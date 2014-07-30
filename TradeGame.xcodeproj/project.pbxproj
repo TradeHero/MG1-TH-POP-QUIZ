@@ -1,0 +1,410 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6D20577919889A7000570042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D20577819889A7000570042 /* AppDelegate.swift */; };
+		6D20577B19889A7000570042 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D20577A19889A7000570042 /* ViewController.swift */; };
+		6D20577E19889A7000570042 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D20577C19889A7000570042 /* Main.storyboard */; };
+		6D20578019889A7000570042 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D20577F19889A7000570042 /* Images.xcassets */; };
+		6D20578C19889A7000570042 /* TradeGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D20578B19889A7000570042 /* TradeGameTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6D20578619889A7000570042 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D20576B19889A7000570042 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D20577219889A7000570042;
+			remoteInfo = TradeGame;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6D20577319889A7000570042 /* TradeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D20577719889A7000570042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D20577819889A7000570042 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6D20577A19889A7000570042 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6D20577D19889A7000570042 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6D20577F19889A7000570042 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6D20578519889A7000570042 /* TradeGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradeGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D20578A19889A7000570042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D20578B19889A7000570042 /* TradeGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeGameTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D20577019889A7000570042 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D20578219889A7000570042 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6D20576A19889A7000570042 = {
+			isa = PBXGroup;
+			children = (
+				6D20577519889A7000570042 /* TradeGame */,
+				6D20578819889A7000570042 /* TradeGameTests */,
+				6D20577419889A7000570042 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6D20577419889A7000570042 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D20577319889A7000570042 /* TradeGame.app */,
+				6D20578519889A7000570042 /* TradeGameTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D20577519889A7000570042 /* TradeGame */ = {
+			isa = PBXGroup;
+			children = (
+				6D20577819889A7000570042 /* AppDelegate.swift */,
+				6D20577A19889A7000570042 /* ViewController.swift */,
+				6D20577C19889A7000570042 /* Main.storyboard */,
+				6D20577F19889A7000570042 /* Images.xcassets */,
+				6D20577619889A7000570042 /* Supporting Files */,
+			);
+			path = TradeGame;
+			sourceTree = "<group>";
+		};
+		6D20577619889A7000570042 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6D20577719889A7000570042 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D20578819889A7000570042 /* TradeGameTests */ = {
+			isa = PBXGroup;
+			children = (
+				6D20578B19889A7000570042 /* TradeGameTests.swift */,
+				6D20578919889A7000570042 /* Supporting Files */,
+			);
+			path = TradeGameTests;
+			sourceTree = "<group>";
+		};
+		6D20578919889A7000570042 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6D20578A19889A7000570042 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6D20577219889A7000570042 /* TradeGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D20578F19889A7000570042 /* Build configuration list for PBXNativeTarget "TradeGame" */;
+			buildPhases = (
+				6D20576F19889A7000570042 /* Sources */,
+				6D20577019889A7000570042 /* Frameworks */,
+				6D20577119889A7000570042 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TradeGame;
+			productName = TradeGame;
+			productReference = 6D20577319889A7000570042 /* TradeGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6D20578419889A7000570042 /* TradeGameTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D20579219889A7000570042 /* Build configuration list for PBXNativeTarget "TradeGameTests" */;
+			buildPhases = (
+				6D20578119889A7000570042 /* Sources */,
+				6D20578219889A7000570042 /* Frameworks */,
+				6D20578319889A7000570042 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6D20578719889A7000570042 /* PBXTargetDependency */,
+			);
+			name = TradeGameTests;
+			productName = TradeGameTests;
+			productReference = 6D20578519889A7000570042 /* TradeGameTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D20576B19889A7000570042 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = TradeHero;
+				TargetAttributes = {
+					6D20577219889A7000570042 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					6D20578419889A7000570042 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 6D20577219889A7000570042;
+					};
+				};
+			};
+			buildConfigurationList = 6D20576E19889A7000570042 /* Build configuration list for PBXProject "TradeGame" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6D20576A19889A7000570042;
+			productRefGroup = 6D20577419889A7000570042 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D20577219889A7000570042 /* TradeGame */,
+				6D20578419889A7000570042 /* TradeGameTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6D20577119889A7000570042 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D20577E19889A7000570042 /* Main.storyboard in Resources */,
+				6D20578019889A7000570042 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D20578319889A7000570042 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D20576F19889A7000570042 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D20577B19889A7000570042 /* ViewController.swift in Sources */,
+				6D20577919889A7000570042 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D20578119889A7000570042 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D20578C19889A7000570042 /* TradeGameTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6D20578719889A7000570042 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D20577219889A7000570042 /* TradeGame */;
+			targetProxy = 6D20578619889A7000570042 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6D20577C19889A7000570042 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D20577D19889A7000570042 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6D20578D19889A7000570042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6D20578E19889A7000570042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6D20579019889A7000570042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = TradeGame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6D20579119889A7000570042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = TradeGame/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		6D20579319889A7000570042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TradeGame.app/TradeGame";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TradeGameTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		6D20579419889A7000570042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TradeGame.app/TradeGame";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TradeGameTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D20576E19889A7000570042 /* Build configuration list for PBXProject "TradeGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D20578D19889A7000570042 /* Debug */,
+				6D20578E19889A7000570042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D20578F19889A7000570042 /* Build configuration list for PBXNativeTarget "TradeGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D20579019889A7000570042 /* Debug */,
+				6D20579119889A7000570042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6D20579219889A7000570042 /* Build configuration list for PBXNativeTarget "TradeGameTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D20579319889A7000570042 /* Debug */,
+				6D20579419889A7000570042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6D20576B19889A7000570042 /* Project object */;
+}
