@@ -34,6 +34,9 @@
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="optionSelected:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="69e-43-s28"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRW-Ry-QG6" customClass="AnswerButton" customModule="DesignableViews">
                                 <rect key="frame" x="40" y="370" width="240" height="45"/>
@@ -53,6 +56,9 @@
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="optionSelected:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="jb8-De-3ov"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSx-vT-B7s" customClass="AnswerButton" customModule="DesignableViews">
                                 <rect key="frame" x="40" y="430" width="240" height="45"/>
@@ -72,6 +78,9 @@
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="optionSelected:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="A84-NV-LbR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KgK-AJ-b3q" customClass="AnswerButton" customModule="DesignableViews">
                                 <rect key="frame" x="40" y="490" width="240" height="45"/>

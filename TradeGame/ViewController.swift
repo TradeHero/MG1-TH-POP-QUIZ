@@ -35,11 +35,11 @@ class ViewController: UIViewController {
     }
 
     func setUpQuestionSet() {
-        questionSet += createQuestion("Which stock symbol do this logo represents?","SGX:C6L","SGX:D05","SGX:O39","SGX:S53",nil)
-        questionSet += createQuestion("Which stock symbol do this logo represents?","SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
-        questionSet += createQuestion("Which stock symbol do this logo represents?","SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
-        questionSet += createQuestion("Which stock symbol do this logo represents?","SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
-        questionSet += createQuestion("Which stock symbol do this logo represents?","SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
+        questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"NASDAQ:GOOG","NASDAQ:APPL","NASDAQ:MSFT","NASDAQ:JAZZ",UIImage(named: "Google"))
+        questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"NYSE:T","NYSE:AA","NYSE:EMC","NYSE:TWTR",UIImage(named: "AT&T"))
+        questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
+        questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "Coke"))
+        questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    func createQuestion(question:String, _ answer:String, _ opt1:String, _ opt2:String, _ opt3:String, _ image:UIImage?) -> Question {
+    func createQuestion(question:String, ans answer:String, _ opt1:String, _ opt2:String, _ opt3:String, _ image:UIImage?) -> Question {
         var correctOpt = AnswerOption(stringContent: answer)
         var dummpOpt: [AnswerOption] = []
         dummpOpt += AnswerOption(stringContent: opt1)
@@ -65,25 +65,25 @@ class ViewController: UIViewController {
     }
     
     func setUpViewWithQuestion(question:Question){
-//        option1.setTitle(question.options.allOptions[0].optionContent, forState: UIControlState.Normal)
-//        option2.setTitle(question.options.allOptions[1].optionContent, forState: UIControlState.Normal)
-//        option3.setTitle(question.options.allOptions[2].optionContent, forState: UIControlState.Normal)
-//        option4.setTitle(question.options.allOptions[3].optionContent, forState: UIControlState.Normal)
-        
         let optionSet = question.options.allOptions
+
         var optionButtonSet = [option1, option2, option3, option4]
         
+        var i = 0
+        for option in optionSet {
+            optionButtonSet[i].option = option
+            optionButtonSet[i].enable()
+            optionButtonSet[i].backgroundColor = UIColor.whiteColor()
+            if option === question.options.correctOption {
+                optionButtonSet[i].is_answer = true
+            } else {
+                optionButtonSet[i].is_answer = false
+            }
+            i++
+        }
         
-//        for option in optionSet {
-//            var i = 0
-//            optionButtonSet[i].option = option
-//            if option === question.options.correctOption {
-//               optionButtonSet[i].is_answer = true
-//            }
-//            i++
-//        }
         
-        questionView.subviews.map { $0.removeFromSuperview() }
+        questionView.removeAllSubviewsExceptSubview(nil)
         questionView.addSubview(setUpQuestionViewWithQuestion(question))
     }
     
@@ -103,15 +103,35 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func optionSelected(sender: AnyObject) {
+    @IBAction func optionSelected(sender: AnswerButton) {
         option1.disable()
         option2.disable()
         option3.disable()
         option4.disable()
         
+        if sender.is_answer {
+            sender.backgroundColor = UIColor(hex: 0x4cd964)
+        } else {
+            sender.backgroundColor = UIColor(hex:0xFF6A6E)
+        }
+        
+        current_q++
+        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "finishSelectedAnswer:", userInfo: nil, repeats: false)
         
     }
     
+    func finishSelectedAnswer(sender: NSTimer) {
+        if questionSet.count > current_q {
+            UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: {() -> Void in
+                self.setUpNewQuestion()
+                }, completion: nil)
+        }
+    }
+    
+    func setUpNewQuestion() {
+        let new_q = questionSet[current_q]
+        setUpViewWithQuestion(new_q)
+    }
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
