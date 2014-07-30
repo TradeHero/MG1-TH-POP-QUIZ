@@ -11,7 +11,6 @@ import Model
 
 public class AnswerButton: UIButton {
 
-    
     init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code

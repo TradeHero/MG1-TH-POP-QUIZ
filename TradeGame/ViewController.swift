@@ -19,20 +19,41 @@ class ViewController: UIViewController {
     @IBOutlet weak var option3: AnswerButton!
     
     @IBOutlet weak var option4: AnswerButton!
-
+    
     @IBOutlet weak var questionView: UIView!
     
     @IBOutlet weak var correctNoLabel: UILabel!
     
+    @IBOutlet weak var timerLabel: UILabel!
+    
+    @IBOutlet weak var scoreLabel: UILabel!
     private var current_q:Int = 0
     
     private var questionSet: [Question] = []
+    
+    private var totalScore: Int = 0 {
+    didSet{
+        scoreLabel.text = String(totalScore)
+    }
+    }
     
     private var correctlyAnswered: Int = 0 {
     didSet{
         correctNoLabel.text = String(correctlyAnswered)
     }
     }
+    
+    private var stopwatch: NSTimer? = nil
+    
+    private var stopwatchStartTime: NSDate? = nil
+    
+    private var currentQuestionCorrect: Bool = false
+    
+    init(coder aDecoder: NSCoder!) {
+        super.init(coder: aDecoder)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         correctNoLabel.text = String(0)
@@ -41,7 +62,7 @@ class ViewController: UIViewController {
         setUpViewWithQuestion(questionSet[current_q])
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     func setUpQuestionSet() {
         questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"NASDAQ:GOOG","NASDAQ:APPL","NASDAQ:MSFT","NASDAQ:JAZZ",UIImage(named: "Google"))
         questionSet += createQuestion("Which security symbol do this logo represents?",ans:"NYSE:T","NYSE:AA","NYSE:EMC","NYSE:TWTR",UIImage(named: "AT&T"))
@@ -53,7 +74,7 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -73,8 +94,9 @@ class ViewController: UIViewController {
     }
     
     func setUpViewWithQuestion(question:Question){
+        currentQuestionCorrect = false
         let optionSet = question.options.allOptions
-
+        
         var optionButtonSet = [option1, option2, option3, option4]
         
         var i = 0
@@ -93,7 +115,7 @@ class ViewController: UIViewController {
         
         questionView.removeAllSubviewsExceptSubview(nil)
         questionView.addSubview(setUpQuestionViewWithQuestion(question))
-        
+        self.timerStart()
     }
     
     func setUpQuestionViewWithQuestion(question:Question) -> UIView? {
@@ -121,8 +143,10 @@ class ViewController: UIViewController {
         if sender.is_answer {
             sender.backgroundColor = UIColor(hex: 0x4cd964)
             correctlyAnswered++
+            currentQuestionCorrect = true
         } else {
             sender.backgroundColor = UIColor(hex:0xFF6A6E)
+            currentQuestionCorrect = false
         }
         
         current_q++
@@ -135,14 +159,48 @@ class ViewController: UIViewController {
             UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: {() -> Void in
                 let new_q = self.questionSet[self.current_q]
                 self.setUpViewWithQuestion(new_q)
-                }, completion: nil)
+                }, completion: {(completed:Bool)->Void in
+                    self.timerStop()
+                })
+            
+        }
+        
+    }
+    func timerStart() {
+        stopwatchStartTime = NSDate()
+        if stopwatch == nil {
+            stopwatch = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
         }
         
         
     }
-
-    init(coder aDecoder: NSCoder!) {
-        super.init(coder: aDecoder)
+    
+    func timerStop() {
+        stopwatch?.invalidate()
+        stopwatch = nil
+        calculateScore()
+    }
+    
+    func updateTimer(){
+        let timeNow = NSDate()
+        let timeInterval = timeNow.timeIntervalSinceDate(stopwatchStartTime)
+        let timerDate = NSDate(timeIntervalSince1970: timeInterval)
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "ss.S"
+        
+        dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        let timeString = dateFormatter.stringFromDate(timerDate)
+        timerLabel.text = timeString
+    }
+    
+    func calculateScore(){
+        var score = totalScore
+        let timeTaken = NSString(string: timerLabel.text).floatValue
+        println(timeTaken)
+        let timeLeft = (10.0 - timeTaken) > 0 ? (10.0 - timeTaken) : 0
+        let correctiveFactor = currentQuestionCorrect ? 1 : 0
+        var doubleScore = 10000.0 * Float(timeLeft)/10.0 * Float(correctiveFactor)
+        println(doubleScore)
+        score += Int(doubleScore)
     }
 }
-

@@ -25,7 +25,6 @@
 		6D2057EC1988BD8F00570042 /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057EA1988BD8F00570042 /* AnswerButton.swift */; };
 		6D2057ED1988BD8F00570042 /* DesignableViews.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D2057EB1988BD8F00570042 /* DesignableViews.h */; };
 		6DA069DC1988D44B0013126F /* Model.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DA069DB1988D44B0013126F /* Model.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6DA069E21988D44C0013126F /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA069D71988D44B0013126F /* Model.framework */; };
 		6DA069EC1988D44C0013126F /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA069D71988D44B0013126F /* Model.framework */; };
 		6DA069ED1988D44C0013126F /* Model.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA069D71988D44B0013126F /* Model.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6DA069F71988D4910013126F /* AnswerOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA069F61988D4910013126F /* AnswerOption.swift */; };
@@ -90,6 +89,27 @@
 			remoteGlobalIDString = 6DA069D61988D44B0013126F;
 			remoteInfo = Model;
 		};
+		6DFF48131988FA69006D5424 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D20576B19889A7000570042 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D20579A19889AA800570042;
+			remoteInfo = DesignableViews;
+		};
+		6DFF48151988FA75006D5424 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D20576B19889A7000570042 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DA069D61988D44B0013126F;
+			remoteInfo = Model;
+		};
+		6DFF48171988FA79006D5424 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D20576B19889A7000570042 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D20579A19889AA800570042;
+			remoteInfo = DesignableViews;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -131,7 +151,7 @@
 		6D2057EA1988BD8F00570042 /* AnswerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
 		6D2057EB1988BD8F00570042 /* DesignableViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesignableViews.h; sourceTree = "<group>"; };
 		6DA069D71988D44B0013126F /* Model.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Model.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6DA069DA1988D44B0013126F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Model/Info.plist; sourceTree = "<group>"; };
+		6DA069DA1988D44B0013126F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DA069DB1988D44B0013126F /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		6DA069E11988D44B0013126F /* ModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DA069E71988D44C0013126F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -184,7 +204,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DA069E21988D44C0013126F /* Model.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +426,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6DFF48161988FA75006D5424 /* PBXTargetDependency */,
 			);
 			name = DesignableViews;
 			productName = DesignableViews;
@@ -426,6 +446,7 @@
 			dependencies = (
 				6D2057A819889AA800570042 /* PBXTargetDependency */,
 				6D2057BC19889AA900570042 /* PBXTargetDependency */,
+				6DFF48141988FA69006D5424 /* PBXTargetDependency */,
 			);
 			name = DesignableViewsTests;
 			productName = DesignableViewsTests;
@@ -444,6 +465,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6DFF48181988FA79006D5424 /* PBXTargetDependency */,
 			);
 			name = Model;
 			productName = Model;
@@ -668,6 +690,21 @@
 			isa = PBXTargetDependency;
 			target = 6DA069D61988D44B0013126F /* Model */;
 			targetProxy = 6DA069EE1988D44C0013126F /* PBXContainerItemProxy */;
+		};
+		6DFF48141988FA69006D5424 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D20579A19889AA800570042 /* DesignableViews */;
+			targetProxy = 6DFF48131988FA69006D5424 /* PBXContainerItemProxy */;
+		};
+		6DFF48161988FA75006D5424 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DA069D61988D44B0013126F /* Model */;
+			targetProxy = 6DFF48151988FA75006D5424 /* PBXContainerItemProxy */;
+		};
+		6DFF48181988FA79006D5424 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D20579A19889AA800570042 /* DesignableViews */;
+			targetProxy = 6DFF48171988FA79006D5424 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1021,6 +1058,7 @@
 				6DA069F21988D44C0013126F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6DA069F31988D44C0013126F /* Build configuration list for PBXNativeTarget "ModelTests" */ = {
 			isa = XCConfigurationList;
@@ -1029,6 +1067,7 @@
 				6DA069F51988D44C0013126F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
