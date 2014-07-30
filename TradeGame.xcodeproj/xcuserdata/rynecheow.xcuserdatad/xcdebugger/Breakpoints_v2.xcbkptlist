@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TradeGame/ViewController.swift"
-            timestampString = "428399229.324841"
+            timestampString = "428402880.857308"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "createQuestion(_:ans:_:_:_:_:)"
             landmarkType = "5">
          </BreakpointContent>

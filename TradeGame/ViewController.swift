@@ -22,24 +22,32 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var questionView: UIView!
     
+    @IBOutlet weak var correctNoLabel: UILabel!
+    
     private var current_q:Int = 0
     
     private var questionSet: [Question] = []
     
+    private var correctlyAnswered: Int = 0 {
+    didSet{
+        correctNoLabel.text = String(correctlyAnswered)
+    }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        correctNoLabel.text = String(0)
         setUpQuestionSet()
-        
+        questionSet.shuffle()
         setUpViewWithQuestion(questionSet[current_q])
         // Do any additional setup after loading the view, typically from a nib.
     }
 
     func setUpQuestionSet() {
         questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"NASDAQ:GOOG","NASDAQ:APPL","NASDAQ:MSFT","NASDAQ:JAZZ",UIImage(named: "Google"))
-        questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"NYSE:T","NYSE:AA","NYSE:EMC","NYSE:TWTR",UIImage(named: "AT&T"))
-        questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
-        questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "Coke"))
-        questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
+        questionSet += createQuestion("Which security symbol do this logo represents?",ans:"NYSE:T","NYSE:AA","NYSE:EMC","NYSE:TWTR",UIImage(named: "AT&T"))
+        questionSet += createQuestion("Which security symbol do this logo represents?",ans:"SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
+        questionSet += createQuestion("Which security do this stock graph of 1-month interval as of today belongs to?",ans:"NYSE:TWX","NASDAQ:WIN","NASDAQ:SIRI","SGX:S53",UIImage(named: "TestGraph1"))
+        questionSet += createQuestion("Which NYSE security of the following has the highest trade volume amongst all?",ans:"CenturyLink","Citigroup","Nokia","JP Morgan",nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -85,6 +93,7 @@ class ViewController: UIViewController {
         
         questionView.removeAllSubviewsExceptSubview(nil)
         questionView.addSubview(setUpQuestionViewWithQuestion(question))
+        
     }
     
     func setUpQuestionViewWithQuestion(question:Question) -> UIView? {
@@ -111,6 +120,7 @@ class ViewController: UIViewController {
         
         if sender.is_answer {
             sender.backgroundColor = UIColor(hex: 0x4cd964)
+            correctlyAnswered++
         } else {
             sender.backgroundColor = UIColor(hex:0xFF6A6E)
         }
@@ -123,15 +133,14 @@ class ViewController: UIViewController {
     func finishSelectedAnswer(sender: NSTimer) {
         if questionSet.count > current_q {
             UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: {() -> Void in
-                self.setUpNewQuestion()
+                let new_q = self.questionSet[self.current_q]
+                self.setUpViewWithQuestion(new_q)
                 }, completion: nil)
         }
+        
+        
     }
-    
-    func setUpNewQuestion() {
-        let new_q = questionSet[current_q]
-        setUpViewWithQuestion(new_q)
-    }
+
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }

@@ -31,7 +31,7 @@
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
-                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -108,10 +108,17 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="238"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vd7-4r-oFf">
+                                <rect key="frame" x="150" y="20" width="20" height="24"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                <color key="textColor" red="0.20085841049382716" green="0.51704764660493829" blue="0.64752121913580252" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.15294117647058825" green="0.15686274509803921" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="correctNoLabel" destination="Vd7-4r-oFf" id="ayO-Df-EV1"/>
                         <outlet property="option1" destination="yYq-7e-Iqw" id="Oe3-nG-7JF"/>
                         <outlet property="option2" destination="MRW-Ry-QG6" id="T7o-VK-D1f"/>
                         <outlet property="option3" destination="FSx-vT-B7s" id="50y-hT-eCS"/>

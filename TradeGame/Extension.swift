@@ -20,6 +20,19 @@ extension UIControl {
     }
 }
 
+extension Array
+    {
+    /** Randomizes the order of an array's elements. */
+    mutating func shuffle()
+    {
+        for _ in 0..<self.count
+        {
+            sort { (_,_) in arc4random() < arc4random() }
+        }
+    }
+}
+
+
 extension UIColor {
     
     convenience init(hex: Int, alpha: CGFloat = 1.0) {
