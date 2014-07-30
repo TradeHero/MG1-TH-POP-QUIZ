@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import TradeGame
+import Model
 
 public class AnswerButton: UIButton {
 
@@ -17,11 +17,10 @@ public class AnswerButton: UIButton {
         // Initialization code
     }
     
-//    var option:AnswerOption? = nil {
-//    didSet{
-//        self.titleLabel.text = option!.optionContent
-//    }
-//    }
+    public var option:AnswerOption? = nil {
+    didSet{
+        self.setTitle(option!.optionContent, forState: UIControlState.Normal)    }
+    }
     
     @IBInspectable var borderColor: UIColor = UIColor.clearColor() {
     didSet {
@@ -47,7 +46,7 @@ public class AnswerButton: UIButton {
     }
     }
     
-    var is_answer: Bool = false
+    public var is_answer: Bool = false
     
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)

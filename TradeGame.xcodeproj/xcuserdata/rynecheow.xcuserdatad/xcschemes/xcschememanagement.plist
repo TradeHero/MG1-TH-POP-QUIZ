@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Model.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>TradeGame.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -33,6 +38,26 @@
 			<true/>
 		</dict>
 		<key>6D2057A419889AA800570042</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6D2057F21988CE6700570042</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6D2057FC1988CE6700570042</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DA069D61988D44B0013126F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DA069E01988D44B0013126F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

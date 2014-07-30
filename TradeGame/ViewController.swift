@@ -8,6 +8,7 @@
 
 import UIKit
 import DesignableViews
+import Model
 
 class ViewController: UIViewController {
     
@@ -34,7 +35,7 @@ class ViewController: UIViewController {
     }
 
     func setUpQuestionSet() {
-        questionSet += createQuestion("Which stock symbol do this logo represents?","SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
+        questionSet += createQuestion("Which stock symbol do this logo represents?","SGX:C6L","SGX:D05","SGX:O39","SGX:S53",nil)
         questionSet += createQuestion("Which stock symbol do this logo represents?","SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
         questionSet += createQuestion("Which stock symbol do this logo represents?","SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
         questionSet += createQuestion("Which stock symbol do this logo represents?","SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
@@ -58,16 +59,29 @@ class ViewController: UIViewController {
         
         let answerSet = AnswerOptionSet(correctOption: correctOpt, dummyOptions: dummpOpt)
         
-        let q = Question(content: question, optionSet: answerSet, image: image!)
+        let q = Question(content: question, optionSet: answerSet, image: image)
         
         return q
     }
     
     func setUpViewWithQuestion(question:Question){
-        option1.setTitle(question.options.allOptions[0].optionContent, forState: UIControlState.Normal)
-        option2.setTitle(question.options.allOptions[1].optionContent, forState: UIControlState.Normal)
-        option3.setTitle(question.options.allOptions[2].optionContent, forState: UIControlState.Normal)
-        option4.setTitle(question.options.allOptions[3].optionContent, forState: UIControlState.Normal)
+//        option1.setTitle(question.options.allOptions[0].optionContent, forState: UIControlState.Normal)
+//        option2.setTitle(question.options.allOptions[1].optionContent, forState: UIControlState.Normal)
+//        option3.setTitle(question.options.allOptions[2].optionContent, forState: UIControlState.Normal)
+//        option4.setTitle(question.options.allOptions[3].optionContent, forState: UIControlState.Normal)
+        
+        let optionSet = question.options.allOptions
+        var optionButtonSet = [option1, option2, option3, option4]
+        
+        
+//        for option in optionSet {
+//            var i = 0
+//            optionButtonSet[i].option = option
+//            if option === question.options.correctOption {
+//               optionButtonSet[i].is_answer = true
+//            }
+//            i++
+//        }
         
         questionView.subviews.map { $0.removeFromSuperview() }
         questionView.addSubview(setUpQuestionViewWithQuestion(question))
@@ -81,7 +95,7 @@ class ViewController: UIViewController {
             contentView.imageView.image = question.questionImage
             return contentView
         } else {
-            var contentView = NSBundle.mainBundle().loadNibNamed(NSStringFromClass(QuestionViewPlain), owner: self, options: nil)[0] as QuestionViewPlain
+            var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
             
             contentView.questionContent.text = question.questionContent
             return contentView

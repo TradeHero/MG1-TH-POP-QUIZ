@@ -17,6 +17,9 @@ class QuestionViewPlain: UIView {
         // Initialization code
     }
 
+    init(coder aDecoder: NSCoder!){
+        super.init(coder: aDecoder)
+    }
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
