@@ -20,30 +20,12 @@ extension Array
     }
 }
 
-//extension UIView {
-//    
-//    class func loadInstanceFromNib() -> UIView? {
-//        var classstr  = NSStringFromClass(self)
-//        println(classstr)
-//        return self.loadInstanceFromNibNamed(classstr)
-//    }
-//
-//    class func loadInstanceFromNibNamed(nibName:String)-> UIView? {
-//        var result: UIView? = nil
-//        var elements = NSBundle.mainBundle().loadNibNamed(nibName, owner: self, options: nil)
-//        
-//        for element in elements {
-////            if let view = element as? UIView {
-////                result = view
-////            }
-//            
-//            if element.isKindOfClass(self) {
-//                result = element as? UIView
-//            }
-//            
-//            break
-//        }
-//        
-//        return result!
-//    }
-//}
+extension UIControl {
+    func disable() {
+        enabled = false
+    }
+    
+    func enable() {
+        enabled = true
+    }
+}

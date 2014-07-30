@@ -12,7 +12,7 @@
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="iMl-Nb-Qgc">
                     <rect key="frame" x="20" y="94" width="280" height="52"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="16"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -21,10 +21,9 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="question" destination="iMl-Nb-Qgc" id="AsB-6J-6Sk"/>
-                <outlet property="questionContent" destination="iMl-Nb-Qgc" id="jJP-uM-J9R"/>
+                <outlet property="questionContent" destination="iMl-Nb-Qgc" id="uON-gl-c0b"/>
             </connections>
-            <point key="canvasLocation" x="205" y="546"/>
+            <point key="canvasLocation" x="215" y="382"/>
         </view>
     </objects>
 </document>

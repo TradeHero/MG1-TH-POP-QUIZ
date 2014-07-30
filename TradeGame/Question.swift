@@ -9,9 +9,9 @@
 import UIKit
 
 public class Question {
-    var questionContent:String
+    public var questionContent:String
 
-    var isWithImage:Bool{
+    public var isWithImage:Bool{
     get{
         return questionImage != nil
     }

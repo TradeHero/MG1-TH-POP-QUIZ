@@ -91,6 +91,9 @@
                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="optionSelected:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mvx-Ze-xwT"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJO-B0-Wpj">
                                 <rect key="frame" x="0.0" y="64" width="320" height="238"/>
@@ -100,10 +103,10 @@
                         <color key="backgroundColor" red="0.15294117647058825" green="0.15686274509803921" blue="0.16078431372549021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <outlet property="option1" destination="yYq-7e-Iqw" id="TkS-cw-Xeh"/>
+                        <outlet property="option1" destination="yYq-7e-Iqw" id="Oe3-nG-7JF"/>
                         <outlet property="option2" destination="MRW-Ry-QG6" id="T7o-VK-D1f"/>
                         <outlet property="option3" destination="FSx-vT-B7s" id="50y-hT-eCS"/>
-                        <outlet property="option4" destination="KgK-AJ-b3q" id="Uqn-pK-RAB"/>
+                        <outlet property="option4" destination="KgK-AJ-b3q" id="0xW-Zf-508"/>
                         <outlet property="questionView" destination="fJO-B0-Wpj" id="XiT-08-BFM"/>
                     </connections>
                 </viewController>

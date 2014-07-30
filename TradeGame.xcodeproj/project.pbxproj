@@ -17,6 +17,16 @@
 		6D2057AD19889AA800570042 /* DesignableViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057AC19889AA800570042 /* DesignableViewsTests.swift */; };
 		6D2057B019889AA800570042 /* DesignableViews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D20579B19889AA800570042 /* DesignableViews.framework */; };
 		6D2057B119889AA800570042 /* DesignableViews.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D20579B19889AA800570042 /* DesignableViews.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		6D2057DD1988BCC200570042 /* AnswerOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057DA1988BCC200570042 /* AnswerOption.swift */; };
+		6D2057DE1988BCC200570042 /* AnswerOptionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057DB1988BCC200570042 /* AnswerOptionSet.swift */; };
+		6D2057DF1988BCC200570042 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057DC1988BCC200570042 /* Question.swift */; };
+		6D2057E41988BCD200570042 /* QuestionViewPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057E01988BCD200570042 /* QuestionViewPlain.swift */; };
+		6D2057E51988BCD200570042 /* QuestionViewPlain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2057E11988BCD200570042 /* QuestionViewPlain.xib */; };
+		6D2057E61988BCD200570042 /* QuestionViewWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057E21988BCD200570042 /* QuestionViewWithImage.swift */; };
+		6D2057E71988BCD200570042 /* QuestionViewWithImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2057E31988BCD200570042 /* QuestionViewWithImage.xib */; };
+		6D2057E91988BCE000570042 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057E81988BCE000570042 /* Extension.swift */; };
+		6D2057EC1988BD8F00570042 /* AnswerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057EA1988BD8F00570042 /* AnswerButton.swift */; };
+		6D2057ED1988BD8F00570042 /* DesignableViews.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D2057EB1988BD8F00570042 /* DesignableViews.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +97,16 @@
 		6D2057A519889AA800570042 /* DesignableViewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DesignableViewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D2057AB19889AA800570042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D2057AC19889AA800570042 /* DesignableViewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableViewsTests.swift; sourceTree = "<group>"; };
+		6D2057DA1988BCC200570042 /* AnswerOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerOption.swift; sourceTree = "<group>"; };
+		6D2057DB1988BCC200570042 /* AnswerOptionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerOptionSet.swift; sourceTree = "<group>"; };
+		6D2057DC1988BCC200570042 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		6D2057E01988BCD200570042 /* QuestionViewPlain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewPlain.swift; sourceTree = "<group>"; };
+		6D2057E11988BCD200570042 /* QuestionViewPlain.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionViewPlain.xib; sourceTree = "<group>"; };
+		6D2057E21988BCD200570042 /* QuestionViewWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewWithImage.swift; sourceTree = "<group>"; };
+		6D2057E31988BCD200570042 /* QuestionViewWithImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionViewWithImage.xib; sourceTree = "<group>"; };
+		6D2057E81988BCE000570042 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		6D2057EA1988BD8F00570042 /* AnswerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerButton.swift; sourceTree = "<group>"; };
+		6D2057EB1988BD8F00570042 /* DesignableViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DesignableViews.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +168,14 @@
 		6D20577519889A7000570042 /* TradeGame */ = {
 			isa = PBXGroup;
 			children = (
+				6D2057E81988BCE000570042 /* Extension.swift */,
+				6D2057E01988BCD200570042 /* QuestionViewPlain.swift */,
+				6D2057E11988BCD200570042 /* QuestionViewPlain.xib */,
+				6D2057E21988BCD200570042 /* QuestionViewWithImage.swift */,
+				6D2057E31988BCD200570042 /* QuestionViewWithImage.xib */,
+				6D2057DA1988BCC200570042 /* AnswerOption.swift */,
+				6D2057DB1988BCC200570042 /* AnswerOptionSet.swift */,
+				6D2057DC1988BCC200570042 /* Question.swift */,
 				6D20577819889A7000570042 /* AppDelegate.swift */,
 				6D20577A19889A7000570042 /* ViewController.swift */,
 				6D20577C19889A7000570042 /* Main.storyboard */,
@@ -185,6 +213,8 @@
 		6D20579C19889AA800570042 /* DesignableViews */ = {
 			isa = PBXGroup;
 			children = (
+				6D2057EA1988BD8F00570042 /* AnswerButton.swift */,
+				6D2057EB1988BD8F00570042 /* DesignableViews.h */,
 				6D20579F19889AA800570042 /* DesignableViews.h */,
 				6D20579D19889AA800570042 /* Supporting Files */,
 			);
@@ -224,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D2057A019889AA800570042 /* DesignableViews.h in Headers */,
+				6D2057ED1988BD8F00570042 /* DesignableViews.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,7 +387,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D2057E71988BCD200570042 /* QuestionViewWithImage.xib in Resources */,
 				6D20577E19889A7000570042 /* Main.storyboard in Resources */,
+				6D2057E51988BCD200570042 /* QuestionViewPlain.xib in Resources */,
 				6D20578019889A7000570042 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,8 +422,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D2057E61988BCD200570042 /* QuestionViewWithImage.swift in Sources */,
+				6D2057DF1988BCC200570042 /* Question.swift in Sources */,
 				6D20577B19889A7000570042 /* ViewController.swift in Sources */,
+				6D2057DE1988BCC200570042 /* AnswerOptionSet.swift in Sources */,
+				6D2057DD1988BCC200570042 /* AnswerOption.swift in Sources */,
 				6D20577919889A7000570042 /* AppDelegate.swift in Sources */,
+				6D2057E41988BCD200570042 /* QuestionViewPlain.swift in Sources */,
+				6D2057E91988BCE000570042 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D2057EC1988BD8F00570042 /* AnswerButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +635,7 @@
 		6D2057B519889AA800570042 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -609,6 +650,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -618,6 +660,7 @@
 		6D2057B619889AA800570042 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -683,6 +726,7 @@
 				6D20579119889A7000570042 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D20579219889A7000570042 /* Build configuration list for PBXNativeTarget "TradeGameTests" */ = {
 			isa = XCConfigurationList;
@@ -691,6 +735,7 @@
 				6D20579419889A7000570042 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D2057B419889AA800570042 /* Build configuration list for PBXNativeTarget "DesignableViews" */ = {
 			isa = XCConfigurationList;
@@ -699,6 +744,7 @@
 				6D2057B619889AA800570042 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D2057B819889AA800570042 /* Build configuration list for PBXNativeTarget "DesignableViewsTests" */ = {
 			isa = XCConfigurationList;
@@ -707,6 +753,7 @@
 				6D2057BA19889AA800570042 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

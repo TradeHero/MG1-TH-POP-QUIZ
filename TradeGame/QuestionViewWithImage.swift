@@ -12,9 +12,14 @@ class QuestionViewWithImage: UIView {
 
     @IBOutlet weak var questionContent: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    
     init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
+    }
+    
+    init(coder aDecoder: NSCoder!) {
+        super.init(coder: aDecoder)
     }
     
     /*

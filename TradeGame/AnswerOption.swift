@@ -8,10 +8,10 @@
 
 import UIKit
 
-class AnswerOption {
-    var optionContent: String = ""
+public class AnswerOption {
+    public var optionContent: String = ""
     
-    var optionImageContent: UIImage? = nil
+    public var optionImageContent: UIImage? = nil
     
     init(stringContent:String){
         optionContent = stringContent
