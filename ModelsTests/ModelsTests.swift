@@ -1,15 +1,15 @@
 //
-//  DesignableViewsTests.swift
-//  DesignableViewsTests
+//  ModelsTests.swift
+//  ModelsTests
 //
-//  Created by Ryne Cheow on 7/30/14.
+//  Created by Ryne Cheow on 7/31/14.
 //  Copyright (c) 2014 TradeHero. All rights reserved.
 //
 
 import UIKit
 import XCTest
 
-class DesignableViewsTests: XCTestCase {
+class ModelsTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

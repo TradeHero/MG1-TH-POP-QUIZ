@@ -1,6 +1,6 @@
 //
-//  ModelTests.swift
-//  ModelTests
+//  ViewsTests.swift
+//  ViewsTests
 //
 //  Created by Ryne Cheow on 7/31/14.
 //  Copyright (c) 2014 TradeHero. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 
-class ModelTests: XCTestCase {
+class ViewsTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

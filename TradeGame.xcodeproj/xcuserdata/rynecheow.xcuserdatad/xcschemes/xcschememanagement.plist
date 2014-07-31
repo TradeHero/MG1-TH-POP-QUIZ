@@ -14,10 +14,20 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>Models.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>TradeGame.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>Views.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -58,6 +68,36 @@
 			<true/>
 		</dict>
 		<key>6DA069E01988D44B0013126F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DC6DD0A198A29A70096DD73</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DC6DD14198A29A70096DD73</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DC6DD2E198A29C90096DD73</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DC6DD38198A29C90096DD73</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DC6DD52198A29E70096DD73</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DC6DD5C198A29E70096DD73</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import DesignableViews
-import Model
+import Views
+import Models
 
 class QuizViewController: UIViewController {
     /*UI*/
@@ -22,26 +22,25 @@ class QuizViewController: UIViewController {
     
     @IBOutlet weak var questionView: UIView!
     
-    @IBOutlet weak var correctNoLabel: UILabel!
-    
-    @IBOutlet weak var timerLabel: UILabel!
-    
     @IBOutlet weak var scoreLabel: UILabel!
+    
+    @IBOutlet weak var result1: MiniProgressResultView!
+    @IBOutlet weak var result2: MiniProgressResultView!
+    @IBOutlet weak var result3: MiniProgressResultView!
+    @IBOutlet weak var result4: MiniProgressResultView!
+    @IBOutlet weak var result5: MiniProgressResultView!
     
     /*ivar*/
     private var current_q:Int = 0
+    private var current_timeTaken: String = ""
     
     private var questionSet: [Question] = []
+    
+    private var resultSet: [MiniProgressResultView] = []
     
     private var totalScore: Int = 0 {
     didSet{
         scoreLabel.text = String(totalScore)
-    }
-    }
-    
-    private var correctlyAnswered: Int = 0 {
-    didSet{
-        correctNoLabel.text = String(correctlyAnswered)
     }
     }
     
@@ -58,7 +57,13 @@ class QuizViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        correctNoLabel.text = String(0)
+//        correctNoLabel.text = String(0)
+        resultSet += result1
+        resultSet += result2
+        resultSet += result3
+        resultSet += result4
+        resultSet += result5
+        
         questionSet = QuestionSetFactory.sharedInstance.generateDummyQuestionSet()
         setUpViewWithQuestion(questionSet[current_q])
         // Do any additional setup after loading the view, typically from a nib.
@@ -81,7 +86,7 @@ class QuizViewController: UIViewController {
         
         var i = 0
         for option in optionSet {
-            optionButtonSet[i].option = option
+            optionButtonSet[i].option = option.content
             optionButtonSet[i].enable()
             optionButtonSet[i].backgroundColor = UIColor.whiteColor()
             if option === question.options.correctOption {
@@ -103,7 +108,7 @@ class QuizViewController: UIViewController {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
                 , owner: self, options: nil)[0] as QuestionViewWithImage
             contentView.questionContent.text = question.questionContent
-            contentView.imageView.image = question.questionImage
+//            contentView.imageView.image = question.questionImage?.applyBlurWithRadius(100.0, tintColor: UIColor.clearColor(), saturationDeltaFactor: 2.0, maskImage: nil)
             return contentView
         } else {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
@@ -126,10 +131,12 @@ class QuizViewController: UIViewController {
         
         if sender.is_answer {
             sender.backgroundColor = UIColor(hex: 0x4cd964)
-            correctlyAnswered++
+//            correctlyAnswered++
             currentQuestionCorrect = true
+            resultSet[current_q].showCorrectAnswerView(current_timeTaken+"s")
         } else {
             sender.backgroundColor = UIColor(hex:0xFF6A6E)
+            resultSet[current_q].showWrongAnswerView()
         }
         
         current_q++
@@ -152,7 +159,8 @@ class QuizViewController: UIViewController {
     
     func calculateScore(){
         var score = totalScore
-        let timeTaken = NSString(string: timerLabel.text).floatValue
+        let timeTaken:Float = 0
+//        let timeTaken = NSString(string: timerLabel.text).floatValue
         let timeLeft = (10.0 - timeTaken) > 0.0 ? (10.0 - timeTaken)/10.0 : 0.4
         let correctiveFactor:Float = currentQuestionCorrect ? 1.0 : 0.0
         let doubleScore = 1000 * timeLeft * correctiveFactor
@@ -183,7 +191,7 @@ class QuizViewController: UIViewController {
         dateFormatter.dateFormat = "ss.S"
         dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         let timeString = dateFormatter.stringFromDate(timerDate)
-        timerLabel.text = timeString
+        current_timeTaken = timeString
         
     }
     
