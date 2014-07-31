@@ -94,7 +94,6 @@ class ViewController: UIViewController {
     }
     
     func setUpViewWithQuestion(question:Question){
-        currentQuestionCorrect = false
         let optionSet = question.options.allOptions
         
         var optionButtonSet = [option1, option2, option3, option4]
@@ -135,23 +134,24 @@ class ViewController: UIViewController {
     
     
     @IBAction func optionSelected(sender: AnswerButton) {
+        self.timerStop()
         option1.disable()
         option2.disable()
         option3.disable()
         option4.disable()
-        
+        currentQuestionCorrect = false
         if sender.is_answer {
             sender.backgroundColor = UIColor(hex: 0x4cd964)
             correctlyAnswered++
             currentQuestionCorrect = true
         } else {
             sender.backgroundColor = UIColor(hex:0xFF6A6E)
-            currentQuestionCorrect = false
         }
-        
+        println(currentQuestionCorrect == true ? "true" : "false")
         current_q++
-        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "finishSelectedAnswer:", userInfo: nil, repeats: false)
         
+        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "finishSelectedAnswer:", userInfo: nil, repeats: false)
+        calculateScore()
     }
     
     func finishSelectedAnswer(sender: NSTimer) {
@@ -159,9 +159,9 @@ class ViewController: UIViewController {
             UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: {() -> Void in
                 let new_q = self.questionSet[self.current_q]
                 self.setUpViewWithQuestion(new_q)
-                }, completion: {(completed:Bool)->Void in
-                    self.timerStop()
-                })
+                }, completion:nil)
+            
+        } else {
             
         }
         
@@ -170,15 +170,13 @@ class ViewController: UIViewController {
         stopwatchStartTime = NSDate()
         if stopwatch == nil {
             stopwatch = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
-        }
-        
-        
+        }        
     }
     
     func timerStop() {
         stopwatch?.invalidate()
         stopwatch = nil
-        calculateScore()
+        
     }
     
     func updateTimer(){
@@ -187,20 +185,19 @@ class ViewController: UIViewController {
         let timerDate = NSDate(timeIntervalSince1970: timeInterval)
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "ss.S"
-        
         dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         let timeString = dateFormatter.stringFromDate(timerDate)
         timerLabel.text = timeString
+        
     }
     
     func calculateScore(){
         var score = totalScore
         let timeTaken = NSString(string: timerLabel.text).floatValue
-        println(timeTaken)
-        let timeLeft = (10.0 - timeTaken) > 0 ? (10.0 - timeTaken) : 0
-        let correctiveFactor = currentQuestionCorrect ? 1 : 0
-        var doubleScore = 10000.0 * Float(timeLeft)/10.0 * Float(correctiveFactor)
-        println(doubleScore)
+        let timeLeft = (10.0 - timeTaken) > 0.0 ? (10.0 - timeTaken)/10.0 : 0.4
+        let correctiveFactor:Float = currentQuestionCorrect ? 1.0 : 0.0
+        let doubleScore = 1000 * timeLeft * correctiveFactor
         score += Int(doubleScore)
+        totalScore = score
     }
 }
