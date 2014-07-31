@@ -1,5 +1,5 @@
 //
-//  AnswerButton.swift
+//  OptionButton.swift
 //  TradeGame
 //
 //  Created by Ryne Cheow on 7/30/14.
@@ -9,16 +9,16 @@
 import UIKit
 import Model
 
-public class AnswerButton: UIButton {
+public class OptionButton: UIButton {
 
     init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
     }
     
-    public var option:AnswerOption? = nil {
+    public var option:Option? = nil {
     didSet{
-        self.setTitle(option!.optionContent, forState: UIControlState.Normal)    }
+        self.setTitle(option!.content, forState: UIControlState.Normal)    }
     }
     
     @IBInspectable var borderColor: UIColor = UIColor.clearColor() {

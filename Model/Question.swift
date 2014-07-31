@@ -17,11 +17,11 @@ public class Question {
     }
     }
 
-    public var options: AnswerOptionSet
+    public var options: OptionSet
     
     public var questionImage:UIImage? = nil
     
-    public init(content:String, optionSet:AnswerOptionSet, image:UIImage?) {
+    public init(content:String, optionSet:OptionSet, image:UIImage?) {
         questionContent = content
         options = optionSet
         if let img = image {

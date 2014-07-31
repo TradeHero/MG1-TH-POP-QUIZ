@@ -8,25 +8,16 @@
 
 import UIKit
 
-class QuestionViewPlain: UIView {
+public class QuestionViewPlain: UIView {
 
-    @IBOutlet weak var questionContent: UILabel!
+    @IBOutlet public weak var questionContent: UILabel!
     
-    init(frame: CGRect) {
+    public init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
     }
 
-    init(coder aDecoder: NSCoder!){
+    public init(coder aDecoder: NSCoder!){
         super.init(coder: aDecoder)
     }
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect)
-    {
-        // Drawing code
-    }
-    */
-
 }

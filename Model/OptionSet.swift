@@ -18,13 +18,13 @@ extension Array
         }
     }
 }
-public class AnswerOptionSet {
+public class OptionSet {
    
-    public let correctOption: AnswerOption
-    public let dummyOptions: [AnswerOption]
+    public let correctOption: Option
+    public let dummyOptions: [Option]
     
-    public var allOptions: [AnswerOption] = []
-    public init(correctOption: AnswerOption, dummyOptions:[AnswerOption]){
+    public var allOptions: [Option] = []
+    public init(correctOption: Option, dummyOptions:[Option]){
         self.correctOption = correctOption
         self.dummyOptions = dummyOptions
         setupAnswerSet()

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  QuizViewController.swift
 //  TradeGame
 //
 //  Created by Ryne Cheow on 7/30/14.
@@ -10,15 +10,15 @@ import UIKit
 import DesignableViews
 import Model
 
-class ViewController: UIViewController {
+class QuizViewController: UIViewController {
+    /*UI*/
+    @IBOutlet weak var option1: OptionButton!
     
-    @IBOutlet weak var option1: AnswerButton!
+    @IBOutlet weak var option2: OptionButton!
     
-    @IBOutlet weak var option2: AnswerButton!
+    @IBOutlet weak var option3: OptionButton!
     
-    @IBOutlet weak var option3: AnswerButton!
-    
-    @IBOutlet weak var option4: AnswerButton!
+    @IBOutlet weak var option4: OptionButton!
     
     @IBOutlet weak var questionView: UIView!
     
@@ -27,6 +27,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     
     @IBOutlet weak var scoreLabel: UILabel!
+    
+    /*ivar*/
     private var current_q:Int = 0
     
     private var questionSet: [Question] = []
@@ -57,19 +59,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         correctNoLabel.text = String(0)
-        setUpQuestionSet()
-        questionSet.shuffle()
+        questionSet = QuestionSetFactory.sharedInstance.generateDummyQuestionSet()
         setUpViewWithQuestion(questionSet[current_q])
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    func setUpQuestionSet() {
-        questionSet += createQuestion("Which stock symbol do this logo represents?",ans:"NASDAQ:GOOG","NASDAQ:APPL","NASDAQ:MSFT","NASDAQ:JAZZ",UIImage(named: "Google"))
-        questionSet += createQuestion("Which security symbol do this logo represents?",ans:"NYSE:T","NYSE:AA","NYSE:EMC","NYSE:TWTR",UIImage(named: "AT&T"))
-        questionSet += createQuestion("Which security symbol do this logo represents?",ans:"SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
-        questionSet += createQuestion("Which security do this stock graph of 1-month interval as of today belongs to?",ans:"NYSE:TWX","NASDAQ:WIN","NASDAQ:SIRI","SGX:S53",UIImage(named: "TestGraph1"))
-        questionSet += createQuestion("Which NYSE security of the following has the highest trade volume amongst all?",ans:"CenturyLink","Citigroup","Nokia","JP Morgan",nil)
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -79,19 +73,6 @@ class ViewController: UIViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    func createQuestion(question:String, ans answer:String, _ opt1:String, _ opt2:String, _ opt3:String, _ image:UIImage?) -> Question {
-        var correctOpt = AnswerOption(stringContent: answer)
-        var dummpOpt: [AnswerOption] = []
-        dummpOpt += AnswerOption(stringContent: opt1)
-        dummpOpt += AnswerOption(stringContent: opt2)
-        dummpOpt += AnswerOption(stringContent: opt3)
-        
-        let answerSet = AnswerOptionSet(correctOption: correctOpt, dummyOptions: dummpOpt)
-        
-        let q = Question(content: question, optionSet: answerSet, image: image)
-        
-        return q
-    }
     
     func setUpViewWithQuestion(question:Question){
         let optionSet = question.options.allOptions
@@ -133,13 +114,16 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func optionSelected(sender: AnswerButton) {
+    @IBAction func optionSelected(sender: OptionButton) {
         self.timerStop()
+        
         option1.disable()
         option2.disable()
         option3.disable()
         option4.disable()
+        
         currentQuestionCorrect = false
+        
         if sender.is_answer {
             sender.backgroundColor = UIColor(hex: 0x4cd964)
             correctlyAnswered++
@@ -147,7 +131,7 @@ class ViewController: UIViewController {
         } else {
             sender.backgroundColor = UIColor(hex:0xFF6A6E)
         }
-        println(currentQuestionCorrect == true ? "true" : "false")
+        
         current_q++
         
         NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "finishSelectedAnswer:", userInfo: nil, repeats: false)
@@ -162,15 +146,27 @@ class ViewController: UIViewController {
                 }, completion:nil)
             
         } else {
-            
+            // done answering all questions
         }
-        
     }
+    
+    func calculateScore(){
+        var score = totalScore
+        let timeTaken = NSString(string: timerLabel.text).floatValue
+        let timeLeft = (10.0 - timeTaken) > 0.0 ? (10.0 - timeTaken)/10.0 : 0.4
+        let correctiveFactor:Float = currentQuestionCorrect ? 1.0 : 0.0
+        let doubleScore = 1000 * timeLeft * correctiveFactor
+        score += Int(doubleScore)
+        totalScore = score
+    }
+
+    
+    /* timer */
     func timerStart() {
         stopwatchStartTime = NSDate()
         if stopwatch == nil {
             stopwatch = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
-        }        
+        }
     }
     
     func timerStop() {
@@ -191,13 +187,4 @@ class ViewController: UIViewController {
         
     }
     
-    func calculateScore(){
-        var score = totalScore
-        let timeTaken = NSString(string: timerLabel.text).floatValue
-        let timeLeft = (10.0 - timeTaken) > 0.0 ? (10.0 - timeTaken)/10.0 : 0.4
-        let correctiveFactor:Float = currentQuestionCorrect ? 1.0 : 0.0
-        let doubleScore = 1000 * timeLeft * correctiveFactor
-        score += Int(doubleScore)
-        totalScore = score
     }
-}
