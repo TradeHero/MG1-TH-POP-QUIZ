@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yYq-7e-Iqw" customClass="OptionButton" customModule="Views">
-                                <rect key="frame" x="22" y="320" width="275" height="35"/>
+                                <rect key="frame" x="8" y="300" width="150" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="17"/>
                                 <state key="normal" title="Option 1">
@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlM-fh-HTI" customClass="OptionButton" customModule="Views">
-                                <rect key="frame" x="22" y="370" width="275" height="35"/>
+                                <rect key="frame" x="8" y="365" width="150" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="17"/>
                                 <state key="normal" title="Option 2">
@@ -48,18 +48,30 @@
                                     <action selector="optionSelected:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="I7d-Ij-pbB"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blL-Cx-x5q">
-                                <rect key="frame" x="125" y="20" width="70" height="24"/>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3275" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blL-Cx-x5q">
+                                <rect key="frame" x="64" y="16" width="70" height="20"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ryne Cheow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SE9-gm-Lnm">
+                                <rect key="frame" x="64" y="32" width="161" height="12"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="9"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Knight" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9S-R1-8zD">
+                                <rect key="frame" x="64" y="43" width="84" height="10"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="8"/>
+                                <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJO-B0-Wpj">
-                                <rect key="frame" x="0.0" y="95" width="320" height="205"/>
+                                <rect key="frame" x="8" y="83" width="305" height="204"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BaB-uw-8Lx" customClass="OptionButton" customModule="Views">
-                                <rect key="frame" x="22" y="420" width="275" height="35"/>
+                                <rect key="frame" x="163" y="300" width="150" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="17"/>
                                 <state key="normal" title="Option 3">
@@ -75,7 +87,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxB-e1-t0D" customClass="OptionButton" customModule="Views">
-                                <rect key="frame" x="22" y="470" width="275" height="35"/>
+                                <rect key="frame" x="163" y="365" width="150" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="17"/>
                                 <state key="normal" title="Option 4">
@@ -90,26 +102,6 @@
                                     <action selector="optionSelected:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="TLK-m2-I5v"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dh0-dM-5Jp" customClass="MiniProgressResultView" customModule="Views">
-                                <rect key="frame" x="34" y="61" width="50" height="20"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lvx-YP-K4c" customClass="MiniProgressResultView" customModule="Views">
-                                <rect key="frame" x="84" y="61" width="50" height="20"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tz3-XR-4ib" customClass="MiniProgressResultView" customModule="Views">
-                                <rect key="frame" x="134" y="61" width="50" height="20"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bv3-zN-rfu" customClass="MiniProgressResultView" customModule="Views">
-                                <rect key="frame" x="184" y="61" width="50" height="20"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Enw-2U-k2s" customClass="MiniProgressResultView" customModule="Views">
-                                <rect key="frame" x="234" y="61" width="50" height="20"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.094117647058823528" green="0.5607843137254902" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -120,11 +112,6 @@
                         <outlet property="option3" destination="BaB-uw-8Lx" id="lEZ-JO-sxZ"/>
                         <outlet property="option4" destination="uxB-e1-t0D" id="b3g-AO-EAN"/>
                         <outlet property="questionView" destination="fJO-B0-Wpj" id="XiT-08-BFM"/>
-                        <outlet property="result1" destination="dh0-dM-5Jp" id="EXp-tj-FsJ"/>
-                        <outlet property="result2" destination="lvx-YP-K4c" id="xzW-Dg-p6x"/>
-                        <outlet property="result3" destination="tz3-XR-4ib" id="ifG-dy-W2L"/>
-                        <outlet property="result4" destination="bv3-zN-rfu" id="Vbj-nR-3kf"/>
-                        <outlet property="result5" destination="Enw-2U-k2s" id="v4L-do-bY1"/>
                         <outlet property="scoreLabel" destination="blL-Cx-x5q" id="GZ5-60-7cG"/>
                     </connections>
                 </viewController>

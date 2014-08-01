@@ -24,19 +24,11 @@ class QuizViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
-    @IBOutlet weak var result1: MiniProgressResultView!
-    @IBOutlet weak var result2: MiniProgressResultView!
-    @IBOutlet weak var result3: MiniProgressResultView!
-    @IBOutlet weak var result4: MiniProgressResultView!
-    @IBOutlet weak var result5: MiniProgressResultView!
-    
     /*ivar*/
     private var current_q:Int = 0
     private var current_timeTaken: String = ""
     
     private var questionSet: [Question] = []
-    
-    private var resultSet: [MiniProgressResultView] = []
     
     private var totalScore: Int = 0 {
     didSet{
@@ -58,11 +50,6 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        correctNoLabel.text = String(0)
-        resultSet += result1
-        resultSet += result2
-        resultSet += result3
-        resultSet += result4
-        resultSet += result5
         
         questionSet = QuestionSetFactory.sharedInstance.generateDummyQuestionSet()
         setUpViewWithQuestion(questionSet[current_q])
@@ -133,11 +120,8 @@ class QuizViewController: UIViewController {
             sender.backgroundColor = UIColor(hex: 0x4cd964)
 //            correctlyAnswered++
             currentQuestionCorrect = true
-            resultSet[current_q].showCorrectAnswerView(current_timeTaken+"s")
         } else {
-            sender.backgroundColor = UIColor(hex:0xFF6A6E)
-            resultSet[current_q].showWrongAnswerView()
-        }
+            sender.backgroundColor = UIColor(hex:0xFF6A6E)        }
         
         current_q++
         
