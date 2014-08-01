@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Views
 
 @IBDesignable
-public class OptionButton: UIButton {
-
+public class OptionButton: DesignableButton {
+    
     init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
@@ -19,24 +20,6 @@ public class OptionButton: UIButton {
     public var option:String? = nil {
     didSet{
         self.setTitle(option, forState: UIControlState.Normal)    }
-    }
-    
-//    @IBInspectable var borderColor: UIColor = UIColor.clearColor() {
-//    didSet {
-//        layer.borderColor = borderColor.CGColor
-//    }
-//    }
-//    
-//    @IBInspectable var borderWidth: CGFloat = 0 {
-//    didSet {
-//        layer.borderWidth = borderWidth
-//    }
-//    }
-    
-    @IBInspectable var cornerRadius: CGFloat = 06 {
-    didSet {
-        layer.cornerRadius = cornerRadius
-    }
     }
     
     public var is_answer: Bool = false

@@ -80,3 +80,15 @@ extension UIView {
         }
     }
 }
+extension UIImage {
+
+    class func imageWithColor(color:UIColor, size:CGSize) -> UIImage{
+        UIGraphicsBeginImageContext(size)
+        let path = UIBezierPath(rect: CGRectMake(0, 0, size.width, size.height))
+        color.setFill()
+        path.fill()
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+}

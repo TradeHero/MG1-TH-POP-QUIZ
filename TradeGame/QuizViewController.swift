@@ -24,23 +24,28 @@ class QuizViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBOutlet weak var selfAvatarView: AvatarRoundedView!
+    
+    @IBOutlet weak var opponentAvatarView: AvatarRoundedView!
+    
     /*ivar*/
     private var current_q:Int = 0
+    
     private var current_timeTaken: String = ""
     
     private var questionSet: [Question] = []
-    
-    private var totalScore: Int = 0 {
-    didSet{
-        scoreLabel.text = String(totalScore)
-    }
-    }
     
     private var stopwatch: NSTimer? = nil
     
     private var stopwatchStartTime: NSDate? = nil
     
     private var currentQuestionCorrect: Bool = false
+    
+    private var totalScore: Int = 0 {
+    didSet{
+        scoreLabel.text = String(totalScore)
+    }
+    }
     
     init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
@@ -49,16 +54,14 @@ class QuizViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        correctNoLabel.text = String(0)
-        
+        selfAvatarView.image = UIImage(named: "AvatarSample1")
+        opponentAvatarView.image = UIImage(named: "AvatarSample2")
         questionSet = QuestionSetFactory.sharedInstance.generateDummyQuestionSet()
         setUpViewWithQuestion(questionSet[current_q])
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
@@ -84,7 +87,6 @@ class QuizViewController: UIViewController {
             i++
         }
         
-        
         questionView.removeAllSubviewsExceptSubview(nil)
         questionView.addSubview(setUpQuestionViewWithQuestion(question))
         self.timerStart()
@@ -95,7 +97,7 @@ class QuizViewController: UIViewController {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
                 , owner: self, options: nil)[0] as QuestionViewWithImage
             contentView.questionContent.text = question.questionContent
-//            contentView.imageView.image = question.questionImage?.applyBlurWithRadius(100.0, tintColor: UIColor.clearColor(), saturationDeltaFactor: 2.0, maskImage: nil)
+            contentView.imageView.image = question.questionImage
             return contentView
         } else {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
@@ -118,7 +120,6 @@ class QuizViewController: UIViewController {
         
         if sender.is_answer {
             sender.backgroundColor = UIColor(hex: 0x4cd964)
-//            correctlyAnswered++
             currentQuestionCorrect = true
         } else {
             sender.backgroundColor = UIColor(hex:0xFF6A6E)        }

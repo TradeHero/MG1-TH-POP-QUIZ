@@ -6,12 +6,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "goog.png"
+      "filename" : "empty-avatar.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "goog@2x.png"
+      "filename" : "empty-avatar@2x.jpg"
     }
   ],
   "info" : {

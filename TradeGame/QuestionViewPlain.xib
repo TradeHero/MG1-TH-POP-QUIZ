@@ -7,12 +7,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="Dy7-bL-b4Y" customClass="QuestionViewPlain" customModule="TradeGame" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="205"/>
+            <rect key="frame" x="0.0" y="0.0" width="260" height="285"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="16" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="iMl-Nb-Qgc">
-                    <rect key="frame" x="20" y="38" width="280" height="129"/>
-                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="16" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="iMl-Nb-Qgc">
+                    <rect key="frame" x="0.0" y="78" width="260" height="129"/>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="24"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
