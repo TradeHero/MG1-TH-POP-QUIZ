@@ -67,7 +67,9 @@ extension UIColor {
         return UIColor(CGColor:newColor)
     }
     
-    
+    convenience init(r:Int, _ g:Int, _ b:Int, _ a:Int) {
+        self.init(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: CGFloat(a)/255.0)
+    }
 }
 extension UIView {
     func removeAllSubviewsExceptSubview(subview:UIView?){
@@ -79,9 +81,19 @@ extension UIView {
             }
         }
     }
+    
+    class func rasterizeView(view: UIView) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, UIScreen.mainScreen().scale)
+        view.layer.renderInContext(UIGraphicsGetCurrentContext())
+        let viewImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return viewImage
+    }
 }
-extension UIImage {
 
+
+extension UIImage {
+    
     class func imageWithColor(color:UIColor, size:CGSize) -> UIImage{
         UIGraphicsBeginImageContext(size)
         let path = UIBezierPath(rect: CGRectMake(0, 0, size.width, size.height))
@@ -91,4 +103,108 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return image
     }
+    
+    func transparencyToWhiteMatte() -> UIImage {
+        return UIImage(data: UIImageJPEGRepresentation(self, 1))
+    }
+    
+    func mosaicEffectOnImage(tileSize:Int) -> UIImage{
+        var originalImage = self
+        let imageSize = originalImage.size
+        let ctx = createARGBBitmapContext(originalImage.CGImage)
+        UIGraphicsBeginImageContext(imageSize)
+        let context = UIGraphicsGetCurrentContext()
+        originalImage.drawInRect(CGRectMake(0, 0, imageSize.width, imageSize.height))
+        
+        let tilesPerRow = Int(imageSize.width)/tileSize
+        let tilesPerColumn = Int(imageSize.height)/tileSize
+        
+        for var j = 0 ; j < tilesPerColumn ; j++ {
+            for var i = 0 ; i < tilesPerRow ; i++ {
+                let xPt = CGFloat(i * tileSize + tileSize/2)
+                let yPt = CGFloat(j * tileSize + tileSize/2)
+                
+                let fillColor = getPixelColorAtLocation(ctx, point: CGPointMake(xPt, yPt), inImage: originalImage.CGImage)
+                
+                let a = CGRectMake(CGFloat(i * tileSize), CGFloat(j * tileSize), CGFloat(tileSize), CGFloat(tileSize))
+                
+                CGContextSetFillColorWithColor(context, fillColor.CGColor)
+                
+                CGContextAddRect(context, a)
+                
+                let a2 = CGRectMake(CGFloat(i * tileSize), CGFloat(j * tileSize), CGFloat(tileSize), CGFloat(tileSize))
+                
+                UIImage.imageWithColor(fillColor, size: CGSizeMake(CGFloat(tileSize), CGFloat(tileSize))).drawInRect(a2, blendMode: kCGBlendModeNormal, alpha: 1)
+                
+            }
+        }
+        
+        let newImg = UIGraphicsGetImageFromCurrentImageContext()
+        return newImg
+    }
+    
+    
+    
+    private func createARGBBitmapContext(inImage: CGImageRef) -> CGContext {
+        var bitmapByteCount = 0
+        var bitmapBytesPerRow = 0
+        
+        //Get image width, height
+        let pixelsWide = CGImageGetWidth(inImage)
+        let pixelsHigh = CGImageGetHeight(inImage)
+        
+        // Declare the number of bytes per row. Each pixel in the bitmap in this
+        // example is represented by 4 bytes; 8 bits each of red, green, blue, and
+        // alpha.
+        bitmapBytesPerRow = Int(pixelsWide) * 4
+        bitmapByteCount = bitmapBytesPerRow * Int(pixelsHigh)
+        
+        // Use the generic RGB color space.
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        // Allocate memory for image data. This is the destination in memory
+        // where any drawing to the bitmap context will be rendered.
+        let bitmapData = malloc(CUnsignedLong(bitmapByteCount))
+        let bitmapInfo = CGBitmapInfo.fromRaw(CGImageAlphaInfo.PremultipliedFirst.toRaw())!
+        
+        // Create the bitmap context. We want pre-multiplied ARGB, 8-bits
+        // per component. Regardless of what the source image format is
+        // (CMYK, Grayscale, and so on) it will be converted over to the format
+        // specified here by CGBitmapContextCreate.
+        let context = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, CUnsignedLong(8), CUnsignedLong(bitmapBytesPerRow), colorSpace, bitmapInfo)
+        
+        // Make sure and release colorspace before returning
+        
+        return context
+    }
+    
+    private func getPixelColorAtLocation(context: CGContext, point:CGPoint, inImage:CGImageRef) -> UIColor {
+        // Create off screen bitmap context to draw the image into. Format ARGB is 4 bytes for each pixel: Alpa, Red, Green, Blue
+        
+        let pixelsWide = CGImageGetWidth(inImage)
+        let pixelsHigh = CGImageGetHeight(inImage)
+        let rect = CGRect(x:0, y:0, width:Int(pixelsWide), height:Int(pixelsHigh))
+        
+        //Clear the context
+        CGContextClearRect(context, rect)
+        
+        // Draw the image to the bitmap context. Once we draw, the memory
+        // allocated for the context for rendering will then contain the
+        // raw image data in the specified color space.
+        CGContextDrawImage(context, rect, inImage)
+        
+        // Now we can get a pointer to the image data associated with the bitmap
+        // context.
+        let data:COpaquePointer = COpaquePointer(CGBitmapContextGetData(context))
+        let dataType = UnsafePointer<UInt8>(data)
+        
+        let offset = 4*((Int(pixelsWide) * Int(point.y)) + Int(point.x))
+        let a = dataType[offset]
+        let r = dataType[offset+1]
+        let g = dataType[offset+2]
+        let b = dataType[offset+3]
+        
+        return UIColor(r: Int(r), Int(g), Int(b), Int(a))
+    }
+
 }

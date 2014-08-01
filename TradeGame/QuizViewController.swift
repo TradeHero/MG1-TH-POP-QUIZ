@@ -97,7 +97,8 @@ class QuizViewController: UIViewController {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
                 , owner: self, options: nil)[0] as QuestionViewWithImage
             contentView.questionContent.text = question.questionContent
-            contentView.imageView.image = question.questionImage
+            contentView.image = question.questionImage
+            contentView.shouldMosaic = true
             return contentView
         } else {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
