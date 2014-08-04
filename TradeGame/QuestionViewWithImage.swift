@@ -9,34 +9,9 @@
 import UIKit
 
 class QuestionViewWithImage: UIView {
-
+    
     @IBOutlet public weak var questionContent: UILabel!
-    @IBOutlet public weak var imageView: UIImageView!
-    
-    var image: UIImage? {
-    
-    didSet{
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
-        imageView.backgroundColor = UIColor.whiteColor()
-        imageView.image = image?.transparencyToWhiteMatte()
-        let betterImage = UIView.rasterizeView(imageView)
-        originalImage = betterImage
-        imageView.image = betterImage
-    }
-    }
-    
-    private var originalImage: UIImage?
-    
-    var shouldMosaic: Bool = false {
-    didSet{
-        if shouldMosaic {
-            imageView.image = imageView.image.mosaicEffectOnImage(10)
-        } else {
-            imageView.image = originalImage
-        }
-    }
-
-    }
+    @IBOutlet public weak var imageView: EditableImageView!
     
     public init(frame: CGRect) {
         super.init(frame: frame)

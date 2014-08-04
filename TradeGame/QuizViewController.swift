@@ -97,8 +97,15 @@ class QuizViewController: UIViewController {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
                 , owner: self, options: nil)[0] as QuestionViewWithImage
             contentView.questionContent.text = question.questionContent
-            contentView.image = question.questionImage
-            contentView.shouldMosaic = true
+            switch question.questionType {
+            case .LogoType:
+                    contentView.imageView.presetImage = question.questionImage
+                    contentView.imageView.mosaic(15)
+            default:
+                contentView.imageView.presetImage = question.questionImage
+            }
+            
+            
             return contentView
         } else {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
@@ -108,7 +115,18 @@ class QuizViewController: UIViewController {
         }
     }
     
-    
+    func unmaskContentViewIfNecessary() {
+        switch questionSet[current_q].questionType {
+        case .LogoType:
+            for view in questionView.subviews {
+                if let logoview = view as? QuestionViewWithImage {
+                    logoview.imageView.reset()
+                }
+            }
+        default:
+            break
+        }
+    }
     @IBAction func optionSelected(sender: OptionButton) {
         self.timerStop()
         
@@ -119,21 +137,32 @@ class QuizViewController: UIViewController {
         
         currentQuestionCorrect = false
         
+        var wobbler: UIButton
         if sender.is_answer {
             sender.backgroundColor = UIColor(hex: 0x4cd964)
             currentQuestionCorrect = true
         } else {
-            sender.backgroundColor = UIColor(hex:0xFF6A6E)        }
+            sender.backgroundColor = UIColor(hex:0xFF6A6E)
+            for option in [option1, option2, option3, option4] {
+                if option.is_answer {
+                    option.backgroundColor = UIColor(hex: 0x4cd964)
+                    option.startWobble()
+                    wobbler = option
+                }
+            }
+        }
+        
+        unmaskContentViewIfNecessary()
         
         current_q++
         
-        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "finishSelectedAnswer:", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "finishSelectedAnswer:", userInfo: nil, repeats: false)
         calculateScore()
     }
     
     func finishSelectedAnswer(sender: NSTimer) {
         if questionSet.count > current_q {
-            UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: {() -> Void in
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
                 let new_q = self.questionSet[self.current_q]
                 self.setUpViewWithQuestion(new_q)
                 }, completion:nil)

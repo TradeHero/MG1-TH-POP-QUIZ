@@ -23,16 +23,16 @@ public class QuestionSetFactory {
     
     public func generateDummyQuestionSet() -> [Question] {
         var set: [Question] = []
-        set += createQuestion("Which stock symbol do this logo represents?",answer:"NASDAQ:GOOG","NASDAQ:APPL","NASDAQ:MSFT","NASDAQ:JAZZ",UIImage(named: "Google"))
-        set += createQuestion("Which security symbol do this logo represents?",answer:"NYSE:T","NYSE:AA","NYSE:EMC","NYSE:TWTR",UIImage(named: "AT&T"))
-        set += createQuestion("Which security symbol do this logo represents?",answer:"SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
-        set += createQuestion("Which security do this stock graph of 1-month interval as of today belongs to?",answer:"NYSE:TWX","NASDAQ:WIN","NASDAQ:SIRI","SGX:S53",UIImage(named: "TestGraph1"))
-        set += createQuestion("Which NYSE security of the following has the highest trade volume amongst all?",answer:"CenturyLink","Citigroup","Nokia","JP Morgan",nil)
+        set += createQuestion("Which stock symbol do this logo represents?", qType: QuestionType.LogoType, answer:"NASDAQ:GOOG","NASDAQ:APPL","NASDAQ:MSFT","NASDAQ:JAZZ",UIImage(named: "Google"))
+        set += createQuestion("Which security symbol do this logo represents?", qType: QuestionType.LogoType, answer:"NYSE:T","NYSE:AA","NYSE:EMC","NYSE:TWTR",UIImage(named: "AT&T"))
+        set += createQuestion("Which security symbol do this logo represents?", qType: QuestionType.LogoType, answer:"SGX:C6L","SGX:D05","SGX:O39","SGX:S53",UIImage(named: "SIA"))
+        set += createQuestion("Which security do this stock graph of 1-month interval as of today belongs to?", qType: QuestionType.GraphType, answer:"NYSE:TWX","NASDAQ:WIN","NASDAQ:SIRI","SGX:S53",UIImage(named: "TestGraph1"))
+        set += createQuestion("Which NYSE security of the following has the highest trade volume amongst all?",qType: QuestionType.TextualType, answer:"CenturyLink","Citigroup","Nokia","JP Morgan",nil)
         
         return set
     }
     
-    func createQuestion(question:String, answer ans:String, _ opt1:String, _ opt2:String, _ opt3:String, _ image:UIImage?) -> Question {
+    func createQuestion(question:String, qType type:QuestionType, answer ans:String, _ opt1:String, _ opt2:String, _ opt3:String, _ image:UIImage?) -> Question {
         var correctOpt = Option(stringContent: ans)
         var dummpOpt: [Option] = []
         dummpOpt += Option(stringContent: opt1)
@@ -41,7 +41,7 @@ public class QuestionSetFactory {
         
         let answerSet = OptionSet(correctOption: correctOpt, dummyOptions: dummpOpt)
         
-        let q = Question(content: question, optionSet: answerSet, image: image)
+        let q = Question(content: question, optionSet: answerSet, image: image, type:type)
         
         return q
     }

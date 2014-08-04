@@ -94,6 +94,14 @@ extension UIView {
 
 extension UIImage {
     
+    class func imageWithImage(image:UIImage, newSize:CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        image.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
     class func imageWithColor(color:UIColor, size:CGSize) -> UIImage{
         UIGraphicsBeginImageContext(size)
         let path = UIBezierPath(rect: CGRectMake(0, 0, size.width, size.height))
