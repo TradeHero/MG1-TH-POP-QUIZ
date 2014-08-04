@@ -120,7 +120,7 @@ class QuizViewController: UIViewController {
             switch question.questionType {
             case .LogoType:
                 contentView.imageView.presetImage = question.questionImage
-                contentView.imageView.mosaic(15)
+                contentView.imageView.mosaic(20)
             default:
                 contentView.imageView.presetImage = question.questionImage
             }
@@ -226,7 +226,6 @@ class QuizViewController: UIViewController {
     func timerStop() {
         stopwatch?.invalidate()
         stopwatch = nil
-        
     }
     
     func getTimeElasped() -> Double{
@@ -241,9 +240,6 @@ class QuizViewController: UIViewController {
             self.setUpViewWithQuestion(new_q)
             }, completion:nil)
         self.resetButtons()
-        
-        
-        
     }
     
     func updateTimer(){
