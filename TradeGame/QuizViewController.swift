@@ -30,6 +30,8 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var opponentAvatarView: AvatarRoundedView!
     
     @IBOutlet weak var timeLeftLabel: UILabel!
+    
+    @IBOutlet weak var removeOptionsButton: DesignableButton!
     /*ivar*/
     private var current_q:Int = 0
     
@@ -158,16 +160,23 @@ class QuizViewController: UIViewController {
                 option.alpha = 1
             }
         }
+        if !removeOptionsButton.enabled {
+            removeOptionsButton.enable()
+        }
         
+        
+        if removeOptionsButton.alpha == 0.5 {
+            removeOptionsButton.alpha = 1
+        }
     }
     @IBAction func optionSelected(sender: OptionButton) {
         self.timerStop()
         
-        //        option1.disable()
-        //        option2.disable()
-        //        option3.disable()
-        //        option4.disable()
-        
+        option1.disable()
+        option2.disable()
+        option3.disable()
+        option4.disable()
+
         currentQuestionCorrect = false
         
         if sender.is_answer {
@@ -186,8 +195,9 @@ class QuizViewController: UIViewController {
     
     func prepareToEndRound() {
         current_q++
+        calculateScore()
         if questionSet.count > current_q {
-            endQuestion()
+            proceedToNextQuestion()
         } else {
             
         }
@@ -225,16 +235,14 @@ class QuizViewController: UIViewController {
         return timeInterval > 0 ? timeInterval : 0
     }
     
-    func endQuestion(){
-        
-        calculateScore()
-        
-        
+    func proceedToNextQuestion(){
         UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
             let new_q = self.questionSet[self.current_q]
             self.setUpViewWithQuestion(new_q)
             }, completion:nil)
         self.resetButtons()
+        
+        
         
     }
     
@@ -245,6 +253,10 @@ class QuizViewController: UIViewController {
             current_timeLeft = timeLeft
         } else if timeLeft <= 0 {
             self.timerStop()
+            option1.disable()
+            option2.disable()
+            option3.disable()
+            option4.disable()
             AudioServicesPlayAlertSound(0x00000FFF)
             revealCorrectAnswer()
             unmaskContentViewIfNecessary()
@@ -265,10 +277,12 @@ class QuizViewController: UIViewController {
             UIView.animateWithDuration(0.5, animations: {()->Void in
                 incorrectOptions[1].alpha = 0
                 incorrectOptions[2].alpha = 0
+                self.removeOptionsButton.alpha = 0.5
                 })
             
             incorrectOptions[1].disable()
             incorrectOptions[2].disable()
+            removeOptionsButton.disable()
         }
         removedOptions = true
     }

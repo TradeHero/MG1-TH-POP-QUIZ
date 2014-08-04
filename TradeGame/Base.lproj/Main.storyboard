@@ -200,6 +200,7 @@
                         <outlet property="option3" destination="BaB-uw-8Lx" id="lEZ-JO-sxZ"/>
                         <outlet property="option4" destination="uxB-e1-t0D" id="b3g-AO-EAN"/>
                         <outlet property="questionView" destination="fJO-B0-Wpj" id="XiT-08-BFM"/>
+                        <outlet property="removeOptionsButton" destination="AV5-hO-dYg" id="Ba8-bj-Oag"/>
                         <outlet property="scoreLabel" destination="blL-Cx-x5q" id="GZ5-60-7cG"/>
                         <outlet property="selfAvatarView" destination="8oh-2Q-fqM" id="cWn-I9-wdA"/>
                         <outlet property="timeLeftLabel" destination="tQI-Y5-pKh" id="V1k-Hj-bmT"/>

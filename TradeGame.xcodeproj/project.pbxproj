@@ -210,13 +210,13 @@
 		6D20576A19889A7000570042 = {
 			isa = PBXGroup;
 			children = (
-				6DC6DD30198A29C90096DD73 /* Views */,
-				6DC6DD3D198A29C90096DD73 /* ViewsTests */,
 				6DC6DD54198A29E70096DD73 /* Models */,
 				6DC6DD61198A29E70096DD73 /* ModelsTests */,
 				6D20577419889A7000570042 /* Products */,
 				6D20577519889A7000570042 /* TradeGame */,
 				6D20578819889A7000570042 /* TradeGameTests */,
+				6DC6DD30198A29C90096DD73 /* Views */,
+				6DC6DD3D198A29C90096DD73 /* ViewsTests */,
 			);
 			sourceTree = "<group>";
 		};
