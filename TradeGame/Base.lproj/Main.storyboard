@@ -148,6 +148,9 @@
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="removeTwoOptions:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="c1e-61-Wwf"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8oh-2Q-fqM" customClass="AvatarRoundedView" customModule="TradeGame" customModuleProvider="target">
                                 <rect key="frame" x="10" y="15" width="45" height="45"/>
@@ -180,6 +183,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="10.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQI-Y5-pKh">
+                                <rect key="frame" x="139" y="20" width="42" height="21"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.094117647058823528" green="0.5607843137254902" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -193,6 +202,7 @@
                         <outlet property="questionView" destination="fJO-B0-Wpj" id="XiT-08-BFM"/>
                         <outlet property="scoreLabel" destination="blL-Cx-x5q" id="GZ5-60-7cG"/>
                         <outlet property="selfAvatarView" destination="8oh-2Q-fqM" id="cWn-I9-wdA"/>
+                        <outlet property="timeLeftLabel" destination="tQI-Y5-pKh" id="V1k-Hj-bmT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
