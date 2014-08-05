@@ -30,12 +30,11 @@ public class Question {
     public var questionImage:UIImage? = nil
     
     public init(content:String, optionSet:OptionSet, image:UIImage?, type:QuestionType) {
-        questionContent = content
-        options = optionSet
+        self.questionContent = content
+        self.options = optionSet
         if let img = image {
             questionImage = img
         }
-        
-        questionType = type
+        self.questionType = type
     }
 }

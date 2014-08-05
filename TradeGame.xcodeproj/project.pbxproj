@@ -240,11 +240,12 @@
 				6D2057E81988BCE000570042 /* Extension.swift */,
 				6D20577F19889A7000570042 /* Images.xcassets */,
 				6D20577C19889A7000570042 /* Main.storyboard */,
+				6D8AD03A19908A36006021A5 /* Network */,
 				6D20577A19889A7000570042 /* QuizViewController.swift */,
 				6D286D491989F07500D179F8 /* ResultViewController.swift */,
 				6D20577619889A7000570042 /* Supporting Files */,
-				6D286D4B1989F12500D179F8 /* Views */,
 				6D0FC246198A34D0004B163C /* TradeGame-Bridging-Header.h */,
+				6D286D4B1989F12500D179F8 /* Views */,
 			);
 			path = TradeGame;
 			sourceTree = "<group>";
@@ -287,6 +288,13 @@
 				6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		6D8AD03A19908A36006021A5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		6DC6DD30198A29C90096DD73 /* Views */ = {

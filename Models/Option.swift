@@ -9,6 +9,7 @@
 import UIKit
 
 public class Option {
+    
     public var content: String? = ""
     
     public var imageContent: UIImage? = nil

@@ -18,12 +18,14 @@ extension Array
         }
     }
 }
+
 public class OptionSet {
    
     public let correctOption: Option
     public let dummyOptions: [Option]
     
-    public var allOptions: [Option] = []
+    public lazy var allOptions = [Option]()
+    
     public init(correctOption: Option, dummyOptions:[Option]){
         self.correctOption = correctOption
         self.dummyOptions = dummyOptions
