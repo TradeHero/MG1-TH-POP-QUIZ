@@ -8,7 +8,22 @@
 
 import UIKit
 
+extension Optional {
+    func or(defaultValue: T) -> T {
+        switch(self) {
+        case .None:
+            return defaultValue
+        case .Some(let value):
+            return value
+        }
+    }
+}
 
+extension UIProgressView {
+    override public func sizeThatFits(size: CGSize) -> CGSize {
+        return CGSizeMake(self.frame.size.width, 10)
+    }
+}
 
 extension UIControl {
     func disable() {
@@ -29,6 +44,11 @@ extension Array
         {
             sort { (_,_) in arc4random() < arc4random() }
         }
+    }
+    
+    func randomItem() -> T {
+        let index = Int(arc4random_uniform(UInt32(self.count)))
+        return self[index]
     }
 }
 
@@ -220,5 +240,5 @@ extension UIImage {
         
         return UIColor(r: Int(r), Int(g), Int(b), Int(a))
     }
-
+    
 }

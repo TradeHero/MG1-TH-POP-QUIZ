@@ -13,7 +13,7 @@ import Views
 class AvatarRoundedView: DesignableRoundedView {
 
     @IBInspectable
-    var image : UIImage? {
+    var image : UIImage! {
     didSet {
         refreshImage()
     }
@@ -47,7 +47,7 @@ class AvatarRoundedView: DesignableRoundedView {
     }
 
     func refreshImage(){
-        avatarImageView.image = image != nil ? prepareImage(image!) : nil
+        avatarImageView.image = image != nil ? prepareImage(image) : nil
         backgroundColor = image != nil ? nil : UIColor.whiteColor()
     }
     
@@ -78,13 +78,5 @@ class AvatarRoundedView: DesignableRoundedView {
         avatarImageView.frame = bounds
         super.layoutSubviews()
     }
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect)
-    {
-        // Drawing code
-    }
-    */
 
 }

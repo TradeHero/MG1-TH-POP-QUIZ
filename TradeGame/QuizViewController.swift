@@ -12,7 +12,7 @@ import Models
 import AudioToolbox
 
 class QuizViewController: UIViewController {
-    /*UI*/
+    // MARK:- UI var
     @IBOutlet weak var option1: OptionButton!
     
     @IBOutlet weak var option2: OptionButton!
@@ -32,8 +32,13 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var timeLeftLabel: UILabel!
     
     @IBOutlet weak var removeOptionsButton: DesignableButton!
-    /*ivar*/
-    private var current_q:Int = 0
+    
+    @IBOutlet weak var selfProgressView: UIProgressView!
+    
+    @IBOutlet var opponentProgressView: UIProgressView!
+    
+    // MARK:- ivar
+    private var current_q: Int = 0
     
     private var current_timeLeft: Double = 10.0 {
     didSet{
@@ -54,28 +59,32 @@ class QuizViewController: UIViewController {
     
     private var stopwatch: NSTimer? = nil
     
-    private var stopwatchStartTime: NSDate? = nil
+    private var stopwatchStartTime: NSDate!
     
     private var currentQuestionCorrect: Bool = false
     
     private var totalScore: Int = 0 {
     didSet{
         scoreLabel.text = String(totalScore)
+        selfProgressView.setProgress(Float(totalScore)/2500.0, animated: true)
     }
     }
     
     
-    private var removedOptions: Bool = false
+    private var didRemoveOptions: Bool = false
     
+// MARK:- init
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
-    
-    
+
+// MARK:- override calls
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        selfAvatarView.image = UIImage(named: "AvatarSample1")
-        opponentAvatarView.image = UIImage(named: "AvatarSample2")
         questionSet = QuestionSetFactory.sharedInstance.generateDummyQuestionSet()
         setUpViewWithQuestion(questionSet[current_q])
     }
@@ -83,22 +92,24 @@ class QuizViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
+// MARK:- methods
+
     func setUpViewWithQuestion(question:Question){
-        removedOptions = false
+        self.resetButtons()
+        didRemoveOptions = false
         let optionSet = question.options.allOptions
         
         var optionButtonSet = [option1, option2, option3, option4]
         
         var i = 0
         for option in optionSet {
-            optionButtonSet[i].option = option.content
-            optionButtonSet[i].enable()
-            optionButtonSet[i].backgroundColor = UIColor.whiteColor()
-            if option === question.options.correctOption {
+            optionButtonSet[i].option = option.stringContent
+            if question.options.checkOptionChoiceIfIsCorrect(option) {
                 optionButtonSet[i].is_answer = true
             } else {
-                optionButtonSet[i].is_answer = false            }
+                optionButtonSet[i].is_answer = false
+            }
             i++
         }
         
@@ -108,7 +119,7 @@ class QuizViewController: UIViewController {
     }
     
     func setUpQuestionViewWithQuestion(question:Question) -> UIView {
-        if question.isWithImage {
+        if question.isGraphical() {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
                 , owner: self, options: nil)[0] as QuestionViewWithImage
             contentView.questionContent.text = question.questionContent
@@ -133,8 +144,8 @@ class QuizViewController: UIViewController {
         switch questionSet[current_q].questionType {
         case .LogoType:
             for view in questionView.subviews {
-                if let logoview = view as? QuestionViewWithImage {
-                    logoview.imageView.reset()
+                if let logoView = view as? QuestionViewWithImage {
+                    logoView.imageView.reset()
                 }
             }
         default:
@@ -144,6 +155,8 @@ class QuizViewController: UIViewController {
     
     func resetButtons(){
         for option in [option1, option2, option3, option4] {
+            option.backgroundColor = UIColor.whiteColor()
+
             if option.wobbling {
                 option.stopWobble()
             }
@@ -155,6 +168,7 @@ class QuizViewController: UIViewController {
                 option.alpha = 1
             }
         }
+
         if !removeOptionsButton.enabled {
             removeOptionsButton.enable()
         }
@@ -164,13 +178,20 @@ class QuizViewController: UIViewController {
             removeOptionsButton.alpha = 1
         }
     }
+
+    func preventFurtherActions(){
+        removeOptionsButton.disable()
+        removeOptionsButton.alpha = 0.5
+
+        for option in [option1, option2, option3, option4] {
+            option.disable()
+        }
+    }
+
     @IBAction func optionSelected(sender: OptionButton) {
-        self.timerStop()
-        
-        option1.disable()
-        option2.disable()
-        option3.disable()
-        option4.disable()
+        timerStop()
+
+        preventFurtherActions()
 
         currentQuestionCorrect = false
         
@@ -194,7 +215,7 @@ class QuizViewController: UIViewController {
         if questionSet.count > current_q {
             proceedToNextQuestion()
         } else {
-            
+            prepareToEndTurn()
         }
     }
     
@@ -234,7 +255,7 @@ class QuizViewController: UIViewController {
             let new_q = self.questionSet[self.current_q]
             self.setUpViewWithQuestion(new_q)
             }, completion:nil)
-        self.resetButtons()
+        
     }
     
     func updateTimer(){
@@ -256,15 +277,14 @@ class QuizViewController: UIViewController {
     }
     
     @IBAction func removeTwoOptions(sender: AnyObject) {
-        if !removedOptions {
+        if !didRemoveOptions {
             var incorrectOptions:[OptionButton] = []
             for option in [option1, option2, option3, option4] {
                 if !option.is_answer {
                     incorrectOptions.append(option)
                 }
-                incorrectOptions.shuffle()
             }
-            
+            incorrectOptions.shuffle()
             UIView.animateWithDuration(0.5, animations: {()->Void in
                 incorrectOptions[1].alpha = 0
                 incorrectOptions[2].alpha = 0
@@ -275,7 +295,7 @@ class QuizViewController: UIViewController {
             incorrectOptions[2].disable()
             removeOptionsButton.disable()
         }
-        removedOptions = true
+        didRemoveOptions = true
     }
     
     func revealCorrectAnswer() {
@@ -283,8 +303,13 @@ class QuizViewController: UIViewController {
             if option.is_answer {
                 option.backgroundColor = UIColor(hex: 0x4cd964)
                 option.startWobble()
+                option.borderColor = UIColor.blackColor()
+                option.borderWidth = 1.0
             }
         }
     }
-    
+ 
+    func prepareToEndTurn(){
+        
+    }
 }

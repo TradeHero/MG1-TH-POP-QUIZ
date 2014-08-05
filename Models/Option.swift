@@ -8,23 +8,24 @@
 
 import UIKit
 
+/// Choices that are of a given question. Can be textual or image-based, or both. Designed to scale according to needs.
 public class Option {
+        
+    /// String content of the option
+    public let stringContent: String? = ""
     
-    public var content: String? = ""
+    /// Image content of the option
+    public let imageContent: UIImage? = nil
+
+    /**
+        Initialise option with string content and image content
     
-    public var imageContent: UIImage? = nil
-    
-    public convenience init(stringContent:String){
-        self.init(stringContent:stringContent, imageContent:nil)
-    }
-    
-    public convenience init(imageContent:UIImage){
-        self.init(stringContent:nil, imageContent:imageContent)
-    }
-    
-    public init(stringContent:String?, imageContent:UIImage?){
+        :param: stringContent The string content of the option
+        :param: imageContent The image content of the option
+    */
+    public init(stringContent:String? = nil, imageContent:UIImage? = nil){
         if let strCont = stringContent {
-            self.content = strCont
+            self.stringContent = strCont
         }
         
         if let imgCont = imageContent {

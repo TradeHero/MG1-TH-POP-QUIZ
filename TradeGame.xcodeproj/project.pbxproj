@@ -337,11 +337,11 @@
 		6DC6DD54198A29E70096DD73 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6DC6DD57198A29E70096DD73 /* Models.h */,
 				6DC6DD72198A29FB0096DD73 /* Option.swift */,
 				6DC6DD73198A29FB0096DD73 /* OptionSet.swift */,
 				6DC6DD74198A29FB0096DD73 /* Question.swift */,
 				6DC6DD75198A29FB0096DD73 /* QuestionSetFactory.swift */,
-				6DC6DD57198A29E70096DD73 /* Models.h */,
 				6DC6DD55198A29E70096DD73 /* Supporting Files */,
 			);
 			path = Models;

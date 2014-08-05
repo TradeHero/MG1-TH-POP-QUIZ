@@ -8,33 +8,52 @@
 
 import UIKit
 
+
+/// Type of questions, which might make question differs in presentation style.
+///
+/// - LogoType: Questions that presents based on logo-guessing mechanics. must contain an image.
+/// - GraphType: Questions that presents based on graphs of a certain interval or demographic, must contain an image.
+/// - TextualType: Questions that presents on a text-based (non-imagerial) form.
 public enum QuestionType : Int {
     case LogoType
     case GraphType
     case TextualType
 }
 
-
+/// A linguistic expression used to make a request for information.
 public class Question {
-    public var questionContent:String
 
-    public lazy var isWithImage:Bool = {
-    [unowned self] in
-        return self.questionImage != nil
-    }()
+    /// Textual content of the question, must not be empty.
+    public let questionContent:String
     
-    public var questionType: QuestionType
+    /// Type of question.
+    public let questionType: QuestionType
 
-    public var options: OptionSet
+    /// Set of options of this current question instance.
+    public let options: OptionSet
     
-    public var questionImage:UIImage? = nil
+    /// Image content of the question, can be nil.
+    public let questionImage:UIImage!
     
+    /// Initialise question with textual content, image content, set of options and type of question.
+    ///
+    /// :param: content Textual content of the question.
+    /// :param: optionSet Set of options of the given question
+    /// :param: image Image content of the question, could be a logo or a graph, etc.
+    /// :param: type The immediate type of the question
     public init(content:String, optionSet:OptionSet, image:UIImage?, type:QuestionType) {
         self.questionContent = content
         self.options = optionSet
-        if let img = image {
-            questionImage = img
-        }
+        self.questionImage = image != nil ? image! : nil
         self.questionType = type
+    }
+
+    public func isGraphical() -> Bool{
+        switch self.questionType {
+        case .LogoType, .GraphType:
+            return true
+        default:
+            return false
+        }
     }
 }

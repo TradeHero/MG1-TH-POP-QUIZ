@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>ADBB311B-C404-4087-9A5E-5322ECB33D4E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TradeGame</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CAF8DEF9791C5CD87C9E2AF4AF2EC5AB601E9EF3</key>
+		<string>https://bitbucket.org/rynecheow/tradegame.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TradeGame.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CAF8DEF9791C5CD87C9E2AF4AF2EC5AB601E9EF3</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/rynecheow/tradegame.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CAF8DEF9791C5CD87C9E2AF4AF2EC5AB601E9EF3</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CAF8DEF9791C5CD87C9E2AF4AF2EC5AB601E9EF3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TradeGame</string>
+		</dict>
+	</array>
+</dict>
+</plist>
