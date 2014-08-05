@@ -11,12 +11,12 @@ import UIKit
 @IBDesignable
 public class DesignableRoundedRectangleView: UIView {
 
-    public init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
 
-    public init(coder aDecoder: NSCoder!) {
+    public required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
         setup()
     }

@@ -18,11 +18,10 @@ public enum QuestionType : Int {
 public class Question {
     public var questionContent:String
 
-    public var isWithImage:Bool{
-    get{
-        return questionImage != nil
-    }
-    }
+    public lazy var isWithImage:Bool = {
+    [unowned self] in
+        return self.questionImage != nil
+    }()
     
     public var questionType: QuestionType
 

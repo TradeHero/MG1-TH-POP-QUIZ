@@ -10,15 +10,15 @@ import UIKit
 
 class QuestionViewWithImage: UIView {
     
-    @IBOutlet public weak var questionContent: UILabel!
-    @IBOutlet public weak var imageView: EditableImageView!
+    @IBOutlet weak var questionContent: UILabel!
+    @IBOutlet weak var imageView: EditableImageView!
     
-    public init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
     
-    public init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
         setup()
     }

@@ -19,14 +19,14 @@ class AvatarRoundedView: DesignableRoundedView {
     }
     }
     
-    init(frame: CGRect) {
+    override init(frame: CGRect) {
         avatarImageView = UIImageView(frame: CGRectZero)
         super.init(frame: frame)
         addSubview(avatarImageView)
         setup()
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder!) {
         avatarImageView = UIImageView(frame: CGRectZero)
         super.init(coder: aDecoder)
         addSubview(avatarImageView)
@@ -40,15 +40,15 @@ class AvatarRoundedView: DesignableRoundedView {
     }
     
     override func setup() {
-        if !image {
+        if image == nil {
             image = UIImage(named: "EmptyAvatar")
         }
         super.setup()
     }
 
     func refreshImage(){
-        avatarImageView.image = image ? prepareImage(image!) : nil
-        backgroundColor = image ? nil : UIColor.whiteColor()
+        avatarImageView.image = image != nil ? prepareImage(image!) : nil
+        backgroundColor = image != nil ? nil : UIColor.whiteColor()
     }
     
     

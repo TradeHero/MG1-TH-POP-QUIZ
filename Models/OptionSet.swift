@@ -32,7 +32,7 @@ public class OptionSet {
     
     public func setupAnswerSet() {
         allOptions = dummyOptions
-        allOptions += correctOption
+        allOptions.append(correctOption)
         allOptions.shuffle()
     }
     

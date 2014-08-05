@@ -50,7 +50,7 @@ class QuizViewController: UIViewController {
     }
     }
     
-    private var questionSet: [Question] = []
+    private lazy var questionSet = [Question]()
     
     private var stopwatch: NSTimer? = nil
     
@@ -67,7 +67,7 @@ class QuizViewController: UIViewController {
     
     private var removedOptions: Bool = false
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
     
@@ -83,11 +83,6 @@ class QuizViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
     
     func setUpViewWithQuestion(question:Question){
         removedOptions = false
@@ -112,7 +107,7 @@ class QuizViewController: UIViewController {
         self.timerStart()
     }
     
-    func setUpQuestionViewWithQuestion(question:Question) -> UIView? {
+    func setUpQuestionViewWithQuestion(question:Question) -> UIView {
         if question.isWithImage {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
                 , owner: self, options: nil)[0] as QuestionViewWithImage
@@ -209,7 +204,7 @@ class QuizViewController: UIViewController {
         let timeLeft = current_timeLeft
         let timeLeftBonus =  timeLeft > 0.0 ? timeLeft/10.0 : 0.4
         let correctiveFactor = currentQuestionCorrect ? 1.0 : 0.0
-        let doubleScore = 1000.0 * timeLeftBonus * correctiveFactor
+        let doubleScore = 500.0 * timeLeftBonus * correctiveFactor
         score += Int(doubleScore)
         totalScore = score
     }
@@ -265,7 +260,7 @@ class QuizViewController: UIViewController {
             var incorrectOptions:[OptionButton] = []
             for option in [option1, option2, option3, option4] {
                 if !option.is_answer {
-                    incorrectOptions += option
+                    incorrectOptions.append(option)
                 }
                 incorrectOptions.shuffle()
             }

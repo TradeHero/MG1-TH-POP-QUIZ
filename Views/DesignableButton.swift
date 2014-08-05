@@ -11,12 +11,12 @@ import UIKit
 @IBDesignable
 public class DesignableButton: UIButton {
     
-    public init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
     }
     
-    public init(coder aDecoder: NSCoder!) {
+  required public init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
     

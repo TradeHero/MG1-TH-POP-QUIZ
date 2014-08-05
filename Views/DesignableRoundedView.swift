@@ -11,13 +11,13 @@ import UIKit
 @IBDesignable
 public class DesignableRoundedView: UIView {
 
-    public init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
         // Initialization code
     }
 
-    public init(coder aDecoder: NSCoder!) {
+  required public init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
         setup()
     }

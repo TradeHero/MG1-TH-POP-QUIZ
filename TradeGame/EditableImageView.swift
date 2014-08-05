@@ -12,13 +12,13 @@ public class EditableImageView: UIImageView {
 
     private var matteImage: UIImage!
     
-    public init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
         self.contentMode = UIViewContentMode.ScaleAspectFit
     }
     
-    public init(coder aDecoder: NSCoder!) {
+   public required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
         self.contentMode = UIViewContentMode.ScaleAspectFit
         self.backgroundColor = UIColor.whiteColor()
