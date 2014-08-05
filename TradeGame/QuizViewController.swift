@@ -55,7 +55,7 @@ class QuizViewController: UIViewController {
         } else if current_timeLeft < 7.5 {
             timeLeftLabel.textColor = UIColor.yellowColor()
         } else {
-            timeLeftLabel.textColor = UIColor.blackColor()
+            timeLeftLabel.textColor = UIColor.lightGrayColor()
         }
         timeLeftLabel.text = timeString
     }

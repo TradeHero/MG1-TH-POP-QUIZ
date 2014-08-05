@@ -25,6 +25,8 @@
 		6D2DD2F71990CCCF00B8CBA4 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2DD2F61990CCCF00B8CBA4 /* Player.swift */; };
 		6D2DD2F91990CCFC00B8CBA4 /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2DD2F81990CCFC00B8CBA4 /* Turn.swift */; };
 		6D2DD2FB1990CFAE00B8CBA4 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2DD2FA1990CFAE00B8CBA4 /* Result.swift */; };
+		6D2DD2FD1990E16400B8CBA4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2DD2FC1990E16400B8CBA4 /* LoginViewController.swift */; };
+		6D2DD3011990E2A800B8CBA4 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2DD3001990E2A800B8CBA4 /* ChallengeViewController.swift */; };
 		6D6913E7198F2E8C00B8AFF1 /* EditableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6913E6198F2E8C00B8AFF1 /* EditableImageView.swift */; };
 		6D6913E9198F4C1D00B8AFF1 /* ScoreProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */; };
 		6DC6DD34198A29C90096DD73 /* Views.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC6DD33198A29C90096DD73 /* Views.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -143,6 +145,8 @@
 		6D2DD2F61990CCCF00B8CBA4 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		6D2DD2F81990CCFC00B8CBA4 /* Turn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
 		6D2DD2FA1990CFAE00B8CBA4 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		6D2DD2FC1990E16400B8CBA4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6D2DD3001990E2A800B8CBA4 /* ChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
 		6D6913E6198F2E8C00B8AFF1 /* EditableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableImageView.swift; sourceTree = "<group>"; };
 		6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreProgressView.swift; sourceTree = "<group>"; };
 		6DC6DD2F198A29C90096DD73 /* Views.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Views.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -243,12 +247,11 @@
 			isa = PBXGroup;
 			children = (
 				6D20577819889A7000570042 /* AppDelegate.swift */,
+				6D2DD2FE1990E23600B8CBA4 /* Controller */,
 				6D2057E81988BCE000570042 /* Extension.swift */,
 				6D20577F19889A7000570042 /* Images.xcassets */,
 				6D20577C19889A7000570042 /* Main.storyboard */,
 				6D8AD03A19908A36006021A5 /* Network */,
-				6D20577A19889A7000570042 /* QuizViewController.swift */,
-				6D286D491989F07500D179F8 /* ResultViewController.swift */,
 				6D20577619889A7000570042 /* Supporting Files */,
 				6D0FC246198A34D0004B163C /* TradeGame-Bridging-Header.h */,
 				6D286D4B1989F12500D179F8 /* Views */,
@@ -294,6 +297,17 @@
 				6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		6D2DD2FE1990E23600B8CBA4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6D2DD2FC1990E16400B8CBA4 /* LoginViewController.swift */,
+				6D20577A19889A7000570042 /* QuizViewController.swift */,
+				6D286D491989F07500D179F8 /* ResultViewController.swift */,
+				6D2DD3001990E2A800B8CBA4 /* ChallengeViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		6D8AD03A19908A36006021A5 /* Network */ = {
@@ -635,6 +649,8 @@
 				6D1E54B8198B45A9007EC028 /* AvatarRoundedView.swift in Sources */,
 				6D2057E91988BCE000570042 /* Extension.swift in Sources */,
 				6D286D4A1989F07500D179F8 /* ResultViewController.swift in Sources */,
+				6D2DD3011990E2A800B8CBA4 /* ChallengeViewController.swift in Sources */,
+				6D2DD2FD1990E16400B8CBA4 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
