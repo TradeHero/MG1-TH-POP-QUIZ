@@ -186,16 +186,21 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="opponentAvatarView" destination="nTF-pk-poD" id="xop-Xd-mbj"/>
+                        <outlet property="opponentDisplayNameLabel" destination="bql-cd-8X9" id="cBr-vY-jUg"/>
                         <outlet property="opponentProgressView" destination="vmO-Gd-Fjm" id="OwC-3I-Q0q"/>
+                        <outlet property="opponentRankLabel" destination="DPx-KY-pYp" id="e55-LA-m9e"/>
+                        <outlet property="opponentScoreLabel" destination="IE4-aB-MG7" id="1S3-bA-WTb"/>
                         <outlet property="option1" destination="yYq-7e-Iqw" id="Oe3-nG-7JF"/>
                         <outlet property="option2" destination="IlM-fh-HTI" id="na1-db-7Sb"/>
                         <outlet property="option3" destination="BaB-uw-8Lx" id="lEZ-JO-sxZ"/>
                         <outlet property="option4" destination="uxB-e1-t0D" id="b3g-AO-EAN"/>
                         <outlet property="questionView" destination="fJO-B0-Wpj" id="XiT-08-BFM"/>
                         <outlet property="removeOptionsButton" destination="AV5-hO-dYg" id="Ba8-bj-Oag"/>
-                        <outlet property="scoreLabel" destination="blL-Cx-x5q" id="GZ5-60-7cG"/>
                         <outlet property="selfAvatarView" destination="8oh-2Q-fqM" id="cWn-I9-wdA"/>
+                        <outlet property="selfDisplayNameLabel" destination="SE9-gm-Lnm" id="T6O-Ji-cmz"/>
                         <outlet property="selfProgressView" destination="yXU-dl-cWF" id="ofg-gh-dvy"/>
+                        <outlet property="selfRankLabel" destination="h9S-R1-8zD" id="jWl-cG-Onf"/>
+                        <outlet property="selfScoreLabel" destination="blL-Cx-x5q" id="6vq-rb-XWI"/>
                         <outlet property="timeLeftLabel" destination="tQI-Y5-pKh" id="V1k-Hj-bmT"/>
                     </connections>
                 </viewController>

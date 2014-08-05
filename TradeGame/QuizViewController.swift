@@ -23,19 +23,25 @@ class QuizViewController: UIViewController {
     
     @IBOutlet weak var questionView: UIView!
     
-    @IBOutlet weak var scoreLabel: UILabel!
     
-    @IBOutlet weak var selfAvatarView: AvatarRoundedView!
-    
-    @IBOutlet weak var opponentAvatarView: AvatarRoundedView!
-    
+
     @IBOutlet weak var timeLeftLabel: UILabel!
     
     @IBOutlet weak var removeOptionsButton: DesignableButton!
     
     @IBOutlet weak var selfProgressView: UIProgressView!
+    @IBOutlet weak var selfAvatarView: AvatarRoundedView!
+    @IBOutlet weak var selfScoreLabel: UILabel!
+    @IBOutlet weak var selfDisplayNameLabel: UILabel!
+    @IBOutlet weak var selfRankLabel: UILabel!
+    
     
     @IBOutlet var opponentProgressView: UIProgressView!
+    @IBOutlet weak var opponentAvatarView: AvatarRoundedView!
+    @IBOutlet weak var opponentScoreLabel: UILabel!
+    @IBOutlet weak var opponentDisplayNameLabel: UILabel!
+    @IBOutlet var opponentRankLabel: UILabel!
+    
     
     // MARK:- ivar
     private var current_q: Int = 0
@@ -55,7 +61,7 @@ class QuizViewController: UIViewController {
     }
     }
     
-    private lazy var questionSet = [Question]()
+    private var turn: Turn!
     
     private var stopwatch: NSTimer? = nil
     
@@ -63,10 +69,10 @@ class QuizViewController: UIViewController {
     
     private var currentQuestionCorrect: Bool = false
     
-    private var totalScore: Int = 0 {
+    private var selfTotalScore: Int = 0 {
     didSet{
-        scoreLabel.text = String(totalScore)
-        selfProgressView.setProgress(Float(totalScore)/2500.0, animated: true)
+        selfScoreLabel.text = String(selfTotalScore)
+        selfProgressView.setProgress(Float(selfTotalScore)/2500.0, animated: true)
     }
     }
     
@@ -76,6 +82,7 @@ class QuizViewController: UIViewController {
 // MARK:- init
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
+        turn = Turn(player: Player(name: "Ryne Cheow", rank: "Knight", displayPic: UIImage(named: "AvatarSample1")), opponent: Player(name: "Maggie Grace", rank: "Novice", displayPic: UIImage(named: "AvatarSample2")), questionSet: QuestionSetFactory.sharedInstance.generateDummyQuestionSet(), newGame: true)
     }
 
 // MARK:- override calls
@@ -85,8 +92,8 @@ class QuizViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        questionSet = QuestionSetFactory.sharedInstance.generateDummyQuestionSet()
-        setUpViewWithQuestion(questionSet[current_q])
+        setUpViewWithQuestion(turn.questionSet[current_q])
+        setUpPlayerDetails()
     }
     
     override func didReceiveMemoryWarning() {
@@ -95,6 +102,21 @@ class QuizViewController: UIViewController {
 
 // MARK:- methods
 
+    func setUpPlayerDetails() {
+        let thisPlayer = turn.player
+        let opponent = turn.opponent
+        
+        selfAvatarView.image = thisPlayer.displayImage
+        selfDisplayNameLabel.text = thisPlayer.displayName
+        selfRankLabel.text = thisPlayer.rank
+        selfTotalScore = 0
+        
+        opponentAvatarView.image = opponent.displayImage
+        opponentDisplayNameLabel.text = opponent.displayName
+        opponentRankLabel.text = opponent.rank
+//        opponentScoreLabel.text = turn.newGame ? "0" : String(turn.opponentScore)
+    }
+    
     func setUpViewWithQuestion(question:Question){
         self.resetButtons()
         didRemoveOptions = false
@@ -141,7 +163,7 @@ class QuizViewController: UIViewController {
     }
     
     func unmaskContentViewIfNecessary() {
-        switch questionSet[current_q].questionType {
+        switch turn.questionSet[current_q].questionType {
         case .LogoType:
             for view in questionView.subviews {
                 if let logoView = view as? QuestionViewWithImage {
@@ -212,22 +234,22 @@ class QuizViewController: UIViewController {
     func prepareToEndRound() {
         current_q++
         calculateScore()
-        if questionSet.count > current_q {
+        if turn.questionSet.count > current_q {
             proceedToNextQuestion()
         } else {
-            prepareToEndTurn()
+            endTurn()
         }
     }
     
     func calculateScore(){
-        var score = totalScore
+        var score = selfTotalScore
         let timeTaken:Float = 0
         let timeLeft = current_timeLeft
         let timeLeftBonus =  timeLeft > 0.0 ? timeLeft/10.0 : 0.4
         let correctiveFactor = currentQuestionCorrect ? 1.0 : 0.0
         let doubleScore = 500.0 * timeLeftBonus * correctiveFactor
         score += Int(doubleScore)
-        totalScore = score
+        selfTotalScore = score
     }
     
     
@@ -252,7 +274,7 @@ class QuizViewController: UIViewController {
     
     func proceedToNextQuestion(){
         UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
-            let new_q = self.questionSet[self.current_q]
+            let new_q = self.turn.questionSet[self.current_q]
             self.setUpViewWithQuestion(new_q)
             }, completion:nil)
         
@@ -264,11 +286,8 @@ class QuizViewController: UIViewController {
         if timeLeft > 0 {
             current_timeLeft = timeLeft
         } else if timeLeft <= 0 {
-            self.timerStop()
-            option1.disable()
-            option2.disable()
-            option3.disable()
-            option4.disable()
+            timerStop()
+            preventFurtherActions()
             AudioServicesPlayAlertSound(0x00000FFF)
             revealCorrectAnswer()
             unmaskContentViewIfNecessary()
@@ -309,7 +328,8 @@ class QuizViewController: UIViewController {
         }
     }
  
-    func prepareToEndTurn(){
+    func endTurn(){
+        let currentTurnScore = selfTotalScore
         
     }
 }
