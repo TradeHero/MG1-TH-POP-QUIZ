@@ -1,0 +1,3 @@
+[submodule "submodules"]
+	path = submodules
+	url = https://rynecheow@github.com/Alamofire/Alamofire
