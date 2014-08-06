@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Views
 
 class LoginViewController: UIViewController {
 
@@ -21,5 +22,12 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    required init(coder aDecoder: NSCoder!) {
+        super.init(coder: aDecoder)
+    }
+    
+    @IBAction func loginButtonClicked(sender: AnyObject) {
+        
+        
+    }
 }
