@@ -242,3 +242,18 @@ extension UIImage {
     }
     
 }
+
+extension String {
+    
+    func encodeToBase64Encoding() -> String {
+        let utf8str = self.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        let base64EncodedString = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!)
+        return base64EncodedString!
+    }
+    
+    func decodeFromBase64Encoding() -> String {
+        let base64data = NSData(base64EncodedString: self, options: NSDataBase64DecodingOptions.fromRaw(0)!)
+        let decodedString = NSString(data: base64data, encoding: NSUTF8StringEncoding)
+        return decodedString
+    }
+}

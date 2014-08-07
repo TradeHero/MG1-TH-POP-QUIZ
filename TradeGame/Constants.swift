@@ -7,13 +7,23 @@
 //
 
 import Foundation
-import Models
+
+let kConstantPrefix = "TH"
 
 
+// MARK:- connections
 
-let THMiniGameAPIBaseURL: String = "http://www.tradehero.mobi/api/games"
+let kConnectionHTTPS = "https://"
+let THAPIHost: String = "www.tradehero.mobi"
+let THAPIPath: String = "/api"
+let THAPIBaseURL: String = "\(kConnectionHTTPS)\(THAPIHost)\(THAPIPath)"
+let THMiniGameAPIBaseURL: String =  "\(THAPIBaseURL)/games"
 
 
+// MARK:- keys
 
-
-let kTHGameLoggedInKey: String = "THGameLoggedIn"
+let kTHGameLoggedInKey: String = "\(kConstantPrefix)GameLoggedIn"
+let kTHGameLoginIDKey: String = "\(kConstantPrefix)GameLoginID"
+let kTHGameLoginPasswordKey: String = "\(kConstantPrefix)GameLoginPassword"
+let kTHGameKeychainIdentifierKey: String = "\(kConstantPrefix)GameKeychainIdentifier"
+let kTHGameKeychainBasicAccKey: String = "\(kConstantPrefix)GameKeychainBasicAcc"

@@ -32,7 +32,6 @@
 		6D6913E7198F2E8C00B8AFF1 /* EditableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6913E6198F2E8C00B8AFF1 /* EditableImageView.swift */; };
 		6D6913E9198F4C1D00B8AFF1 /* ScoreProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */; };
 		6DA8689C1991D0A7009FBD99 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA8689B1991D0A7009FBD99 /* Alamofire.swift */; };
-		6DA8689E1991D2F6009FBD99 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA8689D1991D2F6009FBD99 /* FacebookSDK.framework */; };
 		6DC6DD34198A29C90096DD73 /* Views.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC6DD33198A29C90096DD73 /* Views.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6DC6DD3A198A29C90096DD73 /* Views.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC6DD2F198A29C90096DD73 /* Views.framework */; };
 		6DC6DD41198A29C90096DD73 /* ViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC6DD40198A29C90096DD73 /* ViewsTests.swift */; };
@@ -161,7 +160,6 @@
 		6D6913E6198F2E8C00B8AFF1 /* EditableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableImageView.swift; sourceTree = "<group>"; };
 		6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreProgressView.swift; sourceTree = "<group>"; };
 		6DA8689B1991D0A7009FBD99 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = submodules/Source/Alamofire.swift; sourceTree = "<group>"; };
-		6DA8689D1991D2F6009FBD99 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		6DC6DD2F198A29C90096DD73 /* Views.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Views.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DC6DD32198A29C90096DD73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DC6DD33198A29C90096DD73 /* Views.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Views.h; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DA8689E1991D2F6009FBD99 /* FacebookSDK.framework in Frameworks */,
 				6DC6DD68198A29E70096DD73 /* Models.framework in Frameworks */,
 				6DC6DD44198A29C90096DD73 /* Views.framework in Frameworks */,
 				449863D3E52648AF811620AA /* libPods.a in Frameworks */,
@@ -255,7 +252,6 @@
 		6D20576A19889A7000570042 = {
 			isa = PBXGroup;
 			children = (
-				6DA8689D1991D2F6009FBD99 /* FacebookSDK.framework */,
 				6DA8689A1991D096009FBD99 /* External */,
 				6DC6DD54198A29E70096DD73 /* Models */,
 				6DC6DD61198A29E70096DD73 /* ModelsTests */,

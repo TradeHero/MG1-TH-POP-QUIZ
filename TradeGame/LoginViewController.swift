@@ -11,10 +11,11 @@ import Views
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.loginView.delegate = self
-//        self.loginView.readPermissions = ["public_profile"]
         // Do any additional setup after loading the view.
     }
 
@@ -28,15 +29,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonClicked(sender: AnyObject) {
-       let req = Alamofire.request(.GET, THMiniGameAPIBaseURL + "/question", parameters: nil, encoding:.URL)
-        req.response{(request, response, data, error) in
-            println(request)
-            println(response)
-            println(error)
-        }
-        NetworkClient.loginUserWithFacebook()
+        let username: String = emailField.text
+        let password: String = passwordField.text
+
         
+        NetworkClient.sharedClient.loginUserWithBasicAuth(username, password:password)
+        
+        println(SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainBasicAccKey))
     }
-    
-    
 }
+//
