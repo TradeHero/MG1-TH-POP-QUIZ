@@ -7,5 +7,13 @@
 //
 
 import Foundation
+import Models
+
+
 
 let THMiniGameAPIBaseURL: String = "http://www.tradehero.mobi/api/games"
+
+
+
+
+let kTHGameLoggedInKey: String = "THGameLoggedIn"

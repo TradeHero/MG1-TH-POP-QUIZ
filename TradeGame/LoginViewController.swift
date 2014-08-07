@@ -9,9 +9,8 @@
 import UIKit
 import Views
 
-class LoginViewController: UIViewController, FBLoginViewDelegate {
+class LoginViewController: UIViewController {
 
-    @IBOutlet weak var loginView: FBLoginView!
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.loginView.delegate = self
@@ -35,19 +34,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             println(response)
             println(error)
         }
-        
-        
-    }
-    
-    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
+        NetworkClient.loginUserWithFacebook()
         
     }
     
-    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-       
     
-    }
-    
-    
-
 }

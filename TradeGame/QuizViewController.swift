@@ -22,8 +22,6 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var option4: OptionButton!
     
     @IBOutlet weak var questionView: UIView!
-    
-    
 
     @IBOutlet weak var timeLeftLabel: UILabel!
     

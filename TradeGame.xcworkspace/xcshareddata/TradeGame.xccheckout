@@ -20,7 +20,7 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
-		<string>..submodules/</string>
+		<string>..submodules</string>
 		<key>CAF8DEF9791C5CD87C9E2AF4AF2EC5AB601E9EF3</key>
 		<string>..</string>
 	</dict>
@@ -36,17 +36,17 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>67620B5EFA902936DF04070AF595B76AB0333747</string>
+			<string>CAF8DEF9791C5CD87C9E2AF4AF2EC5AB601E9EF3</string>
 			<key>IDESourceControlWCCName</key>
-			<string>submodules</string>
+			<string>TradeGame</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CAF8DEF9791C5CD87C9E2AF4AF2EC5AB601E9EF3</string>
+			<string>67620B5EFA902936DF04070AF595B76AB0333747</string>
 			<key>IDESourceControlWCCName</key>
-			<string>TradeGame</string>
+			<string>TradeGamesubmodules</string>
 		</dict>
 	</array>
 </dict>

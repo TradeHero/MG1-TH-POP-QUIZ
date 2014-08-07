@@ -10,10 +10,10 @@ import UIKit
 
 public class Player {
     
-    
-    public let displayName: String
-    public let rank:String
-    public let displayImage: UIImage
+    public let user: THUser!
+    public let displayName: String!
+    public let rank:String!
+    public let displayImage: UIImage!
     
     public init(name dName: String, rank:String, displayPic dImage: UIImage = UIImage(named: "EmptyAvatar")){
         self.displayName = dName
@@ -21,6 +21,11 @@ public class Player {
         self.displayImage = dImage
     }
 
-    
+    public init(user:THUser, rank:String, userImage:UIImage = UIImage(named: "EmptyAvatar")){
+        self.user = user
+        self.displayName = user.fullName
+        self.displayImage = userImage
+        self.rank = rank
+    }
     
 }

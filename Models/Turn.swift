@@ -11,6 +11,9 @@ import UIKit
 /// A turn is the opportunity for a player to play the game.
 public class Turn {
     
+    public let game: Game!
+    
+    public let turnID: Int!
     /// Player that is playing the turn
     public let player: Player
     
@@ -32,5 +35,8 @@ public class Turn {
         self.questionSet = questionSet
     }
     
+//    public init(id: Int, game:Game, homeTurn:Int){
+//        
+//    }
     
 }
