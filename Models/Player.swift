@@ -9,6 +9,8 @@
 import UIKit
 
 public class Player {
+    
+    
     public let displayName: String
     public let rank:String
     public let displayImage: UIImage
@@ -18,4 +20,7 @@ public class Player {
         self.rank = rank
         self.displayImage = dImage
     }
+
+    
+    
 }

@@ -9,11 +9,13 @@
 import UIKit
 import Views
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, FBLoginViewDelegate {
 
+    @IBOutlet weak var loginView: FBLoginView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        self.loginView.delegate = self
+//        self.loginView.readPermissions = ["public_profile"]
         // Do any additional setup after loading the view.
     }
 
@@ -27,7 +29,25 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonClicked(sender: AnyObject) {
+       let req = Alamofire.request(.GET, THMiniGameAPIBaseURL + "/question", parameters: nil, encoding:.URL)
+        req.response{(request, response, data, error) in
+            println(request)
+            println(response)
+            println(error)
+        }
         
         
     }
+    
+    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
+        
+    }
+    
+    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
+       
+    
+    }
+    
+    
+
 }
