@@ -34,17 +34,15 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonClicked(sender: AnyObject) {
-        let username: String = emailField.text
-        let password: String = passwordField.text
-        
-        NetworkClient.sharedClient.loginUserWithBasicAuth(username, password: password) {
+        let credentials: [String: String] = [kTHGameLoginIDKey: emailField.text ?? "", kTHGameLoginPasswordKey:passwordField.text ?? ""]
+        NetworkClient.sharedClient.loginUserWithBasicAuth(credentials) {
             (user: THUser?) -> () in
             if let loginUser = user {
                 let vc = self.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
                 self.presentViewController(vc, animated: true, completion: nil)
                 
             } else {
-                UIAlertView(title: "Login failed", message: "Please retype your login credentials", delegate: nil, cancelButtonTitle: "Dismiss").show()
+                UIAlertView(title: "Login failed", message: "Please re-enter your login credentials.", delegate: nil, cancelButtonTitle: "Dismiss").show()
             }
         }
     }

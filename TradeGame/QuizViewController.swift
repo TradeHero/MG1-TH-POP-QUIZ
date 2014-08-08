@@ -33,11 +33,14 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var selfDisplayNameLabel: UILabel!
     @IBOutlet weak var selfRankLabel: UILabel!
     
-    
     @IBOutlet var opponentProgressView: UIProgressView!
+    
     @IBOutlet weak var opponentAvatarView: AvatarRoundedView!
+    
     @IBOutlet weak var opponentScoreLabel: UILabel!
+    
     @IBOutlet weak var opponentDisplayNameLabel: UILabel!
+    
     @IBOutlet var opponentRankLabel: UILabel!
     
     
@@ -59,7 +62,7 @@ class QuizViewController: UIViewController {
     }
     }
     
-    private var turn: Turn!
+    var turn: Turn!
     
     private var stopwatch: NSTimer? = nil
     
@@ -80,7 +83,6 @@ class QuizViewController: UIViewController {
 // MARK:- init
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
-        turn = Turn(player: Player(name: "Ryne Cheow", rank: "Knight", displayPic: UIImage(named: "AvatarSample1")), opponent: Player(name: "Maggie Grace", rank: "Novice", displayPic: UIImage(named: "AvatarSample2")), questionSet: QuestionSetFactory.sharedInstance.generateDummyQuestionSet(), newGame: true)
     }
 
 // MARK:- override calls

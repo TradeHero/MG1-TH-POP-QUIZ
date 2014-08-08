@@ -16,8 +16,9 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var fullNameView: UILabel!
     @IBOutlet weak var rankView: UILabel!
     
-    @IBOutlet weak var contentScrollView: UIScrollView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var scrollableContentView: UIView!
     var progressView: OverlayProgressView? = nil
     
     private weak var user: THUser?
@@ -59,10 +60,8 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
         self.fullNameView.text = user?.fullName
         self.rankView.text = user?.gamePortfolio.rank
         
-        self.contentScrollView.delegate = self
-        let bigView = UIView(frame: CGRectMake(0, 0, 320, 1100))
-        contentScrollView.addSubview(bigView)
-        contentScrollView.contentSize = bigView.bounds.size
+        self.scrollView.delegate = self
+        scrollView.contentSize = self.scrollableContentView.bounds.size
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,5 +74,16 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
         user = NetworkClient.sharedClient.authenticatedUser
     }
     
+    @IBAction func createDummyGame(sender: AnyObject) {
+        let vc = self.storyboard.instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
+        vc.turn = Turn(player: Player(name: "Ryne Cheow", rank: "Knight", displayPic: UIImage(named: "AvatarSample1")), opponent: Player(name: "Maggie Grace", rank: "Novice", displayPic: UIImage(named: "AvatarSample2")), questionSet: QuestionSetFactory.sharedInstance.generateDummyQuestionSet(), newGame: true)
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
     
+    @IBAction func createQuickplayGame(sender: AnyObject) {
+        let quickGame:Game = NetworkClient.sharedClient.createQuickGame()
+        
+        
+        
+    }
 }
