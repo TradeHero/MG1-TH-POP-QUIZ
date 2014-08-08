@@ -57,6 +57,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="emailField" destination="0lx-MM-CXg" id="6Uk-Jz-KNk"/>
                         <outlet property="passwordField" destination="oax-Bo-NSZ" id="RWG-zP-d5X"/>
@@ -64,7 +65,53 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkD-5b-QH6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-506" y="160"/>
+            <point key="canvasLocation" x="-868" y="160"/>
+        </scene>
+        <!--ChallengeViewController-->
+        <scene sceneID="bVp-gC-yih">
+            <objects>
+                <viewController storyboardIdentifier="ChallengeViewController" title="ChallengeViewController" id="gkl-QF-3pe" customClass="ChallengeViewController" customModule="TradeGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dd8-7w-afh"/>
+                        <viewControllerLayoutGuide type="bottom" id="UvF-pw-9h4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="stV-q5-mzg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ryne Cheow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nb-cf-fgB">
+                                <rect key="frame" x="59" y="148" width="203" height="24"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Knight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vg-hf-uPl">
+                                <rect key="frame" x="112" y="180" width="96" height="23"/>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="15"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BN8-Of-Aud">
+                                <rect key="frame" x="0.0" y="219" width="320" height="349"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="EmptyAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="KhU-dg-50J">
+                                <rect key="frame" x="110" y="25" width="100" height="100"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="avatarView" destination="KhU-dg-50J" id="HZO-6Y-mOt"/>
+                        <outlet property="contentScrollView" destination="BN8-Of-Aud" id="oUo-KY-GtW"/>
+                        <outlet property="fullNameView" destination="7nb-cf-fgB" id="bwv-Mi-tle"/>
+                        <outlet property="rankView" destination="8vg-hf-uPl" id="8RX-Sx-035"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ayX-Fo-Vok" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-481" y="159"/>
         </scene>
         <!--Quiz View Controller-->
         <scene sceneID="ufC-wZ-h7g">

@@ -4,3 +4,4 @@
 
 //#import <FacebookSDK/FacebookSDK.h>
 #import <SSKeychain/SSKeychain.h>
+#import <SDWebImage/SDWebImageManager.h>

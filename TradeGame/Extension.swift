@@ -257,3 +257,9 @@ extension String {
         return decodedString
     }
 }
+
+extension UIStoryboard {
+    class func mainStoryboard() -> UIStoryboard {
+        return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+    }
+}

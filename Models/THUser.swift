@@ -16,6 +16,7 @@ public class THUser {
     public var lastName:String!
     public var fullName:String!
     public var pictureURL:String!
+    public var gamePortfolio: GamePortfolio!
     
     public init(profileDTO:[String: AnyObject]){
         if let id: AnyObject? = profileDTO["id"] {
