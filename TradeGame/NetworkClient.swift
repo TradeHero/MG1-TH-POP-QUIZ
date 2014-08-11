@@ -75,6 +75,16 @@ class NetworkClient {
         return false
     }
     
+    
+    ///
+    ///
+    ///
+    ///
+    
+    func createQuickGame() -> Game {
+        return createDummyGame()
+    }
+    
     ///
     /// Fetches game portfolio by using userID of user.
     ///
@@ -84,7 +94,7 @@ class NetworkClient {
     ///
     func fetchGamePortfolioForUser(userID: Int) -> GamePortfolio? {
         
-        return GamePortfolio(gamePfID: 1000, rank: "Novice")
+        return createDummyGamePortfolio()
     }
     
     /// MARK:- Class functions
@@ -141,4 +151,13 @@ class NetworkClient {
         }
     }
 
+    ///MARK:- Dummy functions 
+    
+    func createDummyGame(){
+        return Game(id: 1, initiator: self.authenticatedUser.gamePortfolio, opponent: GamePortfolio(gamePfID: 2000, rank: "Novice"))
+    }
+    
+    func createDummyGamePortfolio() -> GamePortfolio {
+        return GamePortfolio(gamePfID: 1000, rank: "Novice")
+    }
 }

@@ -11,11 +11,10 @@ import UIKit
 public class Game {
 
     public let gameID: Int
-    public let initiatingPlayer:Player
-    public let opponentPlayer:Player
-    public let winningPlayer: Player? = nil
+    public let initiatingPlayer:GamePortfolio
+    public let opponentPlayer:GamePortfolio
     
-    public init(id: Int, initiator:Player, opponent:Player) {
+    public init(id: Int, initiator:GamePortfolio, opponent:GamePortfolio) {
         gameID = id
         initiatingPlayer = initiator
         opponentPlayer = opponent
