@@ -25,6 +25,14 @@ class NetworkClient {
     /// Authenticated user
     var authenticatedUser: THUser!
     
+    
+    ///
+    private var credentials: [String: String]!
+    
+    /// default JSON encoding
+    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(options: NSJSONWritingOptions.PrettyPrinted)
+    
+    
     /// MARK:- Methods
     
     
@@ -37,31 +45,31 @@ class NetworkClient {
     func loginUserWithBasicAuth(credentials:[String : String], loginSuccessHandler:(user: THUser?) -> ()) -> Bool {
         let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
         
+        
         var headers = AF.Manager.sharedInstance.defaultHeaders
-        headers["TH-Client-Version"] = "2.3.0.4245"
-        headers["TH-Client-Type"] = "1"
+        headers = configureDefaultHTTPHeaders(headers)
         headers["Authorization"] = generateBasicAuthHTTPHeader(credentials[kTHGameLoginIDKey]!, password: credentials[kTHGameLoginPasswordKey]!)
-        headers["TH-Language-Code"] = "en-GB"
         AF.Manager.sharedInstance.defaultHeaders = headers
         
         AF.request(.POST,
-            THAPIBaseURL + "/login",
+            THServerAPIBaseURL + "/login",
             parameters: param,
-            encoding: .JSON(options: NSJSONWritingOptions.PrettyPrinted))
-            .responseJSON({(_, response, content, error) in
+            encoding: JSONPrettyPrinted)
+            .responseJSON({
+                _, response, content, error in
             if let responseError = error {
                 println(responseError)
                 return
             }
                 
             if response?.statusCode == 200 {
-                self.saveCredentials(credentials[kTHGameLoginIDKey]!, password:credentials[kTHGameLoginPasswordKey]!)
+                self.saveCredentials(credentials)
                 
                 let responseJSON = content as [String: AnyObject]
                 let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
                 
                 if let profileDTODict = profileDTOPart as? [String: AnyObject] {
-                                    println(profileDTODict)
+//                                    println(profileDTODict)
                     var loginUser = THUser(profileDTO: profileDTODict)
                     if let userGamePortfolio = self.fetchGamePortfolioForUser(loginUser.userId) {
                         loginUser.gamePortfolio = userGamePortfolio
@@ -75,14 +83,43 @@ class NetworkClient {
         return false
     }
     
+    ///
+    ///
+    ///
+    ///
+    func createChallenge(numberOfQuestions:Int, user:THUser, completionHandler: (Game -> ())?) {
+        let params = ["opponentId": user.userId, "numberOfQuestions": numberOfQuestions]
+        
+        var headers = AF.Manager.sharedInstance.defaultHeaders
+        headers = configureDefaultHTTPHeaders(headers)
+        headers["Authorization"] = generateAuthorisationFromKeychain()
+        AF.Manager.sharedInstance.defaultHeaders = headers
+
+        AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: params, encoding: JSONPrettyPrinted).responseJSON({
+            _, response, content, error in
+            if let responseError = error {
+                println(responseError)
+                return
+            }
+
+            if response?.statusCode == 200 {
+                println(content!)
+            }
+        })
+    }
     
     ///
     ///
     ///
     ///
-    
     func createQuickGame() -> Game {
-        return createDummyGame()
+        var g: Game? = nil
+        createChallenge(10, user: self.authenticatedUser, completionHandler: {
+            game in
+            g = game
+        })
+        
+        return Game(id: 1, initiator: GamePortfolio(gamePfID: 1, rank: "n0"), opponent: GamePortfolio(gamePfID: 2, rank: "x"))
     }
     
     
@@ -131,6 +168,35 @@ class NetworkClient {
     
     /// MARK:- private functions
     
+    
+    
+    private func configureDefaultHTTPHeaders(dict:[String : String]) -> [String : String]{
+        var headers = dict
+        if (headers["TH-Client-Version"] == nil) {
+            headers["TH-Client-Version"] = "2.3.0.4245"
+        }
+        
+        if (headers["TH-Client-Type"] == nil) {
+            headers["TH-Client-Type"] = "1"
+        }
+        
+        if (headers["TH-Language-Code"] == nil) {
+            headers["TH-Language-Code"] = "en-GB"
+        }
+        return headers
+    }
+    
+    
+    private func generateAuthorisationFromKeychain() -> String? {
+        self.loadCredentials()
+        if let cred = self.credentials {
+            return generateBasicAuthHTTPHeader(self.credentials[kTHGameLoginIDKey]!, password: self.credentials[kTHGameLoginPasswordKey]!)
+        }
+        return nil
+    }
+    
+    
+    
     ///
     /// Generate BASIC Authentication header from username and password encoded in base64.
     ///
@@ -147,8 +213,10 @@ class NetworkClient {
     /// :param: username Log In ID
     /// :param: password Log In password
     ///
-    private func saveCredentials(username: String, password:String){
-        SSKeychain.setPassword("\(username):\(password)", forService: kTHGameKeychainIdentifierKey, account: kTHGameKeychainBasicAccKey)
+    private func saveCredentials(credentials:[String: String]){
+
+        SSKeychain.setPassword("\(credentials[kTHGameLoginIDKey]!):\(credentials[kTHGameLoginPasswordKey]!)", forService: kTHGameKeychainIdentifierKey, account: kTHGameKeychainBasicAccKey)
+        self.credentials = credentials
     }
     
     /// 
@@ -160,6 +228,23 @@ class NetworkClient {
                 SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: data["acct"])
             }
             
+        }
+        self.credentials = nil
+    }
+    
+    private func loadCredentials() {
+        let keychainAcc = SSKeychain.accountsForService(kTHGameKeychainIdentifierKey)
+        if keychainAcc.count == 0 {
+            println("No credentials found")
+        }
+        
+        for userData in keychainAcc {
+            if let data = userData as? [String: String] {
+                let secret = SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainBasicAccKey)
+                let credArr = secret.componentsSeparatedByString(":")
+                let credDict = [kTHGameLoginIDKey : credArr[0], kTHGameLoginPasswordKey : credArr[1]]
+                self.credentials = credDict
+            }
         }
     }
 

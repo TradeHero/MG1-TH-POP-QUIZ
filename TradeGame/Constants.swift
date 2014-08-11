@@ -8,22 +8,37 @@
 
 import Foundation
 
-let kConstantPrefix = "TH"
+enum Mode: Int {
+    case Dev
+    case Prod
+}
 
+
+let mode = Mode.Dev
+
+let kConstantPrefix = "TH"
 
 // MARK:- connections
 
 let kConnectionHTTPS = "https://"
-let THAPIHost: String = "www.tradehero.mobi"
-let THAPIPath: String = "/api"
-let THAPIBaseURL: String = "\(kConnectionHTTPS)\(THAPIHost)\(THAPIPath)"
-let THMiniGameAPIBaseURL: String =  "\(THAPIBaseURL)/games"
+let kConnectionHTTP = "http://"
+let THAPIPath = "/api"
 
+let THProdAPIHost = "www.tradehero.mobi"
+let THProdAPIBaseURL = "\(kConnectionHTTPS)\(THProdAPIHost)\(THAPIPath)"
+
+let THDevAPIHost = "th-paas-test-dev1.cloudapp.net"
+let THDevAPIBaseURL = "\(kConnectionHTTP)\(THDevAPIHost)\(THAPIPath)"
+
+let THServerAPIBaseURL = mode == Mode.Dev ? "\(THDevAPIBaseURL)" : "\(THProdAPIBaseURL)"
+
+let THGameAPIBaseURL = "\(THServerAPIBaseURL)/games"
 
 // MARK:- keys
 
-let kTHGameLoggedInKey: String = "\(kConstantPrefix)GameLoggedIn"
-let kTHGameLoginIDKey: String = "\(kConstantPrefix)GameLoginID"
-let kTHGameLoginPasswordKey: String = "\(kConstantPrefix)GameLoginPassword"
-let kTHGameKeychainIdentifierKey: String = "\(kConstantPrefix)GameKeychainIdentifier"
-let kTHGameKeychainBasicAccKey: String = "\(kConstantPrefix)GameKeychainBasicAcc"
+let kTHGameLoggedInKey = "\(kConstantPrefix)GameLoggedIn"
+let kTHGameLoginIDKey = "\(kConstantPrefix)GameLoginID"
+
+let kTHGameLoginPasswordKey = "\(kConstantPrefix)GameLoginPassword"
+let kTHGameKeychainIdentifierKey = "\(kConstantPrefix)GameKeychainIdentifier"
+let kTHGameKeychainBasicAccKey = "\(kConstantPrefix)GameKeychainBasicAcc"
