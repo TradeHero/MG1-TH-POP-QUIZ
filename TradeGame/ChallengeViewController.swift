@@ -19,7 +19,7 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var scrollableContentView: UIView!
-    var progressView: OverlayProgressView? = nil
+    var progressView: OverlayProgressView!
     
     private weak var user: THUser?
     
@@ -35,11 +35,12 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func logoutClicked(sender: AnyObject) {
         FBSession.activeSession().closeAndClearTokenInformation()
         NetworkClient.sharedClient.logout()
-    self.presentViewController(self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as LoginViewController, animated: true, completion: nil)
+        self.presentViewController(self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as LoginViewController, animated: true, completion: nil)
     }
+    
     func setupSubviews() {
         self.progressView = OverlayProgressView(frame: self.avatarView.bounds)
-        self.avatarView.addSubview(self.progressView!)
+        self.avatarView.addSubview(self.progressView)
         self.progressView?.displayOperationWillTriggerAnimation()
         NetworkClient.fetchImageFromURLString((user?.pictureURL)!, progressHandler: {
             (current:Int, expected:Int) -> Void in

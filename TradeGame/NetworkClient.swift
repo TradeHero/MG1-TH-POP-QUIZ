@@ -26,7 +26,7 @@ class NetworkClient {
     var authenticatedUser: THUser!
     
     
-    ///
+    /// Credential dictionary (BASIC Auth)
     private var credentials: [String: String]!
     
     /// default JSON encoding
@@ -84,11 +84,15 @@ class NetworkClient {
     }
     
     ///
+    /// Create challenge with
     ///
     ///
-    ///
-    func createChallenge(numberOfQuestions:Int, user:THUser, completionHandler: (Game -> ())?) {
-        let params = ["opponentId": user.userId, "numberOfQuestions": numberOfQuestions]
+    func createChallenge(numberOfQuestions:Int, opponentId:Int?, completionHandler: (Game -> ())?) {
+        
+        var params = ["numberOfQuestions": numberOfQuestions]
+        if opponentId != nil {
+            params["opponentId"] = opponentId
+        }
         
         var headers = AF.Manager.sharedInstance.defaultHeaders
         headers = configureDefaultHTTPHeaders(headers)
@@ -114,12 +118,12 @@ class NetworkClient {
     ///
     func createQuickGame() -> Game {
         var g: Game? = nil
-        createChallenge(10, user: self.authenticatedUser, completionHandler: {
+        createChallenge(10, opponentId: nil, completionHandler: {
             game in
             g = game
         })
         
-        return Game(id: 1, initiator: GamePortfolio(gamePfID: 1, rank: "n0"), opponent: GamePortfolio(gamePfID: 2, rank: "x"))
+        return createDummyGame()
     }
     
     
@@ -251,10 +255,15 @@ class NetworkClient {
     ///MARK:- Dummy functions 
     
     private func createDummyGame() -> Game{
-        return Game(id: 1, initiator: self.authenticatedUser.gamePortfolio, opponent: GamePortfolio(gamePfID: 2000, rank: "Novice"))
+//        return Game(id: 1, initiator: self.authenticatedUser.gamePortfolio, opponent: GamePortfolio(gamePfID: 2000, rank: "Novice"))
+        return Game(id: 1, initiator: createDummyUser(), opponent: createDummyUser(), createdAtUTC: NSDate(), questionSet: QuestionSetFactory.sharedInstance.generateDummyQuestionSet())
     }
     
     private func createDummyGamePortfolio() -> GamePortfolio {
         return GamePortfolio(gamePfID: 1000, rank: "Novice")
+    }
+    
+    private func createDummyUser() -> THUser {
+        return THUser(userId: 1, displayName: "Player1", firstName: "Player", lastName: "1", url: "", gamePort: createDummyGamePortfolio())
     }
 }
