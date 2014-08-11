@@ -45,7 +45,7 @@ public class THUser {
     }
     
     /// dummy initializer 
-    public init(userId:Int, _ dName:String, _ fName:String, _ lName: String, _ avatarURL:String, _ portfolio:GamePortfolio){
+    public init(userId:Int, displayName dName:String!, firstName fName:String!, lastName lName: String!, url avatarURL:String!, gamePort portfolio:GamePortfolio){
         self.userId = userId
         self.displayName = dName
         self.firstName = fName
@@ -53,5 +53,9 @@ public class THUser {
         self.fullName = "\(self.firstName) \(self.lastName)"
         self.pictureURL = avatarURL
         self.gamePortfolio = portfolio
+    }
+    
+    public init(){
+        
     }
 }

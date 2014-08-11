@@ -11,6 +11,7 @@ import UIKit
 public class GamePortfolio {
     public let gamePortfolioID: Int!
     public let rank: String!
+    public let IGN: String!
     
     public init(gamePfID: Int, rank: String) {
         self.gamePortfolioID = gamePfID

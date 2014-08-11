@@ -48,6 +48,7 @@
 		6DC6DD78198A29FB0096DD73 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC6DD74198A29FB0096DD73 /* Question.swift */; };
 		6DC6DD79198A29FB0096DD73 /* QuestionSetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC6DD75198A29FB0096DD73 /* QuestionSetFactory.swift */; };
 		6DC6DD7C198A2A490096DD73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D20577C19889A7000570042 /* Main.storyboard */; };
+		6DD767F919989BB10071BFC1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD767F819989BB10071BFC1 /* FacebookSDK.framework */; };
 		6DE63F371994788D006A523F /* GamePortfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE63F361994788D006A523F /* GamePortfolio.swift */; };
 		6DF7231919932F8B00123D0D /* THUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7231819932F8B00123D0D /* THUser.swift */; };
 		6DF7231B199332E700123D0D /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7231A199332E700123D0D /* NetworkClient.swift */; };
@@ -179,6 +180,7 @@
 		6DC6DD73198A29FB0096DD73 /* OptionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSet.swift; sourceTree = "<group>"; };
 		6DC6DD74198A29FB0096DD73 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		6DC6DD75198A29FB0096DD73 /* QuestionSetFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionSetFactory.swift; sourceTree = "<group>"; };
+		6DD767F819989BB10071BFC1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6DE63F361994788D006A523F /* GamePortfolio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePortfolio.swift; sourceTree = "<group>"; };
 		6DF7231819932F8B00123D0D /* THUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THUser.swift; sourceTree = "<group>"; };
 		6DF7231A199332E700123D0D /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DC6DD68198A29E70096DD73 /* Models.framework in Frameworks */,
+				6DD767F919989BB10071BFC1 /* FacebookSDK.framework in Frameworks */,
 				6DC6DD44198A29C90096DD73 /* Views.framework in Frameworks */,
 				449863D3E52648AF811620AA /* libPods.a in Frameworks */,
 			);
@@ -240,6 +243,7 @@
 		62BCA2FCF6204096938FF8A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DD767F819989BB10071BFC1 /* FacebookSDK.framework */,
 				619E36EC945743B39497D2A9 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -342,8 +346,8 @@
 		6D2DD2FE1990E23600B8CBA4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6D2DD3001990E2A800B8CBA4 /* ChallengeViewController.swift */,
 				6D2DD2FC1990E16400B8CBA4 /* LoginViewController.swift */,
+				6D2DD3001990E2A800B8CBA4 /* ChallengeViewController.swift */,
 				6D20577A19889A7000570042 /* QuizViewController.swift */,
 				6D286D491989F07500D179F8 /* ResultViewController.swift */,
 			);
@@ -947,6 +951,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/rynecheow/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TradeGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -968,6 +973,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/rynecheow/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TradeGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

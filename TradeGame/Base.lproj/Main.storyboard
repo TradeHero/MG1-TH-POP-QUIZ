@@ -7,7 +7,7 @@
         <!--Login View Controller-->
         <scene sceneID="1uV-tW-deh">
             <objects>
-                <viewController id="MON-4h-XBH" customClass="LoginViewController" customModule="TradeGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="MON-4h-XBH" customClass="LoginViewController" customModule="TradeGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O12-hM-9B9"/>
                         <viewControllerLayoutGuide type="bottom" id="JjA-sY-Te5"/>
@@ -54,12 +54,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syJ-aC-8R7" customClass="FBLoginView">
+                                <rect key="frame" x="44" y="338" width="232" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="emailField" destination="0lx-MM-CXg" id="6Uk-Jz-KNk"/>
+                        <outlet property="fbLoginView" destination="syJ-aC-8R7" id="WXj-9Z-J5m"/>
                         <outlet property="passwordField" destination="oax-Bo-NSZ" id="RWG-zP-d5X"/>
                     </connections>
                 </viewController>
@@ -144,6 +149,16 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="createQuickplayGame:" destination="gkl-QF-3pe" eventType="touchUpInside" id="2Dq-Wl-8tM"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeL-Gg-7bo">
+                                                <rect key="frame" x="16" y="19" width="46" height="30"/>
+                                                <state key="normal" title="logout">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="logoutClicked:" destination="gkl-QF-3pe" eventType="touchUpInside" id="xj0-UF-bcO"/>
                                                 </connections>
                                             </button>
                                         </subviews>

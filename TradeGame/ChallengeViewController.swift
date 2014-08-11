@@ -32,6 +32,11 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
         setupSubviews()
     }
     
+    @IBAction func logoutClicked(sender: AnyObject) {
+        FBSession.activeSession().closeAndClearTokenInformation()
+        NetworkClient.sharedClient.logout()
+    self.presentViewController(self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as LoginViewController, animated: true, completion: nil)
+    }
     func setupSubviews() {
         self.progressView = OverlayProgressView(frame: self.avatarView.bounds)
         self.avatarView.addSubview(self.progressView!)
@@ -82,8 +87,5 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     
     @IBAction func createQuickplayGame(sender: AnyObject) {
         let quickGame:Game = NetworkClient.sharedClient.createQuickGame()
-        
-        
-        
     }
 }

@@ -55,7 +55,7 @@ class NetworkClient {
             }
                 
             if response?.statusCode == 200 {
-                self.saveCredentials(credentials["username"]!, password:credentials["password"]!)
+                self.saveCredentials(credentials[kTHGameLoginIDKey]!, password:credentials[kTHGameLoginPasswordKey]!)
                 
                 let responseJSON = content as [String: AnyObject]
                 let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
@@ -84,6 +84,18 @@ class NetworkClient {
     func createQuickGame() -> Game {
         return createDummyGame()
     }
+    
+    
+    ///
+    ///
+    ///
+    ///
+    func logout() {
+        self.authenticatedUser = nil
+        self.removeCredentials()
+    }
+    
+    
     
     ///
     /// Fetches game portfolio by using userID of user.
@@ -153,11 +165,11 @@ class NetworkClient {
 
     ///MARK:- Dummy functions 
     
-    func createDummyGame(){
+    private func createDummyGame() -> Game{
         return Game(id: 1, initiator: self.authenticatedUser.gamePortfolio, opponent: GamePortfolio(gamePfID: 2000, rank: "Novice"))
     }
     
-    func createDummyGamePortfolio() -> GamePortfolio {
+    private func createDummyGamePortfolio() -> GamePortfolio {
         return GamePortfolio(gamePfID: 1000, rank: "Novice")
     }
 }
