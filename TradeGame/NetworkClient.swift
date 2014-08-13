@@ -30,71 +30,21 @@ class NetworkClient {
         }
     }
     
-    
     /// Credential dictionary (BASIC Auth)
     private var credentials: [String: String]!
     
     /// default JSON encoding
     private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(options: NSJSONWritingOptions.PrettyPrinted)
     
+    
     // MARK:- Methods
     
     /**
-        Perform login with credentials and completes operation by acquiring authenticated user session.
+    Perform login with Facebook access token and completes operation by acquiring authenticated user session.
     
-        :param: credentials Dictionary of 2 items, login ID and password
-        :param: loginSuccessHandler Takes a THUser and perform operation
+    :param: accessToken Facebook access token from active facebook session
+    :param: loginSuccessHandler Takes a THUser and perform operation
     */
-    func loginUserWithBasicAuth(credentials:[String : String], loginSuccessHandler:THUser? -> ()) -> Bool {
-        let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
-        
-        
-        var headers = AF.Manager.sharedInstance.defaultHeaders
-        if (headers["TH-Client-Version"] == nil) {
-            headers["TH-Client-Version"] = "2.3.0.4245"
-        }
-        
-        if (headers["TH-Client-Type"] == nil) {
-            headers["TH-Client-Type"] = "1"
-        }
-        
-        if (headers["TH-Language-Code"] == nil) {
-            headers["TH-Language-Code"] = "en-GB"
-        }
-        headers["Authorization"] = generateBasicAuthHTTPHeader(credentials[kTHGameLoginIDKey]!, password: credentials[kTHGameLoginPasswordKey]!)
-        AF.Manager.sharedInstance.defaultHeaders = headers
-        
-        AF.request(.POST,
-            THServerAPIBaseURL + "/login",
-            parameters: param,
-            encoding: JSONPrettyPrinted)
-            .responseJSON({
-                _, response, content, error in
-            if let responseError = error {
-                println(responseError)
-                return
-            }
-                
-            if response?.statusCode == 200 {
-                self.saveCredentials(credentials)
-                let responseJSON = content as [String: AnyObject]
-                let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
-                
-                if let profileDTODict = profileDTOPart as? [String: AnyObject] {
-//                    println(profileDTODict)
-                    var loginUser = THUser(profileDTO: profileDTODict)
-//                    if let userGamePortfolio = self.fetchGamePortfolioForUser(loginUser.userId) {
-//                        loginUser.gamePortfolio = userGamePortfolio
-//                    }
-                    self.authenticatedUser = loginUser
-                    loginSuccessHandler(loginUser)
-                }
-            }
-        })
-        
-        return false
-    }
-    
     func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:THUser? -> ()) -> Bool {
         let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
         
@@ -132,9 +82,6 @@ class NetworkClient {
                     if let profileDTODict = profileDTOPart as? [String: AnyObject] {
                         //                    println(profileDTODict)
                         var loginUser = THUser(profileDTO: profileDTODict)
-                        //                    if let userGamePortfolio = self.fetchGamePortfolioForUser(loginUser.userId) {
-                        //                        loginUser.gamePortfolio = userGamePortfolio
-                        //                    }
                         self.authenticatedUser = loginUser
                         loginSuccessHandler(loginUser)
                     }
@@ -167,22 +114,32 @@ class NetworkClient {
 
             if response?.statusCode == 200 {
                 let responseJSON = content as [String: AnyObject]
+                let game = Game(gameDTO: responseJSON)
                 
-                let gameTuple = self.createGameObjectFromDTO(responseJSON)
-                self.fetchUser(gameTuple.opponentID) {
+                var initiatorID: Int!
+                if let i: AnyObject = responseJSON["createdByUserId"]{
+                    initiatorID = i as Int
+                }
+                
+                var opponentID: Int!
+                if let i: AnyObject = responseJSON["opponentUserId"]{
+                    opponentID = i as Int
+                }
+                
+                self.fetchUser(opponentID) {
                     user in
                     if let u = user {
-                        gameTuple.game.opponentPlayer = u
+                        game.opponentPlayer = u
                     }
                     
-                    self.fetchUser(gameTuple.initiatorID) {
+                    self.fetchUser(initiatorID) {
                         user in
                         if let u = user {
-                            gameTuple.game.initiatingPlayer = u
+                            game.initiatingPlayer = u
                         }
                         
                         if let handler = completionHandler {
-                            handler(gameTuple.game)
+                            handler(game)
                         }
                     }
                 }
@@ -214,19 +171,6 @@ class NetworkClient {
         self.removeCredentials()
     }
     
-    
-    
-    ///
-    /// Fetches game portfolio by using userID of user.
-    ///
-    /// :param: userID ID of user for the portfolio to be fetched.
-    /// 
-    /// :returns: Game portfolio of user, would not be nil normally.
-    ///
-//    func fetchGamePortfolioForUser(userID: Int) -> GamePortfolio? {
-//        
-//        return createDummyGamePortfolio()
-//    }
     
     // MARK:- Class functions
    
@@ -281,8 +225,6 @@ class NetworkClient {
         return nil
     }
     
-    
-    
     ///
     /// Generate BASIC Authentication header from username and password encoded in base64.
     ///
@@ -334,44 +276,15 @@ class NetworkClient {
         }
     }
 
-    
-    private func createGameObjectFromDTO(dto: [String: AnyObject]) -> (game:Game, initiatorID:Int, opponentID:Int) {
-        var gameID: Int!
-        if let id: AnyObject = dto["id"] {
-            gameID = id as Int
-        }
-        
-        var createdAtStr: String!
-        if let s: AnyObject = dto["createdAtUtc"] {
-            createdAtStr = s as String
-        }
-        
-        var initiatorID: Int!
-        if let i: AnyObject = dto["createdByUserId"]{
-            initiatorID = i as Int
-        }
-        
-        var opponentID: Int!
-        if let i: AnyObject = dto["opponentUserId"]{
-            opponentID = i as Int
-        }
-        
-        var questionSet: [Question] = []
-        if let qs: AnyObject = dto["questionSet"] {
-            let questionJSON = qs as [AnyObject]
-            for q in questionJSON {
-                if let questionDTO = q as? [String: AnyObject] {
-                    questionSet.append(Question(questionDTO: questionDTO))
-                }
-            }
-        }
-        
-        let game = Game(id: gameID, createdAtUTCStr: createdAtStr, questionSet: questionSet)
-        
-        return (game, initiatorID, opponentID)
-    }
     // MARK: Simple functions
-    func fetchUser(userId: Int, completionHandler: THUser? -> ()) {
+    
+    /**
+        Fetch user with given user ID, handles with completion handler while fetches completely.
+    
+        :param: userId User ID to fetch
+        :param: completionHandler Handles fetched user if succeed
+    */
+    func fetchUser(userId: Int, completionHandler: THUser! -> ()) {
         configureCompulsoryHeaders()
         
         AF.request(.GET, "\(THServerAPIBaseURL)/users/\(userId)", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
@@ -384,11 +297,7 @@ class NetworkClient {
                 var user = THUser(profileDTO: profileDTODict)
                 completionHandler(user)
             }
-            
-            
         })
-        
-        
     }
     
     

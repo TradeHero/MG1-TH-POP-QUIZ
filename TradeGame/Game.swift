@@ -32,6 +32,27 @@ class Game {
         self.questionSet = questionSet
     }
 
+    init(gameDTO:[String: AnyObject]){
+        if let id: AnyObject = gameDTO["id"] {
+            self.gameID = id as Int
+        }
+
+        if let s: AnyObject = gameDTO["createdAtUtc"] {
+            self.createdAtUTCStr = s as String
+        }
+
+        var qSet: [Question] = []
+        if let qs: AnyObject = gameDTO["questionSet"] {
+            let questionJSON = qs as [AnyObject]
+            for q in questionJSON {
+                if let questionDTO = q as? [String: AnyObject] {
+                    qSet.append(Question(questionDTO: questionDTO))
+                }
+            }
+            self.questionSet = qSet
+        }
+
+    }
 }
 
 extension Game: Printable {

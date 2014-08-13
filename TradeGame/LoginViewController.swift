@@ -38,19 +38,22 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Logging in..."
         
-        var pictureURL: String = "https://graph.facebook.com/\(user.objectID)/picture?height=1000&width=1000"
-        
-        let id = Int((user.objectID as NSString).intValue)
-        
+        weak var weakSelf = self
         NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken) {
             (user: THUser?) -> () in
+            var strongSelf = weakSelf!
             if let loginUser = user {
-                let vc = self.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
-                self.presentViewController(vc, animated: true, completion: nil)
-                
+                let vc = strongSelf.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
+                strongSelf.presentViewController(vc, animated: true, completion: nil)
+                hud.hide(true)
             } else {
                 UIAlertView(title: "Login failed", message: "Please re-enter your login credentials.", delegate: nil, cancelButtonTitle: "Dismiss").show()
+                hud.mode = MBProgressHUDModeText
+                hud.labelText = "Login failed"
+                hud.hide(true, afterDelay: 1.5)
             }
         }
     }
