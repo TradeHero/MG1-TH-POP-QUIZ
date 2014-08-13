@@ -9,26 +9,26 @@
 //import UIKit
 //
 ///// A turn is the opportunity for a player to play the game.
-//public class Turn {
+//class Turn {
 //    
-//    public let game: Game!
+//    let game: Game!
 //    
-//    public let turnID: Int!
+//    let turnID: Int!
 //    /// Player that is playing the turn
-//    public let player: Player
+//    let player: Player
 //    
 //    /// Opponent player of this turn.
-//    public let opponent: Player
+//    let opponent: Player
 //    
 //    /// Result of this turn
-//    //    public lazy var result = Result()
+//    //    lazy var result = Result()
 //    
-//    public let newGame: Bool = false
+//    let newGame: Bool = false
 //    
-//    public let questionSet: [Question]
+//    let questionSet: [Question]
 //    
 //    ///
-//    public init(player: Player, opponent: Player, questionSet:[Question], newGame:Bool = false){
+//    init(player: Player, opponent: Player, questionSet:[Question], newGame:Bool = false){
 //        self.player = player
 //        self.opponent = opponent
 //        self.newGame = newGame

@@ -8,14 +8,14 @@
 
 import UIKit
 
-public class GamePortfolio {
+class GamePortfolio {
     
-    public let gamePortfolioID: Int!
-    public let rank: String!
-    public var IGN: String!
-    public var avatar: String!
+    let gamePortfolioID: Int!
+    let rank: String!
+    var IGN: String!
+    var avatar: String!
     
-    public init(gamePfID: Int, rank: String) {
+    init(gamePfID: Int, rank: String) {
         self.gamePortfolioID = gamePfID
         self.rank = rank
     }

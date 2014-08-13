@@ -8,7 +8,6 @@
 
 import UIKit
 import Views
-import Models
 import AudioToolbox
 
 class QuizViewController: UIViewController {

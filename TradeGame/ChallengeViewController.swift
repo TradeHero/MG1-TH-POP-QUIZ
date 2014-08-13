@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Models
 import Views
 
 class ChallengeViewController: UIViewController, UIScrollViewDelegate {
@@ -80,17 +79,14 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
         user = NetworkClient.sharedClient.authenticatedUser
     }
     
-    @IBAction func createDummyGame(sender: AnyObject) {
-//        let vc = self.storyboard.instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
-//        vc.turn = Turn(player: Player(name: "Ryne Cheow", rank: "Knight", displayPic: UIImage(named: "AvatarSample1")), opponent: Player(name: "Maggie Grace", rank: "Novice", displayPic: UIImage(named: "AvatarSample2")), questionSet: QuestionSetFactory.sharedInstance.generateDummyQuestionSet(), newGame: true)
-//        self.presentViewController(vc, animated: true, completion: nil)
-    }
-    
     @IBAction func createQuickplayGame(sender: AnyObject) {
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Creating quick game..."
         NetworkClient.sharedClient.createQuickGame() {
             createdGame in
             if let game = createdGame {
                 println("GAME CREATED: \n\(game)")
+                hud.hide(true, afterDelay: 0.5)
             }
         }
         
