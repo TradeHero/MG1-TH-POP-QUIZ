@@ -26,6 +26,10 @@
 		6D2DD3011990E2A800B8CBA4 /* ChallengeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2DD3001990E2A800B8CBA4 /* ChallengeViewController.swift */; };
 		6D6913E7198F2E8C00B8AFF1 /* EditableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6913E6198F2E8C00B8AFF1 /* EditableImageView.swift */; };
 		6D6913E9198F4C1D00B8AFF1 /* ScoreProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */; };
+		6D8310B3199B4A260097564A /* THUserFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8310B2199B4A260097564A /* THUserFriend.swift */; };
+		6D8310B7199B5DBA0097564A /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8310B6199B5DBA0097564A /* FriendsViewController.swift */; };
+		6D8310BA199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8310B8199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift */; };
+		6D8310BB199B5FD90097564A /* FriendsChallengeCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D8310B9199B5FD90097564A /* FriendsChallengeCellTableViewCell.xib */; };
 		6D8F0C531999F13600829149 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C521999F13600829149 /* Option.swift */; };
 		6D8F0C551999F14100829149 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C541999F14100829149 /* Question.swift */; };
 		6D8F0C571999F15E00829149 /* OptionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C561999F15E00829149 /* OptionSet.swift */; };
@@ -92,6 +96,10 @@
 		6D2DD3001990E2A800B8CBA4 /* ChallengeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeViewController.swift; sourceTree = "<group>"; };
 		6D6913E6198F2E8C00B8AFF1 /* EditableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableImageView.swift; sourceTree = "<group>"; };
 		6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreProgressView.swift; sourceTree = "<group>"; };
+		6D8310B2199B4A260097564A /* THUserFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THUserFriend.swift; sourceTree = "<group>"; };
+		6D8310B6199B5DBA0097564A /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		6D8310B8199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsChallengeCellTableViewCell.swift; sourceTree = "<group>"; };
+		6D8310B9199B5FD90097564A /* FriendsChallengeCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsChallengeCellTableViewCell.xib; sourceTree = "<group>"; };
 		6D8F0C521999F13600829149 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		6D8F0C541999F14100829149 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		6D8F0C561999F15E00829149 /* OptionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSet.swift; sourceTree = "<group>"; };
@@ -163,6 +171,7 @@
 				6D8F0C541999F14100829149 /* Question.swift */,
 				6D8F0C581999F18100829149 /* THUser.swift */,
 				6D8F0C5C1999F1BB00829149 /* Turn.swift */,
+				6D8310B2199B4A260097564A /* THUserFriend.swift */,
 			);
 			path = "Domain Objects";
 			sourceTree = "<group>";
@@ -243,6 +252,8 @@
 				6D1E54B7198B45A9007EC028 /* AvatarRoundedView.swift */,
 				6D6913E6198F2E8C00B8AFF1 /* EditableImageView.swift */,
 				6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */,
+				6D8310B8199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift */,
+				6D8310B9199B5FD90097564A /* FriendsChallengeCellTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,6 +265,7 @@
 				6D2DD3001990E2A800B8CBA4 /* ChallengeViewController.swift */,
 				6D20577A19889A7000570042 /* QuizViewController.swift */,
 				6D286D491989F07500D179F8 /* ResultViewController.swift */,
+				6D8310B6199B5DBA0097564A /* FriendsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -371,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DC6DD7C198A2A490096DD73 /* Main.storyboard in Resources */,
+				6D8310BB199B5FD90097564A /* FriendsChallengeCellTableViewCell.xib in Resources */,
 				6D2057E71988BCD200570042 /* QuestionViewWithImage.xib in Resources */,
 				6D2057E51988BCD200570042 /* QuestionViewPlain.xib in Resources */,
 				6D20578019889A7000570042 /* Images.xcassets in Resources */,
@@ -426,8 +439,10 @@
 			files = (
 				6DF2E5E3199B35DB009D3C26 /* DesignableRoundedView.swift in Sources */,
 				6D6913E7198F2E8C00B8AFF1 /* EditableImageView.swift in Sources */,
+				6D8310BA199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift in Sources */,
 				6D8F0C5D1999F1BB00829149 /* Turn.swift in Sources */,
 				6D2057E61988BCD200570042 /* QuestionViewWithImage.swift in Sources */,
+				6D8310B7199B5DBA0097564A /* FriendsViewController.swift in Sources */,
 				6D20577B19889A7000570042 /* QuizViewController.swift in Sources */,
 				6D8F0C571999F15E00829149 /* OptionSet.swift in Sources */,
 				6D8F0C591999F18100829149 /* THUser.swift in Sources */,
@@ -439,6 +454,7 @@
 				6D2057E41988BCD200570042 /* QuestionViewPlain.swift in Sources */,
 				6D6913E9198F4C1D00B8AFF1 /* ScoreProgressView.swift in Sources */,
 				6D1E54B8198B45A9007EC028 /* AvatarRoundedView.swift in Sources */,
+				6D8310B3199B4A260097564A /* THUserFriend.swift in Sources */,
 				6DF2E5E2199B35DB009D3C26 /* DesignableRoundedRectangleView.swift in Sources */,
 				6D2057E91988BCE000570042 /* Extension.swift in Sources */,
 				6D286D4A1989F07500D179F8 /* ResultViewController.swift in Sources */,

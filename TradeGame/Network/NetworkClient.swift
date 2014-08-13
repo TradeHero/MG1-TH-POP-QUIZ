@@ -30,8 +30,8 @@ class NetworkClient {
         }
     }
     
-    /// Credential dictionary (BASIC Auth)
-    private var credentials: [String: String]!
+    /// Credential dictionary (FB Token)
+    private var credentials: String!
     
     /// default JSON encoding
     private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(options: NSJSONWritingOptions.PrettyPrinted)
@@ -81,7 +81,6 @@ class NetworkClient {
                     let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
                     
                     if let profileDTODict = profileDTOPart as? [String: AnyObject] {
-                        //                    println(profileDTODict)
                         var loginUser = THUser(profileDTO: profileDTODict)
                         self.authenticatedUser = loginUser
                         loginSuccessHandler(loginUser)
@@ -97,10 +96,10 @@ class NetworkClient {
     */
     func createChallenge(numberOfQuestions:Int, opponentId:Int?, completionHandler: (Game? -> ())?) {
         var params = ["numberOfQuestions": numberOfQuestions]
-        if opponentId == nil {
-            params["opponentId"] = 471931
+        if opponentId != nil {
+            params["opponentId"] = opponentId
         }
-        
+        params["opponentId"] = 471931
         configureCompulsoryHeaders()
 
         AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: params, encoding: JSONPrettyPrinted).responseJSON({
@@ -146,6 +145,34 @@ class NetworkClient {
                 
             }
         })
+    }
+    
+    /**
+        GET api/Users/{userId}/GetFriends
+    */
+    func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: ([THUserFriend] ->())!){
+        configureCompulsoryHeaders()
+        
+        AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)/GetFriends", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
+            _, response, content, error in
+            if let responseError = error {
+                println(responseError)
+                return
+            }
+            var friends: [THUserFriend] = []
+            if let dict = content as? [String: AnyObject] {
+                let d: AnyObject? = dict["data"]
+                if let friendsArray = d as? [AnyObject] {
+                    for friendObj in friendsArray {
+                        let friendDictionary = friendObj as [String: AnyObject]
+                        friends.append(THUserFriend(friendDTO: friendDictionary))
+                    }
+                }
+            }
+
+            completionHandler(friends)
+        })
+
     }
     
     ///
@@ -218,10 +245,7 @@ class NetworkClient {
     ///
     private func generateAuthorisationFromKeychain() -> String? {
         self.loadCredentials()
-        if let cred = self.credentials {
-            return generateBasicAuthHTTPHeader(cred[kTHGameLoginIDKey]!, password: cred[kTHGameLoginPasswordKey]!)
-        }
-        return nil
+        return self.credentials
     }
     
     ///
@@ -240,10 +264,10 @@ class NetworkClient {
     /// :param: username Log In ID
     /// :param: password Log In password
     ///
-    private func saveCredentials(credentials:[String: String]){
+    private func saveCredentials(credentialString:String){
 
-        SSKeychain.setPassword("\(credentials[kTHGameLoginIDKey]!):\(credentials[kTHGameLoginPasswordKey]!)", forService: kTHGameKeychainIdentifierKey, account: kTHGameKeychainBasicAccKey)
-        self.credentials = credentials
+        SSKeychain.setPassword("\(credentialString)", forService: kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccKey)
+        self.credentials = credentialString
     }
     
     /// 
@@ -267,10 +291,8 @@ class NetworkClient {
         
         for userData in keychainAcc {
             if let data = userData as? [String: String] {
-                let secret = SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainBasicAccKey)
-                let credArr = secret.componentsSeparatedByString(":")
-                let credDict = [kTHGameLoginIDKey : credArr[0], kTHGameLoginPasswordKey : credArr[1]]
-                self.credentials = credDict
+                let secret = SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccKey)
+                self.credentials = secret ?? "none"
             }
         }
     }
@@ -286,7 +308,7 @@ class NetworkClient {
     func fetchUser(userId: Int, completionHandler: THUser! -> ()) {
         configureCompulsoryHeaders()
         
-        AF.request(.GET, "\(THServerAPIBaseURL)/users/\(userId)", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
+        AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             if let responseError = error {
                 println(responseError)

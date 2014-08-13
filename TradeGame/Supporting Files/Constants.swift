@@ -14,7 +14,7 @@ enum Mode: Int {
 }
 
 
-let mode = Mode.Prod
+let mode = Mode.Dev
 
 let kConstantPrefix = "TH"
 
@@ -47,5 +47,8 @@ let kTHGameLoginIDKey = "\(kConstantPrefix)GameLoginID"
 let kTHGameLoginPasswordKey = "\(kConstantPrefix)GameLoginPassword"
 let kTHGameKeychainIdentifierKey = "\(kConstantPrefix)GameKeychainIdentifier"
 let kTHGameKeychainBasicAccKey = "\(kConstantPrefix)GameKeychainBasicAcc"
+let kTHGameKeychainFacebookAccKey = "\(kConstantPrefix)GameKeychainFacebookAcc"
+
+
 
 

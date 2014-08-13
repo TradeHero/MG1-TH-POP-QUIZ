@@ -19,7 +19,7 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollableContentView: UIView!
     var progressView: OverlayProgressView!
     
-    private weak var user: THUser?
+    private var user: THUser!
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
@@ -33,14 +33,14 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func logoutClicked(sender: AnyObject) {
         FBSession.activeSession().closeAndClearTokenInformation()
         NetworkClient.sharedClient.logout()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController.popViewControllerAnimated(true)
     }
     
     func setupSubviews() {
         self.progressView = OverlayProgressView(frame: self.avatarView.bounds)
         self.avatarView.addSubview(self.progressView)
         self.progressView?.displayOperationWillTriggerAnimation()
-        NetworkClient.fetchImageFromURLString((user?.pictureURL)!, progressHandler: {
+        NetworkClient.fetchImageFromURLString((user.pictureURL)!, progressHandler: {
             (current:Int, expected:Int) -> Void in
             let ratio:CGFloat = CGFloat(current)/CGFloat(expected)
             if ratio >= 1 {
@@ -61,7 +61,7 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
                 }
                 
         }
-        self.fullNameView.text = user?.fullName
+        self.fullNameView.text = user.displayName
 //        self.rankView.text = user?.gamePortfolio.rank
         
         self.scrollView.delegate = self
@@ -74,8 +74,23 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     required init(coder aDecoder: NSCoder!) {
+        self.user = NetworkClient.sharedClient.authenticatedUser
         super.init(coder: aDecoder)
-        user = NetworkClient.sharedClient.authenticatedUser
+    }
+    
+    @IBAction func loadFriends(sender: AnyObject) {
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Loading friends..."
+        NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friends in
+            hud.hide(true)
+            for friend in friends {
+                println(friend)
+            }
+            let vc = self.storyboard.instantiateViewControllerWithIdentifier("FriendsViewController") as FriendsViewController
+            vc.friendsList = friends
+            self.navigationController.pushViewController(vc, animated: true)
+            
+        })
     }
     
     @IBAction func createQuickplayGame(sender: AnyObject) {

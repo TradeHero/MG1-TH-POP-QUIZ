@@ -48,9 +48,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
              user in
             var strongSelf = weakSelf!
             if let loginUser = user {
-                let vc = strongSelf.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
-                strongSelf.presentViewController(vc, animated: true, completion: nil)
                 hud.hide(true)
+                let vc = strongSelf.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
+                strongSelf.navigationController.pushViewController(vc, animated: true)
             } else {
                 UIAlertView(title: "Login failed", message: "Please re-enter your login credentials.", delegate: nil, cancelButtonTitle: "Dismiss").show()
                 hud.mode = MBProgressHUDModeText

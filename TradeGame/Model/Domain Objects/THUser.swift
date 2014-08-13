@@ -13,7 +13,7 @@ class THUser {
     let userId: Int!
     var firstName: String!
     var lastName:String!
-    var fullName:String!
+    var displayName:String!
     var pictureURL:String!
 //    public let gamePortfolioID
 //    public lazy var gamePortfolio: GamePortfolio = GamePortfolio()
@@ -35,7 +35,7 @@ class THUser {
             self.pictureURL = pic as String
         }
         if let dn: AnyObject = profileDTO["displayName"] {
-            self.fullName = dn as String
+            self.displayName = dn as String
         }
 //        
 //        if self.firstName != nil && self.lastName != nil {
@@ -46,6 +46,6 @@ class THUser {
 
 extension THUser: Printable {
     var description: String {
-        return "{\nDetails of THUser:\nUser ID: \(self.userId)\nFirst name: \(self.firstName)\nLast name: \(self.lastName)\nProfile picture URL: \(self.pictureURL)\n}\n"
+        return "{\nDetails of THUser:\nUser ID: \(self.userId)\nDisplay name: \(self.displayName)\nFirst name: \(self.firstName)\nLast name: \(self.lastName)\nProfile picture URL: \(self.pictureURL)\n}\n"
     }
 }
