@@ -60,20 +60,14 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
         let id = Int((user.objectID as NSString).intValue)
         
-//        println("\(user)")
-        let token = FBSession.activeSession().accessTokenData.accessToken
-        NetworkClient.sharedClient.loginUserWithFacebookAuth(token) {
+        NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken) {
             (user: THUser?) -> () in
             if let loginUser = user {
-                println("\(loginUser)")
                 let vc = self.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
                 self.presentViewController(vc, animated: true, completion: nil)
                 
             } else {
                 UIAlertView(title: "Login failed", message: "Please re-enter your login credentials.", delegate: nil, cancelButtonTitle: "Dismiss").show()
-                
-                //                let x = UIAlertController(title: "Login failed", message: "Please re-enter your login credentials.", preferredStyle: UIAlertControllerStyle.Alert)
-                //                self.presentViewController(x, animated: true, completion: nil)
             }
         }
     }

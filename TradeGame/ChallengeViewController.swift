@@ -90,17 +90,10 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
         NetworkClient.sharedClient.createQuickGame() {
             createdGame in
             if let game = createdGame {
-                if game.fullyLoaded() {
-                    println(game.initiatingPlayer)
-                    println(game.opponentPlayer)
-                }
+                println("GAME CREATED: \n\(game)")
             }
         }
-//        NetworkClient.sharedClient.fetchUser(581801) {
-//            fetchedUser in
-//            if let user = fetchedUser {
-//                println(user)
-//            }
-//        }
+        
+        
     }
 }

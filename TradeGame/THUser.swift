@@ -50,6 +50,6 @@ class THUser {
 
 extension THUser: Printable {
     var description: String {
-        return "\nDetails of THUser:\nUser ID: \(self.userId)\nFirst name: \(self.firstName)\nLast name: \(self.lastName)\nProfile picture URL: \(self.pictureURL)\n"
+        return "{\nDetails of THUser:\nUser ID: \(self.userId)\nFirst name: \(self.firstName)\nLast name: \(self.lastName)\nProfile picture URL: \(self.pictureURL)\n}\n"
     }
 }

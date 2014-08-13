@@ -9,7 +9,7 @@
 import UIKit
 
 ///Set of options that belongs to a particular question.
-public class OptionSet {
+class OptionSet {
     
     /// Correct option or answer.
     private let correctOption: Option!
@@ -17,9 +17,9 @@ public class OptionSet {
     /// Set of options that are not answers.
     private let dummyOptions: [Option]
     
-    public lazy var allOptions = [Option]()
+    lazy var allOptions = [Option]()
     
-    public init(correctOption: Option, dummyOptions:[Option]) {
+    init(correctOption: Option, dummyOptions:[Option]) {
         self.correctOption = correctOption
         self.dummyOptions = dummyOptions
         setupAnswerSet()
@@ -37,7 +37,7 @@ public class OptionSet {
     /// :param: choice Option chosen.
     /// :returns: true if option exist in option set and option is correct answer of this question, false otherwise.
     ///
-    public func checkOptionChoiceIfIsCorrect(choice:Option) -> Bool {
+    func checkOptionChoiceIfIsCorrect(choice:Option) -> Bool {
         for opt in allOptions {
             ///Choice exist
             if opt === choice {
@@ -47,3 +47,19 @@ public class OptionSet {
         return false
     }
 }
+
+
+extension OptionSet : Printable {
+    var description: String {
+        var d = "{\n"
+            d += "Correct option: \(correctOption)\n"
+            d += "Dummy options: "
+            for dOpt in dummyOptions {
+                d += "\(dOpt),"
+            }
+            d += "nil\n"
+            d += "}\n"
+            return d
+    }
+}
+

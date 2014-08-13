@@ -22,7 +22,13 @@ class NetworkClient {
     }
     
     /// Authenticated user
-    var authenticatedUser: THUser!
+    var authenticatedUser: THUser! {
+        didSet{
+            if self.authenticatedUser != nil {
+                println("Signed in as \(self.authenticatedUser)")
+            }
+        }
+    }
     
     
     /// Credential dictionary (BASIC Auth)
@@ -90,7 +96,6 @@ class NetworkClient {
     }
     
     func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:THUser? -> ()) -> Bool {
-        println(accessToken)
         let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
         
         
@@ -155,20 +160,34 @@ class NetworkClient {
         AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: params, encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             
-            println(response)
             if let responseError = error {
                 println(responseError)
                 return
             }
 
             if response?.statusCode == 200 {
-                println(content!)
                 let responseJSON = content as [String: AnyObject]
                 
-                let game = self.createGameObjectFromDTO(responseJSON)
-                if let handler = completionHandler {
-                    handler(game)
+                let gameTuple = self.createGameObjectFromDTO(responseJSON)
+                self.fetchUser(gameTuple.opponentID) {
+                    user in
+                    if let u = user {
+                        gameTuple.game.opponentPlayer = u
+                    }
+                    
+                    self.fetchUser(gameTuple.initiatorID) {
+                        user in
+                        if let u = user {
+                            gameTuple.game.initiatingPlayer = u
+                        }
+                        
+                        if let handler = completionHandler {
+                            handler(gameTuple.game)
+                        }
+                    }
                 }
+                
+                
             }
         })
     }
@@ -316,7 +335,7 @@ class NetworkClient {
     }
 
     
-    private func createGameObjectFromDTO(dto: [String: AnyObject]) -> Game? {
+    private func createGameObjectFromDTO(dto: [String: AnyObject]) -> (game:Game, initiatorID:Int, opponentID:Int) {
         var gameID: Int!
         if let id: AnyObject = dto["id"] {
             gameID = id as Int
@@ -347,8 +366,9 @@ class NetworkClient {
             }
         }
         
-        return Game(id: gameID, initPlayerID: initiatorID, oppPlayerID: opponentID, createdAtUTCStr: createdAtStr, questionSet: questionSet)
+        let game = Game(id: gameID, createdAtUTCStr: createdAtStr, questionSet: questionSet)
         
+        return (game, initiatorID, opponentID)
     }
     // MARK: Simple functions
     func fetchUser(userId: Int, completionHandler: THUser? -> ()) {

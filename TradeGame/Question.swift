@@ -14,29 +14,41 @@ import UIKit
 /// - LogoType: Questions that presents based on logo-guessing mechanics. must contain an image.
 /// - GraphType: Questions that presents based on graphs of a certain interval or demographic, must contain an image.
 /// - TextualType: Questions that presents on a text-based (non-imagerial) form.
-public enum QuestionType : Int {
+///
+enum QuestionType : Int {
     case LogoType
     case GraphType
     case TextualType
+    
+    func description() -> String {
+        switch self {
+        case .LogoType:
+            return "Logo type"
+        case .GraphType:
+            return "Graph type"
+        case .TextualType:
+            return "Textual type"
+        }
+    }
 }
 
 /// A linguistic expression used to make a request for information.
-public class Question {
+class Question {
     
     /// ID
-    public let questionID: Int!
+    let questionID: Int!
     
     /// Textual content of the question, must not be empty.
-    public var questionContent:String!
+    var questionContent:String!
     
     /// Type of question.
-    public var questionType: QuestionType = QuestionType.TextualType
+    var questionType: QuestionType = QuestionType.TextualType
     
     /// Set of options of this current question instance.
-    public var options: OptionSet!
+    var options: OptionSet!
     
     /// Image content url of the question, can be nil.
-    public var questionImageStringName: String?
+    var questionImageStringName: String?
     
     /// Initialise question with textual content, image content, set of options and type of question.
     ///
@@ -44,7 +56,7 @@ public class Question {
     /// :param: optionSet Set of options of the given question
     /// :param: image Image content of the question, could be a logo or a graph, etc.
     /// :param: type The immediate type of the question
-    public init(id:Int, content:String, optionSet:OptionSet, imageName:String?, type:QuestionType) {
+    init(id:Int, content:String, optionSet:OptionSet, imageName:String?, type:QuestionType) {
         self.questionID = id
         self.questionContent = content
         self.options = optionSet
@@ -52,7 +64,7 @@ public class Question {
         self.questionType = type
     }
     
-    public func isGraphical() -> Bool{
+    func isGraphical() -> Bool{
         switch self.questionType {
         case .LogoType, .GraphType:
             return true
@@ -61,7 +73,7 @@ public class Question {
         }
     }
     
-    public init(questionDTO:[String:AnyObject]) {
+    init(questionDTO:[String:AnyObject]) {
         if let id: AnyObject? = questionDTO["id"] {
             self.questionID = (id as Int)
         }
@@ -107,5 +119,19 @@ public class Question {
         }
         
         self.options = OptionSet(correctOption: option1, dummyOptions: [option2, option3, option4])
+    }
+}
+
+extension Question : Printable {
+    var description: String {
+            var d = "{\n"
+            d += "ID: \(questionID)\n"
+            d += "Content: \(questionContent)\n"
+            var imgurl = questionImageStringName ?? "no image"
+            d += "Image name: \(imgurl)\n"
+            d += "Type: \(questionType.description())\n"
+            d += "Options: \(options)"
+            d += "}\n"
+            return d
     }
 }
