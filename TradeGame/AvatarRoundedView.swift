@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Views
 
 @IBDesignable
 class AvatarRoundedView: DesignableRoundedView {

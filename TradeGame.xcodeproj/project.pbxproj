@@ -8,12 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		449863D3E52648AF811620AA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 619E36EC945743B39497D2A9 /* libPods.a */; };
-		6D07C43619949198008408C3 /* OverlayProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D07C43519949198008408C3 /* OverlayProgressView.swift */; };
 		6D0843931992018700FDD83E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0843921992018700FDD83E /* Constants.swift */; };
-		6D110CBC198B5BAD004B3ED0 /* DesignableRoundedRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D110CBB198B5BAD004B3ED0 /* DesignableRoundedRectangleView.swift */; };
-		6D1E54B2198B418B007EC028 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E54B1198B418B007EC028 /* DesignableButton.swift */; };
 		6D1E54B4198B425C007EC028 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E54B3198B425C007EC028 /* OptionButton.swift */; };
-		6D1E54B6198B4431007EC028 /* DesignableRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E54B5198B4431007EC028 /* DesignableRoundedView.swift */; };
 		6D1E54B8198B45A9007EC028 /* AvatarRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E54B7198B45A9007EC028 /* AvatarRoundedView.swift */; };
 		6D1FF5C71999F04A003B3912 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1FF5C61999F04A003B3912 /* Game.swift */; };
 		6D20577919889A7000570042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D20577819889A7000570042 /* AppDelegate.swift */; };
@@ -37,13 +33,12 @@
 		6D8F0C5B1999F1A200829149 /* GamePortfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C5A1999F1A200829149 /* GamePortfolio.swift */; };
 		6D8F0C5D1999F1BB00829149 /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C5C1999F1BB00829149 /* Turn.swift */; };
 		6DA8689C1991D0A7009FBD99 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA8689B1991D0A7009FBD99 /* Alamofire.swift */; };
-		6DC6DD34198A29C90096DD73 /* Views.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC6DD33198A29C90096DD73 /* Views.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6DC6DD3A198A29C90096DD73 /* Views.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC6DD2F198A29C90096DD73 /* Views.framework */; };
-		6DC6DD41198A29C90096DD73 /* ViewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC6DD40198A29C90096DD73 /* ViewsTests.swift */; };
-		6DC6DD44198A29C90096DD73 /* Views.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC6DD2F198A29C90096DD73 /* Views.framework */; };
-		6DC6DD45198A29C90096DD73 /* Views.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC6DD2F198A29C90096DD73 /* Views.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6DC6DD7C198A2A490096DD73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D20577C19889A7000570042 /* Main.storyboard */; };
 		6DD767F919989BB10071BFC1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD767F819989BB10071BFC1 /* FacebookSDK.framework */; };
+		6DF2E5E1199B35DB009D3C26 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2E5DD199B35DB009D3C26 /* DesignableButton.swift */; };
+		6DF2E5E2199B35DB009D3C26 /* DesignableRoundedRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2E5DE199B35DB009D3C26 /* DesignableRoundedRectangleView.swift */; };
+		6DF2E5E3199B35DB009D3C26 /* DesignableRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2E5DF199B35DB009D3C26 /* DesignableRoundedView.swift */; };
+		6DF2E5E4199B35DB009D3C26 /* OverlayProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2E5E0199B35DB009D3C26 /* OverlayProgressView.swift */; };
 		6DF7231B199332E700123D0D /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7231A199332E700123D0D /* NetworkClient.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,27 +50,6 @@
 			remoteGlobalIDString = 6D20577219889A7000570042;
 			remoteInfo = TradeGame;
 		};
-		6DC6DD3B198A29C90096DD73 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D20576B19889A7000570042 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DC6DD2E198A29C90096DD73;
-			remoteInfo = Views;
-		};
-		6DC6DD42198A29C90096DD73 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D20576B19889A7000570042 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DC6DD2E198A29C90096DD73;
-			remoteInfo = Views;
-		};
-		6DC6DD46198A29C90096DD73 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D20576B19889A7000570042 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DC6DD2E198A29C90096DD73;
-			remoteInfo = Views;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,7 +59,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6DC6DD45198A29C90096DD73 /* Views.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,13 +68,9 @@
 /* Begin PBXFileReference section */
 		0251FC027A5E41F0B8DD4BDC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		619E36EC945743B39497D2A9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D07C43519949198008408C3 /* OverlayProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayProgressView.swift; sourceTree = "<group>"; };
 		6D0843921992018700FDD83E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6D0FC246198A34D0004B163C /* TradeGame-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TradeGame-Bridging-Header.h"; sourceTree = "<group>"; };
-		6D110CBB198B5BAD004B3ED0 /* DesignableRoundedRectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableRoundedRectangleView.swift; sourceTree = "<group>"; };
-		6D1E54B1198B418B007EC028 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		6D1E54B3198B425C007EC028 /* OptionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
-		6D1E54B5198B4431007EC028 /* DesignableRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableRoundedView.swift; sourceTree = "<group>"; };
 		6D1E54B7198B45A9007EC028 /* AvatarRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarRoundedView.swift; sourceTree = "<group>"; };
 		6D1FF5C61999F04A003B3912 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		6D20577319889A7000570042 /* TradeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,13 +99,11 @@
 		6D8F0C5A1999F1A200829149 /* GamePortfolio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePortfolio.swift; sourceTree = "<group>"; };
 		6D8F0C5C1999F1BB00829149 /* Turn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
 		6DA8689B1991D0A7009FBD99 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = submodules/Source/Alamofire.swift; sourceTree = "<group>"; };
-		6DC6DD2F198A29C90096DD73 /* Views.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Views.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6DC6DD32198A29C90096DD73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6DC6DD33198A29C90096DD73 /* Views.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Views.h; sourceTree = "<group>"; };
-		6DC6DD39198A29C90096DD73 /* ViewsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6DC6DD3F198A29C90096DD73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6DC6DD40198A29C90096DD73 /* ViewsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsTests.swift; sourceTree = "<group>"; };
 		6DD767F819989BB10071BFC1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		6DF2E5DD199B35DB009D3C26 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
+		6DF2E5DE199B35DB009D3C26 /* DesignableRoundedRectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableRoundedRectangleView.swift; sourceTree = "<group>"; };
+		6DF2E5DF199B35DB009D3C26 /* DesignableRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableRoundedView.swift; sourceTree = "<group>"; };
+		6DF2E5E0199B35DB009D3C26 /* OverlayProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayProgressView.swift; sourceTree = "<group>"; };
 		6DF7231A199332E700123D0D /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -146,7 +113,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DD767F919989BB10071BFC1 /* FacebookSDK.framework in Frameworks */,
-				6DC6DD44198A29C90096DD73 /* Views.framework in Frameworks */,
 				449863D3E52648AF811620AA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,21 +121,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6DC6DD2B198A29C90096DD73 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6DC6DD36198A29C90096DD73 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6DC6DD3A198A29C90096DD73 /* Views.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,8 +175,6 @@
 				6D20577419889A7000570042 /* Products */,
 				6D20577519889A7000570042 /* TradeGame */,
 				6D20578819889A7000570042 /* TradeGameTests */,
-				6DC6DD30198A29C90096DD73 /* Views */,
-				6DC6DD3D198A29C90096DD73 /* ViewsTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -234,8 +183,6 @@
 			children = (
 				6D20577319889A7000570042 /* TradeGame.app */,
 				6D20578519889A7000570042 /* TradeGameTests.xctest */,
-				6DC6DD2F198A29C90096DD73 /* Views.framework */,
-				6DC6DD39198A29C90096DD73 /* ViewsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,6 +233,7 @@
 		6D286D4B1989F12500D179F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6DF2E5DC199B35B7009D3C26 /* Designable */,
 				6D2057E01988BCD200570042 /* QuestionViewPlain.swift */,
 				6D2057E11988BCD200570042 /* QuestionViewPlain.xib */,
 				6D2057E21988BCD200570042 /* QuestionViewWithImage.swift */,
@@ -317,56 +265,18 @@
 			name = External;
 			sourceTree = "<group>";
 		};
-		6DC6DD30198A29C90096DD73 /* Views */ = {
+		6DF2E5DC199B35B7009D3C26 /* Designable */ = {
 			isa = PBXGroup;
 			children = (
-				6D1E54B1198B418B007EC028 /* DesignableButton.swift */,
-				6D110CBB198B5BAD004B3ED0 /* DesignableRoundedRectangleView.swift */,
-				6D1E54B5198B4431007EC028 /* DesignableRoundedView.swift */,
-				6D07C43519949198008408C3 /* OverlayProgressView.swift */,
-				6DC6DD31198A29C90096DD73 /* Supporting Files */,
-				6DC6DD33198A29C90096DD73 /* Views.h */,
+				6DF2E5DD199B35DB009D3C26 /* DesignableButton.swift */,
+				6DF2E5DE199B35DB009D3C26 /* DesignableRoundedRectangleView.swift */,
+				6DF2E5DF199B35DB009D3C26 /* DesignableRoundedView.swift */,
+				6DF2E5E0199B35DB009D3C26 /* OverlayProgressView.swift */,
 			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		6DC6DD31198A29C90096DD73 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6DC6DD32198A29C90096DD73 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		6DC6DD3D198A29C90096DD73 /* ViewsTests */ = {
-			isa = PBXGroup;
-			children = (
-				6DC6DD40198A29C90096DD73 /* ViewsTests.swift */,
-				6DC6DD3E198A29C90096DD73 /* Supporting Files */,
-			);
-			path = ViewsTests;
-			sourceTree = "<group>";
-		};
-		6DC6DD3E198A29C90096DD73 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6DC6DD3F198A29C90096DD73 /* Info.plist */,
-			);
-			name = "Supporting Files";
+			name = Designable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		6DC6DD2C198A29C90096DD73 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6DC6DD34198A29C90096DD73 /* Views.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		6D20577219889A7000570042 /* TradeGame */ = {
@@ -383,8 +293,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6DC6DD43198A29C90096DD73 /* PBXTargetDependency */,
-				6DC6DD47198A29C90096DD73 /* PBXTargetDependency */,
 			);
 			name = TradeGame;
 			productName = TradeGame;
@@ -409,42 +317,6 @@
 			productReference = 6D20578519889A7000570042 /* TradeGameTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6DC6DD2E198A29C90096DD73 /* Views */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6DC6DD48198A29C90096DD73 /* Build configuration list for PBXNativeTarget "Views" */;
-			buildPhases = (
-				6DC6DD2A198A29C90096DD73 /* Sources */,
-				6DC6DD2B198A29C90096DD73 /* Frameworks */,
-				6DC6DD2C198A29C90096DD73 /* Headers */,
-				6DC6DD2D198A29C90096DD73 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Views;
-			productName = Views;
-			productReference = 6DC6DD2F198A29C90096DD73 /* Views.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		6DC6DD38198A29C90096DD73 /* ViewsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6DC6DD4B198A29C90096DD73 /* Build configuration list for PBXNativeTarget "ViewsTests" */;
-			buildPhases = (
-				6DC6DD35198A29C90096DD73 /* Sources */,
-				6DC6DD36198A29C90096DD73 /* Frameworks */,
-				6DC6DD37198A29C90096DD73 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6DC6DD3C198A29C90096DD73 /* PBXTargetDependency */,
-			);
-			name = ViewsTests;
-			productName = ViewsTests;
-			productReference = 6DC6DD39198A29C90096DD73 /* ViewsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -461,13 +333,6 @@
 					6D20578419889A7000570042 = {
 						CreatedOnToolsVersion = 6.0;
 						TestTargetID = 6D20577219889A7000570042;
-					};
-					6DC6DD2E198A29C90096DD73 = {
-						CreatedOnToolsVersion = 6.0;
-					};
-					6DC6DD38198A29C90096DD73 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 6DC6DD2E198A29C90096DD73;
 					};
 				};
 			};
@@ -486,8 +351,6 @@
 			targets = (
 				6D20577219889A7000570042 /* TradeGame */,
 				6D20578419889A7000570042 /* TradeGameTests */,
-				6DC6DD2E198A29C90096DD73 /* Views */,
-				6DC6DD38198A29C90096DD73 /* ViewsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -505,20 +368,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6D20578319889A7000570042 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6DC6DD2D198A29C90096DD73 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6DC6DD37198A29C90096DD73 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -565,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DF2E5E3199B35DB009D3C26 /* DesignableRoundedView.swift in Sources */,
 				6D6913E7198F2E8C00B8AFF1 /* EditableImageView.swift in Sources */,
 				6D8F0C5D1999F1BB00829149 /* Turn.swift in Sources */,
 				6D2057E61988BCD200570042 /* QuestionViewWithImage.swift in Sources */,
@@ -575,13 +425,16 @@
 				6D1E54B4198B425C007EC028 /* OptionButton.swift in Sources */,
 				6D20577919889A7000570042 /* AppDelegate.swift in Sources */,
 				6D8F0C5B1999F1A200829149 /* GamePortfolio.swift in Sources */,
+				6DF2E5E1199B35DB009D3C26 /* DesignableButton.swift in Sources */,
 				6D2057E41988BCD200570042 /* QuestionViewPlain.swift in Sources */,
 				6D6913E9198F4C1D00B8AFF1 /* ScoreProgressView.swift in Sources */,
 				6D1E54B8198B45A9007EC028 /* AvatarRoundedView.swift in Sources */,
+				6DF2E5E2199B35DB009D3C26 /* DesignableRoundedRectangleView.swift in Sources */,
 				6D2057E91988BCE000570042 /* Extension.swift in Sources */,
 				6D286D4A1989F07500D179F8 /* ResultViewController.swift in Sources */,
 				6DF7231B199332E700123D0D /* NetworkClient.swift in Sources */,
 				6D0843931992018700FDD83E /* Constants.swift in Sources */,
+				6DF2E5E4199B35DB009D3C26 /* OverlayProgressView.swift in Sources */,
 				6D8F0C551999F14100829149 /* Question.swift in Sources */,
 				6D1FF5C71999F04A003B3912 /* Game.swift in Sources */,
 				6D2DD3011990E2A800B8CBA4 /* ChallengeViewController.swift in Sources */,
@@ -598,25 +451,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6DC6DD2A198A29C90096DD73 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6D1E54B6198B4431007EC028 /* DesignableRoundedView.swift in Sources */,
-				6D1E54B2198B418B007EC028 /* DesignableButton.swift in Sources */,
-				6D07C43619949198008408C3 /* OverlayProgressView.swift in Sources */,
-				6D110CBC198B5BAD004B3ED0 /* DesignableRoundedRectangleView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6DC6DD35198A29C90096DD73 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6DC6DD41198A29C90096DD73 /* ViewsTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -624,21 +458,6 @@
 			isa = PBXTargetDependency;
 			target = 6D20577219889A7000570042 /* TradeGame */;
 			targetProxy = 6D20578619889A7000570042 /* PBXContainerItemProxy */;
-		};
-		6DC6DD3C198A29C90096DD73 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6DC6DD2E198A29C90096DD73 /* Views */;
-			targetProxy = 6DC6DD3B198A29C90096DD73 /* PBXContainerItemProxy */;
-		};
-		6DC6DD43198A29C90096DD73 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6DC6DD2E198A29C90096DD73 /* Views */;
-			targetProxy = 6DC6DD42198A29C90096DD73 /* PBXContainerItemProxy */;
-		};
-		6DC6DD47198A29C90096DD73 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6DC6DD2E198A29C90096DD73 /* Views */;
-			targetProxy = 6DC6DD46198A29C90096DD73 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -810,81 +629,6 @@
 			};
 			name = Release;
 		};
-		6DC6DD49198A29C90096DD73 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Views/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		6DC6DD4A198A29C90096DD73 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Views/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		6DC6DD4C198A29C90096DD73 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ViewsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		6DC6DD4D198A29C90096DD73 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ViewsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -911,24 +655,6 @@
 			buildConfigurations = (
 				6D20579319889A7000570042 /* Debug */,
 				6D20579419889A7000570042 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6DC6DD48198A29C90096DD73 /* Build configuration list for PBXNativeTarget "Views" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6DC6DD49198A29C90096DD73 /* Debug */,
-				6DC6DD4A198A29C90096DD73 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6DC6DD4B198A29C90096DD73 /* Build configuration list for PBXNativeTarget "ViewsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6DC6DD4C198A29C90096DD73 /* Debug */,
-				6DC6DD4D198A29C90096DD73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

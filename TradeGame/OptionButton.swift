@@ -14,21 +14,21 @@ func radians(deg:Double) -> Double {
 }
 
 @IBDesignable
-public class OptionButton: DesignableButton {
+class OptionButton: DesignableButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
     }
     
-    public var option:String? = nil {
+    var option:String? = nil {
     didSet{
         self.setTitle(option, forState: UIControlState.Normal)    }
     }
     
-    public var is_answer: Bool = false
+    var is_answer: Bool = false
     
-    required public init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
     

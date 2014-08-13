@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Views
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
 

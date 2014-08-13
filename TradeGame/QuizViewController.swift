@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Views
 import AudioToolbox
 
 class QuizViewController: UIViewController {

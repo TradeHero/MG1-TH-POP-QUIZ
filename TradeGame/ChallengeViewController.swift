@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Views
 
 class ChallengeViewController: UIViewController, UIScrollViewDelegate {
 

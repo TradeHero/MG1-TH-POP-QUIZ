@@ -9,35 +9,35 @@
 import UIKit
 
 @IBDesignable
-public class DesignableButton: UIButton {
+class DesignableButton: UIButton {
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
     }
     
-  required public init(coder aDecoder: NSCoder!) {
+  required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
     
-    public override func prepareForInterfaceBuilder() {
+    override func prepareForInterfaceBuilder() {
         layer.cornerRadius = cornerRadius
     }
     
     
-    @IBInspectable public var borderColor: UIColor = UIColor.clearColor() {
+    @IBInspectable var borderColor: UIColor = UIColor.clearColor() {
     didSet {
         layer.borderColor = borderColor.CGColor
     }
     }
     
-    @IBInspectable public var borderWidth: CGFloat = 0 {
+    @IBInspectable var borderWidth: CGFloat = 0 {
     didSet {
         layer.borderWidth = borderWidth
     }
     }
     
-    @IBInspectable public var cornerRadius: CGFloat = 6 {
+    @IBInspectable var cornerRadius: CGFloat = 6 {
     didSet {
         layer.cornerRadius = cornerRadius
     }

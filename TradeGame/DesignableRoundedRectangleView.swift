@@ -9,29 +9,29 @@
 import UIKit
 
 @IBDesignable
-public class DesignableRoundedRectangleView: UIView {
+class DesignableRoundedRectangleView: UIView {
 
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
 
-    public required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
         setup()
     }
     
-    @IBInspectable public var cornerRadius: CGFloat = 1{
+    @IBInspectable var cornerRadius: CGFloat = 1{
     didSet{
         layer.cornerRadius = cornerRadius
     }
     }
     
-    public func setup(){
+    func setup(){
         self.backgroundColor = UIColor.blackColor()
     }
     
-    override public func prepareForInterfaceBuilder() {
+    override func prepareForInterfaceBuilder() {
         setup()
     }
 }

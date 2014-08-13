@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class OverlayProgressView: UIView {
+class OverlayProgressView: UIView {
 
     private enum OverlayProgressViewState{
         case Initial
@@ -23,20 +23,20 @@ public class OverlayProgressView: UIView {
     private var timer: NSTimer? = nil
     
     /// This is #000000 with alpha equal 0.5 by default.
-    public var overlayColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+    var overlayColor: UIColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
     
     
     /// The ratio of the inner circle to the minimum side of OverlayProgressView,
     /// 0 ≤ innerRadiusRatio ≤ 1,
     /// Defaults to 0.6
-    public var innerRadiusRatio: CGFloat = 0.8
+    var innerRadiusRatio: CGFloat = 0.8
     ///  The ratio of the outer circle to the minimum side of OverlayProgressView,
     ///  0 ≤ outerRadiusRatio ≤ 1
     ///  0.7 by default
-    public var outerRadiusRatio: CGFloat = 0.8
+    var outerRadiusRatio: CGFloat = 0.8
     /// The float value used to for calculate the 'filled in' fraction of the inner circle,
     /// 0 ≤ progress ≤ 1
-    public var progress: CGFloat {
+    var progress: CGFloat {
         set(pr) {
             if self._progress != pr {
                 self._progress = pr < 0 ? 0 : pr > 1 ? 1 : pr
@@ -56,14 +56,14 @@ public class OverlayProgressView: UIView {
     /// and displayOperationDidFinishAnimation() methods.
     ///
     /// 0.25 by default.
-    public var stateChangeAnimationDuration: CGFloat = 0.25
+    var stateChangeAnimationDuration: CGFloat = 0.25
     
     /// This flag indicates whether or not displayOperationDidFinishAnimation() is called when 'progress' property is set to 1,
     // defaults to true
-    public var triggersDownloadDidFinishAnimationAutomatically: Bool = true
+    var triggersDownloadDidFinishAnimationAutomatically: Bool = true
     
     /// Makes the outer faded out circle radius expand until it circumscribes the DAProgressOverlayView bounds.
-    public func displayOperationDidFinishAnimation() {
+    func displayOperationDidFinishAnimation() {
         self.state = .Finished
         self.animationProgress = 0
         self.timer = NSTimer.scheduledTimerWithTimeInterval(kUIUpdateFrequency, target: self, selector: "update", userInfo: nil, repeats: true)
@@ -71,7 +71,7 @@ public class OverlayProgressView: UIView {
     
     /// Changes radiuses of the inner and outer circles from zero to the corresponding values, 
     /// calculated from 'innerRadiusRatio' and 'outerRadiusRatio' properties.
-    public func displayOperationWillTriggerAnimation(){
+    func displayOperationWillTriggerAnimation(){
         self.state = .Finished
         self.animationProgress = 0
         self.timer = NSTimer.scheduledTimerWithTimeInterval(kUIUpdateFrequency, target: self, selector: "update", userInfo: nil, repeats: true)
@@ -94,7 +94,7 @@ public class OverlayProgressView: UIView {
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    public override func drawRect(rect: CGRect)
+    override func drawRect(rect: CGRect)
     {
         let width = CGRectGetWidth(rect)
         let height = CGRectGetHeight(rect)
@@ -143,12 +143,12 @@ public class OverlayProgressView: UIView {
         }
     }
 
-    public required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
         self.setup()
     }
     
-    public override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.setup()
     }
