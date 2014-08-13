@@ -45,7 +45,7 @@ class NetworkClient {
     :param: accessToken Facebook access token from active facebook session
     :param: loginSuccessHandler Takes a THUser and perform operation
     */
-    func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:THUser? -> ()) -> Bool {
+    func loginUserWithFacebookAuth(accessToken:String, errorHandler:NSError -> (), loginSuccessHandler:THUser! -> ()) {
         let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
         
         
@@ -72,6 +72,7 @@ class NetworkClient {
                 _, response, content, error in
                 if let responseError = error {
                     println(responseError)
+                    errorHandler(responseError)
                     return
                 }
                 
@@ -87,8 +88,6 @@ class NetworkClient {
                     }
                 }
             })
-        
-        return false
     }
 
     

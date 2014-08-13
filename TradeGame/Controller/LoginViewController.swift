@@ -40,8 +40,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         hud.labelText = "Logging in..."
         
         weak var weakSelf = self
-        NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken) {
-            (user: THUser?) -> () in
+        NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken, errorHandler: { error in
+                hud.mode = MBProgressHUDModeText
+                hud.labelText = "Login error: \(error.description)"
+                hud.hide(true, afterDelay: 1.5)
+            }) {
+             user in
             var strongSelf = weakSelf!
             if let loginUser = user {
                 let vc = strongSelf.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController

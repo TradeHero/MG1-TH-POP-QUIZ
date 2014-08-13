@@ -14,7 +14,7 @@ enum Mode: Int {
 }
 
 
-let mode = Mode.Dev
+let mode = Mode.Prod
 
 let kConstantPrefix = "TH"
 
