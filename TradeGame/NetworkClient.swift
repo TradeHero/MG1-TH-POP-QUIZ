@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import Models
 
 class NetworkClient {
     
-    /// MARK:- Variables
+    // MARK:- Variables
     
     /// Singleton network client
     class var sharedClient: NetworkClient {
@@ -32,22 +31,30 @@ class NetworkClient {
     /// default JSON encoding
     private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(options: NSJSONWritingOptions.PrettyPrinted)
     
+    // MARK:- Methods
     
-    /// MARK:- Methods
+    /**
+        Perform login with credentials and completes operation by acquiring authenticated user session.
     
-    
-    /// 
-    /// Perform login with credentials and completes operation by acquiring authenticated user session.
-    ///
-    /// :param: credentials Dictionary of 2 items, login ID and password
-    /// :param: loginSuccessHandler Takes a THUser and perform operation
-    ///
-    func loginUserWithBasicAuth(credentials:[String : String], loginSuccessHandler:(user: THUser?) -> ()) -> Bool {
+        :param: credentials Dictionary of 2 items, login ID and password
+        :param: loginSuccessHandler Takes a THUser and perform operation
+    */
+    func loginUserWithBasicAuth(credentials:[String : String], loginSuccessHandler:THUser? -> ()) -> Bool {
         let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
         
         
         var headers = AF.Manager.sharedInstance.defaultHeaders
-        headers = configureDefaultHTTPHeaders(headers)
+        if (headers["TH-Client-Version"] == nil) {
+            headers["TH-Client-Version"] = "2.3.0.4245"
+        }
+        
+        if (headers["TH-Client-Type"] == nil) {
+            headers["TH-Client-Type"] = "1"
+        }
+        
+        if (headers["TH-Language-Code"] == nil) {
+            headers["TH-Language-Code"] = "en-GB"
+        }
         headers["Authorization"] = generateBasicAuthHTTPHeader(credentials[kTHGameLoginIDKey]!, password: credentials[kTHGameLoginPasswordKey]!)
         AF.Manager.sharedInstance.defaultHeaders = headers
         
@@ -64,18 +71,17 @@ class NetworkClient {
                 
             if response?.statusCode == 200 {
                 self.saveCredentials(credentials)
-                
                 let responseJSON = content as [String: AnyObject]
                 let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
                 
                 if let profileDTODict = profileDTOPart as? [String: AnyObject] {
-//                                    println(profileDTODict)
+//                    println(profileDTODict)
                     var loginUser = THUser(profileDTO: profileDTODict)
-                    if let userGamePortfolio = self.fetchGamePortfolioForUser(loginUser.userId) {
-                        loginUser.gamePortfolio = userGamePortfolio
-                    }
+//                    if let userGamePortfolio = self.fetchGamePortfolioForUser(loginUser.userId) {
+//                        loginUser.gamePortfolio = userGamePortfolio
+//                    }
                     self.authenticatedUser = loginUser
-                    loginSuccessHandler(user: loginUser)
+                    loginSuccessHandler(loginUser)
                 }
             }
         })
@@ -83,24 +89,73 @@ class NetworkClient {
         return false
     }
     
-    ///
-    /// Create challenge with
-    ///
-    ///
-    func createChallenge(numberOfQuestions:Int, opponentId:Int?, completionHandler: (Game -> ())?) {
+    func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:THUser? -> ()) -> Bool {
+        println(accessToken)
+        let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
         
-        var params = ["numberOfQuestions": numberOfQuestions]
-        if opponentId != nil {
-            params["opponentId"] = opponentId
-        }
         
         var headers = AF.Manager.sharedInstance.defaultHeaders
-        headers = configureDefaultHTTPHeaders(headers)
-        headers["Authorization"] = generateAuthorisationFromKeychain()
+        if (headers["TH-Client-Version"] == nil) {
+            headers["TH-Client-Version"] = "2.3.0.4245"
+        }
+        
+        if (headers["TH-Client-Type"] == nil) {
+            headers["TH-Client-Type"] = "1"
+        }
+        
+        if (headers["TH-Language-Code"] == nil) {
+            headers["TH-Language-Code"] = "en-GB"
+        }
+        headers["Authorization"] = "\(THAuthFacebookPrefix) \(accessToken)"
         AF.Manager.sharedInstance.defaultHeaders = headers
+        
+        AF.request(.POST,
+            THServerAPIBaseURL + "/login",
+            parameters: param,
+            encoding: JSONPrettyPrinted)
+            .responseJSON({
+                _, response, content, error in
+                if let responseError = error {
+                    println(responseError)
+                    return
+                }
+                
+                if response?.statusCode == 200 {
+                    let responseJSON = content as [String: AnyObject]
+                    let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
+                    
+                    if let profileDTODict = profileDTOPart as? [String: AnyObject] {
+                        //                    println(profileDTODict)
+                        var loginUser = THUser(profileDTO: profileDTODict)
+                        //                    if let userGamePortfolio = self.fetchGamePortfolioForUser(loginUser.userId) {
+                        //                        loginUser.gamePortfolio = userGamePortfolio
+                        //                    }
+                        self.authenticatedUser = loginUser
+                        loginSuccessHandler(loginUser)
+                    }
+                }
+            })
+        
+        return false
+    }
+
+    
+    
+    /**
+        Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
+    */
+    func createChallenge(numberOfQuestions:Int, opponentId:Int?, completionHandler: (Game? -> ())?) {
+        var params = ["numberOfQuestions": numberOfQuestions]
+        if opponentId == nil {
+            params["opponentId"] = 471931
+        }
+        
+        configureCompulsoryHeaders()
 
         AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: params, encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
+            
+            println(response)
             if let responseError = error {
                 println(responseError)
                 return
@@ -108,6 +163,12 @@ class NetworkClient {
 
             if response?.statusCode == 200 {
                 println(content!)
+                let responseJSON = content as [String: AnyObject]
+                
+                let game = self.createGameObjectFromDTO(responseJSON)
+                if let handler = completionHandler {
+                    handler(game)
+                }
             }
         })
     }
@@ -116,20 +177,18 @@ class NetworkClient {
     ///
     ///
     ///
-    func createQuickGame() -> Game {
-        var g: Game? = nil
+    func createQuickGame(completionHandler: (Game? -> ())?){
         createChallenge(10, opponentId: nil, completionHandler: {
             game in
-            g = game
+            if let handler = completionHandler {
+                handler(game)
+            }
         })
-        
-        return createDummyGame()
     }
     
     
     ///
-    ///
-    ///
+    /// Logs out current session, removing credentials and user details stored in keychain or in device.
     ///
     func logout() {
         self.authenticatedUser = nil
@@ -145,12 +204,12 @@ class NetworkClient {
     /// 
     /// :returns: Game portfolio of user, would not be nil normally.
     ///
-    func fetchGamePortfolioForUser(userID: Int) -> GamePortfolio? {
-        
-        return createDummyGamePortfolio()
-    }
+//    func fetchGamePortfolioForUser(userID: Int) -> GamePortfolio? {
+//        
+//        return createDummyGamePortfolio()
+//    }
     
-    /// MARK:- Class functions
+    // MARK:- Class functions
    
     ///
     /// Fetch an image from a fully qualified URL String.
@@ -170,12 +229,10 @@ class NetworkClient {
         }
     }
     
-    /// MARK:- private functions
+    // MARK:- private functions
     
-    
-    
-    private func configureDefaultHTTPHeaders(dict:[String : String]) -> [String : String]{
-        var headers = dict
+    func configureCompulsoryHeaders(){
+        var headers = AF.Manager.sharedInstance.defaultHeaders
         if (headers["TH-Client-Version"] == nil) {
             headers["TH-Client-Version"] = "2.3.0.4245"
         }
@@ -187,14 +244,20 @@ class NetworkClient {
         if (headers["TH-Language-Code"] == nil) {
             headers["TH-Language-Code"] = "en-GB"
         }
-        return headers
+
+        if let auth = generateAuthorisationFromKeychain() {
+            headers["Authorization"] = auth
+        }
+        AF.Manager.sharedInstance.defaultHeaders = headers
     }
     
-    
+    /// 
+    /// Generates authorisation header from saved credential in device keychain.
+    ///
     private func generateAuthorisationFromKeychain() -> String? {
         self.loadCredentials()
         if let cred = self.credentials {
-            return generateBasicAuthHTTPHeader(self.credentials[kTHGameLoginIDKey]!, password: self.credentials[kTHGameLoginPasswordKey]!)
+            return generateBasicAuthHTTPHeader(cred[kTHGameLoginIDKey]!, password: cred[kTHGameLoginPasswordKey]!)
         }
         return nil
     }
@@ -252,18 +315,62 @@ class NetworkClient {
         }
     }
 
-    ///MARK:- Dummy functions 
     
-    private func createDummyGame() -> Game{
-//        return Game(id: 1, initiator: self.authenticatedUser.gamePortfolio, opponent: GamePortfolio(gamePfID: 2000, rank: "Novice"))
-        return Game(id: 1, initiator: createDummyUser(), opponent: createDummyUser(), createdAtUTC: NSDate(), questionSet: QuestionSetFactory.sharedInstance.generateDummyQuestionSet())
+    private func createGameObjectFromDTO(dto: [String: AnyObject]) -> Game? {
+        var gameID: Int!
+        if let id: AnyObject = dto["id"] {
+            gameID = id as Int
+        }
+        
+        var createdAtStr: String!
+        if let s: AnyObject = dto["createdAtUtc"] {
+            createdAtStr = s as String
+        }
+        
+        var initiatorID: Int!
+        if let i: AnyObject = dto["createdByUserId"]{
+            initiatorID = i as Int
+        }
+        
+        var opponentID: Int!
+        if let i: AnyObject = dto["opponentUserId"]{
+            opponentID = i as Int
+        }
+        
+        var questionSet: [Question] = []
+        if let qs: AnyObject = dto["questionSet"] {
+            let questionJSON = qs as [AnyObject]
+            for q in questionJSON {
+                if let questionDTO = q as? [String: AnyObject] {
+                    questionSet.append(Question(questionDTO: questionDTO))
+                }
+            }
+        }
+        
+        return Game(id: gameID, initPlayerID: initiatorID, oppPlayerID: opponentID, createdAtUTCStr: createdAtStr, questionSet: questionSet)
+        
+    }
+    // MARK: Simple functions
+    func fetchUser(userId: Int, completionHandler: THUser? -> ()) {
+        configureCompulsoryHeaders()
+        
+        AF.request(.GET, "\(THServerAPIBaseURL)/users/\(userId)", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
+            _, response, content, error in
+            if let responseError = error {
+                println(responseError)
+                return
+            }            
+            if let profileDTODict = content as? [String: AnyObject] {
+                var user = THUser(profileDTO: profileDTODict)
+                completionHandler(user)
+            }
+            
+            
+        })
+        
+        
     }
     
-    private func createDummyGamePortfolio() -> GamePortfolio {
-        return GamePortfolio(gamePfID: 1000, rank: "Novice")
-    }
     
-    private func createDummyUser() -> THUser {
-        return THUser(userId: 1, displayName: "Player1", firstName: "Player", lastName: "1", url: "", gamePort: createDummyGamePortfolio())
-    }
+    
 }

@@ -34,6 +34,11 @@ let THServerAPIBaseURL = mode == Mode.Dev ? "\(THDevAPIBaseURL)" : "\(THProdAPIB
 
 let THGameAPIBaseURL = "\(THServerAPIBaseURL)/games"
 
+
+let THImagePathHost = "https://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/"
+
+
+let THAuthFacebookPrefix = "TH-Facebook"
 // MARK:- keys
 
 let kTHGameLoggedInKey = "\(kConstantPrefix)GameLoggedIn"
@@ -42,3 +47,5 @@ let kTHGameLoginIDKey = "\(kConstantPrefix)GameLoginID"
 let kTHGameLoginPasswordKey = "\(kConstantPrefix)GameLoginPassword"
 let kTHGameKeychainIdentifierKey = "\(kConstantPrefix)GameKeychainIdentifier"
 let kTHGameKeychainBasicAccKey = "\(kConstantPrefix)GameKeychainBasicAcc"
+
+

@@ -47,6 +47,9 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
                 
             } else {
                 UIAlertView(title: "Login failed", message: "Please re-enter your login credentials.", delegate: nil, cancelButtonTitle: "Dismiss").show()
+                
+//                let x = UIAlertController(title: "Login failed", message: "Please re-enter your login credentials.", preferredStyle: UIAlertControllerStyle.Alert)
+//                self.presentViewController(x, animated: true, completion: nil)
             }
         }
     }
@@ -57,10 +60,21 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
         let id = Int((user.objectID as NSString).intValue)
         
-        NetworkClient.sharedClient.authenticatedUser = THUser(userId: id, displayName: user.name, firstName: user.first_name, lastName: user.last_name, url: pictureURL, gamePort: GamePortfolio(gamePfID: 1, rank: "Novice"))
-        
-        let vc = self.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
-        self.presentViewController(vc, animated: true, completion: nil)
+//        println("\(user)")
+        let token = FBSession.activeSession().accessTokenData.accessToken
+        NetworkClient.sharedClient.loginUserWithFacebookAuth(token) {
+            (user: THUser?) -> () in
+            if let loginUser = user {
+                println("\(loginUser)")
+                let vc = self.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
+                self.presentViewController(vc, animated: true, completion: nil)
+                
+            } else {
+                UIAlertView(title: "Login failed", message: "Please re-enter your login credentials.", delegate: nil, cancelButtonTitle: "Dismiss").show()
+                
+                //                let x = UIAlertController(title: "Login failed", message: "Please re-enter your login credentials.", preferredStyle: UIAlertControllerStyle.Alert)
+                //                self.presentViewController(x, animated: true, completion: nil)
+            }
+        }
     }
 }
-//

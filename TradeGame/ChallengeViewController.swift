@@ -12,7 +12,7 @@ import Views
 
 class ChallengeViewController: UIViewController, UIScrollViewDelegate {
 
-    @IBOutlet weak var avatarView: UIImageView!
+    @IBOutlet weak var avatarView: AvatarRoundedView!
     @IBOutlet weak var fullNameView: UILabel!
     @IBOutlet weak var rankView: UILabel!
     
@@ -64,7 +64,7 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
                 
         }
         self.fullNameView.text = user?.fullName
-        self.rankView.text = user?.gamePortfolio.rank
+//        self.rankView.text = user?.gamePortfolio.rank
         
         self.scrollView.delegate = self
         scrollView.contentSize = self.scrollableContentView.bounds.size
@@ -81,12 +81,26 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func createDummyGame(sender: AnyObject) {
-        let vc = self.storyboard.instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
-        vc.turn = Turn(player: Player(name: "Ryne Cheow", rank: "Knight", displayPic: UIImage(named: "AvatarSample1")), opponent: Player(name: "Maggie Grace", rank: "Novice", displayPic: UIImage(named: "AvatarSample2")), questionSet: QuestionSetFactory.sharedInstance.generateDummyQuestionSet(), newGame: true)
-        self.presentViewController(vc, animated: true, completion: nil)
+//        let vc = self.storyboard.instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
+//        vc.turn = Turn(player: Player(name: "Ryne Cheow", rank: "Knight", displayPic: UIImage(named: "AvatarSample1")), opponent: Player(name: "Maggie Grace", rank: "Novice", displayPic: UIImage(named: "AvatarSample2")), questionSet: QuestionSetFactory.sharedInstance.generateDummyQuestionSet(), newGame: true)
+//        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     @IBAction func createQuickplayGame(sender: AnyObject) {
-        let quickGame:Game = NetworkClient.sharedClient.createQuickGame()
+        NetworkClient.sharedClient.createQuickGame() {
+            createdGame in
+            if let game = createdGame {
+                if game.fullyLoaded() {
+                    println(game.initiatingPlayer)
+                    println(game.opponentPlayer)
+                }
+            }
+        }
+//        NetworkClient.sharedClient.fetchUser(581801) {
+//            fetchedUser in
+//            if let user = fetchedUser {
+//                println(user)
+//            }
+//        }
     }
 }

@@ -62,7 +62,7 @@ class QuizViewController: UIViewController {
     }
     }
     
-    var turn: Turn!
+    var game: Game!
     
     private var stopwatch: NSTimer? = nil
     
@@ -92,7 +92,7 @@ class QuizViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViewWithQuestion(turn.questionSet[current_q])
+        setUpViewWithQuestion(game.questionSet[current_q])
         setUpPlayerDetails()
     }
     
@@ -103,17 +103,17 @@ class QuizViewController: UIViewController {
 // MARK:- methods
 
     func setUpPlayerDetails() {
-        let thisPlayer = turn.player
-        let opponent = turn.opponent
+        let thisPlayer = game.initiatingPlayer
+        let opponent = game.opponentPlayer
         
-        selfAvatarView.image = thisPlayer.displayImage
-        selfDisplayNameLabel.text = thisPlayer.displayName
-        selfRankLabel.text = thisPlayer.rank
-        selfTotalScore = 0
-        
-        opponentAvatarView.image = opponent.displayImage
-        opponentDisplayNameLabel.text = opponent.displayName
-        opponentRankLabel.text = opponent.rank
+//        selfAvatarView.image = thisPlayer.displayImage
+//        selfDisplayNameLabel.text = thisPlayer.displayName
+//        selfRankLabel.text = thisPlayer.rank
+//        selfTotalScore = 0
+//        
+//        opponentAvatarView.image = opponent.displayImage
+//        opponentDisplayNameLabel.text = opponent.displayName
+//        opponentRankLabel.text = opponent.rank
 //        opponentScoreLabel.text = turn.newGame ? "0" : String(turn.opponentScore)
     }
     
@@ -147,12 +147,34 @@ class QuizViewController: UIViewController {
             contentView.questionContent.text = question.questionContent
             switch question.questionType {
             case .LogoType:
-                contentView.imageView.presetImage = question.questionImage
-                contentView.imageView.mosaic(20)
+                if let url = question.questionImageStringName?.getTHFullyQualifiedImagePath() {
+                    NetworkClient.fetchImageFromURLString(url, progressHandler: nil, completionHandler: {
+                        image,error in
+                        if error != nil {
+                            return
+                        }
+                        
+                        if let img = image {
+                            contentView.imageView.presetImage = img
+                            contentView.imageView.mosaic(20)
+                        }
+                    })
+                }
             default:
-                contentView.imageView.presetImage = question.questionImage
+                if let url = question.questionImageStringName?.getTHFullyQualifiedImagePath() {
+                    NetworkClient.fetchImageFromURLString(url, progressHandler: nil, completionHandler: {
+                        image,error in
+                        if error != nil {
+                            return
+                        }
+                        
+                        if let img = image {
+                            contentView.imageView.presetImage = img
+                        }
+                    })
+                }
+                
             }
-            
             return contentView
         } else {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
@@ -163,7 +185,7 @@ class QuizViewController: UIViewController {
     }
     
     func unmaskContentViewIfNecessary() {
-        switch turn.questionSet[current_q].questionType {
+        switch game.questionSet[current_q].questionType {
         case .LogoType:
             for view in questionView.subviews {
                 if let logoView = view as? QuestionViewWithImage {
@@ -234,7 +256,7 @@ class QuizViewController: UIViewController {
     func prepareToEndRound() {
         current_q++
         calculateScore()
-        if turn.questionSet.count > current_q {
+        if game.questionSet.count > current_q {
             proceedToNextQuestion()
         } else {
             endTurn()
@@ -274,7 +296,7 @@ class QuizViewController: UIViewController {
     
     func proceedToNextQuestion(){
         UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
-            let new_q = self.turn.questionSet[self.current_q]
+            let new_q = self.game.questionSet[self.current_q]
             self.setUpViewWithQuestion(new_q)
             }, completion:nil)
         

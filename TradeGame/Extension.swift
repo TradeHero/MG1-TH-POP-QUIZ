@@ -263,3 +263,9 @@ extension UIStoryboard {
         return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
     }
 }
+
+extension String {
+    func getTHFullyQualifiedImagePath() -> String {
+        return "\(THImagePathHost)\(self)"
+    }
+}
