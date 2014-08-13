@@ -141,7 +141,7 @@
 			children = (
 				6DF7231A199332E700123D0D /* NetworkClient.swift */,
 			);
-			name = Network;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		6D1FF5C41999F02D003B3912 /* Models */ = {
@@ -150,6 +150,7 @@
 				6D1FF5C51999F03B003B3912 /* Domain Objects */,
 			);
 			name = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6D1FF5C51999F03B003B3912 /* Domain Objects */ = {
@@ -163,7 +164,7 @@
 				6D8F0C581999F18100829149 /* THUser.swift */,
 				6D8F0C5C1999F1BB00829149 /* Turn.swift */,
 			);
-			name = "Domain Objects";
+			path = "Domain Objects";
 			sourceTree = "<group>";
 		};
 		6D20576A19889A7000570042 = {
@@ -190,16 +191,13 @@
 		6D20577519889A7000570042 /* TradeGame */ = {
 			isa = PBXGroup;
 			children = (
-				6D20577819889A7000570042 /* AppDelegate.swift */,
-				6D0843921992018700FDD83E /* Constants.swift */,
+				6DF2E5E5199B38BE009D3C26 /* AppDelegate */,
 				6D2DD2FE1990E23600B8CBA4 /* Controller */,
-				6D2057E81988BCE000570042 /* Extension.swift */,
 				6D20577F19889A7000570042 /* Images.xcassets */,
 				6D20577C19889A7000570042 /* Main.storyboard */,
 				6D1FF5C41999F02D003B3912 /* Models */,
 				6D08439419922F8F00FDD83E /* Network */,
 				6D20577619889A7000570042 /* Supporting Files */,
-				6D0FC246198A34D0004B163C /* TradeGame-Bridging-Header.h */,
 				6D286D4B1989F12500D179F8 /* Views */,
 			);
 			path = TradeGame;
@@ -208,9 +206,12 @@
 		6D20577619889A7000570042 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6D0843921992018700FDD83E /* Constants.swift */,
+				6D2057E81988BCE000570042 /* Extension.swift */,
+				6D0FC246198A34D0004B163C /* TradeGame-Bridging-Header.h */,
 				6D20577719889A7000570042 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		6D20578819889A7000570042 /* TradeGameTests */ = {
@@ -243,7 +244,7 @@
 				6D6913E6198F2E8C00B8AFF1 /* EditableImageView.swift */,
 				6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		6D2DD2FE1990E23600B8CBA4 /* Controller */ = {
@@ -254,7 +255,7 @@
 				6D20577A19889A7000570042 /* QuizViewController.swift */,
 				6D286D491989F07500D179F8 /* ResultViewController.swift */,
 			);
-			name = Controller;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		6DA8689A1991D096009FBD99 /* External */ = {
@@ -274,6 +275,15 @@
 				6DF2E5E0199B35DB009D3C26 /* OverlayProgressView.swift */,
 			);
 			name = Designable;
+			path = Designables;
+			sourceTree = "<group>";
+		};
+		6DF2E5E5199B38BE009D3C26 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				6D20577819889A7000570042 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -565,11 +575,11 @@
 					/Users/rynecheow/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = TradeGame/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TradeGame/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "TradeGame/TradeGame-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "TradeGame/Supporting Files/TradeGame-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -587,11 +597,11 @@
 					/Users/rynecheow/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = TradeGame/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TradeGame/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "TradeGame/TradeGame-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "TradeGame/Supporting Files/TradeGame-Bridging-Header.h";
 			};
 			name = Release;
 		};
