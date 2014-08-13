@@ -37,23 +37,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         super.init(coder: aDecoder)
     }
     
-    @IBAction func loginButtonClicked(sender: AnyObject) {
-        let credentials: [String: String] = [kTHGameLoginIDKey: emailField.text ?? "", kTHGameLoginPasswordKey:passwordField.text ?? ""]
-        NetworkClient.sharedClient.loginUserWithBasicAuth(credentials) {
-            (user: THUser?) -> () in
-            if let loginUser = user {
-                let vc = self.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
-                self.presentViewController(vc, animated: true, completion: nil)
-                
-            } else {
-                UIAlertView(title: "Login failed", message: "Please re-enter your login credentials.", delegate: nil, cancelButtonTitle: "Dismiss").show()
-                
-//                let x = UIAlertController(title: "Login failed", message: "Please re-enter your login credentials.", preferredStyle: UIAlertControllerStyle.Alert)
-//                self.presentViewController(x, animated: true, completion: nil)
-            }
-        }
-    }
-    
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
         
         var pictureURL: String = "https://graph.facebook.com/\(user.objectID)/picture?height=1000&width=1000"

@@ -35,7 +35,7 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func logoutClicked(sender: AnyObject) {
         FBSession.activeSession().closeAndClearTokenInformation()
         NetworkClient.sharedClient.logout()
-        self.presentViewController(self.storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as LoginViewController, animated: true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func setupSubviews() {
