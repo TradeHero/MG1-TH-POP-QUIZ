@@ -12,6 +12,10 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var friendAvatarView: AvatarRoundedView!
     @IBOutlet weak var friendNameLabel: UILabel!
+    
+    var friendUserID: Int!
+    var delegate: FriendsChallengeCellTableViewCellDelegate!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,6 +26,30 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    @IBOutlet weak var challengeAction: DesignableButton!
     
+
+    @IBAction func challengeAction(sender: AnyObject) {
+        if self.friendUserID != nil {
+            self.delegate.friendUserCell(self, didTapChallengeUser: self.friendUserID)
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.friendAvatarView.image = nil
+        self.friendNameLabel.text = nil
+    }
+    
+    func bindFriendUser(friendUser:THUserFriend){
+        self.friendNameLabel.text = friendUser.name ?? "Unknown user"
+        NetworkClient.fetchImageFromURLString(friendUser.facebookPictureURL, progressHandler: nil, completionHandler: {
+            image,error in
+            self.friendAvatarView.image = image
+        })
+        self.friendUserID = friendUser.userID
+    }
+}
+
+protocol FriendsChallengeCellTableViewCellDelegate : class, NSObjectProtocol {
+    func friendUserCell(cell:FriendsChallengeCellTableViewCell, didTapChallengeUser userID:Int)
 }

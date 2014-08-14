@@ -49,6 +49,7 @@ let kTHGameKeychainIdentifierKey = "\(kConstantPrefix)GameKeychainIdentifier"
 let kTHGameKeychainBasicAccKey = "\(kConstantPrefix)GameKeychainBasicAcc"
 let kTHGameKeychainFacebookAccKey = "\(kConstantPrefix)GameKeychainFacebookAcc"
 
-
+// MARK:- view identifiers
+let kTHFriendsChallengeCellTableViewCellIdentifier = "\(kConstantPrefix)FriendsChallengeCellTableViewCellIdentifier"
 
 

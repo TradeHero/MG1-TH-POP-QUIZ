@@ -63,8 +63,9 @@ extension Game: Printable {
             d += "Initiator: \(initiatingPlayer!)\n"
             d += "Opponent: \(opponentPlayer!)\n"
             d += "Questions: "
+            var i:Int = 0
             for q in questionSet {
-                d += "\(q)"
+                d += "Question \(++i): \(q)"
             }
             d += "\n}\n"
             return d

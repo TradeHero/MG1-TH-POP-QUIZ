@@ -261,11 +261,11 @@
 		6D2DD2FE1990E23600B8CBA4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6D2DD2FC1990E16400B8CBA4 /* LoginViewController.swift */,
 				6D2DD3001990E2A800B8CBA4 /* ChallengeViewController.swift */,
+				6D8310B6199B5DBA0097564A /* FriendsViewController.swift */,
+				6D2DD2FC1990E16400B8CBA4 /* LoginViewController.swift */,
 				6D20577A19889A7000570042 /* QuizViewController.swift */,
 				6D286D491989F07500D179F8 /* ResultViewController.swift */,
-				6D8310B6199B5DBA0097564A /* FriendsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate {
 
     var friendsList: [THUserFriend] = []
     
@@ -19,7 +19,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         self.navigationItem.title = "FRIENDS"
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
-        self.friendsTableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Friend_Cell")
+        self.friendsTableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
         // Do any additional setup after loading the view.
     }
 
@@ -34,15 +34,12 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        var cell: FriendsChallengeCellTableViewCell! = tableView.dequeueReusableCellWithIdentifier("Friend_Cell", forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
+        var cell: FriendsChallengeCellTableViewCell! = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
         let friendUser = friendsList[indexPath.row]
-        cell.friendNameLabel.text = friendUser.name ?? "Unknown user"
-        NetworkClient.fetchImageFromURLString(friendUser.facebookPictureURL, progressHandler: nil, completionHandler: {
-            image,error in
-            cell.friendAvatarView.image = image
-            
-        })
+        
+        cell.bindFriendUser(friendUser)
         cell.layoutIfNeeded()
+        cell.delegate = self
         return cell
     }
    required init(coder aDecoder: NSCoder!) {
@@ -56,6 +53,35 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         return 70.0
+    }
+    
+    func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapChallengeUser userID: Int) {
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Creating challenge..."
+        
+        weak var weakSelf = self
+        NetworkClient.sharedClient.createChallenge(10, opponentId: userID, completionHandler: {
+        game in
+            var strongSelf = weakSelf!
+            if let g = game {
+                hud.mode = MBProgressHUDModeText
+                hud.labelText = "Game created."
+//                println(game)
+                let vc = strongSelf.storyboard.instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
+                hud.mode = MBProgressHUDModeAnnularDeterminate
+                hud.labelText = "Fetching image..."
+                
+                vc.prepareGame(game, hud:hud) {
+                    progress -> () in
+                    var strongSelf = weakSelf!
+                    hud.labelText = "Done fetching image."
+                    hud.hide(true, afterDelay: 1)
+                    strongSelf.presentViewController(vc, animated: true, completion: nil)
+                }
+            }
+            
+        })
+        
     }
     
 }

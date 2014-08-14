@@ -42,14 +42,15 @@ class Question {
     var questionContent:String!
     
     /// Type of question.
-    var questionType: QuestionType = QuestionType.TextualType
+    var questionType: QuestionType = QuestionType.LogoType
     
     /// Set of options of this current question instance.
     var options: OptionSet!
     
     /// Image content url of the question, can be nil.
-    var questionImageStringName: String?
+    var questionImageStringName: String!
     
+    var questionImage: UIImage!
     /// Initialise question with textual content, image content, set of options and type of question.
     ///
     /// :param: content Textual content of the question.
@@ -119,6 +120,23 @@ class Question {
         }
         
         self.options = OptionSet(correctOption: option1, dummyOptions: [option2, option3, option4])
+    }
+
+    func fetchImage(completionHandler:() -> ()) {
+        if let imgName = self.questionImageStringName {
+            var name = imgName.stringByReplacingOccurrencesOfString(" ", withString: "%20").stringByReplacingOccurrencesOfString("#", withString: "%23")
+            let fqURL = "\(THImagePathHost)\(name)"
+            NetworkClient.fetchImageFromURLString(fqURL, progressHandler: nil, completionHandler: {
+                image, error in
+                if image != nil {
+                    self.questionImage = image
+                }
+                completionHandler()
+            })
+
+        }else{
+            completionHandler()
+        }
     }
 }
 

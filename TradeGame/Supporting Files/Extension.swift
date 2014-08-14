@@ -268,4 +268,20 @@ extension String {
     func getTHFullyQualifiedImagePath() -> String {
         return "\(THImagePathHost)\(self)"
     }
+
+}
+
+extension UIViewController {
+    func setNavigationTintColor(barColor:UIColor!, buttonColor:UIColor!){
+        if self.navigationController != nil {
+            if barColor != nil {
+                self.navigationController.navigationBar.barTintColor = barColor
+            }
+            
+            if buttonColor != nil {
+                self.navigationController.navigationBar.tintColor = buttonColor
+            }
+        }
+    }
+    
 }

@@ -75,7 +75,6 @@ class QuizViewController: UIViewController {
     }
     }
     
-    
     private var didRemoveOptions: Bool = false
     
 // MARK:- init
@@ -90,6 +89,7 @@ class QuizViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        showReadyView()
         setUpViewWithQuestion(game.questionSet[current_q])
         setUpPlayerDetails()
     }
@@ -99,20 +99,33 @@ class QuizViewController: UIViewController {
     }
 
 // MARK:- methods
-
-    func setUpPlayerDetails() {
-        let thisPlayer = game.initiatingPlayer
-        let opponent = game.opponentPlayer
+    func showReadyView() {
         
-//        selfAvatarView.image = thisPlayer.displayImage
-//        selfDisplayNameLabel.text = thisPlayer.displayName
-//        selfRankLabel.text = thisPlayer.rank
-//        selfTotalScore = 0
-//        
-//        opponentAvatarView.image = opponent.displayImage
-//        opponentDisplayNameLabel.text = opponent.displayName
-//        opponentRankLabel.text = opponent.rank
+    }
+    func setUpPlayerDetails() {
+        let thisPlayer = game.initiatingPlayer!
+        let opponent = game.opponentPlayer!
+        
+        NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil, completionHandler: {
+            image, error in
+            if image != nil {
+                self.selfAvatarView.image = image
+            }
+        })
+        selfDisplayNameLabel.text = thisPlayer.displayName
+        selfRankLabel.text = "Novice"
+        selfTotalScore = 0
+
+        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil, completionHandler: {
+            image, error in
+            if image != nil {
+                self.opponentAvatarView.image = image
+            }
+        })
+        opponentDisplayNameLabel.text = opponent.displayName
+        opponentRankLabel.text = "Novice"
 //        opponentScoreLabel.text = turn.newGame ? "0" : String(turn.opponentScore)
+        opponentScoreLabel.text = "0"
     }
     
     func setUpViewWithQuestion(question:Question){
@@ -145,33 +158,14 @@ class QuizViewController: UIViewController {
             contentView.questionContent.text = question.questionContent
             switch question.questionType {
             case .LogoType:
-                if let url = question.questionImageStringName?.getTHFullyQualifiedImagePath() {
-                    NetworkClient.fetchImageFromURLString(url, progressHandler: nil, completionHandler: {
-                        image,error in
-                        if error != nil {
-                            return
-                        }
-                        
-                        if let img = image {
-                            contentView.imageView.presetImage = img
-                            contentView.imageView.mosaic(20)
-                        }
-                    })
+                if let img = question.questionImage {
+                    contentView.imageView.presetImage = img
+                    contentView.imageView.mosaic(20)
                 }
             default:
-                if let url = question.questionImageStringName?.getTHFullyQualifiedImagePath() {
-                    NetworkClient.fetchImageFromURLString(url, progressHandler: nil, completionHandler: {
-                        image,error in
-                        if error != nil {
-                            return
-                        }
-                        
-                        if let img = image {
-                            contentView.imageView.presetImage = img
-                        }
-                    })
+                if let img = question.questionImage {
+                    contentView.imageView.presetImage = img
                 }
-                
             }
             return contentView
         } else {
@@ -350,6 +344,23 @@ class QuizViewController: UIViewController {
  
     func endTurn(){
         let currentTurnScore = selfTotalScore
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func prepareGame(game:Game, hud:MBProgressHUD, completionHandler:()->()) {
+        var qSet = game.questionSet
+        var count:Int = 0
+        for q in qSet {
+            q.fetchImage() {
+                ()->() in
+                count += 1
+                hud.progress = Float(count)/Float(game.questionSet.count)
+                if count == game.questionSet.count {
+                    self.game = game
+                    completionHandler()
+                }
+            }
+        }
         
     }
 }

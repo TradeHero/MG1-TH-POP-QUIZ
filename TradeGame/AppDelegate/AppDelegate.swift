@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FBLoginView.self
         FBProfilePictureView.self
-        UINavigationBar.appearance().tintColor = UIColor(hex: 0x303030)
         return true
     }
 

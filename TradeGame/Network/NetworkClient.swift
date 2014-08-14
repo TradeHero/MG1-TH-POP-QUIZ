@@ -94,7 +94,7 @@ class NetworkClient {
     /**
         Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions:Int, opponentId:Int?, completionHandler: (Game? -> ())?) {
+    func createChallenge(numberOfQuestions:Int, opponentId:Int!, completionHandler: (Game! -> ())?) {
         var params = ["numberOfQuestions": numberOfQuestions]
         if opponentId != nil {
             params["opponentId"] = opponentId
@@ -112,6 +112,7 @@ class NetworkClient {
 
             if response?.statusCode == 200 {
                 let responseJSON = content as [String: AnyObject]
+                println(responseJSON)
                 let game = Game(gameDTO: responseJSON)
                 
                 var initiatorID: Int!
@@ -207,8 +208,11 @@ class NetworkClient {
     /// :param: progressHandler Refer to SDWebImageDownloaderProgressBlock
     /// :param: completionHandler process image if successfully downloaded.
     ///
-    class func fetchImageFromURLString(urlString: String, progressHandler: ((Int, Int) -> Void)?, completionHandler:(UIImage!, NSError!) -> Void) {
+    class func fetchImageFromURLString(urlString: String!, progressHandler: ((Int, Int) -> Void)?, completionHandler:(UIImage!, NSError!) -> Void) {
         
+        if urlString == nil {
+            return
+        }
         var fetchedImage: UIImage!
         SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: urlString), options: SDWebImageOptions.CacheMemoryOnly, progress: progressHandler) {  (image: UIImage!, error: NSError!, _, finished:Bool, _) -> Void in
             if completionHandler != nil {

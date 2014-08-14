@@ -13,21 +13,19 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var avatarView: AvatarRoundedView!
     @IBOutlet weak var fullNameView: UILabel!
     @IBOutlet weak var rankView: UILabel!
-    
-    @IBOutlet weak var scrollView: UIScrollView!
-    
-    @IBOutlet weak var scrollableContentView: UIView!
+
     var progressView: OverlayProgressView!
     
-    private var user: THUser!
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+    private var user: THUser {
+        didSet{
+            setupSubviews()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
+        self.navigationItem.hidesBackButton = true
     }
     
     @IBAction func logoutClicked(sender: AnyObject) {
@@ -37,23 +35,23 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func setupSubviews() {
-        self.progressView = OverlayProgressView(frame: self.avatarView.bounds)
-        self.avatarView.addSubview(self.progressView)
-        self.progressView?.displayOperationWillTriggerAnimation()
-        NetworkClient.fetchImageFromURLString((user.pictureURL)!, progressHandler: {
+//        self.progressView = OverlayProgressView(frame: self.avatarView.bounds)
+//        self.avatarView.addSubview(self.progressView)
+//        self.progressView?.displayOperationWillTriggerAnimation()
+        NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: {
             (current:Int, expected:Int) -> Void in
-            let ratio:CGFloat = CGFloat(current)/CGFloat(expected)
-            if ratio >= 1 {
-                self.progressView?.displayOperationDidFinishAnimation()
-                let delay = self.progressView?.stateChangeAnimationDuration
-                let poptime = dispatch_time(DISPATCH_TIME_NOW, Int64(UInt64(delay!) * NSEC_PER_SEC))
-                dispatch_after(poptime, dispatch_get_main_queue(), {() -> Void in
-                    self.progressView?.progress = 0
-                    self.progressView?.hidden = true
-                })
-            } else {
-                self.progressView?.progress = ratio
-            }
+//            let ratio:CGFloat = CGFloat(current)/CGFloat(expected)
+//            if ratio >= 1 {
+//                self.progressView?.displayOperationDidFinishAnimation()
+//                let delay = self.progressView?.stateChangeAnimationDuration
+//                let poptime = dispatch_time(DISPATCH_TIME_NOW, Int64(UInt64(delay!) * NSEC_PER_SEC))
+//                dispatch_after(poptime, dispatch_get_main_queue(), {() -> Void in
+//                    self.progressView?.progress = 0
+//                    self.progressView?.hidden = true
+//                })
+//            } else {
+//                self.progressView?.progress = ratio
+//            }
             })  {
                 (image: UIImage!, error:NSError!) in
                 if image != nil {
@@ -62,10 +60,7 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
                 
         }
         self.fullNameView.text = user.displayName
-//        self.rankView.text = user?.gamePortfolio.rank
-        
-        self.scrollView.delegate = self
-        scrollView.contentSize = self.scrollableContentView.bounds.size
+//        self.rankView.text = 
     }
 
     override func didReceiveMemoryWarning() {
