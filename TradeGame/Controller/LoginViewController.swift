@@ -13,7 +13,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var fbLoginView: FBLoginView!
-    var fbFlag:Int = 0
+    var fbFlag = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +32,20 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
-    override func viewDidAppear(animated: Bool) {
-        fbFlag = 0
+    
+    override func viewDidDisappear(animated: Bool) {
+        println("reset flag")
+        fbFlag = false
     }
+    
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        if fbFlag != 0 {
+        println(fbFlag)
+        if !fbFlag {
+            fbFlag = true
+        }else {
             return
         }
-        fbFlag++
+        
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Logging in..."
         
@@ -56,7 +62,6 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
                 let vc = strongSelf.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
                 strongSelf.navigationController.pushViewController(vc, animated: true)
             } else {
-                UIAlertView(title: "Login failed", message: "Please re-enter your login credentials.", delegate: nil, cancelButtonTitle: "Dismiss").show()
                 hud.mode = MBProgressHUDModeText
                 hud.labelText = "Login failed"
                 hud.hide(true, afterDelay: 1.5)

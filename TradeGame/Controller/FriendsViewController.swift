@@ -65,16 +65,16 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             var strongSelf = weakSelf!
             if let g = game {
                 hud.mode = MBProgressHUDModeText
-                hud.labelText = "Game created."
+                hud.detailsLabelText = "Creating game with user.."
 //                println(game)
                 let vc = strongSelf.storyboard.instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
                 hud.mode = MBProgressHUDModeAnnularDeterminate
-                hud.labelText = "Fetching image..."
+                hud.detailsLabelText = "Fetching image..."
                 
                 vc.prepareGame(game, hud:hud) {
                     progress -> () in
                     var strongSelf = weakSelf!
-                    hud.labelText = "Done fetching image."
+                    hud.detailsLabelText = "Done fetching image."
                     hud.hide(true, afterDelay: 1)
                     strongSelf.presentViewController(vc, animated: true, completion: nil)
                 }

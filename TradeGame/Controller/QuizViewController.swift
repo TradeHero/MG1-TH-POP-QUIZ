@@ -20,11 +20,12 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var option4: OptionButton!
     
     @IBOutlet weak var questionView: UIView!
-
+    
     @IBOutlet weak var timeLeftLabel: UILabel!
     
     @IBOutlet weak var removeOptionsButton: DesignableButton!
     
+    @IBOutlet weak var roundIndicatorLabel: UILabel!
     @IBOutlet weak var selfProgressView: UIProgressView!
     @IBOutlet weak var selfAvatarView: AvatarRoundedView!
     @IBOutlet weak var selfScoreLabel: UILabel!
@@ -42,22 +43,24 @@ class QuizViewController: UIViewController {
     @IBOutlet var opponentRankLabel: UILabel!
     
     
+    @IBOutlet weak var buttonSetContentView: UIView!
+    
     // MARK:- ivar
     private var current_q: Int = 0
     
     private var current_timeLeft: Double = 10.0 {
-    didSet{
-        let timeString = current_timeLeft.format(".1")
-        
-        if current_timeLeft < 3.0 {
-            timeLeftLabel.textColor = UIColor(hex: 0xfe0000)
-        } else if current_timeLeft < 7.5 {
-            timeLeftLabel.textColor = UIColor.yellowColor()
-        } else {
-            timeLeftLabel.textColor = UIColor.lightGrayColor()
+        didSet{
+            let timeString = current_timeLeft.format(".1")
+            
+            if current_timeLeft < 3.0 {
+                timeLeftLabel.textColor = UIColor(hex: 0xfe0000)
+            } else if current_timeLeft < 7.5 {
+                timeLeftLabel.textColor = UIColor.yellowColor()
+            } else {
+                timeLeftLabel.textColor = UIColor.lightGrayColor()
+            }
+            timeLeftLabel.text = timeString
         }
-        timeLeftLabel.text = timeString
-    }
     }
     
     var game: Game!
@@ -69,39 +72,37 @@ class QuizViewController: UIViewController {
     private var currentQuestionCorrect: Bool = false
     
     private var selfTotalScore: Int = 0 {
-    didSet{
-        selfScoreLabel.text = String(selfTotalScore)
-        selfProgressView.setProgress(Float(selfTotalScore)/2500.0, animated: true)
-    }
+        didSet{
+            selfScoreLabel.text = String(selfTotalScore)
+            let totalScore = 500 * self.game.questionSet.count
+            selfProgressView.setProgress(Float(selfTotalScore)/Float(totalScore), animated: true)
+        }
     }
     
     private var didRemoveOptions: Bool = false
     
-// MARK:- init
+    // MARK:- init
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
-
-// MARK:- override calls
+    
+    // MARK:- override calls
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        showReadyView()
-        setUpViewWithQuestion(game.questionSet[current_q])
-        setUpPlayerDetails()
+        self.setUpPlayerDetails()
+        self.proceedToNextQuestion()
+
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-// MARK:- methods
-    func showReadyView() {
-        
-    }
+    
+    // MARK:- methods
     func setUpPlayerDetails() {
         let thisPlayer = game.initiatingPlayer!
         let opponent = game.opponentPlayer!
@@ -115,7 +116,7 @@ class QuizViewController: UIViewController {
         selfDisplayNameLabel.text = thisPlayer.displayName
         selfRankLabel.text = "Novice"
         selfTotalScore = 0
-
+        
         NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil, completionHandler: {
             image, error in
             if image != nil {
@@ -124,13 +125,16 @@ class QuizViewController: UIViewController {
         })
         opponentDisplayNameLabel.text = opponent.displayName
         opponentRankLabel.text = "Novice"
-//        opponentScoreLabel.text = turn.newGame ? "0" : String(turn.opponentScore)
+        //        opponentScoreLabel.text = turn.newGame ? "0" : String(turn.opponentScore)
         opponentScoreLabel.text = "0"
     }
     
     func setUpViewWithQuestion(question:Question){
         self.resetButtons()
         didRemoveOptions = false
+        questionView.removeAllSubviewsExceptSubview(nil)
+        questionView.addSubview(setUpQuestionViewWithQuestion(question))
+        
         let optionSet = question.options.allOptions
         
         var optionButtonSet = [option1, option2, option3, option4]
@@ -146,9 +150,31 @@ class QuizViewController: UIViewController {
             i++
         }
         
-        questionView.removeAllSubviewsExceptSubview(nil)
-        questionView.addSubview(setUpQuestionViewWithQuestion(question))
-        self.timerStart()
+        self.roundIndicatorLabel.text = "ROUND \(self.current_q + 1)"
+        
+        
+        UIView.animateWithDuration(1.5, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+            self.roundIndicatorLabel.alpha = 1
+            }, completion: {complete in
+                UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+                    self.roundIndicatorLabel.alpha = 0
+                    }, completion: nil)
+                
+        })
+        
+        UIView.animateWithDuration(1.5, delay: 3.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+            self.questionView.alpha = 1
+            
+            }, completion: nil)
+        
+        UIView.animateWithDuration(1.0, delay: 5.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+            self.buttonSetContentView.alpha = 1
+            }, completion: { completed in
+                if completed {
+                    self.resetRemoveOptionsButton()
+                    self.timerStart()
+                }
+        })
     }
     
     func setUpQuestionViewWithQuestion(question:Question) -> UIView {
@@ -192,10 +218,11 @@ class QuizViewController: UIViewController {
     func resetButtons(){
         for option in [option1, option2, option3, option4] {
             option.backgroundColor = UIColor.whiteColor()
-
+            
             if option.wobbling {
                 option.stopWobble()
             }
+            
             if !option.enabled {
                 option.enable()
             }
@@ -204,7 +231,9 @@ class QuizViewController: UIViewController {
                 option.alpha = 1
             }
         }
-
+    }
+    
+    func resetRemoveOptionsButton() {
         if !removeOptionsButton.enabled {
             removeOptionsButton.enable()
         }
@@ -214,21 +243,20 @@ class QuizViewController: UIViewController {
             removeOptionsButton.alpha = 1
         }
     }
-
     func preventFurtherActions(){
         removeOptionsButton.disable()
         removeOptionsButton.alpha = 0.5
-
+        
         for option in [option1, option2, option3, option4] {
             option.disable()
         }
     }
-
+    
     @IBAction func optionSelected(sender: OptionButton) {
         timerStop()
-
+        
         preventFurtherActions()
-
+        
         currentQuestionCorrect = false
         
         if sender.is_answer {
@@ -287,10 +315,22 @@ class QuizViewController: UIViewController {
     }
     
     func proceedToNextQuestion(){
-        UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
-            let new_q = self.game.questionSet[self.current_q]
-            self.setUpViewWithQuestion(new_q)
-            }, completion:nil)
+        if self.current_q != 0 {
+            UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+                self.buttonSetContentView.alpha = 0
+                }, completion: nil)
+            
+            UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+                self.questionView.alpha = 0
+                
+                }, completion: { c in
+                    self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
+            })
+        } else {
+            self.questionView.alpha = 0
+            self.buttonSetContentView.alpha = 0
+            self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
+        }
         
     }
     
@@ -322,7 +362,7 @@ class QuizViewController: UIViewController {
                 incorrectOptions[1].alpha = 0
                 incorrectOptions[2].alpha = 0
                 self.removeOptionsButton.alpha = 0.5
-                })
+            })
             
             incorrectOptions[1].disable()
             incorrectOptions[2].disable()
@@ -341,7 +381,7 @@ class QuizViewController: UIViewController {
             }
         }
     }
- 
+    
     func endTurn(){
         let currentTurnScore = selfTotalScore
         self.dismissViewControllerAnimated(true, completion: nil)

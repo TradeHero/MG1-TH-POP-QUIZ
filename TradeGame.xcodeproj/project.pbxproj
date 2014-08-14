@@ -37,6 +37,7 @@
 		6D8F0C5B1999F1A200829149 /* GamePortfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C5A1999F1A200829149 /* GamePortfolio.swift */; };
 		6D8F0C5D1999F1BB00829149 /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C5C1999F1BB00829149 /* Turn.swift */; };
 		6DA8689C1991D0A7009FBD99 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA8689B1991D0A7009FBD99 /* Alamofire.swift */; };
+		6DBDA022199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBDA021199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 */; };
 		6DC6DD7C198A2A490096DD73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D20577C19889A7000570042 /* Main.storyboard */; };
 		6DD767F919989BB10071BFC1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD767F819989BB10071BFC1 /* FacebookSDK.framework */; };
 		6DF2E5E1199B35DB009D3C26 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2E5DD199B35DB009D3C26 /* DesignableButton.swift */; };
@@ -107,6 +108,7 @@
 		6D8F0C5A1999F1A200829149 /* GamePortfolio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePortfolio.swift; sourceTree = "<group>"; };
 		6D8F0C5C1999F1BB00829149 /* Turn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
 		6DA8689B1991D0A7009FBD99 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = submodules/Source/Alamofire.swift; sourceTree = "<group>"; };
+		6DBDA021199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electrodoodle - Kevin MacLeod.mp3"; sourceTree = "<group>"; };
 		6DD767F819989BB10071BFC1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6DF2E5DD199B35DB009D3C26 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		6DF2E5DE199B35DB009D3C26 /* DesignableRoundedRectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableRoundedRectangleView.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		6D20577619889A7000570042 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6DBDA020199CAD7700CDD373 /* Sounds */,
 				6D0843921992018700FDD83E /* Constants.swift */,
 				6D2057E81988BCE000570042 /* Extension.swift */,
 				6D0FC246198A34D0004B163C /* TradeGame-Bridging-Header.h */,
@@ -276,6 +279,14 @@
 				6DA8689B1991D0A7009FBD99 /* Alamofire.swift */,
 			);
 			name = External;
+			sourceTree = "<group>";
+		};
+		6DBDA020199CAD7700CDD373 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				6DBDA021199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		6DF2E5DC199B35B7009D3C26 /* Designable */ = {
@@ -387,6 +398,7 @@
 				6D2057E71988BCD200570042 /* QuestionViewWithImage.xib in Resources */,
 				6D2057E51988BCD200570042 /* QuestionViewPlain.xib in Resources */,
 				6D20578019889A7000570042 /* Images.xcassets in Resources */,
+				6DBDA022199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
