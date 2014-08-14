@@ -32,9 +32,14 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
-    
+    override func viewDidAppear(animated: Bool) {
+        fbFlag = 0
+    }
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        
+        if fbFlag != 0 {
+            return
+        }
+        fbFlag++
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Logging in..."
         
