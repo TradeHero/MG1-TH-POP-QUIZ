@@ -285,26 +285,29 @@ class NetworkClient {
     /// Remove completely credentials from system.
     ///
     private func removeCredentials() {
-        for userData in SSKeychain.accountsForService(kTHGameKeychainIdentifierKey) {
-            if let data = userData as? [String: String] {
-                SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: data["acct"])
+        if let accs = SSKeychain.accountsForService(kTHGameKeychainIdentifierKey) {
+            for userData in accs {
+                if let data = userData as? [String: String] {
+                    SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: data["acct"])
+                }
             }
-            
+            self.credentials = nil
         }
-        self.credentials = nil
     }
     
     private func loadCredentials() {
-        let keychainAcc = SSKeychain.accountsForService(kTHGameKeychainIdentifierKey)
-        if keychainAcc.count == 0 {
-            println("No credentials found")
-        }
-        
-        for userData in keychainAcc {
-            if let data = userData as? [String: String] {
-                let secret = SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccKey)
-                self.credentials = secret
+        if let keychainAcc = SSKeychain.accountsForService(kTHGameKeychainIdentifierKey) {
+            if keychainAcc.count == 0 {
+                println("No credentials found")
             }
+            
+            for userData in keychainAcc {
+                if let data = userData as? [String: String] {
+                    let secret = SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccKey)
+                    self.credentials = secret
+                }
+            }
+
         }
     }
 

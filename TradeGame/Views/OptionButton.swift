@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Views
 
 func radians(deg:Double) -> Double {
     return (deg * M_PI)/180.0

@@ -14,7 +14,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var fullNameView: UILabel!
     @IBOutlet weak var rankView: UILabel!
 
-    var progressView: OverlayProgressView!
+//    var progressView: OverlayProgressView!
     
     private var user: THUser {
         didSet{
@@ -60,9 +60,6 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         hud.labelText = "Loading friends..."
         NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friends in
             hud.hide(true)
-//            for friend in friends {
-//                println(friend)
-//            }
             let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("FriendsViewController") as FriendsViewController
             vc.friendsList = friends
             self.navigationController.pushViewController(vc, animated: true)
