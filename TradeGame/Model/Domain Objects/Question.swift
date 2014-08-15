@@ -84,7 +84,7 @@ class Question {
             switch qTypeInt {
             case 1:
                 self.questionType = QuestionType.LogoType
-                self.questionContent = "Which stock symbol do this logo represents?"
+                self.questionContent = "Which stock symbol does this logo represents?"
                 break
             case 2:
                 self.questionType = QuestionType.GraphType
