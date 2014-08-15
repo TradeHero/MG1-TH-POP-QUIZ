@@ -1,5 +1,5 @@
 //
-//  ChallengeViewController.swift
+//  HomeViewController.swift
 //  TradeGame
 //
 //  Created by Ryne Cheow on 8/5/14.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChallengeViewController: UIViewController, UIScrollViewDelegate {
+class HomeViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var avatarView: AvatarRoundedView!
     @IBOutlet weak var fullNameView: UILabel!

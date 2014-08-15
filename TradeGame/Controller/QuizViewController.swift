@@ -75,7 +75,8 @@ class QuizViewController: UIViewController {
         didSet{
             selfScoreLabel.text = String(selfTotalScore)
             let totalScore = 500 * self.game.questionSet.count
-            selfProgressView.setProgress(Float(selfTotalScore)/Float(totalScore), animated: true)
+            let newProgress = Float(selfTotalScore)/Float(totalScore)
+            selfProgressView.setProgress(newProgress, animated: true)
         }
     }
     
@@ -131,7 +132,7 @@ class QuizViewController: UIViewController {
         opponentDisplayNameLabel.text = opponent.displayName
         opponentRankLabel.text = "Novice"
         //        opponentScoreLabel.text = turn.newGame ? "0" : String(turn.opponentScore)
-        opponentScoreLabel.text = "0"
+        opponentScoreLabel.text = "Waiting.."
     }
     
     func setUpViewWithQuestion(question:Question){
@@ -262,7 +263,7 @@ class QuizViewController: UIViewController {
     }
     
     @IBAction func optionSelected(sender: OptionButton) {
-        timerStop()
+        self.timerStop()
         
         preventFurtherActions()
         
@@ -336,20 +337,18 @@ class QuizViewController: UIViewController {
                 self.questionView.alpha = 0
                 
                 }, completion: { c in
-                    self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
+                self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
             })
-
         }
-    
-        
     }
     
     func updateTimer(){
         let time = getTimeElasped()
-        var timeLeft = 10.0 - time
+        var timeLeft = 10.1 - time
         if timeLeft > 0 {
             current_timeLeft = timeLeft
         } else if timeLeft <= 0 {
+            current_timeLeft = 0.0
             timerStop()
             preventFurtherActions()
             AudioServicesPlayAlertSound(0x00000FFF)
