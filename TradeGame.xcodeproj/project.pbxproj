@@ -38,6 +38,10 @@
 		6D8F0C5D1999F1BB00829149 /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C5C1999F1BB00829149 /* Turn.swift */; };
 		6DA8689C1991D0A7009FBD99 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA8689B1991D0A7009FBD99 /* Alamofire.swift */; };
 		6DB39801199DA5350069DDD4 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DB39800199DA5350069DDD4 /* Login.storyboard */; };
+		6DB39807199DC9630069DDD4 /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB39806199DC8E00069DDD4 /* ProximaNova-Regular.ttf */; };
+		6DB39809199DCE6F0069DDD4 /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB39808199DCE6E0069DDD4 /* ProximaNova-Bold.ttf */; };
+		6DB3980C199DCEE50069DDD4 /* ProximaNova-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB3980A199DCEE50069DDD4 /* ProximaNova-Light.ttf */; };
+		6DB3980D199DCEE50069DDD4 /* ProximaNova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB3980B199DCEE50069DDD4 /* ProximaNova-Semibold.ttf */; };
 		6DBDA022199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBDA021199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 */; };
 		6DC6DD7C198A2A490096DD73 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D20577C19889A7000570042 /* Home.storyboard */; };
 		6DD767F919989BB10071BFC1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD767F819989BB10071BFC1 /* FacebookSDK.framework */; };
@@ -110,6 +114,10 @@
 		6D8F0C5C1999F1BB00829149 /* Turn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
 		6DA8689B1991D0A7009FBD99 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = submodules/Source/Alamofire.swift; sourceTree = "<group>"; };
 		6DB39800199DA5350069DDD4 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		6DB39806199DC8E00069DDD4 /* ProximaNova-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.ttf"; sourceTree = "<group>"; };
+		6DB39808199DCE6E0069DDD4 /* ProximaNova-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.ttf"; sourceTree = "<group>"; };
+		6DB3980A199DCEE50069DDD4 /* ProximaNova-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.ttf"; sourceTree = "<group>"; };
+		6DB3980B199DCEE50069DDD4 /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
 		6DBDA021199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electrodoodle - Kevin MacLeod.mp3"; sourceTree = "<group>"; };
 		6DD767F819989BB10071BFC1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6DF2E5DD199B35DB009D3C26 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
@@ -219,6 +227,7 @@
 		6D20577619889A7000570042 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6DB39803199DC17D0069DDD4 /* Fonts */,
 				6DBDA020199CAD7700CDD373 /* Sounds */,
 				6D0843921992018700FDD83E /* Constants.swift */,
 				6D2057E81988BCE000570042 /* Extension.swift */,
@@ -290,6 +299,17 @@
 				6DB39800199DA5350069DDD4 /* Login.storyboard */,
 			);
 			name = Storyboard;
+			sourceTree = "<group>";
+		};
+		6DB39803199DC17D0069DDD4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6DB3980A199DCEE50069DDD4 /* ProximaNova-Light.ttf */,
+				6DB3980B199DCEE50069DDD4 /* ProximaNova-Semibold.ttf */,
+				6DB39806199DC8E00069DDD4 /* ProximaNova-Regular.ttf */,
+				6DB39808199DCE6E0069DDD4 /* ProximaNova-Bold.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		6DBDA020199CAD7700CDD373 /* Sounds */ = {
@@ -404,9 +424,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DB3980C199DCEE50069DDD4 /* ProximaNova-Light.ttf in Resources */,
+				6DB3980D199DCEE50069DDD4 /* ProximaNova-Semibold.ttf in Resources */,
+				6DB39807199DC9630069DDD4 /* ProximaNova-Regular.ttf in Resources */,
 				6DC6DD7C198A2A490096DD73 /* Home.storyboard in Resources */,
 				6D8310BB199B5FD90097564A /* FriendsChallengeCellTableViewCell.xib in Resources */,
 				6DB39801199DA5350069DDD4 /* Login.storyboard in Resources */,
+				6DB39809199DCE6F0069DDD4 /* ProximaNova-Bold.ttf in Resources */,
 				6D2057E71988BCD200570042 /* QuestionViewWithImage.xib in Resources */,
 				6D2057E51988BCD200570042 /* QuestionViewPlain.xib in Resources */,
 				6D20578019889A7000570042 /* Images.xcassets in Resources */,

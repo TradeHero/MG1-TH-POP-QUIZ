@@ -22,7 +22,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
         
-        self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,12 +35,10 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     }
     
     override func viewDidDisappear(animated: Bool) {
-        println("reset flag")
         fbFlag = false
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        println(fbFlag)
         if !fbFlag {
             fbFlag = true
         }else {

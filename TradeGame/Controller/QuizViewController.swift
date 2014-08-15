@@ -94,7 +94,12 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpPlayerDetails()
-        self.proceedToNextQuestion()
+        self.questionView.alpha = 0
+        self.buttonSetContentView.alpha = 0
+        self.roundIndicatorLabel.alpha = 0
+        dispatch_after(1, dispatch_get_main_queue(), {() in
+            self.proceedToNextQuestion()
+        })
 
     }
     
@@ -149,9 +154,13 @@ class QuizViewController: UIViewController {
             }
             i++
         }
-        
-        self.roundIndicatorLabel.text = "ROUND \(self.current_q + 1)"
-        
+        self.roundIndicatorLabel.alpha = 0
+        switch self.current_q {
+        case self.game.questionSet.count - 1:
+            self.roundIndicatorLabel.text = "LAST ROUND"
+        default:
+            self.roundIndicatorLabel.text = "ROUND \(self.current_q + 1)"
+        }
         
         UIView.animateWithDuration(1.5, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
             self.roundIndicatorLabel.alpha = 1
@@ -269,8 +278,7 @@ class QuizViewController: UIViewController {
         }
         
         unmaskContentViewIfNecessary()
-        NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
-        
+        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
     }
     
     func prepareToEndRound() {
@@ -315,7 +323,11 @@ class QuizViewController: UIViewController {
     }
     
     func proceedToNextQuestion(){
-        if self.current_q != 0 {
+        
+        switch(self.current_q){
+        case 0:
+            self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
+        default:
             UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
                 self.buttonSetContentView.alpha = 0
                 }, completion: nil)
@@ -326,11 +338,9 @@ class QuizViewController: UIViewController {
                 }, completion: { c in
                     self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
             })
-        } else {
-            self.questionView.alpha = 0
-            self.buttonSetContentView.alpha = 0
-            self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
+
         }
+    
         
     }
     
@@ -345,7 +355,8 @@ class QuizViewController: UIViewController {
             AudioServicesPlayAlertSound(0x00000FFF)
             revealCorrectAnswer()
             unmaskContentViewIfNecessary()
-            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
+            
         }
     }
     
@@ -395,6 +406,7 @@ class QuizViewController: UIViewController {
                 ()->() in
                 count += 1
                 hud.progress = Float(count)/Float(game.questionSet.count)
+                hud.detailsLabelText = "\(count)/\(game.questionSet.count)"
                 if count == game.questionSet.count {
                     self.game = game
                     completionHandler()

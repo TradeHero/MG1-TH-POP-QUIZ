@@ -10,7 +10,6 @@ import UIKit
 
 @IBDesignable
 class DesignableButton: UIButton {
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
@@ -42,5 +41,4 @@ class DesignableButton: UIButton {
         layer.cornerRadius = cornerRadius
     }
     }
-    
 }

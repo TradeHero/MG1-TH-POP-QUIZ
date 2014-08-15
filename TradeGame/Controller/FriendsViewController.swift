@@ -16,7 +16,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController.navigationBarHidden = false
-        self.navigationItem.title = "FRIENDS"
+        self.navigationItem.title = "Friends"
         self.friendsTableView.delegate = self
         self.friendsTableView.dataSource = self
         self.friendsTableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
@@ -69,7 +69,6 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
 //                println(game)
                 let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
                 hud.mode = MBProgressHUDModeAnnularDeterminate
-                hud.detailsLabelText = "Fetching image..."
                 
                 vc.prepareGame(game, hud:hud) {
                     progress -> () in

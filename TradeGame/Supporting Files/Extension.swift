@@ -289,3 +289,9 @@ extension UIViewController {
     }
     
 }
+
+extension UIFont {
+    func ProximaNovaFont(size:CGFloat) -> UIFont {
+        return UIFont(name: "ProximaNova-Regular", size: size)
+    }
+}

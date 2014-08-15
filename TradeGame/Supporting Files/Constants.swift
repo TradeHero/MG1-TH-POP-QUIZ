@@ -56,5 +56,3 @@ let kTHGameLogoutNotificationKey = "\(kConstantPrefix)GameLogoutNotification"
 
 // MARK:- view identifiers
 let kTHFriendsChallengeCellTableViewCellIdentifier = "\(kConstantPrefix)FriendsChallengeCellTableViewCellIdentifier"
-
-

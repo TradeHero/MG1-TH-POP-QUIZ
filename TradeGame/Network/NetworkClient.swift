@@ -119,7 +119,7 @@ class NetworkClient {
 
             if response?.statusCode == 200 {
                 let responseJSON = content as [String: AnyObject]
-                println(responseJSON)
+//                println(responseJSON)
                 let game = Game(gameDTO: responseJSON)
                 
                 var initiatorID: Int!
@@ -303,7 +303,7 @@ class NetworkClient {
         for userData in keychainAcc {
             if let data = userData as? [String: String] {
                 let secret = SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccKey)
-                self.credentials = secret ?? "none"
+                self.credentials = secret
             }
         }
     }

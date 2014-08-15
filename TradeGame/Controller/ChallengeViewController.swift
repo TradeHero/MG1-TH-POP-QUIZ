@@ -25,7 +25,7 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
-        self.navigationItem.hidesBackButton = true
+        self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0x7AB800))
     }
     
     @IBAction func logoutClicked(sender: AnyObject) {
@@ -60,9 +60,9 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
         hud.labelText = "Loading friends..."
         NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friends in
             hud.hide(true)
-            for friend in friends {
-                println(friend)
-            }
+//            for friend in friends {
+//                println(friend)
+//            }
             let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("FriendsViewController") as FriendsViewController
             vc.friendsList = friends
             self.navigationController.pushViewController(vc, animated: true)
