@@ -21,6 +21,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
         self.fbLoginView.delegate = self
         self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
+        
         self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
     }
 
@@ -56,16 +57,13 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
                 hud.hide(true, afterDelay: 1.5)
             }) {
              user in
-            var strongSelf = weakSelf!
-            if let loginUser = user {
-                hud.hide(true)
-                let vc = strongSelf.storyboard.instantiateViewControllerWithIdentifier("ChallengeViewController") as ChallengeViewController
-                strongSelf.navigationController.pushViewController(vc, animated: true)
-            } else {
-                hud.mode = MBProgressHUDModeText
-                hud.labelText = "Login failed"
-                hud.hide(true, afterDelay: 1.5)
-            }
+                if let loginUser = user {
+                
+                } else {
+                    hud.mode = MBProgressHUDModeText
+                    hud.labelText = "Login failed"
+                    hud.hide(true, afterDelay: 1.5)
+                }
         }
     }
 }

@@ -15,7 +15,12 @@ class NetworkClient {
     /// Singleton network client
     class var sharedClient: NetworkClient {
     struct Singleton {
-        static let instance = NetworkClient()
+        static var onceToken : dispatch_once_t = 0
+        static var instance : NetworkClient!
+    }
+        dispatch_once(&Singleton.onceToken) {
+            Singleton.instance = NetworkClient()
+            Singleton.instance.loadCredentials()
         }
         
         return Singleton.instance
@@ -31,7 +36,7 @@ class NetworkClient {
     }
     
     /// Credential dictionary (FB Token)
-    private var credentials: String!
+    var credentials: String!
     
     /// default JSON encoding
     private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(options: NSJSONWritingOptions.PrettyPrinted)
@@ -83,6 +88,8 @@ class NetworkClient {
                     if let profileDTODict = profileDTOPart as? [String: AnyObject] {
                         var loginUser = THUser(profileDTO: profileDTODict)
                         self.authenticatedUser = loginUser
+                        let userInfo = ["user": loginUser]
+                        NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLoginSuccessfulNotificationKey, object: self, userInfo:userInfo)
                         loginSuccessHandler(loginUser)
                     }
                 }

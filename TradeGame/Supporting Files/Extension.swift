@@ -260,7 +260,11 @@ extension String {
 
 extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard {
-        return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        return UIStoryboard(name: "Home", bundle: nil)
+    }
+    
+    class func loginStoryboard() -> UIStoryboard {
+        return UIStoryboard(name: "Login", bundle: NSBundle.mainBundle())
     }
 }
 

@@ -22,15 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    private var isNotificationRegistered: Bool = false
+    
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
         FBLoginView.self
         FBProfilePictureView.self
-        
         self.bgmPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Electrodoodle - Kevin MacLeod", ofType: "mp3")), error: nil)
         self.bgmPlayer.numberOfLoops = -1
         self.bgmPlayer.play()
-        
+        self.registerLoginNotification()
+//        self.autoLogin()
         return true
     }
 
@@ -44,11 +46,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         self.bgmPlayer.pause()
+        self.unregisterOtherNotification()
     }
 
     func applicationWillEnterForeground(application: UIApplication!) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         self.bgmPlayer.play()
+        self.registerOtherNotification()
     }
 
     func applicationDidBecomeActive(application: UIApplication!) {
@@ -63,7 +67,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var wasHandled:Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
         return wasHandled
     }
-
+    
+    func autoLogin() {
+        let client = NetworkClient.sharedClient
+        if let credential = client.credentials {
+            client.loginUserWithFacebookAuth(credential, errorHandler: {error in
+                }, loginSuccessHandler: {
+                user in
+                
+            })
+        }
+    }
+    
     //MARK: Login/Logout
     
     var loggedIn: Bool {
@@ -79,8 +94,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func loginSuccessful(notification:NSNotification) {
         self.becomeFirstResponder()
+        let obj: AnyObject? = notification.userInfo["user"]
+        if let user = obj as? THUser {
+            var vc: AnyObject! = UIStoryboard.mainStoryboard().instantiateInitialViewController()
+            if let v = vc as? UINavigationController {
+                self.window?.rootViewController = v
+            }
+            if !self.loggedIn {
+                self.loggedIn = true
+            }
+            self.unregisterLoginNotification()
+            self.registerOtherNotification()
+        }
     }
     
-
+    func registerLoginNotification() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loginSuccessful:", name: kTHGameLoginSuccessfulNotificationKey, object: nil)
+    }
+    
+    func unregisterLoginNotification(){
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kTHGameLoginSuccessfulNotificationKey, object: nil)
+    }
+    
+    func registerOtherNotification(){
+        if !self.isNotificationRegistered {
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout:", name: kTHGameLogoutNotificationKey, object: nil)
+            self.isNotificationRegistered = true
+        }
+    }
+    
+    func unregisterOtherNotification(){
+        if self.isNotificationRegistered {
+            NSNotificationCenter.defaultCenter().removeObserver(self, name: kTHGameLogoutNotificationKey, object: nil)
+            self.isNotificationRegistered = false
+        }
+    }
+    
+    func userDidLogout(notification:NSNotification){
+        self.window?.rootViewController = UIStoryboard.loginStoryboard().instantiateInitialViewController() as UIViewController
+        self.unregisterOtherNotification()
+        self.registerLoginNotification()
+        
+        self.loggedIn = false
+    }
 }
 

@@ -1,38 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="acR-aY-Wkq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="14A314h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jzv-90-m6Z">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
     </dependencies>
     <scenes>
-        <!--LoginViewController-->
-        <scene sceneID="1uV-tW-deh">
-            <objects>
-                <viewController storyboardIdentifier="LoginViewController" title="LoginViewController" id="MON-4h-XBH" customClass="LoginViewController" customModule="TradeGame" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="O12-hM-9B9"/>
-                        <viewControllerLayoutGuide type="bottom" id="JjA-sY-Te5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="gax-Az-bPp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syJ-aC-8R7" customClass="FBLoginView">
-                                <rect key="frame" x="44" y="259" width="232" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Login" id="pPq-FD-sqG"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <connections>
-                        <outlet property="fbLoginView" destination="syJ-aC-8R7" id="WXj-9Z-J5m"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fkD-5b-QH6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="178" y="160"/>
-        </scene>
         <!--Challenge View Controller-->
         <scene sceneID="reb-OH-NfV">
             <objects>
@@ -136,6 +107,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="boz-3P-itM"/>
                     <connections>
                         <outlet property="avatarView" destination="hOW-Oh-vVN" id="ctn-4b-AMG"/>
                         <outlet property="fullNameView" destination="Rjv-r9-yGC" id="V4L-dQ-nJj"/>
@@ -144,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKQ-gI-9GF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="573" y="160"/>
+            <point key="canvasLocation" x="1637" y="160"/>
         </scene>
         <!--Friends View Controller-->
         <scene sceneID="3K4-wy-p4V">
@@ -174,7 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKR-c2-2hp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972" y="160"/>
+            <point key="canvasLocation" x="2036" y="160"/>
         </scene>
         <!--Quiz View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -390,28 +362,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-92" y="802"/>
+            <point key="canvasLocation" x="2445" y="160"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="mgT-pF-O5X">
+        <!--THMainNavigationController-->
+        <scene sceneID="Wav-rW-fY2">
             <objects>
-                <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="acR-aY-Wkq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="THMainNavigationController" title="THMainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="jzv-90-m6Z" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DZx-vW-SCm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hhr-Ck-iQd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="OLB-ML-apM">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
                     <connections>
-                        <segue destination="MON-4h-XBH" kind="relationship" relationship="rootViewController" id="dhE-Y9-rvo"/>
+                        <segue destination="mQ1-C7-5Us" kind="relationship" relationship="rootViewController" id="Lx2-Z1-ZuW"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bRb-1m-OZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oVW-Jh-3L9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-271" y="160"/>
+            <point key="canvasLocation" x="1105" y="160"/>
         </scene>
     </scenes>
     <resources>

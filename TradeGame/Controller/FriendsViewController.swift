@@ -67,7 +67,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                 hud.mode = MBProgressHUDModeText
                 hud.detailsLabelText = "Creating game with user.."
 //                println(game)
-                let vc = strongSelf.storyboard.instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
+                let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
                 hud.mode = MBProgressHUDModeAnnularDeterminate
                 hud.detailsLabelText = "Fetching image..."
                 

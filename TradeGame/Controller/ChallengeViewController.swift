@@ -31,33 +31,15 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func logoutClicked(sender: AnyObject) {
         FBSession.activeSession().closeAndClearTokenInformation()
         NetworkClient.sharedClient.logout()
-        self.navigationController.popViewControllerAnimated(true)
+        NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLogoutNotificationKey, object: self, userInfo:nil)
     }
     
     func setupSubviews() {
-//        self.progressView = OverlayProgressView(frame: self.avatarView.bounds)
-//        self.avatarView.addSubview(self.progressView)
-//        self.progressView?.displayOperationWillTriggerAnimation()
-        NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: {
-            (current:Int, expected:Int) -> Void in
-//            let ratio:CGFloat = CGFloat(current)/CGFloat(expected)
-//            if ratio >= 1 {
-//                self.progressView?.displayOperationDidFinishAnimation()
-//                let delay = self.progressView?.stateChangeAnimationDuration
-//                let poptime = dispatch_time(DISPATCH_TIME_NOW, Int64(UInt64(delay!) * NSEC_PER_SEC))
-//                dispatch_after(poptime, dispatch_get_main_queue(), {() -> Void in
-//                    self.progressView?.progress = 0
-//                    self.progressView?.hidden = true
-//                })
-//            } else {
-//                self.progressView?.progress = ratio
-//            }
-            })  {
+        NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: nil)  {
                 (image: UIImage!, error:NSError!) in
                 if image != nil {
                     self.avatarView.image = image
                 }
-                
         }
         self.fullNameView.text = user.displayName
 //        self.rankView.text = 
@@ -81,7 +63,7 @@ class ChallengeViewController: UIViewController, UIScrollViewDelegate {
             for friend in friends {
                 println(friend)
             }
-            let vc = self.storyboard.instantiateViewControllerWithIdentifier("FriendsViewController") as FriendsViewController
+            let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("FriendsViewController") as FriendsViewController
             vc.friendsList = friends
             self.navigationController.pushViewController(vc, animated: true)
             
