@@ -48,20 +48,21 @@ class Question {
     var options: OptionSet!
     
     /// Image content url of the question, can be nil.
-    var questionImageStringName: String!
+    var questionImageURLString: String!
     
     var questionImage: UIImage!
+    
     /// Initialise question with textual content, image content, set of options and type of question.
     ///
     /// :param: content Textual content of the question.
     /// :param: optionSet Set of options of the given question
     /// :param: image Image content of the question, could be a logo or a graph, etc.
     /// :param: type The immediate type of the question
-    init(id:Int, content:String, optionSet:OptionSet, imageName:String?, type:QuestionType) {
+    init(id:Int, content:String, optionSet:OptionSet, imageURL:String?, type:QuestionType) {
         self.questionID = id
         self.questionContent = content
         self.options = optionSet
-        self.questionImageStringName = imageName
+        self.questionImageURLString = imageURL
         self.questionType = type
     }
     
@@ -97,7 +98,7 @@ class Question {
         }
         
         if let q: AnyObject = questionDTO["content"] {
-            self.questionImageStringName = (q as String)
+            self.questionImageURLString = (q as String)
         }
         var option1: Option!
         if let o: AnyObject? = questionDTO["option1"] {
@@ -123,10 +124,8 @@ class Question {
     }
 
     func fetchImage(completionHandler:() -> ()) {
-        if let imgName = self.questionImageStringName {
-            var name = imgName.stringByReplacingOccurrencesOfString(" ", withString: "%20").stringByReplacingOccurrencesOfString("#", withString: "%23")
-            let fqURL = "\(THImagePathHost)\(name)"
-            NetworkClient.fetchImageFromURLString(fqURL, progressHandler: nil, completionHandler: {
+        if let imgName = self.questionImageURLString {
+            NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
                 if image != nil {
                     self.questionImage = image
@@ -145,7 +144,7 @@ extension Question : Printable {
             var d = "{\n"
             d += "ID: \(questionID)\n"
             d += "Content: \(questionContent)\n"
-            var imgurl = questionImageStringName ?? "no image"
+            var imgurl = questionImageURLString ?? "no image"
             d += "Image name: \(imgurl)\n"
             d += "Type: \(questionType.description())\n"
             d += "Options: \(options)"
