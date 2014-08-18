@@ -43,6 +43,7 @@
 		6DB3980C199DCEE50069DDD4 /* ProximaNova-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB3980A199DCEE50069DDD4 /* ProximaNova-Light.ttf */; };
 		6DB3980D199DCEE50069DDD4 /* ProximaNova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DB3980B199DCEE50069DDD4 /* ProximaNova-Semibold.ttf */; };
 		6DBDA022199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBDA021199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 */; };
+		6DC03E2519A1DA1000A6707A /* GPUImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC03E2419A1DA1000A6707A /* GPUImageProcessor.swift */; };
 		6DC6DD7C198A2A490096DD73 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D20577C19889A7000570042 /* Home.storyboard */; };
 		6DD767F919989BB10071BFC1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD767F819989BB10071BFC1 /* FacebookSDK.framework */; };
 		6DF2E5E1199B35DB009D3C26 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2E5DD199B35DB009D3C26 /* DesignableButton.swift */; };
@@ -119,6 +120,7 @@
 		6DB3980A199DCEE50069DDD4 /* ProximaNova-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.ttf"; sourceTree = "<group>"; };
 		6DB3980B199DCEE50069DDD4 /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
 		6DBDA021199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electrodoodle - Kevin MacLeod.mp3"; sourceTree = "<group>"; };
+		6DC03E2419A1DA1000A6707A /* GPUImageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPUImageProcessor.swift; sourceTree = "<group>"; };
 		6DD767F819989BB10071BFC1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6DF2E5DD199B35DB009D3C26 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		6DF2E5DE199B35DB009D3C26 /* DesignableRoundedRectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableRoundedRectangleView.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				6D1FF5C51999F03B003B3912 /* Domain Objects */,
+				6DC03E2419A1DA1000A6707A /* GPUImageProcessor.swift */,
 			);
 			name = Models;
 			path = Model;
@@ -512,6 +515,7 @@
 				6D8F0C551999F14100829149 /* Question.swift in Sources */,
 				6D1FF5C71999F04A003B3912 /* Game.swift in Sources */,
 				6D2DD3011990E2A800B8CBA4 /* HomeViewController.swift in Sources */,
+				6DC03E2519A1DA1000A6707A /* GPUImageProcessor.swift in Sources */,
 				6D2DD2FD1990E16400B8CBA4 /* LoginViewController.swift in Sources */,
 				6D8F0C531999F13600829149 /* Option.swift in Sources */,
 			);

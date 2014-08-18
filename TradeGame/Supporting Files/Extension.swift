@@ -8,17 +8,6 @@
 
 import UIKit
 
-extension Optional {
-    func or(defaultValue: T) -> T {
-        switch(self) {
-        case .None:
-            return defaultValue
-        case .Some(let value):
-            return value
-        }
-    }
-}
-
 extension UIProgressView {
     override public func sizeThatFits(size: CGSize) -> CGSize {
         return CGSizeMake(self.frame.size.width, 10)

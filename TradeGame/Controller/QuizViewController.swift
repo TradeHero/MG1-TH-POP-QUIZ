@@ -197,6 +197,7 @@ class QuizViewController: UIViewController {
                 if let img = question.questionImage {
                     contentView.imageView.presetImage = img
                     contentView.imageView.mosaic(20)
+//                    contentView.imageView.applyFilters()
                 }
             default:
                 if let img = question.questionImage {
