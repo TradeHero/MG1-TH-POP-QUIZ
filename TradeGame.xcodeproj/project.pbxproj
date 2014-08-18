@@ -113,7 +113,7 @@
 		6D8F0C581999F18100829149 /* THUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THUser.swift; sourceTree = "<group>"; };
 		6D8F0C5A1999F1A200829149 /* GamePortfolio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePortfolio.swift; sourceTree = "<group>"; };
 		6D8F0C5C1999F1BB00829149 /* Turn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
-		6DA8689B1991D0A7009FBD99 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = submodules/Source/Alamofire.swift; sourceTree = "<group>"; };
+		6DA8689B1991D0A7009FBD99 /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		6DB39800199DA5350069DDD4 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		6DB39806199DC8E00069DDD4 /* ProximaNova-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.ttf"; sourceTree = "<group>"; };
 		6DB39808199DCE6E0069DDD4 /* ProximaNova-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.ttf"; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 			children = (
 				6DA8689B1991D0A7009FBD99 /* Alamofire.swift */,
 			);
-			name = External;
+			path = External;
 			sourceTree = "<group>";
 		};
 		6DB39802199DA53E0069DDD4 /* Storyboard */ = {

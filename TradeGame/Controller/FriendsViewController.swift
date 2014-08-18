@@ -66,7 +66,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             if let g = game {
                 hud.mode = MBProgressHUDModeText
                 hud.detailsLabelText = "Creating game with user.."
-//                println(game)
+                println(game)
                 let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
                 hud.mode = MBProgressHUDModeAnnularDeterminate
                 

@@ -16,6 +16,7 @@ import UIKit
 /// - TextualType: Questions that presents on a text-based (non-imagerial) form.
 ///
 enum QuestionType : Int {
+    case UnknownType = 0
     case LogoType
     case GraphType
     case TextualType
@@ -28,6 +29,49 @@ enum QuestionType : Int {
             return "Graph type"
         case .TextualType:
             return "Textual type"
+        case .UnknownType:
+            return "Unknown type"
+        }
+    }
+}
+
+enum QuestionCategory : Int {
+    case UnknownCategory = 0
+    case LogoToNameOrTickerCategory
+    case NameToLastPriceCategory
+    case NameToMarketCapCategory
+    case NameToPECategory
+    case NameToADVCategory
+    case LastPriceToNameCategory
+    case MarketCapToNameCategory
+    case PEToNameCategory
+    case ADVToNameCategory
+    case TickerToNameCategory
+    
+    func description() -> String {
+        switch self {
+        case .UnknownCategory:
+            return "Unknown category"
+        case .LogoToNameOrTickerCategory:
+            return "[1] Logo -> Name/Ticker"
+        case .NameToLastPriceCategory:
+            return "[2] Name -> LastPrice"
+        case .NameToMarketCapCategory:
+            return "[3] Name -> Market Cap"
+        case .NameToPECategory:
+            return "[4] Name -> Price-Earnings Ratio"
+        case .NameToADVCategory:
+            return "[5] Name -> Average Daily Volume"
+        case .LastPriceToNameCategory:
+            return "[6] LastPrice -> Name"
+        case .MarketCapToNameCategory:
+            return "[7] Market Cap -> Name"
+        case .PEToNameCategory:
+            return "[8] Price-Earnings Ratio -> Name"
+        case .ADVToNameCategory:
+            return "[9] Average Daily Volume -> Name"
+        case .TickerToNameCategory:
+            return "[10] Ticker -> Name"
         }
     }
 }
@@ -42,9 +86,11 @@ class Question {
     var questionContent:String!
     
     /// Type of question.
-    var questionType: QuestionType = QuestionType.LogoType
+    var questionType: QuestionType = QuestionType.UnknownType
     
-    /// Set of options of this current question instance.
+    var questionCategory: QuestionCategory = QuestionCategory.UnknownCategory
+    
+    /// Set of options of this current question instance
     var options: OptionSet!
     
     /// Image content url of the question, can be nil.
@@ -81,25 +127,59 @@ class Question {
         }
         if let qType: AnyObject = questionDTO["category"] {
             let qTypeInt = (qType as Int)
+            var contentStr:String!
+            if let q: AnyObject = questionDTO["content"] {
+                contentStr = (q as String)
+            }
+
             switch qTypeInt {
             case 1:
                 self.questionType = QuestionType.LogoType
+                self.questionCategory = QuestionCategory.LogoToNameOrTickerCategory
                 self.questionContent = "Which stock symbol does this logo represents?"
-                break
+                self.questionImageURLString = contentStr
             case 2:
-                self.questionType = QuestionType.GraphType
-                self.questionContent = "Graph"
-                break
-            default:
                 self.questionType = QuestionType.TextualType
-                self.questionContent = "Text"
-                break
+                self.questionCategory = QuestionCategory.NameToLastPriceCategory
+                self.questionContent = "Which of the following is the last sale price of \(contentStr)?"
+            case 3:
+                self.questionType = QuestionType.TextualType
+                 self.questionCategory = QuestionCategory.NameToMarketCapCategory
+                self.questionContent = "Which of the following is the market cap of \(contentStr)?"
+            case 4:
+                self.questionType = QuestionType.TextualType
+                self.questionCategory = QuestionCategory.NameToPECategory
+                self.questionContent = "Which of the following is the P/E ratio of \(contentStr)?"
+            case 5:
+                self.questionType = QuestionType.TextualType
+                self.questionCategory = QuestionCategory.NameToADVCategory
+                self.questionContent = "Which of the following is the average daily volume of \(contentStr)?"
+            case 6:
+                self.questionType = QuestionType.TextualType
+                self.questionCategory = QuestionCategory.LastPriceToNameCategory
+                self.questionContent = "Which company has last sale price of \(contentStr)?"
+            case 7:
+                self.questionType = QuestionType.TextualType
+                self.questionCategory = QuestionCategory.MarketCapToNameCategory
+                self.questionContent = "Which company has market cap  of \(contentStr)?"
+            case 8:
+                self.questionType = QuestionType.TextualType
+                self.questionCategory = QuestionCategory.PEToNameCategory
+                self.questionContent = "Which company has P/E ratio of \(contentStr)?"
+            case 9:
+                self.questionType = QuestionType.TextualType
+                self.questionCategory = QuestionCategory.ADVToNameCategory
+                self.questionContent = "Which company has average daily volume of \(contentStr)?"
+            case 10:
+                self.questionType = QuestionType.TextualType
+                self.questionCategory = QuestionCategory.TickerToNameCategory
+                self.questionContent = "Which name corresponds to the ticker symbol \(contentStr)?"
+            default:
+                self.questionType = QuestionType.UnknownType
+                self.questionContent = "~"
             }
         }
         
-        if let q: AnyObject = questionDTO["content"] {
-            self.questionImageURLString = (q as String)
-        }
         var option1: Option!
         if let o: AnyObject? = questionDTO["option1"] {
             option1 = Option(stringContent: (o as String))
@@ -143,10 +223,11 @@ extension Question : Printable {
     var description: String {
             var d = "{\n"
             d += "ID: \(questionID)\n"
-            d += "Content: \(questionContent)\n"
-            var imgurl = questionImageURLString ?? "no image"
-            d += "Image name: \(imgurl)\n"
             d += "Type: \(questionType.description())\n"
+            d += "Category: \(questionCategory.description())\n"
+            d += "Content: \(questionContent)\n"
+            let imgurl = questionImageURLString ?? "no image"
+            d += "Image name: \(imgurl)\n"
             d += "Options: \(options)"
             d += "}\n"
             return d
