@@ -48,21 +48,11 @@ class GPUImageProcessor {
     private var filters: [GPUImageFilter] = []
     
     func imageWithFilterAppliedWithImage(image:UIImage) -> UIImage {
-        let picture = GPUImagePicture(image: image, smoothlyScaleOutput: true)
-        var lastFilter: GPUImageOutput = picture
-        var filter: GPUImageFilter!
-        
-        let scale = UIScreen.mainScreen().scale
-        let processSize = CGSizeMake(image.size.width * scale, image.size.height * scale)
-        
+        var filterableImage = image
         for filter in filters{
-            filter.forceProcessingAtSize(processSize)
-            lastFilter.removeAllTargets()
-            lastFilter.addTarget(filter)
-            lastFilter = filter
+            filterableImage = filter.imageByFilteringImage(filterableImage)
         }
         
-        picture.processImage()
-        return lastFilter.imageFromCurrentFramebuffer()
+        return filterableImage
     }
 }

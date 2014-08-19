@@ -42,10 +42,10 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     
     func bindFriendUser(friendUser:THUserFriend){
         self.friendNameLabel.text = friendUser.name
-//        NetworkClient.fetchImageFromURLString(friendUser.facebookPictureURL, progressHandler: nil, completionHandler: {
-//            image,error in
-//            self.friendAvatarView.image = image
-//        })
+        NetworkClient.fetchImageFromURLString(friendUser.facebookPictureURL, progressHandler: nil, completionHandler: {
+            image,error in
+            self.friendAvatarView.image = image
+        })
         self.friendUserID = friendUser.userID
     }
 }

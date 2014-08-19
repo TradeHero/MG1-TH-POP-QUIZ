@@ -205,13 +205,13 @@ class Question {
 
     func fetchImage(completionHandler:() -> ()) {
         if let imgName = self.questionImageURLString {
-//            NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
-//                image, error in
-//                if image != nil {
-//                    self.questionImage = image
-//                }
-//                completionHandler()
-//            })
+            NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
+                image, error in
+                if image != nil {
+                    self.questionImage = image
+                }
+                completionHandler()
+            })
 
         }else{
             completionHandler()

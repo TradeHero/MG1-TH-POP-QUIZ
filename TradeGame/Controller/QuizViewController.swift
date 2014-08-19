@@ -113,24 +113,24 @@ class QuizViewController: UIViewController {
         let thisPlayer = game.initiatingPlayer!
         let opponent = game.opponentPlayer!
         
-//        NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil, completionHandler: {
-//            image, error in
-//            if image != nil {
-//                self.selfAvatarView.image = image
-//            }
-//        })
+        NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil, completionHandler: {
+            image, error in
+            if image != nil {
+                self.selfAvatarView.image = image
+            }
+        })
         selfDisplayNameLabel.text = thisPlayer.displayName
-        selfRankLabel.text = "Novice"
+//        selfRankLabel.text = "Novice"
         selfTotalScore = 0
         
-//        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil, completionHandler: {
-//            image, error in
-//            if image != nil {
-//                self.opponentAvatarView.image = image
-//            }
-//        })
+        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil, completionHandler: {
+            image, error in
+            if image != nil {
+                self.opponentAvatarView.image = image
+            }
+        })
         opponentDisplayNameLabel.text = opponent.displayName
-        opponentRankLabel.text = "Novice"
+//        opponentRankLabel.text = "Novice"
         //        opponentScoreLabel.text = turn.newGame ? "0" : String(turn.opponentScore)
         opponentScoreLabel.text = "Waiting.."
     }
@@ -196,8 +196,8 @@ class QuizViewController: UIViewController {
             case .LogoType:
                 if let img = question.questionImage {
                     contentView.imageView.presetImage = img
-                    contentView.imageView.mosaic(20)
-//                    contentView.imageView.applyFilters()
+//                    contentView.imageView.mosaic(20)
+                    contentView.imageView.applyFilters()
                 }
             default:
                 if let img = question.questionImage {
