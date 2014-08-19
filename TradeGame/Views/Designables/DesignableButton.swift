@@ -21,6 +21,8 @@ class DesignableButton: UIButton {
     
     override func prepareForInterfaceBuilder() {
         layer.cornerRadius = cornerRadius
+        self.titleLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        self.titleLabel.textAlignment = NSTextAlignment.Center
     }
     
     
@@ -41,4 +43,5 @@ class DesignableButton: UIButton {
         layer.cornerRadius = cornerRadius
     }
     }
+    
 }
