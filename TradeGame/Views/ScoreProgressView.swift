@@ -12,7 +12,7 @@ class ScoreProgressView: DesignableRoundedRectangleView {
     
     var fillColor:UIColor!
     
-    required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         coloredView = UIView(frame: CGRectZero)
         super.init(coder: aDecoder)
         backgroundColor = UIColor.blackColor()

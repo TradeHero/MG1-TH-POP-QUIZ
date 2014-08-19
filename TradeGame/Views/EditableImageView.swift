@@ -20,7 +20,7 @@ class EditableImageView: UIImageView {
     
     var gpuProcessor: GPUImageProcessor = GPUImageProcessor()
     
-    required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.gpuProcessor.swirl = true
         self.gpuProcessor.grayscale = true

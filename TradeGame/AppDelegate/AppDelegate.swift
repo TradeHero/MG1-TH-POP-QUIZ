@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FBLoginView.self
         FBProfilePictureView.self
-        self.bgmPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Electrodoodle - Kevin MacLeod", ofType: "mp3")), error: nil)
+        self.bgmPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Electrodoodle - Kevin MacLeod", ofType: "mp3")!), error: nil)
 //        self.bgmPlayer.numberOfLoops = -1
 //        self.bgmPlayer.play()
         self.registerLoginNotification()
@@ -78,14 +78,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func autoLogin() {
-        let client = NetworkClient.sharedClient
-        if let credential = client.credentials {
-            client.loginUserWithFacebookAuth(credential, errorHandler: {error in
-                }, loginSuccessHandler: {
-                user in
-                
-            })
-        }
+//        let client = NetworkClient.sharedClient
+//        if let credential = client.credentials {
+//            client.loginUserWithFacebookAuth(credential, errorHandler: {error in
+//                }, loginSuccessHandler: {
+//                user in
+//                
+//            })
+//        }
     }
     
     //MARK: Login/Logout
@@ -103,8 +103,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func loginSuccessful(notification:NSNotification) {
         self.becomeFirstResponder()
-        let obj: AnyObject? = notification.userInfo["user"]
-        if let user = obj as? THUser {
+        let obj = notification.userInfo
+        let obj2: AnyObject? = obj!["user"]
+        if let user = obj2 as? THUser {
             var vc: AnyObject! = UIStoryboard.mainStoryboard().instantiateInitialViewController()
             if let v = vc as? UINavigationController {
                 self.window?.rootViewController = v

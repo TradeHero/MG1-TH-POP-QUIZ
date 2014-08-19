@@ -17,7 +17,7 @@ public class QuestionViewPlain: UIView {
         // Initialization code
     }
 
-    public required init(coder aDecoder: NSCoder!){
+    public required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
     }
 }

@@ -18,7 +18,7 @@ class QuestionViewWithImage: UIView {
         setup()
     }
     
-    required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }

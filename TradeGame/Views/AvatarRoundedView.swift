@@ -25,7 +25,7 @@ class AvatarRoundedView: DesignableRoundedView {
         setup()
     }
     
-    required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         avatarImageView = UIImageView(frame: CGRectZero)
         super.init(coder: aDecoder)
         addSubview(avatarImageView)

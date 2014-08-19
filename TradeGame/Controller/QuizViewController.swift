@@ -83,7 +83,7 @@ class QuizViewController: UIViewController {
     private var didRemoveOptions: Bool = false
     
     // MARK:- init
-    required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -113,22 +113,22 @@ class QuizViewController: UIViewController {
         let thisPlayer = game.initiatingPlayer!
         let opponent = game.opponentPlayer!
         
-        NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil, completionHandler: {
-            image, error in
-            if image != nil {
-                self.selfAvatarView.image = image
-            }
-        })
+//        NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil, completionHandler: {
+//            image, error in
+//            if image != nil {
+//                self.selfAvatarView.image = image
+//            }
+//        })
         selfDisplayNameLabel.text = thisPlayer.displayName
         selfRankLabel.text = "Novice"
         selfTotalScore = 0
         
-        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil, completionHandler: {
-            image, error in
-            if image != nil {
-                self.opponentAvatarView.image = image
-            }
-        })
+//        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil, completionHandler: {
+//            image, error in
+//            if image != nil {
+//                self.opponentAvatarView.image = image
+//            }
+//        })
         opponentDisplayNameLabel.text = opponent.displayName
         opponentRankLabel.text = "Novice"
         //        opponentScoreLabel.text = turn.newGame ? "0" : String(turn.opponentScore)

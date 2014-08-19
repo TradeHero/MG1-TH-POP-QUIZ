@@ -42,7 +42,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         cell.delegate = self
         return cell
     }
-   required init(coder aDecoder: NSCoder!) {
+   required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -60,26 +60,26 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         hud.labelText = "Creating challenge..."
         
         weak var weakSelf = self
-        NetworkClient.sharedClient.createChallenge(10, opponentId: userID, completionHandler: {
-        game in
-            var strongSelf = weakSelf!
-            if let g = game {
-                hud.mode = MBProgressHUDModeText
-                hud.detailsLabelText = "Creating game with user.."
-                println(game)
-                let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
-                hud.mode = MBProgressHUDModeAnnularDeterminate
-                
-                vc.prepareGame(game, hud:hud) {
-                    progress -> () in
-                    var strongSelf = weakSelf!
-                    hud.detailsLabelText = "Done fetching image."
-                    hud.hide(true, afterDelay: 1)
-                    strongSelf.presentViewController(vc, animated: true, completion: nil)
-                }
-            }
-            
-        })
+//        NetworkClient.sharedClient.createChallenge(10, opponentId: userID, completionHandler: {
+//        game in
+//            var strongSelf = weakSelf!
+//            if let g = game {
+//                hud.mode = MBProgressHUDModeText
+//                hud.detailsLabelText = "Creating game with user.."
+//                println(game)
+//                let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
+//                hud.mode = MBProgressHUDModeAnnularDeterminate
+//                
+//                vc.prepareGame(game, hud:hud) {
+//                    progress -> () in
+//                    var strongSelf = weakSelf!
+//                    hud.detailsLabelText = "Done fetching image."
+//                    hud.hide(true, afterDelay: 1)
+//                    strongSelf.presentViewController(vc, animated: true, completion: nil)
+//                }
+//            }
+//            
+//        })
         
     }
     

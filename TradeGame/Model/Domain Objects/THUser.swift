@@ -42,6 +42,7 @@ class THUser {
 //            self.fullName = "\(self.firstName) \(self.lastName)"
 //        }
     }
+    init(){}
 }
 
 extension THUser: Printable {
