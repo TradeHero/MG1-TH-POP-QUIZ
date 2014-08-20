@@ -39,12 +39,10 @@ class OptionButton: DesignableButton {
     }
     
     var wobbling: Bool = false
-
+    
     var isShrinked: Bool = false
     
-    var tiltedLeft: Bool = false
-    
-    var tiltedRight: Bool = false
+    var tilted: Bool = false
     
     var tickLogoView = UIImageView(frame: CGRectMake(0, 0, 59, 56))
     
@@ -99,9 +97,6 @@ class OptionButton: DesignableButton {
             }
             
         }
-    }
-    private var tilted: Bool {
-        return tiltedLeft || tiltedRight
     }
     
     func startWobble(){
@@ -158,33 +153,28 @@ class OptionButton: DesignableButton {
     }
     
     func tiltRight(){
-        if !tiltedRight {
-            tiltedRight = true
-            rotate(-5)
+        if !tilted {
+            tilted = true
+            rotate(-3)
+            self.tickLogoView.transform = CGAffineTransformMakeRotation(radians(-3))
         }
     }
     
     func tiltLeft() {
-        if !tiltedLeft {
-            tiltedLeft = true
-            rotate(5)
+        if !tilted {
+            tilted = true
+            rotate(3)
+            self.crossLogoView.transform = CGAffineTransformMakeRotation(radians(3))
         }
     }
     
     func untilt() {
-//        if tilted {
-            if tiltedRight {
-                tiltedRight = false
-                self.transform = CGAffineTransformIdentity
-                self.tickLogoView.transform = CGAffineTransformIdentity
+        if tilted {
+            tilted = false
+            self.transform = CGAffineTransformIdentity
+            self.tickLogoView.transform = CGAffineTransformIdentity
+            self.crossLogoView.transform = CGAffineTransformIdentity
         }
-        
-            if tiltedLeft {
-                tiltedLeft = false
-                self.transform = CGAffineTransformIdentity
-                self.crossLogoView.transform = CGAffineTransformIdentity
-            }
-//    }
     }
     
     func configureAsCorrect(){
@@ -192,8 +182,6 @@ class OptionButton: DesignableButton {
         self.patchTickLogo()
         self.tiltRight()
         self.titleLabel.textColor = UIColor.whiteColor()
-        self.tickLogoView.transform = CGAffineTransformMakeRotation(radians(-2))
-
     }
     
     func configureAsFalse(){
@@ -201,7 +189,7 @@ class OptionButton: DesignableButton {
         self.patchCrossLogo()
         self.tiltLeft()
         self.titleLabel.textColor = UIColor.whiteColor()
-        self.crossLogoView.transform = CGAffineTransformMakeRotation(radians(2))
+        
     }
     
     func patchCrossLogo(){
@@ -232,7 +220,7 @@ class OptionButton: DesignableButton {
         self.tickLogoView.bounds = bounds
         UIView.animateWithDuration(0.2) {
             () in
-                self.tickLogoView.bounds = bounds2
+            self.tickLogoView.bounds = bounds2
         }
     }
     

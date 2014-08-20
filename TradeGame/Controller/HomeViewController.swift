@@ -13,8 +13,6 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var avatarView: AvatarRoundedView!
     @IBOutlet weak var fullNameView: UILabel!
     @IBOutlet weak var rankView: UILabel!
-
-//    var progressView: OverlayProgressView!
     
     private var user: THUser {
         didSet{
@@ -26,6 +24,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         setupSubviews()
         self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0x7AB800))
+        self.navigationController.navigationBar.setBackgroundImage(UIImage(""), forBarMetrics: .Default)
     }
     
     @IBAction func logoutClicked(sender: AnyObject) {

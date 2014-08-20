@@ -1,17 +1,14 @@
 {
   "images" : [
     {
-      "idiom" : "universal"
-    },
-    {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "goog.png"
+      "filename" : "img-profpic.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "goog@2x.png"
+      "filename" : "img-profpic@2x.png"
     }
   ],
   "info" : {

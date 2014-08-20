@@ -40,7 +40,9 @@ class GPUImageProcessor {
                 }
             }
             if swirl {
-                self.filters.append(GPUImageSwirlFilter())
+                var filter = GPUImageSwirlFilter()
+                filter.angle = 0.2
+                self.filters.append(filter)
             }
         }
     }
