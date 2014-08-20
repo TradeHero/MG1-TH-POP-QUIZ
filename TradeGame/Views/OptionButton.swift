@@ -176,13 +176,15 @@ class OptionButton: DesignableButton {
             if tiltedRight {
                 tiltedRight = false
                 self.transform = CGAffineTransformIdentity
-            }
-            
+                self.tickLogoView.transform = CGAffineTransformIdentity
+        }
+        
             if tiltedLeft {
                 tiltedLeft = false
                 self.transform = CGAffineTransformIdentity
+                self.crossLogoView.transform = CGAffineTransformIdentity
             }
-//        }
+//    }
     }
     
     func configureAsCorrect(){
@@ -204,15 +206,33 @@ class OptionButton: DesignableButton {
     
     func patchCrossLogo(){
         self.crossLogoView.frame.origin = getPatchableOrigin()
+        var bounds = self.crossLogoView.bounds
+        var bounds2 = self.crossLogoView.bounds
         if let parent = self.superview {
             parent.addSubview(self.crossLogoView)
+        }
+        bounds.size.width = 0
+        bounds.size.height = 0
+        self.crossLogoView.bounds = bounds
+        UIView.animateWithDuration(0.2) {
+            () in
+            self.crossLogoView.bounds = bounds2
         }
     }
     
     func patchTickLogo(){
         self.tickLogoView.frame.origin = getPatchableOrigin()
+        var bounds = self.tickLogoView.bounds
+        var bounds2 = self.tickLogoView.bounds
         if let parent = self.superview {
             parent.addSubview(self.tickLogoView)
+        }
+        bounds.size.width = 0
+        bounds.size.height = 0
+        self.tickLogoView.bounds = bounds
+        UIView.animateWithDuration(0.2) {
+            () in
+                self.tickLogoView.bounds = bounds2
         }
     }
     

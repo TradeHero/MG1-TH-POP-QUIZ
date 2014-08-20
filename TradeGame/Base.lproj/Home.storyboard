@@ -271,16 +271,6 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" id="yXU-dl-cWF">
-                                        <rect key="frame" x="11" y="69" width="120" height="2"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.0" green="0.83921568629999999" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </progressView>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" id="vmO-Gd-Fjm">
-                                        <rect key="frame" x="195" y="69" width="120" height="2"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.99607843139999996" green="0.3411764706" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </progressView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maggie Grace" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bql-cd-8X9">
                                         <rect key="frame" x="167" y="42" width="100" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -288,6 +278,16 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" id="2UA-DA-IHJ" customClass="LDProgressView">
+                                        <rect key="frame" x="11" y="69" width="120" height="5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="due-eg-8W2" customClass="LDProgressView">
+                                        <rect key="frame" x="195" y="69" width="120" height="5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -412,7 +412,7 @@
                         <outlet property="buttonSetContentView" destination="czn-zq-bPo" id="AaH-8r-HcL"/>
                         <outlet property="opponentAvatarView" destination="nTF-pk-poD" id="xop-Xd-mbj"/>
                         <outlet property="opponentDisplayNameLabel" destination="bql-cd-8X9" id="cBr-vY-jUg"/>
-                        <outlet property="opponentProgressView" destination="vmO-Gd-Fjm" id="OwC-3I-Q0q"/>
+                        <outlet property="opponentProgressView" destination="due-eg-8W2" id="cSk-wJ-3Wn"/>
                         <outlet property="opponentScoreLabel" destination="IE4-aB-MG7" id="1S3-bA-WTb"/>
                         <outlet property="option1" destination="yYq-7e-Iqw" id="Oe3-nG-7JF"/>
                         <outlet property="option2" destination="IlM-fh-HTI" id="na1-db-7Sb"/>
@@ -423,7 +423,7 @@
                         <outlet property="roundIndicatorLabel" destination="dAc-O5-Cpt" id="yDk-Hc-0la"/>
                         <outlet property="selfAvatarView" destination="8oh-2Q-fqM" id="cWn-I9-wdA"/>
                         <outlet property="selfDisplayNameLabel" destination="SE9-gm-Lnm" id="T6O-Ji-cmz"/>
-                        <outlet property="selfProgressView" destination="yXU-dl-cWF" id="ofg-gh-dvy"/>
+                        <outlet property="selfProgressView" destination="2UA-DA-IHJ" id="e81-aY-CXp"/>
                         <outlet property="selfScoreLabel" destination="blL-Cx-x5q" id="6vq-rb-XWI"/>
                         <outlet property="timeLeftLabel" destination="tQI-Y5-pKh" id="V1k-Hj-bmT"/>
                     </connections>

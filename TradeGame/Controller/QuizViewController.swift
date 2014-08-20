@@ -11,7 +11,7 @@ import AudioToolbox
 
 class QuizViewController: UIViewController {
     // MARK:- UI var
-    @IBOutlet weak var option1: OptionButton!
+    @IBOutlet private weak var option1: OptionButton!
     
     @IBOutlet weak var option2: OptionButton!
     
@@ -26,13 +26,18 @@ class QuizViewController: UIViewController {
     @IBOutlet weak var removeOptionsButton: DesignableButton!
     
     @IBOutlet weak var roundIndicatorLabel: UILabel!
-    @IBOutlet weak var selfProgressView: UIProgressView!
+    
+    @IBOutlet weak var selfProgressView: LDProgressView!
+    
     @IBOutlet weak var selfAvatarView: AvatarRoundedView!
+    
     @IBOutlet weak var selfScoreLabel: UILabel!
+    
     @IBOutlet weak var selfDisplayNameLabel: UILabel!
+    
     @IBOutlet weak var selfRankLabel: UILabel!
     
-    @IBOutlet var opponentProgressView: UIProgressView!
+    @IBOutlet var opponentProgressView: LDProgressView!
     
     @IBOutlet weak var opponentAvatarView: AvatarRoundedView!
     
@@ -75,8 +80,8 @@ class QuizViewController: UIViewController {
         didSet{
             selfScoreLabel.text = String(selfTotalScore)
             let totalScore = 500 * self.game.questionSet.count
-            let newProgress = Float(selfTotalScore)/Float(totalScore)
-            selfProgressView.setProgress(newProgress, animated: true)
+            let newProgress = CGFloat(selfTotalScore)/CGFloat(totalScore)
+            selfProgressView.progress = newProgress
         }
     }
     
@@ -94,6 +99,8 @@ class QuizViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupProgressBar(self.selfProgressView)
+        self.setupProgressBar(self.opponentProgressView)
         self.removeOptionsButton.disable()
         self.setUpPlayerDetails()
         self.questionView.alpha = 0
@@ -102,7 +109,14 @@ class QuizViewController: UIViewController {
         dispatch_after(1, dispatch_get_main_queue(), {() in
             self.proceedToNextQuestion()
         })
-
+    }
+    
+    func setupProgressBar(bar:LDProgressView){
+        bar.color = UIColor(hex: 0x75BF34)
+        bar.background = UIColor(hex: 0x4A4A4A)
+        bar.showText = NSNumber(bool: false)
+        bar.progress = 0
+        bar.type = LDProgressSolid
     }
     
     override func didReceiveMemoryWarning() {
@@ -133,7 +147,7 @@ class QuizViewController: UIViewController {
         opponentDisplayNameLabel.text = opponent.displayName
 //        opponentRankLabel.text = "Novice"
         //        opponentScoreLabel.text = turn.newGame ? "0" : String(turn.opponentScore)
-        opponentScoreLabel.text = "Waiting.."
+        opponentScoreLabel.text = "0"
     }
     
     func setUpViewWithQuestion(question:Question){

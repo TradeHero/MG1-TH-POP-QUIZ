@@ -9,3 +9,4 @@
 #import <GPUImage/GPUImageSwirlFilter.h>
 #import <GPUImage/GPUImageGrayscaleFilter.h>
 #import <GPUImage/GPUImagePicture.h>
+#import <LDProgressView/LDProgressView.h>
