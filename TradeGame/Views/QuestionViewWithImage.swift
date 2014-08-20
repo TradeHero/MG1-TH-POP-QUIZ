@@ -25,6 +25,6 @@ class QuestionViewWithImage: UIView {
     }
     
     func setup(){
-        
+        self.logoCanvasView = NSBundle.mainBundle().loadNibNamed("LogoCanvasView", owner: self, options: nil)[0] as LogoCanvasView
     }
 }

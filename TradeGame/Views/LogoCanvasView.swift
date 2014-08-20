@@ -12,18 +12,21 @@ class LogoCanvasView: UIView {
 
     private var rasterizedImage: UIImage!
     
-    @IBOutlet weak var imageView: UIImageView!
+    var imageView: UIImageView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
-        self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        
     }
     
     var gpuProcessor: GPUImageProcessor = GPUImageProcessor()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.imageView = UIImageView(frame: CGRectMake(40, 15, 180, 100))
+        self.addSubview(self.imageView)
+        self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.gpuProcessor.swirl = true
         self.gpuProcessor.grayscale = true
         self.contentMode = UIViewContentMode.ScaleAspectFit
@@ -43,9 +46,11 @@ class LogoCanvasView: UIView {
     
     var presetImage : UIImage! {
         didSet{
-            self.imageView.image = presetImage.transparencyToWhiteMatte()
-            self.rasterizedImage = UIView.rasterizeView(self)
-            self.imageView.image = rasterizedImage
+            if let img = self.presetImage {
+                self.imageView.image = img.transparencyToWhiteMatte()
+                self.rasterizedImage = UIView.rasterizeView(self)
+                self.imageView.image = rasterizedImage
+            }
         }
     }
     
