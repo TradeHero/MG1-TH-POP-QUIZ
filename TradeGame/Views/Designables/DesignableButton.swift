@@ -47,7 +47,7 @@ class DesignableButton: UIButton {
         self.titleLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.titleLabel.textAlignment = NSTextAlignment.Center
         self.titleLabel.adjustsFontSizeToFitWidth = true;
-        self.titleLabel.minimumScaleFactor = 0.5
-        self.titleLabel.numberOfLines = 0
+        self.titleLabel.minimumScaleFactor = 8/self.titleLabel.font.pointSize
+        self.titleLabel.numberOfLines = 3
     }
 }

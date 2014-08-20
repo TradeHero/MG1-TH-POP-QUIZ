@@ -21,20 +21,21 @@ class OptionButton: DesignableButton {
     
     private var defaultSize: CGSize!
     
+    private var defaultCenter: CGPoint!
+    
+    private var defaultFont: UIFont!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
-    }
-    
-    var option:String? = nil {
-    didSet{
-        self.setTitle(option, forState: UIControlState.Normal)    }
     }
     
     var is_answer: Bool = false
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.tickLogoView.image = UIImage(named: "QuizTickIcon")
+        self.crossLogoView.image = UIImage(named: "QuizCrossIcon")
     }
     
     var wobbling: Bool = false
@@ -45,10 +46,60 @@ class OptionButton: DesignableButton {
     
     var tiltedRight: Bool = false
     
-    var tickLogoView = UIImageView(image: UIImage(named: "QuizTickIcon"))
+    var tickLogoView = UIImageView(frame: CGRectMake(0, 0, 59, 56))
     
-    var crossLogoView = UIImageView(image: UIImage(named: "QuizCrossIcon"))
+    var crossLogoView = UIImageView(frame: CGRectMake(0, 0, 51, 51))
     
+    var labelText: String = "" {
+        didSet {
+            func getLongestWordLength(stringArray:[String]) -> Int{
+                var maxLength: Int = 0
+                var length:Int = 0
+                for string in stringArray as [NSString]{
+                    length = string.length
+                    if length > maxLength {
+                        maxLength = length
+                    }
+                }
+                return maxLength
+            }
+            
+            func getNumberOfWordsWithWordCountApproximately(stringArray:[String], count:Int) -> Int{
+                var c: Int = 0
+                for string in stringArray as [NSString]{
+                    let length = string.length
+                    if abs(length - count) < 3 {
+                        ++c
+                    }
+                }
+                return c
+            }
+            self.setTitle(self.labelText, forState: .Normal)
+            let txt = labelText
+            let txtComponents = labelText.componentsSeparatedByString(" ")
+            let wordCount = txtComponents.count
+            
+            let longestWordLength = getLongestWordLength(txtComponents)
+            let longestWordCount = getNumberOfWordsWithWordCountApproximately(txtComponents, longestWordLength)
+            
+            if wordCount > 0 {
+                if longestWordLength > 7 { //chunky
+                    if longestWordCount > 3 { //long
+                        self.titleLabel.lineBreakMode = .ByClipping
+                    } else { // short
+                        self.titleLabel.lineBreakMode = .ByWordWrapping
+                    }
+                } else { // simple
+                    if wordCount > 5 { //long
+                        self.titleLabel.lineBreakMode = .ByClipping
+                    } else { // short
+                        self.titleLabel.lineBreakMode = .ByWordWrapping
+                    }
+                }
+            }
+            
+        }
+    }
     private var tilted: Bool {
         return tiltedLeft || tiltedRight
     }
@@ -76,32 +127,34 @@ class OptionButton: DesignableButton {
     func shrink() {
         if !isShrinked {
             isShrinked = true
-            var frame = self.frame
+            var rect = self.bounds
+            var center = self.center
             self.defaultSize = self.frame.size
-            frame.size.width = frame.size.width * 0.8
-            frame.size.height = frame.size.height * 0.8
-            self.frame = frame
+            self.defaultCenter = self.center
+            self.defaultFont = self.titleLabel.font
+            
+            self.titleLabel.font = self.defaultFont.fontWithSize(14)
+            rect.size.width = self.frame.size.width * 0.8
+            rect.size.height = self.frame.size.height * 0.8
+            
+            UIView.animateWithDuration(0.1, animations: {
+                () in
+                self.bounds = rect
+            })
         }
     }
     
     func unshrink() {
         if isShrinked{
             isShrinked = false
-            if defaultSize == nil {
-                let scale:CGFloat = 1.0/0.8
-                var frame = self.frame
-                frame.size.width = frame.size.width * scale
-                frame.size.height = frame.size.height * scale
-                self.frame = frame
-            } else {
-                self.frame.size = self.defaultSize
-            }
-
+            self.bounds.size = self.defaultSize
+            self.center = self.defaultCenter
+            self.titleLabel.font = self.defaultFont
         }
     }
     
     func rotate(deg:CGFloat){
-        self.transform = CGAffineTransformMakeRotation(radians(deg))
+        self.transform = CGAffineTransformRotate(CGAffineTransformIdentity,radians(deg))
     }
     
     func tiltRight(){
@@ -119,24 +172,25 @@ class OptionButton: DesignableButton {
     }
     
     func untilt() {
-        if tilted {
+//        if tilted {
             if tiltedRight {
                 tiltedRight = false
-                rotate(5)
+                self.transform = CGAffineTransformIdentity
             }
             
             if tiltedLeft {
                 tiltedLeft = false
-                rotate(-5)
+                self.transform = CGAffineTransformIdentity
             }
-        }
+//        }
     }
     
     func configureAsCorrect(){
         self.backgroundColor = UIColor(patternImage: UIImage(named: "CorrectAnswerBackground"))
         self.patchTickLogo()
         self.tiltRight()
-        self.tickLogoView.transform = CGAffineTransformMakeRotation(radians(-5))
+        self.titleLabel.textColor = UIColor.whiteColor()
+        self.tickLogoView.transform = CGAffineTransformMakeRotation(radians(-2))
 
     }
     
@@ -145,26 +199,26 @@ class OptionButton: DesignableButton {
         self.patchCrossLogo()
         self.tiltLeft()
         self.titleLabel.textColor = UIColor.whiteColor()
-        self.crossLogoView.transform = CGAffineTransformMakeRotation(radians(5))
+        self.crossLogoView.transform = CGAffineTransformMakeRotation(radians(2))
     }
     
-    func patchTickLogo(){
-        self.crossLogoView.bounds.origin = getPatchableOrigin()
+    func patchCrossLogo(){
+        self.crossLogoView.frame.origin = getPatchableOrigin()
         if let parent = self.superview {
             parent.addSubview(self.crossLogoView)
         }
     }
     
-    func patchCrossLogo(){
-        self.tickLogoView.bounds.origin = getPatchableOrigin()
+    func patchTickLogo(){
+        self.tickLogoView.frame.origin = getPatchableOrigin()
         if let parent = self.superview {
             parent.addSubview(self.tickLogoView)
         }
     }
     
     func getPatchableOrigin() -> CGPoint {
-        var xOffset = self.bounds.origin.x * 4 / 3
-        var yOffset = self.bounds.origin.y * 8 / 5
+        var xOffset = self.frame.origin.x + self.frame.size.width * 2 / 3
+        var yOffset = self.frame.origin.y + self.frame.size.height * 3 / 5
         return CGPointMake(xOffset, yOffset)
     }
     
@@ -174,8 +228,9 @@ class OptionButton: DesignableButton {
         self.backgroundColor = defaultBackgroundColour
         self.titleLabel.textColor = defaultFontColor
         self.untilt()
-        self.showAndEnable(false)
         self.stopWobble()
+        self.showAndEnable(false)
+        self.disable()
     }
     
     func unpatchAllLogo() {
@@ -216,4 +271,6 @@ class OptionButton: DesignableButton {
             self.enable()
         }
     }
+    
+    
 }

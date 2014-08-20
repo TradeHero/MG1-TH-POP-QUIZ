@@ -224,6 +224,9 @@ class NetworkClient {
         }
         var fetchedImage: UIImage!
         SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: urlString), options: SDWebImageOptions.CacheMemoryOnly, progress: progressHandler) {  (image: UIImage!, error: NSError!, _, finished:Bool, _) -> Void in
+            if error != nil {
+                println(error)
+            }
             completionHandler(image, error)
         }
     }

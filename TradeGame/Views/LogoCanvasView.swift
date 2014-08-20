@@ -24,7 +24,7 @@ class LogoCanvasView: UIView {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.imageView = UIImageView(frame: CGRectMake(40, 15, 180, 100))
+        self.imageView = UIImageView(frame: CGRectMake(10, 10, 240, 110))
         self.addSubview(self.imageView)
         self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
         self.gpuProcessor.swirl = true

@@ -47,6 +47,7 @@ enum QuestionCategory : Int {
     case PEToNameCategory
     case ADVToNameCategory
     case TickerToNameCategory
+    case NameToExchangeCategory
     
     func description() -> String {
         switch self {
@@ -72,6 +73,8 @@ enum QuestionCategory : Int {
             return "[9] Average Daily Volume -> Name"
         case .TickerToNameCategory:
             return "[10] Ticker -> Name"
+        case .NameToExchangeCategory:
+            return "[11] Name -> Exchange"
         }
     }
 }
@@ -134,49 +137,53 @@ class Question {
 
             switch qTypeInt {
             case 1:
-                self.questionType = QuestionType.LogoType
-                self.questionCategory = QuestionCategory.LogoToNameOrTickerCategory
+                self.questionType = .LogoType
+                self.questionCategory = .LogoToNameOrTickerCategory
                 self.questionContent = "Which stock symbol does this logo represents?"
                 self.questionImageURLString = contentStr
             case 2:
-                self.questionType = QuestionType.TextualType
-                self.questionCategory = QuestionCategory.NameToLastPriceCategory
+                self.questionType = .TextualType
+                self.questionCategory = .NameToLastPriceCategory
                 self.questionContent = "Which of the following is the last sale price of \(contentStr)?"
             case 3:
-                self.questionType = QuestionType.TextualType
-                 self.questionCategory = QuestionCategory.NameToMarketCapCategory
+                self.questionType = .TextualType
+                 self.questionCategory = .NameToMarketCapCategory
                 self.questionContent = "Which of the following is the market cap of \(contentStr)?"
             case 4:
-                self.questionType = QuestionType.TextualType
-                self.questionCategory = QuestionCategory.NameToPECategory
+                self.questionType = .TextualType
+                self.questionCategory = .NameToPECategory
                 self.questionContent = "Which of the following is the P/E ratio of \(contentStr)?"
             case 5:
-                self.questionType = QuestionType.TextualType
-                self.questionCategory = QuestionCategory.NameToADVCategory
+                self.questionType = .TextualType
+                self.questionCategory = .NameToADVCategory
                 self.questionContent = "Which of the following is the average daily volume of \(contentStr)?"
             case 6:
-                self.questionType = QuestionType.TextualType
-                self.questionCategory = QuestionCategory.LastPriceToNameCategory
+                self.questionType = .TextualType
+                self.questionCategory = .LastPriceToNameCategory
                 self.questionContent = "Which company has last sale price of \(contentStr)?"
             case 7:
-                self.questionType = QuestionType.TextualType
-                self.questionCategory = QuestionCategory.MarketCapToNameCategory
+                self.questionType = .TextualType
+                self.questionCategory = .MarketCapToNameCategory
                 self.questionContent = "Which company has market cap  of \(contentStr)?"
             case 8:
-                self.questionType = QuestionType.TextualType
-                self.questionCategory = QuestionCategory.PEToNameCategory
+                self.questionType = .TextualType
+                self.questionCategory = .PEToNameCategory
                 self.questionContent = "Which company has P/E ratio of \(contentStr)?"
             case 9:
-                self.questionType = QuestionType.TextualType
-                self.questionCategory = QuestionCategory.ADVToNameCategory
+                self.questionType = .TextualType
+                self.questionCategory = .ADVToNameCategory
                 self.questionContent = "Which company has average daily volume of \(contentStr)?"
             case 10:
-                self.questionType = QuestionType.TextualType
-                self.questionCategory = QuestionCategory.TickerToNameCategory
+                self.questionType = .TextualType
+                self.questionCategory = .TickerToNameCategory
                 self.questionContent = "Which name corresponds to the ticker symbol \(contentStr)?"
+            case 11:
+                self.questionType = .TextualType
+                self.questionCategory = .NameToExchangeCategory
+                self.questionContent = "Which exchange corresponds to the name \(contentStr)?"
             default:
                 self.questionType = QuestionType.UnknownType
-                self.questionContent = "~"
+                self.questionContent = "~ \(contentStr) ~"
             }
         }
         
