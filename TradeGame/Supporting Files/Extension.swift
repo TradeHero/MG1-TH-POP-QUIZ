@@ -87,13 +87,15 @@ extension UIColor {
     }
 }
 extension UIView {
-    func removeAllSubviewsExceptSubview(subview:UIView?){
-        for view in self.subviews as [UIView]{
-            if let sv = subview {
-                if view !== sv {
-                    view.removeFromSuperview()
-                }
-            }
+    func removeAllSubviews(){
+        for view in (self.subviews as [UIView]){
+            view.removeFromSuperview()
+        }
+    }
+
+    func listAllSubviews() {
+        for view in (self.subviews as [UIView]){
+            println("\(object_getClassName(view))")
         }
     }
     

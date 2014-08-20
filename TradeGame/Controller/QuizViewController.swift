@@ -138,7 +138,7 @@ class QuizViewController: UIViewController {
     func setUpViewWithQuestion(question:Question){
         self.resetButtons()
         didRemoveOptions = false
-        questionView.removeAllSubviewsExceptSubview(nil)
+        questionView.removeAllSubviews()
         questionView.addSubview(setUpQuestionViewWithQuestion(question))
         
         let optionSet = question.options.allOptions
@@ -195,13 +195,13 @@ class QuizViewController: UIViewController {
             switch question.questionType {
             case .LogoType:
                 if let img = question.questionImage {
-                    contentView.imageView.presetImage = img
+                    contentView.logoCanvasView.presetImage = img
 //                    contentView.imageView.mosaic(20)
-                    contentView.imageView.applyFilters()
+                    contentView.logoCanvasView.applyFilters()
                 }
             default:
                 if let img = question.questionImage {
-                    contentView.imageView.presetImage = img
+                    contentView.logoCanvasView.presetImage = img
                 }
             }
             return contentView
@@ -218,7 +218,7 @@ class QuizViewController: UIViewController {
         case .LogoType:
             for view in questionView.subviews {
                 if let logoView = view as? QuestionViewWithImage {
-                    logoView.imageView.reset()
+                    logoView.logoCanvasView.reset()
                 }
             }
         default:
@@ -228,19 +228,7 @@ class QuizViewController: UIViewController {
     
     func resetButtons(){
         for option in [option1, option2, option3, option4] {
-            option.backgroundColor = UIColor.whiteColor()
-            
-            if option.wobbling {
-                option.stopWobble()
-            }
-            
-            if !option.enabled {
-                option.enable()
-            }
-            
-            if option.alpha == 0 {
-                option.alpha = 1
-            }
+            option.resetButton()
         }
     }
     
@@ -270,11 +258,15 @@ class QuizViewController: UIViewController {
         
         currentQuestionCorrect = false
         
+        let dummyButtons = [option1, option2, option3, option4].filter({$0 != sender})
+        for button in dummyButtons {
+            button.shrink()
+        }
         if sender.is_answer {
-            sender.backgroundColor = UIColor(hex: 0x4cd964)
+            sender.configureAsCorrect()
             currentQuestionCorrect = true
         } else {
-            sender.backgroundColor = UIColor(hex:0xFF6A6E)
+            sender.configureAsFalse()
             revealCorrectAnswer()
             AudioServicesPlayAlertSound(0x00000FFF)
         }
@@ -369,14 +361,13 @@ class QuizViewController: UIViewController {
                 }
             }
             incorrectOptions.shuffle()
-            UIView.animateWithDuration(0.5, animations: {()->Void in
-                incorrectOptions[1].alpha = 0
-                incorrectOptions[2].alpha = 0
+            incorrectOptions[0].hideAndDisable(true)
+            incorrectOptions[1].hideAndDisable(true)
+            UIView.animateWithDuration(0.5) {
+                () -> Void in
                 self.removeOptionsButton.alpha = 0.5
-            })
-            
-            incorrectOptions[1].disable()
-            incorrectOptions[2].disable()
+            }
+
             removeOptionsButton.disable()
         }
         didRemoveOptions = true
@@ -385,10 +376,11 @@ class QuizViewController: UIViewController {
     func revealCorrectAnswer() {
         for option in [option1, option2, option3, option4] {
             if option.is_answer {
-                option.backgroundColor = UIColor(hex: 0x4cd964)
-                option.startWobble()
-                option.borderColor = UIColor.blackColor()
-                option.borderWidth = 1.0
+                option.backgroundColor = UIColor(patternImage: UIImage(named: "CorrectAnswerBackground"))
+                option.tiltRight()
+//                option.startWobble()
+//                option.borderColor = UIColor.blackColor()
+//                option.borderWidth = 1.0
             }
         }
     }

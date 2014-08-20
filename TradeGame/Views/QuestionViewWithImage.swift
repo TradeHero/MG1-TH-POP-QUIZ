@@ -11,7 +11,8 @@ import UIKit
 class QuestionViewWithImage: UIView {
     
     @IBOutlet weak var questionContent: UILabel!
-    @IBOutlet weak var imageView: EditableImageView!
+    
+    @IBOutlet weak var logoCanvasView: LogoCanvasView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

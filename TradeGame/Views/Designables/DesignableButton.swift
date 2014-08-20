@@ -15,14 +15,13 @@ class DesignableButton: UIButton {
         // Initialization code
     }
     
-  required init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setup()
     }
     
     override func prepareForInterfaceBuilder() {
-        layer.cornerRadius = cornerRadius
-        self.titleLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        self.titleLabel.textAlignment = NSTextAlignment.Center
+        setup()
     }
     
     
@@ -44,4 +43,11 @@ class DesignableButton: UIButton {
     }
     }
     
+    func setup(){
+        self.titleLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        self.titleLabel.textAlignment = NSTextAlignment.Center
+        self.titleLabel.adjustsFontSizeToFitWidth = true;
+        self.titleLabel.minimumScaleFactor = 0.5
+        self.titleLabel.numberOfLines = 0
+    }
 }

@@ -95,7 +95,7 @@ class NetworkClient {
                 }
             })
         
-        debugPrintln(r)
+//        debugPrintln(r)
     }
 
     
