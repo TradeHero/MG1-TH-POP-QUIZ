@@ -8,5 +8,6 @@ pod 'SSKeychain', '~> 1.2.2'
 pod 'MBProgressHUD', '~> 0.9'
 pod 'GPUImage', '~> 0.1.5'
 pod 'LDProgressView', '~> 1.2.1'
+pod 'TMCache', '~> 1.2.1'
 
 xcodeproj 'TradeGame.xcodeproj'
