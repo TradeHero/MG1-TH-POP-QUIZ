@@ -14,7 +14,7 @@ enum Mode: Int {
 }
 
 
-let mode = Mode.Prod
+let kTHGamesServerMode = Mode.Dev
 
 let kConstantPrefix = "TH"
 
@@ -30,7 +30,7 @@ let THProdAPIBaseURL = "\(kConnectionHTTPS)\(THProdAPIHost)\(THAPIPath)"
 let THDevAPIHost = "th-paas-test-dev1.cloudapp.net"
 let THDevAPIBaseURL = "\(kConnectionHTTP)\(THDevAPIHost)\(THAPIPath)"
 
-let THServerAPIBaseURL = mode == Mode.Dev ? "\(THDevAPIBaseURL)" : "\(THProdAPIBaseURL)"
+let THServerAPIBaseURL = kTHGamesServerMode == Mode.Dev ? "\(THDevAPIBaseURL)" : "\(THProdAPIBaseURL)"
 
 let THGameAPIBaseURL = "\(THServerAPIBaseURL)/games"
 

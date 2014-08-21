@@ -25,9 +25,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         setupSubviews()
         self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
         self.navigationItem.title = "Home"
-//        self.navigationController.navigationBar.setBackgroundImage(UIImage(named: "NavigationBarBackground"), forBarMetrics: UIBarMetrics.Default)
-//        self.navigationController.navigationBar.bounds = CGRectMake(0, 0, 320, 37)
-        self.navigationController.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext", size: 21), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
     }
     
     @IBAction func logoutClicked(sender: AnyObject) {
@@ -60,10 +58,12 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     @IBAction func loadFriends(sender: AnyObject) {
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Loading friends..."
+        
+        
         NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friends in
             hud.hide(true)
             let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("FriendsViewController") as FriendsViewController
-            vc.friendsList = friends
+            vc.bindFriendList(friends)
             self.navigationController.pushViewController(vc, animated: true)
             
         })

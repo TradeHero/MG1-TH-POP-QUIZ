@@ -31,6 +31,8 @@
 		6D8310B7199B5DBA0097564A /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8310B6199B5DBA0097564A /* FriendsViewController.swift */; };
 		6D8310BA199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8310B8199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift */; };
 		6D8310BB199B5FD90097564A /* FriendsChallengeCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D8310B9199B5FD90097564A /* FriendsChallengeCellTableViewCell.xib */; };
+		6D8E31C019A5B3C300EA4034 /* SearchBarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8E31BF19A5B3C300EA4034 /* SearchBarHeaderView.swift */; };
+		6D8E31C219A5B3D500EA4034 /* SearchBarHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E31C119A5B3D500EA4034 /* SearchBarHeaderView.xib */; };
 		6D8F0C531999F13600829149 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C521999F13600829149 /* Option.swift */; };
 		6D8F0C551999F14100829149 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C541999F14100829149 /* Question.swift */; };
 		6D8F0C571999F15E00829149 /* OptionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F0C561999F15E00829149 /* OptionSet.swift */; };
@@ -110,6 +112,8 @@
 		6D8310B6199B5DBA0097564A /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		6D8310B8199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsChallengeCellTableViewCell.swift; sourceTree = "<group>"; };
 		6D8310B9199B5FD90097564A /* FriendsChallengeCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsChallengeCellTableViewCell.xib; sourceTree = "<group>"; };
+		6D8E31BF19A5B3C300EA4034 /* SearchBarHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarHeaderView.swift; sourceTree = "<group>"; };
+		6D8E31C119A5B3D500EA4034 /* SearchBarHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarHeaderView.xib; sourceTree = "<group>"; };
 		6D8F0C521999F13600829149 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		6D8F0C541999F14100829149 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		6D8F0C561999F15E00829149 /* OptionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSet.swift; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 				6D2057E21988BCD200570042 /* QuestionViewWithImage.swift */,
 				6D2057E31988BCD200570042 /* QuestionViewWithImage.xib */,
 				6D6913E8198F4C1D00B8AFF1 /* ScoreProgressView.swift */,
+				6D8E31BF19A5B3C300EA4034 /* SearchBarHeaderView.swift */,
+				6D8E31C119A5B3D500EA4034 /* SearchBarHeaderView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -434,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DB3980C199DCEE50069DDD4 /* ProximaNova-Light.ttf in Resources */,
+				6D8E31C219A5B3D500EA4034 /* SearchBarHeaderView.xib in Resources */,
 				6DB3980D199DCEE50069DDD4 /* ProximaNova-Semibold.ttf in Resources */,
 				6DB39807199DC9630069DDD4 /* ProximaNova-Regular.ttf in Resources */,
 				6DC6DD7C198A2A490096DD73 /* Home.storyboard in Resources */,
@@ -498,6 +505,7 @@
 				6DF2E5E3199B35DB009D3C26 /* DesignableRoundedView.swift in Sources */,
 				6D8310BA199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift in Sources */,
 				6D8F0C5D1999F1BB00829149 /* Turn.swift in Sources */,
+				6D8E31C019A5B3C300EA4034 /* SearchBarHeaderView.swift in Sources */,
 				6D2057E61988BCD200570042 /* QuestionViewWithImage.swift in Sources */,
 				6D8310B7199B5DBA0097564A /* FriendsViewController.swift in Sources */,
 				6D20577B19889A7000570042 /* QuizViewController.swift in Sources */,

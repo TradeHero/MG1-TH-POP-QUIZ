@@ -28,6 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FBLoginView.self
         FBProfilePictureView.self
+        switch kTHGamesServerMode {
+        case .Dev:
+            println("Current build points to Staging Server.\n")
+        case .Prod:
+            println("Current build points to Production Server.\n")
+        }
         self.bgmPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Electrodoodle - Kevin MacLeod", ofType: "mp3")!), error: nil)
 //        self.bgmPlayer.numberOfLoops = -1
 //        self.bgmPlayer.play()

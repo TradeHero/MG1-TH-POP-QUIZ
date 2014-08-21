@@ -94,11 +94,11 @@
                     <navigationItem key="navigationItem" id="boz-3P-itM">
                         <barButtonItem key="leftBarButtonItem" style="done" id="zfQ-1Z-28w">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MDS-3r-QEE" customClass="DesignableButton" customModule="TradeGame">
-                                <rect key="frame" x="16" y="10" width="58" height="24"/>
+                                <rect key="frame" x="16" y="7" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
-                                <state key="normal" title="Logout">
+                                <state key="normal" backgroundImage="LogoutIcon">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -111,6 +111,9 @@
                                     <action selector="logoutClicked:" destination="mQ1-C7-5Us" eventType="touchUpInside" id="x8l-qw-Gzx"/>
                                 </connections>
                             </button>
+                            <connections>
+                                <action selector="logoutClicked:" destination="mQ1-C7-5Us" id="V3t-Js-DAL"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="88y-cA-JYA">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7oK-7S-SeK">
@@ -138,17 +141,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="12" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xqb-KH-0jp">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HomeSceneBackground" id="Nde-2n-PtG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="sectionIndexBackgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="12" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="xqb-KH-0jp">
+                                <rect key="frame" x="16" y="54" width="286" height="514"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="FhT-A5-Zjj"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="friendsTableView" destination="xqb-KH-0jp" id="Hg1-Lb-MBk"/>
@@ -417,6 +422,7 @@
         <image name="EmptyAvatar" width="447" height="447"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
+        <image name="LogoutIcon" width="58" height="58"/>
         <image name="ProfileHeaderBackground" width="640" height="191"/>
         <image name="QuizHeaderBackground" width="320" height="85"/>
         <image name="QuizTimerBackground" width="55" height="35"/>

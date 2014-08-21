@@ -163,7 +163,7 @@ class NetworkClient {
     func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: ([THUserFriend] ->())!){
         configureCompulsoryHeaders()
         
-        AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)/GetFriends?perPage=50", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
+        AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)/GetFriends?perPage=200", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             if let responseError = error {
                 println(responseError)

@@ -10,7 +10,7 @@ import UIKit
 
 class FriendsChallengeCellTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var friendAvatarView: AvatarRoundedView!
+    @IBOutlet weak var friendAvatarView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
     
     var friendUserID: Int!
@@ -19,6 +19,11 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.friendAvatarView.layer.borderWidth = 2
+        self.friendAvatarView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.friendAvatarView.clipsToBounds = true
+        self.layer.cornerRadius = 3
+        self.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -36,7 +41,7 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.friendAvatarView.image = nil
+        self.friendAvatarView.image = UIImage(named: "EmptyAvatar")
         self.friendNameLabel.text = nil
     }
     
@@ -47,6 +52,19 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
             self.friendAvatarView.image = image
         })
         self.friendUserID = friendUser.userID
+    }
+    
+    override var frame: CGRect {
+        get {
+            return super.frame
+        }
+        
+        set(fr) {
+            var frame = fr
+            frame.origin.y += 3
+            frame.size.height -=  5;
+            super.frame = frame
+        }
     }
 }
 
