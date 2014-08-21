@@ -46,6 +46,7 @@
 		6DBDA022199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DBDA021199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 */; };
 		6DC03E2519A1DA1000A6707A /* GPUImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC03E2419A1DA1000A6707A /* GPUImageProcessor.swift */; };
 		6DC6DD7C198A2A490096DD73 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D20577C19889A7000570042 /* Home.storyboard */; };
+		6DC9F52319A59B390046888F /* SleekNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC9F52219A59B390046888F /* SleekNavigationBar.swift */; };
 		6DD767F919989BB10071BFC1 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD767F819989BB10071BFC1 /* FacebookSDK.framework */; };
 		6DF2E5E1199B35DB009D3C26 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2E5DD199B35DB009D3C26 /* DesignableButton.swift */; };
 		6DF2E5E2199B35DB009D3C26 /* DesignableRoundedRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2E5DE199B35DB009D3C26 /* DesignableRoundedRectangleView.swift */; };
@@ -123,6 +124,7 @@
 		6DB3980B199DCEE50069DDD4 /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
 		6DBDA021199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electrodoodle - Kevin MacLeod.mp3"; sourceTree = "<group>"; };
 		6DC03E2419A1DA1000A6707A /* GPUImageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPUImageProcessor.swift; sourceTree = "<group>"; };
+		6DC9F52219A59B390046888F /* SleekNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleekNavigationBar.swift; sourceTree = "<group>"; };
 		6DD767F819989BB10071BFC1 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6DF2E5DD199B35DB009D3C26 /* DesignableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		6DF2E5DE199B35DB009D3C26 /* DesignableRoundedRectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableRoundedRectangleView.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				6D20577819889A7000570042 /* AppDelegate.swift */,
+				6DC9F52219A59B390046888F /* SleekNavigationBar.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				6D04AF2F19A44CDA00567C85 /* LogoCanvasView.swift in Sources */,
 				6D2057E91988BCE000570042 /* Extension.swift in Sources */,
 				6D286D4A1989F07500D179F8 /* ResultViewController.swift in Sources */,
+				6DC9F52319A59B390046888F /* SleekNavigationBar.swift in Sources */,
 				6DF7231B199332E700123D0D /* NetworkClient.swift in Sources */,
 				6D0843931992018700FDD83E /* Constants.swift in Sources */,
 				6DF2E5E4199B35DB009D3C26 /* OverlayProgressView.swift in Sources */,
