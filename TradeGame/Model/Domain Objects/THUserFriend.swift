@@ -20,8 +20,12 @@ final class THUserFriend: NSObject, NSCoding {
     var facebookPictureURL: String!
     var name: String!
     var userID: Int! = 0
-    var alreadyInvited: Bool! = false
+    var alreadyInvited: Bool = false
     
+    lazy var isTHUser: Bool = {
+        return self.userID != 0
+    }()
+
     init(friendDTO:[String: AnyObject]) {
         self.facebookID = 0
         if let fbID: AnyObject = friendDTO["fbId"] {
@@ -62,9 +66,8 @@ final class THUserFriend: NSObject, NSCoding {
             aCoder.encodeInteger(uID, forKey: kUserIdKey)
         }
 
-        if let invited = alreadyInvited {
-            aCoder.encodeBool(invited, forKey: kAlreadyInvitedKey)
-        }
+        aCoder.encodeBool(alreadyInvited, forKey: kAlreadyInvitedKey)
+        
     }
 
     init(coder aDecoder: NSCoder) {

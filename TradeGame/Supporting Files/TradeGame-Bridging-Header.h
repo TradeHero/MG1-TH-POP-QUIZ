@@ -12,3 +12,4 @@
 #import <GPUImage/GPUImagePicture.h>
 #import <LDProgressView/LDProgressView.h>
 #import <TMCache/TMCache.h>
+#import <EGOCache/EGOCache.h>

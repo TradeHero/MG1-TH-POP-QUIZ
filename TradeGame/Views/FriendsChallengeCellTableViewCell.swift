@@ -8,13 +8,49 @@
 
 import UIKit
 
+private extension UIButton {
+    func setupAsInviteButton(){
+        self.setBackgroundImage(UIImage(named: "RedButtonBackground"), forState: .Normal)
+        self.setTitle("Invite", forState: .Normal)
+        self.enable()
+        self.alpha = 1
+    }
+    
+    func setupAsChallengeButton(){
+        self.setBackgroundImage(UIImage(named: "GreenButtonBackground"), forState: .Normal)
+        self.setTitle("Challenge", forState: .Normal)
+        self.enable()
+        self.alpha = 1
+    }
+
+    func setupAsInvitedButton(){
+        self.setBackgroundImage(UIImage(named: "RedButtonBackground"), forState: .Normal)
+        self.setTitle("Invited", forState: .Normal)
+        self.disable()
+        self.alpha = 0.5
+    }
+}
 class FriendsChallengeCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var friendAvatarView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
     
-    var friendUserID: Int!
+    var friendUser: THUserFriend! {
+        didSet {
+            if self.friendUser.isTHUser {
+                inviteOrChallengeButton.setupAsChallengeButton()
+            } else {
+                if self.friendUser.alreadyInvited {
+                    inviteOrChallengeButton.setupAsInvitedButton()
+                }else{
+                    inviteOrChallengeButton.setupAsInviteButton()
+                }
+            }
+        }
+    }
     var delegate: FriendsChallengeCellTableViewCellDelegate!
+    
+    @IBOutlet weak var inviteOrChallengeButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,9 +69,11 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     }
     
 
-    @IBAction func challengeAction(sender: AnyObject) {
-        if self.friendUserID != nil {
-            self.delegate.friendUserCell(self, didTapChallengeUser: self.friendUserID)
+    @IBAction func challengeOrInviteAction(sender: AnyObject) {
+        if self.friendUser.isTHUser {
+            self.delegate.friendUserCell(self, didTapChallengeUser: self.friendUser.userID)
+        } else {
+            self.delegate.friendUserCell(self, didTapInviteUser: self.friendUser.facebookID)
         }
     }
     
@@ -47,13 +85,9 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     }
     
     func bindFriendUser(friendUser:THUserFriend){
+        self.friendUser = friendUser
         self.friendNameLabel.text = friendUser.name
-//        NetworkClient.fetchImageFromURLString(friendUser.facebookPictureURL, progressHandler: nil, completionHandler: {
-//            image,error in
-//            self.friendAvatarView.image = image
-//        })
         self.friendAvatarView.sd_setImageWithURL(NSURL(string: friendUser.facebookPictureURL))
-        self.friendUserID = friendUser.userID
     }
     
     override var frame: CGRect {
@@ -68,8 +102,11 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
             super.frame = frame
         }
     }
+    
+    
 }
 
 protocol FriendsChallengeCellTableViewCellDelegate : class, NSObjectProtocol {
     func friendUserCell(cell:FriendsChallengeCellTableViewCell, didTapChallengeUser userID:Int)
+    func friendUserCell(cell:FriendsChallengeCellTableViewCell, didTapInviteUser facebookID:Int)
 }

@@ -102,7 +102,6 @@ class NetworkClient {
         if opponentId != nil {
             params["opponentId"] = opponentId
         }
-        params["opponentId"] = 471931
         configureCompulsoryHeaders()
 
         AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: params, encoding: JSONPrettyPrinted).responseJSON({
@@ -186,7 +185,7 @@ class NetworkClient {
             debugPrintln("Successfully fetched \(friends.count) friend(s).")
             completionHandler(frnds)
         })
-        debugPrintln(r)
+//        debugPrintln(r)
     }
     
     ///
@@ -209,7 +208,8 @@ class NetworkClient {
     func logout() {
         self.authenticatedUser = nil
         self.removeCredentials()
-        TMCache.sharedCache().removeAllObjects()
+//        TMCache.sharedCache().removeAllObjects()
+        EGOCache.globalCache().clearCache()
     }
     
     

@@ -9,8 +9,9 @@
 import UIKit
 
 class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate {
+    private let kFBFriendsDictionaryKey = "FBFriendsDictionaryKey"
     
-    var friendsList: [THUserFriend] = []
+    private let kTHFriendsDictionaryKey = "THFriendsDictionaryKey"
     
     var THFriendList: [THUserFriend] = []
     
@@ -27,6 +28,8 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func backAction(sender: AnyObject) {
+        let dict = [self.kFBFriendsDictionaryKey: self.FBFriendList, kTHFriendsDictionaryKey: self.THFriendList]
+        EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
         self.navigationController.popViewControllerAnimated(true)
     }
     
@@ -151,6 +154,13 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapInviteUser facebookID: Int) {
+        //TODO: invite user via fb
+        var friendUser = cell.friendUser
+        friendUser.alreadyInvited = true
+        cell.friendUser = friendUser
+    }
+    
     func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
         return 25
     }
@@ -170,38 +180,39 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             self.THFriendList = $1
             self.friendsTableView.reloadData()
         }
+     
+        let object = EGOCache.globalCache().objectForKey(kTHUserFriendsCacheStoreKey)
         
-        TMCache.sharedCache().objectForKey(kTHUserFriendsCacheStoreKey, block: { (cache, string, object) -> Void in
-            let kFBFriendsDictionaryKey = "FBFriendsDictionaryKey"
-            let kTHFriendsDictionaryKey = "THFriendsDictionaryKey"
-            if object == nil {
-                debugPrintln("Nothing cached.")
-                hud.labelText = "Retrieving friends..."
-                NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friendsTuple in
-                    hud.hide(false)
-                    let fbF = friendsTuple.fbFriends
-                    let thF = friendsTuple.thFriends
-                    let dict = [kFBFriendsDictionaryKey: fbF, kTHFriendsDictionaryKey: thF]
-                    TMCache.sharedCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
-                    debugPrintln("\(friendsTuple.fbFriends.count + friendsTuple.thFriends.count) friends cached.")
-                    loadCompleteHandler(fbFriends: fbF, thFriends: thF)
-                })
-                return
-            }
-            
-            hud.labelText = "Loading friends..."
-            var cachedFriends = object as [String : [THUserFriend]]
-            
-            if let cFBFrnd = cachedFriends[kFBFriendsDictionaryKey] {
-                if let cTHFrnd = cachedFriends[kTHFriendsDictionaryKey] {
-                    debugPrintln("Retrieved \(cFBFrnd.count + cTHFrnd.count) friend(s) from cache.")
-                    loadCompleteHandler(fbFriends: cFBFrnd, thFriends: cTHFrnd)
-                }
-            }
-
-            hud.hide(false)
+        if object == nil {
+            debugPrintln("Nothing cached.")
+            hud.labelText = "Retrieving friends..."
+            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friendsTuple in
+                hud.hide(false)
+                let fbF = friendsTuple.fbFriends
+                let thF = friendsTuple.thFriends
+                let dict = [self.kFBFriendsDictionaryKey: fbF, self.kTHFriendsDictionaryKey: thF]
+                EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
+                debugPrintln("\(friendsTuple.fbFriends.count + friendsTuple.thFriends.count) friends cached.")
+                loadCompleteHandler(fbFriends: fbF, thFriends: thF)
+            })
             return
-        })
+        }
+        
+        hud.labelText = "Loading friends..."
+        var cachedFriends = object as [String : [THUserFriend]]
+        
+        if let cFBFrnd = cachedFriends[kFBFriendsDictionaryKey] {
+            if let cTHFrnd = cachedFriends[kTHFriendsDictionaryKey] {
+                debugPrintln("Retrieved \(cFBFrnd.count + cTHFrnd.count) friend(s) from cache.")
+                loadCompleteHandler(fbFriends: cFBFrnd, thFriends: cTHFrnd)
+            }
+        }
+        
+        hud.hide(false)
+        
+        
+        
+        
         
     }
 }
