@@ -138,7 +138,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         hud.labelText = "Creating challenge..."
         
         weak var weakSelf = self
-        NetworkClient.sharedClient.createChallenge(3, opponentId: userID, completionHandler: {
+        NetworkClient.sharedClient.createChallenge(20, opponentId: userID, completionHandler: {
             game in
             var strongSelf = weakSelf!
             if let g = game {
