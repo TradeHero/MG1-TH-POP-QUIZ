@@ -5,6 +5,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <SSKeychain/SSKeychain.h>
 #import <SDWebImage/SDWebImageManager.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <GPUImage/GPUImageSwirlFilter.h>
 #import <GPUImage/GPUImageGrayscaleFilter.h>

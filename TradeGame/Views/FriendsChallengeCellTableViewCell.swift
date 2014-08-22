@@ -41,16 +41,18 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.friendAvatarView.sd_cancelCurrentImageLoad()
         self.friendAvatarView.image = nil
         self.friendNameLabel.text = nil
     }
     
     func bindFriendUser(friendUser:THUserFriend){
         self.friendNameLabel.text = friendUser.name
-        NetworkClient.fetchImageFromURLString(friendUser.facebookPictureURL, progressHandler: nil, completionHandler: {
-            image,error in
-            self.friendAvatarView.image = image
-        })
+//        NetworkClient.fetchImageFromURLString(friendUser.facebookPictureURL, progressHandler: nil, completionHandler: {
+//            image,error in
+//            self.friendAvatarView.image = image
+//        })
+        self.friendAvatarView.sd_setImageWithURL(NSURL(string: friendUser.facebookPictureURL))
         self.friendUserID = friendUser.userID
     }
     
