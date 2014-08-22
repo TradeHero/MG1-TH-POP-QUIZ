@@ -156,23 +156,23 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func loadFriends() {
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.removeFromSuperViewOnHide = true
+        hud.minShowTime = 0
+        
         self.FBFriendList.removeAll(keepCapacity: true)
         self.THFriendList.removeAll(keepCapacity: true)
         
         self.friendsTableView.reloadData()
         
-        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.removeFromSuperViewOnHide = true
-
         TMCache.sharedCache().objectForKey(kTHUserFriendsCacheStoreKey, block: { (cache, string, object) -> Void in
-            let i = 0
             let kFBFriendsDictionaryKey = "FBFriendsDictionaryKey"
             let kTHFriendsDictionaryKey = "THFriendsDictionaryKey"
             if object == nil {
                 debugPrintln("Nothing cached.")
                 hud.labelText = "Retrieving friends..."
                 NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friendsTuple in
-                    hud.removeFromSuperview()
+                    hud.hide(false)
                     let fbF = friendsTuple.fbFriends
                     let thF = friendsTuple.thFriends
                     let dict = [kFBFriendsDictionaryKey: fbF, kTHFriendsDictionaryKey: thF]
@@ -199,7 +199,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             debugPrintln("Retrieved \(self.FBFriendList.count + self.THFriendList.count) friend(s) from cache.")
             
             self.friendsTableView.reloadData()
-            hud.removeFromSuperview()
+            hud.hide(false)
             return
         })
         
