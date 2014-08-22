@@ -194,7 +194,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             
             if let cFBFrnd = cachedFriends[kFBFriendsDictionaryKey] {
                 if let cTHFrnd = cachedFriends[kTHFriendsDictionaryKey] {
-                    debugPrintln("Retrieved \(self.FBFriendList.count + self.THFriendList.count) friend(s) from cache.")
+                    debugPrintln("Retrieved \(cFBFrnd.count + cTHFrnd.count) friend(s) from cache.")
                     loadCompleteHandler(fbFriends: cFBFrnd, thFriends: cTHFrnd)
                 }
             }
