@@ -9,5 +9,7 @@ pod 'MBProgressHUD', '~> 0.9'
 pod 'GPUImage', '~> 0.1.5'
 pod 'LDProgressView', '~> 1.2.1'
 pod 'TMCache', '~> 1.2.1'
+pod 'EGOCache', '~> 2.1'
+pod 'M13ProgressSuite', '~> 1.2.5'
 
 xcodeproj 'TradeGame.xcodeproj'

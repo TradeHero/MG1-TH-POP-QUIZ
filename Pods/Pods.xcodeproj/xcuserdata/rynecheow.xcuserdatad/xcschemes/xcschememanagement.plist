@@ -4,12 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-EGOCache.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-GPUImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-LDProgressView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-M13ProgressSuite.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,37 +52,47 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0CBBCBD1160449509BA06CDB</key>
+		<key>4A8DE956AAB040808AB66122</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>18D85FF2E3874E2DB4807A7E</key>
+		<key>5EC07CDA49D742E6A5E7AB5D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2AEFB558A4D94236A658FC5B</key>
+		<key>61ECB423742E4BDA88E8B0AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2D43D447928647F2A92296C0</key>
+		<key>638A6029FFC148AD898A3C91</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6F14DDECC73542DEAE09DABD</key>
+		<key>6CAB52E927B149D89A67EFD9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B8E7B5584F3347F4884435F4</key>
+		<key>9D1FAA0C812E44B6A4778A2A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F366969DAF1942BCBE44985A</key>
+		<key>9ECBDDD92425477B87EDFD7B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B440469A9A734DB3B3248D9E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EBBD9364B9404243A42CECE2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
