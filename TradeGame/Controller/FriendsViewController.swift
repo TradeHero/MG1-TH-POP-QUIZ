@@ -29,6 +29,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     @IBAction func backAction(sender: AnyObject) {
         self.navigationController.popViewControllerAnimated(true)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -154,11 +155,6 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         return 25
     }
     
-    func bindFriendList(fbFriends: [THUserFriend], thFriends: [THUserFriend]) {
-        self.FBFriendList = fbFriends
-        self.THFriendList = thFriends
-    }
-    
     func loadFriends() {
         self.FBFriendList.removeAll(keepCapacity: true)
         self.THFriendList.removeAll(keepCapacity: true)
@@ -176,7 +172,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                 debugPrintln("Nothing cached.")
                 hud.labelText = "Retrieving friends..."
                 NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friendsTuple in
-                    hud.hide(false)
+                    hud.removeFromSuperview()
                     let fbF = friendsTuple.fbFriends
                     let thF = friendsTuple.thFriends
                     let dict = [kFBFriendsDictionaryKey: fbF, kTHFriendsDictionaryKey: thF]
@@ -203,7 +199,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             debugPrintln("Retrieved \(self.FBFriendList.count + self.THFriendList.count) friend(s) from cache.")
             
             self.friendsTableView.reloadData()
-            hud.hide(false)
+            hud.removeFromSuperview()
             return
         })
         

@@ -13,7 +13,6 @@ enum Mode: Int {
     case Prod
 }
 
-
 let kTHGamesServerMode = Mode.Prod
 
 let kConstantPrefix = "TH"
