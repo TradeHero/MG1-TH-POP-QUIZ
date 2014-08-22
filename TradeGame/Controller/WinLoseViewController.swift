@@ -1,5 +1,5 @@
 //
-//  ResultViewController.swift
+//  WinLoseViewController.swift
 //  TradeGame
 //
 //  Created by Ryne Cheow on 7/31/14.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResultViewController: UIViewController {
+class WinLoseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +22,15 @@ class ResultViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+    
     }
-    */
+    
 
 }

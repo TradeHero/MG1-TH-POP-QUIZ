@@ -4,11 +4,6 @@
         <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="ProximaNova-Bold.ttf">
-            <string>ProximaNova-Bold</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--Home View Controller-->
         <scene sceneID="reb-OH-NfV">
@@ -26,6 +21,15 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="eIl-7I-DR2">
+                                        <rect key="frame" x="17" y="205" width="286" height="363"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="mQ1-C7-5Us" id="tAq-o3-7PB"/>
+                                            <outlet property="delegate" destination="mQ1-C7-5Us" id="CQQ-Of-8lc"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -127,6 +131,7 @@
                         <outlet property="avatarView" destination="hOW-Oh-vVN" id="ctn-4b-AMG"/>
                         <outlet property="fullNameView" destination="Rjv-r9-yGC" id="V4L-dQ-nJj"/>
                         <outlet property="rankView" destination="9FL-g8-xZG" id="bmR-zY-m9g"/>
+                        <outlet property="tableView" destination="eIl-7I-DR2" id="3oX-pF-vEo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKQ-gI-9GF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -146,10 +151,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="12" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="xqb-KH-0jp">
-                                <rect key="frame" x="16" y="54" width="286" height="514"/>
+                                <rect key="frame" x="17" y="54" width="286" height="514"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="sectionIndexTrackingBackgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <searchBar key="tableFooterView" contentMode="redraw" searchBarStyle="minimal" id="4wa-s1-k7E">
+                                    <rect key="frame" x="0.0" y="0.0" width="286" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="aaP-JZ-Z0I" id="Z9Y-9z-l3A"/>
+                                    </connections>
+                                </searchBar>
                                 <connections>
                                     <outlet property="dataSource" destination="aaP-JZ-Z0I" id="CXQ-Ts-Buh"/>
                                     <outlet property="delegate" destination="aaP-JZ-Z0I" id="R1f-S6-VLj"/>
@@ -175,245 +187,21 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="friendsTableView" destination="xqb-KH-0jp" id="Hg1-Lb-MBk"/>
+                        <outlet property="searchBar" destination="4wa-s1-k7E" id="Fax-Kf-EYu"/>
+                        <outlet property="searchDisplayController" destination="f65-qE-6by" id="ew1-Pq-Gr6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKR-c2-2hp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="f65-qE-6by">
+                    <connections>
+                        <outlet property="delegate" destination="aaP-JZ-Z0I" id="G86-kC-lFt"/>
+                        <outlet property="searchContentsController" destination="aaP-JZ-Z0I" id="8eU-uk-2vr"/>
+                        <outlet property="searchResultsDataSource" destination="aaP-JZ-Z0I" id="azo-nt-Mk9"/>
+                        <outlet property="searchResultsDelegate" destination="aaP-JZ-Z0I" id="HdM-ow-gpn"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2036" y="160"/>
-        </scene>
-        <!--Quiz View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController storyboardIdentifier="QuizViewController" id="vXZ-lx-hvc" customClass="QuizViewController" customModule="TradeGame" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QuizViewBackground" id="1e0-Dj-l1z">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" id="DyE-RY-1oW">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QuizHeaderBackground" id="zcZ-F7-ez3">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QuizTimerBackground" id="D04-8d-w5i">
-                                        <rect key="frame" x="135" y="0.0" width="55" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="blL-Cx-x5q">
-                                        <rect key="frame" x="59" y="22" width="50" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ryne Cheow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="SE9-gm-Lnm">
-                                        <rect key="frame" x="59" y="42" width="100" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="12"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="975" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IE4-aB-MG7">
-                                        <rect key="frame" x="214" y="22" width="50" height="22"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" id="nTF-pk-poD" customClass="AvatarRoundedView" customModule="TradeGame" customModuleProvider="target">
-                                        <rect key="frame" x="270" y="21" width="44" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="EmptyAvatar"/>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="8oh-2Q-fqM" customClass="AvatarRoundedView" customModule="TradeGame" customModuleProvider="target">
-                                        <rect key="frame" x="6" y="21" width="44" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="2"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="EmptyAvatar"/>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maggie Grace" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="bql-cd-8X9">
-                                        <rect key="frame" x="167" y="42" width="100" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="12"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" id="2UA-DA-IHJ" customClass="LDProgressView">
-                                        <rect key="frame" x="11" y="69" width="120" height="5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" id="due-eg-8W2" customClass="LDProgressView">
-                                        <rect key="frame" x="195" y="69" width="120" height="5"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dAc-O5-Cpt">
-                                <rect key="frame" x="60" y="175" width="200" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="31"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="1" height="3"/>
-                            </label>
-                            <view contentMode="scaleToFill" id="fJO-B0-Wpj">
-                                <rect key="frame" x="0.0" y="85" width="320" height="205"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="czn-zq-bPo">
-                                <rect key="frame" x="0.0" y="290" width="321" height="225"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yYq-7e-Iqw" customClass="OptionButton" customModule="TradeGame" customModuleProvider="target">
-                                        <rect key="frame" x="12" y="5" width="140" height="102"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.54509803921568623" green="0.85882352941176465" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                        <state key="normal" title="NYSE: TSL">
-                                            <color key="titleColor" red="0.047058823529411764" green="0.30980392156862746" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="9"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="optionSelected:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="hHN-ee-Q1h"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BaB-uw-8Lx" customClass="OptionButton" customModule="TradeGame" customModuleProvider="target">
-                                        <rect key="frame" x="165" y="5" width="140" height="102"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.54509803921568623" green="0.85882352941176465" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                        <state key="normal" title="NYSE: TSLA ">
-                                            <color key="titleColor" red="0.047058823529411764" green="0.30980392156862746" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="9"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="optionSelected:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Oe2-A6-nH3"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IlM-fh-HTI" customClass="OptionButton" customModule="TradeGame" customModuleProvider="target">
-                                        <rect key="frame" x="12" y="118" width="140" height="102"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.54509803921568623" green="0.85882352941176465" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                        <state key="normal" title="NYSE: TSLX">
-                                            <color key="titleColor" red="0.047058823529411764" green="0.30980392156862746" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="9"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="optionSelected:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="I7d-Ij-pbB"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uxB-e1-t0D" customClass="OptionButton" customModule="TradeGame" customModuleProvider="target">
-                                        <rect key="frame" x="165" y="118" width="140" height="102"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.54509803921568623" green="0.85882352941176465" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                        <state key="normal" title="NYSE: TS">
-                                            <color key="titleColor" red="0.047058823529411764" green="0.30980392156862746" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="9"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="optionSelected:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="TLK-m2-I5v"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AV5-hO-dYg" customClass="DesignableButton" customModule="TradeGame">
-                                <rect key="frame" x="8" y="518" width="300" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
-                                <state key="normal" title="Remove 2 Options" backgroundImage="RemoveOptionsButtonBackground">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="removeTwoOptions:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="c1e-61-Wwf"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tQI-Y5-pKh">
-                                <rect key="frame" x="144" y="8" width="37" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                <color key="textColor" red="0.062745098039215685" green="0.38823529411764707" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <connections>
-                        <outlet property="buttonSetContentView" destination="czn-zq-bPo" id="AaH-8r-HcL"/>
-                        <outlet property="opponentAvatarView" destination="nTF-pk-poD" id="xop-Xd-mbj"/>
-                        <outlet property="opponentDisplayNameLabel" destination="bql-cd-8X9" id="cBr-vY-jUg"/>
-                        <outlet property="opponentProgressView" destination="due-eg-8W2" id="cSk-wJ-3Wn"/>
-                        <outlet property="opponentScoreLabel" destination="IE4-aB-MG7" id="1S3-bA-WTb"/>
-                        <outlet property="option1" destination="yYq-7e-Iqw" id="Oe3-nG-7JF"/>
-                        <outlet property="option2" destination="IlM-fh-HTI" id="na1-db-7Sb"/>
-                        <outlet property="option3" destination="BaB-uw-8Lx" id="lEZ-JO-sxZ"/>
-                        <outlet property="option4" destination="uxB-e1-t0D" id="b3g-AO-EAN"/>
-                        <outlet property="questionView" destination="fJO-B0-Wpj" id="XiT-08-BFM"/>
-                        <outlet property="removeOptionsButton" destination="AV5-hO-dYg" id="Ba8-bj-Oag"/>
-                        <outlet property="roundIndicatorLabel" destination="dAc-O5-Cpt" id="yDk-Hc-0la"/>
-                        <outlet property="selfAvatarView" destination="8oh-2Q-fqM" id="cWn-I9-wdA"/>
-                        <outlet property="selfDisplayNameLabel" destination="SE9-gm-Lnm" id="T6O-Ji-cmz"/>
-                        <outlet property="selfProgressView" destination="2UA-DA-IHJ" id="e81-aY-CXp"/>
-                        <outlet property="selfScoreLabel" destination="blL-Cx-x5q" id="6vq-rb-XWI"/>
-                        <outlet property="timeLeftLabel" destination="tQI-Y5-pKh" id="V1k-Hj-bmT"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2445" y="160"/>
         </scene>
         <!--THMainNavigationController-->
         <scene sceneID="Wav-rW-fY2">
@@ -438,15 +226,10 @@
         <image name="BackButtonImage" width="21" height="34"/>
         <image name="BadgeView" width="49" height="62"/>
         <image name="ChallengeFriendButtonBackground" width="443" height="92"/>
-        <image name="EmptyAvatar" width="447" height="447"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
         <image name="LogoutIcon" width="58" height="58"/>
         <image name="ProfileHeaderBackground" width="640" height="191"/>
-        <image name="QuizHeaderBackground" width="320" height="85"/>
-        <image name="QuizTimerBackground" width="55" height="35"/>
-        <image name="QuizViewBackground" width="320" height="568"/>
-        <image name="RemoveOptionsButtonBackground" width="304" height="46"/>
         <image name="SettingsIcon" width="58" height="58"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

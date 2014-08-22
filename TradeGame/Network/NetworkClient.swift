@@ -97,14 +97,10 @@ class NetworkClient {
     /**
         Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions:Int, opponentId:Int!, completionHandler: (Game! -> ())?) {
-        var params = ["numberOfQuestions": numberOfQuestions]
-        if opponentId != nil {
-            params["opponentId"] = opponentId
-        }
+    func createChallenge(numberOfQuestions:Int, opponentId:Int, completionHandler: (Game! -> ())?) {
         configureCompulsoryHeaders()
-
-        AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: params, encoding: JSONPrettyPrinted).responseJSON({
+        debugPrintln("Creating challenge with user \(opponentId) with \(numberOfQuestions) questions(s)")
+        AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId], encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             
             if let responseError = error {
@@ -116,7 +112,7 @@ class NetworkClient {
                 let responseJSON = content as [String: AnyObject]
 //                println(responseJSON)
                 let game = Game(gameDTO: responseJSON)
-                
+                debugPrintln("Game created with game ID: \(game.gameID)")
                 var initiatorID: Int!
                 if let i: AnyObject = responseJSON["createdByUserId"]{
                     initiatorID = i as Int
@@ -151,12 +147,12 @@ class NetworkClient {
     }
     
     /**
-        GET api/Users/{userId}/GetFriends
+        GET api/Users/{userId}/getnewfriends?socialNetwork=FB
     */
-    typealias THUserFriendTuple = (fbFriends:[THUserFriend], thFriends:[THUserFriend])
-    func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (THUserFriendTuple -> Void)!){
+    typealias TFBHUserFriendTuple = (fbFriends:[THUserFriend], thFriends:[THUserFriend])
+    func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (TFBHUserFriendTuple -> Void)!){
         configureCompulsoryHeaders()
-         debugPrintln("Fetching Facebook friends for user \(userId)...")
+        debugPrintln("Fetching Facebook friends for user \(userId)...")
         let r = AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             if let responseError = error {
@@ -166,7 +162,6 @@ class NetworkClient {
             var friends: [THUserFriend] = []
             
             if let arr = content as? [AnyObject] {
-//                println(arr)
                 for friendObj in arr {
                     let friendDictionary = friendObj as [String: AnyObject]
                     friends.append(THUserFriend(friendDTO: friendDictionary))
@@ -178,22 +173,20 @@ class NetworkClient {
             fbFrnds = friends.filter({ $0.userID == 0 })
             thFrnds = friends.filter({ $0.userID != 0 })
             
-            var frnds:THUserFriendTuple = (fbFrnds, thFrnds)
-            
-            
-            
             debugPrintln("Successfully fetched \(friends.count) friend(s).")
-            completionHandler(frnds)
+            completionHandler((fbFrnds, thFrnds))
         })
 //        debugPrintln(r)
     }
+    
+    
     
     ///
     ///
     ///
     ///
     func createQuickGame(completionHandler: (Game? -> ())?){
-        createChallenge(10, opponentId: nil, completionHandler: {
+        createChallenge(10, opponentId: 0, completionHandler: {
             game in
             if let handler = completionHandler {
                 handler(game)

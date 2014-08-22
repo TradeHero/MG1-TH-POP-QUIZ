@@ -8,7 +8,7 @@
 
 import UIKit
 
-private extension UIButton {
+extension UIButton {
     func setupAsInviteButton(){
         self.setBackgroundImage(UIImage(named: "RedButtonBackground"), forState: .Normal)
         self.setTitle("Invite", forState: .Normal)
@@ -50,6 +50,8 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     }
     var delegate: FriendsChallengeCellTableViewCellDelegate!
     
+    lazy var index: Int = Int()
+
     @IBOutlet weak var inviteOrChallengeButton: UIButton!
     
     override func awakeFromNib() {
@@ -84,10 +86,11 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
         self.friendNameLabel.text = nil
     }
     
-    func bindFriendUser(friendUser:THUserFriend){
+    func bindFriendUser(friendUser:THUserFriend, index:Int){
         self.friendUser = friendUser
         self.friendNameLabel.text = friendUser.name
         self.friendAvatarView.sd_setImageWithURL(NSURL(string: friendUser.facebookPictureURL))
+        self.index = index
     }
     
     override var frame: CGRect {

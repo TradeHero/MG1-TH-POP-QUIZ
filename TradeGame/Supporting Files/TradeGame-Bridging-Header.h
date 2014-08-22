@@ -7,9 +7,6 @@
 #import <SDWebImage/SDWebImageManager.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MBProgressHUD/MBProgressHUD.h>
-#import <GPUImage/GPUImageSwirlFilter.h>
-#import <GPUImage/GPUImageGrayscaleFilter.h>
-#import <GPUImage/GPUImagePicture.h>
+#import <GPUImage/GPUImage.h>
 #import <LDProgressView/LDProgressView.h>
-#import <TMCache/TMCache.h>
 #import <EGOCache/EGOCache.h>

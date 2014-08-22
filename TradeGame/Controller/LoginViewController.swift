@@ -39,6 +39,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
+        
         if !fbFlag {
             fbFlag = true
         }else {
@@ -55,9 +56,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
                 hud.hide(true, afterDelay: 1.5)
             }) {
              user in
-                if let loginUser = user {
-                
-                } else {
+                if user == nil {
                     hud.mode = MBProgressHUDModeText
                     hud.labelText = "Login failed"
                     hud.hide(true, afterDelay: 1.5)

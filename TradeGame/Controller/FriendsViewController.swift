@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate {
+class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate, UISearchBarDelegate {
     private let kFBFriendsDictionaryKey = "FBFriendsDictionaryKey"
     
     private let kTHFriendsDictionaryKey = "THFriendsDictionaryKey"
@@ -17,13 +17,20 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     var FBFriendList: [THUserFriend] = []
     
+    var searchKey: String = ""
+    
     lazy var user: THUser = THUser()
     @IBOutlet weak var friendsTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController.navigationBarHidden = false
         self.navigationItem.title = "Friend List"
         self.friendsTableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
+        self.searchBar.placeholder = "Search friends"
+        self.searchBar.text = ""
+        self.friendsTableView.tableHeaderView = self.searchBar
         self.loadFriends()
     }
     
@@ -56,10 +63,10 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         switch indexPath.section {
         case 0:
             let friendUser = THFriendList[indexPath.row]
-            cell.bindFriendUser(friendUser)
+            cell.bindFriendUser(friendUser, index: indexPath.row)
         case 1:
             let friendUser = FBFriendList[indexPath.row]
-            cell.bindFriendUser(friendUser)
+            cell.bindFriendUser(friendUser, index: indexPath.row)
         default:
             return nil
         }
@@ -131,14 +138,14 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         hud.labelText = "Creating challenge..."
         
         weak var weakSelf = self
-        NetworkClient.sharedClient.createChallenge(10, opponentId: userID, completionHandler: {
+        NetworkClient.sharedClient.createChallenge(3, opponentId: userID, completionHandler: {
             game in
             var strongSelf = weakSelf!
             if let g = game {
                 hud.mode = MBProgressHUDModeText
                 hud.detailsLabelText = "Creating game with user.."
-                println(game)
-                let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
+//                println(game)
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
                 hud.mode = MBProgressHUDModeAnnularDeterminate
                 
                 vc.prepareGame(game, hud:hud) {
@@ -149,16 +156,15 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                     strongSelf.presentViewController(vc, animated: true, completion: nil)
                 }
             }
-            
         })
-        
     }
     
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapInviteUser facebookID: Int) {
         //TODO: invite user via fb
-        var friendUser = cell.friendUser
+        var friendUser = FBFriendList[cell.index]
         friendUser.alreadyInvited = true
         cell.friendUser = friendUser
+        FBFriendList[cell.index] = friendUser
     }
     
     func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
@@ -209,10 +215,27 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         }
         
         hud.hide(false)
+    }
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar!) -> Bool {
+        searchBar.setShowsCancelButton(true, animated: true)
+        return true
+    }
+    
+    func searchBarShouldEndEditing(searchBar: UISearchBar!) -> Bool {
+        searchBar.setShowsCancelButton(false, animated: true)
+        return true
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar!) {
+        if ((searchBar.text as NSString).length  <= 0) {
+            return
+        }
         
-        
-        
-        
-        
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar!) {
+        searchBar.resignFirstResponder()
     }
 }

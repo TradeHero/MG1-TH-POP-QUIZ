@@ -37,16 +37,12 @@ class THUser {
         if let dn: AnyObject = profileDTO["displayName"] {
             self.displayName = dn as String
         }
-//        
-//        if self.firstName != nil && self.lastName != nil {
-//            self.fullName = "\(self.firstName) \(self.lastName)"
-//        }
     }
     init(){}
 }
 
 extension THUser: Printable {
     var description: String {
-        return "{\nDetails of THUser:\nUser ID: \(self.userId)\nDisplay name: \(self.displayName)\nFirst name: \(self.firstName)\nLast name: \(self.lastName)\nProfile picture URL: \(self.pictureURL)\n}\n"
+        return "{\nTHUser\n======\nUser ID: \(self.userId)\nDisplay name: \(self.displayName)\nFirst name: \(self.firstName)\nLast name: \(self.lastName)\nProfile picture URL: \(self.pictureURL)\n}\n"
     }
 }

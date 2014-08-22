@@ -257,6 +257,11 @@ extension UIStoryboard {
     class func loginStoryboard() -> UIStoryboard {
         return UIStoryboard(name: "Login", bundle: NSBundle.mainBundle())
     }
+
+
+    class func quizStoryboard() -> UIStoryboard {
+        return UIStoryboard(name: "Quiz", bundle: NSBundle.mainBundle())
+    }
 }
 
 extension String {
