@@ -165,6 +165,12 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         
         self.friendsTableView.reloadData()
         
+        let loadCompleteHandler:((fbFriends: [THUserFriend], thFriends:[THUserFriend]) -> Void) = {
+            self.FBFriendList = $0
+            self.THFriendList = $1
+            self.friendsTableView.reloadData()
+        }
+        
         TMCache.sharedCache().objectForKey(kTHUserFriendsCacheStoreKey, block: { (cache, string, object) -> Void in
             let kFBFriendsDictionaryKey = "FBFriendsDictionaryKey"
             let kTHFriendsDictionaryKey = "THFriendsDictionaryKey"
@@ -178,9 +184,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                     let dict = [kFBFriendsDictionaryKey: fbF, kTHFriendsDictionaryKey: thF]
                     TMCache.sharedCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
                     debugPrintln("\(friendsTuple.fbFriends.count + friendsTuple.thFriends.count) friends cached.")
-                    self.THFriendList = thF
-                    self.FBFriendList = fbF
-                    self.friendsTableView.reloadData()
+                    loadCompleteHandler(fbFriends: fbF, thFriends: thF)
                 })
                 return
             }
@@ -189,16 +193,12 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             var cachedFriends = object as [String : [THUserFriend]]
             
             if let cFBFrnd = cachedFriends[kFBFriendsDictionaryKey] {
-                self.FBFriendList = cFBFrnd
+                if let cTHFrnd = cachedFriends[kTHFriendsDictionaryKey] {
+                    debugPrintln("Retrieved \(self.FBFriendList.count + self.THFriendList.count) friend(s) from cache.")
+                    loadCompleteHandler(fbFriends: cFBFrnd, thFriends: cTHFrnd)
+                }
             }
-            
-            if let cTHFrnd = cachedFriends[kTHFriendsDictionaryKey] {
-                self.THFriendList = cTHFrnd
-            }
-            
-            debugPrintln("Retrieved \(self.FBFriendList.count + self.THFriendList.count) friend(s) from cache.")
-            
-            self.friendsTableView.reloadData()
+
             hud.hide(false)
             return
         })
