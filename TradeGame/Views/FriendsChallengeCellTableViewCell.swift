@@ -41,7 +41,7 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.friendAvatarView.image = UIImage(named: "EmptyAvatar")
+        self.friendAvatarView.image = nil
         self.friendNameLabel.text = nil
     }
     

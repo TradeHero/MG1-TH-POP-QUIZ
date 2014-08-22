@@ -193,8 +193,8 @@
 				6D8F0C561999F15E00829149 /* OptionSet.swift */,
 				6D8F0C541999F14100829149 /* Question.swift */,
 				6D8F0C581999F18100829149 /* THUser.swift */,
-				6D8F0C5C1999F1BB00829149 /* Turn.swift */,
 				6D8310B2199B4A260097564A /* THUserFriend.swift */,
+				6D8F0C5C1999F1BB00829149 /* Turn.swift */,
 			);
 			path = "Domain Objects";
 			sourceTree = "<group>";
@@ -226,9 +226,9 @@
 				6DF2E5E5199B38BE009D3C26 /* AppDelegate */,
 				6D2DD2FE1990E23600B8CBA4 /* Controller */,
 				6D20577F19889A7000570042 /* Images.xcassets */,
-				6DB39802199DA53E0069DDD4 /* Storyboard */,
 				6D1FF5C41999F02D003B3912 /* Models */,
 				6D08439419922F8F00FDD83E /* Network */,
+				6DB39802199DA53E0069DDD4 /* Storyboard */,
 				6D20577619889A7000570042 /* Supporting Files */,
 				6D286D4B1989F12500D179F8 /* Views */,
 			);
@@ -289,8 +289,8 @@
 		6D2DD2FE1990E23600B8CBA4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6D2DD3001990E2A800B8CBA4 /* HomeViewController.swift */,
 				6D8310B6199B5DBA0097564A /* FriendsViewController.swift */,
+				6D2DD3001990E2A800B8CBA4 /* HomeViewController.swift */,
 				6D2DD2FC1990E16400B8CBA4 /* LoginViewController.swift */,
 				6D20577A19889A7000570042 /* QuizViewController.swift */,
 				6D286D491989F07500D179F8 /* ResultViewController.swift */,

@@ -9,31 +9,26 @@
 import UIKit
 
 class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate {
-
+    
     var friendsList: [THUserFriend] = []
     
     var THFriendList: [THUserFriend] = []
     
     var FBFriendList: [THUserFriend] = []
     
+    lazy var user: THUser = THUser()
     @IBOutlet weak var friendsTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController.navigationBarHidden = false
         self.navigationItem.title = "Friend List"
-        let view = UIView(frame: CGRectMake(0, 0, 200, 100))
-        self.friendsTableView.backgroundColor = UIColor.clearColor()
-        self.friendsTableView.delegate = self
-        self.friendsTableView.dataSource = self
         self.friendsTableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
-        var backButton = UIButton(frame: CGRectMake(0, 0, 15.5, 17))
-        backButton.setBackgroundImage(UIImage(named: "BackButtonImage"), forState: UIControlState.Normal)
-        backButton.addTarget(self.navigationController, action: "popViewControllerAnimated:",  forControlEvents: UIControlEvents.TouchUpInside)
-        var barButtonItem = UIBarButtonItem(customView: backButton)
-        barButtonItem.width = 15.5
-        self.navigationItem.leftBarButtonItem = barButtonItem
+        self.loadFriends()
     }
-
+    
+    @IBAction func backAction(sender: AnyObject) {
+        self.navigationController.popViewControllerAnimated(true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -64,12 +59,12 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         default:
             return nil
         }
-
+        
         cell.layoutIfNeeded()
         cell.delegate = self
         return cell
     }
-   required init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -85,8 +80,14 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView!, viewForHeaderInSection section: Int) -> UIView! {
         switch section {
         case 0:
+            if THFriendList.count == 0 {
+                return nil
+            }
             return self.createTradeHeroFriendsTableSectionHeaderView()
         case 1:
+            if FBFriendList.count == 0 {
+                return nil
+            }
             return self.createFacebookFriendsTableSectionHeaderView()
         default:
             return nil
@@ -127,7 +128,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         
         weak var weakSelf = self
         NetworkClient.sharedClient.createChallenge(10, opponentId: userID, completionHandler: {
-        game in
+            game in
             var strongSelf = weakSelf!
             if let g = game {
                 hud.mode = MBProgressHUDModeText
@@ -153,13 +154,58 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         return 25
     }
     
-    func bindFriendList(allFriends: [THUserFriend]) {
-        for friend in allFriends {
-            if friend.userID == 0 {
-                self.FBFriendList.append(friend)
-            } else {
-                self.THFriendList.append(friend)
+    func bindFriendList(fbFriends: [THUserFriend], thFriends: [THUserFriend]) {
+        self.FBFriendList = fbFriends
+        self.THFriendList = thFriends
+    }
+    
+    func loadFriends() {
+        self.FBFriendList.removeAll(keepCapacity: true)
+        self.THFriendList.removeAll(keepCapacity: true)
+        
+        self.friendsTableView.reloadData()
+        
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.removeFromSuperViewOnHide = true
+
+        TMCache.sharedCache().objectForKey(kTHUserFriendsCacheStoreKey, block: { (cache, string, object) -> Void in
+            let i = 0
+            let kFBFriendsDictionaryKey = "FBFriendsDictionaryKey"
+            let kTHFriendsDictionaryKey = "THFriendsDictionaryKey"
+            if object == nil {
+                debugPrintln("Nothing cached.")
+                hud.labelText = "Retrieving friends..."
+                NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friendsTuple in
+                    hud.hide(false)
+                    let fbF = friendsTuple.fbFriends
+                    let thF = friendsTuple.thFriends
+                    let dict = [kFBFriendsDictionaryKey: fbF, kTHFriendsDictionaryKey: thF]
+                    TMCache.sharedCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
+                    debugPrintln("\(friendsTuple.fbFriends.count + friendsTuple.thFriends.count) friends cached.")
+                    self.THFriendList = thF
+                    self.FBFriendList = fbF
+                    self.friendsTableView.reloadData()
+                })
+                return
             }
-        }
+            
+            hud.labelText = "Loading friends..."
+            var cachedFriends = object as [String : [THUserFriend]]
+            
+            if let cFBFrnd = cachedFriends[kFBFriendsDictionaryKey] {
+                self.FBFriendList = cFBFrnd
+            }
+            
+            if let cTHFrnd = cachedFriends[kTHFriendsDictionaryKey] {
+                self.THFriendList = cTHFrnd
+            }
+            
+            debugPrintln("Retrieved \(self.FBFriendList.count + self.THFriendList.count) friend(s) from cache.")
+            
+            self.friendsTableView.reloadData()
+            hud.hide(false)
+            return
+        })
+        
     }
 }

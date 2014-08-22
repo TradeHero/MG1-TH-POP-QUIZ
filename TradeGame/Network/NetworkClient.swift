@@ -27,13 +27,7 @@ class NetworkClient {
     }
     
     /// Authenticated user
-    var authenticatedUser: THUser! {
-        didSet{
-            if self.authenticatedUser != nil {
-                println("Signed in as \(self.authenticatedUser)")
-            }
-        }
-    }
+    var authenticatedUser: THUser!
     
     /// Credential dictionary (FB Token)
     var credentials: String!
@@ -52,7 +46,6 @@ class NetworkClient {
     */
     func loginUserWithFacebookAuth(accessToken:String, errorHandler:NSError -> (), loginSuccessHandler:THUser! -> ()) {
         let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
-        
         
         var headers = AF.Manager.sharedInstance.defaultHeaders
         if (headers["TH-Client-Version"] == nil) {
@@ -87,6 +80,7 @@ class NetworkClient {
                     
                     if let profileDTODict = profileDTOPart as? [String: AnyObject] {
                         var loginUser = THUser(profileDTO: profileDTODict)
+                        println("Signed in as \(loginUser)")
                         self.authenticatedUser = loginUser
                         let userInfo = ["user": loginUser]
                         NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLoginSuccessfulNotificationKey, object: self, userInfo:userInfo)
@@ -160,29 +154,39 @@ class NetworkClient {
     /**
         GET api/Users/{userId}/GetFriends
     */
-    func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: ([THUserFriend] ->())!){
+    typealias THUserFriendTuple = (fbFriends:[THUserFriend], thFriends:[THUserFriend])
+    func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (THUserFriendTuple -> Void)!){
         configureCompulsoryHeaders()
-        
-        AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)/GetFriends?perPage=200", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
+         debugPrintln("Fetching Facebook friends for user \(userId)...")
+        let r = AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
                 return
             }
             var friends: [THUserFriend] = []
-            if let dict = content as? [String: AnyObject] {
-                let d: AnyObject? = dict["data"]
-                if let friendsArray = d as? [AnyObject] {
-                    for friendObj in friendsArray {
-                        let friendDictionary = friendObj as [String: AnyObject]
-                        friends.append(THUserFriend(friendDTO: friendDictionary))
-                    }
+            
+            if let arr = content as? [AnyObject] {
+//                println(arr)
+                for friendObj in arr {
+                    let friendDictionary = friendObj as [String: AnyObject]
+                    friends.append(THUserFriend(friendDTO: friendDictionary))
                 }
             }
-
-            completionHandler(friends)
+            var fbFrnds: [THUserFriend] = []
+            var thFrnds: [THUserFriend] = []
+            
+            fbFrnds = friends.filter({ $0.userID == 0 })
+            thFrnds = friends.filter({ $0.userID != 0 })
+            
+            var frnds:THUserFriendTuple = (fbFrnds, thFrnds)
+            
+            
+            
+            debugPrintln("Successfully fetched \(friends.count) friend(s).")
+            completionHandler(frnds)
         })
-
+        debugPrintln(r)
     }
     
     ///
@@ -205,6 +209,7 @@ class NetworkClient {
     func logout() {
         self.authenticatedUser = nil
         self.removeCredentials()
+        TMCache.sharedCache().removeAllObjects()
     }
     
     

@@ -14,7 +14,7 @@ enum Mode: Int {
 }
 
 
-let kTHGamesServerMode = Mode.Dev
+let kTHGamesServerMode = Mode.Prod
 
 let kConstantPrefix = "TH"
 
@@ -56,3 +56,6 @@ let kTHGameLogoutNotificationKey = "\(kConstantPrefix)GameLogoutNotification"
 
 // MARK:- view identifiers
 let kTHFriendsChallengeCellTableViewCellIdentifier = "\(kConstantPrefix)FriendsChallengeCellTableViewCellIdentifier"
+
+// MARK:- cache keys
+let kTHUserFriendsCacheStoreKey = "\(kConstantPrefix)UserFriendsCacheStore"

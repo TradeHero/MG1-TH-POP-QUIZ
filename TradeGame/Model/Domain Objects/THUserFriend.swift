@@ -8,13 +8,22 @@
 
 import UIKit
 
-class THUserFriend: NSObject {
+final class THUserFriend: NSObject, NSCoding {
+
+    private let kFacebookIDKey = "FacebookID"
+    private let kFacebookPictureURLKey = "FacebookPictureURL"
+    private let kNameKey = "Name"
+    private let kUserIdKey = "UserID"
+    private let kAlreadyInvitedKey = "AlreadyInvited"
+    
     var facebookID: Int!
     var facebookPictureURL: String!
     var name: String!
-    var userID: Int!
+    var userID: Int! = 0
+    var alreadyInvited: Bool! = false
     
     init(friendDTO:[String: AnyObject]) {
+        self.facebookID = 0
         if let fbID: AnyObject = friendDTO["fbId"] {
             self.facebookID = (fbID as String).toInt()
         }
@@ -30,6 +39,40 @@ class THUserFriend: NSObject {
         if let uID: AnyObject = friendDTO["thUserId"] {
             self.userID = uID as Int
         }
+
+        if let invited: AnyObject = friendDTO["alreadyInvited"] {
+            self.alreadyInvited = invited as Bool
+        }
+    }
+
+    func encodeWithCoder(aCoder: NSCoder) {
+        if let fbID = facebookID {
+            aCoder.encodeInteger(fbID, forKey: kFacebookIDKey)
+        }
+
+        if let fbpicurl = facebookPictureURL {
+            aCoder.encodeObject(fbpicurl, forKey: kFacebookPictureURLKey)
+        }
+
+        if let n = name {
+            aCoder.encodeObject(n, forKey: kNameKey)
+        }
+
+        if let uID = userID {
+            aCoder.encodeInteger(uID, forKey: kUserIdKey)
+        }
+
+        if let invited = alreadyInvited {
+            aCoder.encodeBool(invited, forKey: kAlreadyInvitedKey)
+        }
+    }
+
+    init(coder aDecoder: NSCoder) {
+        super.init()
+        self.facebookID = aDecoder.decodeIntegerForKey(kFacebookIDKey)
+        self.facebookPictureURL = aDecoder.decodeObjectForKey(kFacebookPictureURLKey) as String
+        self.name = aDecoder.decodeObjectForKey(kNameKey) as String
+        self.userID = aDecoder.decodeIntegerForKey(kUserIdKey)
     }
 }
 

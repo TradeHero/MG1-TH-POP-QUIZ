@@ -54,18 +54,13 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         self.user = NetworkClient.sharedClient.authenticatedUser
         super.init(coder: aDecoder)
     }
-    
-    @IBAction func loadFriends(sender: AnyObject) {
-        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.labelText = "Loading friends..."
+
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         
+        if segue.identifier == "FriendsViewPushSegue" {
+            let vc = segue.destinationViewController as FriendsViewController
+            vc.user = self.user
+        }
         
-        NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friends in
-            hud.hide(true)
-            let vc = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("FriendsViewController") as FriendsViewController
-            vc.bindFriendList(friends)
-            self.navigationController.pushViewController(vc, animated: true)
-            
-        })
     }
 }
