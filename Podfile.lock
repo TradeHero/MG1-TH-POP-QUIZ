@@ -2,32 +2,26 @@ PODS:
   - EGOCache (2.1)
   - GPUImage (0.1.5)
   - LDProgressView (1.2.1)
-  - M13ProgressSuite (1.2.5)
   - MBProgressHUD (0.9)
   - SDWebImage (3.7.1):
     - SDWebImage/Core
   - SDWebImage/Core (3.7.1)
   - SSKeychain (1.2.2)
-  - TMCache (1.2.1)
 
 DEPENDENCIES:
   - EGOCache (~> 2.1)
   - GPUImage (~> 0.1.5)
   - LDProgressView (~> 1.2.1)
-  - M13ProgressSuite (~> 1.2.5)
   - MBProgressHUD (~> 0.9)
   - SDWebImage (~> 3.7.1)
   - SSKeychain (~> 1.2.2)
-  - TMCache (~> 1.2.1)
 
 SPEC CHECKSUMS:
   EGOCache: bf414333c425fe47f5182351d1dd47ebf72d8352
   GPUImage: 5114a47f5fc33eb312f3731550a3cea379416d04
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
-  M13ProgressSuite: bf63f5592f1e40767da5203199804ad5eed3eb48
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
-  TMCache: ed936c5b4684e4ea15113d46fba8829ed3baadad
 
 COCOAPODS: 0.33.1
