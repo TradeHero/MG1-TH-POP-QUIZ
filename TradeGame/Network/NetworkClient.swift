@@ -97,7 +97,7 @@ class NetworkClient {
     /**
         Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions:Int, opponentId:Int, completionHandler: (Game! -> ())?) {
+    func createChallenge(numberOfQuestions:Int = 10, opponentId:Int, completionHandler: (Game! -> ())?) {
         configureCompulsoryHeaders()
         debugPrintln("Creating challenge with user \(opponentId) with \(numberOfQuestions) questions(s)")
         AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId], encoding: JSONPrettyPrinted).responseJSON({
@@ -124,14 +124,12 @@ class NetworkClient {
                 }
                 
                 self.fetchUser(opponentID) {
-                    user in
-                    if let u = user {
+                    if let u = $0 {
                         game.opponentPlayer = u
                     }
                     
                     self.fetchUser(initiatorID) {
-                        user in
-                        if let u = user {
+                        if let u = $0 {
                             game.initiatingPlayer = u
                         }
                         
@@ -153,7 +151,7 @@ class NetworkClient {
     func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (TFBHUserFriendTuple -> Void)!){
         configureCompulsoryHeaders()
         debugPrintln("Fetching Facebook friends for user \(userId)...")
-        let r = AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
+        let r = AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB", parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -175,7 +173,7 @@ class NetworkClient {
             
             debugPrintln("Successfully fetched \(friends.count) friend(s).")
             completionHandler((fbFrnds, thFrnds))
-        })
+        }
 //        debugPrintln(r)
     }
     
@@ -183,15 +181,12 @@ class NetworkClient {
     
     ///
     ///
-    ///
-    ///
     func createQuickGame(completionHandler: (Game? -> ())?){
-        createChallenge(10, opponentId: 0, completionHandler: {
-            game in
+        createChallenge(numberOfQuestions: 10, opponentId: 0) {
             if let handler = completionHandler {
-                handler(game)
+                handler($0)
             }
-        })
+        }
     }
     
     
@@ -221,7 +216,8 @@ class NetworkClient {
             return
         }
         var fetchedImage: UIImage!
-        SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: urlString), options: SDWebImageOptions.CacheMemoryOnly, progress: progressHandler) {  (image: UIImage!, error: NSError!, _, finished:Bool, _) -> Void in
+
+        SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: urlString), options: .CacheMemoryOnly, progress: progressHandler) { (image, error, cacheType, finished, url) -> Void in
             if error != nil {
                 println(error)
             }

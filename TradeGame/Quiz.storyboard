@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="xpE-6b-INw">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -225,10 +226,6 @@
                         <outlet property="opponentDisplayNameLabel" destination="gjK-lr-MYD" id="PMI-bB-djN"/>
                         <outlet property="opponentProgressView" destination="3Gz-u7-SUZ" id="t6S-dZ-5A7"/>
                         <outlet property="opponentScoreLabel" destination="VKw-Gz-3xx" id="P5C-2e-c6M"/>
-                        <outlet property="option1" destination="rOZ-UN-2s9" id="2BN-bg-Lir"/>
-                        <outlet property="option2" destination="IqS-YH-5Vz" id="1Yt-Rw-1U7"/>
-                        <outlet property="option3" destination="Lu1-RO-xB6" id="u0v-eJ-JhV"/>
-                        <outlet property="option4" destination="OgK-m2-H6g" id="n1F-EN-kYd"/>
                         <outlet property="questionView" destination="hmc-VH-Jmt" id="ibp-ZB-bzj"/>
                         <outlet property="removeOptionsButton" destination="Le1-nm-wsv" id="Roy-s7-TPm"/>
                         <outlet property="roundIndicatorLabel" destination="VIo-Ic-ads" id="knV-Vq-2Do"/>
@@ -237,11 +234,12 @@
                         <outlet property="selfProgressView" destination="YyQ-Wi-67v" id="ZZF-wR-WQD"/>
                         <outlet property="selfScoreLabel" destination="rVh-cN-ate" id="LBF-Mw-yeU"/>
                         <outlet property="timeLeftLabel" destination="eKh-sO-TbA" id="fvn-k2-dgE"/>
+                        <outletCollection property="optionGroup" destination="Lu1-RO-xB6" collectionClass="NSMutableArray" id="RGP-wQ-JnZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZEo-Di-ARs" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2139" y="165"/>
+            <point key="canvasLocation" x="2167" y="171"/>
         </scene>
     </scenes>
     <resources>

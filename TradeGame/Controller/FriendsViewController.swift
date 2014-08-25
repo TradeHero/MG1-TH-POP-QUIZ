@@ -138,17 +138,16 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         hud.labelText = "Creating challenge..."
         
         weak var weakSelf = self
-        NetworkClient.sharedClient.createChallenge(20, opponentId: userID, completionHandler: {
-            game in
+        NetworkClient.sharedClient.createChallenge(opponentId: userID) {
             var strongSelf = weakSelf!
-            if let g = game {
+            if let g = $0 {
                 hud.mode = MBProgressHUDModeText
                 hud.detailsLabelText = "Creating game with user.."
 //                println(game)
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
                 hud.mode = MBProgressHUDModeAnnularDeterminate
                 
-                vc.prepareGame(game, hud:hud) {
+                vc.prepareGame($0, hud:hud) {
                     progress -> () in
                     var strongSelf = weakSelf!
                     hud.detailsLabelText = "Done fetching image."
@@ -156,7 +155,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                     strongSelf.presentViewController(vc, animated: true, completion: nil)
                 }
             }
-        })
+        }
     }
     
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapInviteUser facebookID: Int) {
@@ -192,15 +191,15 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         if object == nil {
             debugPrintln("Nothing cached.")
             hud.labelText = "Retrieving friends..."
-            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil, completionHandler: { friendsTuple in
+            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
                 hud.hide(false)
-                let fbF = friendsTuple.fbFriends
-                let thF = friendsTuple.thFriends
+                let fbF = $0.fbFriends
+                let thF = $0.thFriends
                 let dict = [self.kFBFriendsDictionaryKey: fbF, self.kTHFriendsDictionaryKey: thF]
                 EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
-                debugPrintln("\(friendsTuple.fbFriends.count + friendsTuple.thFriends.count) friends cached.")
+                debugPrintln("\($0.fbFriends.count + $0.thFriends.count) friends cached.")
                 loadCompleteHandler(fbFriends: fbF, thFriends: thF)
-            })
+            }
             return
         }
         

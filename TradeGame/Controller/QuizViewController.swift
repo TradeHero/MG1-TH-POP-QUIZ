@@ -11,13 +11,7 @@ import AudioToolbox
 
 class QuizViewController: UIViewController {
     // MARK:- UI var
-    @IBOutlet private weak var option1: OptionButton!
-    
-    @IBOutlet weak var option2: OptionButton!
-    
-    @IBOutlet weak var option3: OptionButton!
-    
-    @IBOutlet weak var option4: OptionButton!
+    @IBOutlet private var optionGroup: [OptionButton]!
     
     @IBOutlet weak var questionView: UIView!
     
@@ -111,7 +105,7 @@ class QuizViewController: UIViewController {
     
     
     private func resetButtons(){
-        for option in [option1, option2, option3, option4] {
+        for option in self.optionGroup {
             option.resetButton()
         }
     }
@@ -130,20 +124,17 @@ class QuizViewController: UIViewController {
         removeOptionsButton.disable()
         removeOptionsButton.alpha = 0.5
         
-        for option in [option1, option2, option3, option4] {
+        for option in self.optionGroup {
             option.disable()
         }
     }
     
     @IBAction func optionSelected(sender: OptionButton) {
         self.timerStop()
+        self.preventFurtherActions()
+        self.currentQuestionCorrect = false
         
-        preventFurtherActions()
-        
-        currentQuestionCorrect = false
-        
-        
-        for button in [option1, option2, option3, option4] {
+        for button in self.optionGroup {
             if sender !== button {
                 button.shrink()
             }
@@ -242,7 +233,7 @@ class QuizViewController: UIViewController {
     @IBAction func removeTwoOptions(sender: AnyObject) {
         if !didRemoveOptions {
             var incorrectOptions:[OptionButton] = []
-            for option in [option1, option2, option3, option4] {
+            for option in self.optionGroup {
                 if !option.is_answer {
                     incorrectOptions.append(option)
                 }
@@ -261,7 +252,7 @@ class QuizViewController: UIViewController {
     }
     
     func revealCorrectAnswer() {
-        for option in [option1, option2, option3, option4] {
+        for option in self.optionGroup {
             if option.is_answer {
                 option.backgroundColor = UIColor(patternImage: UIImage(named: "CorrectAnswerBackground"))
                 option.unshrink()
@@ -347,7 +338,7 @@ class QuizViewController: UIViewController {
         
         let optionSet = question.options.allOptions
         
-        var optionButtonSet = [option1, option2, option3, option4]
+        var optionButtonSet = self.optionGroup
         
         var i = 0
         for option in optionSet {
@@ -386,7 +377,7 @@ class QuizViewController: UIViewController {
             }, completion: { completed in
                 if completed {
                     self.resetRemoveOptionsButton()
-                    for option in [self.option1, self.option2, self.option3, self.option4] {
+                    for option in self.optionGroup {
                         option.enable()
                     }
                     self.timerStart()
