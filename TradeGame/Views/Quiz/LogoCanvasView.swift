@@ -57,4 +57,15 @@ class LogoCanvasView: UIView {
     func applyFilters() {
         self.imageView.image = gpuProcessor.imageWithFilterAppliedWithImage(rasterizedImage)
     }
+    
+    func hideImage(){
+        self.imageView.image = nil
+    }
+    
+    func applySwirlObfuscationWithAngleFactor(factor:Double) {
+        let f = factor < 0 ? 0 : factor > 1 ? 1 : factor //clamp
+        let swirlFilter = GPUImageSwirlFilter()
+        swirlFilter.angle = CGFloat(f)
+        self.imageView.image = swirlFilter.imageByFilteringImage(rasterizedImage)
+    }
 }

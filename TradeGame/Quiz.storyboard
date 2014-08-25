@@ -235,6 +235,9 @@
                         <outlet property="selfScoreLabel" destination="rVh-cN-ate" id="LBF-Mw-yeU"/>
                         <outlet property="timeLeftLabel" destination="eKh-sO-TbA" id="fvn-k2-dgE"/>
                         <outletCollection property="optionGroup" destination="Lu1-RO-xB6" collectionClass="NSMutableArray" id="RGP-wQ-JnZ"/>
+                        <outletCollection property="optionGroup" destination="rOZ-UN-2s9" collectionClass="NSMutableArray" id="eGP-kt-HVx"/>
+                        <outletCollection property="optionGroup" destination="IqS-YH-5Vz" collectionClass="NSMutableArray" id="MyU-3l-KyL"/>
+                        <outletCollection property="optionGroup" destination="OgK-m2-H6g" collectionClass="NSMutableArray" id="R7H-8L-vZu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZEo-Di-ARs" sceneMemberID="firstResponder"/>

@@ -143,12 +143,17 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             if let g = $0 {
                 hud.mode = MBProgressHUDModeText
                 hud.detailsLabelText = "Creating game with user.."
-//                println(game)
+                var i = 0
+                for q in $0.questionSet {
+                    if q.questionType == QuestionType.LogoType {
+                        i++
+                    }
+                }
+                println("\(i) logo questions")
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
                 hud.mode = MBProgressHUDModeAnnularDeterminate
                 
                 vc.prepareGame($0, hud:hud) {
-                    progress -> () in
                     var strongSelf = weakSelf!
                     hud.detailsLabelText = "Done fetching image."
                     hud.hide(true, afterDelay: 1)

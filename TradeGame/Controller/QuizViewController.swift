@@ -79,13 +79,35 @@ class QuizViewController: UIViewController {
         }
     }
     
+    private var currentQuestion:Question {
+        return game.questionSet[current_q]
+    }
+    private var isTimedObfuscatorQuestion:Bool {
+        return currentQuestion.questionType == QuestionType.LogoType
+    }
+    
     private var didRemoveOptions: Bool = false
     
     // MARK:- init
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+    func prepareGame(game:Game, hud:MBProgressHUD, completionHandler:()->()) {
+        var qSet = game.questionSet
+        var count:Int = 0
+        for q in qSet {
+            q.fetchImage() {
+                count += 1
+                hud.progress = Float(count)/Float(game.questionSet.count)
+                hud.detailsLabelText = "\(count)/\(game.questionSet.count)"
+                if count == game.questionSet.count {
+                    self.game = game
+                    completionHandler()
+                }
+            }
+        }
+    }
+
     // MARK:- override calls
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,36 +122,30 @@ class QuizViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    // MARK:- methods
-    
-    
-    
-    private func resetButtons(){
-        for option in self.optionGroup {
-            option.resetButton()
+    //MARK:- Actions 
+    @IBAction private func removeTwoOptions(sender: AnyObject) {
+        if !didRemoveOptions {
+            var incorrectOptions:[OptionButton] = []
+            for option in self.optionGroup {
+                if !option.is_answer {
+                    incorrectOptions.append(option)
+                }
+            }
+            incorrectOptions.shuffle()
+            incorrectOptions[0].hideAndDisable(true)
+            incorrectOptions[1].hideAndDisable(true)
+            UIView.animateWithDuration(0.5) {
+                () -> Void in
+                self.removeOptionsButton.alpha = 0.5
+            }
+            
+            removeOptionsButton.disable()
         }
+        didRemoveOptions = true
     }
     
-    private func resetRemoveOptionsButton() {
-        if !removeOptionsButton.enabled {
-            removeOptionsButton.enable()
-        }
-        
-        
-        if removeOptionsButton.alpha == 0.5 {
-            removeOptionsButton.alpha = 1
-        }
-    }
-    private func preventFurtherActions(){
-        removeOptionsButton.disable()
-        removeOptionsButton.alpha = 0.5
-        
-        for option in self.optionGroup {
-            option.disable()
-        }
-    }
     
-    @IBAction func optionSelected(sender: OptionButton) {
+    @IBAction private func optionSelected(sender: OptionButton) {
         self.timerStop()
         self.preventFurtherActions()
         self.currentQuestionCorrect = false
@@ -153,6 +169,18 @@ class QuizViewController: UIViewController {
         NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
     }
     
+    // MARK:- methods
+
+    private func preventFurtherActions(){
+        removeOptionsButton.disable()
+        removeOptionsButton.alpha = 0.5
+        
+        for option in self.optionGroup {
+            option.disable()
+        }
+    }
+
+    
     func prepareToEndRound() {
         current_q++
         calculateScore()
@@ -163,7 +191,7 @@ class QuizViewController: UIViewController {
         }
     }
     
-    func calculateScore(){
+    private func calculateScore(){
         var score = selfTotalScore
         let timeTaken:Float = 0
         let timeLeft = current_timeLeft
@@ -175,26 +203,26 @@ class QuizViewController: UIViewController {
     }
     
     
-    /* timer */
-    func timerStart() {
+    //MARK:- Timer functions
+    private func timerStart() {
         stopwatchStartTime = NSDate()
         if stopwatch == nil {
             stopwatch = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
         }
     }
     
-    func timerStop() {
+    private func timerStop() {
         stopwatch?.invalidate()
         stopwatch = nil
     }
     
-    func getTimeElasped() -> Double{
+    private func getTimeElasped() -> Double{
         let timeNow = NSDate()
         let timeInterval = timeNow.timeIntervalSinceDate(stopwatchStartTime)
         return timeInterval > 0 ? timeInterval : 0
     }
     
-    func proceedToNextQuestion(){
+    private func proceedToNextQuestion(){
         
         switch(self.current_q){
         case 0:
@@ -218,6 +246,9 @@ class QuizViewController: UIViewController {
         var timeLeft = 10.1 - time
         if timeLeft > 0 {
             current_timeLeft = timeLeft
+            if isTimedObfuscatorQuestion {
+                showImageObfuscationWithTimeFactor(factor: timeLeft/10)
+            }
         } else if timeLeft <= 0 {
             current_timeLeft = 0.0
             timerStop()
@@ -230,62 +261,29 @@ class QuizViewController: UIViewController {
         }
     }
     
-    @IBAction func removeTwoOptions(sender: AnyObject) {
-        if !didRemoveOptions {
-            var incorrectOptions:[OptionButton] = []
-            for option in self.optionGroup {
-                if !option.is_answer {
-                    incorrectOptions.append(option)
-                }
+    private func showImageObfuscationWithTimeFactor(factor:Double = 1) {
+        for view in self.questionView.subviews as [UIView] {
+            if view is QuestionViewWithImage {
+                let qview = view as QuestionViewWithImage
+                qview.logoCanvasView.applySwirlObfuscationWithAngleFactor(factor)
             }
-            incorrectOptions.shuffle()
-            incorrectOptions[0].hideAndDisable(true)
-            incorrectOptions[1].hideAndDisable(true)
-            UIView.animateWithDuration(0.5) {
-                () -> Void in
-                self.removeOptionsButton.alpha = 0.5
-            }
-
-            removeOptionsButton.disable()
         }
-        didRemoveOptions = true
     }
     
-    func revealCorrectAnswer() {
+    private func revealCorrectAnswer() {
         for option in self.optionGroup {
             if option.is_answer {
                 option.backgroundColor = UIColor(patternImage: UIImage(named: "CorrectAnswerBackground"))
                 option.unshrink()
-//                option.tiltRight()
-//                option.startWobble()
-//                option.borderColor = UIColor.blackColor()
-//                option.borderWidth = 1.0
             }
         }
     }
     
-    func endTurn(){
+    private func endTurn(){
         let currentTurnScore = selfTotalScore
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func prepareGame(game:Game, hud:MBProgressHUD, completionHandler:()->()) {
-        var qSet = game.questionSet
-        var count:Int = 0
-        for q in qSet {
-            q.fetchImage() {
-                ()->() in
-                count += 1
-                hud.progress = Float(count)/Float(game.questionSet.count)
-                hud.detailsLabelText = "\(count)/\(game.questionSet.count)"
-                if count == game.questionSet.count {
-                    self.game = game
-                    completionHandler()
-                }
-            }
-        }
-        
-    }
     
     //MARK:- UI setup
     private func setupProgressBar(bar:LDProgressView){
@@ -314,7 +312,8 @@ class QuizViewController: UIViewController {
                 if let img = question.questionImage {
                     contentView.logoCanvasView.presetImage = img
                     //                    contentView.imageView.mosaic(20)
-                    contentView.logoCanvasView.applyFilters()
+//                    contentView.logoCanvasView.applyFilters()
+                    contentView.logoCanvasView.hideImage()
                 }
             default:
                 if let img = question.questionImage {
@@ -414,7 +413,7 @@ class QuizViewController: UIViewController {
     }
     
     private func unmaskContentViewIfNecessary() {
-        switch game.questionSet[current_q].questionType {
+        switch currentQuestion.questionType {
         case .LogoType:
             for view in questionView.subviews {
                 if let logoView = view as? QuestionViewWithImage {
@@ -426,5 +425,20 @@ class QuizViewController: UIViewController {
         }
     }
     
-
+    private func resetButtons(){
+        for option in self.optionGroup {
+            option.resetButton()
+        }
+    }
+    
+    private func resetRemoveOptionsButton() {
+        if !removeOptionsButton.enabled {
+            removeOptionsButton.enable()
+        }
+        
+        
+        if removeOptionsButton.alpha == 0.5 {
+            removeOptionsButton.alpha = 1
+        }
+    }
 }
