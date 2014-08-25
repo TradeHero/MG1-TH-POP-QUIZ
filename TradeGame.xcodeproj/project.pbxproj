@@ -271,6 +271,7 @@
 		6D286D4B1989F12500D179F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6D8FE84219AB281E00F4DFD1 /* Win/Lose */,
 				6DF2E5DC199B35B7009D3C26 /* Designable */,
 				6D7565BE19A8A20000889307 /* Friends */,
 				6D7565BF19A8A22400889307 /* Home */,
@@ -321,6 +322,14 @@
 				6D6293DD19A749A9007A207E /* HomeTurnChallengesTableViewCell.xib */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		6D8FE84219AB281E00F4DFD1 /* Win/Lose */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Win/Lose;
+			path = "Win-Lose";
 			sourceTree = "<group>";
 		};
 		6DA8689A1991D096009FBD99 /* External */ = {

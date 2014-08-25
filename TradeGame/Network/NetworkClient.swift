@@ -100,7 +100,8 @@ class NetworkClient {
     func createChallenge(numberOfQuestions:Int = 5, opponentId:Int, completionHandler: (Game! -> ())?) {
         configureCompulsoryHeaders()
         debugPrintln("Creating challenge with user \(opponentId) with \(numberOfQuestions) questions(s)")
-        AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : 2415], encoding: JSONPrettyPrinted).responseJSON({
+        AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
+            ], encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             
             if let responseError = error {

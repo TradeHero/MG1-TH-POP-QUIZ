@@ -73,7 +73,7 @@ class LogoCanvasView: UIView {
         case .SwirlEffect:
             applySwirlObfuscationWithAngleFactor(f)
         case .PixellateEffect:
-            applyPixellateObfuscationWithFractionalWidth(f)
+            applyPixellateObfuscationWithFractionalWidth(f/10)
         }
     }
     

@@ -109,7 +109,7 @@ class QuizViewController: UIViewController {
             }
         }
     }
-
+    
     // MARK:- override calls
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,7 +124,7 @@ class QuizViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    //MARK:- Actions 
+    //MARK:- Actions
     @IBAction private func removeTwoOptions(sender: AnyObject) {
         if !didRemoveOptions {
             var incorrectOptions:[OptionButton] = []
@@ -175,7 +175,7 @@ class QuizViewController: UIViewController {
     }
     
     // MARK:- methods
-
+    
     private func preventFurtherActions(){
         removeOptionsButton.disable()
         removeOptionsButton.alpha = 0.5
@@ -184,7 +184,7 @@ class QuizViewController: UIViewController {
             option.disable()
         }
     }
-
+    
     
     func prepareToEndRound() {
         current_q++
@@ -241,7 +241,7 @@ class QuizViewController: UIViewController {
                 self.questionView.alpha = 0
                 
                 }, completion: { c in
-                self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
+                    self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
             })
         }
     }
@@ -322,7 +322,7 @@ class QuizViewController: UIViewController {
                 if let img = question.questionImage {
                     contentView.logoCanvasView.presetImage = img
                     //                    contentView.imageView.mosaic(20)
-//                    contentView.logoCanvasView.applyFilters()
+                    //                    contentView.logoCanvasView.applyFilters()
                     contentView.logoCanvasView.hideImage()
                 }
             default:
@@ -367,23 +367,23 @@ class QuizViewController: UIViewController {
             self.roundIndicatorLabel.text = "ROUND \(self.current_q + 1)"
         }
         
-        UIView.animateWithDuration(1.5, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+        UIView.animateWithDuration(1.5, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             self.roundIndicatorLabel.alpha = 1
-            }, completion: {complete in
-                UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+            }) { complete in
+                UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                     self.roundIndicatorLabel.alpha = 0
                     }, completion: nil)
                 
-        })
+        }
         
-        UIView.animateWithDuration(1.5, delay: 3.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+        UIView.animateWithDuration(1.5, delay: 3.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             self.questionView.alpha = 1
             
             }, completion: nil)
         
-        UIView.animateWithDuration(1.0, delay: 5.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+        UIView.animateWithDuration(1.0, delay: 5.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             self.buttonSetContentView.alpha = 1
-            }, completion: { completed in
+            }){ completed in
                 if completed {
                     self.resetRemoveOptionsButton()
                     for option in self.optionGroup {
@@ -392,29 +392,29 @@ class QuizViewController: UIViewController {
                     self.timerStart()
                     
                 }
-        })
+        }
     }
-
+    
     private func setUpPlayerDetails() {
         let thisPlayer = game.initiatingPlayer
         let opponent = game.opponentPlayer
         
-        NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil, completionHandler: {
+        NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil) {
             image, error in
             if image != nil {
                 self.selfAvatarView.image = image
             }
-        })
+        }
         selfDisplayNameLabel.text = thisPlayer.displayName
         
         selfTotalScore = 0
         
-        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil, completionHandler: {
+        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) {
             image, error in
             if image != nil {
                 self.opponentAvatarView.image = image
             }
-        })
+        }
         opponentDisplayNameLabel.text = opponent.displayName
         
         opponentScoreLabel.text = "0"
@@ -445,7 +445,6 @@ class QuizViewController: UIViewController {
         if !removeOptionsButton.enabled {
             removeOptionsButton.enable()
         }
-        
         
         if removeOptionsButton.alpha == 0.5 {
             removeOptionsButton.alpha = 1

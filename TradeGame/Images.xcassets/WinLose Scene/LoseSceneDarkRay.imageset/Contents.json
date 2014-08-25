@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "empty-avatar.png"
+      "filename" : "img-darkray.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "empty-avatar@2x.jpg"
+      "filename" : "img-darkray@2x.png"
     }
   ],
   "info" : {
