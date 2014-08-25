@@ -37,7 +37,7 @@
                                 <rect key="frame" x="51" y="143" width="218" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                <state key="normal" title="Challenge a Friend" backgroundImage="ChallengeFriendButtonBackground">
+                                <state key="normal" title="Challenge a Friend" backgroundImage="GreenLongButtonBackground">
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -225,8 +225,8 @@
     <resources>
         <image name="BackButtonImage" width="21" height="34"/>
         <image name="BadgeView" width="49" height="62"/>
-        <image name="ChallengeFriendButtonBackground" width="443" height="92"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
+        <image name="GreenLongButtonBackground" width="443" height="92"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
         <image name="LogoutIcon" width="58" height="58"/>
         <image name="ProfileHeaderBackground" width="640" height="191"/>

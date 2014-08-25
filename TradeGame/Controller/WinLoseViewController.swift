@@ -10,6 +10,39 @@ import UIKit
 
 class WinLoseViewController: UIViewController {
 
+    @IBOutlet weak var winLoseLabel: UILabel!
+    
+    @IBOutlet weak var winLoseBackgroundImageView: UIImageView!
+    
+    @IBOutlet weak var winLoseSmileyIcon: UIImageView!
+    
+    @IBOutlet weak var winningRay: UIImageView!
+    
+    @IBOutlet weak var losingRay: UIImageView!
+    
+    //MARK:-
+    @IBOutlet weak var largeBoxBackground: UIImageView!
+    
+    @IBOutlet weak var largeBoxAvatarView: AvatarRoundedView!
+
+    @IBOutlet weak var largeBoxNameLabel: UILabel!
+    
+    @IBOutlet weak var largeBoxRankLabel: UILabel!
+    
+    @IBOutlet weak var largeBoxLevelLabel: UILabel!
+    
+    @IBOutlet weak var largeBoxScoreLabel: UILabel!
+    
+    @IBOutlet weak var smallBoxAvatarView: AvatarRoundedView!
+    
+    @IBOutlet weak var smallBoxNameLabel: UILabel!
+    
+    @IBOutlet weak var smallBoxRankLabel: UILabel!
+    
+    @IBOutlet weak var smallBoxLevelLabel: UILabel!
+    @IBOutlet weak var smallBoxScoreLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

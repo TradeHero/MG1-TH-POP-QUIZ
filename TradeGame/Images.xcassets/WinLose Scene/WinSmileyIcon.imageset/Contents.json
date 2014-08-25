@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Down bkg.png"
+      "filename" : "icn-win.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Down bkg@2x.png"
+      "filename" : "icn-win@2x.png"
     }
   ],
   "info" : {
