@@ -13,9 +13,9 @@ class Game {
     let gameID: Int!
     private let createdAtUTCStr: String!
 
-    var initiatingPlayer: THUser?
+    var initiatingPlayer: THUser!
 
-    var opponentPlayer: THUser?
+    var opponentPlayer: THUser!
     
     lazy var createdAt: NSDate! = {
         let df = NSDateFormatter()
@@ -60,8 +60,8 @@ extension Game: Printable {
         var d = "{\nGame details:\n"
             d += "ID: \(gameID)\n"
             d += "Created At: \(createdAt)\n"
-            d += "Initiator: \(initiatingPlayer!)\n"
-            d += "Opponent: \(opponentPlayer!)\n"
+            d += "Initiator: \(initiatingPlayer)\n"
+            d += "Opponent: \(opponentPlayer)\n"
             d += "Questions: "
             var i:Int = 0
             for q in questionSet {

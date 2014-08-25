@@ -93,30 +93,13 @@ class QuizViewController: UIViewController {
     }
     
     // MARK:- override calls
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupProgressBar(self.selfProgressView)
-        self.setupProgressBar(self.opponentProgressView)
-        self.removeOptionsButton.disable()
-        self.setUpPlayerDetails()
-        self.questionView.alpha = 0
-        self.buttonSetContentView.alpha = 0
-        self.roundIndicatorLabel.alpha = 0
+        self.prepareFirstQuestionUISetup()
+        
         dispatch_after(1, dispatch_get_main_queue(), {() in
             self.proceedToNextQuestion()
         })
-    }
-    
-    func setupProgressBar(bar:LDProgressView){
-        bar.color = UIColor(hex: 0x75BF34)
-        bar.background = UIColor(hex: 0x4A4A4A)
-        bar.showText = NSNumber(bool: false)
-        bar.progress = 0
-        bar.type = LDProgressSolid
     }
     
     override func didReceiveMemoryWarning() {
@@ -124,134 +107,16 @@ class QuizViewController: UIViewController {
     }
     
     // MARK:- methods
-    func setUpPlayerDetails() {
-        let thisPlayer = game.initiatingPlayer!
-        let opponent = game.opponentPlayer!
-        
-        NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil, completionHandler: {
-            image, error in
-            if image != nil {
-                self.selfAvatarView.image = image
-            }
-        })
-        selfDisplayNameLabel.text = thisPlayer.displayName
-//        selfRankLabel.text = "Novice"
-        selfTotalScore = 0
-        
-        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil, completionHandler: {
-            image, error in
-            if image != nil {
-                self.opponentAvatarView.image = image
-            }
-        })
-        opponentDisplayNameLabel.text = opponent.displayName
-//        opponentRankLabel.text = "Novice"
-        //        opponentScoreLabel.text = turn.newGame ? "0" : String(turn.opponentScore)
-        opponentScoreLabel.text = "0"
-    }
     
-    func setUpViewWithQuestion(question:Question){
-        self.resetButtons()
-        didRemoveOptions = false
-        questionView.removeAllSubviews()
-        questionView.addSubview(setUpQuestionViewWithQuestion(question))
-        
-        let optionSet = question.options.allOptions
-        
-        var optionButtonSet = [option1, option2, option3, option4]
-        
-        var i = 0
-        for option in optionSet {
-            optionButtonSet[i].labelText = option.stringContent
-            if question.options.checkOptionChoiceIfIsCorrect(option) {
-                optionButtonSet[i].is_answer = true
-            } else {
-                optionButtonSet[i].is_answer = false
-            }
-            i++
-        }
-        self.roundIndicatorLabel.alpha = 0
-        switch self.current_q {
-        case self.game.questionSet.count - 1:
-            self.roundIndicatorLabel.text = "LAST ROUND"
-        default:
-            self.roundIndicatorLabel.text = "ROUND \(self.current_q + 1)"
-        }
-        
-        UIView.animateWithDuration(1.5, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
-            self.roundIndicatorLabel.alpha = 1
-            }, completion: {complete in
-                UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
-                    self.roundIndicatorLabel.alpha = 0
-                    }, completion: nil)
-                
-        })
-        
-        UIView.animateWithDuration(1.5, delay: 3.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
-            self.questionView.alpha = 1
-            
-            }, completion: nil)
-        
-        UIView.animateWithDuration(1.0, delay: 5.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
-            self.buttonSetContentView.alpha = 1
-            }, completion: { completed in
-                if completed {
-                    self.resetRemoveOptionsButton()
-                    for option in [self.option1, self.option2, self.option3, self.option4] {
-                        option.enable()
-                    }
-                    self.timerStart()
-                    
-                }
-        })
-    }
     
-    func setUpQuestionViewWithQuestion(question:Question) -> UIView {
-        if question.isGraphical() {
-            var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
-                , owner: self, options: nil)[0] as QuestionViewWithImage
-            contentView.questionContent.text = question.questionContent
-            switch question.questionType {
-            case .LogoType:
-                if let img = question.questionImage {
-                    contentView.logoCanvasView.presetImage = img
-//                    contentView.imageView.mosaic(20)
-                    contentView.logoCanvasView.applyFilters()
-                }
-            default:
-                if let img = question.questionImage {
-                    contentView.logoCanvasView.presetImage = img
-                }
-            }
-            return contentView
-        } else {
-            var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
-            
-            contentView.questionContent.text = question.questionContent
-            return contentView
-        }
-    }
     
-    func unmaskContentViewIfNecessary() {
-        switch game.questionSet[current_q].questionType {
-        case .LogoType:
-            for view in questionView.subviews {
-                if let logoView = view as? QuestionViewWithImage {
-                    logoView.logoCanvasView.reset()
-                }
-            }
-        default:
-            break
-        }
-    }
-    
-    func resetButtons(){
+    private func resetButtons(){
         for option in [option1, option2, option3, option4] {
             option.resetButton()
         }
     }
     
-    func resetRemoveOptionsButton() {
+    private func resetRemoveOptionsButton() {
         if !removeOptionsButton.enabled {
             removeOptionsButton.enable()
         }
@@ -261,7 +126,7 @@ class QuizViewController: UIViewController {
             removeOptionsButton.alpha = 1
         }
     }
-    func preventFurtherActions(){
+    private func preventFurtherActions(){
         removeOptionsButton.disable()
         removeOptionsButton.alpha = 0.5
         
@@ -430,4 +295,145 @@ class QuizViewController: UIViewController {
         }
         
     }
+    
+    //MARK:- UI setup
+    private func setupProgressBar(bar:LDProgressView){
+        bar.color = UIColor(hex: 0x75BF34)
+        bar.background = UIColor(hex: 0x4A4A4A)
+        bar.showText = NSNumber(bool: false)
+        bar.progress = 0
+        bar.type = LDProgressSolid
+    }
+    
+    private func prepareFirstQuestionUISetup(){
+        removeOptionsButton.disable()
+        setUpPlayerDetails()
+        questionView.alpha = 0
+        buttonSetContentView.alpha = 0
+        roundIndicatorLabel.alpha = 0
+    }
+    
+    private func setUpQuestionViewWithQuestion(question:Question) -> UIView {
+        if question.isGraphical() {
+            var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
+                , owner: self, options: nil)[0] as QuestionViewWithImage
+            contentView.questionContent.text = question.questionContent
+            switch question.questionType {
+            case .LogoType:
+                if let img = question.questionImage {
+                    contentView.logoCanvasView.presetImage = img
+                    //                    contentView.imageView.mosaic(20)
+                    contentView.logoCanvasView.applyFilters()
+                }
+            default:
+                if let img = question.questionImage {
+                    contentView.logoCanvasView.presetImage = img
+                }
+            }
+            return contentView
+        } else {
+            var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
+            
+            contentView.questionContent.text = question.questionContent
+            return contentView
+        }
+    }
+    
+    private func setUpViewWithQuestion(question:Question){
+        self.resetButtons()
+        didRemoveOptions = false
+        questionView.removeAllSubviews()
+        questionView.addSubview(setUpQuestionViewWithQuestion(question))
+        
+        let optionSet = question.options.allOptions
+        
+        var optionButtonSet = [option1, option2, option3, option4]
+        
+        var i = 0
+        for option in optionSet {
+            optionButtonSet[i].labelText = option.stringContent
+            if question.options.checkOptionChoiceIfIsCorrect(option) {
+                optionButtonSet[i].is_answer = true
+            } else {
+                optionButtonSet[i].is_answer = false
+            }
+            i++
+        }
+        self.roundIndicatorLabel.alpha = 0
+        switch self.current_q {
+        case self.game.questionSet.count - 1:
+            self.roundIndicatorLabel.text = "LAST ROUND"
+        default:
+            self.roundIndicatorLabel.text = "ROUND \(self.current_q + 1)"
+        }
+        
+        UIView.animateWithDuration(1.5, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+            self.roundIndicatorLabel.alpha = 1
+            }, completion: {complete in
+                UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+                    self.roundIndicatorLabel.alpha = 0
+                    }, completion: nil)
+                
+        })
+        
+        UIView.animateWithDuration(1.5, delay: 3.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+            self.questionView.alpha = 1
+            
+            }, completion: nil)
+        
+        UIView.animateWithDuration(1.0, delay: 5.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+            self.buttonSetContentView.alpha = 1
+            }, completion: { completed in
+                if completed {
+                    self.resetRemoveOptionsButton()
+                    for option in [self.option1, self.option2, self.option3, self.option4] {
+                        option.enable()
+                    }
+                    self.timerStart()
+                    
+                }
+        })
+    }
+
+    private func setUpPlayerDetails() {
+        let thisPlayer = game.initiatingPlayer
+        let opponent = game.opponentPlayer
+        
+        NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil, completionHandler: {
+            image, error in
+            if image != nil {
+                self.selfAvatarView.image = image
+            }
+        })
+        selfDisplayNameLabel.text = thisPlayer.displayName
+        
+        selfTotalScore = 0
+        
+        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil, completionHandler: {
+            image, error in
+            if image != nil {
+                self.opponentAvatarView.image = image
+            }
+        })
+        opponentDisplayNameLabel.text = opponent.displayName
+        
+        opponentScoreLabel.text = "0"
+        self.setupProgressBar(self.selfProgressView)
+        self.setupProgressBar(self.opponentProgressView)
+    }
+    
+    private func unmaskContentViewIfNecessary() {
+        switch game.questionSet[current_q].questionType {
+        case .LogoType:
+            for view in questionView.subviews {
+                if let logoView = view as? QuestionViewWithImage {
+                    logoView.logoCanvasView.reset()
+                }
+            }
+        default:
+            break
+        }
+    }
+    
+
 }
