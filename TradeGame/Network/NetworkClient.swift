@@ -97,10 +97,10 @@ class NetworkClient {
     /**
         Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions:Int = 10, opponentId:Int, completionHandler: (Game! -> ())?) {
+    func createChallenge(numberOfQuestions:Int = 5, opponentId:Int, completionHandler: (Game! -> ())?) {
         configureCompulsoryHeaders()
         debugPrintln("Creating challenge with user \(opponentId) with \(numberOfQuestions) questions(s)")
-        AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId], encoding: JSONPrettyPrinted).responseJSON({
+        AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : 2415], encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             
             if let responseError = error {
@@ -177,7 +177,15 @@ class NetworkClient {
 //        debugPrintln(r)
     }
     
-    
+    /**
+        GET api/games/open
+    */
+    func fetchOpenChallengesForUser(userId:Int, completionHandler: ([Game] -> Void)!){
+        configureCompulsoryHeaders()
+        debugPrintln("Fetching all open challenges for user \(userId)...")
+        let r = AF.request(.GET, "\(THGameAPIBaseURL)/open", parameters: nil, encoding: JSONPrettyPrinted)
+        debugPrintln(r)
+    }
     
     ///
     ///
@@ -200,7 +208,31 @@ class NetworkClient {
         EGOCache.globalCache().clearCache()
     }
     
+    // MARK: Simple functions
     
+    /**
+    Fetch user with given user ID, handles with completion handler while fetches completely.
+    
+    :param: userId User ID to fetch
+    :param: completionHandler Handles fetched user if succeed
+    */
+    func fetchUser(userId: Int, completionHandler: THUser! -> ()) {
+        configureCompulsoryHeaders()
+        
+        AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
+            _, response, content, error in
+            if let responseError = error {
+                println(responseError)
+                return
+            }
+            if let profileDTODict = content as? [String: AnyObject] {
+                var user = THUser(profileDTO: profileDTODict)
+                completionHandler(user)
+            }
+        })
+    }
+    
+
     // MARK:- Class functions
    
     ///
@@ -307,30 +339,6 @@ class NetworkClient {
         }
     }
 
-    // MARK: Simple functions
-    
-    /**
-        Fetch user with given user ID, handles with completion handler while fetches completely.
-    
-        :param: userId User ID to fetch
-        :param: completionHandler Handles fetched user if succeed
-    */
-    func fetchUser(userId: Int, completionHandler: THUser! -> ()) {
-        configureCompulsoryHeaders()
-        
-        AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
-            _, response, content, error in
-            if let responseError = error {
-                println(responseError)
-                return
-            }            
-            if let profileDTODict = content as? [String: AnyObject] {
-                var user = THUser(profileDTO: profileDTODict)
-                completionHandler(user)
-            }
-        })
-    }
-    
     
     
 }

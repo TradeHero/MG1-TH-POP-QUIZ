@@ -28,6 +28,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadOpenChallenges()
         setupSubviews()
         self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
         self.navigationItem.title = "Home"
@@ -64,6 +65,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         self.fullNameView.text = user.displayName
         //        self.rankView.text =
+    }
+    
+    private func loadOpenChallenges(){
+         NetworkClient.sharedClient.fetchOpenChallengesForUser(user.userId, completionHandler: nil)
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {

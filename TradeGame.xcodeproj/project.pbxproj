@@ -55,6 +55,7 @@
 		6DF2E5E3199B35DB009D3C26 /* DesignableRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2E5DF199B35DB009D3C26 /* DesignableRoundedView.swift */; };
 		6DF2E5E4199B35DB009D3C26 /* OverlayProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2E5E0199B35DB009D3C26 /* OverlayProgressView.swift */; };
 		6DF7231B199332E700123D0D /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7231A199332E700123D0D /* NetworkClient.swift */; };
+		6DFD21C419AAFDF5007D14F2 /* QuestionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFD21C319AAFDF5007D14F2 /* QuestionResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		6DF2E5DF199B35DB009D3C26 /* DesignableRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignableRoundedView.swift; sourceTree = "<group>"; };
 		6DF2E5E0199B35DB009D3C26 /* OverlayProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayProgressView.swift; sourceTree = "<group>"; };
 		6DF7231A199332E700123D0D /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		6DFD21C319AAFDF5007D14F2 /* QuestionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 				6D8F0C521999F13600829149 /* Option.swift */,
 				6D8F0C561999F15E00829149 /* OptionSet.swift */,
 				6D8F0C541999F14100829149 /* Question.swift */,
+				6DFD21C319AAFDF5007D14F2 /* QuestionResult.swift */,
 				6D8F0C581999F18100829149 /* THUser.swift */,
 				6D8310B2199B4A260097564A /* THUserFriend.swift */,
 				6D8F0C5C1999F1BB00829149 /* Turn.swift */,
@@ -533,6 +536,7 @@
 				6D2057E61988BCD200570042 /* QuestionViewWithImage.swift in Sources */,
 				6D8310B7199B5DBA0097564A /* FriendsViewController.swift in Sources */,
 				6D20577B19889A7000570042 /* QuizViewController.swift in Sources */,
+				6DFD21C419AAFDF5007D14F2 /* QuestionResult.swift in Sources */,
 				6D8F0C571999F15E00829149 /* OptionSet.swift in Sources */,
 				6D8F0C591999F18100829149 /* THUser.swift in Sources */,
 				6DA8689C1991D0A7009FBD99 /* Alamofire.swift in Sources */,

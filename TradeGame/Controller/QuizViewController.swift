@@ -70,6 +70,8 @@ class QuizViewController: UIViewController {
     
     private var currentQuestionCorrect: Bool = false
     
+    private var questionResults: [QuestionResult] = []
+    
     private var selfTotalScore: Int = 0 {
         didSet{
             selfScoreLabel.text = String(selfTotalScore)
@@ -159,13 +161,16 @@ class QuizViewController: UIViewController {
         if sender.is_answer {
             sender.configureAsCorrect()
             currentQuestionCorrect = true
+            produceResultForCurrentQuestion(true)
         } else {
             sender.configureAsFalse()
             revealCorrectAnswer()
+            produceResultForCurrentQuestion(false)
             AudioServicesPlayAlertSound(0x00000FFF)
         }
         
         unmaskContentViewIfNecessary()
+        
         NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
     }
     
@@ -256,6 +261,7 @@ class QuizViewController: UIViewController {
             AudioServicesPlayAlertSound(0x00000FFF)
             revealCorrectAnswer()
             unmaskContentViewIfNecessary()
+            produceResultForCurrentQuestion(false)
             NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
             
         }
@@ -265,7 +271,7 @@ class QuizViewController: UIViewController {
         for view in self.questionView.subviews as [UIView] {
             if view is QuestionViewWithImage {
                 let qview = view as QuestionViewWithImage
-                qview.logoCanvasView.applySwirlObfuscationWithAngleFactor(factor)
+                qview.logoCanvasView.obfuscateWithEffect(.PixellateEffect, factor:factor)
             }
         }
     }
@@ -281,6 +287,10 @@ class QuizViewController: UIViewController {
     
     private func endTurn(){
         let currentTurnScore = selfTotalScore
+        let results = self.questionResults
+        for r in results{
+            println("\(r)")
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -440,5 +450,10 @@ class QuizViewController: UIViewController {
         if removeOptionsButton.alpha == 0.5 {
             removeOptionsButton.alpha = 1
         }
+    }
+    
+    private func produceResultForCurrentQuestion(isCorrect:Bool){
+        let result = QuestionResult(questionID: currentQuestion.questionID, timeTaken: CGFloat(10 - current_timeLeft), correct: isCorrect)
+        self.questionResults.append(result)
     }
 }

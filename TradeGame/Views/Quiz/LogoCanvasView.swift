@@ -8,8 +8,13 @@
 
 import UIKit
 
-class LogoCanvasView: UIView {
+enum LogoCanvasObfuscationType : Int {
+    case SwirlEffect
+    case PixellateEffect
+}
 
+class LogoCanvasView: UIView {
+    
     private var rasterizedImage: UIImage!
     
     var imageView: UIImageView!
@@ -62,10 +67,25 @@ class LogoCanvasView: UIView {
         self.imageView.image = nil
     }
     
-    func applySwirlObfuscationWithAngleFactor(factor:Double) {
-        let f = factor < 0 ? 0 : factor > 1 ? 1 : factor //clamp
+    func obfuscateWithEffect(type:LogoCanvasObfuscationType, factor:Double) {
+        let f:CGFloat = factor < 0 ? 0 : factor > 1 ? 1 : CGFloat(factor) //clamp
+        switch type {
+        case .SwirlEffect:
+            applySwirlObfuscationWithAngleFactor(f)
+        case .PixellateEffect:
+            applyPixellateObfuscationWithFractionalWidth(f)
+        }
+    }
+    
+    func applySwirlObfuscationWithAngleFactor(factor:CGFloat) {
         let swirlFilter = GPUImageSwirlFilter()
-        swirlFilter.angle = CGFloat(f)
+        swirlFilter.angle = factor
         self.imageView.image = swirlFilter.imageByFilteringImage(rasterizedImage)
+    }
+    
+    func applyPixellateObfuscationWithFractionalWidth(factor:CGFloat){
+        let pixellateFilter = GPUImagePixellateFilter()
+        pixellateFilter.fractionalWidthOfAPixel = factor
+        self.imageView.image = pixellateFilter.imageByFilteringImage(rasterizedImage)
     }
 }
