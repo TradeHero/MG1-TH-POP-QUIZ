@@ -247,7 +247,6 @@ class QuizViewController: UIViewController {
     
     func updateTimer(){
         let time = getTimeElasped().roundToNearest1DecimalPlace()
-        println(time)
         var timeLeft = 10 - time
         if timeLeft > 0 {
             current_timeLeft = timeLeft
@@ -320,7 +319,7 @@ class QuizViewController: UIViewController {
             switch question.questionType {
             case .LogoType:
                 if let img = question.questionImage {
-                    let filters = [LogoCanvasObfuscationType.SwirlEffect, LogoCanvasObfuscationType.PixellateEffect]
+                    let filters:[LogoCanvasObfuscationType] = [.SwirlEffect, .PixellateEffect, .GaussianBlurEffect]
                     contentView.logoCanvasView.presetImage = img
                     contentView.logoCanvasView.obfuscationType = filters.randomItem()
                     contentView.logoCanvasView.prepareFirstObfuscation()

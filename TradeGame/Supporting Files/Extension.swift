@@ -49,11 +49,7 @@ extension Double {
 
 extension CGFloat {
     func roundToNearest1DecimalPlace() -> CGFloat {
-        let doublyString = Double(self).format(".1")
-        let floatyDouble = doublyString.floatValue
-        let cgfloaty = CGFloat(floatyDouble)
-        println(floatyDouble)
-        return cgfloaty
+        return CGFloat(Double(self).format(".1").floatValue)
     }
 }
 

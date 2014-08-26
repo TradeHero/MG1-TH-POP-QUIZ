@@ -98,20 +98,6 @@ class Question {
     
     var questionImage: UIImage!
     
-    /// Initialise question with textual content, image content, set of options and type of question.
-    ///
-    /// :param: content Textual content of the question.
-    /// :param: optionSet Set of options of the given question
-    /// :param: image Image content of the question, could be a logo or a graph, etc.
-    /// :param: type The immediate type of the question
-    init(id:Int, content:String, optionSet:OptionSet, imageURL:String?, type:QuestionType) {
-        self.questionID = id
-        self.questionContent = content
-        self.options = optionSet
-        self.questionImageURLString = imageURL
-        self.questionType = type
-    }
-    
     func isGraphical() -> Bool{
         switch self.questionType {
         case .LogoType, .TimedObfuscatorType:

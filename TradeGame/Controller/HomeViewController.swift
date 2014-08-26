@@ -68,7 +68,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func loadOpenChallenges(){
-         NetworkClient.sharedClient.fetchOpenChallengesForUser(user.userId, completionHandler: nil)
+         NetworkClient.sharedClient.fetchOpenChallenges(nil)
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {

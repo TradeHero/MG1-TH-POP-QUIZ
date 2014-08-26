@@ -136,7 +136,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapChallengeUser userID: Int) {
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Creating challenge..."
-        
+        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
         weak var weakSelf = self
         NetworkClient.sharedClient.createChallenge(opponentId: userID) {
             var strongSelf = weakSelf!
@@ -179,7 +179,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.removeFromSuperViewOnHide = true
         hud.minShowTime = 0
-        
+        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
         self.FBFriendList.removeAll(keepCapacity: true)
         self.THFriendList.removeAll(keepCapacity: true)
         

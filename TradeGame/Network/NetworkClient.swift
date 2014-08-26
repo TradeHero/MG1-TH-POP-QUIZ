@@ -161,10 +161,12 @@ class NetworkClient {
             var friends: [THUserFriend] = []
             
             if let arr = content as? [AnyObject] {
+                debugPrintln("Parsing \(arr.count) objects as THUserFriend...")
                 for friendObj in arr {
                     let friendDictionary = friendObj as [String: AnyObject]
                     friends.append(THUserFriend(friendDTO: friendDictionary))
                 }
+                debugPrintln("Completely parsed objects as THUserFriend(s).")
             }
             var fbFrnds: [THUserFriend] = []
             var thFrnds: [THUserFriend] = []
@@ -181,14 +183,25 @@ class NetworkClient {
     /**
         GET api/games/open
     */
-    func fetchOpenChallengesForUser(userId:Int, completionHandler: ([Game] -> Void)!){
+    func fetchOpenChallenges(completionHandler: ([Game] -> Void)!){
         configureCompulsoryHeaders()
-        debugPrintln("Fetching all open challenges for user \(userId)...")
+        debugPrintln("Fetching all open challenges for authenticated user...")
         let r = AF.request(.GET, "\(THGameAPIBaseURL)/open", parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
+            if error != nil {
+                debugPrintln(error)
+            }
             
+            if let openChallengesDTOs = content as? [AnyObject] {
+                if openChallengesDTOs.count == 0 {
+                    debugPrintln("User has no open challenges.")
+                } else {
+                    debugPrintln("Parsing \(openChallengesDTOs.count) objects as open challenges...")
+//                    debugPrintln("Successfully fetched \(openChallengesDTOs.count) open challenge(s).")
+                }
+            }
         }
-        debugPrintln(r)
+//        debugPrintln(r)
     }
     
     ///
