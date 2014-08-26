@@ -41,7 +41,7 @@ extension Array
     }
 }
 
-extension Double {
+extension CGFloat {
     func format(f: String) -> String {
         return NSString(format: "%\(f)f", self)
     }

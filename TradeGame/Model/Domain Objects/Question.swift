@@ -18,15 +18,15 @@ import UIKit
 enum QuestionType : Int {
     case UnknownType = 0
     case LogoType
-    case GraphType
+    case TimedObfuscatorType
     case TextualType
     
     func description() -> String {
         switch self {
         case .LogoType:
             return "Logo type"
-        case .GraphType:
-            return "Graph type"
+        case .TimedObfuscatorType:
+            return "Timed Obfuscator type"
         case .TextualType:
             return "Textual type"
         case .UnknownType:
@@ -37,44 +37,41 @@ enum QuestionType : Int {
 
 enum QuestionCategory : Int {
     case UnknownCategory = 0
-    case LogoToNameOrTickerCategory
-    case NameToLastPriceCategory
-    case NameToMarketCapCategory
-    case NameToPECategory
-    case NameToADVCategory
-    case LastPriceToNameCategory
-    case MarketCapToNameCategory
-    case PEToNameCategory
-    case ADVToNameCategory
-    case TickerToNameCategory
-    case NameToExchangeCategory
+    case LogoToNameCategory
+    case LogoToTickerSymbolCategory
+    case NameToPriceRangeCategory
+    case NameToMarketCapRangeCategory
+    case PriceRangeToCompanyNameCategory
+    case HighestMarketCapCategory
+    case LowestMarketCapCategory
+    case CompanyNameToExchangeSymbolCategory
+    case OddOneOutCategory
+    case CompanyNameToSectorCategory
     
     func description() -> String {
         switch self {
         case .UnknownCategory:
             return "Unknown category"
-        case .LogoToNameOrTickerCategory:
-            return "[1] Logo -> Name/Ticker"
-        case .NameToLastPriceCategory:
-            return "[2] Name -> LastPrice"
-        case .NameToMarketCapCategory:
-            return "[3] Name -> Market Cap"
-        case .NameToPECategory:
-            return "[4] Name -> Price-Earnings Ratio"
-        case .NameToADVCategory:
-            return "[5] Name -> Average Daily Volume"
-        case .LastPriceToNameCategory:
-            return "[6] LastPrice -> Name"
-        case .MarketCapToNameCategory:
-            return "[7] Market Cap -> Name"
-        case .PEToNameCategory:
-            return "[8] Price-Earnings Ratio -> Name"
-        case .ADVToNameCategory:
-            return "[9] Average Daily Volume -> Name"
-        case .TickerToNameCategory:
-            return "[10] Ticker -> Name"
-        case .NameToExchangeCategory:
-            return "[11] Name -> Exchange"
+        case .LogoToNameCategory:
+            return "[1] Logo -> Name"
+        case .LogoToTickerSymbolCategory:
+            return "[2] Logo -> Ticker Symbol"
+        case .NameToPriceRangeCategory:
+            return "[3] Name -> Price Range"
+        case .NameToMarketCapRangeCategory:
+            return "[4] Name -> Market Cap Range"
+        case .PriceRangeToCompanyNameCategory:
+            return "[5] Price Range -> Company name"
+        case .HighestMarketCapCategory:
+            return "[6] Highest Market Cap"
+        case .LowestMarketCapCategory:
+            return "[7] Lowest Market Cap"
+        case .CompanyNameToExchangeSymbolCategory:
+            return "[8] Company name -> Exchange symbol"
+        case .OddOneOutCategory:
+            return "[9] Odd one out"
+        case .CompanyNameToSectorCategory:
+            return "[10] Company Name -> Sector"
         }
     }
 }
@@ -117,7 +114,7 @@ class Question {
     
     func isGraphical() -> Bool{
         switch self.questionType {
-        case .LogoType, .GraphType:
+        case .LogoType, .TimedObfuscatorType:
             return true
         default:
             return false
@@ -138,49 +135,46 @@ class Question {
             switch qTypeInt {
             case 1:
                 self.questionType = .LogoType
-                self.questionCategory = .LogoToNameOrTickerCategory
-                self.questionContent = "Which stock symbol does this logo represents?"
+                self.questionCategory = .LogoToNameCategory
+                self.questionContent = "Which of the following companies does this logo correspond to?"
                 self.questionImageURLString = contentStr
             case 2:
-                self.questionType = .TextualType
-                self.questionCategory = .NameToLastPriceCategory
-                self.questionContent = "Which of the following is the last sale price of \(contentStr)?"
+                self.questionType = .LogoType
+                self.questionCategory = .LogoToTickerSymbolCategory
+                self.questionContent = "Which of the following ticker symbols does this logo correspond to?"
+                self.questionImageURLString = contentStr
             case 3:
                 self.questionType = .TextualType
-                 self.questionCategory = .NameToMarketCapCategory
-                self.questionContent = "Which of the following is the market cap of \(contentStr)?"
+                self.questionCategory = .NameToPriceRangeCategory
+                self.questionContent = "In which of the price ranges did \(contentStr) recently trade?"
             case 4:
                 self.questionType = .TextualType
-                self.questionCategory = .NameToPECategory
-                self.questionContent = "Which of the following is the P/E ratio of \(contentStr)?"
+                self.questionCategory = .NameToMarketCapRangeCategory
+                self.questionContent = "Which of the following ranges best represents the market cap of \(contentStr)?"
             case 5:
                 self.questionType = .TextualType
-                self.questionCategory = .NameToADVCategory
-                self.questionContent = "Which of the following is the average daily volume of \(contentStr)?"
+                self.questionCategory = .PriceRangeToCompanyNameCategory
+                self.questionContent = "Which of the 4 companies below trades in the price range of \(contentStr)"
             case 6:
                 self.questionType = .TextualType
-                self.questionCategory = .LastPriceToNameCategory
-                self.questionContent = "Which company has last sale price of \(contentStr)?"
+                self.questionCategory = .HighestMarketCapCategory
+                self.questionContent = "Which of the following companies has highest market cap?"
             case 7:
                 self.questionType = .TextualType
-                self.questionCategory = .MarketCapToNameCategory
-                self.questionContent = "Which company has market cap  of \(contentStr)?"
+                self.questionCategory = .LowestMarketCapCategory
+                self.questionContent = "Which of the following companies has lowest market cap?"
             case 8:
                 self.questionType = .TextualType
-                self.questionCategory = .PEToNameCategory
-                self.questionContent = "Which company has P/E ratio of \(contentStr)?"
+                self.questionCategory = .CompanyNameToExchangeSymbolCategory
+                self.questionContent = "Identify the exchange symbol of the following company?"
             case 9:
                 self.questionType = .TextualType
-                self.questionCategory = .ADVToNameCategory
-                self.questionContent = "Which company has average daily volume of \(contentStr)?"
+                self.questionCategory = .OddOneOutCategory
+                self.questionContent = "Spot the odd one from the four companies below."
             case 10:
                 self.questionType = .TextualType
-                self.questionCategory = .TickerToNameCategory
-                self.questionContent = "Which name corresponds to the ticker symbol \(contentStr)?"
-            case 11:
-                self.questionType = .TextualType
-                self.questionCategory = .NameToExchangeCategory
-                self.questionContent = "Which exchange corresponds to the name \(contentStr)?"
+                self.questionCategory = .CompanyNameToSectorCategory
+                self.questionContent = "In which sector does the \(contentStr) operate?"
             default:
                 self.questionType = QuestionType.UnknownType
                 self.questionContent = "~ \(contentStr) ~"
@@ -211,17 +205,34 @@ class Question {
     }
 
     func fetchImage(completionHandler:() -> ()) {
+
         if let imgName = self.questionImageURLString {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
+                if error != nil {
+                    debugPrintln(error)
+                    return
+                }
                 if image != nil {
                     self.questionImage = image
                 }
-                completionHandler()
+                self.fetchOptionImageOperation(completionHandler)
             })
 
         }else{
-            completionHandler()
+            self.fetchOptionImageOperation(completionHandler)
+        }
+    }
+
+    func fetchOptionImageOperation(completionHandler:() -> ()){
+        var count:Int = 0
+        for option in self.options.allOptions {
+            option.fetchImage() {
+                count += 1
+                if count == 4 {
+                    completionHandler()
+                }
+            }
         }
     }
 }

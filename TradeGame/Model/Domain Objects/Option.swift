@@ -13,15 +13,48 @@ import UIKit
 class Option {
     
     /// String content of the option
-    let stringContent: String
+    let stringContent: String!
     
+    let imageContentURLString: String!
+    
+    var imageContent: UIImage!
+    
+    lazy var isGraphical: Bool = {
+        return self.imageContentURLString != nil
+        }()
     /**
     Initialise option with string content and image content
     
     :param: stringContent The string content of the option
     */
     init(stringContent:String){
-        self.stringContent = stringContent
+        var d = stringContent.componentsSeparatedByString("|")
+        if d.count == 2 {
+            self.stringContent = d[0]
+            self.imageContentURLString = d[1]
+        } else {
+            self.stringContent = stringContent
+            self.imageContentURLString = nil
+        }
+    }
+    
+    func fetchImage(completionHandler:() -> ()){
+        if let imgName = self.imageContentURLString {
+            NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
+                image, error in
+                if error != nil {
+                    debugPrintln(error)
+                    return
+                }
+                if image != nil {
+                    self.imageContent = image
+                }
+                completionHandler()
+            })
+            
+        }else{
+            completionHandler()
+        }
     }
 }
 

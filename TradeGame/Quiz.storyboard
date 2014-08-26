@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="xpE-6b-INw">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -469,6 +468,10 @@
                         <outlet property="winLoseLabel" destination="EFc-dS-UBs" id="IDr-iT-58t"/>
                         <outlet property="winLoseSmileyIcon" destination="wpo-Qs-ZL9" id="gMv-Tx-xXC"/>
                         <outlet property="winningRay" destination="9cE-Lt-rTi" id="cxw-r8-W8v"/>
+                        <outletCollection property="starViews" destination="M4A-T9-qfI" collectionClass="NSMutableArray" id="4b1-Zd-QKS"/>
+                        <outletCollection property="starViews" destination="kS7-fI-CLC" collectionClass="NSMutableArray" id="iju-qP-4zP"/>
+                        <outletCollection property="starViews" destination="IDz-qY-QAt" collectionClass="NSMutableArray" id="cmR-ht-ys9"/>
+                        <outletCollection property="starViews" destination="oQx-uE-XeA" collectionClass="NSMutableArray" id="nba-kF-hDC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J8h-kn-fgd" userLabel="First Responder" sceneMemberID="firstResponder"/>

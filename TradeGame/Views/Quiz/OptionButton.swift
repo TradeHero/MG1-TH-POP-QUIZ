@@ -219,7 +219,6 @@ class OptionButton: DesignableButton {
         bounds.size.height = 0
         self.tickLogoView.bounds = bounds
         UIView.animateWithDuration(0.2) {
-            () in
             self.tickLogoView.bounds = bounds2
         }
     }

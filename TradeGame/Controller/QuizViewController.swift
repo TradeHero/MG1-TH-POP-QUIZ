@@ -47,7 +47,7 @@ class QuizViewController: UIViewController {
     // MARK:- ivar
     private var current_q: Int = 0
     
-    private var current_timeLeft: Double = 10.0 {
+    private var current_timeLeft: CGFloat = 10.0 {
         didSet{
             let timeString = current_timeLeft.format(".1")
             
@@ -202,7 +202,7 @@ class QuizViewController: UIViewController {
         let timeLeft = current_timeLeft
         let timeLeftBonus =  timeLeft > 0.0 ? timeLeft/10.0 : 0.4
         let correctiveFactor = currentQuestionCorrect ? 1.0 : 0.0
-        let doubleScore = 500.0 * timeLeftBonus * correctiveFactor
+        let doubleScore = 500.0 * Double(timeLeftBonus) * correctiveFactor
         score += Int(doubleScore)
         selfTotalScore = score
     }
@@ -221,9 +221,9 @@ class QuizViewController: UIViewController {
         stopwatch = nil
     }
     
-    private func getTimeElasped() -> Double{
+    private func getTimeElasped() -> CGFloat{
         let timeNow = NSDate()
-        let timeInterval = timeNow.timeIntervalSinceDate(stopwatchStartTime)
+        let timeInterval = CGFloat(timeNow.timeIntervalSinceDate(stopwatchStartTime))
         return timeInterval > 0 ? timeInterval : 0
     }
     
@@ -267,7 +267,7 @@ class QuizViewController: UIViewController {
         }
     }
     
-    private func showImageObfuscationWithTimeFactor(factor:Double = 1) {
+    private func showImageObfuscationWithTimeFactor(factor:CGFloat = 1) {
         for view in self.questionView.subviews as [UIView] {
             if view is QuestionViewWithImage {
                 let qview = view as QuestionViewWithImage
