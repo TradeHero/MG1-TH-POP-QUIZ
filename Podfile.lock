@@ -1,6 +1,6 @@
 PODS:
   - EGOCache (2.1)
-  - GPUImage (0.1.5)
+  - GPUImage (0.1.4)
   - LDProgressView (1.2.1)
   - MBProgressHUD (0.9)
   - SDWebImage (3.7.1):
@@ -10,15 +10,20 @@ PODS:
 
 DEPENDENCIES:
   - EGOCache (~> 2.1)
-  - GPUImage (~> 0.1.5)
+  - GPUImage (from `https://github.com/BradLarson/GPUImage.git`, commit `ea9c96c32d375fd78d2336be340ad490c3c8cff9`)
   - LDProgressView (~> 1.2.1)
   - MBProgressHUD (~> 0.9)
   - SDWebImage (~> 3.7.1)
   - SSKeychain (~> 1.2.2)
 
+EXTERNAL SOURCES:
+  GPUImage:
+    :commit: ea9c96c32d375fd78d2336be340ad490c3c8cff9
+    :git: https://github.com/BradLarson/GPUImage.git
+
 SPEC CHECKSUMS:
   EGOCache: bf414333c425fe47f5182351d1dd47ebf72d8352
-  GPUImage: 5114a47f5fc33eb312f3731550a3cea379416d04
+  GPUImage: f9b32e12350792a630e596ffc7b050bea3662670
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d

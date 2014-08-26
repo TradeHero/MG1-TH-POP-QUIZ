@@ -48,7 +48,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Logging in..."
-        
+        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
         weak var weakSelf = self
         NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken, errorHandler: { error in
                 hud.mode = MBProgressHUDModeText

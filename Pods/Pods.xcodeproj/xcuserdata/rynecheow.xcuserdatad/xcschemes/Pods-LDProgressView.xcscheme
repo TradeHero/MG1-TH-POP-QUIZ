@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB7C31C70A03489C8EA6E5C2"
+               BlueprintIdentifier = "981F92112ABC4298BDCFD6C9"
                BuildableName = "libPods-LDProgressView.a"
                BlueprintName = "Pods-LDProgressView"
                ReferencedContainer = "container:Pods.xcodeproj">
