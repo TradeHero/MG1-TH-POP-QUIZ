@@ -205,11 +205,11 @@
 		6D20576A19889A7000570042 = {
 			isa = PBXGroup;
 			children = (
+				6D20577519889A7000570042 /* Code */,
 				6DA8689A1991D096009FBD99 /* External */,
 				62BCA2FCF6204096938FF8A1 /* Frameworks */,
 				0251FC027A5E41F0B8DD4BDC /* Pods.xcconfig */,
 				6D20577419889A7000570042 /* Products */,
-				6D20577519889A7000570042 /* TradeGame */,
 				6D20578819889A7000570042 /* TradeGameTests */,
 			);
 			sourceTree = "<group>";
@@ -223,7 +223,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6D20577519889A7000570042 /* TradeGame */ = {
+		6D20577519889A7000570042 /* Code */ = {
 			isa = PBXGroup;
 			children = (
 				6DF2E5E5199B38BE009D3C26 /* AppDelegate */,
@@ -235,7 +235,7 @@
 				6D20577619889A7000570042 /* Supporting Files */,
 				6D286D4B1989F12500D179F8 /* Views */,
 			);
-			path = TradeGame;
+			path = Code;
 			sourceTree = "<group>";
 		};
 		6D20577619889A7000570042 /* Supporting Files */ = {
