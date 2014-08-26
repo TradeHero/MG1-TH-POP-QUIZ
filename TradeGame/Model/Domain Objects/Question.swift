@@ -166,7 +166,7 @@ class Question {
             case 8:
                 self.questionType = .TextualType
                 self.questionCategory = .CompanyNameToExchangeSymbolCategory
-                self.questionContent = "Identify the exchange symbol of the following company?"
+                self.questionContent = "Identify the exchange symbol of \(contentStr)."
             case 9:
                 self.questionType = .TextualType
                 self.questionCategory = .OddOneOutCategory

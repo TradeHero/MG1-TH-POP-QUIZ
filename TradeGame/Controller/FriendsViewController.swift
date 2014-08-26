@@ -149,7 +149,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                         i++
                     }
                 }
-                println("\(g)")
+
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
                 hud.mode = MBProgressHUDModeAnnularDeterminate
                 

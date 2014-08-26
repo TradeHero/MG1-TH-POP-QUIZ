@@ -33,6 +33,10 @@ class LogoCanvasView: UIView {
 
     let pixellateFilter = GPUImagePixellateFilter()
     
+    lazy var obfuscationType: LogoCanvasObfuscationType = {
+       return LogoCanvasObfuscationType.SwirlEffect
+    }()
+    
     var gpuProcessor: GPUImageProcessor = GPUImageProcessor()
     
     required init(coder aDecoder: NSCoder) {
@@ -71,17 +75,22 @@ class LogoCanvasView: UIView {
         self.imageView.image = gpuProcessor.imageWithFilterAppliedWithImage(rasterizedImage)
     }
     
-    func hideImage(){
-        self.imageView.image = nil
+    func prepareFirstObfuscation(){
+        switch obfuscationType {
+        case .SwirlEffect:
+            applySwirlObfuscationWithAngleFactor(1)
+        case .PixellateEffect:
+            applyPixellateObfuscationWithFractionalWidth(1 * 0.05)
+        }
     }
     
-    func obfuscateWithEffect(type:LogoCanvasObfuscationType, factor:CGFloat) {
-        let f:CGFloat = factor < 0 ? 0 : factor > 1 ? 1 : factor //clamp
-        switch type {
+    func obfuscateWithEffect(factor:CGFloat) {
+        let f:CGFloat = factor < 0 ? 0.01 : factor > 1 ? 1 : factor //clamp
+        switch obfuscationType {
         case .SwirlEffect:
-            applySwirlObfuscationWithAngleFactor(f/1.5)
+            applySwirlObfuscationWithAngleFactor(f)
         case .PixellateEffect:
-            applyPixellateObfuscationWithFractionalWidth(f/30 + 0.001)
+            applyPixellateObfuscationWithFractionalWidth(f * 0.05)
         }
     }
     

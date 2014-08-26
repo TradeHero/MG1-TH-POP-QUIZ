@@ -41,9 +41,19 @@ extension Array
     }
 }
 
-extension CGFloat {
+extension Double {
     func format(f: String) -> String {
         return NSString(format: "%\(f)f", self)
+    }
+}
+
+extension CGFloat {
+    func roundToNearest1DecimalPlace() -> CGFloat {
+        let doublyString = Double(self).format(".1")
+        let floatyDouble = doublyString.floatValue
+        let cgfloaty = CGFloat(floatyDouble)
+        println(floatyDouble)
+        return cgfloaty
     }
 }
 
@@ -247,6 +257,11 @@ extension String {
         let decodedString = NSString(data: base64data, encoding: NSUTF8StringEncoding)
         return decodedString
     }
+
+    var floatValue: Float {
+        return (self as NSString).floatValue
+    }
+
 }
 
 extension UIStoryboard {

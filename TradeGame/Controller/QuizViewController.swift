@@ -49,8 +49,8 @@ class QuizViewController: UIViewController {
     
     private var current_timeLeft: CGFloat = 10.0 {
         didSet{
-            let timeString = current_timeLeft.format(".1")
-            
+            let timeString = Double(current_timeLeft).format(".1")
+            timeLeftLabel.text = timeString
             if current_timeLeft < 3.0 {
                 timeLeftLabel.textColor = UIColor(hex: 0xfe0000)
             } else if current_timeLeft < 7.5 {
@@ -58,8 +58,7 @@ class QuizViewController: UIViewController {
             } else {
                 timeLeftLabel.textColor = UIColor(hex :0x1063D9)
             }
-            timeLeftLabel.text = timeString
-        }
+                    }
     }
     
     var game: Game!
@@ -151,7 +150,7 @@ class QuizViewController: UIViewController {
         self.timerStop()
         self.preventFurtherActions()
         self.currentQuestionCorrect = false
-        
+        self.timeLeftLabel.text = "∞"
         for button in self.optionGroup {
             if sender !== button {
                 button.shrink()
@@ -247,15 +246,16 @@ class QuizViewController: UIViewController {
     }
     
     func updateTimer(){
-        let time = getTimeElasped()
-        var timeLeft = 10.1 - time
+        let time = getTimeElasped().roundToNearest1DecimalPlace()
+        println(time)
+        var timeLeft = 10 - time
         if timeLeft > 0 {
             current_timeLeft = timeLeft
             if isTimedObfuscatorQuestion {
                 showImageObfuscationWithTimeFactor(factor: timeLeft/10)
             }
         } else if timeLeft <= 0 {
-            current_timeLeft = 0.0
+            current_timeLeft = 0
             timerStop()
             preventFurtherActions()
             AudioServicesPlayAlertSound(0x00000FFF)
@@ -271,7 +271,7 @@ class QuizViewController: UIViewController {
         for view in self.questionView.subviews as [UIView] {
             if view is QuestionViewWithImage {
                 let qview = view as QuestionViewWithImage
-                qview.logoCanvasView.obfuscateWithEffect(.PixellateEffect, factor:factor)
+                qview.logoCanvasView.obfuscateWithEffect(factor)
             }
         }
     }
@@ -320,10 +320,10 @@ class QuizViewController: UIViewController {
             switch question.questionType {
             case .LogoType:
                 if let img = question.questionImage {
+                    let filters = [LogoCanvasObfuscationType.SwirlEffect, LogoCanvasObfuscationType.PixellateEffect]
                     contentView.logoCanvasView.presetImage = img
-                    //                    contentView.imageView.mosaic(20)
-                    //                    contentView.logoCanvasView.applyFilters()
-                    contentView.logoCanvasView.hideImage()
+                    contentView.logoCanvasView.obfuscationType = filters.randomItem()
+                    contentView.logoCanvasView.prepareFirstObfuscation()
                 }
             default:
                 if let img = question.questionImage {

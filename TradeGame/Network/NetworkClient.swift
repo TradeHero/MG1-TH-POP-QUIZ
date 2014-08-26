@@ -97,7 +97,7 @@ class NetworkClient {
     /**
         Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions:Int = 5, opponentId:Int, completionHandler: (Game! -> ())?) {
+    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int, completionHandler: (Game! -> ())?) {
         configureCompulsoryHeaders()
         debugPrintln("Creating challenge with user \(opponentId) with \(numberOfQuestions) questions(s)")
         AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
@@ -184,7 +184,10 @@ class NetworkClient {
     func fetchOpenChallengesForUser(userId:Int, completionHandler: ([Game] -> Void)!){
         configureCompulsoryHeaders()
         debugPrintln("Fetching all open challenges for user \(userId)...")
-        let r = AF.request(.GET, "\(THGameAPIBaseURL)/open", parameters: nil, encoding: JSONPrettyPrinted)
+        let r = AF.request(.GET, "\(THGameAPIBaseURL)/open", parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+            _, response, content, error in
+            
+        }
         debugPrintln(r)
     }
     
