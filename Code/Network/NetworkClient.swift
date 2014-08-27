@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import Alamofire
 
 class NetworkClient {
     
@@ -33,8 +34,8 @@ class NetworkClient {
     var credentials: String!
     
     /// default JSON encoding
-    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(NSJSONWritingOptions.PrettyPrinted)
-    
+//    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON
+    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(nil)
     
     // MARK:- Methods
     
@@ -47,7 +48,7 @@ class NetworkClient {
     func loginUserWithFacebookAuth(accessToken:String, errorHandler:NSError -> (), loginSuccessHandler:THUser! -> ()) {
         let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
         
-        var headers = AF.Manager.sharedInstance.defaultHeaders
+        var headers = Alamofire.Manager.sharedInstance.defaultHeaders
         if (headers["TH-Client-Version"] == nil) {
             headers["TH-Client-Version"] = "2.3.0.4245"
         }
@@ -60,9 +61,9 @@ class NetworkClient {
             headers["TH-Language-Code"] = "en-GB"
         }
         headers["Authorization"] = "\(THAuthFacebookPrefix) \(accessToken)"
-        AF.Manager.sharedInstance.defaultHeaders = headers
+        Alamofire.Manager.sharedInstance.defaultHeaders = headers
         
-        let r = AF.request(.POST,
+        let r = Alamofire.request(.POST,
             THServerAPIBaseURL + "/login",
             parameters: param,
             encoding: JSONPrettyPrinted)
@@ -98,7 +99,7 @@ class NetworkClient {
     func createChallenge(numberOfQuestions:Int = 7, opponentId:Int, completionHandler: (Game! -> ())?) {
         configureCompulsoryHeaders()
         debugPrintln("Creating challenge with user \(opponentId) with \(numberOfQuestions) questions(s)")
-        AF.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
+        Alamofire.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
             ], encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             
@@ -151,7 +152,7 @@ class NetworkClient {
         let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
         configureCompulsoryHeaders()
         debugPrintln("Fetching Facebook friends for user \(userId)...")
-        let r = AF.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -187,7 +188,7 @@ class NetworkClient {
         
         configureCompulsoryHeaders()
         debugPrintln("Fetching all open challenges for authenticated user...")
-        let r = AF.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
             if error != nil {
                 debugPrintln(error)
@@ -279,7 +280,7 @@ class NetworkClient {
     func fetchUser(userId: Int, completionHandler: THUser! -> ()) {
         configureCompulsoryHeaders()
         
-        AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
+        Alamofire.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -297,7 +298,7 @@ class NetworkClient {
    
     ///
     /// Fetch an image from a fully qualified URL String.
-    /// 
+    ///
     /// :param: urlString Fully qualified URL String of the image to be fetched
     /// :param: progressHandler Refer to SDWebImageDownloaderProgressBlock
     /// :param: completionHandler process image if successfully downloaded.
@@ -320,7 +321,7 @@ class NetworkClient {
     // MARK:- private functions
     
     func configureCompulsoryHeaders(){
-        var headers = AF.Manager.sharedInstance.defaultHeaders
+        var headers = Alamofire.Manager.sharedInstance.defaultHeaders
         if (headers["TH-Client-Version"] == nil) {
             headers["TH-Client-Version"] = "2.3.0.4245"
         }
@@ -336,10 +337,10 @@ class NetworkClient {
         if let auth = generateAuthorisationFromKeychain() {
             headers["Authorization"] = auth
         }
-        AF.Manager.sharedInstance.defaultHeaders = headers
+        Alamofire.Manager.sharedInstance.defaultHeaders = headers
     }
     
-    /// 
+    ///
     /// Generates authorisation header from saved credential in device keychain.
     ///
     private func generateAuthorisationFromKeychain() -> String? {
@@ -369,7 +370,7 @@ class NetworkClient {
         self.credentials = credentialString
     }
     
-    /// 
+    ///
     /// Remove completely credentials from system.
     ///
     private func removeCredentials() {
