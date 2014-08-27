@@ -157,15 +157,15 @@ class QuizViewController: UIViewController {
                 button.shrink()
             }
         }
-        
+        let currentQuestionScore = calculateScore()
         if sender.is_answer {
             sender.configureAsCorrect()
             currentQuestionCorrect = true
-            produceResultForCurrentQuestion(true)
+            produceResultForCurrentQuestion(true, score: currentQuestionScore)
         } else {
             sender.configureAsFalse()
             revealCorrectAnswer()
-            produceResultForCurrentQuestion(false)
+            produceResultForCurrentQuestion(false, score: currentQuestionScore)
             AudioServicesPlayAlertSound(0x00000FFF)
         }
         
@@ -188,7 +188,6 @@ class QuizViewController: UIViewController {
     
     func prepareToEndRound() {
         current_q++
-        calculateScore()
         if game.questionSet.count > current_q {
             proceedToNextQuestion()
         } else {
@@ -196,15 +195,15 @@ class QuizViewController: UIViewController {
         }
     }
     
-    private func calculateScore(){
-        var score = selfTotalScore
-        let timeTaken:Float = 0
+    private func calculateScore() -> Int {
+        let timeTaken:CGFloat = 0
         let timeLeft = current_timeLeft
         let timeLeftBonus =  timeLeft > 0.0 ? timeLeft/10.0 : 0.4
-        let correctiveFactor = currentQuestionCorrect ? 1.0 : 0.0
-        let doubleScore = 500.0 * Double(timeLeftBonus) * correctiveFactor
-        score += Int(doubleScore)
-        selfTotalScore = score
+        let correctiveFactor:CGFloat = currentQuestionCorrect ? 1.0 : 0.0
+        let floatScore = 500.0 * timeLeftBonus * correctiveFactor
+        let intScore = Int(floatScore)
+        self.selfTotalScore += intScore
+        return intScore
     }
     
     
@@ -261,9 +260,10 @@ class QuizViewController: UIViewController {
             AudioServicesPlayAlertSound(0x00000FFF)
             revealCorrectAnswer()
             unmaskContentViewIfNecessary()
-            produceResultForCurrentQuestion(false)
+            let score = calculateScore()
+            produceResultForCurrentQuestion(false, score: score)
             NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
-            
+
         }
     }
     
@@ -460,8 +460,7 @@ class QuizViewController: UIViewController {
         }
     }
     
-    private func produceResultForCurrentQuestion(isCorrect:Bool){
-        let result = QuestionResult(questionID: currentQuestion.questionID, timeTaken: CGFloat(10 - current_timeLeft), correct: isCorrect)
-        self.questionResults.append(result)
+    private func produceResultForCurrentQuestion(isCorrect:Bool, score:Int){
+        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: CGFloat(10 - current_timeLeft), correct: isCorrect, score: score))
     }
 }

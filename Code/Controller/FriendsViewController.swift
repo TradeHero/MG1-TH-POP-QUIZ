@@ -182,7 +182,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
 
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
                 hud.mode = MBProgressHUDModeAnnularDeterminate
-                
+
                 vc.prepareGame($0, hud:hud) {
                     var strongSelf = weakSelf!
                     hud.detailsLabelText = "Done fetching image."

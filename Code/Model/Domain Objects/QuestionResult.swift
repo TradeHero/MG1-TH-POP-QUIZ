@@ -12,11 +12,13 @@ class QuestionResult {
     var questionId: Int!
     var timeTaken: CGFloat!
     var isCorrect: Bool!
+    var rawScore: Int!
     
-    init(questionID: Int, timeTaken:CGFloat, correct:Bool) {
+    init(questionID: Int, timeTaken:CGFloat, correct:Bool, score: Int) {
         self.questionId = questionID
         self.timeTaken = timeTaken
         self.isCorrect = correct
+        self.rawScore = score
     }
 }
 
@@ -26,6 +28,7 @@ extension QuestionResult: Printable {
             d += "Question ID: \(self.questionId)\n"
             d += "Time taken: \(self.timeTaken) sec(s)\n"
             d += "Correct: \(self.isCorrect)\n"
+            d += "Raw score: \(self.rawScore)\n"
             d += "\n}"
         return d
     }

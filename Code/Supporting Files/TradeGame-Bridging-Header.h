@@ -12,4 +12,4 @@
 #import <EGOCache/EGOCache.h>
 
 #pragma mark - non-library
-#import "UIImage+Transparency.h"
+#import "ObjCHelpers.h"

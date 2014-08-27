@@ -223,10 +223,10 @@ class NetworkClient {
         debugPrintln("Posting results for game \(game.gameID)...")
         var resultSet:[[String:AnyObject]] = []
         for result in questionResults {
-            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "correct" : result.isCorrect, "timeTaken" : result.timeTaken.roundToNearest1DecimalPlace()]
+            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "correct" : result.isCorrect, "time" : result.timeTaken, "rawScore": result.rawScore]
             resultSet.append(resultData)
         }
-        var param:[String: AnyObject] = ["gameId": game.gameID, "score" : currentScore, "results": resultSet]
+        var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
         
         let r = Alamofire.request(.POST, url, parameters: param, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
@@ -236,10 +236,27 @@ class NetworkClient {
             
             
         }
-        //        debugPrintln(r)
+                debugPrintln(r)
     }
     
-    
+    /**
+    GET api/games/results
+    */
+    func getResultForGame(gameId:Int, completionHandler:(Void -> Void)!){
+        let url = "\(THGameAPIBaseURL)/results"
+        configureCompulsoryHeaders()
+        debugPrintln("Fetching results for game \(gameId)...")
+        
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+            _, response, content, error in
+            if error != nil {
+                debugPrintln(error)
+            }
+            
+            
+        }
+        debugPrintln(r)
+    }
     
     ///
     /// Logs out current session, removing credentials and user details stored in keychain or in device.

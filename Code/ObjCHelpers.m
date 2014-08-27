@@ -1,12 +1,12 @@
 //
-//  UIImage+Transparency.m
+//  ObjCHelpers.m
 //  TradeGame
 //
 //  Created by Ryne Cheow on 8/27/14.
 //  Copyright (c) 2014 TradeHero. All rights reserved.
 //
 
-#import "UIImage+Transparency.h"
+#import "ObjCHelpers.h"
 
 @implementation UIImage (Transparency)
 
