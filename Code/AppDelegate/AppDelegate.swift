@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBLoginView.self
         FBProfilePictureView.self
         TestFlight.takeOff(TestFlightToken)
-        
+        println("\(NSBundle.mainBundle().bundleIdentifier)")
         switch kTHGamesServerMode {
         case .Dev:
             println("Current build points to Staging Server.\n")

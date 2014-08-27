@@ -10,4 +10,4 @@ pod 'MBProgressHUD', '~> 0.9'
 pod 'SDWebImage', '~> 3.7.1'
 pod 'SSKeychain', '~> 1.2.2'
 
-xcodeproj 'TradeGame.xcodeproj'
+xcodeproj 'TH PopQuiz.xcodeproj'

@@ -30,10 +30,8 @@
 		6D6293DE19A749A9007A207E /* HomeTurnChallengesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6293DC19A749A9007A207E /* HomeTurnChallengesTableViewCell.swift */; };
 		6D6293DF19A749A9007A207E /* HomeTurnChallengesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6293DD19A749A9007A207E /* HomeTurnChallengesTableViewCell.xib */; };
 		6D6E04C119ADCD6B00CFF7A0 /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6E04C019ADCD6B00CFF7A0 /* GameResult.swift */; };
-		6D6E04C919ADD1BE00CFF7A0 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6E04C319ADD1BE00CFF7A0 /* libTestFlight.a */; };
-		6D6E04CA19ADD1BE00CFF7A0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 6D6E04C419ADD1BE00CFF7A0 /* README.md */; };
-		6D6E04CB19ADD1BE00CFF7A0 /* release_notes.md in Sources */ = {isa = PBXBuildFile; fileRef = 6D6E04C519ADD1BE00CFF7A0 /* release_notes.md */; };
 		6D6E04CD19ADD20900CFF7A0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6E04CC19ADD20900CFF7A0 /* libz.dylib */; };
+		6D6E04D119ADDCE200CFF7A0 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6E04C319ADD1BE00CFF7A0 /* libTestFlight.a */; };
 		6D8310B3199B4A260097564A /* THUserFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8310B2199B4A260097564A /* THUserFriend.swift */; };
 		6D8310B7199B5DBA0097564A /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8310B6199B5DBA0097564A /* FriendsViewController.swift */; };
 		6D8310BA199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8310B8199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift */; };
@@ -113,13 +111,13 @@
 		6D1E54B3198B425C007EC028 /* OptionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
 		6D1E54B7198B45A9007EC028 /* AvatarRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarRoundedView.swift; sourceTree = "<group>"; };
 		6D1FF5C61999F04A003B3912 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		6D20577319889A7000570042 /* TradeGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradeGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D20577319889A7000570042 /* TH PopQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TH PopQuiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D20577719889A7000570042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D20577819889A7000570042 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D20577A19889A7000570042 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		6D20577D19889A7000570042 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		6D20577F19889A7000570042 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6D20578519889A7000570042 /* TradeGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradeGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D20578519889A7000570042 /* TH PopQuizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TH PopQuizTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D20578A19889A7000570042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D20578B19889A7000570042 /* TradeGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeGameTests.swift; sourceTree = "<group>"; };
 		6D2057E01988BCD200570042 /* QuestionViewPlain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewPlain.swift; sourceTree = "<group>"; };
@@ -180,9 +178,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D6E04CD19ADD20900CFF7A0 /* libz.dylib in Frameworks */,
-				6D6E04C919ADD1BE00CFF7A0 /* libTestFlight.a in Frameworks */,
 				6DD767F919989BB10071BFC1 /* FacebookSDK.framework in Frameworks */,
 				449863D3E52648AF811620AA /* libPods.a in Frameworks */,
+				6D6E04D119ADDCE200CFF7A0 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +255,8 @@
 		6D20577419889A7000570042 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6D20577319889A7000570042 /* TradeGame.app */,
-				6D20578519889A7000570042 /* TradeGameTests.xctest */,
+				6D20577319889A7000570042 /* TH PopQuiz.app */,
+				6D20578519889A7000570042 /* TH PopQuizTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -460,9 +458,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6D20577219889A7000570042 /* TradeGame */ = {
+		6D20577219889A7000570042 /* TH PopQuiz */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6D20578F19889A7000570042 /* Build configuration list for PBXNativeTarget "TradeGame" */;
+			buildConfigurationList = 6D20578F19889A7000570042 /* Build configuration list for PBXNativeTarget "TH PopQuiz" */;
 			buildPhases = (
 				7E6989569E524595A76C0CE7 /* Check Pods Manifest.lock */,
 				6D20576F19889A7000570042 /* Sources */,
@@ -475,14 +473,14 @@
 			);
 			dependencies = (
 			);
-			name = TradeGame;
+			name = "TH PopQuiz";
 			productName = TradeGame;
-			productReference = 6D20577319889A7000570042 /* TradeGame.app */;
+			productReference = 6D20577319889A7000570042 /* TH PopQuiz.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6D20578419889A7000570042 /* TradeGameTests */ = {
+		6D20578419889A7000570042 /* TH PopQuizTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6D20579219889A7000570042 /* Build configuration list for PBXNativeTarget "TradeGameTests" */;
+			buildConfigurationList = 6D20579219889A7000570042 /* Build configuration list for PBXNativeTarget "TH PopQuizTests" */;
 			buildPhases = (
 				6D20578119889A7000570042 /* Sources */,
 				6D20578219889A7000570042 /* Frameworks */,
@@ -493,9 +491,9 @@
 			dependencies = (
 				6D20578719889A7000570042 /* PBXTargetDependency */,
 			);
-			name = TradeGameTests;
+			name = "TH PopQuizTests";
 			productName = TradeGameTests;
-			productReference = 6D20578519889A7000570042 /* TradeGameTests.xctest */;
+			productReference = 6D20578519889A7000570042 /* TH PopQuizTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -509,7 +507,7 @@
 				TargetAttributes = {
 					6D20577219889A7000570042 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = LZV346N8B3;
+						DevelopmentTeam = CLAS2G6QPJ;
 					};
 					6D20578419889A7000570042 = {
 						CreatedOnToolsVersion = 6.0;
@@ -517,7 +515,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6D20576E19889A7000570042 /* Build configuration list for PBXProject "TradeGame" */;
+			buildConfigurationList = 6D20576E19889A7000570042 /* Build configuration list for PBXProject "TH PopQuiz" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -536,8 +534,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				6D20577219889A7000570042 /* TradeGame */,
-				6D20578419889A7000570042 /* TradeGameTests */,
+				6D20577219889A7000570042 /* TH PopQuiz */,
+				6D20578419889A7000570042 /* TH PopQuizTests */,
 			);
 		};
 /* End PBXProject section */
@@ -634,9 +632,7 @@
 				6D8F0C5D1999F1BB00829149 /* Turn.swift in Sources */,
 				6D2057E61988BCD200570042 /* QuestionViewWithImage.swift in Sources */,
 				6D8310B7199B5DBA0097564A /* FriendsViewController.swift in Sources */,
-				6D6E04CB19ADD1BE00CFF7A0 /* release_notes.md in Sources */,
 				6D20577B19889A7000570042 /* QuizViewController.swift in Sources */,
-				6D6E04CA19ADD1BE00CFF7A0 /* README.md in Sources */,
 				6DFD21C419AAFDF5007D14F2 /* QuestionResult.swift in Sources */,
 				6D8F0C571999F15E00829149 /* OptionSet.swift in Sources */,
 				6D8F0C591999F18100829149 /* THUser.swift in Sources */,
@@ -682,7 +678,7 @@
 /* Begin PBXTargetDependency section */
 		6D20578719889A7000570042 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6D20577219889A7000570042 /* TradeGame */;
+			target = 6D20577219889A7000570042 /* TH PopQuiz */;
 			targetProxy = 6D20578619889A7000570042 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -786,6 +782,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/rynecheow/Documents/FacebookSDK,
@@ -798,7 +795,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TestFlightSDK3",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TH PopQuiz";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Code/Supporting Files/TradeGame-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -812,6 +810,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/rynecheow/Documents/FacebookSDK,
@@ -824,7 +823,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TestFlightSDK3",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TH PopQuiz";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Code/Supporting Files/TradeGame-Bridging-Header.h";
 			};
 			name = Release;
@@ -843,7 +843,7 @@
 				);
 				INFOPLIST_FILE = TradeGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TH PopQuizTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -858,7 +858,7 @@
 				);
 				INFOPLIST_FILE = TradeGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TH PopQuizTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -866,7 +866,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6D20576E19889A7000570042 /* Build configuration list for PBXProject "TradeGame" */ = {
+		6D20576E19889A7000570042 /* Build configuration list for PBXProject "TH PopQuiz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6D20578D19889A7000570042 /* Debug */,
@@ -875,7 +875,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6D20578F19889A7000570042 /* Build configuration list for PBXNativeTarget "TradeGame" */ = {
+		6D20578F19889A7000570042 /* Build configuration list for PBXNativeTarget "TH PopQuiz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6D20579019889A7000570042 /* Debug */,
@@ -884,7 +884,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6D20579219889A7000570042 /* Build configuration list for PBXNativeTarget "TradeGameTests" */ = {
+		6D20579219889A7000570042 /* Build configuration list for PBXNativeTarget "TH PopQuizTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6D20579319889A7000570042 /* Debug */,

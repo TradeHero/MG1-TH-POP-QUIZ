@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="xpE-6b-INw">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -12,7 +13,7 @@
         <!--Quiz View Controller-->
         <scene sceneID="IeY-xz-fFr">
             <objects>
-                <viewController storyboardIdentifier="QuizViewController" id="xpE-6b-INw" customClass="QuizViewController" customModule="TradeGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuizViewController" id="xpE-6b-INw" customClass="QuizViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Swn-Vh-3Mk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -54,7 +55,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" id="RTM-FS-opA" customClass="AvatarRoundedView" customModule="TradeGame" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" id="RTM-FS-opA" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="270" y="21" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -68,7 +69,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <view contentMode="scaleToFill" id="Ddw-WS-kKR" customClass="AvatarRoundedView" customModule="TradeGame" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" id="Ddw-WS-kKR" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="6" y="21" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -118,7 +119,7 @@
                                 <rect key="frame" x="0.0" y="290" width="321" height="225"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rOZ-UN-2s9" customClass="OptionButton" customModule="TradeGame" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rOZ-UN-2s9" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="12" y="5" width="140" height="102"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.5450980392" green="0.85882352939999995" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -135,7 +136,7 @@
                                             <action selector="optionSelected:" destination="xpE-6b-INw" eventType="touchUpInside" id="o2d-eZ-fjv"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lu1-RO-xB6" customClass="OptionButton" customModule="TradeGame" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lu1-RO-xB6" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="165" y="5" width="140" height="102"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.5450980392" green="0.85882352939999995" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -152,7 +153,7 @@
                                             <action selector="optionSelected:" destination="xpE-6b-INw" eventType="touchUpInside" id="Sqy-K4-iWY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IqS-YH-5Vz" customClass="OptionButton" customModule="TradeGame" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IqS-YH-5Vz" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="12" y="118" width="140" height="102"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.5450980392" green="0.85882352939999995" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -169,7 +170,7 @@
                                             <action selector="optionSelected:" destination="xpE-6b-INw" eventType="touchUpInside" id="vDE-9h-bPj"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OgK-m2-H6g" customClass="OptionButton" customModule="TradeGame" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OgK-m2-H6g" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="165" y="118" width="140" height="102"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.5450980392" green="0.85882352939999995" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -188,7 +189,7 @@
                                     </button>
                                 </subviews>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Le1-nm-wsv" customClass="DesignableButton" customModule="TradeGame">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Le1-nm-wsv" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
                                 <rect key="frame" x="8" y="518" width="300" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
@@ -246,7 +247,7 @@
         <!--Win Lose View Controller-->
         <scene sceneID="EF7-pr-S4d">
             <objects>
-                <viewController id="aGt-3J-cJ8" customClass="WinLoseViewController" customModule="TradeGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aGt-3J-cJ8" customClass="WinLoseViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k8A-Yk-yV1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -278,7 +279,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="223" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" id="4uj-A8-DNu" customClass="AvatarRoundedView" customModule="TradeGame" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" id="4uj-A8-DNu" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="13" y="16" width="69" height="69"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -331,7 +332,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="89"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" id="3Rg-Oh-dOT" customClass="AvatarRoundedView" customModule="TradeGame" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" id="3Rg-Oh-dOT" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="10" y="13" width="54" height="54"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -477,19 +478,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J8h-kn-fgd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2632" y="132"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Lud-1C-lKd">
-            <objects>
-                <viewController id="GBg-sC-xSl" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UgN-De-khr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="n3Q-CD-RCN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>

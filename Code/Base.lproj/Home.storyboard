@@ -8,7 +8,7 @@
         <!--Home View Controller-->
         <scene sceneID="reb-OH-NfV">
             <objects>
-                <viewController storyboardIdentifier="ChallengeViewController" id="mQ1-C7-5Us" customClass="HomeViewController" customModule="TradeGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChallengeViewController" id="mQ1-C7-5Us" customClass="HomeViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gi5-tJ-xMN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,7 +52,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" id="hOW-Oh-vVN" customClass="AvatarRoundedView" customModule="TradeGame" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" id="hOW-Oh-vVN" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="20" y="14" width="63" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -97,7 +97,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="boz-3P-itM">
                         <barButtonItem key="leftBarButtonItem" style="done" id="zfQ-1Z-28w">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MDS-3r-QEE" customClass="DesignableButton" customModule="TradeGame">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MDS-3r-QEE" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
                                 <rect key="frame" x="16" y="7" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -141,7 +141,7 @@
         <!--Friends View Controller-->
         <scene sceneID="3K4-wy-p4V">
             <objects>
-                <viewController storyboardIdentifier="FriendsViewController" id="aaP-JZ-Z0I" customClass="FriendsViewController" customModule="TradeGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FriendsViewController" id="aaP-JZ-Z0I" customClass="FriendsViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LX1-Jo-413">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -208,7 +208,7 @@
             <objects>
                 <navigationController storyboardIdentifier="THMainNavigationController" title="THMainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="jzv-90-m6Z" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hhr-Ck-iQd" customClass="SleekNavigationBar" customModule="TradeGame" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hhr-Ck-iQd" customClass="SleekNavigationBar" customModule="TH_PopQuiz" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

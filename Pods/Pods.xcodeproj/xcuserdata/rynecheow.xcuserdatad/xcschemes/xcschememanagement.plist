@@ -8,85 +8,71 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-GPUImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-LDProgressView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods-SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>Pods-SSKeychain.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2430E9FE92BF4B9CA54760A1</key>
+		<key>20E92668EA454816822D35B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>371F4BC25F844220B9882011</key>
+		<key>49AB47849F634B4AB5933BC2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7E9CE63C5DEF4FC59DA31956</key>
+		<key>59D4EBC7759E4F50BF930501</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>938317BB145A4783B0610860</key>
+		<key>A93A73A7AE6B4C3ABDD0F114</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>981F92112ABC4298BDCFD6C9</key>
+		<key>C030BD5218514AEF8758ED58</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9C8A176C96E646C88BF6DE35</key>
+		<key>DCBBE338661A48E6AA47ADCF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C153E265E4B2477689DF7430</key>
+		<key>EEF61E501ECD4D57A33B8C02</key>
 		<dict>
 			<key>primary</key>
 			<true/>
