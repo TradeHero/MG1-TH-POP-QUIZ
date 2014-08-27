@@ -98,6 +98,10 @@ class Question {
     
     var questionImage: UIImage!
     
+    var accessoryImageContent: String!
+
+    var accessoryImage: UIImage!
+
     func isGraphical() -> Bool{
         switch self.questionType {
         case .LogoType, .TimedObfuscatorType:
@@ -117,30 +121,39 @@ class Question {
             if let q: AnyObject = questionDTO["content"] {
                 contentStr = (q as String)
             }
+            var mainContent: String!
+            var d = contentStr.componentsSeparatedByString("|")
+            if d.count == 2 {
+                mainContent = d[0]
+                self.accessoryImageContent = d[1]
+            } else {
+                mainContent = contentStr
+                self.accessoryImageContent = nil
+            }
 
             switch qTypeInt {
             case 1:
                 self.questionType = .LogoType
                 self.questionCategory = .LogoToNameCategory
                 self.questionContent = "Which of the following companies does this logo correspond to?"
-                self.questionImageURLString = contentStr
+                self.questionImageURLString = mainContent
             case 2:
                 self.questionType = .LogoType
                 self.questionCategory = .LogoToTickerSymbolCategory
                 self.questionContent = "Which of the following ticker symbols does this logo correspond to?"
-                self.questionImageURLString = contentStr
+                self.questionImageURLString = mainContent
             case 3:
                 self.questionType = .TextualType
                 self.questionCategory = .NameToPriceRangeCategory
-                self.questionContent = "In which of the price ranges did \(contentStr) recently trade?"
+                self.questionContent = "In which of the price ranges did \(mainContent) recently trade?"
             case 4:
                 self.questionType = .TextualType
                 self.questionCategory = .NameToMarketCapRangeCategory
-                self.questionContent = "Which of the following ranges best represents the market cap of \(contentStr)?"
+                self.questionContent = "Which of the following ranges best represents the market cap of \(mainContent)?"
             case 5:
                 self.questionType = .TextualType
                 self.questionCategory = .PriceRangeToCompanyNameCategory
-                self.questionContent = "Which of the 4 companies below trades in the price range of \(contentStr)"
+                self.questionContent = "Which of the 4 companies below trades in the price range of \(mainContent)"
             case 6:
                 self.questionType = .TextualType
                 self.questionCategory = .HighestMarketCapCategory
@@ -152,7 +165,7 @@ class Question {
             case 8:
                 self.questionType = .TextualType
                 self.questionCategory = .CompanyNameToExchangeSymbolCategory
-                self.questionContent = "Identify the exchange symbol of \(contentStr)."
+                self.questionContent = "Identify the exchange symbol of \(mainContent)."
             case 9:
                 self.questionType = .TextualType
                 self.questionCategory = .OddOneOutCategory
@@ -160,7 +173,7 @@ class Question {
             case 10:
                 self.questionType = .TextualType
                 self.questionCategory = .CompanyNameToSectorCategory
-                self.questionContent = "In which sector does the \(contentStr) operate?"
+                self.questionContent = "In which sector does the \(mainContent) operate?"
             default:
                 self.questionType = QuestionType.UnknownType
                 self.questionContent = "~ \(contentStr) ~"
@@ -195,18 +208,18 @@ class Question {
         if let imgName = self.questionImageURLString {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
-                if error != nil {
-                    debugPrintln(error)
+                if let err = error {
+                    debugPrintln(err)
                     return
                 }
-                if image != nil {
-                    self.questionImage = image
+                if let img = image {
+                    self.questionImage = img
                 }
-                self.fetchOptionImageOperation(completionHandler)
+                self.fetchAccessoryImageOperation(completionHandler)
             })
 
         }else{
-            self.fetchOptionImageOperation(completionHandler)
+            self.fetchAccessoryImageOperation(completionHandler)
         }
     }
 
@@ -219,6 +232,24 @@ class Question {
                     completionHandler()
                 }
             }
+        }
+    }
+
+    func fetchAccessoryImageOperation(completionHandler:() -> ()){
+        if let imgName = self.accessoryImageContent {
+            NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
+                image, error in
+                if let err = error {
+                    debugPrintln(err)
+                    return
+                }
+                if let img = image {
+                    self.accessoryImage = img.replaceWhiteinImageWithTransparency()
+                }
+                self.fetchOptionImageOperation(completionHandler)
+            })
+        } else {
+                self.fetchOptionImageOperation(completionHandler)
         }
     }
 }

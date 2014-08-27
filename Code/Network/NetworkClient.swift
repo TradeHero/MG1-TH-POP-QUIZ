@@ -91,8 +91,6 @@ class NetworkClient {
         
 //        debugPrintln(r)
     }
-
-    
     
     /**
         Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
@@ -150,9 +148,10 @@ class NetworkClient {
     */
     typealias TFBHUserFriendTuple = (fbFriends:[THUserFriend], thFriends:[THUserFriend])
     func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (TFBHUserFriendTuple -> Void)!){
+        let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
         configureCompulsoryHeaders()
         debugPrintln("Fetching Facebook friends for user \(userId)...")
-        let r = AF.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB", parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+        let r = AF.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -184,9 +183,11 @@ class NetworkClient {
         GET api/games/open
     */
     func fetchOpenChallenges(completionHandler: ([Game] -> Void)!){
+        let url = "\(THGameAPIBaseURL)/open"
+        
         configureCompulsoryHeaders()
         debugPrintln("Fetching all open challenges for authenticated user...")
-        let r = AF.request(.GET, "\(THGameAPIBaseURL)/open", parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+        let r = AF.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
             if error != nil {
                 debugPrintln(error)
@@ -205,7 +206,6 @@ class NetworkClient {
     }
     
     ///
-    ///
     func createQuickGame(completionHandler: (Game? -> ())?){
         createChallenge(numberOfQuestions: 10, opponentId: 0) {
             if let handler = completionHandler {
@@ -213,6 +213,32 @@ class NetworkClient {
             }
         }
     }
+    
+    /**
+        POST api/games/postresults
+    */
+    func postGameResults(game:Game, currentScore:Int, questionResults:[QuestionResult], completionHandler:(Void -> Void)!){
+        let url = "\(THGameAPIBaseURL)/postResults"
+        configureCompulsoryHeaders()
+        debugPrintln("Posting results for game \(game.gameID)...")
+        var resultSet:[[String:AnyObject]] = []
+        for result in questionResults {
+            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "correct" : result.isCorrect, "timeTaken" : result.timeTaken.roundToNearest1DecimalPlace()]
+            resultSet.append(resultData)
+        }
+        var param:[String: AnyObject] = ["gameId": game.gameID, "score" : currentScore, "results": resultSet]
+        
+        let r = Alamofire.request(.POST, url, parameters: param, encoding: JSONPrettyPrinted).responseJSON() {
+            _, response, content, error in
+            if error != nil {
+                debugPrintln(error)
+            }
+            
+            
+        }
+        //        debugPrintln(r)
+    }
+    
     
     
     ///

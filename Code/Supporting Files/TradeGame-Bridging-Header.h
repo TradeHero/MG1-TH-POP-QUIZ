@@ -10,3 +10,6 @@
 #import <GPUImage/GPUImage.h>
 #import <LDProgressView/LDProgressView.h>
 #import <EGOCache/EGOCache.h>
+
+#pragma mark - non-library
+#import "UIImage+Transparency.h"

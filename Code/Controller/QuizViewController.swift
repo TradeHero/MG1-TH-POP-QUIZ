@@ -288,10 +288,11 @@ class QuizViewController: UIViewController {
     private func endTurn(){
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
-        for r in results{
-            println("\(r)")
-        }
-        self.dismissViewControllerAnimated(true, completion: nil)
+        NetworkClient.sharedClient.postGameResults(self.game, currentScore: currentTurnScore, questionResults: results, completionHandler: nil)
+        
+        
+        
+//        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -332,10 +333,18 @@ class QuizViewController: UIViewController {
             }
             return contentView
         } else {
-            var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
-            
-            contentView.questionContent.text = question.questionContent
-            return contentView
+            if let accessoryImage = question.accessoryImage {
+                var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithAccessoryImage", owner: self, options: nil)[0] as QuestionViewWithAccessoryImage
+                
+                contentView.questionContent.text = question.questionContent
+                contentView.accessoryImageView.image = question.accessoryImage
+                return contentView
+            } else {
+                var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
+                
+                contentView.questionContent.text = question.questionContent
+                return contentView
+            }
         }
     }
     

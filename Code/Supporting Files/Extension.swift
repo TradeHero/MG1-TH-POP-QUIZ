@@ -49,7 +49,7 @@ extension Double {
 
 extension CGFloat {
     func roundToNearest1DecimalPlace() -> CGFloat {
-        return CGFloat(Double(self).format(".1").floatValue)
+        return Double(self).format(".1").CGFloatValue
     }
 }
 
@@ -237,7 +237,6 @@ extension UIImage {
         
         return UIColor(r: Int(r), Int(g), Int(b), Int(a))
     }
-    
 }
 
 extension String {
@@ -258,6 +257,10 @@ extension String {
         return (self as NSString).floatValue
     }
 
+
+    var CGFloatValue: CGFloat {
+        return CGFloat(self.floatValue)
+    }
 }
 
 extension UIStoryboard {
