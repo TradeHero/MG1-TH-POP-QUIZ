@@ -10,39 +10,40 @@ import UIKit
 
 class WinLoseViewController: UIViewController {
 
-    @IBOutlet weak var winLoseLabel: UILabel!
+    @IBOutlet private weak var winLoseLabel: UILabel!
     
-    @IBOutlet weak var winLoseBackgroundImageView: UIImageView!
+    @IBOutlet private weak var winLoseBackgroundImageView: UIImageView!
     
-    @IBOutlet weak var winLoseSmileyIcon: UIImageView!
+    @IBOutlet private weak var winLoseSmileyIcon: UIImageView!
     
-    @IBOutlet weak var winningRay: UIImageView!
+    @IBOutlet private weak var winningRay: UIImageView!
     
-    @IBOutlet weak var losingRay: UIImageView!
+    @IBOutlet private weak var losingRay: UIImageView!
     
     //MARK:-
-    @IBOutlet weak var largeBoxBackground: UIImageView!
+    @IBOutlet private weak var largeBoxBackground: UIImageView!
     
-    @IBOutlet weak var largeBoxAvatarView: AvatarRoundedView!
+    @IBOutlet private weak var largeBoxAvatarView: AvatarRoundedView!
 
-    @IBOutlet weak var largeBoxNameLabel: UILabel!
+    @IBOutlet private weak var largeBoxNameLabel: UILabel!
     
-    @IBOutlet weak var largeBoxRankLabel: UILabel!
+    @IBOutlet private weak var largeBoxRankLabel: UILabel!
     
-    @IBOutlet weak var largeBoxLevelLabel: UILabel!
+    @IBOutlet private weak var largeBoxLevelLabel: UILabel!
     
-    @IBOutlet weak var largeBoxScoreLabel: UILabel!
+    @IBOutlet private weak var largeBoxScoreLabel: UILabel!
     
-    @IBOutlet weak var smallBoxAvatarView: AvatarRoundedView!
+    @IBOutlet private weak var smallBoxAvatarView: AvatarRoundedView!
     
-    @IBOutlet weak var smallBoxNameLabel: UILabel!
+    @IBOutlet private weak var smallBoxNameLabel: UILabel!
     
-    @IBOutlet weak var smallBoxRankLabel: UILabel!
+    @IBOutlet private weak var smallBoxRankLabel: UILabel!
     
-    @IBOutlet weak var smallBoxLevelLabel: UILabel!
-    @IBOutlet weak var smallBoxScoreLabel: UILabel!
+    @IBOutlet private weak var smallBoxLevelLabel: UILabel!
     
-    @IBOutlet var starViews: [UIImageView]!
+    @IBOutlet private weak var smallBoxScoreLabel: UILabel!
+    
+    @IBOutlet private var starViews: [UIImageView]!
     
     
     
@@ -70,7 +71,7 @@ class WinLoseViewController: UIViewController {
         }
     }
     
-    func configureAsWinningScene() {
+    private func configureAsWinningScene() {
         winLoseLabel.text = "YOU WON!"
         for star in starViews {
             star.alpha = 1
@@ -82,7 +83,7 @@ class WinLoseViewController: UIViewController {
         losingRay.alpha = 0
     }
     
-    func configureAsLosingScene() {
+    private func configureAsLosingScene() {
         winLoseLabel.text = "YOU LOST!"
         for star in starViews {
             star.alpha = 0

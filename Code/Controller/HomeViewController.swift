@@ -10,17 +10,19 @@ import UIKit
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, HomeTurnChallengesTableViewCellDelegate {
 
-    @IBOutlet weak var avatarView: AvatarRoundedView!
-    @IBOutlet weak var fullNameView: UILabel!
-    @IBOutlet weak var rankView: UILabel!
+    @IBOutlet private weak var avatarView: AvatarRoundedView!
+    @IBOutlet private weak var fullNameView: UILabel!
+    @IBOutlet private weak var rankView: UILabel!
     
-    private var user: THUser
+    private lazy var user: THUser = {
+        return NetworkClient.sharedClient.authenticatedUser
+    }()
     
     private lazy var noOpenChallenge:Bool = {
         return true
     }()
+    
     required init(coder aDecoder: NSCoder) {
-        self.user = NetworkClient.sharedClient.authenticatedUser
         super.init(coder: aDecoder)
     }
     
@@ -43,7 +45,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         if segue.identifier == "FriendsViewPushSegue" {
             let vc = segue.destinationViewController as FriendsViewController
-            vc.user = self.user
         }
         
     }
@@ -115,6 +116,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    
+    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge challengeId: Int) {
+        
+    }
+    
+    //MARK:- UI methods
     private func createHeaderViewForEmptyTurn() -> UIView {
         var headerView = UIView(frame: CGRectMake(0, 0, 286, 119))
         var logoView = UIImageView(frame: CGRectMake(119, 23, 51, 51))
@@ -161,8 +168,5 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         headerView.addSubview(rightLabelView)
         return headerView
     }
-    
-    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge challengeId: Int) {
-        
-    }
+
 }

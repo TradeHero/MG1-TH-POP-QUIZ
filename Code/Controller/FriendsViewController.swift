@@ -19,9 +19,17 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     var searchKey: String = ""
     
-    lazy var user: THUser = THUser()
-    @IBOutlet weak var friendsTableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    private lazy var user: THUser = {
+        return NetworkClient.sharedClient.authenticatedUser
+    }()
+    
+    @IBOutlet private weak var friendsTableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
+    
+    //MARK:- Init
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,18 +42,64 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         self.loadFriends()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func loadFriends() {
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.removeFromSuperViewOnHide = true
+        hud.minShowTime = 0
+        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
+        self.FBFriendList.removeAll(keepCapacity: true)
+        self.THFriendList.removeAll(keepCapacity: true)
+        
+        self.friendsTableView.reloadData()
+        
+        let loadCompleteHandler:((fbFriends: [THUserFriend], thFriends:[THUserFriend]) -> Void) = {
+            self.FBFriendList = $0
+            self.THFriendList = $1
+            self.friendsTableView.reloadData()
+        }
+        
+        let object = EGOCache.globalCache().objectForKey(kTHUserFriendsCacheStoreKey)
+        
+        if object == nil {
+            debugPrintln("Nothing cached.")
+            hud.labelText = "Retrieving friends..."
+            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
+                hud.hide(false)
+                let fbF = $0.fbFriends
+                let thF = $0.thFriends
+                let dict = [self.kFBFriendsDictionaryKey: fbF, self.kTHFriendsDictionaryKey: thF]
+                EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
+                debugPrintln("\($0.fbFriends.count + $0.thFriends.count) friends cached.")
+                loadCompleteHandler(fbFriends: fbF, thFriends: thF)
+            }
+            return
+        }
+        
+        hud.labelText = "Loading friends..."
+        var cachedFriends = object as [String : [THUserFriend]]
+        
+        if let cFBFrnd = cachedFriends[kFBFriendsDictionaryKey] {
+            if let cTHFrnd = cachedFriends[kTHFriendsDictionaryKey] {
+                debugPrintln("Retrieved \(cFBFrnd.count + cTHFrnd.count) friend(s) from cache.")
+                loadCompleteHandler(fbFriends: cFBFrnd, thFriends: cTHFrnd)
+            }
+        }
+        
+        hud.hide(false)
+    }
+    
     @IBAction func backAction(sender: AnyObject) {
         let dict = [self.kFBFriendsDictionaryKey: self.FBFriendList, kTHFriendsDictionaryKey: self.THFriendList]
         EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
         self.navigationController.popViewControllerAnimated(true)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    //MARK:- Data source
+    //MARK:- UITableViewDataSource
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -75,11 +129,10 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         cell.delegate = self
         return cell
     }
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
-    //MARK:- Delegate
+
+    
+    //MARK:- UITableViewDelegate
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
         return 2
     }
@@ -105,34 +158,11 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func createTradeHeroFriendsTableSectionHeaderView() -> UIView {
-        var headerView = UIView(frame: CGRectMake(0, 0, 286, 22))
-        var logoView = UIImageView(frame: CGRectMake(2, 2, 19, 19))
-        logoView.image = UIImage(named: "TradeHeroFriendsBullIcon")
-        headerView.addSubview(logoView)
-        
-        var labelView = UILabel(frame: CGRectMake(28, 1, 142, 21))
-        labelView.text = "TradeHero's Friends"
-        labelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
-        labelView.textColor = UIColor.whiteColor()
-        headerView.addSubview(labelView)
-        return headerView
+    func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
+        return 25
     }
     
-    func createFacebookFriendsTableSectionHeaderView() -> UIView {
-        var headerView = UIView(frame: CGRectMake(0, 0, 286, 22))
-        var logoView = UIImageView(frame: CGRectMake(2, 2, 19, 19))
-        logoView.image = UIImage(named: "FacebookFriendsMiniIcon")
-        headerView.addSubview(logoView)
-        
-        var labelView = UILabel(frame: CGRectMake(28, 1, 142, 21))
-        labelView.text = "Facebook Friends"
-        labelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
-        labelView.textColor = UIColor.whiteColor()
-        headerView.addSubview(labelView)
-        return headerView
-    }
-    
+    //MARK:- FriendsChallengeCellTableViewCellDelegate
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapChallengeUser userID: Int) {
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Creating challenge..."
@@ -171,56 +201,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         FBFriendList[cell.index] = friendUser
     }
     
-    func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
-    }
-    
-    func loadFriends() {
-        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.removeFromSuperViewOnHide = true
-        hud.minShowTime = 0
-        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
-        self.FBFriendList.removeAll(keepCapacity: true)
-        self.THFriendList.removeAll(keepCapacity: true)
-        
-        self.friendsTableView.reloadData()
-        
-        let loadCompleteHandler:((fbFriends: [THUserFriend], thFriends:[THUserFriend]) -> Void) = {
-            self.FBFriendList = $0
-            self.THFriendList = $1
-            self.friendsTableView.reloadData()
-        }
-     
-        let object = EGOCache.globalCache().objectForKey(kTHUserFriendsCacheStoreKey)
-        
-        if object == nil {
-            debugPrintln("Nothing cached.")
-            hud.labelText = "Retrieving friends..."
-            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
-                hud.hide(false)
-                let fbF = $0.fbFriends
-                let thF = $0.thFriends
-                let dict = [self.kFBFriendsDictionaryKey: fbF, self.kTHFriendsDictionaryKey: thF]
-                EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
-                debugPrintln("\($0.fbFriends.count + $0.thFriends.count) friends cached.")
-                loadCompleteHandler(fbFriends: fbF, thFriends: thF)
-            }
-            return
-        }
-        
-        hud.labelText = "Loading friends..."
-        var cachedFriends = object as [String : [THUserFriend]]
-        
-        if let cFBFrnd = cachedFriends[kFBFriendsDictionaryKey] {
-            if let cTHFrnd = cachedFriends[kTHFriendsDictionaryKey] {
-                debugPrintln("Retrieved \(cFBFrnd.count + cTHFrnd.count) friend(s) from cache.")
-                loadCompleteHandler(fbFriends: cFBFrnd, thFriends: cTHFrnd)
-            }
-        }
-        
-        hud.hide(false)
-    }
-    
+    //MARK:- Search bar delegate
     func searchBarShouldBeginEditing(searchBar: UISearchBar!) -> Bool {
         searchBar.setShowsCancelButton(true, animated: true)
         return true
@@ -241,5 +222,34 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar!) {
         searchBar.resignFirstResponder()
+    }
+    
+    //MARK:- UI construct
+    private func createTradeHeroFriendsTableSectionHeaderView() -> UIView {
+        var headerView = UIView(frame: CGRectMake(0, 0, 286, 22))
+        var logoView = UIImageView(frame: CGRectMake(2, 2, 19, 19))
+        logoView.image = UIImage(named: "TradeHeroFriendsBullIcon")
+        headerView.addSubview(logoView)
+        
+        var labelView = UILabel(frame: CGRectMake(28, 1, 142, 21))
+        labelView.text = "TradeHero's Friends"
+        labelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
+        labelView.textColor = UIColor.whiteColor()
+        headerView.addSubview(labelView)
+        return headerView
+    }
+    
+    private func createFacebookFriendsTableSectionHeaderView() -> UIView {
+        var headerView = UIView(frame: CGRectMake(0, 0, 286, 22))
+        var logoView = UIImageView(frame: CGRectMake(2, 2, 19, 19))
+        logoView.image = UIImage(named: "FacebookFriendsMiniIcon")
+        headerView.addSubview(logoView)
+        
+        var labelView = UILabel(frame: CGRectMake(28, 1, 142, 21))
+        labelView.text = "Facebook Friends"
+        labelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
+        labelView.textColor = UIColor.whiteColor()
+        headerView.addSubview(labelView)
+        return headerView
     }
 }

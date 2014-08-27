@@ -13,36 +13,36 @@ class QuizViewController: UIViewController {
     // MARK:- UI var
     @IBOutlet private var optionGroup: [OptionButton]!
     
-    @IBOutlet weak var questionView: UIView!
+    @IBOutlet private weak var questionView: UIView!
     
-    @IBOutlet weak var timeLeftLabel: UILabel!
+    @IBOutlet private weak var timeLeftLabel: UILabel!
     
-    @IBOutlet weak var removeOptionsButton: DesignableButton!
+    @IBOutlet private weak var removeOptionsButton: DesignableButton!
     
-    @IBOutlet weak var roundIndicatorLabel: UILabel!
+    @IBOutlet private weak var roundIndicatorLabel: UILabel!
     
-    @IBOutlet weak var selfProgressView: LDProgressView!
+    @IBOutlet private weak var selfProgressView: LDProgressView!
     
-    @IBOutlet weak var selfAvatarView: AvatarRoundedView!
+    @IBOutlet private weak var selfAvatarView: AvatarRoundedView!
     
-    @IBOutlet weak var selfScoreLabel: UILabel!
+    @IBOutlet private weak var selfScoreLabel: UILabel!
     
-    @IBOutlet weak var selfDisplayNameLabel: UILabel!
+    @IBOutlet private weak var selfDisplayNameLabel: UILabel!
     
-    @IBOutlet weak var selfRankLabel: UILabel!
+    @IBOutlet private weak var selfRankLabel: UILabel!
     
-    @IBOutlet var opponentProgressView: LDProgressView!
+    @IBOutlet private var opponentProgressView: LDProgressView!
     
-    @IBOutlet weak var opponentAvatarView: AvatarRoundedView!
+    @IBOutlet private weak var opponentAvatarView: AvatarRoundedView!
     
-    @IBOutlet weak var opponentScoreLabel: UILabel!
+    @IBOutlet private weak var opponentScoreLabel: UILabel!
     
-    @IBOutlet weak var opponentDisplayNameLabel: UILabel!
+    @IBOutlet private weak var opponentDisplayNameLabel: UILabel!
     
-    @IBOutlet var opponentRankLabel: UILabel!
+    @IBOutlet private var opponentRankLabel: UILabel!
     
     
-    @IBOutlet weak var buttonSetContentView: UIView!
+    @IBOutlet private weak var buttonSetContentView: UIView!
     
     // MARK:- ivar
     private var current_q: Int = 0
@@ -93,6 +93,7 @@ class QuizViewController: UIViewController {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
     func prepareGame(game:Game, hud:MBProgressHUD, completionHandler:()->()) {
         var qSet = game.questionSet
         var count:Int = 0

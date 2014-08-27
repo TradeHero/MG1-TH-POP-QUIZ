@@ -687,11 +687,11 @@
 					/Users/rynecheow/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/TradeGame/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Code/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "TradeGame/Supporting Files/TradeGame-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Code/Supporting Files/TradeGame-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -709,11 +709,11 @@
 					/Users/rynecheow/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/TradeGame/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Code/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "TradeGame/Supporting Files/TradeGame-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Code/Supporting Files/TradeGame-Bridging-Header.h";
 			};
 			name = Release;
 		};

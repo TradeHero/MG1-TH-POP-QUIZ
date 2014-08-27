@@ -10,10 +10,10 @@ import UIKit
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
 
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var fbLoginView: FBLoginView!
-    var fbFlag = false
+    @IBOutlet private weak var emailField: UITextField!
+    @IBOutlet private weak var passwordField: UITextField!
+    @IBOutlet private weak var fbLoginView: FBLoginView!
+    private var fbFlag = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
