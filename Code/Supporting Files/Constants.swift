@@ -13,6 +13,8 @@ enum Mode: Int {
     case Prod
 }
 
+let TestFlightToken = "c1a29f46-4c93-4e9a-8b89-0ec297bf1622"
+
 let kTHGamesServerMode = Mode.Dev
 
 let kConstantPrefix = "TH"

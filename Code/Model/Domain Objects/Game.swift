@@ -17,6 +17,10 @@ class Game {
 
     var opponentPlayer: THUser!
     
+    var initiatingPlayerResult: GameResult!
+
+    var opponentPlayerResult: GameResult!
+
     lazy var createdAt: NSDate! = {
         let df = NSDateFormatter()
         df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"

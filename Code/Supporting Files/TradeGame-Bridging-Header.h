@@ -10,6 +10,7 @@
 #import <GPUImage/GPUImage.h>
 #import <LDProgressView/LDProgressView.h>
 #import <EGOCache/EGOCache.h>
+#import "TestFlight.h"
 
 #pragma mark - non-library
 #import "ObjCHelpers.h"
