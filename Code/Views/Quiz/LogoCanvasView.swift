@@ -88,7 +88,7 @@ class LogoCanvasView: UIView {
         case .PixellateEffect:
             applyPixellateObfuscationWithFractionalWidth(1 * 0.05)
         case .GaussianBlurEffect:
-            applyGaussianBlurObfuscationWithBlurRadiusFactor(10)
+            applyGaussianBlurObfuscationWithBlurRadiusFactor(20)
         }
     }
     

@@ -50,13 +50,12 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         hud.labelText = "Logging in..."
         hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
         weak var weakSelf = self
-        NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken, errorHandler: { error in
+        NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken, errorHandler: {
                 hud.mode = MBProgressHUDModeText
-                hud.labelText = "Login error: \(error.description)"
+                hud.labelText = "Login error: \($0.description)"
                 hud.hide(true, afterDelay: 1.5)
             }) {
-             user in
-                if user == nil {
+                if $0 == nil {
                     hud.mode = MBProgressHUDModeText
                     hud.labelText = "Login failed"
                     hud.hide(true, afterDelay: 1.5)

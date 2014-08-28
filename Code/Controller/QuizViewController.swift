@@ -10,6 +10,8 @@ import UIKit
 import AudioToolbox
 
 class QuizViewController: UIViewController {
+    
+    let basicScorePerQuestion = 1000
     // MARK:- UI var
     @IBOutlet private var optionGroup: [OptionButton]!
     
@@ -74,7 +76,7 @@ class QuizViewController: UIViewController {
     private var selfTotalScore: Int = 0 {
         didSet{
             selfScoreLabel.text = String(selfTotalScore)
-            let totalScore = 500 * self.game.questionSet.count
+            let totalScore = basicScorePerQuestion * self.game.questionSet.count
             let newProgress = CGFloat(selfTotalScore)/CGFloat(totalScore)
             selfProgressView.progress = newProgress
         }
@@ -157,14 +159,16 @@ class QuizViewController: UIViewController {
                 button.shrink()
             }
         }
-        let currentQuestionScore = calculateScore()
+        
         if sender.is_answer {
             sender.configureAsCorrect()
             currentQuestionCorrect = true
+            let currentQuestionScore = calculateScore()
             produceResultForCurrentQuestion(true, score: currentQuestionScore)
         } else {
             sender.configureAsFalse()
             revealCorrectAnswer()
+            let currentQuestionScore = calculateScore()
             produceResultForCurrentQuestion(false, score: currentQuestionScore)
             AudioServicesPlayAlertSound(0x00000FFF)
         }
@@ -196,14 +200,38 @@ class QuizViewController: UIViewController {
     }
     
     private func calculateScore() -> Int {
-        let timeTaken:CGFloat = 0
-        let timeLeft = current_timeLeft
-        let timeLeftBonus =  timeLeft > 0.0 ? timeLeft/10.0 : 0.4
+        let timeLeftBonus =  getTimeBonus(current_timeLeft)
         let correctiveFactor:CGFloat = currentQuestionCorrect ? 1.0 : 0.0
-        let floatScore = 500.0 * timeLeftBonus * correctiveFactor
-        let intScore = Int(floatScore)
-        self.selfTotalScore += intScore
-        return intScore
+        let score = CGFloat(basicScorePerQuestion) * timeLeftBonus * correctiveFactor
+        self.selfTotalScore += Int(score)
+        return Int(score)
+    }
+    
+    private func getTimeBonus(timeLeft:CGFloat) -> CGFloat {
+        let timeAllowed:CGFloat = 10.0
+        
+        let timeRange = (timeAllowed - timeLeft)/timeAllowed * 100
+        
+        switch timeRange {
+        case 0..<1:
+            return 1
+        case 1..<5:
+            return 0.95
+        case 5..<10:
+            return 0.9
+        case 10..<20:
+            return 0.8
+        case 20..<30:
+            return 0.7
+        case 30..<40:
+            return 0.6
+        case 40..<50:
+            return 0.5
+        case 0..<40:
+            return 0.4
+        default:
+            return 0
+        }
     }
     
     
@@ -289,10 +317,7 @@ class QuizViewController: UIViewController {
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
         NetworkClient.sharedClient.postGameResults(self.game, currentScore: currentTurnScore, questionResults: results, completionHandler: nil)
-        
-        
-        
-//        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -360,7 +385,7 @@ class QuizViewController: UIViewController {
         
         var i = 0
         for option in optionSet {
-            optionButtonSet[i].labelText = option.stringContent
+            optionButtonSet[i].configureButtonWithContent(option.stringContent, imageContent: option.imageContent )
             if question.options.checkOptionChoiceIfIsCorrect(option) {
                 optionButtonSet[i].is_answer = true
             } else {

@@ -112,6 +112,15 @@ extension UIView {
         UIGraphicsEndImageContext()
         return viewImage
     }
+
+    func isSubviewOf(view:UIView) -> Bool {
+        for v in view.subviews as [UIView] {
+            if v === self {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 

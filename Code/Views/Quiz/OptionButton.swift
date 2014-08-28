@@ -37,6 +37,7 @@ class OptionButton: DesignableButton {
         self.tickLogoView.image = UIImage(named: "QuizTickIcon")
         self.crossLogoView.image = UIImage(named: "QuizCrossIcon")
     }
+    var trendingTopLayerView: OptionButtonAccessoryImageLayer!
     
     var wobbling: Bool = false
     
@@ -48,6 +49,14 @@ class OptionButton: DesignableButton {
     
     var crossLogoView = UIImageView(frame: CGRectMake(0, 0, 51, 51))
     
+    var accessoryImage: UIImage! {
+        didSet {
+            if let img = accessoryImage {
+//                self.setImage(img, forState: .Normal)
+                self.configureAsTrendingStyle()
+            }
+        }
+    }
     var labelText: String = "" {
         didSet {
             func getLongestWordLength(stringArray:[String]) -> Int{
@@ -132,10 +141,16 @@ class OptionButton: DesignableButton {
             rect.size.width = self.frame.size.width * 0.8
             rect.size.height = self.frame.size.height * 0.8
             
+            if self.trendingTopLayerView != nil {
+                var t = CGAffineTransformMakeScale(0.8, 0.8)
+                t = CGAffineTransformTranslate(t, -0.1 * self.trendingTopLayerView.frame.size.width, -0.1 * self.trendingTopLayerView.frame.size.height)
+                self.trendingTopLayerView.transform = t
+            }
+            
             UIView.animateWithDuration(0.1, animations: {
-                () in
                 self.bounds = rect
             })
+            
         }
     }
     
@@ -145,6 +160,9 @@ class OptionButton: DesignableButton {
             self.bounds.size = self.defaultSize
             self.center = self.defaultCenter
             self.titleLabel.font = self.defaultFont
+            if self.trendingTopLayerView != nil {
+                self.trendingTopLayerView.transform = CGAffineTransformIdentity
+            }
         }
     }
     
@@ -157,6 +175,9 @@ class OptionButton: DesignableButton {
             tilted = true
             rotate(-3)
             self.tickLogoView.transform = CGAffineTransformMakeRotation(radians(-3))
+            if self.trendingTopLayerView != nil {
+                self.trendingTopLayerView.titleLabel.textColor = UIColor.whiteColor()
+            }
         }
     }
     
@@ -165,6 +186,10 @@ class OptionButton: DesignableButton {
             tilted = true
             rotate(3)
             self.crossLogoView.transform = CGAffineTransformMakeRotation(radians(3))
+            if self.trendingTopLayerView != nil {
+                self.trendingTopLayerView.titleLabel.textColor = UIColor.whiteColor()
+            }
+
         }
     }
     
@@ -203,7 +228,6 @@ class OptionButton: DesignableButton {
         bounds.size.height = 0
         self.crossLogoView.bounds = bounds
         UIView.animateWithDuration(0.2) {
-            () in
             self.crossLogoView.bounds = bounds2
         }
     }
@@ -230,6 +254,7 @@ class OptionButton: DesignableButton {
     }
     
     func resetButton(){
+        self.configureAsNormalStyle()
         self.unpatchAllLogo()
         self.unshrink()
         self.backgroundColor = defaultBackgroundColour
@@ -279,5 +304,45 @@ class OptionButton: DesignableButton {
         }
     }
     
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        self.imageView.image = UIImage(named:"TradeHeroFriendsBullIcon")
+    }
     
+    private func configureAsTrendingStyle(){
+        if self.titleLabel.isSubviewOf(self) {
+            self.titleLabel.removeFromSuperview()
+        }
+
+//        self.imageView.hidden = true
+        trendingTopLayerView = NSBundle.mainBundle().loadNibNamed("OptionButtonAccessoryImageLayer", owner: self, options: nil)[0] as OptionButtonAccessoryImageLayer
+        trendingTopLayerView.titleLabel.text = self.labelText
+        trendingTopLayerView.imageView.image = self.accessoryImage
+        trendingTopLayerView.userInteractionEnabled = false
+        self.addSubview(trendingTopLayerView)
+//        self.bringSubviewToFront(topLayer)
+    }
+    
+    private func configureAsNormalStyle() {
+        if !self.titleLabel.isSubviewOf(self) {
+            self.addSubview(self.titleLabel)
+        }
+        self.titleLabel.hidden = false
+        self.imageView.hidden = false
+        for view in self.subviews as [UIView]{
+            if view is OptionButtonAccessoryImageLayer {
+                view.removeFromSuperview()
+            }
+        }
+        trendingTopLayerView = nil
+    }
+    
+    func configureButtonWithContent(stringContent:String, imageContent:UIImage!){
+        self.labelText = stringContent
+        if let img = imageContent {
+            self.accessoryImage = img.replaceWhiteinImageWithTransparency()
+        }
+    }
 }
+
+
