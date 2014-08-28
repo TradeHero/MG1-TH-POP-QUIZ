@@ -271,10 +271,6 @@ extension String {
         return CGFloat(self.floatValue)
     }
 
-    func getTHFullyQualifiedImagePath() -> String {
-        return "\(THImagePathHost)\(self)"
-    }
-
     var length: Int {
         return self.utf16Count
     }
