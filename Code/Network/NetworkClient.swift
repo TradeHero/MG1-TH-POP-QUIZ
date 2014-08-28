@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import Alamofire
+import Alamofire
 
 class NetworkClient {
     
@@ -34,8 +34,8 @@ class NetworkClient {
     var credentials: String!
     
     /// default JSON encoding
-//    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON
-    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(nil)
+    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON
+//    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(nil)
     
     // MARK:- Methods
     

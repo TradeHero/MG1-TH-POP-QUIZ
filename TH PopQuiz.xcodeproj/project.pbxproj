@@ -31,6 +31,8 @@
 		6D6293DF19A749A9007A207E /* HomeTurnChallengesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6293DD19A749A9007A207E /* HomeTurnChallengesTableViewCell.xib */; };
 		6D6A833419AED58500248D95 /* OptionButtonAccessoryImageLayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6A833319AED58500248D95 /* OptionButtonAccessoryImageLayer.xib */; };
 		6D6A833619AED75B00248D95 /* OptionButtonAccessoryImageLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6A833519AED75B00248D95 /* OptionButtonAccessoryImageLayer.swift */; };
+		6D6A833A19AF2CB900248D95 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC42CFB19ADC33900A4A44C /* Alamofire.framework */; };
+		6D6A833B19AF2CB900248D95 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC42CFB19ADC33900A4A44C /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6D6E04C119ADCD6B00CFF7A0 /* GameResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6E04C019ADCD6B00CFF7A0 /* GameResult.swift */; };
 		6D6E04CD19ADD20900CFF7A0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6E04CC19ADD20900CFF7A0 /* libz.dylib */; };
 		6D6E04D119ADDCE200CFF7A0 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6E04C319ADD1BE00CFF7A0 /* libTestFlight.a */; };
@@ -74,6 +76,13 @@
 			remoteGlobalIDString = 6D20577219889A7000570042;
 			remoteInfo = TradeGame;
 		};
+		6D6A833C19AF2CB900248D95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DC42CF519ADC33900A4A44C /* Alamofire.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
+			remoteInfo = Alamofire;
+		};
 		6DC42CFA19ADC33900A4A44C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6DC42CF519ADC33900A4A44C /* Alamofire.xcodeproj */;
@@ -97,6 +106,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6D6A833B19AF2CB900248D95 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,6 +194,7 @@
 				6D6E04CD19ADD20900CFF7A0 /* libz.dylib in Frameworks */,
 				6DD767F919989BB10071BFC1 /* FacebookSDK.framework in Frameworks */,
 				449863D3E52648AF811620AA /* libPods.a in Frameworks */,
+				6D6A833A19AF2CB900248D95 /* Alamofire.framework in Frameworks */,
 				6D6E04D119ADDCE200CFF7A0 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +489,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6D6A833D19AF2CB900248D95 /* PBXTargetDependency */,
 			);
 			name = "TH PopQuiz";
 			productName = TradeGame;
@@ -689,6 +701,11 @@
 			target = 6D20577219889A7000570042 /* TH PopQuiz */;
 			targetProxy = 6D20578619889A7000570042 /* PBXContainerItemProxy */;
 		};
+		6D6A833D19AF2CB900248D95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Alamofire;
+			targetProxy = 6D6A833C19AF2CB900248D95 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -804,7 +821,7 @@
 					"$(PROJECT_DIR)/TestFlightSDK3",
 				);
 				PRODUCT_NAME = "TH PopQuiz";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "71f04141-158b-4b6f-bb5f-77500f3a851c";
 				SWIFT_OBJC_BRIDGING_HEADER = "Code/Supporting Files/TradeGame-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -817,8 +834,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/rynecheow/Documents/FacebookSDK,
@@ -832,7 +849,7 @@
 					"$(PROJECT_DIR)/TestFlightSDK3",
 				);
 				PRODUCT_NAME = "TH PopQuiz";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "71f04141-158b-4b6f-bb5f-77500f3a851c";
 				SWIFT_OBJC_BRIDGING_HEADER = "Code/Supporting Files/TradeGame-Bridging-Header.h";
 			};
 			name = Release;

@@ -213,7 +213,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar!) {
-        if ((searchBar.text as NSString).length  <= 0) {
+        if (searchBar.text.length <= 0) {
             return
         }
         

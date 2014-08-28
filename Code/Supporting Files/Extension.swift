@@ -270,6 +270,14 @@ extension String {
     var CGFloatValue: CGFloat {
         return CGFloat(self.floatValue)
     }
+
+    func getTHFullyQualifiedImagePath() -> String {
+        return "\(THImagePathHost)\(self)"
+    }
+
+    var length: Int {
+        return self.utf16Count
+    }
 }
 
 extension UIStoryboard {
@@ -285,13 +293,6 @@ extension UIStoryboard {
     class func quizStoryboard() -> UIStoryboard {
         return UIStoryboard(name: "Quiz", bundle: NSBundle.mainBundle())
     }
-}
-
-extension String {
-    func getTHFullyQualifiedImagePath() -> String {
-        return "\(THImagePathHost)\(self)"
-    }
-
 }
 
 extension UIViewController {
