@@ -97,27 +97,15 @@ class QuizViewController: UIViewController {
     
     private var didRemoveOptions: Bool = false
     
+    private var player: THUser!
+    private var opponent:THUser!
+    
     // MARK:- init
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    func prepareGame(game:Game, hud:MBProgressHUD, completionHandler:()->()) {
-        var qSet = game.questionSet
-        var count:Int = 0
-        for q in qSet {
-            q.fetchImage() {
-                count += 1
-                hud.progress = Float(count)/Float(game.questionSet.count)
-                hud.detailsLabelText = "\(count)/\(game.questionSet.count)"
-                if count == game.questionSet.count {
-                    self.game = game
-                    completionHandler()
-                }
-            }
-        }
-    }
-    
+        
     // MARK:- override calls
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -417,11 +405,11 @@ class QuizViewController: UIViewController {
                 }
         }
         
-        UIView.animateWithDuration(1.5, delay: 1.50, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+        UIView.animateWithDuration(1.5, delay: 1.50, options: .TransitionCrossDissolve, animations: {
             self.questionView.alpha = 1
             }, completion: nil)
         
-        UIView.animateWithDuration(1.0, delay: 3.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+        UIView.animateWithDuration(1.0, delay: 3.0, options: .TransitionCrossDissolve, animations: {
             self.buttonSetContentView.alpha = 1
             }){ completed in
                 if completed {
@@ -434,9 +422,10 @@ class QuizViewController: UIViewController {
         }
     }
     
+    
     private func setUpPlayerDetails() {
-        let thisPlayer = game.initiatingPlayer
-        let opponent = game.opponentPlayer
+        let thisPlayer = self.player
+        let opponent = self.opponent
         
         NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil) {
             image, error in
@@ -492,5 +481,11 @@ class QuizViewController: UIViewController {
     
     private func produceResultForCurrentQuestion(isCorrect:Bool, score:Int){
         self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: CGFloat(10 - current_timeLeft), correct: isCorrect, score: score))
+    }
+    
+    func bindGameAndUsers(game:Game, player:THUser, opponent:THUser){
+        self.game = game
+        self.player = player
+        self.opponent = opponent
     }
 }

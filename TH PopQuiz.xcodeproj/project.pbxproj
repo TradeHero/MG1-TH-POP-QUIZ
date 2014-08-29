@@ -17,7 +17,6 @@
 		6D20577919889A7000570042 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D20577819889A7000570042 /* AppDelegate.swift */; };
 		6D20577B19889A7000570042 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D20577A19889A7000570042 /* QuizViewController.swift */; };
 		6D20578019889A7000570042 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D20577F19889A7000570042 /* Images.xcassets */; };
-		6D20578C19889A7000570042 /* TradeGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D20578B19889A7000570042 /* TradeGameTests.swift */; };
 		6D2057E41988BCD200570042 /* QuestionViewPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057E01988BCD200570042 /* QuestionViewPlain.swift */; };
 		6D2057E51988BCD200570042 /* QuestionViewPlain.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2057E11988BCD200570042 /* QuestionViewPlain.xib */; };
 		6D2057E61988BCD200570042 /* QuestionViewWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057E21988BCD200570042 /* QuestionViewWithImage.swift */; };
@@ -69,13 +68,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6D20578619889A7000570042 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D20576B19889A7000570042 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6D20577219889A7000570042;
-			remoteInfo = TradeGame;
-		};
 		6D6A833C19AF2CB900248D95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6DC42CF519ADC33900A4A44C /* Alamofire.xcodeproj */;
@@ -129,9 +121,6 @@
 		6D20577A19889A7000570042 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		6D20577D19889A7000570042 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		6D20577F19889A7000570042 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6D20578519889A7000570042 /* TH PopQuizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TH PopQuizTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D20578A19889A7000570042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6D20578B19889A7000570042 /* TradeGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeGameTests.swift; sourceTree = "<group>"; };
 		6D2057E01988BCD200570042 /* QuestionViewPlain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewPlain.swift; sourceTree = "<group>"; };
 		6D2057E11988BCD200570042 /* QuestionViewPlain.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionViewPlain.xib; sourceTree = "<group>"; };
 		6D2057E21988BCD200570042 /* QuestionViewWithImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewWithImage.swift; sourceTree = "<group>"; };
@@ -199,13 +188,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6D20578219889A7000570042 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -262,7 +244,6 @@
 				62BCA2FCF6204096938FF8A1 /* Frameworks */,
 				0251FC027A5E41F0B8DD4BDC /* Pods.xcconfig */,
 				6D20577419889A7000570042 /* Products */,
-				6D20578819889A7000570042 /* TradeGameTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -270,7 +251,6 @@
 			isa = PBXGroup;
 			children = (
 				6D20577319889A7000570042 /* TH PopQuiz.app */,
-				6D20578519889A7000570042 /* TH PopQuizTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -302,23 +282,6 @@
 				6D20577719889A7000570042 /* Info.plist */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		6D20578819889A7000570042 /* TradeGameTests */ = {
-			isa = PBXGroup;
-			children = (
-				6D20578B19889A7000570042 /* TradeGameTests.swift */,
-				6D20578919889A7000570042 /* Supporting Files */,
-			);
-			path = TradeGameTests;
-			sourceTree = "<group>";
-		};
-		6D20578919889A7000570042 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6D20578A19889A7000570042 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		6D286D4B1989F12500D179F8 /* Views */ = {
@@ -496,24 +459,6 @@
 			productReference = 6D20577319889A7000570042 /* TH PopQuiz.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6D20578419889A7000570042 /* TH PopQuizTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6D20579219889A7000570042 /* Build configuration list for PBXNativeTarget "TH PopQuizTests" */;
-			buildPhases = (
-				6D20578119889A7000570042 /* Sources */,
-				6D20578219889A7000570042 /* Frameworks */,
-				6D20578319889A7000570042 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6D20578719889A7000570042 /* PBXTargetDependency */,
-			);
-			name = "TH PopQuizTests";
-			productName = TradeGameTests;
-			productReference = 6D20578519889A7000570042 /* TH PopQuizTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -526,10 +471,6 @@
 					6D20577219889A7000570042 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = CLAS2G6QPJ;
-					};
-					6D20578419889A7000570042 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 6D20577219889A7000570042;
 					};
 				};
 			};
@@ -553,7 +494,6 @@
 			projectRoot = "";
 			targets = (
 				6D20577219889A7000570042 /* TH PopQuiz */,
-				6D20578419889A7000570042 /* TH PopQuizTests */,
 			);
 		};
 /* End PBXProject section */
@@ -596,13 +536,6 @@
 				6D2057E51988BCD200570042 /* QuestionViewPlain.xib in Resources */,
 				6D20578019889A7000570042 /* Images.xcassets in Resources */,
 				6DBDA022199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6D20578319889A7000570042 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,22 +618,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6D20578119889A7000570042 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6D20578C19889A7000570042 /* TradeGameTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6D20578719889A7000570042 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6D20577219889A7000570042 /* TH PopQuiz */;
-			targetProxy = 6D20578619889A7000570042 /* PBXContainerItemProxy */;
-		};
 		6D6A833D19AF2CB900248D95 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Alamofire;
@@ -854,40 +774,6 @@
 			};
 			name = Release;
 		};
-		6D20579319889A7000570042 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TradeGame.app/TradeGame";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TradeGameTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "TH PopQuizTests";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Debug;
-		};
-		6D20579419889A7000570042 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TradeGame.app/TradeGame";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TradeGameTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "TH PopQuizTests";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -905,15 +791,6 @@
 			buildConfigurations = (
 				6D20579019889A7000570042 /* Debug */,
 				6D20579119889A7000570042 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6D20579219889A7000570042 /* Build configuration list for PBXNativeTarget "TH PopQuizTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6D20579319889A7000570042 /* Debug */,
-				6D20579419889A7000570042 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -179,16 +179,10 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                         i++
                     }
                 }
-
-                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
-                hud.mode = MBProgressHUDModeAnnularDeterminate
-
-                vc.prepareGame($0, hud:hud) {
-                    var strongSelf = weakSelf!
-                    hud.detailsLabelText = "Done fetching image."
-                    hud.hide(true, afterDelay: 1)
-                    strongSelf.presentViewController(vc, animated: true, completion: nil)
-                }
+                
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                vc.bindGame($0)
+                strongSelf.navigationController.pushViewController(vc, animated: true)
             }
         }
     }
