@@ -60,7 +60,7 @@ class QuizViewController: UIViewController {
             } else {
                 timeLeftLabel.textColor = UIColor(hex :0x1063D9)
             }
-                    }
+        }
     }
     
     var game: Game!
@@ -69,16 +69,22 @@ class QuizViewController: UIViewController {
     
     private var stopwatchStartTime: NSDate!
     
-    private var currentQuestionCorrect: Bool = false
+    private var currentQuestionCorrect: Bool = false {
+        didSet {
+            if currentQuestionCorrect {
+                selfProgressView.progress += 1 / CGFloat(self.game.questionSet.count)
+            }
+        }
+    }
     
     private var questionResults: [QuestionResult] = []
     
     private var selfTotalScore: Int = 0 {
         didSet{
             selfScoreLabel.text = String(selfTotalScore)
-            let totalScore = basicScorePerQuestion * self.game.questionSet.count
-            let newProgress = CGFloat(selfTotalScore)/CGFloat(totalScore)
-            selfProgressView.progress = newProgress
+//            let totalScore = basicScorePerQuestion * self.game.questionSet.count
+//            let newProgress = CGFloat(selfTotalScore)/CGFloat(totalScore)
+//            selfProgressView.progress = newProgress
         }
     }
     
@@ -175,7 +181,7 @@ class QuizViewController: UIViewController {
         
         unmaskContentViewIfNecessary()
         
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
     }
     
     // MARK:- methods
@@ -213,21 +219,21 @@ class QuizViewController: UIViewController {
         let timeRange = (timeAllowed - timeLeft)/timeAllowed * 100
         
         switch timeRange {
-        case 0..<1:
-            return 1
-        case 1..<5:
-            return 0.95
+        case 0..<2:
+            return 10
+        case 2..<5:
+            return 5
         case 5..<10:
-            return 0.9
+            return 2
         case 10..<20:
-            return 0.8
+            return 1.5
         case 20..<30:
-            return 0.7
-        case 30..<40:
-            return 0.6
-        case 40..<50:
-            return 0.5
-        case 0..<40:
+            return 1.2
+        case 30..<50:
+            return 1
+        case 50..<70:
+            return 0.8
+        case 70..<100:
             return 0.4
         default:
             return 0
@@ -260,11 +266,11 @@ class QuizViewController: UIViewController {
         case 0:
             self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
         default:
-            UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+            UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                 self.buttonSetContentView.alpha = 0
                 }, completion: nil)
             
-            UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() in
+            UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                 self.questionView.alpha = 0
                 
                 }, completion: { c in
@@ -290,7 +296,7 @@ class QuizViewController: UIViewController {
             unmaskContentViewIfNecessary()
             let score = calculateScore()
             produceResultForCurrentQuestion(false, score: score)
-            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
 
         }
     }
@@ -401,21 +407,21 @@ class QuizViewController: UIViewController {
             self.roundIndicatorLabel.text = "ROUND \(self.current_q + 1)"
         }
         
-        UIView.animateWithDuration(1.5, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+        
+        
+        UIView.animateWithDuration(1, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             self.roundIndicatorLabel.alpha = 1
             }) { complete in
-                UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                UIView.animateWithDuration(1, options: .TransitionCrossDissolve) {
                     self.roundIndicatorLabel.alpha = 0
-                    }, completion: nil)
-                
+                }
         }
         
-        UIView.animateWithDuration(1.5, delay: 3.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+        UIView.animateWithDuration(1.5, delay: 1.50, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             self.questionView.alpha = 1
-            
             }, completion: nil)
         
-        UIView.animateWithDuration(1.0, delay: 5.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+        UIView.animateWithDuration(1.0, delay: 3.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             self.buttonSetContentView.alpha = 1
             }){ completed in
                 if completed {
@@ -424,7 +430,6 @@ class QuizViewController: UIViewController {
                         option.enable()
                     }
                     self.timerStart()
-                    
                 }
         }
     }
