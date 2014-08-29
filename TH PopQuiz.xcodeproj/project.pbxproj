@@ -821,7 +821,7 @@
 					"$(PROJECT_DIR)/TestFlightSDK3",
 				);
 				PRODUCT_NAME = "TH PopQuiz";
-				PROVISIONING_PROFILE = "71f04141-158b-4b6f-bb5f-77500f3a851c";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Code/Supporting Files/TradeGame-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -849,7 +849,7 @@
 					"$(PROJECT_DIR)/TestFlightSDK3",
 				);
 				PRODUCT_NAME = "TH PopQuiz";
-				PROVISIONING_PROFILE = "71f04141-158b-4b6f-bb5f-77500f3a851c";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Code/Supporting Files/TradeGame-Bridging-Header.h";
 			};
 			name = Release;
