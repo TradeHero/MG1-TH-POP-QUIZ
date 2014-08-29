@@ -9,7 +9,7 @@
 import UIKit
 
 ///Set of options that belongs to a particular question.
-class OptionSet {
+final class OptionSet {
     
     /// Correct option or answer.
     private let correctOption: Option!

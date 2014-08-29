@@ -77,7 +77,7 @@ enum QuestionCategory : Int {
 }
 
 /// A linguistic expression used to make a request for information.
-class Question {
+final class Question {
     
     /// ID
     let questionID: Int!

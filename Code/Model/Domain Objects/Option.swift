@@ -10,7 +10,7 @@ import UIKit
 
 /// Choices that are of a given question.
 
-class Option {
+final class Option {
     
     /// String content of the option
     let stringContent: String!

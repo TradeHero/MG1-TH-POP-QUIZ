@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Game {
+final class Game {
     
     let gameID: Int!
     private let createdAtUTCStr: String!

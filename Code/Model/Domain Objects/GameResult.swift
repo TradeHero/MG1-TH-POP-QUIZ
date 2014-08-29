@@ -8,6 +8,6 @@
 
 import UIKit
 
-class GameResult {
+final class GameResult {
    
 }

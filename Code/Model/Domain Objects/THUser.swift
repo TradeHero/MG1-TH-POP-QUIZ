@@ -8,7 +8,7 @@
 
 import UIKit
 
-class THUser {
+final class THUser {
     
     let userId: Int!
     var firstName: String!

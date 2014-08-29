@@ -8,7 +8,7 @@
 
 import Foundation
 
-class QuestionResult {
+final class QuestionResult {
     var questionId: Int!
     var timeTaken: CGFloat!
     var isCorrect: Bool!

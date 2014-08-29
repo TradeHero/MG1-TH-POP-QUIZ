@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GamePortfolio {
+final class GamePortfolio {
     
     let gamePortfolioID: Int!
     let rank: String!
