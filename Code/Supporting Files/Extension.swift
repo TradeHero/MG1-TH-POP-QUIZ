@@ -8,12 +8,19 @@
 
 import UIKit
 
-extension UIProgressView {
-    override public func sizeThatFits(size: CGSize) -> CGSize {
-        return CGSizeMake(self.frame.size.width, 10)
+extension UINavigationController {
+    func hideNavigationBar() {
+        if !self.navigationBarHidden {
+            self.navigationBarHidden = true
+        }
+    }
+
+    func showNavigationBar() {
+        if self.navigationBarHidden {
+            self.navigationBarHidden = false
+        }
     }
 }
-
 extension UIControl {
     func disable() {
         enabled = false

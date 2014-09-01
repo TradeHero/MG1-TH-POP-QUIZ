@@ -10,44 +10,45 @@ import UIKit
 
 class GameLoadingSceneViewController: UIViewController {
     
-    @IBOutlet weak var countdownTimerLabel: UILabel!
-    @IBOutlet weak var prepareView: UIView!
-    @IBOutlet weak var prepareViewLabel: UILabel!
-    @IBOutlet weak var prepareViewDetailLabel: UILabel!
+    @IBOutlet private weak var countdownTimerLabel: UILabel!
+    @IBOutlet private weak var prepareView: UIView!
+    @IBOutlet private weak var prepareViewLabel: UILabel!
+    @IBOutlet private weak var prepareViewDetailLabel: UILabel!
     // top view
     
-    @IBOutlet weak var topBoxBackgroundImageView: UIImageView!
-    @IBOutlet weak var categoryIconImageView: UIImageView!
-    @IBOutlet weak var categoryNameLabel: UILabel!
+    @IBOutlet private weak var topBoxBackgroundImageView: UIImageView!
+    @IBOutlet private weak var categoryIconImageView: UIImageView!
+    @IBOutlet private weak var categoryNameLabel: UILabel!
     
-    @IBOutlet weak var selfAvatarView: AvatarRoundedView!
-    @IBOutlet weak var selfDisplayNameLabel: UILabel!
-    @IBOutlet weak var selfRankLabel: UILabel!
-    @IBOutlet weak var selfLevelLabel: UILabel!
-    @IBOutlet weak var selfBadgeImageView: UIImageView!
+    @IBOutlet private weak var selfAvatarView: AvatarRoundedView!
+    @IBOutlet private weak var selfDisplayNameLabel: UILabel!
+    @IBOutlet private weak var selfRankLabel: UILabel!
+    @IBOutlet private weak var selfLevelLabel: UILabel!
+    @IBOutlet private weak var selfBadgeImageView: UIImageView!
     
     // bottom view
     
-    @IBOutlet weak var bottomBoxBackgroundImageView: UIImageView!
-    @IBOutlet weak var opponentAvatarView: AvatarRoundedView!
-    @IBOutlet weak var opponentDisplayNameLabel: UILabel!
-    @IBOutlet weak var opponentRankLabel: UILabel!
-    @IBOutlet weak var opponentLevelLabel: UILabel!
-    @IBOutlet weak var opponentBadgeImageView: UIImageView!
+    @IBOutlet private weak var bottomBoxBackgroundImageView: UIImageView!
+    @IBOutlet private weak var opponentAvatarView: AvatarRoundedView!
+    @IBOutlet private weak var opponentDisplayNameLabel: UILabel!
+    @IBOutlet private weak var opponentRankLabel: UILabel!
+    @IBOutlet private weak var opponentLevelLabel: UILabel!
+    @IBOutlet private weak var opponentBadgeImageView: UIImageView!
     
-    var user = NetworkClient.sharedClient.authenticatedUser
-    var game: Game!
+    @IBOutlet weak var roundTimerImageView: UIImageView!
+    private var user = NetworkClient.sharedClient.authenticatedUser
+    private var game: Game!
     
-    var player: THUser!
-    var opponent: THUser!
-    var timer: NSTimer!
-    var startTime: NSDate!
+    private var player: THUser!
+    private var opponent: THUser!
+    private var timer: NSTimer!
+    private var startTime: NSDate!
     
-    var time = 6
+    private var time = 4
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController.navigationBarHidden = true
+        self.navigationController.hideNavigationBar()
         self.configureUI()
         
         weak var wself = self
@@ -72,9 +73,15 @@ class GameLoadingSceneViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func bindGame(game:Game){
+        self.game = game
+        self.determineUserRoles(game)
     }
     
     private func determineUserRoles(game:Game) {
@@ -89,15 +96,16 @@ class GameLoadingSceneViewController: UIViewController {
         }
     }
     
-    func prepareGame(game:Game, completionHandler:()->()) {
+    private func prepareGame(game:Game, completionHandler:()->()) {
         var qSet = game.questionSet
         var count:Int = 0
+        var tcount = game.questionSet.count
         weak var wself = self
         for q in qSet {
             q.fetchImage() {
                 var sself = wself!
                 count += 1
-                sself.prepareViewDetailLabel.text = "\(count)/\(game.questionSet.count)"
+                sself.prepareViewDetailLabel.text = "\(count) of \(tcount)"
                 if count == game.questionSet.count {
                     sself.game = game
                     completionHandler()
@@ -114,27 +122,40 @@ class GameLoadingSceneViewController: UIViewController {
     
     
     func updateTimer() {
-        countdownTimerLabel.text = String(time--)
-        println(time)
+        countdownTimerLabel.text = String(--time)
         if time == 0 {
             timer.invalidate()
             timer = nil
-            startGame(1)
+            startGame()
         }
     }
     
-    func bindGame(game:Game){
-        self.game = game
-        self.determineUserRoles(game)
-    }
-    
-    private func startGame(delay: dispatch_time_t){
+    private func startGame(){
         
-        let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
-        vc.bindGameAndUsers(self.game, player: self.player, opponent: self.opponent)
-        //        self.navigationController.popViewControllerAnimated(false)
-        self.presentViewController(vc, animated: true, completion: nil)
+        let topView = topBoxBackgroundImageView.superview!
+        let bottomView = bottomBoxBackgroundImageView.superview!
         
+        var topEndFrame = topView.frame
+        topEndFrame.origin.x += 500
+        
+        var bottomEndFrame = bottomView.frame
+        bottomEndFrame.origin.x -= 500
+        
+        weak var wself = self
+        
+        UIView.animateWithDuration(1, delay: 1, options: .TransitionNone, animations: {
+            var sself = wself!
+            sself.countdownTimerLabel.alpha = 0
+            topView.frame = topEndFrame
+            bottomView.frame = bottomEndFrame
+            sself.roundTimerImageView.bounds.size = CGSizeZero
+            }) { complete in
+                if complete {
+                    var sself = wself!
+                    usleep(1)
+                    sself.performSegueWithIdentifier("PresentQuizSegue", sender: sself)
+                }
+        }
     }
     
     private func configureUI(){
@@ -162,14 +183,18 @@ class GameLoadingSceneViewController: UIViewController {
         }
         self.opponentDisplayNameLabel.text = opponent.displayName
     }
-    /*
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "PresentQuizSegue" {
+            let vc =  segue.destinationViewController as QuizViewController
+            vc.bindGameAndUsers(self.game, player: self.player, opponent: self.opponent)
+        }
     }
-    */
+    
     
 }

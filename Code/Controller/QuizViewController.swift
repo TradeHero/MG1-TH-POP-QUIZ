@@ -88,6 +88,7 @@ class QuizViewController: UIViewController {
         }
     }
     
+    
     private var currentQuestion:Question {
         return game.questionSet[current_q]
     }
@@ -112,10 +113,9 @@ class QuizViewController: UIViewController {
         self.prepareFirstQuestionUISetup()
     }
     
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.navigationController.hideNavigationBar()
         weak var wself = self
         dispatch_after(1, dispatch_get_main_queue()) {
             var sself = wself!
@@ -318,7 +318,8 @@ class QuizViewController: UIViewController {
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
         NetworkClient.sharedClient.postGameResults(self.game, currentScore: currentTurnScore, questionResults: results, completionHandler: nil)
-        self.dismissViewControllerAnimated(true, completion: nil)
+//        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController.popToRootViewControllerAnimated(false)
     }
     
     

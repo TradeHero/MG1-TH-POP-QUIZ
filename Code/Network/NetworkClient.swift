@@ -96,13 +96,15 @@ class NetworkClient {
     /**
         Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int, completionHandler: (Game! -> ())?) {
+    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int, completionHandler: (Game! -> ())!) {
         configureCompulsoryHeaders()
         debugPrintln("Creating challenge with user \(opponentId) with \(numberOfQuestions) questions(s)")
-        Alamofire.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
+        
+        weak var wself = self
+        Alamofire.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : 322868
             ], encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
-            
+            var sself = wself!
             if let responseError = error {
                 println(responseError)
                 return
@@ -123,12 +125,12 @@ class NetworkClient {
                     opponentID = i as Int
                 }
                 
-                self.fetchUser(opponentID) {
+                sself.fetchUser(opponentID) {
                     if let u = $0 {
                         game.opponentPlayer = u
                     }
                     
-                    self.fetchUser(initiatorID) {
+                    sself.fetchUser(initiatorID) {
                         if let u = $0 {
                             game.initiatingPlayer = u
                         }
@@ -152,6 +154,7 @@ class NetworkClient {
         let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
         configureCompulsoryHeaders()
         debugPrintln("Fetching Facebook friends for user \(userId)...")
+        
         let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
             if let responseError = error {
@@ -180,6 +183,58 @@ class NetworkClient {
 //        debugPrintln(r)
     }
     
+    /*
+    GET api/games/\(id)/details
+    */
+    func fetchGameByGameId(gameId:Int, completionHandler: (Game! -> ())!){
+        let url = "\(THGameAPIBaseURL)\(gameId)/details"
+        configureCompulsoryHeaders()
+        debugPrintln("Fetching game with game ID: \(gameId)...")
+        
+        
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+            _, response, content, error in
+            if error != nil {
+                debugPrintln(error)
+            }
+            weak var wself = self
+            if response?.statusCode == 200 {
+                var sself = wself!
+                let responseJSON = content as [String: AnyObject]
+                //                println(responseJSON)
+                let game = Game(gameDTO: responseJSON)
+                debugPrintln("Game created with game ID: \(game.gameID)")
+                var initiatorID: Int!
+                if let i: AnyObject = responseJSON["createdByUserId"]{
+                    initiatorID = i as Int
+                }
+                
+                var opponentID: Int!
+                if let i: AnyObject = responseJSON["opponentUserId"]{
+                    opponentID = i as Int
+                }
+                
+                sself.fetchUser(opponentID) {
+                    if let u = $0 {
+                        game.opponentPlayer = u
+                    }
+                    
+                    sself.fetchUser(initiatorID) {
+                        if let u = $0 {
+                            game.initiatingPlayer = u
+                        }
+                        
+                        if let handler = completionHandler {
+                            handler(game)
+                        }
+                    }
+                }
+                
+                
+            }
+
+        }
+    }
     /**
         GET api/games/open
     */

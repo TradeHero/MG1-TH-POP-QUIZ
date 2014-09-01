@@ -13,11 +13,11 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     private let kTHFriendsDictionaryKey = "THFriendsDictionaryKey"
     
-    var THFriendList: [THUserFriend] = []
+    private var THFriendList: [THUserFriend] = []
     
-    var FBFriendList: [THUserFriend] = []
+    private var FBFriendList: [THUserFriend] = []
     
-    var searchKey: String = ""
+    private var searchKey: String = ""
     
     private lazy var user: THUser = {
         return NetworkClient.sharedClient.authenticatedUser
@@ -33,21 +33,23 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController.navigationBarHidden = false
         self.navigationItem.title = "Friend List"
         self.friendsTableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
         self.searchBar.placeholder = "Search friends"
         self.searchBar.text = ""
         self.friendsTableView.tableHeaderView = self.searchBar
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController.showNavigationBar()
         self.loadFriends()
     }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    func loadFriends() {
+    private func loadFriends() {
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.removeFromSuperViewOnHide = true
         hud.minShowTime = 0
@@ -57,10 +59,12 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         
         self.friendsTableView.reloadData()
         
+        weak var wself = self
         let loadCompleteHandler:((fbFriends: [THUserFriend], thFriends:[THUserFriend]) -> Void) = {
-            self.FBFriendList = $0
-            self.THFriendList = $1
-            self.friendsTableView.reloadData()
+            var sself = wself!
+            sself.FBFriendList = $0
+            sself.THFriendList = $1
+            sself.friendsTableView.reloadData()
         }
         
         let object = EGOCache.globalCache().objectForKey(kTHUserFriendsCacheStoreKey)
@@ -69,10 +73,11 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             debugPrintln("Nothing cached.")
             hud.labelText = "Retrieving friends..."
             NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
+                var sself = wself!
                 hud.hide(false)
                 let fbF = $0.fbFriends
                 let thF = $0.thFriends
-                let dict = [self.kFBFriendsDictionaryKey: fbF, self.kTHFriendsDictionaryKey: thF]
+                let dict = [sself.kFBFriendsDictionaryKey: fbF, sself.kTHFriendsDictionaryKey: thF]
                 EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
                 debugPrintln("\($0.fbFriends.count + $0.thFriends.count) friends cached.")
                 loadCompleteHandler(fbFriends: fbF, thFriends: thF)
