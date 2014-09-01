@@ -5,22 +5,18 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>78D4A7E0-2533-4481-A3DA-EE3E66CD4043</string>
+	<string>F7DC4648-A3AD-419F-8428-357482C1504C</string>
 	<key>IDESourceControlProjectName</key>
-	<string>TH PopQuiz</string>
+	<string>TH-PopQuiz</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
-		<string>https://github.com/Alamofire/Alamofire.git</string>
 		<key>CAF8DEF9791C5CD87C9E2AF4AF2EC5AB601E9EF3</key>
 		<string>https://bitbucket.org/rynecheow/tradegame.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>TH PopQuiz.xcworkspace</string>
+	<string>TH-PopQuiz.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>67620B5EFA902936DF04070AF595B76AB0333747</key>
-		<string>..Vendor/Alamofire</string>
 		<key>CAF8DEF9791C5CD87C9E2AF4AF2EC5AB601E9EF3</key>
 		<string>..</string>
 	</dict>
@@ -32,14 +28,6 @@
 	<string>CAF8DEF9791C5CD87C9E2AF4AF2EC5AB601E9EF3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>67620B5EFA902936DF04070AF595B76AB0333747</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Alamofire</string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

@@ -25,10 +25,10 @@ echo "*     Cleaning     *"
 echo "********************"
 xcodebuild -alltargets clean
 
- echo "********************"
- echo "*     Archiving     *"
- echo "********************"
- xcodebuild -workspace $WORKSPACE -scheme $SCHEME archive
+# echo "********************"
+# echo "*     Archiving     *"
+# echo "********************"
+# xcodebuild -workspace $WORKSPACE -scheme $SCHEME archive
 
 echo "********************"
 echo "*     Building     *" 

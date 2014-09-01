@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0600"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CC324DF974C54BDFA77DA676"
-               BuildableName = "libPods-LDProgressView.a"
-               BlueprintName = "Pods-LDProgressView"
-               ReferencedContainer = "container:Pods.xcodeproj">
+               BlueprintIdentifier = "6D20577219889A7000570042"
+               BuildableName = "TH PopQuiz.app"
+               BlueprintName = "TH PopQuiz"
+               ReferencedContainer = "container:TH PopQuiz.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "6D20577219889A7000570042"
+            BuildableName = "TH PopQuiz.app"
+            BlueprintName = "TH PopQuiz"
+            ReferencedContainer = "container:TH PopQuiz.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -39,6 +48,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "6D20577219889A7000570042"
+            BuildableName = "TH PopQuiz.app"
+            BlueprintName = "TH PopQuiz"
+            ReferencedContainer = "container:TH PopQuiz.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -48,6 +66,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "6D20577219889A7000570042"
+            BuildableName = "TH PopQuiz.app"
+            BlueprintName = "TH PopQuiz"
+            ReferencedContainer = "container:TH PopQuiz.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
