@@ -26,7 +26,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.delegate.homeTurnChallengesCell(self, didTapAcceptChallenge: challengeID)
     }
     
-    func bindChallenge() {
+    func bindChalllenge(challenge:Game) {
         challengeID = 0
     }
 }

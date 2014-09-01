@@ -57,6 +57,18 @@ final class Game {
         }
 
     }
+
+    init(compactGameDTO:[String: AnyObject]){
+        if let id: AnyObject = compactGameDTO["id"] {
+            self.gameID = id as Int
+        }
+
+        if let s: AnyObject = compactGameDTO["createdAtUtc"] {
+            self.createdAtUTCStr = s as String
+        }
+
+        self.questionSet = nil
+    }
 }
 
 extension Game: Printable {

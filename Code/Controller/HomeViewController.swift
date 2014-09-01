@@ -14,12 +14,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet private weak var fullNameView: UILabel!
     @IBOutlet private weak var rankView: UILabel!
     
+    private var openChallenges: [Game] = []
+    private var takenChallenges: [Game] = []
+    
     private lazy var user: THUser = {
         return NetworkClient.sharedClient.authenticatedUser
     }()
     
     private lazy var noOpenChallenge:Bool = {
-        return true
+        return self.openChallenges.count == 0
     }()
     
     required init(coder aDecoder: NSCoder) {
@@ -30,7 +33,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadOpenChallenges()
+        self.loadChallenges()
+        self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         setupSubviews()
         self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
         self.navigationItem.title = "Home"
@@ -73,20 +77,63 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         //        self.rankView.text =
     }
     
-    private func loadOpenChallenges(){
-         NetworkClient.sharedClient.fetchOpenChallenges(nil)
+    private func loadChallenges(){
+        var numberLoaded = 0
+        self.openChallenges.removeAll(keepCapacity: true)
+        self.takenChallenges.removeAll(keepCapacity: true)
+        self.tableView.reloadData()
+        
+        let completionHandler: () -> Void = {
+            numberLoaded++
+            if numberLoaded == 2 {
+                self.tableView.reloadData()
+            }
+        }
+        
+        weak var wself = self
+        NetworkClient.sharedClient.fetchOpenChallenges() {
+            var sself = wself!
+            sself.openChallenges = $0
+            completionHandler()
+        }
+        
+        NetworkClient.sharedClient.fetchTakenChallenges() {
+            var sself = wself!
+            sself.takenChallenges = $0
+            completionHandler()
+        }
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        return nil
+        var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath:indexPath) as HomeTurnChallengesTableViewCell
+        
+        switch indexPath.section {
+        case 0:
+            cell.bindChalllenge(openChallenges[indexPath.row])
+        case 1:
+            cell.bindChalllenge(takenChallenges[indexPath.row])
+        default:
+            return nil
+        }
+        
+        cell.layoutIfNeeded()
+        cell.delegate = self
+        return cell
     }
     
     func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        return 0
+        return 48.0
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        switch section {
+        case 0:
+            return openChallenges.count
+        case 1:
+            return takenChallenges.count
+        default:
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView!, viewForHeaderInSection section: Int) -> UIView! {

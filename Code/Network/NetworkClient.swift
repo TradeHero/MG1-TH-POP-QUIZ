@@ -243,8 +243,10 @@ class NetworkClient {
         
         configureCompulsoryHeaders()
         debugPrintln("Fetching all open challenges for authenticated user...")
+        weak var wself = self
         let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
+            var sself = wself!
             if error != nil {
                 debugPrintln(error)
             }
@@ -254,11 +256,125 @@ class NetworkClient {
                     debugPrintln("User has no open challenges.")
                 } else {
                     debugPrintln("Parsing \(openChallengesDTOs.count) objects as open challenges...")
+                    var numberCompleted = 0
+                    var total = openChallengesDTOs.count
+                    var openChallenges: [Game] = []
+                    
+                    let fetchUserHandler: () -> Void = { Void in
+                        numberCompleted++
+                        if numberCompleted == total {
+                            if let handler = completionHandler {
+                                handler(openChallenges)
+                            }
+                        }
+                    }
+                    for openChallengeDTO in openChallengesDTOs as [[String: AnyObject]] {
+                        let game = Game(compactGameDTO: openChallengeDTO)
+                        
+                        var initiatorID: Int!
+                        if let i: AnyObject = openChallengeDTO["createdByUserId"]{
+                            initiatorID = i as Int
+                        }
+                        
+                        var opponentID: Int!
+                        if let i: AnyObject = openChallengeDTO["opponentUserId"]{
+                            opponentID = i as Int
+                        }
+                        
+                        sself.fetchUser(opponentID) {
+                            if let u = $0 {
+                                game.opponentPlayer = u
+                            }
+                            
+                            sself.fetchUser(initiatorID) {
+                                if let u = $0 {
+                                    game.initiatingPlayer = u
+                                }
+                                
+                                openChallenges.append(game)
+                                fetchUserHandler()
+                            }
+                        }
+
+                        
+                        
+                    }
+                    
 //                    debugPrintln("Successfully fetched \(openChallengesDTOs.count) open challenge(s).")
                 }
             }
         }
 //        debugPrintln(r)
+    }
+    
+    /**
+        GET api/games/taken
+    */
+    func fetchTakenChallenges(completionHandler: ([Game] -> Void)!){
+        let url = "\(THGameAPIBaseURL)/taken"
+        
+        configureCompulsoryHeaders()
+        debugPrintln("Fetching all taken challenges for authenticated user...")
+        weak var wself = self
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+            _, response, content, error in
+            var sself = wself!
+            if error != nil {
+                debugPrintln(error)
+            }
+            
+            if let takenChallengesDTOs = content as? [AnyObject] {
+                if takenChallengesDTOs.count == 0 {
+                    debugPrintln("User has no open challenges.")
+                } else {
+                    debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
+                    var numberCompleted = 0
+                    var total = takenChallengesDTOs.count
+                    var takenChallenges: [Game] = []
+                    
+                    let fetchUserHandler: () -> Void = { Void in
+                        numberCompleted++
+                        if numberCompleted == total {
+                            if let handler = completionHandler {
+                                handler(takenChallenges)
+                            }
+                        }
+                    }
+                    for takenChallengeDTO in takenChallengesDTOs as [[String: AnyObject]] {
+                        let game = Game(compactGameDTO: takenChallengeDTO)
+                        println(takenChallengeDTO)
+                        var initiatorID: Int!
+                        if let i: AnyObject = takenChallengeDTO["createdByUserId"]{
+                            initiatorID = i as Int
+                        }
+                        
+                        var opponentID: Int!
+                        if let i: AnyObject = takenChallengeDTO["opponentUserId"]{
+                            opponentID = i as Int
+                        }
+                        
+                        sself.fetchUser(opponentID) {
+                            if let u = $0 {
+                                game.opponentPlayer = u
+                            }
+                            
+                            sself.fetchUser(initiatorID) {
+                                if let u = $0 {
+                                    game.initiatingPlayer = u
+                                }
+                                
+                                takenChallenges.append(game)
+                                fetchUserHandler()
+                            }
+                        }
+                        
+                        
+                        
+                    }
+                }
+            }
+        }
+        //        debugPrintln(r)
     }
     
     ///
