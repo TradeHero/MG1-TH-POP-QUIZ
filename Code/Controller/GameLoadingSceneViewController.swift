@@ -43,25 +43,29 @@ class GameLoadingSceneViewController: UIViewController {
     var timer: NSTimer!
     var startTime: NSDate!
     
+    var time = 6
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController.navigationBarHidden = true
         self.configureUI()
         
+        weak var wself = self
         self.prepareGame(self.game){
-            self.prepareViewDetailLabel.text = "Done fetching image."
+            var sself = wself!
+            sself.prepareViewDetailLabel.text = "Done fetching image."
             UIView.animateWithDuration(1.0, delay: 0, options: .TransitionCrossDissolve , animations: {
-                self.prepareView.alpha = 0
+                sself.prepareView.alpha = 0
                 }) { complete in
                     if complete {
                         UIView.animateWithDuration(1, options: .TransitionCrossDissolve){
-                            self.opponentAvatarView.alpha = 1
-                            self.opponentDisplayNameLabel.alpha = 1
-                            self.opponentRankLabel.alpha = 1
-                            self.opponentLevelLabel.alpha = 1
-                            self.opponentBadgeImageView.alpha = 1
+                            sself.opponentAvatarView.alpha = 1
+                            sself.opponentDisplayNameLabel.alpha = 1
+                            sself.opponentRankLabel.alpha = 1
+                            sself.opponentLevelLabel.alpha = 1
+                            sself.opponentBadgeImageView.alpha = 1
                         }
-                        self.countdown()
+                        sself.timerStart()
                     }
             }
         }
@@ -88,12 +92,14 @@ class GameLoadingSceneViewController: UIViewController {
     func prepareGame(game:Game, completionHandler:()->()) {
         var qSet = game.questionSet
         var count:Int = 0
+        weak var wself = self
         for q in qSet {
             q.fetchImage() {
+                var sself = wself!
                 count += 1
-                self.prepareViewDetailLabel.text = "\(count)/\(game.questionSet.count)"
+                sself.prepareViewDetailLabel.text = "\(count)/\(game.questionSet.count)"
                 if count == game.questionSet.count {
-                    self.game = game
+                    sself.game = game
                     completionHandler()
                 }
             }
@@ -101,36 +107,20 @@ class GameLoadingSceneViewController: UIViewController {
     }
     
     private func timerStart() {
-        startTime = NSDate()
         if timer == nil {
             timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
         }
     }
     
-    private func timerStop() {
-        timer.invalidate()
-        timer = nil
-    }
-    
-    
-    private func countdown(){
-        timerStart()
-    }
     
     func updateTimer() {
-        var timeLeft = 6 - Int(getTimeElasped())
-        countdownTimerLabel.text = String(timeLeft)
-        
-        if timeLeft == 0 {
-            timerStop()
-            startGame()
+        countdownTimerLabel.text = String(time--)
+        println(time)
+        if time == 0 {
+            timer.invalidate()
+            timer = nil
+            startGame(1)
         }
-    }
-    
-    private func getTimeElasped() -> CGFloat{
-        let timeNow = NSDate()
-        let timeInterval = CGFloat(timeNow.timeIntervalSinceDate(startTime))
-        return timeInterval > 0 ? timeInterval : 0
     }
     
     func bindGame(game:Game){
@@ -138,31 +128,37 @@ class GameLoadingSceneViewController: UIViewController {
         self.determineUserRoles(game)
     }
     
-    private func startGame(){
+    private func startGame(delay: dispatch_time_t){
+        
         let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("QuizViewController") as QuizViewController
         vc.bindGameAndUsers(self.game, player: self.player, opponent: self.opponent)
-//        self.navigationController.popViewControllerAnimated(false)
+        //        self.navigationController.popViewControllerAnimated(false)
         self.presentViewController(vc, animated: true, completion: nil)
+        
     }
+    
     private func configureUI(){
         self.opponentAvatarView.alpha = 0
         self.opponentDisplayNameLabel.alpha = 0
         self.opponentRankLabel.alpha = 0
         self.opponentLevelLabel.alpha = 0
         self.opponentBadgeImageView.alpha = 0
+        weak var wself = self
         NetworkClient.fetchImageFromURLString(player.pictureURL, progressHandler: nil) { image, error in
+            var sself = wself!
             if let err = error {
                 println(err)
             }
-            self.selfAvatarView.image = image
+            sself.selfAvatarView.image = image
         }
         self.selfDisplayNameLabel.text = player.displayName
         
         NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) { image, error in
+            var sself = wself!
             if let err = error {
                 println(err)
             }
-            self.opponentAvatarView.image = image
+            sself.opponentAvatarView.image = image
         }
         self.opponentDisplayNameLabel.text = opponent.displayName
     }

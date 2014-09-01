@@ -110,10 +110,17 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareFirstQuestionUISetup()
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        dispatch_after(1, dispatch_get_main_queue(), {() in
-            self.proceedToNextQuestion()
-        })
+        weak var wself = self
+        dispatch_after(1, dispatch_get_main_queue()) {
+            var sself = wself!
+            sself.proceedToNextQuestion()
+        }
     }
     
     override func didReceiveMemoryWarning() {
