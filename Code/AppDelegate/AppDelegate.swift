@@ -28,8 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FBLoginView.self
         FBProfilePictureView.self
-        TestFlight.takeOff(TestFlightToken)
-        println("\(NSBundle.mainBundle().bundleIdentifier)")
+
+        #if TF
+            TestFlight.takeOff(TestFlightToken)
+        #endif
+        
         switch kTHGamesServerMode {
         case .Dev:
             println("Current build points to Staging Server.\n")

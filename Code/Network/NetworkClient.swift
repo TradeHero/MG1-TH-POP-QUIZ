@@ -254,6 +254,7 @@ class NetworkClient {
             if let openChallengesDTOs = content as? [AnyObject] {
                 if openChallengesDTOs.count == 0 {
                     debugPrintln("User has no open challenges.")
+                    completionHandler([])
                 } else {
                     debugPrintln("Parsing \(openChallengesDTOs.count) objects as open challenges...")
                     var numberCompleted = 0
@@ -326,51 +327,54 @@ class NetworkClient {
             if let takenChallengesDTOs = content as? [AnyObject] {
                 if takenChallengesDTOs.count == 0 {
                     debugPrintln("User has no open challenges.")
+                    completionHandler([])
                 } else {
                     debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
-                    var numberCompleted = 0
-                    var total = takenChallengesDTOs.count
-                    var takenChallenges: [Game] = []
+//                    var numberCompleted = 0
+//                    var total = takenChallengesDTOs.count
+//                    var takenChallenges: [Game] = []
+//                    
+//                    let fetchUserHandler: () -> Void = { Void in
+//                        numberCompleted++
+//                        if numberCompleted == total {
+//                            if let handler = completionHandler {
+//                                handler(takenChallenges)
+//                            }
+//                        }
+//                    }
+//                    for takenChallengeDTO in takenChallengesDTOs as [[String: AnyObject]] {
+//                        let game = Game(compactGameDTO: takenChallengeDTO)
+//                        println(takenChallengeDTO)
+//                        var initiatorID: Int!
+//                        if let i: AnyObject = takenChallengeDTO["createdByUserId"]{
+//                            initiatorID = i as Int
+//                        }
+//                        
+//                        var opponentID: Int!
+//                        if let i: AnyObject = takenChallengeDTO["opponentUserId"]{
+//                            opponentID = i as Int
+//                        }
+//                        
+//                        sself.fetchUser(opponentID) {
+//                            if let u = $0 {
+//                                game.opponentPlayer = u
+//                            }
+//                            
+//                            sself.fetchUser(initiatorID) {
+//                                if let u = $0 {
+//                                    game.initiatingPlayer = u
+//                                }
+//                                
+//                                takenChallenges.append(game)
+//                                fetchUserHandler()
+//                            }
+//                        }
+//
+//                        
+//                        
+//                    }
                     
-                    let fetchUserHandler: () -> Void = { Void in
-                        numberCompleted++
-                        if numberCompleted == total {
-                            if let handler = completionHandler {
-                                handler(takenChallenges)
-                            }
-                        }
-                    }
-                    for takenChallengeDTO in takenChallengesDTOs as [[String: AnyObject]] {
-                        let game = Game(compactGameDTO: takenChallengeDTO)
-                        println(takenChallengeDTO)
-                        var initiatorID: Int!
-                        if let i: AnyObject = takenChallengeDTO["createdByUserId"]{
-                            initiatorID = i as Int
-                        }
-                        
-                        var opponentID: Int!
-                        if let i: AnyObject = takenChallengeDTO["opponentUserId"]{
-                            opponentID = i as Int
-                        }
-                        
-                        sself.fetchUser(opponentID) {
-                            if let u = $0 {
-                                game.opponentPlayer = u
-                            }
-                            
-                            sself.fetchUser(initiatorID) {
-                                if let u = $0 {
-                                    game.initiatingPlayer = u
-                                }
-                                
-                                takenChallenges.append(game)
-                                fetchUserHandler()
-                            }
-                        }
-                        
-                        
-                        
-                    }
+                    completionHandler([])
                 }
             }
         }

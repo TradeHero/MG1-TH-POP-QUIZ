@@ -78,14 +78,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func loadChallenges(){
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.removeFromSuperViewOnHide = true
+        hud.minShowTime = 0
+        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
+        
         var numberLoaded = 0
         self.openChallenges.removeAll(keepCapacity: true)
         self.takenChallenges.removeAll(keepCapacity: true)
         self.tableView.reloadData()
-        
+        hud.labelText = "Loading challenges.."
         let completionHandler: () -> Void = {
             numberLoaded++
             if numberLoaded == 2 {
+                hud.hide(true)
                 self.tableView.reloadData()
             }
         }
@@ -94,12 +100,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         NetworkClient.sharedClient.fetchOpenChallenges() {
             var sself = wself!
             sself.openChallenges = $0
+            println("Fetched \($0.count) open challenges.")
             completionHandler()
         }
         
         NetworkClient.sharedClient.fetchTakenChallenges() {
             var sself = wself!
             sself.takenChallenges = $0
+            println("Fetched \($0.count) taken challenges")
             completionHandler()
         }
     }
