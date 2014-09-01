@@ -101,7 +101,7 @@ class NetworkClient {
         debugPrintln("Creating challenge with user \(opponentId) with \(numberOfQuestions) questions(s)")
         
         weak var wself = self
-        Alamofire.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : 322868
+        Alamofire.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
             ], encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
             var sself = wself!
@@ -125,12 +125,12 @@ class NetworkClient {
                     opponentID = i as Int
                 }
                 
-                sself.fetchUser(opponentID) {
+                sself.fetchUser(opponentID, force: false) {
                     if let u = $0 {
                         game.opponentPlayer = u
                     }
                     
-                    sself.fetchUser(initiatorID) {
+                    sself.fetchUser(initiatorID, force: false) {
                         if let u = $0 {
                             game.initiatingPlayer = u
                         }
@@ -214,12 +214,12 @@ class NetworkClient {
                     opponentID = i as Int
                 }
                 
-                sself.fetchUser(opponentID) {
+                sself.fetchUser(opponentID, force: false) {
                     if let u = $0 {
                         game.opponentPlayer = u
                     }
                     
-                    sself.fetchUser(initiatorID) {
+                    sself.fetchUser(initiatorID, force: false) {
                         if let u = $0 {
                             game.initiatingPlayer = u
                         }
@@ -282,12 +282,12 @@ class NetworkClient {
                             opponentID = i as Int
                         }
                         
-                        sself.fetchUser(opponentID) {
+                        sself.fetchUser(opponentID, force: false) {
                             if let u = $0 {
                                 game.opponentPlayer = u
                             }
                             
-                            sself.fetchUser(initiatorID) {
+                            sself.fetchUser(initiatorID, force: false) {
                                 if let u = $0 {
                                     game.initiatingPlayer = u
                                 }
@@ -330,51 +330,51 @@ class NetworkClient {
                     completionHandler([])
                 } else {
                     debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
-//                    var numberCompleted = 0
-//                    var total = takenChallengesDTOs.count
-//                    var takenChallenges: [Game] = []
-//                    
-//                    let fetchUserHandler: () -> Void = { Void in
-//                        numberCompleted++
-//                        if numberCompleted == total {
-//                            if let handler = completionHandler {
-//                                handler(takenChallenges)
-//                            }
-//                        }
-//                    }
-//                    for takenChallengeDTO in takenChallengesDTOs as [[String: AnyObject]] {
-//                        let game = Game(compactGameDTO: takenChallengeDTO)
-//                        println(takenChallengeDTO)
-//                        var initiatorID: Int!
-//                        if let i: AnyObject = takenChallengeDTO["createdByUserId"]{
-//                            initiatorID = i as Int
-//                        }
-//                        
-//                        var opponentID: Int!
-//                        if let i: AnyObject = takenChallengeDTO["opponentUserId"]{
-//                            opponentID = i as Int
-//                        }
-//                        
-//                        sself.fetchUser(opponentID) {
-//                            if let u = $0 {
-//                                game.opponentPlayer = u
-//                            }
-//                            
-//                            sself.fetchUser(initiatorID) {
-//                                if let u = $0 {
-//                                    game.initiatingPlayer = u
-//                                }
-//                                
-//                                takenChallenges.append(game)
-//                                fetchUserHandler()
-//                            }
-//                        }
-//
-//                        
-//                        
-//                    }
+                    var numberCompleted = 0
+                    var total = takenChallengesDTOs.count
+                    var takenChallenges: [Game] = []
                     
-                    completionHandler([])
+                    let fetchUserHandler: () -> Void = { Void in
+                        numberCompleted++
+                        if numberCompleted == total {
+                            if let handler = completionHandler {
+                                handler(takenChallenges)
+                            }
+                        }
+                    }
+                    for takenChallengeDTO in takenChallengesDTOs as [[String: AnyObject]] {
+                        let game = Game(compactGameDTO: takenChallengeDTO)
+
+                        var initiatorID: Int!
+                        if let i: AnyObject = takenChallengeDTO["createdByUserId"]{
+                            initiatorID = i as Int
+                        }
+                        
+                        var opponentID: Int!
+                        if let i: AnyObject = takenChallengeDTO["opponentUserId"]{
+                            opponentID = i as Int
+                        }
+                        
+                        sself.fetchUser(opponentID, force: false) {
+                            if let u = $0 {
+                                game.opponentPlayer = u
+                            }
+                            
+                            sself.fetchUser(initiatorID, force: false) {
+                                if let u = $0 {
+                                    game.initiatingPlayer = u
+                                }
+                                
+                                takenChallenges.append(game)
+                                fetchUserHandler()
+                            }
+                        }
+
+                        
+                        
+                    }
+                    
+//                    completionHandler([])
                 }
             }
         }
@@ -452,8 +452,17 @@ class NetworkClient {
     :param: userId User ID to fetch
     :param: completionHandler Handles fetched user if succeed
     */
-    func fetchUser(userId: Int, completionHandler: THUser! -> ()) {
+    func fetchUser(userId: Int, force:Bool = false, completionHandler: THUser! -> ()) {
         configureCompulsoryHeaders()
+        let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(userId)"
+        if !force {
+            let obj = EGOCache.globalCache().objectForKey(userCacheKey)
+            if obj != nil {
+                let user = obj as THUser
+                completionHandler(user)
+                return
+            }
+        }
         
         Alamofire.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
             _, response, content, error in
@@ -463,6 +472,7 @@ class NetworkClient {
             }
             if let profileDTODict = content as? [String: AnyObject] {
                 var user = THUser(profileDTO: profileDTODict)
+                EGOCache.globalCache().setObject(user, forKey: userCacheKey)
                 completionHandler(user)
             }
         })

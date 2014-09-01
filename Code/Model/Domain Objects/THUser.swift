@@ -8,13 +8,20 @@
 
 import UIKit
 
-final class THUser {
+final class THUser : NSObject, NSCoding {
     
     let userId: Int!
-    var firstName: String!
-    var lastName:String!
+    var firstName: String = ""
+    var lastName:String = ""
     var displayName:String!
     var pictureURL:String!
+    
+    private let kPictureURLKey = "Picture URL"
+    private let kUserIdKey = "User ID"
+    private let kFirstNameKey = "First Name"
+    private let kLastNameKey = "Last Name"
+    private let kDispNameKey = "Display Name"
+
 //    public let gamePortfolioID
 //    public lazy var gamePortfolio: GamePortfolio = GamePortfolio()
     
@@ -34,15 +41,46 @@ final class THUser {
         if let pic: AnyObject = profileDTO["picture"] {
             self.pictureURL = pic as String
         }
+
         if let dn: AnyObject = profileDTO["displayName"] {
             self.displayName = dn as String
         }
     }
-    init(){}
+
+    func encodeWithCoder(aCoder: NSCoder) {
+        if let fbpicurl = pictureURL {
+            aCoder.encodeObject(fbpicurl, forKey: kPictureURLKey)
+        }
+
+        aCoder.encodeObject(firstName, forKey: kFirstNameKey)
+        
+
+        aCoder.encodeObject(lastName, forKey: kLastNameKey)
+        
+
+        if let n = displayName {
+            aCoder.encodeObject(n, forKey: kDispNameKey)
+        }
+
+        if let uID = userId {
+            aCoder.encodeInteger(uID, forKey: kUserIdKey)
+        }
+        
+    }
+
+    init(coder aDecoder: NSCoder) {
+        super.init()
+        self.userId = aDecoder.decodeIntegerForKey(kUserIdKey)
+        self.pictureURL = aDecoder.decodeObjectForKey(kPictureURLKey) as String
+        self.firstName = aDecoder.decodeObjectForKey(kFirstNameKey) as String
+        self.lastName = aDecoder.decodeObjectForKey(kLastNameKey) as String
+        self.displayName = aDecoder.decodeObjectForKey(kDispNameKey) as String
+    }
+
 }
 
 extension THUser: Printable {
-    var description: String {
+    override var description: String {
         return "{\nTHUser\n======\nUser ID: \(self.userId)\nDisplay name: \(self.displayName)\nFirst name: \(self.firstName)\nLast name: \(self.lastName)\nProfile picture URL: \(self.pictureURL)\n}\n"
     }
 }

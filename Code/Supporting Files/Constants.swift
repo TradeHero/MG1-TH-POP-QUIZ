@@ -61,3 +61,4 @@ let kTHHomeTurnChallengesTableViewCellIdentifier = "\(kConstantPrefix)HomeTurnCh
 
 // MARK:- cache keys
 let kTHUserFriendsCacheStoreKey = "\(kConstantPrefix)UserFriendsCacheStore"
+let kTHUserCacheStoreKeyPrefix = "\(kConstantPrefix)UserCacheStoreID"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -24,14 +25,14 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="XjA-fC-Nqi">
-                        <rect key="frame" x="51" y="22" width="39" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="XjA-fC-Nqi">
+                        <rect key="frame" x="51" y="22" width="39" height="20"/>
                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zuK-kl-FN9">
-                        <rect key="frame" x="158" y="22" width="39" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zuK-kl-FN9">
+                        <rect key="frame" x="158" y="22" width="39" height="20"/>
                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -51,7 +52,6 @@
                         </state>
                         <connections>
                             <action selector="acceptChallengeAction:" destination="Ug8-Kp-pNl" eventType="touchUpInside" id="Noh-Yu-2t2"/>
-                            <action selector="challengeOrInviteAction:" destination="Ug8-Kp-pNl" eventType="touchUpInside" id="gBB-Sz-Dh4"/>
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="EmptyAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="jwV-H9-2A4">
@@ -68,17 +68,10 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="0.94509803920000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="actionButton" destination="UIE-i5-kGu" id="BJz-y7-otV"/>
                 <outlet property="challengerDisplayNameLabel" destination="AUv-Rq-BYb" id="7ae-m5-ssI"/>
                 <outlet property="challengerImageView" destination="jwV-H9-2A4" id="ayP-kP-8yy"/>
-                <outlet property="challengerWins" destination="XjA-fC-Nqi" id="Oke-td-hak"/>
                 <outlet property="challengerWinsLabel" destination="XjA-fC-Nqi" id="mLA-As-bci"/>
-                <outlet property="friendAvatarView" destination="jwV-H9-2A4" id="hBl-i6-pG5"/>
-                <outlet property="friendNameLabel" destination="AUv-Rq-BYb" id="q7X-7f-LoJ"/>
-                <outlet property="imageView" destination="jwV-H9-2A4" id="sJe-Rd-N8b"/>
-                <outlet property="inviteOrChallengeButton" destination="UIE-i5-kGu" id="y9X-Fj-4Lg"/>
-                <outlet property="opponentDisplayNameLabel" destination="AUv-Rq-BYb" id="Sm8-eX-FUG"/>
-                <outlet property="opponentScore" destination="XjA-fC-Nqi" id="u7K-DO-1xa"/>
-                <outlet property="selfScore" destination="zuK-kl-FN9" id="9XO-kb-R7p"/>
                 <outlet property="selfWinsLabel" destination="zuK-kl-FN9" id="haz-3n-SfR"/>
             </connections>
             <point key="canvasLocation" x="263" y="379"/>

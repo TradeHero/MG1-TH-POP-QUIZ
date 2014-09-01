@@ -116,7 +116,7 @@
 		6D1E54B3198B425C007EC028 /* OptionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
 		6D1E54B7198B45A9007EC028 /* AvatarRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarRoundedView.swift; sourceTree = "<group>"; };
 		6D1FF5C61999F04A003B3912 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		6D20577319889A7000570042 /* TH-PopQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TH-PopQuiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D20577319889A7000570042 /* TH PopQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TH PopQuiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D20577719889A7000570042 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D20577819889A7000570042 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D20577A19889A7000570042 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 		6D20577419889A7000570042 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6D20577319889A7000570042 /* TH-PopQuiz.app */,
+				6D20577319889A7000570042 /* TH PopQuiz.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -467,7 +467,7 @@
 			);
 			name = "TH-PopQuiz";
 			productName = TradeGame;
-			productReference = 6D20577319889A7000570042 /* TH-PopQuiz.app */;
+			productReference = 6D20577319889A7000570042 /* TH PopQuiz.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -752,7 +752,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TestFlightSDK3",
 				);
-				PRODUCT_NAME = "TH-PopQuiz";
+				PRODUCT_NAME = "TH PopQuiz";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Code/Supporting Files/TradeGame-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -780,7 +780,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TestFlightSDK3",
 				);
-				PRODUCT_NAME = "TH-PopQuiz";
+				PRODUCT_NAME = "TH PopQuiz";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Code/Supporting Files/TradeGame-Bridging-Header.h";
 			};

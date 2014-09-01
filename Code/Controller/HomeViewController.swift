@@ -101,12 +101,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             var sself = wself!
             sself.openChallenges = $0
             println("Fetched \($0.count) open challenges.")
+            sself.openChallenges.sort({ $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate })
             completionHandler()
         }
         
         NetworkClient.sharedClient.fetchTakenChallenges() {
             var sself = wself!
             sself.takenChallenges = $0
+            sself.takenChallenges.sort({ $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate })
             println("Fetched \($0.count) taken challenges")
             completionHandler()
         }
@@ -118,8 +120,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch indexPath.section {
         case 0:
             cell.bindChalllenge(openChallenges[indexPath.row])
+            cell.configureAsAcceptChallengeMode()
         case 1:
             cell.bindChalllenge(takenChallenges[indexPath.row])
+            cell.configureAsTakenChallengesMode()
         default:
             return nil
         }

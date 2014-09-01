@@ -5,11 +5,11 @@
 
 PROJECT_ROOT="$HOME/Development/THPopQuiz"
 
-WORKSPACE="$PROJECT_ROOT/THPopQuiz.xcodeproj/project.xcworkspace"
-CONFIG="AdHoc"
-SCHEME="THPopQuiz"
+WORKSPACE="$PROJECT_ROOT/TH-PopQuiz.xcodeproj/project.xcworkspace"
+CONFIG="Release"
+SCHEME="TH-PopQuiz"
 SDK="iphoneos"
-TARGET="THPopQuiz"
+TARGET="TH-PopQuiz"
 BUILDDIR="$HOME/build$TARGET"
 OUTPUTDIR="$BUILDDIR/AdHoc-iphoneos"
 APPNAME="TH PopQuiz"
@@ -25,10 +25,10 @@ echo "*     Cleaning     *"
 echo "********************"
 xcodebuild -alltargets clean
 
-# echo "********************"
-# echo "*     Archiving     *"
-# echo "********************"
-# xcodebuild -workspace $WORKSPACE -scheme $SCHEME archive
+ echo "********************"
+ echo "*     Archiving     *"
+ echo "********************"
+ xcodebuild -workspace $WORKSPACE -scheme $SCHEME archive
 
 echo "********************"
 echo "*     Building     *" 
