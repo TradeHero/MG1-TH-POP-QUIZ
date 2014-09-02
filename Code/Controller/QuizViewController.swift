@@ -367,7 +367,7 @@ class QuizViewController: UIViewController {
     private func endTurn(){
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
-        NetworkClient.sharedClient.postGameResults(self.game, currentScore: currentTurnScore, questionResults: results, completionHandler: nil)
+        NetworkClient.sharedClient.postGameResults(self.game, highestCombo: highestCombo, currentScore: currentTurnScore, questionResults: results, completionHandler: nil)
 //        self.dismissViewControllerAnimated(true, completion: nil)
         self.navigationController.popToRootViewControllerAnimated(false)
     }

@@ -125,12 +125,12 @@ class NetworkClient {
                     opponentID = i as Int
                 }
                 
-                sself.fetchUser(opponentID, force: false) {
+                sself.fetchUser(opponentID, force: true) {
                     if let u = $0 {
                         game.opponentPlayer = u
                     }
                     
-                    sself.fetchUser(initiatorID, force: false) {
+                    sself.fetchUser(initiatorID, force: true) {
                         if let u = $0 {
                             game.initiatingPlayer = u
                         }
@@ -214,12 +214,12 @@ class NetworkClient {
                     opponentID = i as Int
                 }
                 
-                sself.fetchUser(opponentID, force: false) {
+                sself.fetchUser(opponentID, force: true) {
                     if let u = $0 {
                         game.opponentPlayer = u
                     }
                     
-                    sself.fetchUser(initiatorID, force: false) {
+                    sself.fetchUser(initiatorID, force: true) {
                         if let u = $0 {
                             game.initiatingPlayer = u
                         }
@@ -384,8 +384,8 @@ class NetworkClient {
     
     ///
     func createQuickGame(completionHandler: (Game! -> ())!){
-//        let fakeID = 2415
-        let fakeID = 617543
+        let fakeID = 2415
+//        let fakeID = 617543
         createChallenge(numberOfQuestions: 7, opponentId: fakeID) {
             if let handler = completionHandler {
                 handler($0)
@@ -396,13 +396,13 @@ class NetworkClient {
     /**
         POST api/games/postresults
     */
-    func postGameResults(game:Game, currentScore:Int, questionResults:[QuestionResult], completionHandler:(Void -> Void)!){
+    func postGameResults(game:Game, highestCombo:UInt, currentScore:Int, questionResults:[QuestionResult], completionHandler:(Void -> Void)!){
         let url = "\(THGameAPIBaseURL)/postResults"
         configureCompulsoryHeaders()
         debugPrintln("Posting results for game \(game.gameID)...")
         var resultSet:[[String:AnyObject]] = []
         for result in questionResults {
-            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "time" : result.timeTaken, "rawScore": result.rawScore]
+            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "combo": highestCombo, "time" : result.timeTaken, "rawScore": result.rawScore]
             resultSet.append(resultData)
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
