@@ -21,6 +21,13 @@ extension UINavigationController {
         }
     }
 }
+
+extension UITableView {
+    func forceUpdateTable(){
+        self.beginUpdates()
+        self.endUpdates()
+    }
+}
 extension UIControl {
     func disable() {
         enabled = false

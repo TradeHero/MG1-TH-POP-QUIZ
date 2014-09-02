@@ -21,9 +21,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return NetworkClient.sharedClient.authenticatedUser
     }()
     
-    private lazy var noOpenChallenge:Bool = {
+    private var noOpenChallenge:Bool {
         return self.openChallenges.count == 0
-    }()
+    }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -33,7 +33,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadChallenges()
+        
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         setupSubviews()
         self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
@@ -44,6 +44,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController.showNavigationBar()
+        self.loadChallenges()
     }
     
     override func didReceiveMemoryWarning() {
@@ -108,15 +109,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.takenChallenges.removeAll(keepCapacity: true)
         self.tableView.reloadData()
         hud.labelText = "Loading challenges.."
+        weak var wself = self
         let completionHandler: () -> Void = {
             numberLoaded++
+            var sself = wself!
+            
             if numberLoaded == 2 {
                 hud.hide(true)
-                self.tableView.reloadData()
+                sself.tableView.reloadData()
+                sself.tableView.forceUpdateTable()
             }
         }
         
-        weak var wself = self
         NetworkClient.sharedClient.fetchOpenChallenges() {
             var sself = wself!
             sself.openChallenges = $0
@@ -167,14 +171,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView!, viewForHeaderInSection section: Int) -> UIView! {
+        println(openChallenges.count)
         switch section {
         case 0:
             if noOpenChallenge {
                 return createHeaderViewForEmptyTurn()
             }
-            return createHeaderView("Your turn", numberOfGames: 0)
+            return createHeaderView("Your turn", numberOfGames: openChallenges.count)
         case 1:
-            return createHeaderView("Their turn", numberOfGames: 0)
+            return createHeaderView("Their turn", numberOfGames: takenChallenges.count)
         default:
             return nil
         }
@@ -200,7 +205,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge challengeId: Int) {
-        
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        let name = (cell.opponent.displayName == "" || cell.opponent.displayName == nil) ? "opponent" : cell.opponent.displayName
+        hud.labelText = "Accepting \(name)'s challenge'"
+        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
+        hud.removeFromSuperViewOnHide = true
+        weak var weakSelf = self
+        NetworkClient.sharedClient.fetchGameByGameId(challengeId) {
+            var strongSelf = weakSelf!
+            if let g = $0 {
+                hud.mode = MBProgressHUDModeText
+                hud.detailsLabelText = "Creating game with user.."
+                
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                vc.bindGame($0)
+                strongSelf.navigationController.pushViewController(vc, animated: true)
+                hud.hide(true)
+            }
+        }
     }
     
     //MARK:- UI methods

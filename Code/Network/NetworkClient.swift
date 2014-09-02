@@ -187,7 +187,7 @@ class NetworkClient {
     GET api/games/\(id)/details
     */
     func fetchGameByGameId(gameId:Int, completionHandler: (Game! -> ())!){
-        let url = "\(THGameAPIBaseURL)\(gameId)/details"
+        let url = "\(THGameAPIBaseURL)/\(gameId)/details"
         configureCompulsoryHeaders()
         debugPrintln("Fetching game with game ID: \(gameId)...")
         
@@ -234,6 +234,7 @@ class NetworkClient {
             }
 
         }
+        debugPrintln(r)
     }
     /**
         GET api/games/open

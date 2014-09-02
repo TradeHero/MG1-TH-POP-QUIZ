@@ -39,6 +39,9 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    var player: THUser!
+    var opponent: THUser!
 
     var delegate: HomeTurnChallengesTableViewCellDelegate!
     @IBAction func acceptChallengeAction(sender: AnyObject) {
@@ -48,12 +51,14 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     func bindChalllenge(challenge:Game, status:ChallengeStatus) {
         self.game = challenge
         self.status = status
-        var player: THUser?
+
         switch status {
         case .Done:
             player = game.opponentPlayer
+            opponent = game.initiatingPlayer
         default:
             player = game.initiatingPlayer
+            opponent = game.opponentPlayer
         }
         
         self.challengerDisplayNameLabel.text = player!.displayName
