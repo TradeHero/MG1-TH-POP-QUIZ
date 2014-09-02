@@ -13,6 +13,7 @@
 		6D0843931992018700FDD83E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0843921992018700FDD83E /* Constants.swift */; };
 		6D14821E19B5632400856754 /* QuickChallengeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D14821C19B5632400856754 /* QuickChallengeTableViewCell.swift */; };
 		6D14821F19B5632400856754 /* QuickChallengeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D14821D19B5632400856754 /* QuickChallengeTableViewCell.xib */; };
+		6D14822319B5AF2300856754 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D14822219B5AF2300856754 /* ResultsViewController.swift */; };
 		6D1E54B4198B425C007EC028 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E54B3198B425C007EC028 /* OptionButton.swift */; };
 		6D1E54B8198B45A9007EC028 /* AvatarRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E54B7198B45A9007EC028 /* AvatarRoundedView.swift */; };
 		6D1FF5C71999F04A003B3912 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1FF5C61999F04A003B3912 /* Game.swift */; };
@@ -117,6 +118,7 @@
 		6D0FC246198A34D0004B163C /* TradeGame-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TradeGame-Bridging-Header.h"; sourceTree = "<group>"; };
 		6D14821C19B5632400856754 /* QuickChallengeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickChallengeTableViewCell.swift; sourceTree = "<group>"; };
 		6D14821D19B5632400856754 /* QuickChallengeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuickChallengeTableViewCell.xib; sourceTree = "<group>"; };
+		6D14822219B5AF2300856754 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		6D1E54B3198B425C007EC028 /* OptionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
 		6D1E54B7198B45A9007EC028 /* AvatarRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarRoundedView.swift; sourceTree = "<group>"; };
 		6D1FF5C61999F04A003B3912 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				6D2DD2FC1990E16400B8CBA4 /* LoginViewController.swift */,
 				6D20577A19889A7000570042 /* QuizViewController.swift */,
 				6D562F6119A7179800147F7D /* WinLoseViewController.swift */,
+				6D14822219B5AF2300856754 /* ResultsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 				6DF2E5E2199B35DB009D3C26 /* DesignableRoundedRectangleView.swift in Sources */,
 				6DC42CF419ADC2C600A4A44C /* ObjCHelpers.m in Sources */,
 				6D04AF2F19A44CDA00567C85 /* LogoCanvasView.swift in Sources */,
+				6D14822319B5AF2300856754 /* ResultsViewController.swift in Sources */,
 				6D2057E91988BCE000570042 /* Extension.swift in Sources */,
 				6DC9F52319A59B390046888F /* SleekNavigationBar.swift in Sources */,
 				6D562F6219A7179800147F7D /* WinLoseViewController.swift in Sources */,
