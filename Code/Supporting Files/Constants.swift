@@ -59,6 +59,7 @@ let kTHGameLogoutNotificationKey = "\(kConstantPrefix)GameLogoutNotification"
 let kTHFriendsChallengeCellTableViewCellIdentifier = "\(kConstantPrefix)FriendsChallengeCellTableViewCellIdentifier"
 let kTHHomeTurnChallengesTableViewCellIdentifier = "\(kConstantPrefix)HomeTurnChallengesTableViewCellIdentifier"
 let kTHQuickChallengeTableViewCellIdentifier = "\(kConstantPrefix)QuickChallengeTableViewCellIdentifier"
+let kTHQuestionResultTableViewCellIdentifier = "\(kConstantPrefix)QuestionResultTableViewCellIdentifier"
 
 // MARK:- cache keys
 let kTHUserFriendsCacheStoreKey = "\(kConstantPrefix)UserFriendsCacheStore"

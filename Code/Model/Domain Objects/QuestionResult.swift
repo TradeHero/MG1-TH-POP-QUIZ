@@ -11,7 +11,7 @@ import Foundation
 final class QuestionResult {
     var questionId: Int!
     var timeTaken: CGFloat!
-    var isCorrect: Bool!
+    var isCorrect: Bool = false
     var rawScore: Int!
     
     init(questionID: Int, timeTaken:CGFloat, correct:Bool, score: Int) {

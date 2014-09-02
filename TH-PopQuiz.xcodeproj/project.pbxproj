@@ -14,6 +14,8 @@
 		6D14821E19B5632400856754 /* QuickChallengeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D14821C19B5632400856754 /* QuickChallengeTableViewCell.swift */; };
 		6D14821F19B5632400856754 /* QuickChallengeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D14821D19B5632400856754 /* QuickChallengeTableViewCell.xib */; };
 		6D14822319B5AF2300856754 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D14822219B5AF2300856754 /* ResultsViewController.swift */; };
+		6D14822719B5B44000856754 /* QuestionResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D14822519B5B44000856754 /* QuestionResultTableViewCell.swift */; };
+		6D14822819B5B44000856754 /* QuestionResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D14822619B5B44000856754 /* QuestionResultTableViewCell.xib */; };
 		6D1E54B4198B425C007EC028 /* OptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E54B3198B425C007EC028 /* OptionButton.swift */; };
 		6D1E54B8198B45A9007EC028 /* AvatarRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1E54B7198B45A9007EC028 /* AvatarRoundedView.swift */; };
 		6D1FF5C71999F04A003B3912 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1FF5C61999F04A003B3912 /* Game.swift */; };
@@ -119,6 +121,8 @@
 		6D14821C19B5632400856754 /* QuickChallengeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickChallengeTableViewCell.swift; sourceTree = "<group>"; };
 		6D14821D19B5632400856754 /* QuickChallengeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuickChallengeTableViewCell.xib; sourceTree = "<group>"; };
 		6D14822219B5AF2300856754 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		6D14822519B5B44000856754 /* QuestionResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionResultTableViewCell.swift; sourceTree = "<group>"; };
+		6D14822619B5B44000856754 /* QuestionResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionResultTableViewCell.xib; sourceTree = "<group>"; };
 		6D1E54B3198B425C007EC028 /* OptionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionButton.swift; sourceTree = "<group>"; };
 		6D1E54B7198B45A9007EC028 /* AvatarRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarRoundedView.swift; sourceTree = "<group>"; };
 		6D1FF5C61999F04A003B3912 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -218,6 +222,15 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		6D14822419B5B3D700856754 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				6D14822519B5B44000856754 /* QuestionResultTableViewCell.swift */,
+				6D14822619B5B44000856754 /* QuestionResultTableViewCell.xib */,
+			);
+			path = Results;
+			sourceTree = "<group>";
+		};
 		6D1FF5C41999F02D003B3912 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +309,7 @@
 		6D286D4B1989F12500D179F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6D14822419B5B3D700856754 /* Results */,
 				6DF2E5DC199B35B7009D3C26 /* Designable */,
 				6D7565BE19A8A20000889307 /* Friends */,
 				6D7565BF19A8A22400889307 /* Home */,
@@ -554,6 +568,7 @@
 				6D04AF2D19A44CBD00567C85 /* LogoCanvasView.xib in Resources */,
 				6D562F6419A71A7100147F7D /* Quiz.storyboard in Resources */,
 				6D2057E71988BCD200570042 /* QuestionViewWithImage.xib in Resources */,
+				6D14822819B5B44000856754 /* QuestionResultTableViewCell.xib in Resources */,
 				6D2057E51988BCD200570042 /* QuestionViewPlain.xib in Resources */,
 				6D20578019889A7000570042 /* Images.xcassets in Resources */,
 				6DBDA022199CB0B800CDD373 /* Electrodoodle - Kevin MacLeod.mp3 in Resources */,
@@ -602,6 +617,7 @@
 			files = (
 				6DF2E5E3199B35DB009D3C26 /* DesignableRoundedView.swift in Sources */,
 				6D8310BA199B5FD90097564A /* FriendsChallengeCellTableViewCell.swift in Sources */,
+				6D14822719B5B44000856754 /* QuestionResultTableViewCell.swift in Sources */,
 				6D2057E61988BCD200570042 /* QuestionViewWithImage.swift in Sources */,
 				6D8310B7199B5DBA0097564A /* FriendsViewController.swift in Sources */,
 				6DD92FB419B0681400D5DFA5 /* GameLoadingSceneViewController.swift in Sources */,

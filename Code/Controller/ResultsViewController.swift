@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, QuestionResultTableViewCellDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,8 +29,8 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        self.tableView.registerNib(UINib(nibName: "QuestionResultTableViewCell", bundle: nil), forCellReuseIdentifier: kTHQuestionResultTableViewCellIdentifier)
+        self.loadResults()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -45,6 +45,10 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
 
     @IBAction func nextAction() {
+        
+    }
+    
+    func loadResults(){
         
     }
     
@@ -78,5 +82,9 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
+    }
+    
+    func questionResultCell(cell: QuestionResultTableViewCell, didTapInfoButton questionID: Int) {
+        
     }
 }
