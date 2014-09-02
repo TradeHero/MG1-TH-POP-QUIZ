@@ -7,6 +7,11 @@
 //
 
 import UIKit
+enum ChallengeStatus: Int {
+    case Play
+    case Done
+    case Accept
+}
 
 class HomeTurnChallengesTableViewCell: UITableViewCell {
 
@@ -22,17 +27,38 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     
     var game: Game!
     
+    var status: ChallengeStatus = .Play {
+        didSet {
+            switch status {
+            case .Play:
+                configureAsPlayChallengesMode()
+            case .Done:
+                configureAsTakenChallengesMode()
+            case .Accept:
+                configureAsAcceptChallengeMode()
+            }
+        }
+    }
 
     var delegate: HomeTurnChallengesTableViewCellDelegate!
     @IBAction func acceptChallengeAction(sender: AnyObject) {
         self.delegate.homeTurnChallengesCell(self, didTapAcceptChallenge: self.game.gameID)
     }
     
-    func bindChalllenge(challenge:Game) {
+    func bindChalllenge(challenge:Game, status:ChallengeStatus) {
         self.game = challenge
-        self.challengerDisplayNameLabel.text = game.opponentPlayer.displayName
+        self.status = status
+        var player: THUser?
+        switch status {
+        case .Done:
+            player = game.opponentPlayer
+        default:
+            player = game.initiatingPlayer
+        }
+        
+        self.challengerDisplayNameLabel.text = player!.displayName
         self.challengerWinsLabel.text = String(0)
-        self.challengerImageView.sd_setImageWithURL(NSURL(string: game.opponentPlayer.pictureURL))
+        self.challengerImageView.sd_setImageWithURL(NSURL(string: player!.pictureURL))
     }
     
     

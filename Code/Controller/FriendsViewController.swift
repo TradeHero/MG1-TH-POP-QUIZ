@@ -164,7 +164,21 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
-        return 25
+        switch section {
+        case 0:
+            if THFriendList.count == 0 {
+                return 0
+            }
+            return 25
+        case 1:
+            if FBFriendList.count == 0 {
+                return 0
+            }
+            return 25
+        default:
+            return 0
+        }
+
     }
     
     //MARK:- FriendsChallengeCellTableViewCellDelegate
@@ -178,12 +192,6 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             if let g = $0 {
                 hud.mode = MBProgressHUDModeText
                 hud.detailsLabelText = "Creating game with user.."
-                var i = 0
-                for q in $0.questionSet {
-                    if q.questionType == QuestionType.LogoType {
-                        i++
-                    }
-                }
                 
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)

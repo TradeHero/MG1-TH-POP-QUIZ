@@ -65,6 +65,26 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLogoutNotificationKey, object: self, userInfo:nil)
     }
     
+    @IBAction func quickGameAction(sender: UIButton) {
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Creating quick game..."
+        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
+        hud.removeFromSuperViewOnHide = true
+        weak var weakSelf = self
+        NetworkClient.sharedClient.createQuickGame() {
+            var strongSelf = weakSelf!
+            if let g = $0 {
+                hud.mode = MBProgressHUDModeText
+                hud.detailsLabelText = "Creating game with user.."
+                
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                vc.bindGame($0)
+                strongSelf.navigationController.pushViewController(vc, animated: true)
+                hud.hide(true)
+            }
+        }
+    }
+    
     //MARK:- Private functions
     private func setupSubviews() {
         NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: nil)  {
@@ -119,11 +139,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         switch indexPath.section {
         case 0:
-            cell.bindChalllenge(openChallenges[indexPath.row])
-            cell.configureAsAcceptChallengeMode()
+            cell.bindChalllenge(openChallenges[indexPath.row], status:.Accept)
         case 1:
-            cell.bindChalllenge(takenChallenges[indexPath.row])
-            cell.configureAsTakenChallengesMode()
+            cell.bindChalllenge(takenChallenges[indexPath.row], status:.Done)
         default:
             return nil
         }

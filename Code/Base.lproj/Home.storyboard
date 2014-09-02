@@ -30,11 +30,21 @@
                                             <outlet property="delegate" destination="mQ1-C7-5Us" id="CQQ-Of-8lc"/>
                                         </connections>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vDK-mj-G2c">
+                                        <rect key="frame" x="270" y="149" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="DiceIcon">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="quickGameAction:" destination="mQ1-C7-5Us" eventType="touchUpInside" id="AEZ-Uk-N7E"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tyA-dZ-ZWs">
-                                <rect key="frame" x="51" y="143" width="218" height="42"/>
+                                <rect key="frame" x="35" y="143" width="218" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                 <state key="normal" title="Challenge a Friend" backgroundImage="GreenLongButtonBackground">
@@ -227,6 +237,7 @@
     <resources>
         <image name="BackButtonImage" width="21" height="34"/>
         <image name="BadgeView" width="49" height="62"/>
+        <image name="DiceIcon" width="256" height="256"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
         <image name="GreenLongButtonBackground" width="443" height="92"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
