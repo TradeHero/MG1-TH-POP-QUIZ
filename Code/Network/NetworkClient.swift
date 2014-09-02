@@ -382,7 +382,7 @@ class NetworkClient {
     }
     
     ///
-    func createQuickGame(completionHandler: (Game? -> ())?){
+    func createQuickGame(completionHandler: (Game! -> ())!){
         createChallenge(numberOfQuestions: 10, opponentId: 0) {
             if let handler = completionHandler {
                 handler($0)
