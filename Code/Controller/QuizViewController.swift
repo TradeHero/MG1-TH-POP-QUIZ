@@ -101,6 +101,20 @@ class QuizViewController: UIViewController {
     private var player: THUser!
     private var opponent:THUser!
     
+    private var combos: UInt = 0 {
+        didSet {
+            if combos > highestCombo {
+                highestCombo = combos
+            }
+        }
+    }
+    
+    private var highestCombo: UInt = 0
+    
+    private var hintUsed:UInt = 0
+    
+    private var totalHintUsed: UInt = 0
+    
     // MARK:- init
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -145,6 +159,8 @@ class QuizViewController: UIViewController {
             }
             
             removeOptionsButton.disable()
+            hintUsed++
+            totalHintUsed++
         }
         didRemoveOptions = true
     }
@@ -163,12 +179,14 @@ class QuizViewController: UIViewController {
         
         if sender.is_answer {
             sender.configureAsCorrect()
+            combos++
             currentQuestionCorrect = true
             let currentQuestionScore = calculateScore()
             produceResultForCurrentQuestion(true, score: currentQuestionScore)
         } else {
             sender.configureAsFalse()
             revealCorrectAnswer()
+            combos = 0
             let currentQuestionScore = calculateScore()
             produceResultForCurrentQuestion(false, score: currentQuestionScore)
             AudioServicesPlayAlertSound(0x00000FFF)
@@ -202,10 +220,42 @@ class QuizViewController: UIViewController {
     
     private func calculateScore() -> Int {
         let timeLeftBonus =  getTimeBonus(current_timeLeft)
+        let comboBonus = getComboBonus()
+        let hintPenalty = getHintPenalty()
         let correctiveFactor:CGFloat = currentQuestionCorrect ? 1.0 : 0.0
-        let score = CGFloat(basicScorePerQuestion) * timeLeftBonus * correctiveFactor
+        let score = CGFloat(basicScorePerQuestion) * timeLeftBonus * correctiveFactor * comboBonus * hintPenalty
         self.selfTotalScore += Int(score)
         return Int(score)
+    }
+    
+    private func getHintPenalty() -> CGFloat {
+        switch hintUsed{
+        case 0:
+            return 1
+        case 1:
+            return 0.75
+        case 2:
+            return 0.5
+        default:
+            return 0.25
+        }
+    }
+    
+    private func getComboBonus() -> CGFloat {
+        switch combos {
+        case 0:
+            return 1
+        case 1:
+            return 1.5
+        case 2:
+            return 2
+        case 3:
+            return 3
+        case 4:
+            return 4
+        default:
+            return 5
+        }
     }
     
     private func getTimeBonus(timeLeft:CGFloat) -> CGFloat {
@@ -378,6 +428,7 @@ class QuizViewController: UIViewController {
     private func setUpViewWithQuestion(question:Question){
         self.resetButtons()
         didRemoveOptions = false
+        hintUsed = 0
         questionView.removeAllSubviews()
         questionView.addSubview(setUpQuestionViewWithQuestion(question))
         
@@ -478,12 +529,16 @@ class QuizViewController: UIViewController {
     }
     
     private func resetRemoveOptionsButton() {
-        if !removeOptionsButton.enabled {
-            removeOptionsButton.enable()
-        }
+        let threshold = UInt(0.3 * CGFloat(self.game.questionSet.count))
         
-        if removeOptionsButton.alpha == 0.5 {
-            removeOptionsButton.alpha = 1
+        if hintUsed <= threshold {
+            if !removeOptionsButton.enabled {
+                removeOptionsButton.enable()
+            }
+            
+            if removeOptionsButton.alpha == 0.5 {
+                removeOptionsButton.alpha = 1
+            }
         }
     }
     

@@ -402,7 +402,7 @@ class NetworkClient {
         debugPrintln("Posting results for game \(game.gameID)...")
         var resultSet:[[String:AnyObject]] = []
         for result in questionResults {
-            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "correct" : result.isCorrect, "time" : result.timeTaken, "rawScore": result.rawScore]
+            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "time" : result.timeTaken, "rawScore": result.rawScore]
             resultSet.append(resultData)
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
@@ -412,10 +412,8 @@ class NetworkClient {
             if error != nil {
                 debugPrintln(error)
             }
-            
-            
         }
-                debugPrintln(r)
+//                debugPrintln(r)
     }
     
     /**

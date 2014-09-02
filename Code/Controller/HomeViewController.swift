@@ -171,7 +171,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView!, viewForHeaderInSection section: Int) -> UIView! {
-        println(openChallenges.count)
         switch section {
         case 0:
             if noOpenChallenge {
