@@ -53,14 +53,19 @@ class QuestionResultTableViewCell: UITableViewCell {
         }
     }
     
-    func bindQuestionResults(selfResult: QuestionResult, opponentResult:QuestionResult, status: ResultStatus, index:Int) {
+    func bindQuestionResults(selfResult: QuestionResult, opponentResult:QuestionResult, index:Int) {
         self.selfQuestionResult = selfResult
         self.opponentQuestionResult = opponentResult
         if selfResult.questionId == opponentResult.questionId {
             self.questionId = selfResult.questionId
         }
         self.questionTypeNameLabel.text = "Question \(index)"
-        self.resultStatus = status
+        
+        if opponentQuestionResult == nil {
+            self.resultStatus = .Partial
+        } else {
+            self.resultStatus = .Full
+        }
     }
     
     private func configureOpponentNotReady() {

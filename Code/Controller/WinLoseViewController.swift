@@ -45,7 +45,7 @@ class WinLoseViewController: UIViewController {
     
     @IBOutlet private var starViews: [UIImageView]!
     
-    
+    private var game: Game!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,12 +100,44 @@ class WinLoseViewController: UIViewController {
         losingRay.alpha = 1
     }
     
-    func bindResult(selfUser:THUser, opponentUser:THUser, selfScore:Int, opponentScore:Int) {
+    func bindResult(game:Game, selfUser:THUser, opponentUser:THUser) {
+        self.game = game
+       
+        var selfResult: GameResult!
+        var oppResult: GameResult!
+        if game.initiatingPlayerID == selfUser.userId {
+            selfResult = game.initiatingPlayerResult
+            oppResult = game.opponentPlayerResult
+        } else {
+            selfResult = game.opponentPlayerResult
+            oppResult = game.initiatingPlayerResult
+        }
+        
+        var selfScore: Int = 0
+        var opponentScore: Int = 0
+        
+        for detail in selfResult.resultDetails {
+            selfScore += detail.rawScore
+        }
+        
+        for detail in oppResult.resultDetails {
+            opponentScore += detail.rawScore
+        }
+        
+        for extraDetail in selfResult.resultExtraDetails {
+            selfScore += extraDetail.bonus
+        }
+        
+        for extraDetail in oppResult.resultExtraDetails {
+            opponentScore += extraDetail.bonus
+        }
+        
         if selfScore > opponentScore {
             configureAsWinningScene()
         } else {
             configureAsLosingScene()
         }
+        
         largeBoxNameLabel.text = selfUser.displayName
         //        largeBoxRankLabel = selfUser.rank
         //        largeBoxLevelLabel.text = selfUser.level

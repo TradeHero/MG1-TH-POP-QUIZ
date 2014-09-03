@@ -321,7 +321,7 @@ class NetworkClient {
     /**
     POST api/games/postresults
     */
-    func postGameResults(game:Game, highestCombo:UInt, currentScore:Int, questionResults:[QuestionResult], completionHandler:(Void -> Void)!){
+    func postGameResults(game:Game, highestCombo:UInt, currentScore:Int, questionResults:[QuestionResult], completionHandler:(Game -> ())!){
         let url = "\(THGameAPIBaseURL)/postResults"
         configureCompulsoryHeaders()
         debugPrintln("Posting results for game \(game.gameID)...")

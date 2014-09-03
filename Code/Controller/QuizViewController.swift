@@ -372,9 +372,24 @@ class QuizViewController: UIViewController {
     private func endTurn(){
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
-        NetworkClient.sharedClient.postGameResults(self.game, highestCombo: highestCombo, currentScore: currentTurnScore, questionResults: results, completionHandler: nil)
-        //        self.dismissViewControllerAnimated(true, completion: nil)
-        self.navigationController?.popToRootViewControllerAnimated(false)
+        weak var wself = self
+        NetworkClient.sharedClient.postGameResults(self.game, highestCombo: highestCombo, currentScore: currentTurnScore, questionResults: results) {
+            var sself = wself!
+            
+            if $0.isGameCompletedByChallenger {
+                let vc = sself.storyboard?.instantiateViewControllerWithIdentifier("ResultsViewController") as ResultsViewController
+                vc.bindGame($0)
+                sself.navigationController?.pushViewController(vc, animated: true)
+                return
+            }
+            
+            if $0.isGameCompletedByBothPlayer {
+                let vc = sself.storyboard?.instantiateViewControllerWithIdentifier("WinLoseViewController") as WinLoseViewController
+                vc.bindResult($0, selfUser: sself.player, opponentUser: sself.opponent)
+                sself.navigationController?.pushViewController(vc, animated: true)
+                return
+            }
+        }
     }
     
     
@@ -491,6 +506,9 @@ class QuizViewController: UIViewController {
         let thisPlayer = self.player
         let opponent = self.opponent
         
+        self.setupProgressBar(self.selfProgressView)
+        self.setupProgressBar(self.opponentProgressView)
+        
         NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil) {
             image, error in
             if image != nil {
@@ -513,8 +531,7 @@ class QuizViewController: UIViewController {
         opponentProgressView.progress = CGFloat(self.opponentQuestionCorrect)/CGFloat(self.game.questionSet.count)
         opponentScoreLabel.text = "\(opponentScore)"
         
-        self.setupProgressBar(self.selfProgressView)
-        self.setupProgressBar(self.opponentProgressView)
+        
     }
     
     private func unmaskContentViewIfNecessary() {

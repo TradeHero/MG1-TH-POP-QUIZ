@@ -9,10 +9,12 @@
 import Foundation
 
 final class QuestionResult {
-    var questionId: Int!
-    var timeTaken: CGFloat!
+    var questionId: Int
+    var timeTaken: CGFloat
     var isCorrect: Bool = false
-    var rawScore: Int!
+    var rawScore: Int
+    var bonus: Int!
+    var finalScore: Int!
     
     init(questionID: Int, timeTaken:CGFloat, correct:Bool, score: Int) {
         self.questionId = questionID
@@ -29,6 +31,8 @@ extension QuestionResult: Printable {
             d += "Time taken: \(self.timeTaken) sec(s)\n"
             d += "Correct: \(self.isCorrect)\n"
             d += "Raw score: \(self.rawScore)\n"
+            if self.bonus != nil { d += "Bonus: \(self.bonus)\n" }
+            if self.finalScore != nil { d += "Final Score: \(self.finalScore)\n" }
             d += "\n}"
             return d
     }

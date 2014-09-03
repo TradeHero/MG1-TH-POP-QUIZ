@@ -9,15 +9,15 @@
 import UIKit
 
 typealias QuestionResultDetail = (id:Int, rawScore:Int, time:CGFloat)
-typealias QuestionResultFinalDetail = (id:Int, bonus:Int)
+typealias QuestionResultExtraDetail = (id:Int, bonus:Int)
 
 final class GameResult {
-   
+    
     var gameId: Int!
     var userId: Int!
     var score: Int!
     var details: String!
-    var finalScores: String!
+    var extraDetails: String!
     
     lazy var rawScore: Int = {
         var rScore = 0
@@ -35,7 +35,9 @@ final class GameResult {
             }
         }
         return qCorrect
-    }()
+        }()
+    
+    private var submittedAtUtcString:String!
     
     lazy var submittedAt: NSDate! = {
         let df = NSDateFormatter()
@@ -56,9 +58,10 @@ final class GameResult {
         return qrd
         }()
     
-    lazy var resultFinalScores: [QuestionResultFinalDetail] = {
-        var qrfd: [QuestionResultFinalDetail] = []
-        let details = self.details.componentsSeparatedByString("|")
+    lazy var resultExtraDetails: [QuestionResultExtraDetail]! = {
+        if self.extraDetails == nil { return nil }
+        var qrfd: [QuestionResultExtraDetail] = []
+        let details = self.extraDetails.componentsSeparatedByString("|")
         
         for detail in details {
             let dComps = detail.componentsSeparatedByString(", ")
@@ -68,7 +71,6 @@ final class GameResult {
         return qrfd
         }()
     
-    private var submittedAtUtcString:String!
     
     init(gameId:Int, resultDTO:[String: AnyObject]) {
         self.gameId = gameId
@@ -86,7 +88,7 @@ final class GameResult {
         }
         
         if let d: AnyObject = resultDTO["finalScores"] {
-            self.finalScores = d as String
+            self.extraDetails = d as String
         }
         
         if let date: AnyObject = resultDTO["submittedAtUtc"] {

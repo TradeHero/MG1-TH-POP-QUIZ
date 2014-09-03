@@ -27,6 +27,15 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet private weak var opponentRankLabel: UILabel!
     @IBOutlet private weak var opponentLevelLabel: UILabel!
     
+    private var game: Game!
+    
+    private var player: THUser!
+    private var opponent: THUser!
+    
+    private var playerResult: GameResult!
+    private var opponentResult: GameResult!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: "QuestionResultTableViewCell", bundle: nil), forCellReuseIdentifier: kTHQuestionResultTableViewCellIdentifier)
@@ -48,8 +57,30 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
+    func bindGame(game:Game){
+        self.game = game
+        self.determineUserRoles(game)
+    }
+    
+    private func determineUserRoles(game:Game) {
+        let user = NetworkClient.sharedClient.authenticatedUser
+        if game.initiatingPlayer.userId == user.userId {
+            player = game.initiatingPlayer
+            playerResult = game.initiatingPlayerResult
+            opponent = game.opponentPlayer
+            opponentResult = game.opponentPlayerResult
+        } else {
+            player = game.opponentPlayer
+            playerResult = game.opponentPlayerResult
+            opponent = game.initiatingPlayer
+            opponentResult = game.initiatingPlayerResult
+        }
+    }
+
     func loadResults(){
-        
+//        selfQuestionResults.removeAll(keepCapacity: true)
+//        oppQuestionResults.removeAll(keepCapacity: true)
+        self.tableView.reloadData()
     }
     
     // MARK: - Navigation
@@ -61,27 +92,78 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")
+        
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCellWithIdentifier(kTHQuestionResultTableViewCellIdentifier, forIndexPath: indexPath) as QuestionResultTableViewCell
+            let selfRaw = playerResult.resultDetails[indexPath.row]
+            var selfRes = QuestionResult(questionID: selfRaw.id, timeTaken: selfRaw.time, correct: selfRaw.rawScore > 0, score: selfRaw.rawScore)
+            
+            if let selfExtras = playerResult.resultExtraDetails {
+                let selfExtra = selfExtras[indexPath.row]
+                selfRes.bonus = selfExtra.bonus
+                selfRes.finalScore = selfExtra.bonus + selfRes.rawScore
+            }
+            
+            var oppRes: QuestionResult!
+            if let oResult = opponentResult {
+                let oppRaw = oResult.resultDetails[indexPath.row]
+                oppRes = QuestionResult(questionID: oppRaw.id, timeTaken: oppRaw.time, correct: oppRaw.rawScore > 0, score: oppRaw.rawScore)
+                
+                if let oppExtras = opponentResult.resultExtraDetails {
+                    let oppExtra = oppExtras[indexPath.row]
+                    oppRes.bonus = oppExtra.bonus
+                    oppRes.finalScore = oppExtra.bonus + oppRes.rawScore
+                }
+            }
+            
+            cell.bindQuestionResults(selfRes, opponentResult: oppRes, index:indexPath.row)
+            cell.layoutIfNeeded()
+            cell.delegate = self
+            return cell
+        default:
+            return UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")
+        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 0
+        switch indexPath.section {
+        case 0:
+            return 47
+        default:
+            return 0
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        switch section {
+        case 0:
+            return self.game.questionSet.count
+        default:
+            return 0
+        }
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView! {
-        return nil
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            return createHeaderViewForResultsView()
+        default:
+            return nil
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
+        switch section {
+        case 0:
+            return 50
+        default:
+            return 0
+        }
     }
     
     func questionResultCell(cell: QuestionResultTableViewCell, didTapInfoButton questionID: Int) {
