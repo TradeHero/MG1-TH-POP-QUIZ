@@ -69,6 +69,8 @@ class QuizViewController: UIViewController {
     
     private var stopwatchStartTime: NSDate!
     
+    private var stopwatchCurrTime: CGFloat = 10.0
+    
     private var currentQuestionCorrect: Bool = false {
         didSet {
             if currentQuestionCorrect {
@@ -293,7 +295,7 @@ class QuizViewController: UIViewController {
     
     //MARK:- Timer functions
     private func timerStart() {
-        stopwatchStartTime = NSDate()
+        stopwatchCurrTime = 10.0
         if stopwatch == nil {
             stopwatch = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
         }
@@ -330,8 +332,8 @@ class QuizViewController: UIViewController {
     }
     
     func updateTimer(){
-        let time = getTimeElasped().roundToNearest1DecimalPlace()
-        var timeLeft = 10 - time
+        stopwatchCurrTime -= 0.1
+        var timeLeft = stopwatchCurrTime
         if timeLeft > 0 {
             current_timeLeft = timeLeft
             if isTimedObfuscatorQuestion {
@@ -375,17 +377,16 @@ class QuizViewController: UIViewController {
         weak var wself = self
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: highestCombo, currentScore: currentTurnScore, questionResults: results) {
             var sself = wself!
-            
-            if $0.isGameCompletedByChallenger {
-                let vc = sself.storyboard?.instantiateViewControllerWithIdentifier("ResultsViewController") as ResultsViewController
-                vc.bindGame($0)
+            if $0.isGameCompletedByBothPlayer {
+                let vc = sself.storyboard?.instantiateViewControllerWithIdentifier("WinLoseViewController") as WinLoseViewController
+                vc.bindResult($0, selfUser: sself.player, opponentUser: sself.opponent)
                 sself.navigationController?.pushViewController(vc, animated: true)
                 return
             }
             
-            if $0.isGameCompletedByBothPlayer {
-                let vc = sself.storyboard?.instantiateViewControllerWithIdentifier("WinLoseViewController") as WinLoseViewController
-                vc.bindResult($0, selfUser: sself.player, opponentUser: sself.opponent)
+            if $0.isGameCompletedByChallenger {
+                let vc = sself.storyboard?.instantiateViewControllerWithIdentifier("ResultsViewController") as ResultsViewController
+                vc.bindGame($0)
                 sself.navigationController?.pushViewController(vc, animated: true)
                 return
             }
@@ -575,11 +576,15 @@ class QuizViewController: UIViewController {
         self.game = game
         
         if game.initiatingPlayer == opponent {
-            self.opponentScore = game.initiatingPlayerResult.rawScore
-            self.opponentQuestionCorrect = game.initiatingPlayerResult.questionCorrect
+            if game.initiatingPlayerResult != nil {
+                self.opponentScore = game.initiatingPlayerResult.rawScore
+                self.opponentQuestionCorrect = game.initiatingPlayerResult.questionCorrect
+            }
         } else {
-            self.opponentScore = game.opponentPlayerResult.rawScore
-            self.opponentQuestionCorrect = game.opponentPlayerResult.questionCorrect
+            if game.opponentPlayerResult != nil {
+                self.opponentScore = game.opponentPlayerResult.rawScore
+                self.opponentQuestionCorrect = game.opponentPlayerResult.questionCorrect
+            }
         }
         
         self.player = player

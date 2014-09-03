@@ -33,6 +33,8 @@ class WinLoseViewController: UIViewController {
     
     @IBOutlet private weak var largeBoxScoreLabel: UILabel!
     
+    @IBOutlet private weak var smallBoxBackground: UIImageView!
+    
     @IBOutlet private weak var smallBoxAvatarView: AvatarRoundedView!
     
     @IBOutlet private weak var smallBoxNameLabel: UILabel!
@@ -47,8 +49,17 @@ class WinLoseViewController: UIViewController {
     
     private var game: Game!
     
+    private var selfScore = 0
+    
+    private var opponentScore = 0
+    
+    private var selfUser: THUser!
+    private var opponentUser: THUser!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
+        animateStars()
         
         // Do any additional setup after loading the view.
     }
@@ -61,6 +72,11 @@ class WinLoseViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.hideNavigationBar()
+    }
+    
+    
+    @IBAction func showResultAction(sender: AnyObject) {
+        self.performSegueWithIdentifier("CompleteQuizResultSegue", sender: self)
     }
     
     func animateStars(){
@@ -84,6 +100,8 @@ class WinLoseViewController: UIViewController {
         winLoseBackgroundImageView.image = UIImage(named: "WinSceneBackground")
         largeBoxBackground.image = UIImage(named: "WinBoxBackground")
         winLoseSmileyIcon.image = UIImage(named: "WinSmileyIcon")
+        
+        smallBoxBackground.image = UIImage(named: "LoseBoxBackground")
         winningRay.alpha = 1
         losingRay.alpha = 0
     }
@@ -96,6 +114,8 @@ class WinLoseViewController: UIViewController {
         winLoseBackgroundImageView.image = UIImage(named: "LoseSceneBackground")
         largeBoxBackground.image = UIImage(named: "LoseBoxBackground")
         winLoseSmileyIcon.image = UIImage(named: "LoseSmileyIcon")
+        smallBoxBackground.image = UIImage(named: "WinBoxBackground")
+        
         winningRay.alpha = 0
         losingRay.alpha = 1
     }
@@ -103,6 +123,9 @@ class WinLoseViewController: UIViewController {
     func bindResult(game:Game, selfUser:THUser, opponentUser:THUser) {
         self.game = game
        
+        self.selfUser = selfUser
+        self.opponentUser = opponentUser
+        
         var selfResult: GameResult!
         var oppResult: GameResult!
         if game.initiatingPlayerID == selfUser.userId {
@@ -112,9 +135,6 @@ class WinLoseViewController: UIViewController {
             selfResult = game.opponentPlayerResult
             oppResult = game.initiatingPlayerResult
         }
-        
-        var selfScore: Int = 0
-        var opponentScore: Int = 0
         
         for detail in selfResult.resultDetails {
             selfScore += detail.rawScore
@@ -132,6 +152,22 @@ class WinLoseViewController: UIViewController {
             opponentScore += extraDetail.bonus
         }
         
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "CompleteQuizResultSegue" {
+            let vc = segue.destinationViewController as ResultsViewController
+            vc.bindGame(self.game)
+        }
+
+    }
+    
+    private func configureUI(){
         if selfScore > opponentScore {
             configureAsWinningScene()
         } else {
@@ -155,16 +191,6 @@ class WinLoseViewController: UIViewController {
             (image, error) in
             self.smallBoxAvatarView.image = image
         })
+
     }
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-    }
-    
-    
 }

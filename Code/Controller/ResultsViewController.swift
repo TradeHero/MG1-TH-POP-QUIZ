@@ -40,6 +40,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: "QuestionResultTableViewCell", bundle: nil), forCellReuseIdentifier: kTHQuestionResultTableViewCellIdentifier)
         self.loadResults()
+        self.configureUI()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -53,8 +54,8 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    @IBAction func nextAction() {
-        
+    @IBAction func rematchAction() {
+        self
     }
     
     func bindGame(game:Game){
@@ -62,6 +63,31 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.determineUserRoles(game)
     }
     
+    private func configureUI() {
+        selfDispNameLabel.text = self.player.displayName
+        weak var wself = self
+        NetworkClient.fetchImageFromURLString(player.pictureURL, progressHandler: nil) {
+            (image, error) in
+            var sself = wself!
+            if let e = error {
+                println(e)
+                return
+            }
+            sself.selfAvatarView.image = image
+        }
+
+        
+        opponentDisplayNameLabel.text = self.opponent.displayName
+        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) {
+            (image, error) in
+            var sself = wself!
+            if let e = error {
+                println(e)
+                return
+            }
+            sself.opponentAvatarView.image = image
+        }
+    }
     private func determineUserRoles(game:Game) {
         let user = NetworkClient.sharedClient.authenticatedUser
         if game.initiatingPlayer.userId == user.userId {
@@ -117,7 +143,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
             
-            cell.bindQuestionResults(selfRes, opponentResult: oppRes, index:indexPath.row)
+            cell.bindQuestionResults(selfRes, opponentResult: oppRes, index:indexPath.row+1)
             cell.layoutIfNeeded()
             cell.delegate = self
             return cell
@@ -129,7 +155,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 47
+            return 42
         default:
             return 0
         }
@@ -173,14 +199,23 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     //MARK:- Private functions
     private func createHeaderViewForResultsView() -> UIView {
         let view = UIView(frame: CGRectMake(0, 0, 285, 50))
+        
         view.backgroundColor = UIColor(hex: 0xFF4069)
-        var label = UILabel(frame:CGRectMake(15, 14, 130, 21))
+        view.layer.cornerRadius = 10.0
+        view.layer.borderWidth = 3.0
+        view.layer.borderColor = UIColor(hex: 0xF51B49).CGColor
+
+        var label = UILabel(frame:CGRectMake(8, 14, 130, 21))
         label.text = "Correct Answers"
+        label.font = UIFont(name: "AvenirNext-Medium", size: 17.0)
+        label.textColor = UIColor.whiteColor()
         view.addSubview(label)
         
-        var selfAvatarView = AvatarRoundedView(frame: CGRectMake(161, 2, 45, 45))
+        var selfAvatarView = AvatarRoundedView(frame: CGRectMake(152, 5, 40, 40))
+        selfAvatarView.borderWidth = 1
+        selfAvatarView.borderColor = UIColor.whiteColor()
         view.addSubview(selfAvatarView)
-        NetworkClient.fetchImageFromURLString("", progressHandler: nil) {
+        NetworkClient.fetchImageFromURLString(player.pictureURL, progressHandler: nil) {
             (image, error) in
             if let e = error {
                 println(e)
@@ -189,9 +224,11 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             selfAvatarView.image = image
         }
     
-        var opponentAvatarView = AvatarRoundedView(frame: CGRectMake(232, 2, 45, 45))
-        view.addSubview(selfAvatarView)
-        NetworkClient.fetchImageFromURLString("", progressHandler: nil) {
+        var opponentAvatarView = AvatarRoundedView(frame: CGRectMake(223, 5, 40, 40))
+        view.addSubview(opponentAvatarView)
+        opponentAvatarView.borderWidth = 1
+        opponentAvatarView.borderColor = UIColor.whiteColor()
+        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) {
             (image, error) in
             if let e = error {
                 println(e)
@@ -199,7 +236,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             opponentAvatarView.image = image
         }
-        view.roundCornersOnTopLeft(true, topRight: true, bottomLeft: false, bottomRight: false, radius: 1.0)
+        view.roundCornersOnTopLeft(true, topRight: true, bottomLeft: false, bottomRight: false, radius: 5.0)
         return view
     }
 }

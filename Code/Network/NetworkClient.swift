@@ -309,8 +309,8 @@ class NetworkClient {
     
     ///
     func createQuickGame(completionHandler: (Game! -> ())!){
-        //        let fakeID = 2415
-        let fakeID = 617543
+                let fakeID = 2415
+//        let fakeID = 617543
         createChallenge(numberOfQuestions: 7, opponentId: fakeID) {
             if let handler = completionHandler {
                 handler($0)
@@ -331,11 +331,18 @@ class NetworkClient {
             resultSet.append(resultData)
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
-        
+        weak var wself = self
         let r = Alamofire.request(.POST, url, parameters: param, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
+            var sself = wself!
             if error != nil {
                 debugPrintln(error)
+            }
+            
+            game.fetchResults() {
+                if let c = completionHandler {
+                    c(game)
+                }
             }
         }
         //                debugPrintln(r)

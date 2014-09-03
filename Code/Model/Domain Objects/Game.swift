@@ -129,7 +129,7 @@ final class Game {
             }
             
             if let oResults = $0.opponentResult {
-                if self.opponentPlayerResult.userId == oResults.userId {
+                if self.opponentPlayer.userId == oResults.userId {
                     self.opponentPlayerResult = oResults
                 } else {
                     self.initiatingPlayerResult = oResults

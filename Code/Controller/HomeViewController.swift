@@ -156,7 +156,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 48.0
+        return 55
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -237,7 +237,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         leftLabelView.textColor = UIColor.whiteColor()
         headerView.addSubview(leftLabelView)
         
-        var rightLabelView = UILabel(frame: CGRectMake(213, 4, 65, 21))
+        var rightLabelView = UILabel(frame: CGRectMake(178, 4, 100, 21))
         rightLabelView.text = "0 games"
         rightLabelView.textAlignment = .Right
         rightLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
@@ -263,7 +263,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         leftLabelView.textColor = UIColor.whiteColor()
         headerView.addSubview(leftLabelView)
         
-        var rightLabelView = UILabel(frame: CGRectMake(213, 4, 65, 21))
+        var rightLabelView = UILabel(frame: CGRectMake(178, 4, 100, 21))
         rightLabelView.text = "\(numberOfGames) games"
         rightLabelView.textAlignment = .Right
         rightLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)

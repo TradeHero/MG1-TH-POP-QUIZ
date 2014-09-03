@@ -53,12 +53,12 @@ class QuestionResultTableViewCell: UITableViewCell {
         }
     }
     
-    func bindQuestionResults(selfResult: QuestionResult, opponentResult:QuestionResult, index:Int) {
+    func bindQuestionResults(selfResult: QuestionResult, opponentResult:QuestionResult!, index:Int) {
         self.selfQuestionResult = selfResult
         self.opponentQuestionResult = opponentResult
-        if selfResult.questionId == opponentResult.questionId {
+//        if selfResult.questionId == opponentResult.questionId {
             self.questionId = selfResult.questionId
-        }
+//        }
         self.questionTypeNameLabel.text = "Question \(index)"
         
         if opponentQuestionResult == nil {
