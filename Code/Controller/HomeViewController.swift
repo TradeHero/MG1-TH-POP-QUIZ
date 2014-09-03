@@ -9,7 +9,7 @@
 import UIKit
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, HomeTurnChallengesTableViewCellDelegate {
-
+    
     @IBOutlet private weak var avatarView: AvatarRoundedView!
     @IBOutlet private weak var fullNameView: UILabel!
     @IBOutlet private weak var rankView: UILabel!
@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private lazy var user: THUser = {
         return NetworkClient.sharedClient.authenticatedUser
-    }()
+        }()
     
     private var noOpenChallenge:Bool {
         return self.openChallenges.count == 0
@@ -38,12 +38,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         setupSubviews()
         self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
         self.navigationItem.title = "Home"
-        self.navigationController.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
     }
-
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController.showNavigationBar()
+        self.navigationController?.showNavigationBar()
         self.loadChallenges()
     }
     
@@ -52,7 +52,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "FriendsViewPushSegue" {
             let vc = segue.destinationViewController as FriendsViewController
         }
@@ -80,7 +80,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)
-                strongSelf.navigationController.pushViewController(vc, animated: true)
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
                 hud.hide(true)
             }
         }
@@ -138,7 +138,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath:indexPath) as HomeTurnChallengesTableViewCell
         
         switch indexPath.section {
@@ -147,7 +147,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 1:
             cell.bindChalllenge(takenChallenges[indexPath.row], status:.Done)
         default:
-            return nil
+            break
         }
         
         cell.layoutIfNeeded()
@@ -155,11 +155,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 48.0
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return openChallenges.count
@@ -170,7 +170,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func tableView(tableView: UITableView!, viewForHeaderInSection section: Int) -> UIView! {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView! {
         switch section {
         case 0:
             if noOpenChallenge {
@@ -184,11 +184,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
             if noOpenChallenge {
@@ -218,7 +218,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)
-                strongSelf.navigationController.pushViewController(vc, animated: true)
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
                 hud.hide(true)
             }
         }
@@ -271,5 +271,5 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         headerView.addSubview(rightLabelView)
         return headerView
     }
-
+    
 }

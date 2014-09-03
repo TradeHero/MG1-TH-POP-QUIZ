@@ -18,7 +18,7 @@ class NetworkClient {
     struct Singleton {
         static var onceToken : dispatch_once_t = 0
         static var instance : NetworkClient!
-    }
+        }
         dispatch_once(&Singleton.onceToken) {
             Singleton.instance = NetworkClient()
             Singleton.instance.loadCredentials()
@@ -35,7 +35,7 @@ class NetworkClient {
     
     /// default JSON encoding
     private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON
-//    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(nil)
+    //    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(nil)
     
     // MARK:- Methods
     
@@ -90,11 +90,11 @@ class NetworkClient {
                 }
             })
         
-//        debugPrintln(r)
+        //        debugPrintln(r)
     }
     
     /**
-        Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
+    Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
     func createChallenge(numberOfQuestions:Int = 7, opponentId:Int, completionHandler: (Game! -> ())!) {
         configureCompulsoryHeaders()
@@ -103,51 +103,51 @@ class NetworkClient {
         weak var wself = self
         Alamofire.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
             ], encoding: JSONPrettyPrinted).responseJSON({
-            _, response, content, error in
-            var sself = wself!
-            if let responseError = error {
-                println(responseError)
-                return
-            }
-
-            if response?.statusCode == 200 {
-                let responseJSON = content as [String: AnyObject]
-//                println(responseJSON)
-                let game = Game(gameDTO: responseJSON)
-                debugPrintln("Game created with game ID: \(game.gameID)")
-                var initiatorID: Int!
-                if let i: AnyObject = responseJSON["createdByUserId"]{
-                    initiatorID = i as Int
+                _, response, content, error in
+                var sself = wself!
+                if let responseError = error {
+                    println(responseError)
+                    return
                 }
                 
-                var opponentID: Int!
-                if let i: AnyObject = responseJSON["opponentUserId"]{
-                    opponentID = i as Int
-                }
-                
-                sself.fetchUser(opponentID, force: true) {
-                    if let u = $0 {
-                        game.opponentPlayer = u
+                if response?.statusCode == 200 {
+                    let responseJSON = content as [String: AnyObject]
+                    //                println(responseJSON)
+                    let game = Game(gameDTO: responseJSON)
+                    debugPrintln("Game created with game ID: \(game.gameID)")
+                    var initiatorID: Int!
+                    if let i: AnyObject = responseJSON["createdByUserId"]{
+                        initiatorID = i as Int
                     }
                     
-                    sself.fetchUser(initiatorID, force: true) {
+                    var opponentID: Int!
+                    if let i: AnyObject = responseJSON["opponentUserId"]{
+                        opponentID = i as Int
+                    }
+                    
+                    sself.fetchUser(opponentID, force: true) {
                         if let u = $0 {
-                            game.initiatingPlayer = u
+                            game.opponentPlayer = u
                         }
                         
-                        if let handler = completionHandler {
-                            handler(game)
+                        sself.fetchUser(initiatorID, force: true) {
+                            if let u = $0 {
+                                game.initiatingPlayer = u
+                            }
+                            
+                            if let handler = completionHandler {
+                                handler(game)
+                            }
                         }
                     }
+                    
+                    
                 }
-                
-                
-            }
-        })
+            })
     }
     
     /**
-        GET api/Users/{userId}/getnewfriends?socialNetwork=FB
+    GET api/Users/{userId}/getnewfriends?socialNetwork=FB
     */
     typealias TFBHUserFriendTuple = (fbFriends:[THUserFriend], thFriends:[THUserFriend])
     func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (TFBHUserFriendTuple -> Void)!){
@@ -180,7 +180,7 @@ class NetworkClient {
             debugPrintln("Successfully fetched \(friends.count) friend(s).")
             completionHandler((fbFrnds, thFrnds))
         }
-//        debugPrintln(r)
+        //        debugPrintln(r)
     }
     
     /*
@@ -232,12 +232,12 @@ class NetworkClient {
                 
                 
             }
-
+            
         }
         debugPrintln(r)
     }
     /**
-        GET api/games/open
+    GET api/games/open
     */
     func fetchOpenChallenges(completionHandler: ([Game] -> Void)!){
         let url = "\(THGameAPIBaseURL)/open"
@@ -297,20 +297,20 @@ class NetworkClient {
                                 fetchUserHandler()
                             }
                         }
-
+                        
                         
                         
                     }
                     
-//                    debugPrintln("Successfully fetched \(openChallengesDTOs.count) open challenge(s).")
+                    //                    debugPrintln("Successfully fetched \(openChallengesDTOs.count) open challenge(s).")
                 }
             }
         }
-//        debugPrintln(r)
+        //        debugPrintln(r)
     }
     
     /**
-        GET api/games/taken
+    GET api/games/taken
     */
     func fetchTakenChallenges(completionHandler: ([Game] -> Void)!){
         let url = "\(THGameAPIBaseURL)/taken"
@@ -345,7 +345,7 @@ class NetworkClient {
                     }
                     for takenChallengeDTO in takenChallengesDTOs as [[String: AnyObject]] {
                         let game = Game(compactGameDTO: takenChallengeDTO)
-
+                        
                         var initiatorID: Int!
                         if let i: AnyObject = takenChallengeDTO["createdByUserId"]{
                             initiatorID = i as Int
@@ -370,12 +370,12 @@ class NetworkClient {
                                 fetchUserHandler()
                             }
                         }
-
+                        
                         
                         
                     }
                     
-//                    completionHandler([])
+                    //                    completionHandler([])
                 }
             }
         }
@@ -385,7 +385,7 @@ class NetworkClient {
     ///
     func createQuickGame(completionHandler: (Game! -> ())!){
         let fakeID = 2415
-//        let fakeID = 617543
+        //        let fakeID = 617543
         createChallenge(numberOfQuestions: 7, opponentId: fakeID) {
             if let handler = completionHandler {
                 handler($0)
@@ -394,7 +394,7 @@ class NetworkClient {
     }
     
     /**
-        POST api/games/postresults
+    POST api/games/postresults
     */
     func postGameResults(game:Game, highestCombo:UInt, currentScore:Int, questionResults:[QuestionResult], completionHandler:(Void -> Void)!){
         let url = "\(THGameAPIBaseURL)/postResults"
@@ -413,7 +413,7 @@ class NetworkClient {
                 debugPrintln(error)
             }
         }
-//                debugPrintln(r)
+        //                debugPrintln(r)
     }
     
     /**
@@ -441,7 +441,7 @@ class NetworkClient {
     func logout() {
         self.authenticatedUser = nil
         self.removeCredentials()
-//        TMCache.sharedCache().removeAllObjects()
+        //        TMCache.sharedCache().removeAllObjects()
         EGOCache.globalCache().clearCache()
     }
     
@@ -479,9 +479,9 @@ class NetworkClient {
         })
     }
     
-
+    
     // MARK:- Class functions
-   
+    
     ///
     /// Fetch an image from a fully qualified URL String.
     ///
@@ -495,7 +495,7 @@ class NetworkClient {
             return
         }
         var fetchedImage: UIImage!
-
+        
         SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: urlString), options: .CacheMemoryOnly, progress: progressHandler) { (image, error, cacheType, finished, url) -> Void in
             if error != nil {
                 println(error)
@@ -519,7 +519,7 @@ class NetworkClient {
         if (headers["TH-Language-Code"] == nil) {
             headers["TH-Language-Code"] = "en-GB"
         }
-
+        
         if let auth = generateAuthorisationFromKeychain() {
             headers["Authorization"] = auth
         }
@@ -551,7 +551,7 @@ class NetworkClient {
     /// :param: password Log In password
     ///
     private func saveCredentials(credentialString:String){
-
+        
         SSKeychain.setPassword("\(credentialString)", forService: kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccKey)
         self.credentials = credentialString
     }
@@ -582,10 +582,10 @@ class NetworkClient {
                     self.credentials = secret
                 }
             }
-
+            
         }
     }
-
+    
     
     
 }

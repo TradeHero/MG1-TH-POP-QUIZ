@@ -10,21 +10,21 @@ import UIKit
 
 @IBDesignable
 class DesignableRoundedRectangleView: UIView {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
     
     @IBInspectable var cornerRadius: CGFloat = 1{
-    didSet{
-        layer.cornerRadius = cornerRadius
-    }
+        didSet{
+            layer.cornerRadius = cornerRadius
+        }
     }
     
     func setup(){

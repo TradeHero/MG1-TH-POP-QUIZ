@@ -10,21 +10,21 @@ import UIKit
 
 @IBDesignable
 class DesignableRoundedView: UIView {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
         // Initialization code
     }
-
-  required init(coder aDecoder: NSCoder) {
+    
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
     }
     
     func setup(){
         self.layer.cornerRadius = self.frame.size.width * 0.5
-//        self.layer.cornerRadius = self.bounds.size.width * 0.5
+        //        self.layer.cornerRadius = self.bounds.size.width * 0.5
     }
     
     override func prepareForInterfaceBuilder() {
@@ -32,14 +32,14 @@ class DesignableRoundedView: UIView {
     }
     
     @IBInspectable var borderWidth: CGFloat = 0 {
-    didSet{
-        layer.borderWidth = borderWidth;
+        didSet{
+            layer.borderWidth = borderWidth;
+        }
     }
-    }
-
+    
     @IBInspectable var borderColor: UIColor = UIColor.clearColor() {
-    didSet{
-        layer.borderColor = borderColor.CGColor
-    }
+        didSet{
+            layer.borderColor = borderColor.CGColor
+        }
     }
 }

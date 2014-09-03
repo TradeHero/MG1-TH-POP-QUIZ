@@ -21,9 +21,9 @@ final class THUser : NSObject, NSCoding {
     private let kFirstNameKey = "First Name"
     private let kLastNameKey = "Last Name"
     private let kDispNameKey = "Display Name"
-
-//    public let gamePortfolioID
-//    public lazy var gamePortfolio: GamePortfolio = GamePortfolio()
+    
+    //    public let gamePortfolioID
+    //    public lazy var gamePortfolio: GamePortfolio = GamePortfolio()
     
     init(profileDTO:[String: AnyObject]){
         if let id: AnyObject = profileDTO["id"] {
@@ -41,33 +41,33 @@ final class THUser : NSObject, NSCoding {
         if let pic: AnyObject = profileDTO["picture"] {
             self.pictureURL = pic as String
         }
-
+        
         if let dn: AnyObject = profileDTO["displayName"] {
             self.displayName = dn as String
         }
     }
-
+    
     func encodeWithCoder(aCoder: NSCoder) {
         if let fbpicurl = pictureURL {
             aCoder.encodeObject(fbpicurl, forKey: kPictureURLKey)
         }
-
+        
         aCoder.encodeObject(firstName, forKey: kFirstNameKey)
         
-
+        
         aCoder.encodeObject(lastName, forKey: kLastNameKey)
         
-
+        
         if let n = displayName {
             aCoder.encodeObject(n, forKey: kDispNameKey)
         }
-
+        
         if let uID = userId {
             aCoder.encodeInteger(uID, forKey: kUserIdKey)
         }
         
     }
-
+    
     init(coder aDecoder: NSCoder) {
         super.init()
         self.userId = aDecoder.decodeIntegerForKey(kUserIdKey)
@@ -76,7 +76,7 @@ final class THUser : NSObject, NSCoding {
         self.lastName = aDecoder.decodeObjectForKey(kLastNameKey) as String
         self.displayName = aDecoder.decodeObjectForKey(kDispNameKey) as String
     }
-
+    
 }
 
 extension THUser: Printable {

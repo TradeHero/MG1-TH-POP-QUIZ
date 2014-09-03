@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginViewController: UIViewController, FBLoginViewDelegate {
-
+    
     @IBOutlet private weak var emailField: UITextField!
     @IBOutlet private weak var passwordField: UITextField!
     @IBOutlet private weak var fbLoginView: FBLoginView!
@@ -24,7 +24,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -49,11 +49,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.labelText = "Logging in..."
         hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
-
+        
         NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken, errorHandler: {
-                hud.mode = MBProgressHUDModeText
-                hud.labelText = "Login error: \($0.description)"
-                hud.hide(true, afterDelay: 1.5)
+            hud.mode = MBProgressHUDModeText
+            hud.labelText = "Login error: \($0.description)"
+            hud.hide(true, afterDelay: 1.5)
             }) {
                 if $0 == nil {
                     hud.mode = MBProgressHUDModeText

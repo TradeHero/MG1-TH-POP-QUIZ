@@ -14,7 +14,7 @@ enum ChallengeStatus: Int {
 }
 
 class HomeTurnChallengesTableViewCell: UITableViewCell {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -42,7 +42,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     
     var player: THUser!
     var opponent: THUser!
-
+    
     var delegate: HomeTurnChallengesTableViewCellDelegate!
     @IBAction func acceptChallengeAction(sender: AnyObject) {
         self.delegate.homeTurnChallengesCell(self, didTapAcceptChallenge: self.game.gameID)
@@ -51,7 +51,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     func bindChalllenge(challenge:Game, status:ChallengeStatus) {
         self.game = challenge
         self.status = status
-
+        
         switch status {
         case .Done:
             player = game.opponentPlayer

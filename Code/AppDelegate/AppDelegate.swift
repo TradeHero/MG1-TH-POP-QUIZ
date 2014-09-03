@@ -152,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func userDidLogout(notification:NSNotification){
-        self.window?.rootViewController = UIStoryboard.loginStoryboard().instantiateInitialViewController() as UIViewController
+        self.window?.rootViewController = UIStoryboard.loginStoryboard().instantiateInitialViewController() as? UIViewController
         self.unregisterOtherNotification()
         self.registerLoginNotification()
         

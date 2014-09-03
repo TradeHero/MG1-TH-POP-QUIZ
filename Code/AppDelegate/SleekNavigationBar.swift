@@ -9,7 +9,7 @@
 import UIKit
 
 class SleekNavigationBar: UINavigationBar {
-
+    
     let preferredHeight: CGFloat = 43
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -23,5 +23,5 @@ class SleekNavigationBar: UINavigationBar {
     override func sizeThatFits(size: CGSize) -> CGSize {
         return CGSizeMake(self.frame.size.width, preferredHeight)
     }
-
+    
 }

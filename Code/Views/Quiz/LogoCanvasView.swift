@@ -19,7 +19,7 @@ class LogoCanvasView: UIView {
     private var rasterizedImage: UIImage!
     
     var imageView: UIImageView!
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
@@ -30,8 +30,8 @@ class LogoCanvasView: UIView {
         var f = GPUImageSwirlFilter()
         f.radius = 0.7
         return f
-    }()
-
+        }()
+    
     let pixellateFilter = GPUImagePixellateFilter()
     
     lazy var gaussianBlurFilter:GPUImageGaussianBlurFilter = {
@@ -40,8 +40,8 @@ class LogoCanvasView: UIView {
         }()
     
     lazy var obfuscationType: LogoCanvasObfuscationType = {
-       return LogoCanvasObfuscationType.SwirlEffect
-    }()
+        return LogoCanvasObfuscationType.SwirlEffect
+        }()
     
     var gpuProcessor: GPUImageProcessor = GPUImageProcessor()
     
@@ -100,7 +100,7 @@ class LogoCanvasView: UIView {
         case .PixellateEffect:
             applyPixellateObfuscationWithFractionalWidth(f * 0.05)
         case .GaussianBlurEffect:
-//            applyGaussianBlurObfuscationWithBlurRadiusFactor(f * 10)
+            //            applyGaussianBlurObfuscationWithBlurRadiusFactor(f * 10)
             break
         }
     }
@@ -114,7 +114,7 @@ class LogoCanvasView: UIView {
         pixellateFilter.fractionalWidthOfAPixel = factor
         self.imageView.image = pixellateFilter.imageByFilteringImage(rasterizedImage)
     }
-
+    
     func applyGaussianBlurObfuscationWithBlurRadiusFactor(factor:CGFloat) {
         gaussianBlurFilter.blurRadiusInPixels = factor
         self.imageView.image = gaussianBlurFilter.imageByFilteringImage(rasterizedImage)

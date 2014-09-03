@@ -19,6 +19,4 @@ final class GamePortfolio {
         self.gamePortfolioID = gamePfID
         self.rank = rank
     }
-    
-    
 }

@@ -21,7 +21,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     private lazy var user: THUser = {
         return NetworkClient.sharedClient.authenticatedUser
-    }()
+        }()
     
     @IBOutlet private weak var friendsTableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
@@ -42,7 +42,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController.showNavigationBar()
+        self.navigationController?.showNavigationBar()
         self.loadFriends()
     }
     override func didReceiveMemoryWarning() {
@@ -101,11 +101,11 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     @IBAction func backAction(sender: AnyObject) {
         let dict = [self.kFBFriendsDictionaryKey: self.FBFriendList, kTHFriendsDictionaryKey: self.THFriendList]
         EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
-        self.navigationController.popViewControllerAnimated(true)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     //MARK:- UITableViewDataSource
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return THFriendList.count
@@ -116,7 +116,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
         
         switch indexPath.section {
@@ -127,7 +127,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             let friendUser = FBFriendList[indexPath.row]
             cell.bindFriendUser(friendUser, index: indexPath.row)
         default:
-            return nil
+            break
         }
         
         cell.layoutIfNeeded()
@@ -135,18 +135,18 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
-
+    
     
     //MARK:- UITableViewDelegate
-    func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 48.0
     }
     
-    func tableView(tableView: UITableView!, viewForHeaderInSection section: Int) -> UIView! {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
             if THFriendList.count == 0 {
@@ -178,7 +178,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         default:
             return 0
         }
-
+        
     }
     
     //MARK:- FriendsChallengeCellTableViewCellDelegate
@@ -195,7 +195,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                 
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)
-                strongSelf.navigationController.pushViewController(vc, animated: true)
+                strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

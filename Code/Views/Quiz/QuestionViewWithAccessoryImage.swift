@@ -9,7 +9,7 @@
 import UIKit
 
 class QuestionViewWithAccessoryImage: UIView {
-
+    
     @IBOutlet  weak var questionContent: UILabel!
     
     @IBOutlet weak var accessoryImageView: UIImageView!
@@ -22,5 +22,5 @@ class QuestionViewWithAccessoryImage: UIView {
     required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
     }
-
+    
 }

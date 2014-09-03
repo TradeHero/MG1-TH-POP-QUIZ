@@ -9,7 +9,7 @@
 import UIKit
 
 class OverlayProgressView: UIView {
-
+    
     private enum OverlayProgressViewState{
         case Initial
         case Waiting
@@ -69,7 +69,7 @@ class OverlayProgressView: UIView {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(kUIUpdateFrequency, target: self, selector: "update", userInfo: nil, repeats: true)
     }
     
-    /// Changes radiuses of the inner and outer circles from zero to the corresponding values, 
+    /// Changes radiuses of the inner and outer circles from zero to the corresponding values,
     /// calculated from 'innerRadiusRatio' and 'outerRadiusRatio' properties.
     func displayOperationWillTriggerAnimation(){
         self.state = .Finished
@@ -90,7 +90,7 @@ class OverlayProgressView: UIView {
         
         self.setNeedsDisplay()
     }
-
+    
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -125,7 +125,7 @@ class OverlayProgressView: UIView {
         
         CGContextAddPath(context, path0)
         CGContextFillPath(context)
-
+        
         CGContextAddPath(context, path1)
         CGContextFillPath(context)
         
@@ -142,7 +142,7 @@ class OverlayProgressView: UIView {
             CGContextFillPath(context)
         }
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setup()

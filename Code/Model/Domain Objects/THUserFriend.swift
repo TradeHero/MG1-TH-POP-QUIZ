@@ -9,7 +9,7 @@
 import UIKit
 
 final class THUserFriend: NSObject, NSCoding {
-
+    
     private let kFacebookIDKey = "FacebookID"
     private let kFacebookPictureURLKey = "FacebookPictureURL"
     private let kNameKey = "Name"
@@ -24,8 +24,8 @@ final class THUserFriend: NSObject, NSCoding {
     
     lazy var isTHUser: Bool = {
         return self.userID != 0
-    }()
-
+        }()
+    
     init(friendDTO:[String: AnyObject]) {
         self.facebookID = 0
         if let fbID: AnyObject = friendDTO["fbId"] {
@@ -43,33 +43,33 @@ final class THUserFriend: NSObject, NSCoding {
         if let uID: AnyObject = friendDTO["thUserId"] {
             self.userID = uID as Int
         }
-
+        
         if let invited: AnyObject = friendDTO["alreadyInvited"] {
             self.alreadyInvited = invited as Bool
         }
     }
-
+    
     func encodeWithCoder(aCoder: NSCoder) {
         if let fbID = facebookID {
             aCoder.encodeInteger(fbID, forKey: kFacebookIDKey)
         }
-
+        
         if let fbpicurl = facebookPictureURL {
             aCoder.encodeObject(fbpicurl, forKey: kFacebookPictureURLKey)
         }
-
+        
         if let n = name {
             aCoder.encodeObject(n, forKey: kNameKey)
         }
-
+        
         if let uID = userID {
             aCoder.encodeInteger(uID, forKey: kUserIdKey)
         }
-
+        
         aCoder.encodeBool(alreadyInvited, forKey: kAlreadyInvitedKey)
         
     }
-
+    
     init(coder aDecoder: NSCoder) {
         super.init()
         self.facebookID = aDecoder.decodeIntegerForKey(kFacebookIDKey)

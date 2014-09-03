@@ -99,9 +99,9 @@ final class Question {
     var questionImage: UIImage!
     
     var accessoryImageContent: String!
-
+    
     var accessoryImage: UIImage!
-
+    
     func isGraphical() -> Bool{
         switch self.questionType {
         case .LogoType, .TimedObfuscatorType:
@@ -130,7 +130,7 @@ final class Question {
                 mainContent = contentStr
                 self.accessoryImageContent = nil
             }
-
+            
             switch qTypeInt {
             case 1:
                 self.questionType = .LogoType
@@ -202,9 +202,9 @@ final class Question {
         
         self.options = OptionSet(correctOption: option1, dummyOptions: [option2, option3, option4])
     }
-
+    
     func fetchImage(completionHandler:() -> ()) {
-
+        
         if let imgName = self.questionImageURLString {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
@@ -217,12 +217,12 @@ final class Question {
                 }
                 self.fetchAccessoryImageOperation(completionHandler)
             })
-
+            
         }else{
             self.fetchAccessoryImageOperation(completionHandler)
         }
     }
-
+    
     func fetchOptionImageOperation(completionHandler:() -> ()){
         var count:Int = 0
         for option in self.options.allOptions {
@@ -234,7 +234,7 @@ final class Question {
             }
         }
     }
-
+    
     func fetchAccessoryImageOperation(completionHandler:() -> ()){
         if let imgName = self.accessoryImageContent {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
@@ -249,14 +249,14 @@ final class Question {
                 self.fetchOptionImageOperation(completionHandler)
             })
         } else {
-                self.fetchOptionImageOperation(completionHandler)
+            self.fetchOptionImageOperation(completionHandler)
         }
     }
 }
 
 extension Question : Printable {
     var description: String {
-            var d = "{\n"
+        var d = "{\n"
             d += "ID: \(questionID)\n"
             d += "Type: \(questionType.description())\n"
             d += "Category: \(questionCategory.description())\n"

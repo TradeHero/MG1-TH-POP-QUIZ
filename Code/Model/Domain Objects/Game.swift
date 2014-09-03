@@ -12,22 +12,22 @@ final class Game {
     
     let gameID: Int!
     private let createdAtUTCStr: String!
-
+    
     var initiatingPlayer: THUser!
-
+    
     var opponentPlayer: THUser!
     
     var initiatingPlayerResult: GameResult!
-
+    
     var opponentPlayerResult: GameResult!
-
+    
     lazy var createdAt: NSDate! = {
         let df = NSDateFormatter()
         df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         df.timeZone = NSTimeZone(name: "UTC")
         return df.dateFromString(self.createdAtUTCStr)
-    }()
-
+        }()
+    
     let questionSet: [Question]!
     
     init(id: Int, createdAtUTCStr:String, questionSet:[Question]) {
@@ -35,16 +35,16 @@ final class Game {
         self.createdAtUTCStr = createdAtUTCStr
         self.questionSet = questionSet
     }
-
+    
     init(gameDTO:[String: AnyObject]){
         if let id: AnyObject = gameDTO["id"] {
             self.gameID = id as Int
         }
-
+        
         if let s: AnyObject = gameDTO["createdAtUtc"] {
             self.createdAtUTCStr = s as String
         }
-
+        
         var qSet: [Question] = []
         if let qs: AnyObject = gameDTO["questionSet"] {
             let questionJSON = qs as [AnyObject]
@@ -55,18 +55,18 @@ final class Game {
             }
             self.questionSet = qSet
         }
-
+        
     }
-
+    
     init(compactGameDTO:[String: AnyObject]){
         if let id: AnyObject = compactGameDTO["id"] {
             self.gameID = id as Int
         }
-
+        
         if let s: AnyObject = compactGameDTO["createdAtUtc"] {
             self.createdAtUTCStr = s as String
         }
-
+        
         self.questionSet = nil
     }
 }

@@ -26,28 +26,30 @@ class DesignableButton: UIButton {
     
     
     @IBInspectable var borderColor: UIColor = UIColor.clearColor() {
-    didSet {
-        layer.borderColor = borderColor.CGColor
-    }
+        didSet {
+            layer.borderColor = borderColor.CGColor
+        }
     }
     
     @IBInspectable var borderWidth: CGFloat = 0 {
-    didSet {
-        layer.borderWidth = borderWidth
-    }
+        didSet {
+            layer.borderWidth = borderWidth
+        }
     }
     
     @IBInspectable var cornerRadius: CGFloat = 6 {
-    didSet {
-        layer.cornerRadius = cornerRadius
-    }
+        didSet {
+            layer.cornerRadius = cornerRadius
+        }
     }
     
     func setup(){
-        self.titleLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        self.titleLabel.textAlignment = NSTextAlignment.Center
-        self.titleLabel.adjustsFontSizeToFitWidth = true;
-        self.titleLabel.minimumScaleFactor = 8/self.titleLabel.font.pointSize
-        self.titleLabel.numberOfLines = 3
+        if let t = self.titleLabel {
+            t.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            t.textAlignment = NSTextAlignment.Center
+            t.adjustsFontSizeToFitWidth = true;
+            t.minimumScaleFactor = 8/t.font.pointSize
+            t.numberOfLines = 3
+        }
     }
 }

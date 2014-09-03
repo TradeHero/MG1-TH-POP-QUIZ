@@ -9,13 +9,13 @@
 import UIKit
 
 class FadeInSegue: UIStoryboardSegue {
-   
+    
     override func perform() {
         let transition = CATransition()
         transition.duration = 1
         transition.type = kCATransitionFade
         
-        (self.sourceViewController as UIViewController).navigationController.view.layer.addAnimation(transition, forKey: kCATransition)
-        (self.sourceViewController as UIViewController).navigationController.pushViewController(self.destinationViewController as UIViewController, animated: false)
+        (self.sourceViewController as UIViewController).navigationController?.view.layer.addAnimation(transition, forKey: kCATransition)
+        (self.sourceViewController as UIViewController).navigationController?.pushViewController(self.destinationViewController as UIViewController, animated: false)
     }
 }

@@ -52,7 +52,7 @@ class OptionButton: DesignableButton {
     var accessoryImage: UIImage! {
         didSet {
             if let img = accessoryImage {
-//                self.setImage(img, forState: .Normal)
+                //                self.setImage(img, forState: .Normal)
                 self.configureAsTrendingStyle()
             }
         }
@@ -92,15 +92,15 @@ class OptionButton: DesignableButton {
             if wordCount > 0 {
                 if longestWordLength > 7 { //chunky
                     if longestWordCount > 3 { //long
-                        self.titleLabel.lineBreakMode = .ByClipping
+                        self.titleLabel?.lineBreakMode = .ByClipping
                     } else { // short
-                        self.titleLabel.lineBreakMode = .ByWordWrapping
+                        self.titleLabel?.lineBreakMode = .ByWordWrapping
                     }
                 } else { // simple
                     if wordCount > 5 { //long
-                        self.titleLabel.lineBreakMode = .ByClipping
+                        self.titleLabel?.lineBreakMode = .ByClipping
                     } else { // short
-                        self.titleLabel.lineBreakMode = .ByWordWrapping
+                        self.titleLabel?.lineBreakMode = .ByWordWrapping
                     }
                 }
             }
@@ -135,9 +135,9 @@ class OptionButton: DesignableButton {
             var center = self.center
             self.defaultSize = self.frame.size
             self.defaultCenter = self.center
-            self.defaultFont = self.titleLabel.font
+            self.defaultFont = self.titleLabel?.font
             
-            self.titleLabel.font = self.defaultFont.fontWithSize(14)
+            self.titleLabel?.font = self.defaultFont.fontWithSize(14)
             rect.size.width = self.frame.size.width * 0.8
             rect.size.height = self.frame.size.height * 0.8
             
@@ -159,7 +159,7 @@ class OptionButton: DesignableButton {
             isShrinked = false
             self.bounds.size = self.defaultSize
             self.center = self.defaultCenter
-            self.titleLabel.font = self.defaultFont
+            self.titleLabel?.font = self.defaultFont
             if self.trendingTopLayerView != nil {
                 self.trendingTopLayerView.transform = CGAffineTransformIdentity
             }
@@ -189,7 +189,7 @@ class OptionButton: DesignableButton {
             if self.trendingTopLayerView != nil {
                 self.trendingTopLayerView.titleLabel.textColor = UIColor.whiteColor()
             }
-
+            
         }
     }
     
@@ -206,14 +206,14 @@ class OptionButton: DesignableButton {
         self.backgroundColor = UIColor(patternImage: UIImage(named: "CorrectAnswerBackground"))
         self.patchTickLogo()
         self.tiltRight()
-        self.titleLabel.textColor = UIColor.whiteColor()
+        self.titleLabel?.textColor = UIColor.whiteColor()
     }
     
     func configureAsFalse(){
         self.backgroundColor = UIColor(patternImage: UIImage(named: "FalseAnswerBackground"))
         self.patchCrossLogo()
         self.tiltLeft()
-        self.titleLabel.textColor = UIColor.whiteColor()
+        self.titleLabel?.textColor = UIColor.whiteColor()
         
     }
     
@@ -258,7 +258,7 @@ class OptionButton: DesignableButton {
         self.unpatchAllLogo()
         self.unshrink()
         self.backgroundColor = defaultBackgroundColour
-        self.titleLabel.textColor = defaultFontColor
+        self.titleLabel?.textColor = defaultFontColor
         self.untilt()
         self.stopWobble()
         self.showAndEnable(false)
@@ -306,29 +306,35 @@ class OptionButton: DesignableButton {
     
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        self.imageView.image = UIImage(named:"TradeHeroFriendsBullIcon")
+        self.imageView?.image = UIImage(named:"TradeHeroFriendsBullIcon")
     }
     
     private func configureAsTrendingStyle(){
-        if self.titleLabel.isSubviewOf(self) {
-            self.titleLabel.removeFromSuperview()
+        
+        if let b = self.titleLabel?.isSubviewOf(self) {
+            if b {
+                self.titleLabel?.removeFromSuperview()
+            }
         }
-
-//        self.imageView.hidden = true
+        
+        //        self.imageView.hidden = true
         trendingTopLayerView = NSBundle.mainBundle().loadNibNamed("OptionButtonAccessoryImageLayer", owner: self, options: nil)[0] as OptionButtonAccessoryImageLayer
         trendingTopLayerView.titleLabel.text = self.labelText
         trendingTopLayerView.imageView.image = self.accessoryImage
         trendingTopLayerView.userInteractionEnabled = false
         self.addSubview(trendingTopLayerView)
-//        self.bringSubviewToFront(topLayer)
+        //        self.bringSubviewToFront(topLayer)
     }
     
     private func configureAsNormalStyle() {
-        if !self.titleLabel.isSubviewOf(self) {
-            self.addSubview(self.titleLabel)
+        
+        if let b = self.titleLabel?.isSubviewOf(self) {
+            if !b {
+                self.addSubview(self.titleLabel!)
+            }
         }
-        self.titleLabel.hidden = false
-        self.imageView.hidden = false
+        self.titleLabel?.hidden = false
+        self.imageView?.hidden = false
         for view in self.subviews as [UIView]{
             if view is OptionButtonAccessoryImageLayer {
                 view.removeFromSuperview()

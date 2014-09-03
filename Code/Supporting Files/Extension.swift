@@ -14,7 +14,7 @@ extension UINavigationController {
             self.navigationBarHidden = true
         }
     }
-
+    
     func showNavigationBar() {
         if self.navigationBarHidden {
             self.navigationBarHidden = false
@@ -112,7 +112,7 @@ extension UIView {
             view.removeFromSuperview()
         }
     }
-
+    
     func listAllSubviews() {
         for view in (self.subviews as [UIView]){
             println("\(object_getClassName(view))")
@@ -126,7 +126,7 @@ extension UIView {
         UIGraphicsEndImageContext()
         return viewImage
     }
-
+    
     func isSubviewOf(view:UIView) -> Bool {
         for v in view.subviews as [UIView] {
             if v === self {
@@ -135,7 +135,7 @@ extension UIView {
         }
         return false
     }
-
+    
     class func animateWithDuration(duration: NSTimeInterval, options: UIViewAnimationOptions, animations: () -> Void) {
         self.animateWithDuration(duration, delay: 0, options: options, animations: animations, completion: nil)
     }
@@ -279,16 +279,16 @@ extension String {
         let decodedString = NSString(data: base64data, encoding: NSUTF8StringEncoding)
         return decodedString
     }
-
+    
     var floatValue: Float {
         return (self as NSString).floatValue
     }
-
-
+    
+    
     var CGFloatValue: CGFloat {
         return CGFloat(self.floatValue)
     }
-
+    
     var length: Int {
         return self.utf16Count
     }
@@ -302,8 +302,8 @@ extension UIStoryboard {
     class func loginStoryboard() -> UIStoryboard {
         return UIStoryboard(name: "Login", bundle: NSBundle.mainBundle())
     }
-
-
+    
+    
     class func quizStoryboard() -> UIStoryboard {
         return UIStoryboard(name: "Quiz", bundle: NSBundle.mainBundle())
     }
@@ -313,11 +313,11 @@ extension UIViewController {
     func setNavigationTintColor(barColor:UIColor!, buttonColor:UIColor!){
         if self.navigationController != nil {
             if barColor != nil {
-                self.navigationController.navigationBar.barTintColor = barColor
+                self.navigationController?.navigationBar.barTintColor = barColor
             }
             
             if buttonColor != nil {
-                self.navigationController.navigationBar.tintColor = buttonColor
+                self.navigationController?.navigationBar.tintColor = buttonColor
             }
         }
     }

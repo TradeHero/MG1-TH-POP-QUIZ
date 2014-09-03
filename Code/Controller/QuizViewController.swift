@@ -82,9 +82,9 @@ class QuizViewController: UIViewController {
     private var selfTotalScore: Int = 0 {
         didSet{
             selfScoreLabel.text = String(selfTotalScore)
-//            let totalScore = basicScorePerQuestion * self.game.questionSet.count
-//            let newProgress = CGFloat(selfTotalScore)/CGFloat(totalScore)
-//            selfProgressView.progress = newProgress
+            //            let totalScore = basicScorePerQuestion * self.game.questionSet.count
+            //            let newProgress = CGFloat(selfTotalScore)/CGFloat(totalScore)
+            //            selfProgressView.progress = newProgress
         }
     }
     
@@ -120,7 +120,7 @@ class QuizViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-        
+    
     // MARK:- override calls
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,7 +129,7 @@ class QuizViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController.hideNavigationBar()
+        self.navigationController?.hideNavigationBar()
         weak var wself = self
         dispatch_after(1, dispatch_get_main_queue()) {
             var sself = wself!
@@ -342,7 +342,7 @@ class QuizViewController: UIViewController {
             let score = calculateScore()
             produceResultForCurrentQuestion(false, score: score)
             NSTimer.scheduledTimerWithTimeInterval(1.5, target: self, selector: "prepareToEndRound", userInfo: nil, repeats: false)
-
+            
         }
     }
     
@@ -368,8 +368,8 @@ class QuizViewController: UIViewController {
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: highestCombo, currentScore: currentTurnScore, questionResults: results, completionHandler: nil)
-//        self.dismissViewControllerAnimated(true, completion: nil)
-        self.navigationController.popToRootViewControllerAnimated(false)
+        //        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popToRootViewControllerAnimated(false)
     }
     
     

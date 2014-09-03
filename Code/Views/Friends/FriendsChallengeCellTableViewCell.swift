@@ -22,7 +22,7 @@ extension UIButton {
         self.enable()
         self.alpha = 1
     }
-
+    
     func setupAsInvitedButton(){
         self.setBackgroundImage(UIImage(named: "RedButtonBackground"), forState: .Normal)
         self.setTitle("Invited", forState: .Normal)
@@ -31,7 +31,7 @@ extension UIButton {
     }
 }
 class FriendsChallengeCellTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var friendAvatarView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
     
@@ -51,7 +51,7 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     var delegate: FriendsChallengeCellTableViewCellDelegate!
     
     lazy var index: Int = Int()
-
+    
     @IBOutlet weak var inviteOrChallengeButton: UIButton!
     
     override func awakeFromNib() {
@@ -63,14 +63,14 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
         self.layer.cornerRadius = 3
         self.clipsToBounds = true
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
-
+    
     @IBAction func challengeOrInviteAction(sender: AnyObject) {
         if self.friendUser.isTHUser {
             self.delegate.friendUserCell(self, didTapChallengeUser: self.friendUser.userID)

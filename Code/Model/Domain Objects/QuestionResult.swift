@@ -30,6 +30,6 @@ extension QuestionResult: Printable {
             d += "Correct: \(self.isCorrect)\n"
             d += "Raw score: \(self.rawScore)\n"
             d += "\n}"
-        return d
+            return d
     }
 }

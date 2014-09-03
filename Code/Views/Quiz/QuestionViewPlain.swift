@@ -9,14 +9,14 @@
 import UIKit
 
 public class QuestionViewPlain: UIView {
-
+    
     @IBOutlet public weak var questionContent: UILabel!
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
     }
-
+    
     public required init(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
     }

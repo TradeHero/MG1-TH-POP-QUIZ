@@ -9,7 +9,7 @@
 import UIKit
 
 class WinLoseViewController: UIViewController {
-
+    
     @IBOutlet private weak var winLoseLabel: UILabel!
     
     @IBOutlet private weak var winLoseBackgroundImageView: UIImageView!
@@ -24,7 +24,7 @@ class WinLoseViewController: UIViewController {
     @IBOutlet private weak var largeBoxBackground: UIImageView!
     
     @IBOutlet private weak var largeBoxAvatarView: AvatarRoundedView!
-
+    
     @IBOutlet private weak var largeBoxNameLabel: UILabel!
     
     @IBOutlet private weak var largeBoxRankLabel: UILabel!
@@ -49,10 +49,10 @@ class WinLoseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -60,7 +60,7 @@ class WinLoseViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController.hideNavigationBar()
+        self.navigationController?.hideNavigationBar()
     }
     
     func animateStars(){
@@ -107,15 +107,15 @@ class WinLoseViewController: UIViewController {
             configureAsLosingScene()
         }
         largeBoxNameLabel.text = selfUser.displayName
-//        largeBoxRankLabel = selfUser.rank
-//        largeBoxLevelLabel.text = selfUser.level
+        //        largeBoxRankLabel = selfUser.rank
+        //        largeBoxLevelLabel.text = selfUser.level
         largeBoxScoreLabel.text = "\(selfScore)"
         smallBoxNameLabel.text = opponentUser.displayName
-//        smallBoxRankLabel = opponentUser.rank
-//        smallBoxLevelLabel.text = opponentUser.level
+        //        smallBoxRankLabel = opponentUser.rank
+        //        smallBoxLevelLabel.text = opponentUser.level
         smallBoxScoreLabel.text = "\(opponentScore)"
         NetworkClient.fetchImageFromURLString(selfUser.pictureURL, progressHandler: nil, completionHandler: {
-        (image, error) in
+            (image, error) in
             self.largeBoxAvatarView.image = image
         })
         
@@ -126,13 +126,13 @@ class WinLoseViewController: UIViewController {
     }
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    
+        
     }
     
-
+    
 }
