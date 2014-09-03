@@ -41,6 +41,7 @@ class GameLoadingSceneViewController: UIViewController {
     
     private var player: THUser!
     private var opponent: THUser!
+    
     private var timer: NSTimer!
     private var startTime: NSDate!
     

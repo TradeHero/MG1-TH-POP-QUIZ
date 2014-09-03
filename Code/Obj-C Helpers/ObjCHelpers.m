@@ -53,3 +53,40 @@
 }
 
 @end
+
+
+@implementation UIView (roundedCorners)
+
+-(void)roundCornersOnTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius {
+    
+    if (tl || tr || bl || br) {
+        
+        UIRectCorner corner; //holds the corner
+        //Determine which corner(s) should be changed
+        if (tl) {
+            corner = UIRectCornerTopLeft;
+        }
+        if (tr) {
+            UIRectCorner add = corner | UIRectCornerTopRight;
+            corner = add;
+        }
+        if (bl) {
+            UIRectCorner add = corner | UIRectCornerBottomLeft;
+            corner = add;
+        }
+        if (br) {
+            UIRectCorner add = corner | UIRectCornerBottomRight;
+            corner = add;
+        }
+        
+        UIView *v = self;
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:v.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(radius, radius)];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        maskLayer.frame = v.bounds;
+        maskLayer.path = maskPath.CGPath;
+        v.layer.mask = maskLayer;
+    } else {
+    }
+}
+
+@end

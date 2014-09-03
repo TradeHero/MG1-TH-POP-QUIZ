@@ -99,7 +99,12 @@ class QuizViewController: UIViewController {
     private var didRemoveOptions: Bool = false
     
     private var player: THUser!
+    
     private var opponent:THUser!
+    
+    private var opponentScore: Int = 0
+    
+    private var opponentQuestionCorrect: Int = 0
     
     private var combos: UInt = 0 {
         didSet {
@@ -502,9 +507,12 @@ class QuizViewController: UIViewController {
                 self.opponentAvatarView.image = image
             }
         }
-        opponentDisplayNameLabel.text = opponent.displayName
         
-        opponentScoreLabel.text = "0"
+        opponentDisplayNameLabel.text = opponent.displayName
+        println("\(self.opponentQuestionCorrect)")
+        opponentProgressView.progress = CGFloat(self.opponentQuestionCorrect)/CGFloat(self.game.questionSet.count)
+        opponentScoreLabel.text = "\(opponentScore)"
+        
         self.setupProgressBar(self.selfProgressView)
         self.setupProgressBar(self.opponentProgressView)
     }
@@ -548,6 +556,15 @@ class QuizViewController: UIViewController {
     
     func bindGameAndUsers(game:Game, player:THUser, opponent:THUser){
         self.game = game
+        
+        if game.initiatingPlayer == opponent {
+            self.opponentScore = game.initiatingPlayerResult.rawScore
+            self.opponentQuestionCorrect = game.initiatingPlayerResult.questionCorrect
+        } else {
+            self.opponentScore = game.opponentPlayerResult.rawScore
+            self.opponentQuestionCorrect = game.opponentPlayerResult.questionCorrect
+        }
+        
         self.player = player
         self.opponent = opponent
     }

@@ -17,10 +17,22 @@ final class Game {
     
     var opponentPlayer: THUser!
     
+    var initiatingPlayerID: Int!
+    
+    var opponentPlayerID: Int!
+    
     var initiatingPlayerResult: GameResult!
     
     var opponentPlayerResult: GameResult!
     
+    var isGameCompletedByChallenger: Bool {
+        return initiatingPlayerResult != nil
+    }
+    
+    var isGameCompletedByBothPlayer: Bool {
+        return initiatingPlayerResult != nil && opponentPlayerResult != nil
+    }
+
     lazy var createdAt: NSDate! = {
         let df = NSDateFormatter()
         df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
@@ -28,7 +40,7 @@ final class Game {
         return df.dateFromString(self.createdAtUTCStr)
         }()
     
-    let questionSet: [Question]!
+    var questionSet: [Question]!
     
     init(id: Int, createdAtUTCStr:String, questionSet:[Question]) {
         self.gameID = id
@@ -37,6 +49,14 @@ final class Game {
     }
     
     init(gameDTO:[String: AnyObject]){
+        if let cuid: AnyObject = gameDTO["createdByUserId"] {
+            self.initiatingPlayerID = cuid as Int
+        }
+        
+        if let opuid: AnyObject = gameDTO["opponentUserId"] {
+            self.opponentPlayerID = opuid as Int
+        }
+        
         if let id: AnyObject = gameDTO["id"] {
             self.gameID = id as Int
         }
@@ -55,10 +75,17 @@ final class Game {
             }
             self.questionSet = qSet
         }
-        
     }
     
     init(compactGameDTO:[String: AnyObject]){
+        if let cuid: AnyObject = compactGameDTO["createdByUserId"] {
+            self.initiatingPlayerID = cuid as Int
+        }
+        
+        if let opuid: AnyObject = compactGameDTO["opponentUserId"] {
+            self.opponentPlayerID = opuid as Int
+        }
+        
         if let id: AnyObject = compactGameDTO["id"] {
             self.gameID = id as Int
         }
@@ -68,6 +95,49 @@ final class Game {
         }
         
         self.questionSet = nil
+    }
+    
+    func fetchUsers(completionHandler:()->Void) {
+        weak var wself = self
+        NetworkClient.sharedClient.fetchUser(opponentPlayerID, force: true) {
+            var sself = wself!
+            if let u = $0 {
+                sself.opponentPlayer = u
+            }
+            
+            NetworkClient.sharedClient.fetchUser(sself.initiatingPlayerID, force: true) {
+                if let u = $0 {
+                    sself.initiatingPlayer = u
+                }
+                
+                completionHandler()
+            }
+        }
+    }
+    
+    func fetchResults(completionHandler:()->Void){
+//        weak var wself = self
+        
+        NetworkClient.sharedClient.getResultForGame(self.gameID) {
+//            var sself = wself!
+            if let cResults = $0.challengerResult {
+                if self.initiatingPlayer.userId == cResults.userId {
+                    self.initiatingPlayerResult = cResults
+                } else {
+                    self.opponentPlayerResult = cResults
+                }
+            }
+            
+            if let oResults = $0.opponentResult {
+                if self.opponentPlayerResult.userId == oResults.userId {
+                    self.opponentPlayerResult = oResults
+                } else {
+                    self.initiatingPlayerResult = oResults
+                }
+            }
+            
+            completionHandler()
+        }
     }
 }
 

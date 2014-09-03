@@ -87,4 +87,37 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func questionResultCell(cell: QuestionResultTableViewCell, didTapInfoButton questionID: Int) {
         
     }
+    
+    //MARK:- Private functions
+    private func createHeaderViewForResultsView() -> UIView {
+        let view = UIView(frame: CGRectMake(0, 0, 285, 50))
+        view.backgroundColor = UIColor(hex: 0xFF4069)
+        var label = UILabel(frame:CGRectMake(15, 14, 130, 21))
+        label.text = "Correct Answers"
+        view.addSubview(label)
+        
+        var selfAvatarView = AvatarRoundedView(frame: CGRectMake(161, 2, 45, 45))
+        view.addSubview(selfAvatarView)
+        NetworkClient.fetchImageFromURLString("", progressHandler: nil) {
+            (image, error) in
+            if let e = error {
+                println(e)
+                return
+            }
+            selfAvatarView.image = image
+        }
+    
+        var opponentAvatarView = AvatarRoundedView(frame: CGRectMake(232, 2, 45, 45))
+        view.addSubview(selfAvatarView)
+        NetworkClient.fetchImageFromURLString("", progressHandler: nil) {
+            (image, error) in
+            if let e = error {
+                println(e)
+                return
+            }
+            opponentAvatarView.image = image
+        }
+        view.roundCornersOnTopLeft(true, topRight: true, bottomLeft: false, bottomRight: false, radius: 1.0)
+        return view
+    }
 }

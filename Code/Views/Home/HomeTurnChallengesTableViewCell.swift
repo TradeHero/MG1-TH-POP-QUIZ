@@ -17,6 +17,8 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.layer.cornerRadius = 3
+        self.clipsToBounds = true
         // Initialization code
     }
     @IBOutlet weak var actionButton: UIButton!
@@ -45,7 +47,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     
     var delegate: HomeTurnChallengesTableViewCellDelegate!
     @IBAction func acceptChallengeAction(sender: AnyObject) {
-        self.delegate.homeTurnChallengesCell(self, didTapAcceptChallenge: self.game.gameID)
+        self.delegate.homeTurnChallengesCell(self, didTapAcceptChallenge: self.game)
     }
     
     func bindChalllenge(challenge:Game, status:ChallengeStatus) {
@@ -88,9 +90,22 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.challengerDisplayNameLabel.text = ""
         self.challengerWinsLabel.text = ""
     }
+    
+    override var frame: CGRect {
+        get {
+            return super.frame
+        }
+        
+        set(fr) {
+            var frame = fr
+            frame.origin.y += 3
+            frame.size.height -=  5;
+            super.frame = frame
+        }
+    }
 }
 
 protocol HomeTurnChallengesTableViewCellDelegate : class, NSObjectProtocol {
-    func homeTurnChallengesCell(cell:HomeTurnChallengesTableViewCell, didTapAcceptChallenge challengeId:Int)
+    func homeTurnChallengesCell(cell:HomeTurnChallengesTableViewCell, didTapAcceptChallenge game:Game)
 }
 

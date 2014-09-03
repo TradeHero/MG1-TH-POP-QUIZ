@@ -203,14 +203,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge challengeId: Int) {
+    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game) {
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         let name = (cell.opponent.displayName == "" || cell.opponent.displayName == nil) ? "opponent" : cell.opponent.displayName
         hud.labelText = "Accepting \(name)'s challenge'"
         hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
         hud.removeFromSuperViewOnHide = true
         weak var weakSelf = self
-        NetworkClient.sharedClient.fetchGameByGameId(challengeId) {
+        NetworkClient.sharedClient.fetchGameByGameId(game.gameID) {
             var strongSelf = weakSelf!
             if let g = $0 {
                 hud.mode = MBProgressHUDModeText

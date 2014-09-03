@@ -113,34 +113,15 @@ class NetworkClient {
                 if response?.statusCode == 200 {
                     let responseJSON = content as [String: AnyObject]
                     //                println(responseJSON)
-                    let game = Game(gameDTO: responseJSON)
+                    var game = Game(gameDTO: responseJSON)
                     debugPrintln("Game created with game ID: \(game.gameID)")
-                    var initiatorID: Int!
-                    if let i: AnyObject = responseJSON["createdByUserId"]{
-                        initiatorID = i as Int
-                    }
-                    
-                    var opponentID: Int!
-                    if let i: AnyObject = responseJSON["opponentUserId"]{
-                        opponentID = i as Int
-                    }
-                    
-                    sself.fetchUser(opponentID, force: true) {
-                        if let u = $0 {
-                            game.opponentPlayer = u
-                        }
-                        
-                        sself.fetchUser(initiatorID, force: true) {
-                            if let u = $0 {
-                                game.initiatingPlayer = u
-                            }
-                            
-                            if let handler = completionHandler {
-                                handler(game)
+                    game.fetchUsers() {
+                        game.fetchResults() {
+                            if let c = completionHandler {
+                                c(game)
                             }
                         }
                     }
-                    
                     
                 }
             })
@@ -204,33 +185,14 @@ class NetworkClient {
                 //                println(responseJSON)
                 let game = Game(gameDTO: responseJSON)
                 debugPrintln("Game created with game ID: \(game.gameID)")
-                var initiatorID: Int!
-                if let i: AnyObject = responseJSON["createdByUserId"]{
-                    initiatorID = i as Int
-                }
                 
-                var opponentID: Int!
-                if let i: AnyObject = responseJSON["opponentUserId"]{
-                    opponentID = i as Int
-                }
-                
-                sself.fetchUser(opponentID, force: true) {
-                    if let u = $0 {
-                        game.opponentPlayer = u
-                    }
-                    
-                    sself.fetchUser(initiatorID, force: true) {
-                        if let u = $0 {
-                            game.initiatingPlayer = u
-                        }
-                        
-                        if let handler = completionHandler {
-                            handler(game)
+                game.fetchUsers() {
+                    game.fetchResults() {
+                        if let c = completionHandler {
+                            c(game)
                         }
                     }
                 }
-                
-                
             }
             
         }
@@ -262,7 +224,7 @@ class NetworkClient {
                     var total = openChallengesDTOs.count
                     var openChallenges: [Game] = []
                     
-                    let fetchUserHandler: () -> Void = { Void in
+                    let fetchUserHandler: () -> () = {
                         numberCompleted++
                         if numberCompleted == total {
                             if let handler = completionHandler {
@@ -273,36 +235,12 @@ class NetworkClient {
                     for openChallengeDTO in openChallengesDTOs as [[String: AnyObject]] {
                         let game = Game(compactGameDTO: openChallengeDTO)
                         
-                        var initiatorID: Int!
-                        if let i: AnyObject = openChallengeDTO["createdByUserId"]{
-                            initiatorID = i as Int
+                        game.fetchUsers(){
+                            openChallenges.append(game)
+                            fetchUserHandler()
                         }
-                        
-                        var opponentID: Int!
-                        if let i: AnyObject = openChallengeDTO["opponentUserId"]{
-                            opponentID = i as Int
-                        }
-                        
-                        sself.fetchUser(opponentID, force: false) {
-                            if let u = $0 {
-                                game.opponentPlayer = u
-                            }
-                            
-                            sself.fetchUser(initiatorID, force: false) {
-                                if let u = $0 {
-                                    game.initiatingPlayer = u
-                                }
-                                
-                                openChallenges.append(game)
-                                fetchUserHandler()
-                            }
-                        }
-                        
-                        
-                        
                     }
-                    
-                    //                    debugPrintln("Successfully fetched \(openChallengesDTOs.count) open challenge(s).")
+                    debugPrintln("Successfully fetched \(openChallenges.count) open challenge(s).")
                 }
             }
         }
@@ -327,7 +265,7 @@ class NetworkClient {
             
             if let takenChallengesDTOs = content as? [AnyObject] {
                 if takenChallengesDTOs.count == 0 {
-                    debugPrintln("User has no open challenges.")
+                    debugPrintln("User has no taken challenges.")
                     completionHandler([])
                 } else {
                     debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
@@ -335,7 +273,7 @@ class NetworkClient {
                     var total = takenChallengesDTOs.count
                     var takenChallenges: [Game] = []
                     
-                    let fetchUserHandler: () -> Void = { Void in
+                    let fetchUserHandler: () -> () = {
                         numberCompleted++
                         if numberCompleted == total {
                             if let handler = completionHandler {
@@ -355,25 +293,12 @@ class NetworkClient {
                         if let i: AnyObject = takenChallengeDTO["opponentUserId"]{
                             opponentID = i as Int
                         }
-                        
-                        sself.fetchUser(opponentID, force: false) {
-                            if let u = $0 {
-                                game.opponentPlayer = u
-                            }
-                            
-                            sself.fetchUser(initiatorID, force: false) {
-                                if let u = $0 {
-                                    game.initiatingPlayer = u
-                                }
-                                
-                                takenChallenges.append(game)
-                                fetchUserHandler()
-                            }
+                        game.fetchUsers(){
+                            takenChallenges.append(game)
+                            fetchUserHandler()
                         }
-                        
-                        
-                        
                     }
+                    debugPrintln("Successfully fetched \(takenChallenges.count) taken challenge(s).")
                     
                     //                    completionHandler([])
                 }
@@ -384,8 +309,8 @@ class NetworkClient {
     
     ///
     func createQuickGame(completionHandler: (Game! -> ())!){
-        let fakeID = 2415
-        //        let fakeID = 617543
+        //        let fakeID = 2415
+        let fakeID = 617543
         createChallenge(numberOfQuestions: 7, opponentId: fakeID) {
             if let handler = completionHandler {
                 handler($0)
@@ -417,20 +342,40 @@ class NetworkClient {
     }
     
     /**
-    GET api/games/results
+    GET api/games/\(gameId)/results
     */
-    func getResultForGame(gameId:Int, completionHandler:(Void -> Void)!){
-        let url = "\(THGameAPIBaseURL)/results"
+    typealias THGameResultsTuple = (challengerResult:GameResult?, opponentResult:GameResult?)
+    func getResultForGame(gameId:Int, completionHandler:(THGameResultsTuple -> ())!){
+        let url = "\(THGameAPIBaseURL)/\(gameId)/results"
         configureCompulsoryHeaders()
         debugPrintln("Fetching results for game \(gameId)...")
-        
+        weak var wself = self
         let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
             _, response, content, error in
+            var sself = wself!
             if error != nil {
                 debugPrintln(error)
             }
             
-            
+            if let resultsDTO = content as? [String : AnyObject] {
+                
+                var challengerResult:GameResult?
+                if let challengerResultDTO: AnyObject = resultsDTO["challenger"] {
+                    debugPrintln("Parsing game initiator result..")
+                    let dto = challengerResultDTO as [String : AnyObject]
+                    challengerResult = GameResult(gameId:gameId, resultDTO: dto)
+                }
+                var opponentResult:GameResult?
+                if let opponentResultDTO: AnyObject = resultsDTO["opponent"] {
+                    debugPrintln("Parsing game opponent result..")
+                    let dto = opponentResultDTO as [String : AnyObject]
+                    opponentResult = GameResult(gameId:gameId, resultDTO: dto)
+                }
+                
+                if let c = completionHandler{
+                    c((challengerResult:challengerResult, opponentResult:opponentResult))
+                }
+            }
         }
         debugPrintln(r)
     }

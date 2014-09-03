@@ -29,6 +29,7 @@
 		6D2057E91988BCE000570042 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2057E81988BCE000570042 /* Extension.swift */; };
 		6D2DD2FD1990E16400B8CBA4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2DD2FC1990E16400B8CBA4 /* LoginViewController.swift */; };
 		6D2DD3011990E2A800B8CBA4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2DD3001990E2A800B8CBA4 /* HomeViewController.swift */; };
+		6D49238619B6BC43004CC238 /* ResultsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D49238519B6BC43004CC238 /* ResultsHeaderView.xib */; };
 		6D562F6219A7179800147F7D /* WinLoseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D562F6119A7179800147F7D /* WinLoseViewController.swift */; };
 		6D562F6419A71A7100147F7D /* Quiz.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D562F6319A71A7100147F7D /* Quiz.storyboard */; };
 		6D6293DE19A749A9007A207E /* HomeTurnChallengesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6293DC19A749A9007A207E /* HomeTurnChallengesTableViewCell.swift */; };
@@ -139,6 +140,7 @@
 		6D2057E81988BCE000570042 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		6D2DD2FC1990E16400B8CBA4 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		6D2DD3001990E2A800B8CBA4 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		6D49238519B6BC43004CC238 /* ResultsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsHeaderView.xib; sourceTree = "<group>"; };
 		6D562F6119A7179800147F7D /* WinLoseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinLoseViewController.swift; sourceTree = "<group>"; };
 		6D562F6319A71A7100147F7D /* Quiz.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Quiz.storyboard; sourceTree = "<group>"; };
 		6D6293DC19A749A9007A207E /* HomeTurnChallengesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTurnChallengesTableViewCell.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			children = (
 				6D14822519B5B44000856754 /* QuestionResultTableViewCell.swift */,
 				6D14822619B5B44000856754 /* QuestionResultTableViewCell.xib */,
+				6D49238519B6BC43004CC238 /* ResultsHeaderView.xib */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -309,11 +312,11 @@
 		6D286D4B1989F12500D179F8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6D14822419B5B3D700856754 /* Results */,
 				6DF2E5DC199B35B7009D3C26 /* Designable */,
 				6D7565BE19A8A20000889307 /* Friends */,
 				6D7565BF19A8A22400889307 /* Home */,
 				6D7565BB19A8A1CB00889307 /* Quiz */,
+				6D14822419B5B3D700856754 /* Results */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DB3980C199DCEE50069DDD4 /* ProximaNova-Light.ttf in Resources */,
+				6D49238619B6BC43004CC238 /* ResultsHeaderView.xib in Resources */,
 				6DB3980D199DCEE50069DDD4 /* ProximaNova-Semibold.ttf in Resources */,
 				6DC42C7619AD917200A4A44C /* QuestionViewWithAccessoryImage.xib in Resources */,
 				6DB39807199DC9630069DDD4 /* ProximaNova-Regular.ttf in Resources */,

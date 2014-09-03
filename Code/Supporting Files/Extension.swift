@@ -289,6 +289,10 @@ extension String {
         return CGFloat(self.floatValue)
     }
     
+    var intValue: Int {
+        return (self as NSString).integerValue
+    }
+    
     var length: Int {
         return self.utf16Count
     }
