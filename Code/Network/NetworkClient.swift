@@ -154,8 +154,8 @@ class NetworkClient {
             var fbFrnds: [THUserFriend] = []
             var thFrnds: [THUserFriend] = []
             
-            fbFrnds = friends.filter({ $0.userID == 0 })
-            thFrnds = friends.filter({ $0.userID != 0 })
+            fbFrnds = friends.filter() { $0.userID == 0 }
+            thFrnds = friends.filter() { $0.userID != 0 }
             
             debugPrintln("Successfully fetched \(friends.count) friend(s).")
             completionHandler((fbFrnds, thFrnds))
@@ -218,7 +218,7 @@ class NetworkClient {
                     debugPrintln("User has no open challenges.")
                     completionHandler([])
                 } else {
-                    debugPrintln("Parsing \(openChallengesDTOs.count) objects as open challenges...")
+//                    debugPrintln("Parsing \(openChallengesDTOs.count) objects as open challenges...")
                     var numberCompleted = 0
                     var total = openChallengesDTOs.count
                     var openChallenges: [Game] = []
@@ -226,6 +226,7 @@ class NetworkClient {
                     let fetchUserHandler: () -> () = {
                         numberCompleted++
                         if numberCompleted == total {
+                            debugPrintln("Successfully fetched \(total) open challenge(s).")
                             if let handler = completionHandler {
                                 handler(openChallenges)
                             }
@@ -240,7 +241,7 @@ class NetworkClient {
                             fetchUserHandler()
                         }
                     }
-                    debugPrintln("Successfully fetched \(openChallenges.count) open challenge(s).")
+                    
                 }
             }
         }
@@ -268,7 +269,7 @@ class NetworkClient {
                     debugPrintln("User has no taken challenges.")
                     completionHandler([])
                 } else {
-                    debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
+//                    debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
                     var numberCompleted = 0
                     var total = takenChallengesDTOs.count
                     var takenChallenges: [Game] = []
@@ -276,6 +277,7 @@ class NetworkClient {
                     let fetchUserHandler: () -> () = {
                         numberCompleted++
                         if numberCompleted == total {
+                            debugPrintln("Successfully fetched \(total) taken challenge(s).")
                             if let handler = completionHandler {
                                 handler(takenChallenges)
                             }
@@ -298,7 +300,7 @@ class NetworkClient {
                             fetchUserHandler()
                         }
                     }
-                    debugPrintln("Successfully fetched \(takenChallenges.count) taken challenge(s).")
+                    
                     
                     //                    completionHandler([])
                 }

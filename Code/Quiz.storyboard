@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="92o-ux-CMP">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -597,6 +596,7 @@
                         <outlet property="opponentDisplayNameLabel" destination="P0J-Cr-rXr" id="Qw3-t6-C9P"/>
                         <outlet property="opponentLevelLabel" destination="mod-cV-FX8" id="fvh-Ta-YbD"/>
                         <outlet property="opponentRankLabel" destination="F5H-dG-yOT" id="bFp-38-yLh"/>
+                        <outlet property="opponentWaitingImageView" destination="udk-N5-h6C" id="9sD-cu-VRF"/>
                         <outlet property="selfAvatarView" destination="Uqh-2f-4I0" id="IaD-fq-I6P"/>
                         <outlet property="selfDispNameLabel" destination="U7g-Jb-zIb" id="2s8-rS-zWT"/>
                         <outlet property="selfLevelLabel" destination="a5F-Xh-woF" id="e3l-jA-dro"/>

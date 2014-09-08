@@ -136,16 +136,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         NetworkClient.sharedClient.fetchOpenChallenges() {
             var sself = wself!
             sself.openChallenges = $0
-            println("Fetched \($0.count) open challenges.")
-            sself.openChallenges.sort({ $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate })
+           
+            sself.openChallenges.sort() {
+                $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
+            }
             completionHandler()
         }
         
         NetworkClient.sharedClient.fetchTakenChallenges() {
             var sself = wself!
             sself.takenChallenges = $0
-            sself.takenChallenges.sort({ $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate })
-            println("Fetched \($0.count) taken challenges")
+            sself.takenChallenges.sort() {
+                $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
+            }
             completionHandler()
         }
     }
@@ -287,7 +290,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         headerView.addSubview(leftLabelView)
         
         var rightLabelView = UILabel(frame: CGRectMake(178, 4, 100, 21))
-        rightLabelView.text = "\(numberOfGames) games"
+        rightLabelView.text = numberOfGames == 1 ? "1 game" : "\(numberOfGames) games"
         rightLabelView.textAlignment = .Right
         rightLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
         rightLabelView.textColor = UIColor.whiteColor()

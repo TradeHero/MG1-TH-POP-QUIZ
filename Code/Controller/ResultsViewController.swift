@@ -26,6 +26,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet private weak var opponentDisplayNameLabel: UILabel!
     @IBOutlet private weak var opponentRankLabel: UILabel!
     @IBOutlet private weak var opponentLevelLabel: UILabel!
+    @IBOutlet private weak var opponentWaitingImageView: UIImageView!
     
     @IBOutlet weak var nextOrRematchButton: UIButton!
     private var game: Game!
@@ -92,6 +93,11 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private func configureUI() {
         selfDispNameLabel.text = self.player.displayName
+        if game.isGameCompletedByBothPlayer {
+            opponentWaitingImageView.alpha = 0
+        } else {
+             opponentWaitingImageView.alpha = 1
+        }
         weak var wself = self
         NetworkClient.fetchImageFromURLString(player.pictureURL, progressHandler: nil) {
             (image, error) in

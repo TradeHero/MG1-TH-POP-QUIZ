@@ -59,7 +59,6 @@ class WinLoseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        animateStars()
         
         // Do any additional setup after loading the view.
     }
@@ -72,6 +71,7 @@ class WinLoseViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.hideNavigationBar()
+        animateStars()
     }
     
     
@@ -182,15 +182,15 @@ class WinLoseViewController: UIViewController {
         //        smallBoxRankLabel = opponentUser.rank
         //        smallBoxLevelLabel.text = opponentUser.level
         smallBoxScoreLabel.text = "\(opponentScore)"
-        NetworkClient.fetchImageFromURLString(selfUser.pictureURL, progressHandler: nil, completionHandler: {
+        NetworkClient.fetchImageFromURLString(selfUser.pictureURL, progressHandler: nil) {
             (image, error) in
             self.largeBoxAvatarView.image = image
-        })
+        }
         
-        NetworkClient.fetchImageFromURLString(opponentUser.pictureURL, progressHandler: nil, completionHandler: {
+        NetworkClient.fetchImageFromURLString(opponentUser.pictureURL, progressHandler: nil) {
             (image, error) in
             self.smallBoxAvatarView.image = image
-        })
+        }
 
     }
 }
