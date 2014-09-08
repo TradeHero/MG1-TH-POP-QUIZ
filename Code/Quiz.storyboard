@@ -430,8 +430,8 @@
                         <outletCollection property="optionGroup" destination="rOZ-UN-2s9" collectionClass="NSMutableArray" id="eGP-kt-HVx"/>
                         <outletCollection property="optionGroup" destination="IqS-YH-5Vz" collectionClass="NSMutableArray" id="MyU-3l-KyL"/>
                         <outletCollection property="optionGroup" destination="OgK-m2-H6g" collectionClass="NSMutableArray" id="R7H-8L-vZu"/>
-                        <segue destination="gUA-UG-Nbm" kind="push" identifier="PartialQuizResultSegue" id="42N-oZ-ona"/>
-                        <segue destination="aGt-3J-cJ8" kind="push" identifier="WinLoseSegue" id="qCT-oq-Uix"/>
+                        <segue destination="gUA-UG-Nbm" kind="custom" identifier="PartialQuizResultSegue" customClass="FadeInSegue" customModule="TH_PopQuiz" id="42N-oZ-ona"/>
+                        <segue destination="aGt-3J-cJ8" kind="custom" identifier="QuizWinLoseSegue" customClass="FadeInSegue" customModule="TH_PopQuiz" id="qCT-oq-Uix"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZEo-Di-ARs" sceneMemberID="firstResponder"/>
@@ -502,21 +502,21 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ryne Cheow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U7g-Jb-zIb">
-                                        <rect key="frame" x="47" y="10" width="75" height="12"/>
+                                        <rect key="frame" x="47" y="6" width="75" height="12"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="9"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="10"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Knight" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SdW-cY-RfF">
-                                        <rect key="frame" x="47" y="23" width="75" height="12"/>
+                                        <rect key="frame" x="47" y="19" width="75" height="12"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="8"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a5F-Xh-woF">
-                                        <rect key="frame" x="47" y="32" width="50" height="10"/>
+                                        <rect key="frame" x="47" y="28" width="50" height="10"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="8"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -534,21 +534,21 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mary Poppins" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P0J-Cr-rXr">
-                                        <rect key="frame" x="47" y="10" width="75" height="13"/>
+                                        <rect key="frame" x="47" y="6" width="75" height="13"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="9"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="10"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OldSchool" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="F5H-dG-yOT">
-                                        <rect key="frame" x="47" y="23" width="75" height="12"/>
+                                        <rect key="frame" x="47" y="19" width="75" height="12"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="8"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mod-cV-FX8">
-                                        <rect key="frame" x="47" y="32" width="50" height="10"/>
+                                        <rect key="frame" x="47" y="28" width="50" height="10"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="8"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -568,6 +568,10 @@
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="EmptyAvatar"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WaitingStamp" id="udk-N5-h6C">
+                                        <rect key="frame" x="47" y="39" width="48" height="13"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -588,6 +592,7 @@
                     <connections>
                         <outlet property="categoryLogoImageView" destination="Oje-KC-r3x" id="Tge-Ro-AEa"/>
                         <outlet property="categoryNameLabel" destination="iON-4U-eTO" id="fXS-xM-29w"/>
+                        <outlet property="nextOrRematchButton" destination="ATS-r2-pNU" id="pdW-eG-Rs3"/>
                         <outlet property="opponentAvatarView" destination="I9o-sk-m8i" id="fQ0-Lx-KrF"/>
                         <outlet property="opponentDisplayNameLabel" destination="P0J-Cr-rXr" id="Qw3-t6-C9P"/>
                         <outlet property="opponentLevelLabel" destination="mod-cV-FX8" id="fvh-Ta-YbD"/>
@@ -861,6 +866,7 @@
         <image name="QuizViewBackground" width="320" height="568"/>
         <image name="RedCategoryBackground" width="640" height="581"/>
         <image name="RemoveOptionsButtonBackground" width="304" height="46"/>
+        <image name="WaitingStamp" width="93" height="26"/>
         <image name="WinBoxBackground" width="455" height="208"/>
         <image name="WinSceneBackground" width="640" height="1136"/>
         <image name="WinSceneLightRay" width="640" height="327"/>
@@ -876,6 +882,6 @@
         </simulatedScreenMetrics>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Nq6-Kd-3IX"/>
+        <segue reference="42N-oZ-ona"/>
     </inferredMetricsTieBreakers>
 </document>

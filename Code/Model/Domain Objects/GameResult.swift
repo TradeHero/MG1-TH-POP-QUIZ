@@ -18,6 +18,8 @@ final class GameResult {
     var score: Int!
     var details: String!
     var extraDetails: String!
+    var hintsUsed: Int!
+    var highestCombo: Int!
     
     lazy var rawScore: Int = {
         var rScore = 0

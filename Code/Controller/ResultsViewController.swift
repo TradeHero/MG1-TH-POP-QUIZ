@@ -27,6 +27,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet private weak var opponentRankLabel: UILabel!
     @IBOutlet private weak var opponentLevelLabel: UILabel!
     
+    @IBOutlet weak var nextOrRematchButton: UIButton!
     private var game: Game!
     
     private var player: THUser!
@@ -38,7 +39,13 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if game.isGameCompletedByBothPlayer {
+            nextOrRematchButton.setTitle("Rematch", forState: .Normal)
+        } else {
+            nextOrRematchButton.setTitle("Home", forState: .Normal)
+        }
         self.tableView.registerNib(UINib(nibName: "QuestionResultTableViewCell", bundle: nil), forCellReuseIdentifier: kTHQuestionResultTableViewCellIdentifier)
+        self.tableView.registerNib(UINib(nibName: "GameResultDetailTableViewCell", bundle: nil), forCellReuseIdentifier: kTHGameResultDetailTableViewCellIdentifier)
         self.loadResults()
         self.configureUI()
     }
@@ -55,7 +62,27 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     @IBAction func rematchAction() {
-        self
+        weak var weakSelf = self
+        
+        if game.isGameCompletedByBothPlayer {
+            var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.labelText = "Re-matching..."
+            hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
+            NetworkClient.sharedClient.createChallenge(numberOfQuestions: 7, opponentId: opponent.userId) {
+                var strongSelf = weakSelf!
+                if let g = $0 {
+                    hud.mode = MBProgressHUDModeText
+                    hud.detailsLabelText = "Creating game with user.."
+                    
+                    let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                    vc.bindGame($0)
+                    strongSelf.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        } else {
+            self.navigationController?.showNavigationBar()
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }
     }
     
     func bindGame(game:Game){
@@ -147,6 +174,30 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.layoutIfNeeded()
             cell.delegate = self
             return cell
+        case 1:
+            let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
+            cell.attribute = "Hints Used"
+            cell.selfAttributeDetail = "\(2)"
+            cell.labelTintColor = UIColor(hex: 0xBF0221)
+            
+            
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(1)" : "--"
+            
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
+            cell.attribute = "Highest Combo"
+            cell.selfAttributeDetail = "x\(5)"
+            
+            cell.labelTintColor = UIColor(hex: 0x457B1D)
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "x\(1)" : "--"
+            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
+            cell.attribute = "Total Score"
+            cell.selfAttributeDetail = "\(2)"
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(1)" : "--"
+            return cell
         default:
             return UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")
         }
@@ -154,7 +205,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0:
+        case 0, 1, 2, 3:
             return 42
         default:
             return 0
@@ -165,6 +216,8 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         switch section {
         case 0:
             return self.game.questionSet.count
+        case 1, 2, 3:
+            return 1
         default:
             return 0
         }
@@ -180,7 +233,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 4
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

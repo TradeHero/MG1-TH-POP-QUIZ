@@ -13,7 +13,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet private weak var avatarView: AvatarRoundedView!
     @IBOutlet private weak var fullNameView: UILabel!
     @IBOutlet private weak var rankView: UILabel!
-    
+    private var refreshControl: UIRefreshControl!
     private var openChallenges: [Game] = []
     private var takenChallenges: [Game] = []
     
@@ -33,7 +33,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.loadChallenges()
+        refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+        self.tableView.addSubview(refreshControl)
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         setupSubviews()
         self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
@@ -44,7 +48,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.showNavigationBar()
-        self.loadChallenges()
     }
     
     override func didReceiveMemoryWarning() {
@@ -98,17 +101,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         //        self.rankView.text =
     }
     
-    private func loadChallenges(){
+    private func loadChallenges(loadCompleteHandler:(()->())! = nil){
         var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.removeFromSuperViewOnHide = true
-        hud.minShowTime = 0
-        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
+        if loadCompleteHandler == nil {
+            hud.removeFromSuperViewOnHide = true
+            hud.minShowTime = 0
+            hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
+            self.openChallenges.removeAll(keepCapacity: true)
+            self.takenChallenges.removeAll(keepCapacity: true)
+            self.tableView.reloadData()
+        } else {
+            hud.hide(false)
+        }
         
         var numberLoaded = 0
-        self.openChallenges.removeAll(keepCapacity: true)
-        self.takenChallenges.removeAll(keepCapacity: true)
-        self.tableView.reloadData()
+        
         hud.labelText = "Loading challenges.."
+        
         weak var wself = self
         let completionHandler: () -> Void = {
             numberLoaded++
@@ -118,6 +127,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 hud.hide(true)
                 sself.tableView.reloadData()
                 sself.tableView.forceUpdateTable()
+            }
+            if loadCompleteHandler != nil {
+                loadCompleteHandler()
             }
         }
         
@@ -212,6 +224,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         weak var weakSelf = self
         NetworkClient.sharedClient.fetchGameByGameId(game.gameID) {
             var strongSelf = weakSelf!
+            
+            var i = 0
+            for game in strongSelf.openChallenges {
+                if $0.gameID == game.gameID  {
+                    strongSelf.openChallenges.removeAtIndex(i)
+                    strongSelf.tableView.reloadData()
+                    break
+                }
+                i++
+            }
+            
             if let g = $0 {
                 hud.mode = MBProgressHUDModeText
                 hud.detailsLabelText = "Creating game with user.."
@@ -270,6 +293,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         rightLabelView.textColor = UIColor.whiteColor()
         headerView.addSubview(rightLabelView)
         return headerView
+    }
+    
+    func refresh(sender: UIRefreshControl){
+        self.loadChallenges() {
+            self.refreshControl.endRefreshing()
+        }
+        
     }
     
 }

@@ -29,7 +29,6 @@
 		6DD2317D19B8204900B5D05E /* QuestionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2313619B8204900B5D05E /* QuestionResult.swift */; };
 		6DD2317E19B8204900B5D05E /* THUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2313719B8204900B5D05E /* THUser.swift */; };
 		6DD2317F19B8204900B5D05E /* THUserFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2313819B8204900B5D05E /* THUserFriend.swift */; };
-		6DD2318019B8204900B5D05E /* GPUImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2313919B8204900B5D05E /* GPUImageProcessor.swift */; };
 		6DD2318119B8204900B5D05E /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2313B19B8204900B5D05E /* NetworkClient.swift */; };
 		6DD2318219B8204900B5D05E /* ObjCHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2313E19B8204900B5D05E /* ObjCHelpers.m */; };
 		6DD2318319B8204900B5D05E /* Quiz.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2313F19B8204900B5D05E /* Quiz.storyboard */; };
@@ -74,6 +73,8 @@
 		6DD231C619B8224C00B5D05E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231C019B8224C00B5D05E /* libTestFlight.a */; };
 		6DD231CD19B825BA00B5D05E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231CC19B825BA00B5D05E /* StoreKit.framework */; };
 		6DD231CF19B825BE00B5D05E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231CE19B825BE00B5D05E /* GameKit.framework */; };
+		6DF8BD5F19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */; };
+		6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,7 +147,6 @@
 		6DD2313619B8204900B5D05E /* QuestionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionResult.swift; sourceTree = "<group>"; };
 		6DD2313719B8204900B5D05E /* THUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THUser.swift; sourceTree = "<group>"; };
 		6DD2313819B8204900B5D05E /* THUserFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THUserFriend.swift; sourceTree = "<group>"; };
-		6DD2313919B8204900B5D05E /* GPUImageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPUImageProcessor.swift; sourceTree = "<group>"; };
 		6DD2313B19B8204900B5D05E /* NetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		6DD2313D19B8204900B5D05E /* ObjCHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCHelpers.h; sourceTree = "<group>"; };
 		6DD2313E19B8204900B5D05E /* ObjCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCHelpers.m; sourceTree = "<group>"; };
@@ -198,6 +198,8 @@
 		6DD231C519B8224C00B5D05E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		6DD231CC19B825BA00B5D05E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6DD231CE19B825BE00B5D05E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultDetailTableViewCell.swift; sourceTree = "<group>"; };
+		6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameResultDetailTableViewCell.xib; sourceTree = "<group>"; };
 		7C2C12E80B2143C290FCDB20 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		895489D99E484E478D8E8DE2 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -309,7 +311,6 @@
 			isa = PBXGroup;
 			children = (
 				6DD2312F19B8204900B5D05E /* Domain Objects */,
-				6DD2313919B8204900B5D05E /* GPUImageProcessor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -447,6 +448,8 @@
 				6DD2316919B8204900B5D05E /* QuestionResultTableViewCell.swift */,
 				6DD2316A19B8204900B5D05E /* QuestionResultTableViewCell.xib */,
 				6DD2316B19B8204900B5D05E /* ResultsHeaderView.xib */,
+				6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */,
+				6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				6DD231A519B8204900B5D05E /* ResultsHeaderView.xib in Resources */,
 				6DD231A219B8204900B5D05E /* QuestionViewWithImage.xib in Resources */,
 				6DD2319E19B8204900B5D05E /* QuestionViewPlain.xib in Resources */,
+				6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */,
 				6DD2319519B8204900B5D05E /* QuickChallengeTableViewCell.xib in Resources */,
 				6DD2319319B8204900B5D05E /* FriendsChallengeCellTableViewCell.xib in Resources */,
 				6DD2319719B8204900B5D05E /* HomeTurnChallengesTableViewCell.xib in Resources */,
@@ -716,6 +720,7 @@
 				6DD2317A19B8204900B5D05E /* Option.swift in Sources */,
 				6DD2318119B8204900B5D05E /* NetworkClient.swift in Sources */,
 				6DD231A119B8204900B5D05E /* QuestionViewWithImage.swift in Sources */,
+				6DF8BD5F19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift in Sources */,
 				6DD2316E19B8204900B5D05E /* FriendsViewController.swift in Sources */,
 				6DD2318619B8204900B5D05E /* Extension.swift in Sources */,
 				6DD2319F19B8204900B5D05E /* QuestionViewWithAccessoryImage.swift in Sources */,
@@ -725,7 +730,6 @@
 				6DD2317E19B8204900B5D05E /* THUser.swift in Sources */,
 				6DD2317819B8204900B5D05E /* GamePortfolio.swift in Sources */,
 				6DD2319D19B8204900B5D05E /* QuestionViewPlain.swift in Sources */,
-				6DD2318019B8204900B5D05E /* GPUImageProcessor.swift in Sources */,
 				6DD2318D19B8204900B5D05E /* AvatarRoundedView.swift in Sources */,
 				6DD2316C19B8204900B5D05E /* AppDelegate.swift in Sources */,
 				6DD2318E19B8204900B5D05E /* DesignableButton.swift in Sources */,

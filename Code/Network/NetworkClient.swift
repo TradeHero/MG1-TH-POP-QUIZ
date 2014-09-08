@@ -34,8 +34,7 @@ class NetworkClient {
     var credentials: String!
     
     /// default JSON encoding
-    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON
-    //    private let JSONPrettyPrinted = Alamofire.ParameterEncoding.JSON(nil)
+    private let JSONEncoding = Alamofire.ParameterEncoding.JSON
     
     // MARK:- Methods
     
@@ -66,7 +65,7 @@ class NetworkClient {
         let r = Alamofire.request(.POST,
             THServerAPIBaseURL + "/login",
             parameters: param,
-            encoding: JSONPrettyPrinted)
+            encoding: JSONEncoding)
             .responseJSON({
                 _, response, content, error in
                 if let responseError = error {
@@ -102,7 +101,7 @@ class NetworkClient {
         
         weak var wself = self
         Alamofire.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
-            ], encoding: JSONPrettyPrinted).responseJSON({
+            ], encoding: JSONEncoding).responseJSON({
                 _, response, content, error in
                 var sself = wself!
                 if let responseError = error {
@@ -136,7 +135,7 @@ class NetworkClient {
         configureCompulsoryHeaders()
         debugPrintln("Fetching Facebook friends for user \(userId)...")
         
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -173,7 +172,7 @@ class NetworkClient {
         debugPrintln("Fetching game with game ID: \(gameId)...")
         
         
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
             _, response, content, error in
             if error != nil {
                 debugPrintln(error)
@@ -207,7 +206,7 @@ class NetworkClient {
         configureCompulsoryHeaders()
         debugPrintln("Fetching all open challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -232,6 +231,7 @@ class NetworkClient {
                             }
                         }
                     }
+                    
                     for openChallengeDTO in openChallengesDTOs as [[String: AnyObject]] {
                         let game = Game(compactGameDTO: openChallengeDTO)
                         
@@ -256,7 +256,7 @@ class NetworkClient {
         configureCompulsoryHeaders()
         debugPrintln("Fetching all taken challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -321,18 +321,18 @@ class NetworkClient {
     /**
     POST api/games/postresults
     */
-    func postGameResults(game:Game, highestCombo:UInt, currentScore:Int, questionResults:[QuestionResult], completionHandler:(Game -> ())!){
+    func postGameResults(game:Game, highestCombo:UInt, noOfHintsUsed hints: UInt,currentScore:Int, questionResults:[QuestionResult], completionHandler:(Game -> ())!){
         let url = "\(THGameAPIBaseURL)/postResults"
         configureCompulsoryHeaders()
         debugPrintln("Posting results for game \(game.gameID)...")
         var resultSet:[[String:AnyObject]] = []
         for result in questionResults {
-            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "combo": highestCombo, "time" : result.timeTaken, "rawScore": result.rawScore]
+            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "combo": highestCombo, "time" : result.timeTaken, "rawScore": result.rawScore, "noOfHintsUsed": hints]
             resultSet.append(resultData)
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
         weak var wself = self
-        let r = Alamofire.request(.POST, url, parameters: param, encoding: JSONPrettyPrinted).responseJSON() {
+        let r = Alamofire.request(.POST, url, parameters: param, encoding: JSONEncoding).responseJSON() {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -357,7 +357,7 @@ class NetworkClient {
         configureCompulsoryHeaders()
         debugPrintln("Fetching results for game \(gameId)...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONPrettyPrinted).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -393,7 +393,6 @@ class NetworkClient {
     func logout() {
         self.authenticatedUser = nil
         self.removeCredentials()
-        //        TMCache.sharedCache().removeAllObjects()
         EGOCache.globalCache().clearCache()
     }
     
@@ -417,7 +416,7 @@ class NetworkClient {
             }
         }
         
-        Alamofire.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONPrettyPrinted).responseJSON({
+        Alamofire.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding).responseJSON() {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -428,7 +427,7 @@ class NetworkClient {
                 EGOCache.globalCache().setObject(user, forKey: userCacheKey)
                 completionHandler(user)
             }
-        })
+        }
     }
     
     

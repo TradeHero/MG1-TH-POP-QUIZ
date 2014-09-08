@@ -53,6 +53,22 @@ extension Array
         let index = Int(arc4random_uniform(UInt32(self.count)))
         return self[index]
     }
+    
+    mutating func removeObject<U: Equatable>(object: U) {
+        var index: Int?
+        for (idx, objectToCompare) in enumerate(self) {
+            if let to = objectToCompare as? U {
+                if object == to {
+                    index = idx
+                }
+            }
+        }
+        
+        if let i = index {
+            self.removeAtIndex(i)
+        }
+    }
+    
 }
 
 extension Double {

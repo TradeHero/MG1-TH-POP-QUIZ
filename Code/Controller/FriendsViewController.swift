@@ -29,6 +29,8 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     //MARK:- Init
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
+        
     }
     
     override func viewDidLoad() {
@@ -38,6 +40,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         self.searchBar.placeholder = "Search friends"
         self.searchBar.text = ""
         self.friendsTableView.tableHeaderView = self.searchBar
+        
     }
     
     override func viewDidAppear(animated: Bool) {

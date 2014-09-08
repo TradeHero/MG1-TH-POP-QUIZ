@@ -43,15 +43,12 @@ class LogoCanvasView: UIView {
         return LogoCanvasObfuscationType.SwirlEffect
         }()
     
-    var gpuProcessor: GPUImageProcessor = GPUImageProcessor()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.imageView = UIImageView(frame: CGRectMake(10, 10, 240, 110))
         self.addSubview(self.imageView)
         self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
-        self.gpuProcessor.swirl = true
-        self.gpuProcessor.grayscale = true
         self.contentMode = UIViewContentMode.ScaleAspectFit
         self.backgroundColor = UIColor.whiteColor()
     }
@@ -75,10 +72,6 @@ class LogoCanvasView: UIView {
                 self.imageView.image = rasterizedImage
             }
         }
-    }
-    
-    func applyFilters() {
-        self.imageView.image = gpuProcessor.imageWithFilterAppliedWithImage(rasterizedImage)
     }
     
     func prepareFirstObfuscation(){

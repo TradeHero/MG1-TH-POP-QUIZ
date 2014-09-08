@@ -375,19 +375,22 @@ class QuizViewController: UIViewController {
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
         weak var wself = self
-        NetworkClient.sharedClient.postGameResults(self.game, highestCombo: highestCombo, currentScore: currentTurnScore, questionResults: results) {
+        
+        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.labelText = "Calculating results..."
+        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
+        hud.removeFromSuperViewOnHide = true
+        NetworkClient.sharedClient.postGameResults(self.game, highestCombo: highestCombo, noOfHintsUsed: self.hintUsed, currentScore: currentTurnScore, questionResults: results) {
             var sself = wself!
+            hud.hide(true)
+            sself.game = $0
             if $0.isGameCompletedByBothPlayer {
-                let vc = sself.storyboard?.instantiateViewControllerWithIdentifier("WinLoseViewController") as WinLoseViewController
-                vc.bindResult($0, selfUser: sself.player, opponentUser: sself.opponent)
-                sself.navigationController?.pushViewController(vc, animated: true)
+                self.performSegueWithIdentifier("QuizWinLoseSegue", sender: nil)
                 return
             }
             
             if $0.isGameCompletedByChallenger {
-                let vc = sself.storyboard?.instantiateViewControllerWithIdentifier("ResultsViewController") as ResultsViewController
-                vc.bindGame($0)
-                sself.navigationController?.pushViewController(vc, animated: true)
+                self.performSegueWithIdentifier("PartialQuizResultSegue", sender: nil)
                 return
             }
         }
@@ -569,7 +572,7 @@ class QuizViewController: UIViewController {
     }
     
     private func produceResultForCurrentQuestion(isCorrect:Bool, score:Int){
-        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: CGFloat(10 - current_timeLeft), correct: isCorrect, score: score))
+        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: 10 - current_timeLeft, correct: isCorrect, score: score))
     }
     
     func bindGameAndUsers(game:Game, player:THUser, opponent:THUser){
@@ -589,5 +592,15 @@ class QuizViewController: UIViewController {
         
         self.player = player
         self.opponent = opponent
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "QuizWinLoseSegue" {
+            let vc = segue.destinationViewController as WinLoseViewController
+            vc.bindResult(self.game, selfUser: self.player, opponentUser: self.opponent)
+        } else if segue.identifier == "PartialQuizResultSegue" {
+            let vc = segue.destinationViewController as ResultsViewController
+            vc.bindGame(self.game)
+        }
     }
 }
