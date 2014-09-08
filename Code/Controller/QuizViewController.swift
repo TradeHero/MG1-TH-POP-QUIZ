@@ -161,7 +161,6 @@ class QuizViewController: UIViewController {
             incorrectOptions[0].hideAndDisable(true)
             incorrectOptions[1].hideAndDisable(true)
             UIView.animateWithDuration(0.5) {
-                () -> Void in
                 self.removeOptionsButton.alpha = 0.5
             }
             
@@ -376,10 +375,8 @@ class QuizViewController: UIViewController {
         let results = self.questionResults
         weak var wself = self
         
-        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
         hud.labelText = "Calculating results..."
-        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
-        hud.removeFromSuperViewOnHide = true
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: highestCombo, noOfHintsUsed: self.hintUsed, currentScore: currentTurnScore, questionResults: results) {
             var sself = wself!
             hud.hide(true)

@@ -59,7 +59,7 @@ class LogoCanvasView: UIView {
     }
     
     func reset(){
-        UIView.transitionWithView(self, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {() -> Void in
+        UIView.transitionWithView(self, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             self.imageView.image = self.rasterizedImage
             }, completion: nil)
     }

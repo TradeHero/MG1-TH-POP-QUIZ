@@ -97,7 +97,7 @@ final class Game {
         self.questionSet = nil
     }
     
-    func fetchUsers(completionHandler:()->Void) {
+    func fetchUsers(completionHandler:()->()) {
         weak var wself = self
         NetworkClient.sharedClient.fetchUser(opponentPlayerID, force: true) {
             var sself = wself!
@@ -115,7 +115,7 @@ final class Game {
         }
     }
     
-    func fetchResults(completionHandler:()->Void){
+    func fetchResults(completionHandler:()->()){
 //        weak var wself = self
         
         NetworkClient.sharedClient.getResultForGame(self.gameID) {

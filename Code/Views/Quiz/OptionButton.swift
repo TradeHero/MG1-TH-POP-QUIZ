@@ -113,7 +113,7 @@ class OptionButton: DesignableButton {
             self.wobbling = true
             self.transform = CGAffineTransformRotate(CGAffineTransformIdentity,radians(-3))
             
-            UIView.animateWithDuration(0.1, delay: 0, options: .AllowUserInteraction | .Repeat | .Autoreverse, animations: {() -> Void in
+            UIView.animateWithDuration(0.1, delay: 0, options: .AllowUserInteraction | .Repeat | .Autoreverse, animations: {
                 self.transform = CGAffineTransformRotate(CGAffineTransformIdentity, radians(3))
                 }, completion: nil)
         }
@@ -122,7 +122,7 @@ class OptionButton: DesignableButton {
     func stopWobble() {
         if self.wobbling {
             self.wobbling = false
-            UIView.animateWithDuration(0.1, delay: 0, options: .AllowUserInteraction | .BeginFromCurrentState | .CurveLinear, animations: {() -> Void in
+            UIView.animateWithDuration(0.1, delay: 0, options: .AllowUserInteraction | .BeginFromCurrentState | .CurveLinear, animations: {
                 self.transform = CGAffineTransformIdentity
                 }, completion: nil)
         }
@@ -281,7 +281,7 @@ class OptionButton: DesignableButton {
         }
         
         if animated {
-            UIView.animateWithDuration(0.5) {()->Void in
+            UIView.animateWithDuration(0.5) {
                 self.alpha = 0
             }
         } else {
@@ -295,7 +295,7 @@ class OptionButton: DesignableButton {
             return
         }
         if animated {
-            UIView.animateWithDuration(0.5) {()->Void in
+            UIView.animateWithDuration(0.5) {
                 self.alpha = 1
             }
         } else {

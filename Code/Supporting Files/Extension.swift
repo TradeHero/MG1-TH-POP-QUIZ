@@ -152,7 +152,7 @@ extension UIView {
         return false
     }
     
-    class func animateWithDuration(duration: NSTimeInterval, options: UIViewAnimationOptions, animations: () -> Void) {
+    class func animateWithDuration(duration: NSTimeInterval, options: UIViewAnimationOptions, animations: () -> ()) {
         self.animateWithDuration(duration, delay: 0, options: options, animations: animations, completion: nil)
     }
 }
@@ -347,5 +347,22 @@ extension UIViewController {
 extension UIFont {
     func ProximaNovaFont(size:CGFloat) -> UIFont {
         return UIFont(name: "ProximaNova-Regular", size: size)
+    }
+}
+
+extension MBProgressHUD {
+    class func showCustomisedHUD(view:UIView, animated: Bool) -> MBProgressHUD! {
+        var hud = self.showHUDAddedTo(view, animated: true)
+        hud.removeFromSuperViewOnHide = true
+        hud.minShowTime = 0
+        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 16)
+        hud.detailsLabelFont = UIFont(name: "AvenirNext", size: 12)
+//        hud.labelColor = UIColor.whiteColor()
+//        hud.color = UIColor(hex: 0xda0230)
+//        hud.activityIndicatorColor = UIColor.whiteColor()
+//        hud.detailsLabelColor = UIColor.whiteColor()
+        
+        hud.cornerRadius = 5.0
+        return hud
     }
 }

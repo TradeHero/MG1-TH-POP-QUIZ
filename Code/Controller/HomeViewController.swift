@@ -102,11 +102,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func loadChallenges(loadCompleteHandler:(()->())! = nil){
-        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
         if loadCompleteHandler == nil {
-            hud.removeFromSuperViewOnHide = true
-            hud.minShowTime = 0
-            hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
             self.openChallenges.removeAll(keepCapacity: true)
             self.takenChallenges.removeAll(keepCapacity: true)
             self.tableView.reloadData()
@@ -119,7 +116,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         hud.labelText = "Loading challenges.."
         
         weak var wself = self
-        let completionHandler: () -> Void = {
+        let completionHandler: () -> () = {
             numberLoaded++
             var sself = wself!
             
@@ -219,11 +216,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game) {
-        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
         let name = (cell.opponent.displayName == "" || cell.opponent.displayName == nil) ? "opponent" : cell.opponent.displayName
         hud.labelText = "Accepting \(name)'s challenge'"
-        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
-        hud.removeFromSuperViewOnHide = true
         weak var weakSelf = self
         NetworkClient.sharedClient.fetchGameByGameId(game.gameID) {
             var strongSelf = weakSelf!

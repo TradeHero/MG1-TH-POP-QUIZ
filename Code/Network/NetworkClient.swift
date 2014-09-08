@@ -131,7 +131,7 @@ class NetworkClient {
     GET api/Users/{userId}/getnewfriends?socialNetwork=FB
     */
     typealias TFBHUserFriendTuple = (fbFriends:[THUserFriend], thFriends:[THUserFriend])
-    func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (TFBHUserFriendTuple -> Void)!){
+    func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (TFBHUserFriendTuple -> ())!){
         let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
         configureCompulsoryHeaders()
         debugPrintln("Fetching Facebook friends for user \(userId)...")
@@ -201,7 +201,7 @@ class NetworkClient {
     /**
     GET api/games/open
     */
-    func fetchOpenChallenges(completionHandler: ([Game] -> Void)!){
+    func fetchOpenChallenges(completionHandler: ([Game] -> ())!){
         let url = "\(THGameAPIBaseURL)/open"
         
         configureCompulsoryHeaders()
@@ -252,7 +252,7 @@ class NetworkClient {
     /**
     GET api/games/taken
     */
-    func fetchTakenChallenges(completionHandler: ([Game] -> Void)!){
+    func fetchTakenChallenges(completionHandler: ([Game] -> ())!){
         let url = "\(THGameAPIBaseURL)/taken"
         
         configureCompulsoryHeaders()
@@ -443,14 +443,15 @@ class NetworkClient {
     /// :param: progressHandler Refer to SDWebImageDownloaderProgressBlock
     /// :param: completionHandler process image if successfully downloaded.
     ///
-    class func fetchImageFromURLString(urlString: String!, progressHandler: ((Int, Int) -> Void)?, completionHandler:(UIImage!, NSError!) -> Void) {
+    class func fetchImageFromURLString(urlString: String!, progressHandler: ((Int, Int) -> ())?, completionHandler:(UIImage!, NSError!) -> ()) {
         
         if urlString == nil {
             return
         }
         var fetchedImage: UIImage!
         
-        SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: urlString), options: .CacheMemoryOnly, progress: progressHandler) { (image, error, cacheType, finished, url) -> Void in
+        SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: urlString), options: .CacheMemoryOnly, progress: progressHandler) {
+            (image, error, cacheType, finished, url) -> () in
             if error != nil {
                 println(error)
             }

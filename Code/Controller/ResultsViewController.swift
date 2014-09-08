@@ -66,9 +66,8 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         weak var weakSelf = self
         
         if game.isGameCompletedByBothPlayer {
-            var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
             hud.labelText = "Re-matching..."
-            hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
             NetworkClient.sharedClient.createChallenge(numberOfQuestions: 7, opponentId: opponent.userId) {
                 var strongSelf = weakSelf!
                 if let g = $0 {
