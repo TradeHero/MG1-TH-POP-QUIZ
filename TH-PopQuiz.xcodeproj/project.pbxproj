@@ -64,7 +64,6 @@
 		6DD231A219B8204900B5D05E /* QuestionViewWithImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2316719B8204900B5D05E /* QuestionViewWithImage.xib */; };
 		6DD231A319B8204900B5D05E /* QuestionResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2316919B8204900B5D05E /* QuestionResultTableViewCell.swift */; };
 		6DD231A419B8204900B5D05E /* QuestionResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2316A19B8204900B5D05E /* QuestionResultTableViewCell.xib */; };
-		6DD231A519B8204900B5D05E /* ResultsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2316B19B8204900B5D05E /* ResultsHeaderView.xib */; };
 		6DD231A919B8208700B5D05E /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DD231A819B8208700B5D05E /* Home.storyboard */; };
 		6DD231B519B8219E00B5D05E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231B219B8218300B5D05E /* Alamofire.framework */; };
 		6DD231B619B8219E00B5D05E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231B219B8218300B5D05E /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -185,7 +184,6 @@
 		6DD2316719B8204900B5D05E /* QuestionViewWithImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionViewWithImage.xib; sourceTree = "<group>"; };
 		6DD2316919B8204900B5D05E /* QuestionResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionResultTableViewCell.swift; sourceTree = "<group>"; };
 		6DD2316A19B8204900B5D05E /* QuestionResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionResultTableViewCell.xib; sourceTree = "<group>"; };
-		6DD2316B19B8204900B5D05E /* ResultsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsHeaderView.xib; sourceTree = "<group>"; };
 		6DD231A819B8208700B5D05E /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		6DD231AC19B8218300B5D05E /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		6DD231BA19B821D700B5D05E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -445,11 +443,10 @@
 		6DD2316819B8204900B5D05E /* Results */ = {
 			isa = PBXGroup;
 			children = (
-				6DD2316919B8204900B5D05E /* QuestionResultTableViewCell.swift */,
-				6DD2316A19B8204900B5D05E /* QuestionResultTableViewCell.xib */,
-				6DD2316B19B8204900B5D05E /* ResultsHeaderView.xib */,
 				6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */,
 				6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */,
+				6DD2316919B8204900B5D05E /* QuestionResultTableViewCell.swift */,
+				6DD2316A19B8204900B5D05E /* QuestionResultTableViewCell.xib */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -626,7 +623,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DD231A519B8204900B5D05E /* ResultsHeaderView.xib in Resources */,
 				6DD231A219B8204900B5D05E /* QuestionViewWithImage.xib in Resources */,
 				6DD2319E19B8204900B5D05E /* QuestionViewPlain.xib in Resources */,
 				6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */,

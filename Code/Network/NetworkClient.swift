@@ -61,13 +61,14 @@ class NetworkClient {
         }
         headers["Authorization"] = "\(THAuthFacebookPrefix) \(accessToken)"
         Alamofire.Manager.sharedInstance.defaultHeaders = headers
-        
+        weak var weakSelf = self
         let r = Alamofire.request(.POST,
             THServerAPIBaseURL + "/login",
             parameters: param,
             encoding: JSONEncoding)
-            .responseJSON({
+            .responseJSON() {
                 _, response, content, error in
+                var strongSelf = weakSelf!
                 if let responseError = error {
                     println(responseError)
                     errorHandler(responseError)
@@ -81,13 +82,13 @@ class NetworkClient {
                     if let profileDTODict = profileDTOPart as? [String: AnyObject] {
                         var loginUser = THUser(profileDTO: profileDTODict)
                         println("Signed in as \(loginUser)")
-                        self.authenticatedUser = loginUser
+                        strongSelf.authenticatedUser = loginUser
                         let userInfo = ["user": loginUser]
                         NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLoginSuccessfulNotificationKey, object: self, userInfo:userInfo)
                         loginSuccessHandler(loginUser)
                     }
                 }
-            })
+        }
         
         //        debugPrintln(r)
     }
@@ -101,7 +102,7 @@ class NetworkClient {
         
         weak var wself = self
         Alamofire.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
-            ], encoding: JSONEncoding).responseJSON({
+            ], encoding: JSONEncoding).responseJSON() {
                 _, response, content, error in
                 var sself = wself!
                 if let responseError = error {
@@ -123,7 +124,7 @@ class NetworkClient {
                     }
                     
                 }
-            })
+        }
     }
     
     /**
