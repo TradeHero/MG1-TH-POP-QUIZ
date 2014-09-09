@@ -871,7 +871,7 @@
 					"$(PROJECT_DIR)/Frameworks/TestFlightSDK3",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "595e9e27-309f-4817-aa25-6fc7eafb7132";
+				PROVISIONING_PROFILE = "4c27ca5c-2fe0-479b-88ea-58c0005af526";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Code/Supporting Files/TH-PopQuiz-Bridging-Header.h";
 			};
 			name = Debug;
@@ -896,7 +896,7 @@
 					"$(PROJECT_DIR)/Frameworks/TestFlightSDK3",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "26db23d3-d04d-478d-87e1-42e0a1514da4";
+				PROVISIONING_PROFILE = "2132f5c3-5d8b-49fa-a7e4-24048a27b600";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Code/Supporting Files/TH-PopQuiz-Bridging-Header.h";
 			};
 			name = Release;
