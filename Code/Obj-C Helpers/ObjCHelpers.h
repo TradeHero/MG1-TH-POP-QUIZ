@@ -19,3 +19,19 @@
 - (void)roundCornersOnTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius;
 
 @end
+
+#define kBOUNCE_DISTANCE  4.f
+#define kWAVE_DURATION   .5f
+
+typedef NS_ENUM(NSInteger,UITableViewCellLoadWaveAnimationDirection) {
+    UITableViewCellLoadWaveAnimationDirectionLeftToRight = -1,
+    UITableViewCellLoadWaveAnimationDirectionRightToLeft = 1
+};
+
+
+@interface UITableView (Wave)
+
+- (void)reloadDataAnimateWithWave:(UITableViewCellLoadWaveAnimationDirection)animation;
+
+@end
+

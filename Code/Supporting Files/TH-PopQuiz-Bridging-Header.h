@@ -11,6 +11,7 @@
 #import <LDProgressView/LDProgressView.h>
 #import <EGOCache/EGOCache.h>
 #import "TestFlight.h"
+#import <JGProgressHUD/JGProgressHUD.h>
 
 #pragma mark - non-library
 #import "ObjCHelpers.h"

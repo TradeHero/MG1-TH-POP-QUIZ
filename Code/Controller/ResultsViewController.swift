@@ -138,7 +138,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func loadResults(){
 //        selfQuestionResults.removeAll(keepCapacity: true)
 //        oppQuestionResults.removeAll(keepCapacity: true)
-        self.tableView.reloadData()
+        self.tableView.reloadDataAnimateWithWave(.LeftToRight)
     }
     
     // MARK: - Navigation
