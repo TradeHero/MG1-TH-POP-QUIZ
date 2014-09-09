@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="jzv-90-m6Z">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--TradeHero PopQuiz-->
         <scene sceneID="reb-OH-NfV">
             <objects>
                 <viewController storyboardIdentifier="ChallengeViewController" id="mQ1-C7-5Us" customClass="HomeViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,16 +21,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vDK-mj-G2c">
-                                        <rect key="frame" x="270" y="149" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" backgroundImage="DiceIcon">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="quickGameAction:" destination="mQ1-C7-5Us" eventType="touchUpInside" id="AEZ-Uk-N7E"/>
-                                        </connections>
-                                    </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="eIl-7I-DR2">
                                         <rect key="frame" x="17" y="205" width="286" height="363"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -39,20 +30,30 @@
                                             <outlet property="delegate" destination="mQ1-C7-5Us" id="CQQ-Of-8lc"/>
                                         </connections>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tyA-dZ-ZWs">
+                                        <rect key="frame" x="167" y="146" width="135" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal" backgroundImage="ChallengeFriendButtonBackground">
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="aaP-JZ-Z0I" kind="push" identifier="FriendsViewPushSegue" id="ITW-b9-4cc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vDK-mj-G2c">
+                                        <rect key="frame" x="19" y="146" width="135" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="RandomChallengeButtonBackground">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="quickGameAction:" destination="mQ1-C7-5Us" eventType="touchUpInside" id="AEZ-Uk-N7E"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tyA-dZ-ZWs">
-                                <rect key="frame" x="35" y="143" width="218" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                <state key="normal" title="Challenge a Friend" backgroundImage="GreenLongButtonBackground">
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="aaP-JZ-Z0I" kind="push" identifier="FriendsViewPushSegue" id="ITW-b9-4cc"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" id="qTb-Ny-vYW">
                                 <rect key="frame" x="0.0" y="39" width="320" height="93"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -97,14 +98,14 @@
                                         <rect key="frame" x="90" y="14" width="203" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </view>
                         </subviews>
                     </view>
-                    <navigationItem key="navigationItem" id="boz-3P-itM">
+                    <navigationItem key="navigationItem" title="TradeHero PopQuiz" id="boz-3P-itM">
                         <barButtonItem key="leftBarButtonItem" style="done" id="zfQ-1Z-28w">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MDS-3r-QEE" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
                                 <rect key="frame" x="16" y="7" width="28" height="28"/>
@@ -156,7 +157,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HomeSceneBackground" id="Nde-2n-PtG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FriendSceneBackground" id="Nde-2n-PtG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -236,12 +237,13 @@
     <resources>
         <image name="BackButtonImage" width="21" height="34"/>
         <image name="BadgeView" width="49" height="62"/>
-        <image name="DiceIcon" width="256" height="256"/>
+        <image name="ChallengeFriendButtonBackground" width="271" height="89"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
-        <image name="GreenLongButtonBackground" width="443" height="92"/>
+        <image name="FriendSceneBackground" width="640" height="1136"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
         <image name="LogoutIcon" width="58" height="58"/>
-        <image name="ProfileHeaderBackground" width="640" height="191"/>
+        <image name="ProfileHeaderBackground" width="640" height="192"/>
+        <image name="RandomChallengeButtonBackground" width="271" height="89"/>
         <image name="SettingsIcon" width="58" height="58"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -13,6 +13,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet private weak var avatarView: AvatarRoundedView!
     @IBOutlet private weak var fullNameView: UILabel!
     @IBOutlet private weak var rankView: UILabel!
+    
     private var refreshControl: UIRefreshControl!
     private var openChallenges: [Game] = []
     private var takenChallenges: [Game] = []
@@ -41,7 +42,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         setupSubviews()
         self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
-        self.navigationItem.title = "Home"
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
     }
     
@@ -164,7 +164,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 55
+        return 50
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -213,7 +213,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game) {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
-        let name = (cell.opponent.displayName == "" || cell.opponent.displayName == nil) ? "opponent" : cell.player.displayName
+        let name = cell.player.displayName == "" || cell.player.displayName == nil ? "opponent" : cell.player.displayName
         hud.textLabel.text = "Accepting \(name)'s challenge"
         hud.detailTextLabel.text = "Initiating game"
         weak var weakSelf = self
@@ -290,7 +290,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.loadChallenges() {
             self.refreshControl.endRefreshing()
         }
-        
     }
     
 }
