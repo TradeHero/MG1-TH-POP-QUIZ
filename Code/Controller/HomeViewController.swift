@@ -70,21 +70,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func quickGameAction(sender: UIButton) {
-        var hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        hud.labelText = "Creating quick game..."
-        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 15)
-        hud.removeFromSuperViewOnHide = true
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        hud.textLabel.text = "Creating quick game..."
         weak var weakSelf = self
         NetworkClient.sharedClient.createQuickGame() {
             var strongSelf = weakSelf!
             if let g = $0 {
-                hud.mode = MBProgressHUDModeText
-                hud.detailsLabelText = "Creating game with user.."
+                hud.textLabel.text = "Creating game with user.."
                 
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
-                hud.hide(true)
+                hud.dismissAnimated(true)
             }
         }
     }
@@ -98,22 +95,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         self.fullNameView.text = user.displayName
-        //        self.rankView.text =
     }
     
     private func loadChallenges(loadCompleteHandler:(()->())! = nil){
-        var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         if loadCompleteHandler == nil {
             self.openChallenges.removeAll(keepCapacity: true)
             self.takenChallenges.removeAll(keepCapacity: true)
             self.tableView.reloadData()
         } else {
-            hud.hide(false)
+            hud.dismissAnimated(false)
         }
         
         var numberLoaded = 0
         
-        hud.labelText = "Loading challenges.."
+        hud.textLabel.text = "Loading challenges.."
         
         weak var wself = self
         let completionHandler: () -> () = {
@@ -121,7 +117,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             var sself = wself!
             
             if numberLoaded == 2 {
-                hud.hide(true)
+                hud.dismissAnimated(true)
                 sself.tableView.reloadData()
                 sself.tableView.forceUpdateTable()
             }
@@ -216,9 +212,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game) {
-        var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         let name = (cell.opponent.displayName == "" || cell.opponent.displayName == nil) ? "opponent" : cell.opponent.displayName
-        hud.labelText = "Accepting \(name)'s challenge'"
+        hud.textLabel.text = "Accepting \(name)'s challenge'"
         weak var weakSelf = self
         NetworkClient.sharedClient.fetchGameByGameId(game.gameID) {
             var strongSelf = weakSelf!
@@ -234,13 +230,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             if let g = $0 {
-                hud.mode = MBProgressHUDModeText
-                hud.detailsLabelText = "Creating game with user.."
+                hud.detailTextLabel.text = "Creating game with user.."
                 
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
-                hud.hide(true)
+                hud.dismissAnimated(true)
             }
         }
     }

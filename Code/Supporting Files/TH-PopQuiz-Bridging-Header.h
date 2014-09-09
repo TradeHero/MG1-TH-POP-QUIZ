@@ -6,12 +6,12 @@
 #import <SSKeychain/SSKeychain.h>
 #import <SDWebImage/SDWebImageManager.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <MBProgressHUD/MBProgressHUD.h>
 #import <GPUImage/GPUImage.h>
 #import <LDProgressView/LDProgressView.h>
 #import <EGOCache/EGOCache.h>
 #import "TestFlight.h"
 #import <JGProgressHUD/JGProgressHUD.h>
+#import <JGProgressHUD/JGProgressHUDIndicatorView.h>
 
 #pragma mark - non-library
 #import "ObjCHelpers.h"

@@ -72,6 +72,8 @@
 		6DD231C619B8224C00B5D05E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231C019B8224C00B5D05E /* libTestFlight.a */; };
 		6DD231CD19B825BA00B5D05E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231CC19B825BA00B5D05E /* StoreKit.framework */; };
 		6DD231CF19B825BE00B5D05E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231CE19B825BE00B5D05E /* GameKit.framework */; };
+		6DE3B4E519BEA71E00F9251A /* THIndefiniteAnnularIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3B4E419BEA71E00F9251A /* THIndefiniteAnnularIndicatorView.swift */; };
+		6DE3B4E719BEB3DC00F9251A /* THIndefiniteIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */; };
 		6DF8BD5F19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */; };
 		6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -196,6 +198,8 @@
 		6DD231C519B8224C00B5D05E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		6DD231CC19B825BA00B5D05E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6DD231CE19B825BE00B5D05E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		6DE3B4E419BEA71E00F9251A /* THIndefiniteAnnularIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THIndefiniteAnnularIndicatorView.swift; sourceTree = "<group>"; };
+		6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THIndefiniteIndicatorView.swift; sourceTree = "<group>"; };
 		6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameResultDetailTableViewCell.xib; sourceTree = "<group>"; };
 		7C2C12E80B2143C290FCDB20 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -386,6 +390,8 @@
 				6DD2315919B8204900B5D05E /* Home */,
 				6DD2315C19B8204900B5D05E /* Quiz */,
 				6DD2316819B8204900B5D05E /* Results */,
+				6DE3B4E419BEA71E00F9251A /* THIndefiniteAnnularIndicatorView.swift */,
+				6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -713,6 +719,7 @@
 				6DD2316F19B8204900B5D05E /* GameLoadingSceneViewController.swift in Sources */,
 				6DD2319B19B8204900B5D05E /* OptionButtonAccessoryImageLayer.swift in Sources */,
 				6DD2316D19B8204900B5D05E /* SleekNavigationBar.swift in Sources */,
+				6DE3B4E519BEA71E00F9251A /* THIndefiniteAnnularIndicatorView.swift in Sources */,
 				6DD2317A19B8204900B5D05E /* Option.swift in Sources */,
 				6DD2318119B8204900B5D05E /* NetworkClient.swift in Sources */,
 				6DD231A119B8204900B5D05E /* QuestionViewWithImage.swift in Sources */,
@@ -724,6 +731,7 @@
 				6DD2319119B8204900B5D05E /* OverlayProgressView.swift in Sources */,
 				6DD2317919B8204900B5D05E /* GameResult.swift in Sources */,
 				6DD2317E19B8204900B5D05E /* THUser.swift in Sources */,
+				6DE3B4E719BEB3DC00F9251A /* THIndefiniteIndicatorView.swift in Sources */,
 				6DD2317819B8204900B5D05E /* GamePortfolio.swift in Sources */,
 				6DD2319D19B8204900B5D05E /* QuestionViewPlain.swift in Sources */,
 				6DD2318D19B8204900B5D05E /* AvatarRoundedView.swift in Sources */,

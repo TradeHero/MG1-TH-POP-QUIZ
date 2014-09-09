@@ -53,8 +53,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     private func loadFriends() {
-        var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
-        
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         self.FBFriendList.removeAll(keepCapacity: true)
         self.THFriendList.removeAll(keepCapacity: true)
         
@@ -72,10 +71,10 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         
         if object == nil {
             debugPrintln("Nothing cached.")
-            hud.labelText = "Retrieving friends..."
+            hud.textLabel.text = "Retrieving friends..."
             NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
                 var sself = wself!
-                hud.hide(false)
+                hud.dismissAnimated(true)
                 let fbF = $0.fbFriends
                 let thF = $0.thFriends
                 let dict = [sself.kFBFriendsDictionaryKey: fbF, sself.kTHFriendsDictionaryKey: thF]
@@ -86,7 +85,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             return
         }
         
-        hud.labelText = "Loading friends..."
+        hud.textLabel.text = "Loading friends..."
         var cachedFriends = object as [String : [THUserFriend]]
         
         if let cFBFrnd = cachedFriends[kFBFriendsDictionaryKey] {
@@ -96,7 +95,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             }
         }
         
-        hud.hide(false)
+        hud.dismissAnimated(true)
     }
     
     @IBAction func backAction(sender: AnyObject) {
@@ -184,15 +183,14 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     //MARK:- FriendsChallengeCellTableViewCellDelegate
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapChallengeUser userID: Int) {
-        var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
-        hud.labelText = "Creating challenge..."
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        hud.textLabel.text = "Creating challenge..."
+        hud.detailTextLabel.text = "Creating game with user.."
         weak var weakSelf = self
         NetworkClient.sharedClient.createChallenge(opponentId: userID) {
             var strongSelf = weakSelf!
             if let g = $0 {
-                hud.mode = MBProgressHUDModeText
-                hud.detailsLabelText = "Creating game with user.."
-                
+                hud.dismissAnimated(true)
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)
                 strongSelf.navigationController?.pushViewController(vc, animated: true)

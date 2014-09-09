@@ -350,19 +350,18 @@ extension UIFont {
     }
 }
 
-extension MBProgressHUD {
-    class func showCustomisedHUD(view:UIView, animated: Bool) -> MBProgressHUD! {
-        var hud = self.showHUDAddedTo(view, animated: true)
-        hud.removeFromSuperViewOnHide = true
-        hud.minShowTime = 0
-        hud.labelFont = UIFont(name: "AvenirNext-Medium", size: 16)
-        hud.detailsLabelFont = UIFont(name: "AvenirNext", size: 12)
-//        hud.labelColor = UIColor.whiteColor()
-//        hud.color = UIColor(hex: 0xda0230)
-//        hud.activityIndicatorColor = UIColor.whiteColor()
-//        hud.detailsLabelColor = UIColor.whiteColor()
-        
-        hud.cornerRadius = 5.0
+extension JGProgressHUD {
+    class func progressHUDWithCustomisedStyle(style:JGProgressHUDStyle = .ExtraLight) -> JGProgressHUD {
+        var hud = JGProgressHUD.progressHUDWithStyle(style)
+        hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 16)
+        hud.detailTextLabel.font = UIFont(name: "AvenirNext", size: 12)
+        hud.indicatorView = THIndefiniteIndicatorView(style: style)
+        return hud
+    }
+    
+    class func progressHUDWithCustomisedStyleInView(view:UIView, style:JGProgressHUDStyle = .ExtraLight) -> JGProgressHUD {
+        let hud = self.progressHUDWithCustomisedStyle(style: style)
+        hud.showInView(view)
         return hud
     }
 }

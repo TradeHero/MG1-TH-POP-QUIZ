@@ -66,14 +66,13 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         weak var weakSelf = self
         
         if game.isGameCompletedByBothPlayer {
-            var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
-            hud.labelText = "Re-matching..."
+            var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+            hud.textLabel.text = "Re-matching..."
+            hud.detailTextLabel.text = "Creating game with user.."
             NetworkClient.sharedClient.createChallenge(numberOfQuestions: 7, opponentId: opponent.userId) {
                 var strongSelf = weakSelf!
                 if let g = $0 {
-                    hud.mode = MBProgressHUDModeText
-                    hud.detailsLabelText = "Creating game with user.."
-                    
+                    hud.dismissAnimated(true)
                     let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                     vc.bindGame($0)
                     strongSelf.navigationController?.pushViewController(vc, animated: true)

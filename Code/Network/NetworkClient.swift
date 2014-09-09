@@ -44,7 +44,7 @@ class NetworkClient {
     :param: accessToken Facebook access token from active facebook session
     :param: loginSuccessHandler Takes a THUser and perform operation
     */
-    func loginUserWithFacebookAuth(accessToken:String, errorHandler:NSError -> (), loginSuccessHandler:THUser! -> ()) {
+    func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:(THUser -> ())!) {
         let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
         
         var headers = Alamofire.Manager.sharedInstance.defaultHeaders
@@ -71,7 +71,6 @@ class NetworkClient {
                 var strongSelf = weakSelf!
                 if let responseError = error {
                     println(responseError)
-                    errorHandler(responseError)
                     return
                 }
                 

@@ -375,11 +375,11 @@ class QuizViewController: UIViewController {
         let results = self.questionResults
         weak var wself = self
         
-        var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
-        hud.labelText = "Calculating results..."
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        hud.textLabel.text = "Calculating results..."
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: highestCombo, noOfHintsUsed: self.hintUsed, currentScore: currentTurnScore, questionResults: results) {
             var sself = wself!
-            hud.hide(true)
+            hud.dismissAnimated(true)
             sself.game = $0
             if $0.isGameCompletedByBothPlayer {
                 self.performSegueWithIdentifier("QuizWinLoseSegue", sender: nil)

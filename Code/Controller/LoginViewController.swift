@@ -46,19 +46,11 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
             return
         }
         
-        var hud = MBProgressHUD.showCustomisedHUD(self.view, animated: true)
-        hud.labelText = "Logging in..."
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        hud.textLabel.text = "Logging in..."
         
-        NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken, errorHandler: {
-            hud.mode = MBProgressHUDModeText
-            hud.labelText = "Login error: \($0.description)"
-            hud.hide(true, afterDelay: 1.5)
-            }) {
-                if $0 == nil {
-                    hud.mode = MBProgressHUDModeText
-                    hud.labelText = "Login failed"
-                    hud.hide(true, afterDelay: 1.5)
-                }
+        NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken) { user in
+            hud.dismissAfterDelay(1.5, animated: true)
         }
     }
 }
