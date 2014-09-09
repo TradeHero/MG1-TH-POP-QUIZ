@@ -12,6 +12,6 @@
 #import "TestFlight.h"
 #import <JGProgressHUD/JGProgressHUD.h>
 #import <JGProgressHUD/JGProgressHUDIndicatorView.h>
-
+#import <JGProgressHUD/JGProgressHUDFadeZoomAnimation.h>
 #pragma mark - non-library
 #import "ObjCHelpers.h"

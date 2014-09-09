@@ -105,7 +105,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.openChallenges.removeAll(keepCapacity: true)
             self.takenChallenges.removeAll(keepCapacity: true)
             self.tableView.reloadData()
-        } 
+        }
         
         var numberLoaded = 0
         
@@ -213,12 +213,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game) {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
-        let name = (cell.opponent.displayName == "" || cell.opponent.displayName == nil) ? "opponent" : cell.opponent.displayName
-        hud.textLabel.text = "Accepting \(name)'s challenge'"
+        let name = (cell.opponent.displayName == "" || cell.opponent.displayName == nil) ? "opponent" : cell.player.displayName
+        hud.textLabel.text = "Accepting \(name)'s challenge"
+        hud.detailTextLabel.text = "Initiating game"
         weak var weakSelf = self
         NetworkClient.sharedClient.fetchGameByGameId(game.gameID) {
             var strongSelf = weakSelf!
-            
             var i = 0
             for game in strongSelf.openChallenges {
                 if $0.gameID == game.gameID  {
@@ -230,8 +230,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             if let g = $0 {
-                hud.detailTextLabel.text = "Creating game with user.."
-                
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)
                 strongSelf.navigationController?.pushViewController(vc, animated: true)

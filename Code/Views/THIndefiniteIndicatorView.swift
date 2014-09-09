@@ -16,7 +16,7 @@ class THIndefiniteIndicatorView: JGProgressHUDIndicatorView {
         case .ExtraLight:
             indicatorView.strokeColor = UIColor.blackColor()
         case .Light:
-            indicatorView.strokeColor = UIColor.grayColor()
+            indicatorView.strokeColor = UIColor.darkGrayColor()
         case .Dark:
             indicatorView.strokeColor = UIColor.whiteColor()
         }

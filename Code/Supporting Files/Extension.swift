@@ -351,16 +351,18 @@ extension UIFont {
 }
 
 extension JGProgressHUD {
-    class func progressHUDWithCustomisedStyle(style:JGProgressHUDStyle = .ExtraLight) -> JGProgressHUD {
+    class func progressHUDWithCustomisedStyle(style:JGProgressHUDStyle) -> JGProgressHUD! {
         var hud = JGProgressHUD.progressHUDWithStyle(style)
-        hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 16)
-        hud.detailTextLabel.font = UIFont(name: "AvenirNext", size: 12)
+        hud.textLabel.font = UIFont(name: "AngryBirds-Regular", size: 18)
+        hud.detailTextLabel.font = UIFont(name: "AngryBirds-Regular", size: 14)
         hud.indicatorView = THIndefiniteIndicatorView(style: style)
+        hud.interactionType = .BlockAllTouches
+        hud.animation = JGProgressHUDFadeZoomAnimation()
         return hud
     }
     
-    class func progressHUDWithCustomisedStyleInView(view:UIView, style:JGProgressHUDStyle = .ExtraLight) -> JGProgressHUD {
-        let hud = self.progressHUDWithCustomisedStyle(style: style)
+    class func progressHUDWithCustomisedStyleInView(view:UIView, style:JGProgressHUDStyle = .ExtraLight) -> JGProgressHUD! {
+        let hud = self.progressHUDWithCustomisedStyle(style)
         hud.showInView(view)
         return hud
     }

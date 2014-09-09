@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C62BA7F65B04C13BB4646FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2C12E80B2143C290FCDB20 /* libPods.a */; };
+		6D04887319BED33100F955D0 /* angrybirds-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D04887219BED33100F955D0 /* angrybirds-regular.ttf */; };
 		6DD2311819B81FFA00B5D05E /* TH_PopQuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2311719B81FFA00B5D05E /* TH_PopQuizTests.swift */; };
 		6DD2316C19B8204900B5D05E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2312219B8204900B5D05E /* AppDelegate.swift */; };
 		6DD2316D19B8204900B5D05E /* SleekNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2312319B8204900B5D05E /* SleekNavigationBar.swift */; };
@@ -35,10 +36,6 @@
 		6DD2318419B8204900B5D05E /* FadeInSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2314119B8204900B5D05E /* FadeInSegue.swift */; };
 		6DD2318519B8204900B5D05E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2314319B8204900B5D05E /* Constants.swift */; };
 		6DD2318619B8204900B5D05E /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2314419B8204900B5D05E /* Extension.swift */; };
-		6DD2318819B8204900B5D05E /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2314619B8204900B5D05E /* ProximaNova-Bold.ttf */; };
-		6DD2318919B8204900B5D05E /* ProximaNova-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2314719B8204900B5D05E /* ProximaNova-Light.ttf */; };
-		6DD2318A19B8204900B5D05E /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2314819B8204900B5D05E /* ProximaNova-Regular.ttf */; };
-		6DD2318B19B8204900B5D05E /* ProximaNova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2314919B8204900B5D05E /* ProximaNova-Semibold.ttf */; };
 		6DD2318C19B8204900B5D05E /* Electrodoodle - Kevin MacLeod.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DD2314B19B8204900B5D05E /* Electrodoodle - Kevin MacLeod.mp3 */; };
 		6DD2318D19B8204900B5D05E /* AvatarRoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2314F19B8204900B5D05E /* AvatarRoundedView.swift */; };
 		6DD2318E19B8204900B5D05E /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2315019B8204900B5D05E /* DesignableButton.swift */; };
@@ -73,6 +70,11 @@
 		6DD231CD19B825BA00B5D05E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231CC19B825BA00B5D05E /* StoreKit.framework */; };
 		6DD231CF19B825BE00B5D05E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231CE19B825BE00B5D05E /* GameKit.framework */; };
 		6DE3B4E719BEB3DC00F9251A /* THIndefiniteIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */; };
+		6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */; };
+		6DE3B4F119BECCBC00F9251A /* ProximaNova-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EC19BECCBC00F9251A /* ProximaNova-Light.ttf */; };
+		6DE3B4F219BECCBC00F9251A /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4ED19BECCBC00F9251A /* ProximaNova-Regular.ttf */; };
+		6DE3B4F319BECCBC00F9251A /* ProximaNova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EE19BECCBC00F9251A /* ProximaNova-Semibold.ttf */; };
+		6DE3B4F519BECD6300F9251A /* BebasNeue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4F419BECD6300F9251A /* BebasNeue.ttf */; };
 		6DF8BD5F19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */; };
 		6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -123,6 +125,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D04887219BED33100F955D0 /* angrybirds-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "angrybirds-regular.ttf"; sourceTree = "<group>"; };
 		6DD230FF19B81FFA00B5D05E /* TH-PopQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TH-PopQuiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD2311119B81FFA00B5D05E /* TH-PopQuizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TH-PopQuizTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD2311619B81FFA00B5D05E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -155,10 +158,6 @@
 		6DD2314319B8204900B5D05E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6DD2314419B8204900B5D05E /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		6DD2314519B8204900B5D05E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6DD2314619B8204900B5D05E /* ProximaNova-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.ttf"; sourceTree = "<group>"; };
-		6DD2314719B8204900B5D05E /* ProximaNova-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.ttf"; sourceTree = "<group>"; };
-		6DD2314819B8204900B5D05E /* ProximaNova-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.ttf"; sourceTree = "<group>"; };
-		6DD2314919B8204900B5D05E /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
 		6DD2314B19B8204900B5D05E /* Electrodoodle - Kevin MacLeod.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Electrodoodle - Kevin MacLeod.mp3"; sourceTree = "<group>"; };
 		6DD2314C19B8204900B5D05E /* TH-PopQuiz-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TH-PopQuiz-Bridging-Header.h"; sourceTree = "<group>"; };
 		6DD2314F19B8204900B5D05E /* AvatarRoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarRoundedView.swift; sourceTree = "<group>"; };
@@ -198,6 +197,11 @@
 		6DD231CC19B825BA00B5D05E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		6DD231CE19B825BE00B5D05E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THIndefiniteIndicatorView.swift; sourceTree = "<group>"; };
+		6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.ttf"; sourceTree = "<group>"; };
+		6DE3B4EC19BECCBC00F9251A /* ProximaNova-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.ttf"; sourceTree = "<group>"; };
+		6DE3B4ED19BECCBC00F9251A /* ProximaNova-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.ttf"; sourceTree = "<group>"; };
+		6DE3B4EE19BECCBC00F9251A /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
+		6DE3B4F419BECD6300F9251A /* BebasNeue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.ttf; sourceTree = "<group>"; };
 		6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameResultDetailTableViewCell.xib; sourceTree = "<group>"; };
 		7C2C12E80B2143C290FCDB20 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -359,13 +363,10 @@
 		6DD2314219B8204900B5D05E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6DE3B4E919BECC8700F9251A /* Fonts */,
 				6DD2314319B8204900B5D05E /* Constants.swift */,
 				6DD2314419B8204900B5D05E /* Extension.swift */,
 				6DD2314519B8204900B5D05E /* Info.plist */,
-				6DD2314619B8204900B5D05E /* ProximaNova-Bold.ttf */,
-				6DD2314719B8204900B5D05E /* ProximaNova-Light.ttf */,
-				6DD2314819B8204900B5D05E /* ProximaNova-Regular.ttf */,
-				6DD2314919B8204900B5D05E /* ProximaNova-Semibold.ttf */,
 				6DD2314A19B8204900B5D05E /* Sounds */,
 				6DD2314C19B8204900B5D05E /* TH-PopQuiz-Bridging-Header.h */,
 			);
@@ -507,6 +508,19 @@
 			path = TestFlightSDK3;
 			sourceTree = "<group>";
 		};
+		6DE3B4E919BECC8700F9251A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6D04887219BED33100F955D0 /* angrybirds-regular.ttf */,
+				6DE3B4F419BECD6300F9251A /* BebasNeue.ttf */,
+				6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */,
+				6DE3B4EC19BECCBC00F9251A /* ProximaNova-Light.ttf */,
+				6DE3B4ED19BECCBC00F9251A /* ProximaNova-Regular.ttf */,
+				6DE3B4EE19BECCBC00F9251A /* ProximaNova-Semibold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -629,22 +643,24 @@
 				6DD231A219B8204900B5D05E /* QuestionViewWithImage.xib in Resources */,
 				6DD2319E19B8204900B5D05E /* QuestionViewPlain.xib in Resources */,
 				6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */,
+				6DE3B4F519BECD6300F9251A /* BebasNeue.ttf in Resources */,
 				6DD2319519B8204900B5D05E /* QuickChallengeTableViewCell.xib in Resources */,
 				6DD2319319B8204900B5D05E /* FriendsChallengeCellTableViewCell.xib in Resources */,
 				6DD2319719B8204900B5D05E /* HomeTurnChallengesTableViewCell.xib in Resources */,
 				6DD231A019B8204900B5D05E /* QuestionViewWithAccessoryImage.xib in Resources */,
 				6DD2319919B8204900B5D05E /* LogoCanvasView.xib in Resources */,
+				6D04887319BED33100F955D0 /* angrybirds-regular.ttf in Resources */,
 				6DD2317619B8204900B5D05E /* Login.storyboard in Resources */,
 				6DD2318C19B8204900B5D05E /* Electrodoodle - Kevin MacLeod.mp3 in Resources */,
 				6DD231A919B8208700B5D05E /* Home.storyboard in Resources */,
 				6DD2319C19B8204900B5D05E /* OptionButtonAccessoryImageLayer.xib in Resources */,
-				6DD2318919B8204900B5D05E /* ProximaNova-Light.ttf in Resources */,
-				6DD2318A19B8204900B5D05E /* ProximaNova-Regular.ttf in Resources */,
-				6DD2318B19B8204900B5D05E /* ProximaNova-Semibold.ttf in Resources */,
+				6DE3B4F319BECCBC00F9251A /* ProximaNova-Semibold.ttf in Resources */,
 				6DD231A419B8204900B5D05E /* QuestionResultTableViewCell.xib in Resources */,
 				6DD2317519B8204900B5D05E /* Images.xcassets in Resources */,
+				6DE3B4F119BECCBC00F9251A /* ProximaNova-Light.ttf in Resources */,
+				6DE3B4F219BECCBC00F9251A /* ProximaNova-Regular.ttf in Resources */,
 				6DD2318319B8204900B5D05E /* Quiz.storyboard in Resources */,
-				6DD2318819B8204900B5D05E /* ProximaNova-Bold.ttf in Resources */,
+				6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

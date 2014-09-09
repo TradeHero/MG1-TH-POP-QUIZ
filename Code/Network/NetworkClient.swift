@@ -311,7 +311,12 @@ class NetworkClient {
     
     ///
     func createQuickGame(completionHandler: (Game! -> ())!){
-                let fakeID = 2415
+        var fakeID: Int!
+        if self.authenticatedUser.userId == 2415 {
+            fakeID = 617543
+        } else {
+            fakeID = 2415
+        }
 //        let fakeID = 617543
         createChallenge(numberOfQuestions: 7, opponentId: fakeID) {
             if let handler = completionHandler {

@@ -44,15 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.bgmPlayer.play()
         self.registerLoginNotification()
 //        self.autoLogin()
-        
-//        for familyName in UIFont.familyNames() {
-//            let f = familyName as String
-//            for fontName in UIFont.fontNamesForFamilyName(f){
-//                println(fontName)
-//            }
-//        }
-        
-        
+/*
+        for familyName in UIFont.familyNames() {
+            let f = familyName as String
+            for fontName in UIFont.fontNamesForFamilyName(f){
+                println("\(fontName) - \(f)")
+            }
+        }
+*/
         return true
     }
 

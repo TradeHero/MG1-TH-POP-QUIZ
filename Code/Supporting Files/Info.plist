@@ -22,8 +22,16 @@
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>431745923529834</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BebasNeue.ttf</string>
+		<string>angrybirds-regular.ttf</string>
+		<string>ProximaNova-Light.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
