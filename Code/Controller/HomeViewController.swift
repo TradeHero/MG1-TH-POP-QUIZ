@@ -98,18 +98,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func loadChallenges(loadCompleteHandler:(()->())! = nil){
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        var hud: JGProgressHUD?
         if loadCompleteHandler == nil {
+            hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+
             self.openChallenges.removeAll(keepCapacity: true)
             self.takenChallenges.removeAll(keepCapacity: true)
             self.tableView.reloadData()
-        } else {
-            hud.dismissAnimated(false)
-        }
+        } 
         
         var numberLoaded = 0
         
-        hud.textLabel.text = "Loading challenges.."
+        hud?.textLabel.text = "Loading challenges.."
         
         weak var wself = self
         let completionHandler: () -> () = {
@@ -117,7 +117,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             var sself = wself!
             
             if numberLoaded == 2 {
-                hud.dismissAnimated(true)
+                hud?.dismissAnimated(true)
                 sself.tableView.reloadData()
                 sself.tableView.forceUpdateTable()
             }
