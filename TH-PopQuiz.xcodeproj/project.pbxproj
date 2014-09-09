@@ -74,7 +74,6 @@
 		6DE3B4F119BECCBC00F9251A /* ProximaNova-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EC19BECCBC00F9251A /* ProximaNova-Light.ttf */; };
 		6DE3B4F219BECCBC00F9251A /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4ED19BECCBC00F9251A /* ProximaNova-Regular.ttf */; };
 		6DE3B4F319BECCBC00F9251A /* ProximaNova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EE19BECCBC00F9251A /* ProximaNova-Semibold.ttf */; };
-		6DE3B4F519BECD6300F9251A /* BebasNeue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4F419BECD6300F9251A /* BebasNeue.ttf */; };
 		6DF8BD5F19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */; };
 		6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -201,7 +200,6 @@
 		6DE3B4EC19BECCBC00F9251A /* ProximaNova-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.ttf"; sourceTree = "<group>"; };
 		6DE3B4ED19BECCBC00F9251A /* ProximaNova-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.ttf"; sourceTree = "<group>"; };
 		6DE3B4EE19BECCBC00F9251A /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
-		6DE3B4F419BECD6300F9251A /* BebasNeue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.ttf; sourceTree = "<group>"; };
 		6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameResultDetailTableViewCell.xib; sourceTree = "<group>"; };
 		7C2C12E80B2143C290FCDB20 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -512,7 +510,6 @@
 			isa = PBXGroup;
 			children = (
 				6D04887219BED33100F955D0 /* angrybirds-regular.ttf */,
-				6DE3B4F419BECD6300F9251A /* BebasNeue.ttf */,
 				6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */,
 				6DE3B4EC19BECCBC00F9251A /* ProximaNova-Light.ttf */,
 				6DE3B4ED19BECCBC00F9251A /* ProximaNova-Regular.ttf */,
@@ -643,7 +640,6 @@
 				6DD231A219B8204900B5D05E /* QuestionViewWithImage.xib in Resources */,
 				6DD2319E19B8204900B5D05E /* QuestionViewPlain.xib in Resources */,
 				6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */,
-				6DE3B4F519BECD6300F9251A /* BebasNeue.ttf in Resources */,
 				6DD2319519B8204900B5D05E /* QuickChallengeTableViewCell.xib in Resources */,
 				6DD2319319B8204900B5D05E /* FriendsChallengeCellTableViewCell.xib in Resources */,
 				6DD2319719B8204900B5D05E /* HomeTurnChallengesTableViewCell.xib in Resources */,
