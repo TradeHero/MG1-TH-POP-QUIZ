@@ -237,8 +237,10 @@ class NetworkClient {
                         let game = Game(compactGameDTO: openChallengeDTO)
                         
                         game.fetchUsers(){
-                            openChallenges.append(game)
-                            fetchUserHandler()
+                            game.fetchResults() {
+                                openChallenges.append(game)
+                                fetchUserHandler()
+                            }
                         }
                     }
                     
@@ -296,8 +298,10 @@ class NetworkClient {
                             opponentID = i as Int
                         }
                         game.fetchUsers(){
-                            takenChallenges.append(game)
-                            fetchUserHandler()
+                            game.fetchResults() {
+                                takenChallenges.append(game)
+                                fetchUserHandler()
+                            }
                         }
                     }
                     

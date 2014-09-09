@@ -153,7 +153,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 0:
             cell.bindChalllenge(openChallenges[indexPath.row], status:.Accept)
         case 1:
-            cell.bindChalllenge(takenChallenges[indexPath.row], status:.Done)
+            cell.bindChalllenge(takenChallenges[indexPath.row], status:.Nudge)
         default:
             break
         }
@@ -164,7 +164,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 50
+        return 55
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -212,29 +212,37 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game) {
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
-        let name = cell.player.displayName == "" || cell.player.displayName == nil ? "opponent" : cell.player.displayName
-        hud.textLabel.text = "Accepting \(name)'s challenge"
-        hud.detailTextLabel.text = "Initiating game"
-        weak var weakSelf = self
-        NetworkClient.sharedClient.fetchGameByGameId(game.gameID) {
-            var strongSelf = weakSelf!
-            var i = 0
-            for game in strongSelf.openChallenges {
-                if $0.gameID == game.gameID  {
-                    strongSelf.openChallenges.removeAtIndex(i)
-                    strongSelf.tableView.reloadData()
-                    break
+        switch cell.status {
+        case .Accept, .Play:
+            var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+            let name = cell.player.displayName == "" || cell.player.displayName == nil ? "opponent" : cell.player.displayName
+            hud.textLabel.text = "Accepting \(name)'s challenge"
+            hud.detailTextLabel.text = "Initiating game"
+            weak var weakSelf = self
+            NetworkClient.sharedClient.fetchGameByGameId(game.gameID) {
+                var strongSelf = weakSelf!
+                var i = 0
+                for game in strongSelf.openChallenges {
+                    if $0.gameID == game.gameID  {
+                        strongSelf.openChallenges.removeAtIndex(i)
+                        strongSelf.tableView.reloadData()
+                        break
+                    }
+                    i++
                 }
-                i++
+                
+                if let g = $0 {
+                    let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                    vc.bindGame($0)
+                    strongSelf.navigationController?.pushViewController(vc, animated: true)
+                    hud.dismissAnimated(true)
+                }
             }
-            
-            if let g = $0 {
-                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
-                vc.bindGame($0)
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
-                hud.dismissAnimated(true)
-            }
+        case .Nudge:
+            //TODO send notification
+            cell.configureAsInvitedMode()
+        default:
+            break
         }
     }
     

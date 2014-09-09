@@ -9,8 +9,9 @@
 import UIKit
 enum ChallengeStatus: Int {
     case Play
-    case Done
     case Accept
+    case Nudge
+    case Invited
 }
 
 class HomeTurnChallengesTableViewCell: UITableViewCell {
@@ -23,9 +24,9 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     }
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var challengerDisplayNameLabel: UILabel!
-    @IBOutlet weak var challengerWinsLabel: UILabel!
-    @IBOutlet weak var selfWinsLabel: UILabel!
     @IBOutlet weak var challengerImageView: UIImageView!
+    @IBOutlet weak var scoreDetailLabel: UILabel!
+    @IBOutlet weak var gameStatusImageView: UIImageView!
     
     var game: Game!
     
@@ -34,8 +35,10 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             switch status {
             case .Play:
                 configureAsPlayChallengesMode()
-            case .Done:
-                configureAsTakenChallengesMode()
+            case .Nudge:
+                configureAsNudgeMode()
+            case .Invited:
+                configureAsInvitedMode()
             case .Accept:
                 configureAsAcceptChallengeMode()
             }
@@ -55,40 +58,69 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.status = status
         
         switch status {
-        case .Done:
+        case .Nudge, .Invited:
             player = game.opponentPlayer
             opponent = game.initiatingPlayer
-        default:
+        case .Play, .Accept:
             player = game.initiatingPlayer
             opponent = game.opponentPlayer
         }
         
         self.challengerDisplayNameLabel.text = player!.displayName
-        self.challengerWinsLabel.text = String(0)
         self.challengerImageView.sd_setImageWithURL(NSURL(string: player!.pictureURL))
-    }
-    
-    
-    func configureAsTakenChallengesMode() {
-        self.actionButton.hidden = true
+        
+        let str = self.challengerDisplayNameLabel.text as NSString?
+        let r = str?.sizeWithAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 14.0)]).width
+        
+        self.challengerDisplayNameLabel.width = r!
+        self.gameStatusImageView.x = self.challengerDisplayNameLabel.bounds.origin.x + r! + 5
+
+        if let result = self.game.initiatingPlayerResult {
+            self.scoreDetailLabel.text = "\(player.displayName)'s Score: \(result.rawScore)"
+        } else {
+            self.scoreDetailLabel.text = ""
+        }
+        
     }
     
     func configureAsPlayChallengesMode() {
-        self.actionButton.hidden = false
+        self.actionButton.enabled = true
         self.actionButton.setTitle("Play", forState: .Normal)
         self.actionButton.setBackgroundImage(UIImage(named: "GreenButtonBackground"), forState: .Normal)
+        self.gameStatusImageView.alpha = 1
+        self.gameStatusImageView.image = UIImage(named: "BeatMeLabelBox")
+        
     }
     
     func configureAsAcceptChallengeMode() {
-        self.actionButton.hidden = false
+        self.actionButton.enabled = true
         self.actionButton.setTitle("Accept", forState: .Normal)
         self.actionButton.setBackgroundImage(UIImage(named: "RedButtonBackground"), forState: .Normal)
+        self.gameStatusImageView.alpha = 1
+        self.gameStatusImageView.image = UIImage(named: "BeatMeLabelBox")
+    }
+    
+    func configureAsNudgeMode(){
+        self.actionButton.enabled = true
+        self.actionButton.setTitle("Nudge", forState: .Normal)
+        self.actionButton.setBackgroundImage(UIImage(named: "BlueButtonBackground"), forState: .Normal)
+        self.gameStatusImageView.alpha = 0
+        self.gameStatusImageView.image = nil
+    }
+    
+    func configureAsInvitedMode() {
+        
+        self.actionButton.enabled = false
+        self.actionButton.setTitle("Invited", forState: .Normal)
+        self.actionButton.setBackgroundImage(UIImage(named: "BlueButtonBackground"), forState: .Normal)
+        self.gameStatusImageView.alpha = 0
+        self.gameStatusImageView.image = nil
     }
     
     override func prepareForReuse() {
         self.challengerImageView.image = nil
         self.challengerDisplayNameLabel.text = ""
-        self.challengerWinsLabel.text = ""
+        self.scoreDetailLabel.text = ""
     }
     
     override var frame: CGRect {
@@ -103,6 +135,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             super.frame = frame
         }
     }
+    
 }
 
 protocol HomeTurnChallengesTableViewCellDelegate : class, NSObjectProtocol {
