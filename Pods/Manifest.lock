@@ -3,7 +3,6 @@ PODS:
   - GPUImage (0.1.4)
   - JGProgressHUD (1.2.1)
   - LDProgressView (1.2.1)
-  - MBProgressHUD (0.9)
   - SDWebImage (3.7.1):
     - SDWebImage/Core
   - SDWebImage/Core (3.7.1)
@@ -14,7 +13,6 @@ DEPENDENCIES:
   - GPUImage (from `https://github.com/BradLarson/GPUImage.git`, commit `ea9c96c32d375fd78d2336be340ad490c3c8cff9`)
   - JGProgressHUD (~> 1.2.1)
   - LDProgressView (~> 1.2.1)
-  - MBProgressHUD (~> 0.9)
   - SDWebImage (~> 3.7.1)
   - SSKeychain (~> 1.2.2)
 
@@ -28,7 +26,6 @@ SPEC CHECKSUMS:
   GPUImage: f9b32e12350792a630e596ffc7b050bea3662670
   JGProgressHUD: f3c0258684f318bc0009e893fdac0701de5cb75b
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
-  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
 
