@@ -367,3 +367,9 @@ extension JGProgressHUD {
         return hud
     }
 }
+
+extension Int {
+    var decimalFormattedString: String {
+        return NSNumberFormatter.localizedStringFromNumber(NSNumber(integer: self), numberStyle: .DecimalStyle)
+    }
+}

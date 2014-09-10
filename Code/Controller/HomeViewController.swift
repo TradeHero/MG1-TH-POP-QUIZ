@@ -105,6 +105,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.openChallenges.removeAll(keepCapacity: true)
             self.takenChallenges.removeAll(keepCapacity: true)
             self.tableView.reloadData()
+            self.tableView.forceUpdateTable()
         }
         
         var numberLoaded = 0

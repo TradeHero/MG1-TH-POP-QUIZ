@@ -83,10 +83,7 @@ class QuizViewController: UIViewController {
     
     private var selfTotalScore: Int = 0 {
         didSet{
-            selfScoreLabel.text = String(selfTotalScore)
-            //            let totalScore = basicScorePerQuestion * self.game.questionSet.count
-            //            let newProgress = CGFloat(selfTotalScore)/CGFloat(totalScore)
-            //            selfProgressView.progress = newProgress
+            selfScoreLabel.text = "\(selfTotalScore.decimalFormattedString)"
         }
     }
     
@@ -530,7 +527,7 @@ class QuizViewController: UIViewController {
         opponentDisplayNameLabel.text = opponent.displayName
         println("\(self.opponentQuestionCorrect)")
         opponentProgressView.progress = CGFloat(self.opponentQuestionCorrect)/CGFloat(self.game.questionSet.count)
-        opponentScoreLabel.text = "\(opponentScore)"
+        opponentScoreLabel.text = "\(opponentScore.decimalFormattedString)"
         
         
     }

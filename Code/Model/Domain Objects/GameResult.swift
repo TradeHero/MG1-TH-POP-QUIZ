@@ -9,7 +9,7 @@
 import UIKit
 
 typealias QuestionResultDetail = (id:Int, rawScore:Int, time:CGFloat)
-typealias QuestionResultExtraDetail = (id:Int, bonus:Int)
+typealias QuestionResultFinalDetail = (id:Int, finalScore:Int)
 
 final class GameResult {
     
@@ -21,15 +21,27 @@ final class GameResult {
     var hintsUsed: Int!
     var highestCombo: Int!
     
-    lazy var rawScore: Int = {
+    var rawScore: Int {
         var rScore = 0
         for detail in self.resultDetails {
             rScore += detail.rawScore
         }
         return rScore
-        }()
+    }
     
-    lazy var questionCorrect: Int = {
+    var finalScore: Int {
+        if let rxd = self.resultExtraDetails {
+            var fScore = 0
+            for detail in rxd {
+                fScore += detail.finalScore
+            }
+            return fScore
+        } else {
+            return rawScore
+        }
+    }
+    
+    var questionCorrect: Int {
         var qCorrect = 0
         for detail in self.resultDetails {
             if detail.rawScore > 0 {
@@ -37,7 +49,7 @@ final class GameResult {
             }
         }
         return qCorrect
-        }()
+    }
     
     private var submittedAtUtcString:String!
     
@@ -60,14 +72,14 @@ final class GameResult {
         return qrd
         }()
     
-    lazy var resultExtraDetails: [QuestionResultExtraDetail]! = {
+    lazy var resultExtraDetails: [QuestionResultFinalDetail]! = {
         if self.extraDetails == nil { return nil }
-        var qrfd: [QuestionResultExtraDetail] = []
+        var qrfd: [QuestionResultFinalDetail] = []
         let details = self.extraDetails.componentsSeparatedByString("|")
         
         for detail in details {
             let dComps = detail.componentsSeparatedByString(", ")
-            qrfd.append((id:dComps[0].intValue, bonus:dComps[1].intValue))
+            qrfd.append((id:dComps[0].intValue, finalScore:dComps[1].intValue))
         }
         
         return qrfd

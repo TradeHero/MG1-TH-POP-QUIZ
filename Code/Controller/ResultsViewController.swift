@@ -157,9 +157,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             var selfRes = QuestionResult(questionID: selfRaw.id, timeTaken: selfRaw.time, correct: selfRaw.rawScore > 0, score: selfRaw.rawScore)
             
             if let selfExtras = playerResult.resultExtraDetails {
-                let selfExtra = selfExtras[indexPath.row]
-                selfRes.bonus = selfExtra.bonus
-                selfRes.finalScore = selfExtra.bonus + selfRes.rawScore
+                selfRes.finalScore = playerResult.finalScore
             }
             
             var oppRes: QuestionResult!
@@ -168,9 +166,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
                 oppRes = QuestionResult(questionID: oppRaw.id, timeTaken: oppRaw.time, correct: oppRaw.rawScore > 0, score: oppRaw.rawScore)
                 
                 if let oppExtras = opponentResult.resultExtraDetails {
-                    let oppExtra = oppExtras[indexPath.row]
-                    oppRes.bonus = oppExtra.bonus
-                    oppRes.finalScore = oppExtra.bonus + oppRes.rawScore
+                    oppRes.finalScore = opponentResult.finalScore
                 }
             }
             

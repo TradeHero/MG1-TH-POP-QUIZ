@@ -136,20 +136,12 @@ class WinLoseViewController: UIViewController {
             oppResult = game.initiatingPlayerResult
         }
         
-        for detail in selfResult.resultDetails {
-            selfScore += detail.rawScore
-        }
-        
-        for detail in oppResult.resultDetails {
-            opponentScore += detail.rawScore
-        }
-        
         for extraDetail in selfResult.resultExtraDetails {
-            selfScore += extraDetail.bonus
+            selfScore += extraDetail.finalScore
         }
         
         for extraDetail in oppResult.resultExtraDetails {
-            opponentScore += extraDetail.bonus
+            opponentScore += extraDetail.finalScore
         }
         
     }
@@ -177,11 +169,11 @@ class WinLoseViewController: UIViewController {
         largeBoxNameLabel.text = selfUser.displayName
         //        largeBoxRankLabel = selfUser.rank
         //        largeBoxLevelLabel.text = selfUser.level
-        largeBoxScoreLabel.text = "\(selfScore)"
+        largeBoxScoreLabel.text = "\(selfScore.decimalFormattedString)"
         smallBoxNameLabel.text = opponentUser.displayName
         //        smallBoxRankLabel = opponentUser.rank
         //        smallBoxLevelLabel.text = opponentUser.level
-        smallBoxScoreLabel.text = "\(opponentScore)"
+        smallBoxScoreLabel.text = "\(opponentScore.decimalFormattedString)"
         NetworkClient.fetchImageFromURLString(selfUser.pictureURL, progressHandler: nil) {
             (image, error) in
             self.largeBoxAvatarView.image = image

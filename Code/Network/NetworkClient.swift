@@ -195,7 +195,7 @@ class NetworkClient {
             }
             
         }
-        debugPrintln(r)
+//        debugPrintln(r)
     }
     /**
     GET api/games/open
@@ -376,15 +376,16 @@ class NetworkClient {
             }
             
             if let resultsDTO = content as? [String : AnyObject] {
-                
+                let inner: AnyObject? = resultsDTO["result"]
+                if let innerResultDTO = inner as? [String : AnyObject] {
                 var challengerResult:GameResult?
-                if let challengerResultDTO: AnyObject = resultsDTO["challenger"] {
+                if let challengerResultDTO: AnyObject = innerResultDTO["challenger"] {
                     debugPrintln("Parsing game initiator result..")
                     let dto = challengerResultDTO as [String : AnyObject]
                     challengerResult = GameResult(gameId:gameId, resultDTO: dto)
                 }
                 var opponentResult:GameResult?
-                if let opponentResultDTO: AnyObject = resultsDTO["opponent"] {
+                if let opponentResultDTO: AnyObject = innerResultDTO["opponent"] {
                     debugPrintln("Parsing game opponent result..")
                     let dto = opponentResultDTO as [String : AnyObject]
                     opponentResult = GameResult(gameId:gameId, resultDTO: dto)
@@ -392,6 +393,7 @@ class NetworkClient {
                 
                 if let c = completionHandler{
                     c((challengerResult:challengerResult, opponentResult:opponentResult))
+                }
                 }
             }
         }
