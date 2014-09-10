@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private var refreshControl: UIRefreshControl!
     private var openChallenges: [Game] = []
-    private var takenChallenges: [Game] = []
+    private var opponentPendingChallenges: [Game] = []
     
     private lazy var user: THUser = {
         return NetworkClient.sharedClient.authenticatedUser
@@ -103,7 +103,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
 
             self.openChallenges.removeAll(keepCapacity: true)
-            self.takenChallenges.removeAll(keepCapacity: true)
+            self.opponentPendingChallenges.removeAll(keepCapacity: true)
             self.tableView.reloadData()
             self.tableView.forceUpdateTable()
         }
@@ -137,10 +137,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             completionHandler()
         }
         
-        NetworkClient.sharedClient.fetchTakenChallenges() {
+        NetworkClient.sharedClient.fetchOpponentPendingChallenges() {
             var sself = wself!
-            sself.takenChallenges = $0
-            sself.takenChallenges.sort() {
+            sself.opponentPendingChallenges = $0
+            sself.opponentPendingChallenges.sort() {
                 $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
             }
             completionHandler()
@@ -154,7 +154,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 0:
             cell.bindChalllenge(openChallenges[indexPath.row], status:.Accept)
         case 1:
-            cell.bindChalllenge(takenChallenges[indexPath.row], status:.Nudge)
+            cell.bindChalllenge(opponentPendingChallenges[indexPath.row], status:.Nudge)
         default:
             break
         }
@@ -173,7 +173,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 0:
             return openChallenges.count
         case 1:
-            return takenChallenges.count
+            return opponentPendingChallenges.count
         default:
             return 0
         }
@@ -187,7 +187,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             return createHeaderView("Your turn", numberOfGames: openChallenges.count)
         case 1:
-            return createHeaderView("Their turn", numberOfGames: takenChallenges.count)
+            return createHeaderView("Their turn", numberOfGames: opponentPendingChallenges.count)
         default:
             return nil
         }

@@ -195,7 +195,7 @@ class NetworkClient {
             }
             
         }
-//        debugPrintln(r)
+        //        debugPrintln(r)
     }
     /**
     GET api/games/open
@@ -218,7 +218,7 @@ class NetworkClient {
                     debugPrintln("User has no open challenges.")
                     completionHandler([])
                 } else {
-//                    debugPrintln("Parsing \(openChallengesDTOs.count) objects as open challenges...")
+                    //                    debugPrintln("Parsing \(openChallengesDTOs.count) objects as open challenges...")
                     var numberCompleted = 0
                     var total = openChallengesDTOs.count
                     var openChallenges: [Game] = []
@@ -271,7 +271,7 @@ class NetworkClient {
                     debugPrintln("User has no taken challenges.")
                     completionHandler([])
                 } else {
-//                    debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
+                    //                    debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
                     var numberCompleted = 0
                     var total = takenChallengesDTOs.count
                     var takenChallenges: [Game] = []
@@ -313,6 +313,70 @@ class NetworkClient {
         //        debugPrintln(r)
     }
     
+    /**
+    GET api/games/theirturn
+    */
+    func fetchOpponentPendingChallenges(completionHandler: ([Game] -> ())!){
+        let url = "\(THGameAPIBaseURL)/theirturn"
+        
+        configureCompulsoryHeaders()
+        debugPrintln("Fetching all opponent pending challenges for authenticated user...")
+        weak var wself = self
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
+            _, response, content, error in
+            var sself = wself!
+            if error != nil {
+                debugPrintln(error)
+            }
+            
+            if let pendingChallengesDTOs = content as? [AnyObject] {
+                if pendingChallengesDTOs.count == 0 {
+                    debugPrintln("User has no opponent pending challenges.")
+                    completionHandler([])
+                } else {
+                    //                    debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
+                    var numberCompleted = 0
+                    var total = pendingChallengesDTOs.count
+                    var pendingChallenges: [Game] = []
+                    
+                    let fetchUserHandler: () -> () = {
+                        numberCompleted++
+                        if numberCompleted == total {
+                            debugPrintln("Successfully fetched \(total)  opponent pending challenge(s).")
+                            if let handler = completionHandler {
+                                handler(pendingChallenges)
+                            }
+                        }
+                    }
+                    for pendingChallengeDTO in pendingChallengesDTOs as [[String: AnyObject]] {
+                        let game = Game(compactGameDTO: pendingChallengeDTO)
+                        
+                        var initiatorID: Int!
+                        if let i: AnyObject = pendingChallengeDTO["createdByUserId"]{
+                            initiatorID = i as Int
+                        }
+                        
+                        var opponentID: Int!
+                        if let i: AnyObject = pendingChallengeDTO["opponentUserId"]{
+                            opponentID = i as Int
+                        }
+                        game.fetchUsers(){
+                            game.fetchResults() {
+                                pendingChallenges.append(game)
+                                fetchUserHandler()
+                            }
+                        }
+                    }
+                    
+                    
+                    //                    completionHandler([])
+                }
+            }
+        }
+        //        debugPrintln(r)
+    }
+
+    
     ///
     func createQuickGame(completionHandler: (Game! -> ())!){
         var fakeID: Int!
@@ -321,7 +385,7 @@ class NetworkClient {
         } else {
             fakeID = 2415
         }
-//        let fakeID = 617543
+        //        let fakeID = 617543
         createChallenge(numberOfQuestions: 7, opponentId: fakeID) {
             if let handler = completionHandler {
                 handler($0)
@@ -378,22 +442,22 @@ class NetworkClient {
             if let resultsDTO = content as? [String : AnyObject] {
                 let inner: AnyObject? = resultsDTO["result"]
                 if let innerResultDTO = inner as? [String : AnyObject] {
-                var challengerResult:GameResult?
-                if let challengerResultDTO: AnyObject = innerResultDTO["challenger"] {
-                    debugPrintln("Parsing game initiator result..")
-                    let dto = challengerResultDTO as [String : AnyObject]
-                    challengerResult = GameResult(gameId:gameId, resultDTO: dto)
-                }
-                var opponentResult:GameResult?
-                if let opponentResultDTO: AnyObject = innerResultDTO["opponent"] {
-                    debugPrintln("Parsing game opponent result..")
-                    let dto = opponentResultDTO as [String : AnyObject]
-                    opponentResult = GameResult(gameId:gameId, resultDTO: dto)
-                }
-                
-                if let c = completionHandler{
-                    c((challengerResult:challengerResult, opponentResult:opponentResult))
-                }
+                    var challengerResult:GameResult?
+                    if let challengerResultDTO: AnyObject = innerResultDTO["challenger"] {
+                        debugPrintln("Parsing game initiator result..")
+                        let dto = challengerResultDTO as [String : AnyObject]
+                        challengerResult = GameResult(gameId:gameId, resultDTO: dto)
+                    }
+                    var opponentResult:GameResult?
+                    if let opponentResultDTO: AnyObject = innerResultDTO["opponent"] {
+                        debugPrintln("Parsing game opponent result..")
+                        let dto = opponentResultDTO as [String : AnyObject]
+                        opponentResult = GameResult(gameId:gameId, resultDTO: dto)
+                    }
+                    
+                    if let c = completionHandler{
+                        c((challengerResult:challengerResult, opponentResult:opponentResult))
+                    }
                 }
             }
         }
