@@ -1,18 +1,25 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "1x",
-      "filename" : "Time 2.png"
+      "filename" : "Time.png"
     },
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "Time 2@2x.png"
+      "filename" : "Time@2x.png"
     },
     {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "iphone",
+      "filename" : "Time@r2x.png",
+      "subtype" : "retina4",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "filename" : "Time@3x.png"
     }
   ],
   "info" : {

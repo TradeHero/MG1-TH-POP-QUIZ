@@ -1,18 +1,25 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "1x",
-      "filename" : "img-lightray.png"
+      "filename" : "Light Win.png"
     },
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "img-lightray@2x.png"
+      "filename" : "Light Win@2x.png"
     },
     {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "iphone",
+      "filename" : "Light Win@r2x.png",
+      "subtype" : "retina4",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "filename" : "Light Win@3x.png"
     }
   ],
   "info" : {

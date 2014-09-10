@@ -1,18 +1,25 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "1x",
-      "filename" : "bg-losescreen.png"
+      "filename" : "bg2.png"
     },
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "bg-losescreen@2x.png"
+      "filename" : "bg2@2x.png"
     },
     {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "iphone",
+      "filename" : "bg2@r2x.png",
+      "subtype" : "retina4",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "filename" : "bg2@3x.png"
     }
   ],
   "info" : {

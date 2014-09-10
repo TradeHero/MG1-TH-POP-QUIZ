@@ -853,7 +853,7 @@
     </scenes>
     <resources>
         <image name="BadgeView" width="49" height="62"/>
-        <image name="BlueCategoryBackground" width="640" height="570"/>
+        <image name="BlueCategoryBackground" width="640" height="596"/>
         <image name="CountdownTimerButtonBackground" width="163" height="163"/>
         <image name="EmptyAvatar" width="200" height="200"/>
         <image name="ExperienceIcon" width="68" height="77"/>
@@ -865,7 +865,7 @@
         <image name="QuizHeaderBackground" width="320" height="85"/>
         <image name="QuizTimerBackground" width="55" height="35"/>
         <image name="QuizViewBackground" width="320" height="568"/>
-        <image name="RedCategoryBackground" width="640" height="581"/>
+        <image name="RedCategoryBackground" width="640" height="577"/>
         <image name="RemoveOptionsButtonBackground" width="304" height="46"/>
         <image name="WaitingStamp" width="93" height="26"/>
         <image name="WinBoxBackground" width="455" height="208"/>
