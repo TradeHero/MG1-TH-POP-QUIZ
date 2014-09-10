@@ -1,14 +1,25 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "1x",
       "filename" : "empty-avatar.png"
     },
     {
-      "idiom" : "universal",
+      "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "empty-avatar@2x.jpg"
+      "filename" : "empty-avatar@2x.png"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "empty-avatar@2x-1.png",
+      "subtype" : "retina4",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "filename" : "empty-avatar@3x.png"
     }
   ],
   "info" : {
