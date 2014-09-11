@@ -108,5 +108,13 @@ final class GameResult {
         if let date: AnyObject = resultDTO["submittedAtUtc"] {
             self.submittedAtUtcString = date as String
         }
+        
+        if let cs: AnyObject = resultDTO["correctStreak"] {
+            self.highestCombo = cs as Int
+        }
+        
+        if let h: AnyObject = resultDTO["hintsUsed"] {
+            self.hintsUsed = h as Int
+        }
     }
 }

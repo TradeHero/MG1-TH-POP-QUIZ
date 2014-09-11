@@ -165,7 +165,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 55
+        return 48
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

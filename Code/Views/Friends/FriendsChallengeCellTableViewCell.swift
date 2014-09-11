@@ -57,7 +57,7 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.friendAvatarView.layer.borderWidth = 2
+        self.friendAvatarView.layer.borderWidth = 1
         self.friendAvatarView.layer.borderColor = UIColor.whiteColor().CGColor
         self.friendAvatarView.clipsToBounds = true
         self.layer.cornerRadius = 3
@@ -84,12 +84,15 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
         self.friendAvatarView.sd_cancelCurrentImageLoad()
         self.friendAvatarView.image = nil
         self.friendNameLabel.text = nil
+        super.layoutIfNeeded()
     }
     
     func bindFriendUser(friendUser:THUserFriend, index:Int){
         self.friendUser = friendUser
         self.friendNameLabel.text = friendUser.name
-        self.friendAvatarView.sd_setImageWithURL(NSURL(string: friendUser.facebookPictureURL))
+        self.friendAvatarView.sd_setImageWithURL(NSURL(string: friendUser.facebookPictureURL)) { (image, _, _, _) in
+            self.friendAvatarView.image = image.centerCropImage()
+        }
         self.index = index
     }
     

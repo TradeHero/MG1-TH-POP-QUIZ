@@ -78,7 +78,7 @@ class QuestionResultTableViewCell: UITableViewCell {
         configureSelfResult()
         if opponentQuestionResult.isCorrect {
             opponentQuestionTimeLabel.hidden = false
-            opponentQuestionTimeLabel.text = "\(opponentQuestionResult.timeTaken.roundToNearest1DecimalPlace())s"
+            opponentQuestionTimeLabel.text = "\(opponentQuestionResult.timeTaken)s"
             opponentQuestionResultImageView.image = UIImage(named: "ResultCorrectQuestionBox")
         } else {
             opponentQuestionTimeLabel.hidden = true
@@ -89,7 +89,7 @@ class QuestionResultTableViewCell: UITableViewCell {
     private func configureSelfResult(){
         if selfQuestionResult.isCorrect {
             selfQuestionTimeLabel.hidden = false
-            selfQuestionTimeLabel.text = "\(selfQuestionResult.timeTaken.roundToNearest1DecimalPlace())s"
+            selfQuestionTimeLabel.text = "\(selfQuestionResult.timeTaken)s"
             selfQuestionResultImageView.image = UIImage(named: "ResultCorrectQuestionBox")
         } else {
             selfQuestionTimeLabel.hidden = true

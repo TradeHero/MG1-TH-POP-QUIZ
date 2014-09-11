@@ -1,32 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="i3Y-gV-xhx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i3Y-gV-xhx">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--LoginViewController-->
         <scene sceneID="ZR9-El-789">
             <objects>
                 <viewController storyboardIdentifier="LoginViewController" title="LoginViewController" id="i3Y-gV-xhx" customClass="LoginViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1eA-Kl-pYA"/>
+                        <viewControllerLayoutGuide type="bottom" id="whF-0h-7WK"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2j7-GK-TDo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginSceneBackground" id="l2w-cF-deM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="l2w-cF-deM">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="568" id="8nN-Rz-oYD"/>
+                                    <constraint firstAttribute="width" constant="320" id="M5F-aj-hqO"/>
+                                </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" id="Dhz-W5-BUP" customClass="FBLoginView">
-                                <rect key="frame" x="44" y="411" width="232" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginDecals" translatesAutoresizingMaskIntoConstraints="NO" id="oPh-tF-PXQ">
+                                <rect key="frame" x="25" y="41" width="271" height="331"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oPh-tF-PXQ" secondAttribute="height" multiplier="271:331" id="HYT-pk-sft"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="331" id="gef-Gd-Qz8"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="271" id="suc-4T-QxU"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhz-W5-BUP" customClass="FBLoginView">
+                                <rect key="frame" x="44" y="478" width="232" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="232" id="0ld-Yq-SIa"/>
+                                    <constraint firstAttribute="width" secondItem="Dhz-W5-BUP" secondAttribute="height" multiplier="116:25" id="IZq-zY-efv"/>
+                                    <constraint firstAttribute="height" constant="50" id="Zgw-Wp-leX"/>
+                                </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginDecals" id="oPh-tF-PXQ">
-                                <rect key="frame" x="25" y="60" width="271" height="331"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oPh-tF-PXQ" firstAttribute="leading" secondItem="2j7-GK-TDo" secondAttribute="leading" constant="25" id="0xd-nD-Urx"/>
+                            <constraint firstAttribute="centerY" secondItem="l2w-cF-deM" secondAttribute="centerY" id="4YT-YZ-qVv"/>
+                            <constraint firstAttribute="trailing" secondItem="oPh-tF-PXQ" secondAttribute="trailing" constant="24" id="AtO-DT-gsp"/>
+                            <constraint firstItem="oPh-tF-PXQ" firstAttribute="top" secondItem="1eA-Kl-pYA" secondAttribute="bottom" constant="21" id="BEU-l7-bKE"/>
+                            <constraint firstItem="whF-0h-7WK" firstAttribute="top" secondItem="Dhz-W5-BUP" secondAttribute="bottom" constant="40" id="Ehs-eh-XZF"/>
+                            <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="oPh-tF-PXQ" secondAttribute="bottom" constant="196" id="Y64-ac-2b3"/>
+                            <constraint firstItem="Dhz-W5-BUP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2j7-GK-TDo" secondAttribute="leading" constant="44" id="dP8-WZ-9bG"/>
+                            <constraint firstAttribute="centerX" secondItem="l2w-cF-deM" secondAttribute="centerX" id="gGd-YN-y49"/>
+                            <constraint firstAttribute="trailing" secondItem="Dhz-W5-BUP" secondAttribute="trailing" constant="44" id="vU6-E1-zav"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="2XT-mF-vUg"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
@@ -36,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LBp-PP-LNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-129" y="119"/>
+            <point key="canvasLocation" x="-265" y="132"/>
         </scene>
     </scenes>
     <resources>

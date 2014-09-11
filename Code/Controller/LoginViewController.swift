@@ -47,6 +47,8 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         }
         
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        hud.indicatorView = nil
+        
         hud.textLabel.text = "Logging in..."
         
         NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken) { user in

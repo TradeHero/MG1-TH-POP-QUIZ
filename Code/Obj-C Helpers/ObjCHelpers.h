@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (Transparency)
+@interface UIImage (Helper)
 
 - (instancetype) replaceWhiteinImageWithTransparency;
-
+- (instancetype) centerCropImage;
 @end
 
 @interface UIView (roundedCorners)
@@ -32,14 +32,5 @@ typedef NS_ENUM(NSInteger,UITableViewCellLoadWaveAnimationDirection) {
 @interface UITableView (Wave)
 
 - (void)reloadDataAnimateWithWave:(UITableViewCellLoadWaveAnimationDirection)animation;
-
-@end
-
-@interface UIView (GCLibrary)
-
-@property (nonatomic, assign) CGFloat height;
-@property (nonatomic, assign) CGFloat width;
-@property (nonatomic, assign) CGFloat x;
-@property (nonatomic, assign) CGFloat y;
 
 @end

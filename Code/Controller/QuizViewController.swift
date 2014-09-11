@@ -105,7 +105,7 @@ class QuizViewController: UIViewController {
     
     private var opponentQuestionCorrect: Int = 0
     
-    private var combos: UInt = 0 {
+    private var combos: Int = -1 {
         didSet {
             if combos > highestCombo {
                 highestCombo = combos
@@ -113,7 +113,7 @@ class QuizViewController: UIViewController {
         }
     }
     
-    private var highestCombo: UInt = 0
+    private var highestCombo: Int = 0
     
     private var hintUsed:UInt = 0
     
@@ -189,7 +189,7 @@ class QuizViewController: UIViewController {
         } else {
             sender.configureAsFalse()
             revealCorrectAnswer()
-            combos = 0
+            combos = -1
             let currentQuestionScore = calculateScore()
             produceResultForCurrentQuestion(false, score: currentQuestionScore)
             AudioServicesPlayAlertSound(0x00000FFF)
@@ -566,7 +566,7 @@ class QuizViewController: UIViewController {
     }
     
     private func produceResultForCurrentQuestion(isCorrect:Bool, score:Int){
-        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: 10 - current_timeLeft, correct: isCorrect, score: score))
+        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: (10 - current_timeLeft).roundToNearest1DecimalPlace(), correct: isCorrect, score: score))
     }
     
     func bindGameAndUsers(game:Game, player:THUser, opponent:THUser){

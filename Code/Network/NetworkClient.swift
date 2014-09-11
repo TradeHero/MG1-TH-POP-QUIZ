@@ -385,7 +385,7 @@ class NetworkClient {
         } else {
             fakeID = 2415
         }
-        //        let fakeID = 617543
+        
         createChallenge(numberOfQuestions: 7, opponentId: fakeID) {
             if let handler = completionHandler {
                 handler($0)
@@ -396,13 +396,13 @@ class NetworkClient {
     /**
     POST api/games/postresults
     */
-    func postGameResults(game:Game, highestCombo:UInt, noOfHintsUsed hints: UInt,currentScore:Int, questionResults:[QuestionResult], completionHandler:(Game -> ())!){
+    func postGameResults(game:Game, highestCombo:Int, noOfHintsUsed hints: UInt,currentScore:Int, questionResults:[QuestionResult], completionHandler:(Game -> ())!){
         let url = "\(THGameAPIBaseURL)/postResults"
         configureCompulsoryHeaders()
         debugPrintln("Posting results for game \(game.gameID)...")
         var resultSet:[[String:AnyObject]] = []
         for result in questionResults {
-            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "combo": highestCombo, "time" : result.timeTaken, "rawScore": result.rawScore, "noOfHintsUsed": hints]
+            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "correctStreak": highestCombo, "time" : result.timeTaken, "rawScore": result.rawScore, "hintsUsed": hints]
             resultSet.append(resultData)
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
@@ -461,7 +461,7 @@ class NetworkClient {
                 }
             }
         }
-        debugPrintln(r)
+//        debugPrintln(r)
     }
     
     ///

@@ -58,7 +58,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="EmptyAvatar" width="447" height="447"/>
+        <image name="EmptyAvatar" width="200" height="200"/>
         <image name="GreenButtonBackground" width="163" height="61"/>
     </resources>
 </document>

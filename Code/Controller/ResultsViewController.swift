@@ -177,26 +177,26 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
             cell.attribute = "Hints Used"
-            cell.selfAttributeDetail = "\(2)"
+            cell.selfAttributeDetail = "\(playerResult.hintsUsed)"
             cell.labelTintColor = UIColor(hex: 0xBF0221)
             
-            
-            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(1)" : "--"
+
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.hintsUsed)" : "--"
             
             return cell
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
             cell.attribute = "Highest Combo"
-            cell.selfAttributeDetail = "x\(5)"
+            cell.selfAttributeDetail = "\(playerResult.highestCombo)"
             
             cell.labelTintColor = UIColor(hex: 0x457B1D)
-            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "x\(1)" : "--"
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.highestCombo)" : "--"
             return cell
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
             cell.attribute = "Total Score"
-            cell.selfAttributeDetail = "\(2)"
-            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(1)" : "--"
+            cell.selfAttributeDetail = "\(playerResult.finalScore)"
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.finalScore.decimalFormattedString)" : "--"
             return cell
         default:
             return UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")

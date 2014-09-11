@@ -19,6 +19,9 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 3
+        self.challengerImageView.layer.borderWidth = 1
+        self.challengerImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.challengerImageView.clipsToBounds = true
         self.clipsToBounds = true
         self.challengerDisplayNameLabel.text = ""
         // Initialization code
@@ -65,7 +68,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             opponent = game.initiatingPlayer
             if game.isGameCompletedByChallenger {
                 var attributedString = NSMutableAttributedString(string:"Your Score: ")
-                var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 9)])
+                var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 14)])
                 attributedString.appendAttributedString(boldStr)
                 self.scoreDetailLabel.attributedText  = attributedString
             }
@@ -73,8 +76,8 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             player = game.initiatingPlayer
             opponent = game.opponentPlayer
             if game.isGameCompletedByChallenger {
-                var attributedString = NSMutableAttributedString(string:"\(player.displayName)'s Score: ")
-                var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 9)])
+                var attributedString = NSMutableAttributedString(string:"Score: ")
+                var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 14)])
                 attributedString.appendAttributedString(boldStr)
 
                 self.scoreDetailLabel.attributedText  = attributedString
@@ -82,13 +85,15 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         }
         
         self.challengerDisplayNameLabel.text = player!.displayName
-        self.challengerImageView.sd_setImageWithURL(NSURL(string: player!.pictureURL))
+        self.challengerImageView.sd_setImageWithURL(NSURL(string: player!.pictureURL)) { (image, _, _, _) in
+            self.challengerImageView.image = image.centerCropImage()
+        }
         
-        let str = self.challengerDisplayNameLabel.text as NSString?
-        let r = str?.sizeWithAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 14.0)]).width
-        
-        self.challengerDisplayNameLabel.width = r!
-        self.gameStatusImageView.x = self.challengerDisplayNameLabel.x + r! + 5
+//        let str = self.challengerDisplayNameLabel.text as NSString?
+//        let r = str?.sizeWithAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 14.0)]).width
+//        
+//        self.challengerDisplayNameLabel.width = r!
+//        self.gameStatusImageView.x = self.challengerDisplayNameLabel.x + r! + 5
         
     }
     
@@ -120,16 +125,18 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     func configureAsInvitedMode() {
         
         self.actionButton.enabled = false
-        self.actionButton.setTitle("Invited", forState: .Normal)
+        self.actionButton.setTitle("Waiting..", forState: .Normal)
         self.actionButton.setBackgroundImage(UIImage(named: "BlueButtonBackground"), forState: .Normal)
         self.gameStatusImageView.alpha = 0
         self.gameStatusImageView.image = nil
     }
     
     override func prepareForReuse() {
+        self.challengerImageView.sd_cancelCurrentImageLoad()
         self.challengerImageView.image = nil
         self.challengerDisplayNameLabel.text = ""
         self.scoreDetailLabel.text = ""
+        super.layoutIfNeeded()
     }
     
     override var frame: CGRect {
@@ -147,13 +154,6 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
-        let str = self.challengerDisplayNameLabel.text as NSString?
-        let r = str?.sizeWithAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 14.0)]).width
-        
-        self.challengerDisplayNameLabel.width = r!
-        self.gameStatusImageView.x = self.challengerDisplayNameLabel.x + r! + 5
-
-
     }
     
 }

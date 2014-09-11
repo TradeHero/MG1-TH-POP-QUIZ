@@ -101,26 +101,27 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZQN-Sv-0eE">
+                                        <rect key="frame" x="263" y="30" width="39" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="ProfileDetailDisclosureButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                             </view>
                         </subviews>
                     </view>
                     <navigationItem key="navigationItem" title="TradeHero PopQuiz" id="boz-3P-itM">
                         <barButtonItem key="leftBarButtonItem" style="done" id="zfQ-1Z-28w">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MDS-3r-QEE" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MDS-3r-QEE">
                                 <rect key="frame" x="16" y="7" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="13"/>
                                 <state key="normal" backgroundImage="LogoutIcon">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="logoutClicked:" destination="mQ1-C7-5Us" eventType="touchUpInside" id="x8l-qw-Gzx"/>
                                 </connections>
@@ -133,7 +134,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7oK-7S-SeK">
                                 <rect key="frame" x="147" y="198" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="SettingsIcon"/>
+                                <state key="normal" backgroundImage="SettingsIcon"/>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -242,6 +243,7 @@
         <image name="FriendSceneBackground" width="640" height="1136"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
         <image name="LogoutIcon" width="58" height="58"/>
+        <image name="ProfileDetailDisclosureButton" width="85" height="88"/>
         <image name="ProfileHeaderBackground" width="640" height="192"/>
         <image name="RandomChallengeButtonBackground" width="271" height="89"/>
         <image name="SettingsIcon" width="58" height="58"/>

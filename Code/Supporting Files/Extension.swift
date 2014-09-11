@@ -78,8 +78,17 @@ extension Double {
 }
 
 extension CGFloat {
+    
+    func format(f: String) -> String {
+        return NSString(format: "%\(f)f", self)
+    }
+    
+//    func roundToNearest1DecimalPlace() -> CGFloat {
+//        return self.format(".1").CGFloatValue
+//    }
+    
     func roundToNearest1DecimalPlace() -> CGFloat {
-        return Double(self).format(".1").CGFloatValue
+        return CGFloat(Int(floor(self * 10 + 0.5))) / 10
     }
 }
 
@@ -123,6 +132,57 @@ extension UIColor {
     }
 }
 extension UIView {
+    
+    var x: CGFloat {
+        get {
+            return self.center.x
+        }
+        
+        set(x) {
+            var frame = self.frame
+            frame.origin.x = x
+            self.frame = frame
+        }
+    }
+    
+    var y: CGFloat {
+        get {
+            return self.center.y
+        }
+        
+        set(y) {
+            var frame = self.frame
+            frame.origin.y = y
+            self.frame = frame
+        }
+    }
+    
+    var width: CGFloat {
+        get {
+            return self.frame.size.width
+        }
+        
+        set(width) {
+            var frame = self.frame
+            frame.size.width = width
+            self.frame = frame
+        }
+    }
+
+    var height: CGFloat {
+        get {
+            return self.frame.size.height
+        }
+        
+        set(height) {
+            var frame = self.frame
+            frame.size.height = height
+            self.frame = frame
+        }
+    }
+
+    
+    
     func removeAllSubviews(){
         for view in (self.subviews as [UIView]){
             view.removeFromSuperview()
