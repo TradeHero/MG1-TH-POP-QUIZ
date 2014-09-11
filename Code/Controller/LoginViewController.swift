@@ -42,7 +42,7 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         
         if !fbFlag {
             fbFlag = true
-        }else {
+        } else {
             return
         }
         

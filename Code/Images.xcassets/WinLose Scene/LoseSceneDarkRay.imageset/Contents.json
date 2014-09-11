@@ -3,23 +3,23 @@
     {
       "idiom" : "iphone",
       "scale" : "1x",
-      "filename" : "Down bkg.png"
+      "filename" : "Down-bkg.png"
     },
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "Down bkg@2x.png"
+      "filename" : "Down-bkg@2x.png"
     },
     {
       "idiom" : "iphone",
-      "filename" : "Down bkg@r2x.png",
+      "filename" : "Down-bkg@r2x.png",
       "subtype" : "retina4",
       "scale" : "2x"
     },
     {
       "idiom" : "iphone",
       "scale" : "3x",
-      "filename" : "Down bkg@3x.png"
+      "filename" : "Down-bkg@3x.png"
     }
   ],
   "info" : {
