@@ -177,4 +177,31 @@
     
 }
 
+
+
+@end
+
+
+@implementation NSDateFormatter (RFC822)
+
++ (instancetype)rfc822Formatter {
+    static NSDateFormatter *formatter = nil;
+    if (formatter == nil) {
+        formatter = [[NSDateFormatter alloc] init];
+        NSLocale *enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        [formatter setLocale:enUS];
+        [formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss z"];
+    }
+    return formatter;
+}
+
+
+@end
+
+@implementation NSDate (RFC822)
+
++ (instancetype)dateFromRFC822:(NSString *)date {
+    return [[NSDateFormatter rfc822Formatter] dateFromString:date];
+}
+
 @end

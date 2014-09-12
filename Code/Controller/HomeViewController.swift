@@ -58,6 +58,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "FriendsViewPushSegue" {
             let vc = segue.destinationViewController as FriendsViewController
+        } else if segue.identifier == "ProfileViewPushSegue" {
+//            let vc = segue.destinationViewController
         }
         
     }

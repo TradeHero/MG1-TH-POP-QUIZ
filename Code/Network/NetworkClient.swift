@@ -328,21 +328,20 @@ class NetworkClient {
             if error != nil {
                 debugPrintln(error)
             }
-            
+            var pendingChallenges: [Game] = []
             if let pendingChallengesDTOs = content as? [AnyObject] {
                 if pendingChallengesDTOs.count == 0 {
                     debugPrintln("User has no opponent pending challenges.")
-                    completionHandler([])
+                    completionHandler(pendingChallenges)
                 } else {
                     //                    debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
                     var numberCompleted = 0
                     var total = pendingChallengesDTOs.count
-                    var pendingChallenges: [Game] = []
                     
                     let fetchUserHandler: () -> () = {
                         numberCompleted++
                         if numberCompleted == total {
-                            debugPrintln("Successfully fetched \(total)  opponent pending challenge(s).")
+                            debugPrintln("Successfully fetched \(total) opponent pending challenge(s).")
                             if let handler = completionHandler {
                                 handler(pendingChallenges)
                             }
@@ -363,6 +362,68 @@ class NetworkClient {
                         game.fetchUsers(){
                             game.fetchResults() {
                                 pendingChallenges.append(game)
+                                fetchUserHandler()
+                            }
+                        }
+                    }
+                    
+                    
+                    //                    completionHandler([])
+                }
+            }
+        }
+        //        debugPrintln(r)
+    }
+
+    /**
+    GET api/games/closed
+    */
+    func fetchClosedChallenges(completionHandler: ([Game] -> ())!){
+        let url = "\(THGameAPIBaseURL)/theirturn"
+        
+        configureCompulsoryHeaders()
+        debugPrintln("Fetching all closed challenges for authenticated user...")
+        weak var wself = self
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
+            _, response, content, error in
+            var sself = wself!
+            if error != nil {
+                debugPrintln(error)
+            }
+            
+            if let closedChallengesDTOs = content as? [AnyObject] {
+                if closedChallengesDTOs.count == 0 {
+                    debugPrintln("User has no closed challenges.")
+                    completionHandler([])
+                } else {
+                    var numberCompleted = 0
+                    var total = closedChallengesDTOs.count
+                    var closedChallenges: [Game] = []
+                    
+                    let fetchUserHandler: () -> () = {
+                        numberCompleted++
+                        if numberCompleted == total {
+                            debugPrintln("Successfully fetched \(total) closed challenge(s).")
+                            if let handler = completionHandler {
+                                handler(closedChallenges)
+                            }
+                        }
+                    }
+                    for closedChallengeDTO in closedChallengesDTOs as [[String: AnyObject]] {
+                        let game = Game(compactGameDTO: closedChallengeDTO)
+                        
+                        var initiatorID: Int!
+                        if let i: AnyObject = closedChallengeDTO["createdByUserId"]{
+                            initiatorID = i as Int
+                        }
+                        
+                        var opponentID: Int!
+                        if let i: AnyObject = closedChallengeDTO["opponentUserId"]{
+                            opponentID = i as Int
+                        }
+                        game.fetchUsers(){
+                            game.fetchResults() {
+                                closedChallenges.append(game)
                                 fetchUserHandler()
                             }
                         }
@@ -464,6 +525,29 @@ class NetworkClient {
 //        debugPrintln(r)
     }
     
+    ///MARK:- Game profile
+    
+    /**
+    POST api/games/?
+    */
+    func updateInGameName(newName: String, completionHandler:()->()){
+//        let url = "\(THGameAPIBaseURL)/??"
+//        configureCompulsoryHeaders()
+//        
+//        
+//        weak var wself = self
+//        let r = Alamofire.request(.POST, url, parameters: ["ign" : newName], encoding: JSONEncoding).responseJSON() {
+//            _, response, content, error in
+//            if let sself = wself {
+//                sself.updateUser(sself.authenticatedUser) {
+//                    sself.authenticatedUser = $0
+//                }
+//            }
+//        }
+    }
+    
+    
+    
     ///
     /// Logs out current session, removing credentials and user details stored in keychain or in device.
     ///
@@ -502,6 +586,14 @@ class NetworkClient {
             if let profileDTODict = content as? [String: AnyObject] {
                 var user = THUser(profileDTO: profileDTODict)
                 EGOCache.globalCache().setObject(user, forKey: userCacheKey)
+                completionHandler(user)
+            }
+        }
+    }
+    
+    func updateUser(user:THUser, completionHandler: THUser -> ()){
+        self.fetchUser(user.userId, force: true) {
+            if let u = $0 {
                 completionHandler(user)
             }
         }

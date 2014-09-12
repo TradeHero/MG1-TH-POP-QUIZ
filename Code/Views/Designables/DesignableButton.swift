@@ -46,7 +46,6 @@ class DesignableButton: UIButton {
     func setup(){
         if let t = self.titleLabel {
             t.lineBreakMode = NSLineBreakMode.ByWordWrapping
-            t.textAlignment = NSTextAlignment.Center
             t.adjustsFontSizeToFitWidth = true;
             t.minimumScaleFactor = 8/t.font.pointSize
             t.numberOfLines = 3

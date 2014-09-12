@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="jzv-90-m6Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A343f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jzv-90-m6Z">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--TradeHero PopQuiz-->
         <scene sceneID="reb-OH-NfV">
             <objects>
                 <viewController storyboardIdentifier="ChallengeViewController" id="mQ1-C7-5Us" customClass="HomeViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OSh-fS-Mho"/>
+                        <viewControllerLayoutGuide type="bottom" id="GpJ-pI-HPo"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gi5-tJ-xMN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="tvB-7H-ejU">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvB-7H-ejU">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HomeSceneBackground" id="Raq-z3-tZB">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="HomeSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-z3-tZB">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="eIl-7I-DR2">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="eIl-7I-DR2">
                                         <rect key="frame" x="17" y="205" width="286" height="363"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="mQ1-C7-5Us" id="tAq-o3-7PB"/>
                                             <outlet property="delegate" destination="mQ1-C7-5Us" id="CQQ-Of-8lc"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tyA-dZ-ZWs">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyA-dZ-ZWs">
                                         <rect key="frame" x="167" y="146" width="135" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                         <state key="normal" backgroundImage="ChallengeFriendButtonBackground">
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -41,9 +41,8 @@
                                             <segue destination="aaP-JZ-Z0I" kind="push" identifier="FriendsViewPushSegue" id="ITW-b9-4cc"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vDK-mj-G2c">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDK-mj-G2c">
                                         <rect key="frame" x="19" y="146" width="135" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="RandomChallengeButtonBackground">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -54,17 +53,14 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" id="qTb-Ny-vYW">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qTb-Ny-vYW">
                                 <rect key="frame" x="0.0" y="39" width="320" height="93"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProfileHeaderBackground" id="CQM-YR-lFB">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ProfileHeaderBackground" translatesAutoresizingMaskIntoConstraints="NO" id="CQM-YR-lFB">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" id="hOW-Oh-vVN" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hOW-Oh-vVN" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="20" y="14" width="63" height="63"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="EmptyAvatarAskToAdd"/>
@@ -76,37 +72,35 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BadgeView" id="fE7-Hx-EcL">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BadgeView" translatesAutoresizingMaskIntoConstraints="NO" id="fE7-Hx-EcL">
                                         <rect key="frame" x="90" y="43" width="22" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Knight" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9FL-g8-xZG">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Knight" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9FL-g8-xZG">
                                         <rect key="frame" x="115" y="40" width="133" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Te-mY-oNH">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Level 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Te-mY-oNH">
                                         <rect key="frame" x="115" y="54" width="60" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ryne Cheow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rjv-r9-yGC">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ryne Cheow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjv-r9-yGC">
                                         <rect key="frame" x="90" y="14" width="203" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZQN-Sv-0eE">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQN-Sv-0eE">
                                         <rect key="frame" x="263" y="30" width="39" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" backgroundImage="ProfileDetailDisclosureButton">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="ReR-pk-HA9" kind="push" identifier="ProfileViewPushSegue" id="0P9-Bg-hQB"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </view>
@@ -150,21 +144,183 @@
             </objects>
             <point key="canvasLocation" x="1637" y="160"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="IeC-3H-rzM">
+            <objects>
+                <viewController id="ReR-pk-HA9" customClass="ProfileViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ugc-6s-vyg"/>
+                        <viewControllerLayoutGuide type="bottom" id="E5K-d7-vzf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lJT-wv-uRW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HomeSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="By3-up-24F">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7l1-NF-sDD">
+                                <rect key="frame" x="0.0" y="39" width="320" height="93"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProfileHeaderBackgroundv2" translatesAutoresizingMaskIntoConstraints="NO" id="0OY-qD-QHC">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Af-Gg-R8C" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="14" width="63" height="63"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="9Af-Gg-R8C" secondAttribute="height" multiplier="1:1" id="vY5-mD-7U0"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="EmptyAvatarAskToAdd"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageEditIcon" translatesAutoresizingMaskIntoConstraints="NO" id="U5x-DK-cGC">
+                                        <rect key="frame" x="63" y="55" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="U5x-DK-cGC" secondAttribute="height" multiplier="1:1" id="Yks-6M-CBL"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ryne Cheow" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="m9T-s3-uQZ">
+                                        <rect key="frame" x="96" y="14" width="175" height="30"/>
+                                        <color key="backgroundColor" red="0.23529411764705882" green="0.22745098039215686" blue="0.22745098039215686" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="175" id="TFX-Zj-rQJ"/>
+                                            <constraint firstAttribute="width" secondItem="m9T-s3-uQZ" secondAttribute="height" multiplier="35:6" id="uJC-dU-CwB"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="ReR-pk-HA9" id="rdE-Jb-uKh"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="io0-Bs-qcv" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
+                                        <rect key="frame" x="96" y="52" width="175" height="30"/>
+                                        <color key="backgroundColor" red="0.23529411759999999" green="0.2274509804" blue="0.2274509804" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Knight">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="7"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="U5x-DK-cGC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9Af-Gg-R8C" secondAttribute="leading" constant="43" id="0k8-nQ-9XW"/>
+                                    <constraint firstItem="m9T-s3-uQZ" firstAttribute="height" secondItem="io0-Bs-qcv" secondAttribute="height" id="5YQ-PI-uL8"/>
+                                    <constraint firstAttribute="width" secondItem="0OY-qD-QHC" secondAttribute="width" id="74L-zo-w7l"/>
+                                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="io0-Bs-qcv" secondAttribute="trailing" constant="74" id="9bU-hP-HTi"/>
+                                    <constraint firstItem="U5x-DK-cGC" firstAttribute="trailing" secondItem="9Af-Gg-R8C" secondAttribute="trailing" constant="5" id="FdB-qw-f4t"/>
+                                    <constraint firstItem="m9T-s3-uQZ" firstAttribute="width" secondItem="io0-Bs-qcv" secondAttribute="width" id="Fvm-Yv-gEs"/>
+                                    <constraint firstItem="U5x-DK-cGC" firstAttribute="bottom" secondItem="9Af-Gg-R8C" secondAttribute="bottom" constant="3" id="Iyt-T3-rX4"/>
+                                    <constraint firstItem="0OY-qD-QHC" firstAttribute="leading" secondItem="7l1-NF-sDD" secondAttribute="leading" id="KWK-2x-3Iu"/>
+                                    <constraint firstItem="0OY-qD-QHC" firstAttribute="top" secondItem="7l1-NF-sDD" secondAttribute="top" id="MbR-Mp-VQo"/>
+                                    <constraint firstAttribute="trailing" secondItem="0OY-qD-QHC" secondAttribute="trailing" id="Nhd-AF-jxo"/>
+                                    <constraint firstItem="9Af-Gg-R8C" firstAttribute="top" secondItem="7l1-NF-sDD" secondAttribute="top" constant="14" id="Npa-bi-iH3"/>
+                                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="m9T-s3-uQZ" secondAttribute="trailing" constant="114" id="PgF-XW-wgS"/>
+                                    <constraint firstAttribute="bottom" secondItem="0OY-qD-QHC" secondAttribute="bottom" constant="-1" id="W90-A2-BUs"/>
+                                    <constraint firstItem="io0-Bs-qcv" firstAttribute="leading" secondItem="9Af-Gg-R8C" secondAttribute="trailing" constant="13" id="XQA-zY-4Ql"/>
+                                    <constraint firstAttribute="bottom" secondItem="io0-Bs-qcv" secondAttribute="bottom" constant="11" id="XqH-FA-3ip"/>
+                                    <constraint firstItem="m9T-s3-uQZ" firstAttribute="top" secondItem="7l1-NF-sDD" secondAttribute="top" constant="14" id="bgf-n2-vjj"/>
+                                    <constraint firstItem="U5x-DK-cGC" firstAttribute="width" secondItem="9Af-Gg-R8C" secondAttribute="height" multiplier="25:63" id="fBE-Ze-l60"/>
+                                    <constraint firstAttribute="width" secondItem="7l1-NF-sDD" secondAttribute="height" multiplier="320:93" id="jSR-P4-D7c"/>
+                                    <constraint firstItem="io0-Bs-qcv" firstAttribute="top" secondItem="m9T-s3-uQZ" secondAttribute="bottom" constant="8" id="mra-zj-IjW"/>
+                                    <constraint firstItem="U5x-DK-cGC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9Af-Gg-R8C" secondAttribute="top" constant="38" id="rbE-CJ-4Of"/>
+                                    <constraint firstAttribute="bottom" secondItem="9Af-Gg-R8C" secondAttribute="bottom" constant="16" id="ten-27-1jZ"/>
+                                    <constraint firstItem="9Af-Gg-R8C" firstAttribute="leading" secondItem="7l1-NF-sDD" secondAttribute="leading" constant="20" id="tr3-qU-VPI"/>
+                                    <constraint firstItem="m9T-s3-uQZ" firstAttribute="leading" secondItem="9Af-Gg-R8C" secondAttribute="trailing" constant="13" id="wk3-vt-lvw"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Ies-gW-fkc" appends="YES" id="VOG-Jo-CfP"/>
+                                </connections>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="cMt-vN-DXN">
+                                <rect key="frame" x="10" y="132" width="301" height="438"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ReR-pk-HA9" id="tY2-ab-zz0"/>
+                                    <outlet property="delegate" destination="ReR-pk-HA9" id="8Ej-b6-7qr"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="7l1-NF-sDD" secondAttribute="trailing" id="1CV-6r-viB"/>
+                            <constraint firstAttribute="bottom" secondItem="By3-up-24F" secondAttribute="bottom" id="IFB-Wk-PrV"/>
+                            <constraint firstItem="cMt-vN-DXN" firstAttribute="top" secondItem="7l1-NF-sDD" secondAttribute="bottom" id="IPb-oe-9EN"/>
+                            <constraint firstItem="By3-up-24F" firstAttribute="leading" secondItem="lJT-wv-uRW" secondAttribute="leading" id="Lrg-Dv-ec3"/>
+                            <constraint firstAttribute="trailing" secondItem="By3-up-24F" secondAttribute="trailing" id="PVn-Pe-Uqe"/>
+                            <constraint firstItem="7l1-NF-sDD" firstAttribute="top" secondItem="lJT-wv-uRW" secondAttribute="top" constant="39" id="b16-ie-9dB"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7l1-NF-sDD" secondAttribute="bottom" constant="300" id="cWP-br-HmD"/>
+                            <constraint firstAttribute="trailing" secondItem="cMt-vN-DXN" secondAttribute="trailing" constant="9" id="mHp-mZ-JGJ"/>
+                            <constraint firstItem="7l1-NF-sDD" firstAttribute="leading" secondItem="lJT-wv-uRW" secondAttribute="leading" id="qiC-rg-tZl"/>
+                            <constraint firstItem="By3-up-24F" firstAttribute="top" secondItem="lJT-wv-uRW" secondAttribute="top" id="xuj-WX-bpQ"/>
+                            <constraint firstAttribute="bottom" secondItem="cMt-vN-DXN" secondAttribute="bottom" constant="-2" id="xxc-JR-Olc"/>
+                            <constraint firstItem="cMt-vN-DXN" firstAttribute="leading" secondItem="lJT-wv-uRW" secondAttribute="leading" constant="10" id="yGx-vS-Fh7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Profile" id="BIe-Oe-6JY">
+                        <barButtonItem key="leftBarButtonItem" id="inW-vQ-iUX">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Db2-JP-gnK">
+                                <rect key="frame" x="129" y="143" width="28" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="BackButtonImagev2">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="EqP-8d-crA">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4Er-2i-x55">
+                                <rect key="frame" x="147" y="198" width="28" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="SettingsIcon"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="inGameNameEditTextField" destination="m9T-s3-uQZ" id="OAl-gv-ueY"/>
+                        <outlet property="rankViewButton" destination="io0-Bs-qcv" id="aHk-sy-PFb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Fo-NU-auB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Ies-gW-fkc">
+                    <connections>
+                        <action selector="imageTapped:" destination="ReR-pk-HA9" id="1nT-18-LJx"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1637" y="962"/>
+        </scene>
         <!--Friends View Controller-->
         <scene sceneID="3K4-wy-p4V">
             <objects>
                 <viewController storyboardIdentifier="FriendsViewController" id="aaP-JZ-Z0I" customClass="FriendsViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="R40-sw-HB2"/>
+                        <viewControllerLayoutGuide type="bottom" id="ank-yl-cNL"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LX1-Jo-413">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FriendSceneBackground" id="Nde-2n-PtG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="FriendSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Nde-2n-PtG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="12" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="xqb-KH-0jp">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="12" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="xqb-KH-0jp">
                                 <rect key="frame" x="17" y="54" width="286" height="514"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableFooterView" contentMode="redraw" searchBarStyle="minimal" id="4wa-s1-k7E">
                                     <rect key="frame" x="0.0" y="0.0" width="286" height="44"/>
@@ -213,7 +369,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2036" y="160"/>
+            <point key="canvasLocation" x="2270" y="160"/>
         </scene>
         <!--THMainNavigationController-->
         <scene sceneID="Wav-rW-fY2">
@@ -237,14 +393,17 @@
     </scenes>
     <resources>
         <image name="BackButtonImage" width="21" height="34"/>
+        <image name="BackButtonImagev2" width="61" height="63"/>
         <image name="BadgeView" width="49" height="62"/>
         <image name="ChallengeFriendButtonBackground" width="271" height="89"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
         <image name="FriendSceneBackground" width="640" height="1136"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
+        <image name="ImageEditIcon" width="47" height="48"/>
         <image name="LogoutIcon" width="58" height="58"/>
         <image name="ProfileDetailDisclosureButton" width="85" height="88"/>
         <image name="ProfileHeaderBackground" width="640" height="192"/>
+        <image name="ProfileHeaderBackgroundv2" width="640" height="202"/>
         <image name="RandomChallengeButtonBackground" width="271" height="89"/>
         <image name="SettingsIcon" width="58" height="58"/>
     </resources>
