@@ -60,12 +60,11 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     func bindChalllenge(challenge:Game, status:ChallengeStatus) {
         self.game = challenge
         self.status = status
-        
+        self.player = game.selfUser
+        self.opponent = game.awayUser
         
         switch status {
         case .Nudge, .Invited:
-            player = game.opponentPlayer
-            opponent = game.initiatingPlayer
             if game.isGameCompletedByChallenger {
                 var attributedString = NSMutableAttributedString(string:"Your Score: ")
                 var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 14)])
@@ -73,8 +72,6 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
                 self.scoreDetailLabel.attributedText  = attributedString
             }
         case .Play, .Accept:
-            player = game.initiatingPlayer
-            opponent = game.opponentPlayer
             if game.isGameCompletedByChallenger {
                 var attributedString = NSMutableAttributedString(string:"Score: ")
                 var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 14)])
@@ -84,17 +81,11 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             }
         }
         
-        self.challengerDisplayNameLabel.text = player!.displayName
-        self.challengerImageView.sd_setImageWithURL(NSURL(string: player!.pictureURL)) { (image, _, _, _) in
+        self.challengerDisplayNameLabel.text = opponent!.displayName
+        self.challengerImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL)) { (image, _, _, _) in
             self.challengerImageView.image = image.centerCropImage()
         }
-        
-//        let str = self.challengerDisplayNameLabel.text as NSString?
-//        let r = str?.sizeWithAttributes([NSFontAttributeName: UIFont(name: "AvenirNext-Regular", size: 14.0)]).width
-//        
-//        self.challengerDisplayNameLabel.width = r!
-//        self.gameStatusImageView.x = self.challengerDisplayNameLabel.x + r! + 5
-        
+
     }
     
     func configureAsPlayChallengesMode() {

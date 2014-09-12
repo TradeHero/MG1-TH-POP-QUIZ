@@ -12,11 +12,12 @@
 
 - (instancetype) replaceWhiteinImageWithTransparency;
 - (instancetype) centerCropImage;
+
 @end
 
 @interface UIView (roundedCorners)
 
-- (void)roundCornersOnTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius;
+//- (void)roundCornersOnTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius;
 
 @end
 

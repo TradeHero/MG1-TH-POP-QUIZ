@@ -27,8 +27,20 @@ class DesignableRoundedRectangleView: UIView {
         }
     }
     
+    @IBInspectable var borderColor: UIColor = UIColor.clearColor() {
+        didSet {
+            layer.borderColor = borderColor.CGColor
+        }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
     func setup(){
-        self.backgroundColor = UIColor.blackColor()
+//        self.backgroundColor = UIColor.blackColor()
     }
     
     override func prepareForInterfaceBuilder() {

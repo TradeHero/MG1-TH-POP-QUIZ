@@ -48,6 +48,10 @@ final class Game {
         self.questionSet = questionSet
     }
     
+    var selfUser: THUser!
+    
+    var awayUser: THUser!
+    
     init(gameDTO:[String: AnyObject]){
         if let cuid: AnyObject = gameDTO["createdByUserId"] {
             self.initiatingPlayerID = cuid as Int
@@ -99,19 +103,40 @@ final class Game {
     
     func fetchUsers(completionHandler:()->()) {
         weak var wself = self
-        NetworkClient.sharedClient.fetchUser(opponentPlayerID, force: true) {
-            var sself = wself!
-            if let u = $0 {
-                sself.opponentPlayer = u
-            }
-            
-            NetworkClient.sharedClient.fetchUser(sself.initiatingPlayerID, force: true) {
-                if let u = $0 {
-                    sself.initiatingPlayer = u
+        var client = NetworkClient.sharedClient
+        
+        var counter = 0
+        var partialCompletionHandler: () -> () = {
+            counter++
+            if counter == 2 {
+                var sself = wself!
+
+                if client.authenticatedUser.userId == sself.opponentPlayer.userId {
+                    sself.selfUser = sself.opponentPlayer
+                    sself.awayUser = sself.initiatingPlayer
+                } else if client.authenticatedUser.userId == sself.initiatingPlayer.userId {
+                    sself.selfUser = sself.initiatingPlayer
+                    sself.awayUser = sself.opponentPlayer
                 }
                 
                 completionHandler()
             }
+        }
+        
+        client.fetchUser(opponentPlayerID, force: true) {
+            var sself = wself!
+            if let u = $0 {
+                sself.opponentPlayer = u
+            }
+            partialCompletionHandler()
+        }
+        
+        client.fetchUser(initiatingPlayerID, force: true) {
+            var sself = wself!
+            if let u = $0 {
+                sself.initiatingPlayer = u
+            }
+            partialCompletionHandler()
         }
     }
     
@@ -139,6 +164,27 @@ final class Game {
             completionHandler()
         }
     }
+    
+    func selfPlayerForGame(userId:Int) -> THUser!{
+        if userId == self.initiatingPlayerID {
+            return self.initiatingPlayer
+        } else if userId == self.opponentPlayerID {
+            return self.opponentPlayer
+        }
+        
+        return nil
+    }
+    
+    func opponentPlayerForGame(user:THUser) -> THUser! {
+        if user.userId == self.initiatingPlayerID {
+            return self.opponentPlayer
+        } else if user.userId == self.opponentPlayerID {
+            return self.initiatingPlayer
+        }
+        
+        return nil
+    }
+
 }
 
 extension Game: Printable {

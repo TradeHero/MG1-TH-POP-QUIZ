@@ -289,7 +289,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             opponentAvatarView.image = image
         }
-        view.roundCornersOnTopLeft(true, topRight: true, bottomLeft: false, bottomRight: false, radius: 5.0)
+//        view.roundCornersOnTopLeft(true, topRight: true, bottomLeft: false, bottomRight: false, radius: 5.0)
         return view
     }
 }

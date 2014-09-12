@@ -82,7 +82,9 @@ class GameLoadingSceneViewController: UIViewController {
     
     func bindGame(game:Game){
         self.game = game
-        self.determineUserRoles(game)
+        self.player = game.selfUser
+        self.opponent = game.awayUser
+//        self.determineUserRoles(game)
     }
     
     private func determineUserRoles(game:Game) {

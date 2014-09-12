@@ -207,9 +207,6 @@ class OptionButton: DesignableButton {
         self.patchTickLogo()
         self.tiltRight()
         self.titleLabel?.textColor = UIColor.whiteColor()
-        self.titleLabel?.layer.shadowColor = UIColor(hex: 0x000000, alpha: 0.5).CGColor
-        self.titleLabel?.layer.shadowOffset = CGSizeMake(0.0, 2.0);
-        self.titleLabel?.layer.shadowRadius = 4
     }
     
     func configureAsFalse(){
@@ -217,9 +214,7 @@ class OptionButton: DesignableButton {
         self.patchCrossLogo()
         self.tiltLeft()
         self.titleLabel?.textColor = UIColor.whiteColor()
-        self.titleLabel?.layer.shadowColor = UIColor(hex: 0x000000, alpha: 0.5).CGColor
-        self.titleLabel?.layer.shadowOffset = CGSizeMake(0.0, 2.0);
-        self.titleLabel?.layer.shadowRadius = 4
+        
     }
     
     func patchCrossLogo(){
@@ -268,9 +263,6 @@ class OptionButton: DesignableButton {
         self.stopWobble()
         self.showAndEnable(false)
         self.disable()
-        self.titleLabel?.layer.shadowColor = UIColor.clearColor().CGColor
-        self.titleLabel?.layer.shadowOffset = CGSizeZero
-        self.titleLabel?.layer.shadowRadius = 0
     }
     
     func unpatchAllLogo() {
