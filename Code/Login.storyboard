@@ -20,40 +20,34 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="l2w-cF-deM">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="568" id="8nN-Rz-oYD"/>
-                                    <constraint firstAttribute="width" constant="320" id="M5F-aj-hqO"/>
-                                </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginDecals" translatesAutoresizingMaskIntoConstraints="NO" id="oPh-tF-PXQ">
                                 <rect key="frame" x="25" y="41" width="271" height="331"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="oPh-tF-PXQ" secondAttribute="height" multiplier="271:331" id="HYT-pk-sft"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="331" id="gef-Gd-Qz8"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="271" id="suc-4T-QxU"/>
+                                    <constraint firstAttribute="width" secondItem="oPh-tF-PXQ" secondAttribute="height" multiplier="271:331" id="jfO-7Y-HOT"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhz-W5-BUP" customClass="FBLoginView">
                                 <rect key="frame" x="44" y="478" width="232" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="232" id="0ld-Yq-SIa"/>
-                                    <constraint firstAttribute="width" secondItem="Dhz-W5-BUP" secondAttribute="height" multiplier="116:25" id="IZq-zY-efv"/>
-                                    <constraint firstAttribute="height" constant="50" id="Zgw-Wp-leX"/>
+                                    <constraint firstAttribute="width" secondItem="Dhz-W5-BUP" secondAttribute="height" multiplier="116:25" id="zcv-OE-79h"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oPh-tF-PXQ" firstAttribute="leading" secondItem="2j7-GK-TDo" secondAttribute="leading" constant="25" id="0xd-nD-Urx"/>
-                            <constraint firstAttribute="centerY" secondItem="l2w-cF-deM" secondAttribute="centerY" id="4YT-YZ-qVv"/>
-                            <constraint firstAttribute="trailing" secondItem="oPh-tF-PXQ" secondAttribute="trailing" constant="24" id="AtO-DT-gsp"/>
-                            <constraint firstItem="oPh-tF-PXQ" firstAttribute="top" secondItem="1eA-Kl-pYA" secondAttribute="bottom" constant="21" id="BEU-l7-bKE"/>
-                            <constraint firstItem="whF-0h-7WK" firstAttribute="top" secondItem="Dhz-W5-BUP" secondAttribute="bottom" constant="40" id="Ehs-eh-XZF"/>
-                            <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="oPh-tF-PXQ" secondAttribute="bottom" constant="196" id="Y64-ac-2b3"/>
-                            <constraint firstItem="Dhz-W5-BUP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2j7-GK-TDo" secondAttribute="leading" constant="44" id="dP8-WZ-9bG"/>
-                            <constraint firstAttribute="centerX" secondItem="l2w-cF-deM" secondAttribute="centerX" id="gGd-YN-y49"/>
-                            <constraint firstAttribute="trailing" secondItem="Dhz-W5-BUP" secondAttribute="trailing" constant="44" id="vU6-E1-zav"/>
+                            <constraint firstAttribute="bottom" secondItem="l2w-cF-deM" secondAttribute="bottom" id="3bl-QV-GyW"/>
+                            <constraint firstItem="Dhz-W5-BUP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="oPh-tF-PXQ" secondAttribute="bottom" constant="10" id="HKp-mO-hAi"/>
+                            <constraint firstAttribute="trailing" secondItem="Dhz-W5-BUP" secondAttribute="trailing" constant="44" id="Lrj-TA-BXp"/>
+                            <constraint firstAttribute="trailing" secondItem="l2w-cF-deM" secondAttribute="trailing" id="S1t-S1-1hN"/>
+                            <constraint firstAttribute="bottom" secondItem="Dhz-W5-BUP" secondAttribute="bottom" constant="40" id="TDK-yt-Hdl"/>
+                            <constraint firstItem="l2w-cF-deM" firstAttribute="leading" secondItem="2j7-GK-TDo" secondAttribute="leading" id="cLh-FY-LyB"/>
+                            <constraint firstItem="oPh-tF-PXQ" firstAttribute="leading" secondItem="2j7-GK-TDo" secondAttribute="leading" constant="25" id="dAH-dS-hZ5"/>
+                            <constraint firstItem="oPh-tF-PXQ" firstAttribute="top" secondItem="2j7-GK-TDo" secondAttribute="top" constant="41" id="iVs-zQ-Ihf"/>
+                            <constraint firstAttribute="trailing" secondItem="oPh-tF-PXQ" secondAttribute="trailing" constant="24" id="lDO-lg-wSY"/>
+                            <constraint firstItem="l2w-cF-deM" firstAttribute="top" secondItem="2j7-GK-TDo" secondAttribute="top" id="n0p-Ay-aRF"/>
+                            <constraint firstItem="Dhz-W5-BUP" firstAttribute="leading" secondItem="2j7-GK-TDo" secondAttribute="leading" constant="44" id="rDO-nJ-I17"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="2XT-mF-vUg"/>
@@ -64,7 +58,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LBp-PP-LNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-265" y="132"/>
+            <point key="canvasLocation" x="-350" y="130"/>
         </scene>
     </scenes>
     <resources>
