@@ -105,7 +105,7 @@ class GameLoadingSceneViewController: UIViewController {
         var tcount = game.questionSet.count
         weak var wself = self
         for q in qSet {
-            q.fetchImage() {
+            q.fetchImage {
                 var sself = wself!
                 count += 1
                 sself.prepareViewDetailLabel.text = "\(count) of \(tcount)"

@@ -40,10 +40,10 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         weak var weakSelf = self
         
         
-        NetworkClient.sharedClient.fetchClosedChallenges() {
+        NetworkClient.sharedClient.fetchClosedChallenges {
             if let strongSelf = weakSelf {
                 strongSelf.closedChallenges = $0
-                strongSelf.closedChallenges.sort() {
+                strongSelf.closedChallenges.sort {
                     $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
                 }
             }

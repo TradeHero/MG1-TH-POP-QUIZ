@@ -75,7 +75,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Creating quick game..."
         weak var weakSelf = self
-        NetworkClient.sharedClient.createQuickGame() {
+        NetworkClient.sharedClient.createQuickGame {
             var strongSelf = weakSelf!
             if let g = $0 {
                 hud.textLabel.text = "Creating game with user.."
@@ -129,20 +129,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
-        NetworkClient.sharedClient.fetchOpenChallenges() {
+        NetworkClient.sharedClient.fetchOpenChallenges {
             var sself = wself!
             sself.openChallenges = $0
            
-            sself.openChallenges.sort() {
+            sself.openChallenges.sort {
                 $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
             }
             completionHandler()
         }
         
-        NetworkClient.sharedClient.fetchOpponentPendingChallenges() {
+        NetworkClient.sharedClient.fetchOpponentPendingChallenges {
             var sself = wself!
             sself.opponentPendingChallenges = $0
-            sself.opponentPendingChallenges.sort() {
+            sself.opponentPendingChallenges.sort {
                 $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
             }
             completionHandler()
@@ -298,7 +298,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func refresh(sender: UIRefreshControl){
-        self.loadChallenges() {
+        self.loadChallenges {
             self.refreshControl.endRefreshing()
         }
     }

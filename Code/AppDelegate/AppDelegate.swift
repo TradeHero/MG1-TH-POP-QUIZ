@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             TestFlight.takeOff(TestFlightToken)
         #endif
         
+
+        
         switch kTHGamesServerMode {
         case .Dev:
             println("Current build points to Staging Server.\n")

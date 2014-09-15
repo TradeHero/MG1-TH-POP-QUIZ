@@ -66,7 +66,7 @@ class NetworkClient {
             THServerAPIBaseURL + "/login",
             parameters: param,
             encoding: JSONEncoding)
-            .responseJSON() {
+            .responseJSON {
                 _, response, content, error in
                 var strongSelf = weakSelf!
                 if let responseError = error {
@@ -101,7 +101,7 @@ class NetworkClient {
         
         weak var wself = self
         Alamofire.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
-            ], encoding: JSONEncoding).responseJSON() {
+            ], encoding: JSONEncoding).responseJSON {
                 _, response, content, error in
                 var sself = wself!
                 if let responseError = error {
@@ -114,8 +114,8 @@ class NetworkClient {
                     //                println(responseJSON)
                     var game = Game(gameDTO: responseJSON)
                     debugPrintln("Game created with game ID: \(game.gameID)")
-                    game.fetchUsers() {
-                        game.fetchResults() {
+                    game.fetchUsers {
+                        game.fetchResults {
                             if let c = completionHandler {
                                 c(game)
                             }
@@ -135,7 +135,7 @@ class NetworkClient {
         configureCompulsoryHeaders()
         debugPrintln("Fetching Facebook friends for user \(userId)...")
         
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -154,8 +154,8 @@ class NetworkClient {
             var fbFrnds: [THUserFriend] = []
             var thFrnds: [THUserFriend] = []
             
-            fbFrnds = friends.filter() { $0.userID == 0 }
-            thFrnds = friends.filter() { $0.userID != 0 }
+            fbFrnds = friends.filter { $0.userID == 0 }
+            thFrnds = friends.filter { $0.userID != 0 }
             
             debugPrintln("Successfully fetched \(friends.count) friend(s).")
             completionHandler((fbFrnds, thFrnds))
@@ -172,7 +172,7 @@ class NetworkClient {
         debugPrintln("Fetching game with game ID: \(gameId)...")
         
         
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
             _, response, content, error in
             if error != nil {
                 debugPrintln(error)
@@ -185,8 +185,8 @@ class NetworkClient {
                 let game = Game(gameDTO: responseJSON)
                 debugPrintln("Game created with game ID: \(game.gameID)")
                 
-                game.fetchUsers() {
-                    game.fetchResults() {
+                game.fetchUsers {
+                    game.fetchResults {
                         if let c = completionHandler {
                             c(game)
                         }
@@ -206,7 +206,7 @@ class NetworkClient {
         configureCompulsoryHeaders()
         debugPrintln("Fetching all open challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -236,8 +236,8 @@ class NetworkClient {
                     for openChallengeDTO in openChallengesDTOs as [[String: AnyObject]] {
                         let game = Game(compactGameDTO: openChallengeDTO)
                         
-                        game.fetchUsers(){
-                            game.fetchResults() {
+                        game.fetchUsers{
+                            game.fetchResults {
                                 openChallenges.append(game)
                                 fetchUserHandler()
                             }
@@ -259,7 +259,7 @@ class NetworkClient {
         configureCompulsoryHeaders()
         debugPrintln("Fetching all taken challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -297,8 +297,8 @@ class NetworkClient {
                         if let i: AnyObject = takenChallengeDTO["opponentUserId"]{
                             opponentID = i as Int
                         }
-                        game.fetchUsers(){
-                            game.fetchResults() {
+                        game.fetchUsers{
+                            game.fetchResults {
                                 takenChallenges.append(game)
                                 fetchUserHandler()
                             }
@@ -322,7 +322,7 @@ class NetworkClient {
         configureCompulsoryHeaders()
         debugPrintln("Fetching all opponent pending challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -359,8 +359,8 @@ class NetworkClient {
                         if let i: AnyObject = pendingChallengeDTO["opponentUserId"]{
                             opponentID = i as Int
                         }
-                        game.fetchUsers(){
-                            game.fetchResults() {
+                        game.fetchUsers{
+                            game.fetchResults {
                                 pendingChallenges.append(game)
                                 fetchUserHandler()
                             }
@@ -384,7 +384,7 @@ class NetworkClient {
         configureCompulsoryHeaders()
         debugPrintln("Fetching all closed challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -421,8 +421,8 @@ class NetworkClient {
                         if let i: AnyObject = closedChallengeDTO["opponentUserId"]{
                             opponentID = i as Int
                         }
-                        game.fetchUsers(){
-                            game.fetchResults() {
+                        game.fetchUsers{
+                            game.fetchResults {
                                 closedChallenges.append(game)
                                 fetchUserHandler()
                             }
@@ -468,7 +468,7 @@ class NetworkClient {
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
         weak var wself = self
-        let r = Alamofire.request(.POST, url, parameters: param, encoding: JSONEncoding).responseJSON() {
+        let r = Alamofire.request(.POST, url, parameters: param, encoding: JSONEncoding).responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -493,7 +493,7 @@ class NetworkClient {
         configureCompulsoryHeaders()
         debugPrintln("Fetching results for game \(gameId)...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON() {
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -536,7 +536,7 @@ class NetworkClient {
 //        
 //        
 //        weak var wself = self
-//        let r = Alamofire.request(.POST, url, parameters: ["ign" : newName], encoding: JSONEncoding).responseJSON() {
+//        let r = Alamofire.request(.POST, url, parameters: ["ign" : newName], encoding: JSONEncoding).responseJSON {
 //            _, response, content, error in
 //            if let sself = wself {
 //                sself.updateUser(sself.authenticatedUser) {
@@ -577,7 +577,7 @@ class NetworkClient {
             }
         }
         
-        Alamofire.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding).responseJSON() {
+       let r = Alamofire.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding).responseJSON {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)

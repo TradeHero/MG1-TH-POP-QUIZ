@@ -226,7 +226,7 @@ final class Question {
     func fetchOptionImageOperation(completionHandler:() -> ()){
         var count:Int = 0
         for option in self.options.allOptions {
-            option.fetchImage() {
+            option.fetchImage {
                 count += 1
                 if count == 4 {
                     completionHandler()
