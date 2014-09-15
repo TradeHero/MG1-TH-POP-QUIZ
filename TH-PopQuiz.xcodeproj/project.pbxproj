@@ -12,6 +12,7 @@
 		6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */; };
 		6D3AF98419C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */; };
 		6D3AF98519C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */; };
+		6DD053A319C6BDAF00831B6C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */; };
 		6DD2311819B81FFA00B5D05E /* TH_PopQuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2311719B81FFA00B5D05E /* TH_PopQuizTests.swift */; };
 		6DD2316C19B8204900B5D05E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2312219B8204900B5D05E /* AppDelegate.swift */; };
 		6DD2316D19B8204900B5D05E /* SleekNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2312319B8204900B5D05E /* SleekNavigationBar.swift */; };
@@ -68,10 +69,7 @@
 		6DD231B519B8219E00B5D05E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231B219B8218300B5D05E /* Alamofire.framework */; };
 		6DD231B619B8219E00B5D05E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231B219B8218300B5D05E /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6DD231BB19B821D700B5D05E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231BA19B821D700B5D05E /* libz.dylib */; };
-		6DD231BE19B8224300B5D05E /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231BD19B8224300B5D05E /* FacebookSDK.framework */; };
 		6DD231C619B8224C00B5D05E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231C019B8224C00B5D05E /* libTestFlight.a */; };
-		6DD231CD19B825BA00B5D05E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231CC19B825BA00B5D05E /* StoreKit.framework */; };
-		6DD231CF19B825BE00B5D05E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231CE19B825BE00B5D05E /* GameKit.framework */; };
 		6DE3B4E719BEB3DC00F9251A /* THIndefiniteIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */; };
 		6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */; };
 		6DE3B4F119BECCBC00F9251A /* ProximaNova-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EC19BECCBC00F9251A /* ProximaNova-Light.ttf */; };
@@ -131,6 +129,7 @@
 		6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTimelineTableViewCell.swift; sourceTree = "<group>"; };
 		6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengesTimelineTableViewCell.xib; sourceTree = "<group>"; };
+		6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6DD230FF19B81FFA00B5D05E /* TH-PopQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TH-PopQuiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD2311119B81FFA00B5D05E /* TH-PopQuizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TH-PopQuizTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD2311619B81FFA00B5D05E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -192,15 +191,12 @@
 		6DD231A819B8208700B5D05E /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		6DD231AC19B8218300B5D05E /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		6DD231BA19B821D700B5D05E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		6DD231BD19B8224300B5D05E /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6DD231C019B8224C00B5D05E /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		6DD231C119B8224C00B5D05E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6DD231C219B8224C00B5D05E /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = release_notes.md; sourceTree = "<group>"; };
 		6DD231C319B8224C00B5D05E /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		6DD231C419B8224C00B5D05E /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		6DD231C519B8224C00B5D05E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
-		6DD231CC19B825BA00B5D05E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		6DD231CE19B825BE00B5D05E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THIndefiniteIndicatorView.swift; sourceTree = "<group>"; };
 		6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.ttf"; sourceTree = "<group>"; };
 		6DE3B4EC19BECCBC00F9251A /* ProximaNova-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.ttf"; sourceTree = "<group>"; };
@@ -218,10 +214,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DD231BB19B821D700B5D05E /* libz.dylib in Frameworks */,
+				6DD053A319C6BDAF00831B6C /* FacebookSDK.framework in Frameworks */,
 				6DD231B519B8219E00B5D05E /* Alamofire.framework in Frameworks */,
-				6DD231CF19B825BE00B5D05E /* GameKit.framework in Frameworks */,
-				6DD231BE19B8224300B5D05E /* FacebookSDK.framework in Frameworks */,
-				6DD231CD19B825BA00B5D05E /* StoreKit.framework in Frameworks */,
 				6DD231C619B8224C00B5D05E /* libTestFlight.a in Frameworks */,
 				1C62BA7F65B04C13BB4646FA /* libPods.a in Frameworks */,
 			);
@@ -500,10 +494,8 @@
 		6DD231BC19B821DB00B5D05E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6DD231CE19B825BE00B5D05E /* GameKit.framework */,
-				6DD231CC19B825BA00B5D05E /* StoreKit.framework */,
+				6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */,
 				6DD231BF19B8224C00B5D05E /* TestFlightSDK3 */,
-				6DD231BD19B8224300B5D05E /* FacebookSDK.framework */,
 				6DD231BA19B821D700B5D05E /* libz.dylib */,
 				7C2C12E80B2143C290FCDB20 /* libPods.a */,
 			);
@@ -594,10 +586,10 @@
 								enabled = 1;
 							};
 							com.apple.GameCenter = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.InAppPurchase = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
