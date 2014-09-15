@@ -11,17 +11,24 @@ import UIKit
 class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource
 {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     @IBOutlet weak var inGameNameEditTextField: UITextField!
+    
+    @IBOutlet weak var profilePicView: AvatarRoundedView!
     private var defaultText:String!
     
     @IBOutlet weak var rankViewButton: DesignableButton!
     
     private var closedChallenges: [Game]!
     
+    private var user = NetworkClient.sharedClient.authenticatedUser
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadClosedChallenges()
-        
+//        self.loadClosedChallenges()
+        self.tableView.registerNib(UINib(nibName: "ChallengesTimelineTableViewCell", bundle: nil), forCellReuseIdentifier: kTHChallengesTimelineTableViewCellIdentifier)
+        self.configureUI()
         // Do any additional setup after loading the view.
     }
     
@@ -36,24 +43,44 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func backAction(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     func loadClosedChallenges() {
         weak var weakSelf = self
-        
-        
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        hud.textLabel.text = "Refreshing timeline.."
         NetworkClient.sharedClient.fetchClosedChallenges {
             if let strongSelf = weakSelf {
                 strongSelf.closedChallenges = $0
                 strongSelf.closedChallenges.sort {
                     $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
                 }
+                
+                strongSelf.tableView.reloadData()
+                hud.dismissAnimated(true)
             }
         }
     }
     
     @IBAction func imageTapped(sender: AnyObject) {
-        println("tapped")
+        
     }
 
+    private func configureUI() {
+        weak var weakSelf = self
+        NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: nil) {
+            image, error in
+            if error != nil {
+                println(error)
+            }
+            if let strongSelf = weakSelf {
+                strongSelf.profilePicView.image  = image
+            }
+        }
+        
+        self.inGameNameEditTextField.text = user.displayName
+    }
     // MARK:- UITextField delegate methods
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -85,7 +112,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     
     // MARK:- UITextField delegate methods
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier(kTHChallengesTimelineTableViewCellIdentifier) as ChallengesTimelineTableViewCell
+        return cell
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -93,11 +121,11 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 10
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 0
+        return 60
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -105,7 +133,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
     
     

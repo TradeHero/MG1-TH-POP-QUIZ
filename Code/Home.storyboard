@@ -248,8 +248,9 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="cMt-vN-DXN">
-                                <rect key="frame" x="10" y="132" width="301" height="438"/>
+                                <rect key="frame" x="10" y="130" width="301" height="438"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="ReR-pk-HA9" id="tY2-ab-zz0"/>
                                     <outlet property="delegate" destination="ReR-pk-HA9" id="8Ej-b6-7qr"/>
@@ -260,7 +261,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="7l1-NF-sDD" secondAttribute="trailing" id="1CV-6r-viB"/>
                             <constraint firstAttribute="bottom" secondItem="By3-up-24F" secondAttribute="bottom" id="IFB-Wk-PrV"/>
-                            <constraint firstItem="cMt-vN-DXN" firstAttribute="top" secondItem="7l1-NF-sDD" secondAttribute="bottom" id="IPb-oe-9EN"/>
+                            <constraint firstItem="cMt-vN-DXN" firstAttribute="top" secondItem="7l1-NF-sDD" secondAttribute="bottom" constant="-2" id="IPb-oe-9EN"/>
                             <constraint firstItem="By3-up-24F" firstAttribute="leading" secondItem="lJT-wv-uRW" secondAttribute="leading" id="Lrg-Dv-ec3"/>
                             <constraint firstAttribute="trailing" secondItem="By3-up-24F" secondAttribute="trailing" id="PVn-Pe-Uqe"/>
                             <constraint firstItem="7l1-NF-sDD" firstAttribute="top" secondItem="lJT-wv-uRW" secondAttribute="top" constant="39" id="b16-ie-9dB"/>
@@ -268,7 +269,7 @@
                             <constraint firstAttribute="trailing" secondItem="cMt-vN-DXN" secondAttribute="trailing" constant="9" id="mHp-mZ-JGJ"/>
                             <constraint firstItem="7l1-NF-sDD" firstAttribute="leading" secondItem="lJT-wv-uRW" secondAttribute="leading" id="qiC-rg-tZl"/>
                             <constraint firstItem="By3-up-24F" firstAttribute="top" secondItem="lJT-wv-uRW" secondAttribute="top" id="xuj-WX-bpQ"/>
-                            <constraint firstAttribute="bottom" secondItem="cMt-vN-DXN" secondAttribute="bottom" constant="-2" id="xxc-JR-Olc"/>
+                            <constraint firstAttribute="bottom" secondItem="cMt-vN-DXN" secondAttribute="bottom" id="xxc-JR-Olc"/>
                             <constraint firstItem="cMt-vN-DXN" firstAttribute="leading" secondItem="lJT-wv-uRW" secondAttribute="leading" constant="10" id="yGx-vS-Fh7"/>
                         </constraints>
                     </view>
@@ -280,19 +281,17 @@
                                 <state key="normal" backgroundImage="BackButtonImagev2">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="EqP-8d-crA">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4Er-2i-x55">
-                                <rect key="frame" x="147" y="198" width="28" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="SettingsIcon"/>
+                                <connections>
+                                    <action selector="backAction:" destination="ReR-pk-HA9" eventType="touchUpInside" id="teh-EB-sof"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="inGameNameEditTextField" destination="m9T-s3-uQZ" id="OAl-gv-ueY"/>
+                        <outlet property="profilePicView" destination="9Af-Gg-R8C" id="ynS-Jl-b6K"/>
                         <outlet property="rankViewButton" destination="io0-Bs-qcv" id="aHk-sy-PFb"/>
+                        <outlet property="tableView" destination="cMt-vN-DXN" id="T6S-dq-IpX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Fo-NU-auB" userLabel="First Responder" sceneMemberID="firstResponder"/>
