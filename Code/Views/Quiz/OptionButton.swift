@@ -36,6 +36,9 @@ class OptionButton: DesignableButton {
         super.init(coder: aDecoder)
         self.tickLogoView.image = UIImage(named: "QuizTickIcon")
         self.crossLogoView.image = UIImage(named: "QuizCrossIcon")
+        if let t = self.titleLabel {
+            t.textAlignment = .Center
+        }
     }
     var trendingTopLayerView: OptionButtonAccessoryImageLayer!
     

@@ -379,7 +379,7 @@ class NetworkClient {
     GET api/games/closed
     */
     func fetchClosedChallenges(completionHandler: ([Game] -> ())!){
-        let url = "\(THGameAPIBaseURL)/theirturn"
+        let url = "\(THGameAPIBaseURL)/closed"
         
         configureCompulsoryHeaders()
         debugPrintln("Fetching all closed challenges for authenticated user...")

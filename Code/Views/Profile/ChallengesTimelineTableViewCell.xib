@@ -14,7 +14,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ubt-S3-hyB" userLabel="Vertical line view">
-                        <rect key="frame" x="14" y="0.0" width="3" height="60"/>
+                        <rect key="frame" x="14" y="0.0" width="3" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5h5-ET-sdO" userLabel="Vertical line view">
+                        <rect key="frame" x="14" y="30" width="3" height="30"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eXu-vN-MsD" customClass="DesignableRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
@@ -62,7 +66,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTi-IW-W8k">
-                                <rect key="frame" x="10" y="27" width="128" height="21"/>
+                                <rect key="frame" x="10" y="27" width="205" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="34,500">
                                         <attributes>
@@ -110,7 +114,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vjd-T4-SZO" userLabel="Horizontal line view">
-                        <rect key="frame" x="25" y="29" width="14" height="2"/>
+                        <rect key="frame" x="25" y="29" width="14" height="3"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
@@ -118,12 +122,15 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="opponentDisplayNameLabel" destination="N8X-mo-WGP" id="f50-Fe-isx"/>
+                <outlet property="circularView" destination="eXu-vN-MsD" id="bCB-hd-vyN"/>
+                <outlet property="lowerVerticalBar" destination="5h5-ET-sdO" id="fUO-Me-qmD"/>
+                <outlet property="opponentDisplayNameLabel" destination="N8X-mo-WGP" id="EJj-qb-Q5T"/>
                 <outlet property="opponentImageView" destination="jKc-tv-mPd" id="trm-gw-Owd"/>
                 <outlet property="scoreVersusLabel" destination="GTi-IW-W8k" id="pTK-yI-udO"/>
+                <outlet property="upperVerticalBar" destination="ubt-S3-hyB" id="BWq-YW-2uc"/>
                 <outlet property="winLoseVSLabel" destination="v1M-fL-G4n" id="3K3-KF-s6y"/>
             </connections>
-            <point key="canvasLocation" x="267" y="561"/>
+            <point key="canvasLocation" x="266.5" y="561"/>
         </tableViewCell>
     </objects>
     <resources>

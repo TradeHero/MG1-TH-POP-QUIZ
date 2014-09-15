@@ -195,7 +195,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
             cell.attribute = "Total Score"
-            cell.selfAttributeDetail = "\(playerResult.finalScore)"
+            cell.selfAttributeDetail = "\(playerResult.finalScore.decimalFormattedString)"
             cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.finalScore.decimalFormattedString)" : "--"
             return cell
         default:
