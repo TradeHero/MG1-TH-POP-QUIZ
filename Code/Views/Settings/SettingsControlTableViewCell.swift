@@ -29,27 +29,23 @@ enum SettingsControlType: Int {
 }
 
 class SettingsControlTableViewCell: UITableViewCell {
-
-    @IBOutlet private weak var controlSlider: UISlider!
+    
     var delegate: SettingsControlTableViewCellDelegate!
+    
+    @IBOutlet weak var controlLogoImageView: UIImageView!
     
     @IBOutlet private weak var controlTitleLabel: UILabel!
     
-    private var toggleSwitch = THSwitch(frame: CGRectMake(214, 5, 65, 25))
+    private var toggleSwitch = THSwitch(frame: CGRectMake(214, 8.5, 65, 25))
     
     var type: SettingsControlType!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         configureSwitch()
         self.contentView.addSubview(toggleSwitch)
         toggleSwitch.addTarget(self, action: "toggleAction:", forControlEvents: .ValueChanged)
         // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     private func configureSwitch(){
@@ -63,30 +59,22 @@ class SettingsControlTableViewCell: UITableViewCell {
         toggleSwitch.offLabel.textColor = UIColor.whiteColor()
     }
     
+    
     func configureControlType(type:SettingsControlType){
         self.type = type
+        
         switch type {
         case .PushNotification:
-            toggleSwitch.hidden = false
-            controlSlider.hidden = true
             toggleSwitch.on = kTHPushNotificationOn
-            break
-        case .BackgroundMusic:
-            toggleSwitch.hidden = true
-            controlSlider.hidden = false
-            controlSlider.value = kTHBackgroundMusicValue
-            break
-        case .SoundEffect:
-            toggleSwitch.hidden = true
-            controlSlider.hidden = false
-            controlSlider.value = kTHSoundEffectValue
-            break
+            controlLogoImageView.image = UIImage(named: "PushNotificationSettingsIcon")
         case .VibrationEffect:
-            toggleSwitch.hidden = false
-            controlSlider.hidden = true
             toggleSwitch.on = kTHVibrationEffectOn
+            controlLogoImageView.image = UIImage(named: "VibrationSettingsIcon")
+        default:
+            println("Wrong type of control")
             break
         }
+        
         controlTitleLabel.text = type.description
     }
     
@@ -94,18 +82,12 @@ class SettingsControlTableViewCell: UITableViewCell {
         self.delegate.settingsControlTableViewCell(self, didToggleSwitch: toggleSwitch.on)
     }
     
-    @IBAction func sliderAction(sender: AnyObject) {
-        self.delegate.settingsControlTableViewCell(self, didSliderValueChanged: Float(controlSlider.value))
-    }
-    
     override func prepareForReuse() {
         controlTitleLabel.text = ""
-        controlSlider.hidden = false
-        toggleSwitch.hidden = false
     }
 }
 
 protocol SettingsControlTableViewCellDelegate :class, NSObjectProtocol {
     func settingsControlTableViewCell(cell: SettingsControlTableViewCell, didToggleSwitch on:Bool)
-    func settingsControlTableViewCell(cell: SettingsControlTableViewCell, didSliderValueChanged value:Float)
+    func settingsSliderTableViewCell(cell: SettingsSliderTableViewCell, didSliderValueChanged value:Float)
 }

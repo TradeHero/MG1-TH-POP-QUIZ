@@ -238,7 +238,7 @@ import QuartzCore
         
         // labels
         self.onLabel = UILabel(frame: CGRectMake(0, 0, self.frame.size.width - self.frame.size.height, self.frame.size.height))
-        onLabel.textAlignment = NSTextAlignment.Center
+        onLabel.textAlignment = .Center
         onLabel.textColor = UIColor.lightGrayColor()
         onLabel.font = UIFont.systemFontOfSize(12)
         backgroundView.addSubview(onLabel)
@@ -280,7 +280,7 @@ import QuartzCore
         let activeKnobWidth = self.bounds.size.height - 2 + 5
         isAnimating = true
         
-        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut | UIViewAnimationOptions.BeginFromCurrentState, animations: {
+        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
             if self.on {
                 self.thumbView.frame = CGRectMake(self.bounds.size.width - (activeKnobWidth + 1), self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height)
                 self.backgroundView.backgroundColor = self.onTintColor
@@ -291,9 +291,9 @@ import QuartzCore
                 self.backgroundView.backgroundColor = self.activeColor
                 self.thumbView.backgroundColor = self.thumbTintColor
             }
-            }, completion: { finished in
+            }) { finished in
                 self.isAnimating = false
-        })
+        }
         
         return true
     }
@@ -412,11 +412,10 @@ import QuartzCore
         let activeKnobWidth = normalKnobWidth + 5
         if animated {
             isAnimating = true
-            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut | UIViewAnimationOptions.BeginFromCurrentState, animations: {
+            UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
                 if self.tracking {
                     self.thumbView.frame = CGRectMake(self.bounds.size.width - (activeKnobWidth + 1), self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height)
-                }
-                else {
+                } else {
                     self.thumbView.frame = CGRectMake(self.bounds.size.width - (normalKnobWidth + 1), self.thumbView.frame.origin.y, normalKnobWidth, self.thumbView.frame.size.height)
                 }
                 
@@ -427,15 +426,14 @@ import QuartzCore
                 self.offImageView.alpha = 0
                 self.onLabel.alpha = 1.0
                 self.offLabel.alpha = 0
-                }, completion: { finished in
+                }) { finished in
                     self.isAnimating = false
-            })
+            }
         }
         else {
             if self.tracking {
                 thumbView.frame = CGRectMake(self.bounds.size.width - (activeKnobWidth + 1), thumbView.frame.origin.y, activeKnobWidth, thumbView.frame.size.height)
-            }
-            else {
+            } else {
                 thumbView.frame = CGRectMake(self.bounds.size.width - (normalKnobWidth + 1), thumbView.frame.origin.y, normalKnobWidth, thumbView.frame.size.height)
             }
             
@@ -461,7 +459,7 @@ import QuartzCore
         
         if animated {
             isAnimating = true
-            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut | UIViewAnimationOptions.BeginFromCurrentState, animations: {
+            UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
                 if self.tracking {
                     self.thumbView.frame = CGRectMake(1, self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height);
                     self.backgroundView.backgroundColor = self.activeColor
@@ -478,16 +476,16 @@ import QuartzCore
                 self.onLabel.alpha = 0
                 self.offLabel.alpha = 1.0
                 
-                }, completion: { finished in
+                })
+                { finished in
                     self.isAnimating = false
-            })
+            }
         }
         else {
-            if (self.tracking) {
+            if self.tracking {
                 thumbView.frame = CGRectMake(1, thumbView.frame.origin.y, activeKnobWidth, thumbView.frame.size.height)
                 backgroundView.backgroundColor = self.activeColor
-            }
-            else {
+            } else {
                 thumbView.frame = CGRectMake(1, thumbView.frame.origin.y, normalKnobWidth, thumbView.frame.size.height)
                 backgroundView.backgroundColor = self.inactiveColor
             }

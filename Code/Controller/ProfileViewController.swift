@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         super.viewDidLoad()
         self.loadClosedChallenges()
         self.tableView.registerNib(UINib(nibName: "ChallengesTimelineTableViewCell", bundle: nil), forCellReuseIdentifier: kTHChallengesTimelineTableViewCellIdentifier)
+        tableView.alwaysBounceVertical = false
         self.configureUI()
         // Do any additional setup after loading the view.
     }

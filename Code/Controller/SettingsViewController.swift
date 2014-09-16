@@ -14,6 +14,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: "SettingsControlTableViewCell", bundle: nil), forCellReuseIdentifier: kTHSettingsControlTableViewCellIdentifier)
+        self.tableView.registerNib(UINib(nibName: "SettingsSliderTableViewCell", bundle: nil), forCellReuseIdentifier: kTHSettingsSliderTableViewCellIdentifier)
         // Do any additional setup after loading the view.
     }
 
@@ -57,7 +58,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         }
     }
 
-    func settingsControlTableViewCell(cell: SettingsControlTableViewCell, didSliderValueChanged value: Float) {
+    func settingsSliderTableViewCell(cell: SettingsSliderTableViewCell, didSliderValueChanged value: Float) {
         if let type = cell.type {
             switch type {
             case .BackgroundMusic:
@@ -73,32 +74,45 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
     //MARK:- UITableViewDelegate, UITableViewDataSource methods
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as SettingsControlTableViewCell
-        
+        var cell = UITableViewCell()
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
-                cell.configureControlType(.PushNotification)
+                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
+                (cell as SettingsControlTableViewCell).configureControlType(.PushNotification)
+                (cell as SettingsControlTableViewCell).delegate = self
+                UIView.roundView(cell, onCorner: .BottomLeft | .BottomRight, radius: 5)
+                return cell
             default:
                 break
             }
         case 1:
             switch indexPath.row {
             case 0:
-                cell.configureControlType(.BackgroundMusic)
+                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsSliderTableViewCellIdentifier) as UITableViewCell
+                (cell as SettingsSliderTableViewCell).configureControlType(.BackgroundMusic)
+                (cell as SettingsSliderTableViewCell).delegate = self
+                return cell
             case 1:
-                cell.configureControlType(.SoundEffect)
+                let cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsSliderTableViewCellIdentifier) as UITableViewCell
+                (cell as SettingsSliderTableViewCell).configureControlType(.SoundEffect)
+                (cell as SettingsSliderTableViewCell).delegate = self
+                return cell
             case 2:
-                cell.configureControlType(.VibrationEffect)
+                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
+                (cell as SettingsControlTableViewCell).configureControlType(.VibrationEffect)
+                (cell as SettingsControlTableViewCell).delegate = self
+                UIView.roundView(cell, onCorner: .BottomLeft | .BottomRight, radius: 5)
+                return cell
             default:
                 break
             }
         default:
             break
         }
+        
         cell.layoutIfNeeded()
-        cell.delegate = self
         return cell
     }
     
@@ -118,6 +132,54 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 42
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                return 42
+            default:
+                break
+            }
+        case 1:
+            switch indexPath.row {
+            case 0, 1:
+                return 70
+            case 2:
+                return 42
+            default:
+                break
+            }
+        default:
+            break
+        }
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            return createHeaderView("Notifications")
+        case 1:
+            return createHeaderView("In Game Settings")
+        default:
+            return nil
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    private func createHeaderView(title:String) -> UIView{
+        var view = UIView(frame: CGRectMake(0, 0, 286, 40))
+        UIView.roundView(view, onCorner: .TopRight | .TopLeft, radius: 10)
+        
+        view.backgroundColor = UIColor(hex: 0xFF4069)
+        let label = UILabel(frame: CGRectMake(8, 9, 152, 21))
+        label.text = title
+        label.font = UIFont(name: "AvenirNext-Regular", size: 15)
+        label.textColor = UIColor.whiteColor()
+        view.addSubview(label)
+        return view
     }
 }
