@@ -69,6 +69,8 @@ let kTHQuestionResultTableViewCellIdentifier = "\(kConstantPrefix)QuestionResult
 let kTHGameResultDetailTableViewCellIdentifier = "\(kConstantPrefix)GameResultDetailTableViewCellIdentifier"
 let kTHChallengesTimelineTableViewCellIdentifier = "\(kConstantPrefix)ChallengesTimelineTableViewCellIdentifier"
 let kTHSettingsControlTableViewCellIdentifier = "\(kConstantPrefix)SettingsControlTableViewCellIdentifier"
+let kTHSettingsSliderTableViewCellIdentifier = "\(kConstantPrefix)SettingsSliderTableViewCellIdentifier"
+
 
 // MARK:- cache keys
 let kTHUserFriendsCacheStoreKey = "\(kConstantPrefix)UserFriendsCacheStore"

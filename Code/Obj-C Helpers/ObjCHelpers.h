@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 TradeHero. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface UIImage (Helper)
 
@@ -16,7 +16,7 @@
 @end
 
 @interface UIView (roundedCorners)
-
++ (void)roundView:(UIView *)view onCorner:(UIRectCorner)rectCorner radius:(float)radius;
 //- (void)roundCornersOnTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius;
 
 @end
@@ -34,4 +34,14 @@ typedef NS_ENUM(NSInteger,UITableViewCellLoadWaveAnimationDirection) {
 
 - (void)reloadDataAnimateWithWave:(UITableViewCellLoadWaveAnimationDirection)animation;
 
+@end
+
+@interface JMMarkSlider : UISlider
+@property (nonatomic) UIColor *markColor;
+@property (nonatomic) CGFloat markWidth;
+@property (nonatomic) NSArray *markPositions;
+@property (nonatomic) UIColor *selectedBarColor;
+@property (nonatomic) UIColor *unselectedBarColor;
+@property (nonatomic) UIImage *handlerImage;
+@property (nonatomic) UIColor *handlerColor;
 @end
