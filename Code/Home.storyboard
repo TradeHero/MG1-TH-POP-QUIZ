@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--TradeHero PopQuiz-->
@@ -107,28 +108,14 @@
                         </subviews>
                     </view>
                     <navigationItem key="navigationItem" title="TradeHero PopQuiz" id="boz-3P-itM">
-                        <barButtonItem key="leftBarButtonItem" style="done" id="zfQ-1Z-28w">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MDS-3r-QEE">
-                                <rect key="frame" x="16" y="7" width="28" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" backgroundImage="LogoutIcon">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="logoutClicked:" destination="mQ1-C7-5Us" eventType="touchUpInside" id="x8l-qw-Gzx"/>
-                                </connections>
-                            </button>
-                            <connections>
-                                <action selector="logoutClicked:" destination="mQ1-C7-5Us" id="V3t-Js-DAL"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="88y-cA-JYA">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7oK-7S-SeK">
                                 <rect key="frame" x="147" y="198" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="SettingsIcon"/>
+                                <connections>
+                                    <segue destination="X7x-Ie-Iwf" kind="push" identifier="SettingsSegue" id="Mii-q5-gHM"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -143,6 +130,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKQ-gI-9GF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1637" y="160"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="8by-l1-bbK">
+            <objects>
+                <viewController id="X7x-Ie-Iwf" customClass="SettingsViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dku-hf-GSZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="SCX-MH-2z6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zjw-oR-Gn8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SettingsSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="KkU-jk-ctP">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="355-1K-Ern">
+                                <rect key="frame" x="17" y="57" width="286" height="348"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="348" id="dmx-d1-HuC"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="X7x-Ie-Iwf" id="Fna-bg-23G"/>
+                                    <outlet property="delegate" destination="X7x-Ie-Iwf" id="ePX-KO-ESW"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBy-om-abg">
+                                <rect key="frame" x="80" y="511" width="160.5" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="pBy-om-abg" secondAttribute="height" multiplier="85:26" id="Klz-FC-Oj8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
+                                <state key="normal" title="Logout" backgroundImage="RedButtonBackground">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutAction:" destination="X7x-Ie-Iwf" eventType="touchUpInside" id="Edn-TR-b7k"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KkU-jk-ctP" firstAttribute="leading" secondItem="Zjw-oR-Gn8" secondAttribute="leadingMargin" constant="-16" id="6Xi-sK-O8J"/>
+                            <constraint firstItem="355-1K-Ern" firstAttribute="top" secondItem="Zjw-oR-Gn8" secondAttribute="top" constant="57" id="7Nf-NV-5KQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KkU-jk-ctP" secondAttribute="trailing" constant="-16" id="8Sa-zW-4cg"/>
+                            <constraint firstAttribute="trailing" secondItem="pBy-om-abg" secondAttribute="trailing" constant="79.5" id="AMc-il-XGN"/>
+                            <constraint firstItem="355-1K-Ern" firstAttribute="leading" secondItem="Zjw-oR-Gn8" secondAttribute="leading" constant="17" id="J7R-Ln-tzx"/>
+                            <constraint firstItem="pBy-om-abg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="355-1K-Ern" secondAttribute="bottom" constant="15" id="Ndf-bN-JiN"/>
+                            <constraint firstItem="pBy-om-abg" firstAttribute="leading" secondItem="Zjw-oR-Gn8" secondAttribute="leading" constant="80" id="Qau-BH-L0q"/>
+                            <constraint firstAttribute="bottom" secondItem="KkU-jk-ctP" secondAttribute="bottom" id="VE3-It-QNp"/>
+                            <constraint firstItem="KkU-jk-ctP" firstAttribute="top" secondItem="Zjw-oR-Gn8" secondAttribute="topMargin" id="d6R-rV-bn8"/>
+                            <constraint firstAttribute="bottom" secondItem="pBy-om-abg" secondAttribute="bottom" constant="8" id="stM-w8-A6q"/>
+                            <constraint firstAttribute="trailing" secondItem="355-1K-Ern" secondAttribute="trailing" constant="17" id="vLP-PL-Zan"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="3B0-Jq-PN6">
+                        <barButtonItem key="leftBarButtonItem" id="tkm-ta-HAW">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="S5X-I9-cJI">
+                                <rect key="frame" x="-7" y="125" width="28" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="BackButtonImagev2">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backAction:" destination="ReR-pk-HA9" eventType="touchUpInside" id="MY0-EP-QqC"/>
+                                    <action selector="backAction:" destination="X7x-Ie-Iwf" eventType="touchUpInside" id="atz-cY-YWA"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="355-1K-Ern" id="vcu-vC-GQn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6N5-jO-rUw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1656.5" y="-503"/>
         </scene>
         <!--Profile-->
         <scene sceneID="IeC-3H-rzM">
@@ -399,12 +464,13 @@
         <image name="FriendSceneBackground" width="640" height="1136"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
         <image name="ImageEditIcon" width="47" height="48"/>
-        <image name="LogoutIcon" width="58" height="58"/>
         <image name="ProfileDetailDisclosureButton" width="85" height="88"/>
         <image name="ProfileHeaderBackground" width="640" height="192"/>
         <image name="ProfileHeaderBackgroundv2" width="640" height="202"/>
         <image name="RandomChallengeButtonBackground" width="271" height="89"/>
+        <image name="RedButtonBackground" width="163" height="61"/>
         <image name="SettingsIcon" width="58" height="58"/>
+        <image name="SettingsSceneBackground" width="640" height="1136"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

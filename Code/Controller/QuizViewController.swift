@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AudioToolbox
 
 class QuizViewController: UIViewController {
     
@@ -192,7 +191,7 @@ class QuizViewController: UIViewController {
             combos = -1
             let currentQuestionScore = calculateScore()
             produceResultForCurrentQuestion(false, score: currentQuestionScore)
-            AudioServicesPlayAlertSound(0x00000FFF)
+            vibrateIfAllowed()
         }
         
         unmaskContentViewIfNecessary()
@@ -339,7 +338,7 @@ class QuizViewController: UIViewController {
             current_timeLeft = 0
             timerStop()
             preventFurtherActions()
-            AudioServicesPlayAlertSound(0x00000FFF)
+            vibrateIfAllowed()
             revealCorrectAnswer()
             unmaskContentViewIfNecessary()
             let score = calculateScore()

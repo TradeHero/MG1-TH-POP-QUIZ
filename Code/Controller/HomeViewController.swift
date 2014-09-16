@@ -18,10 +18,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var openChallenges: [Game] = []
     private var opponentPendingChallenges: [Game] = []
     
-    private lazy var user: THUser = {
-        return NetworkClient.sharedClient.authenticatedUser
-        }()
-    
+    private var user: THUser = NetworkClient.sharedClient.authenticatedUser
+
     private var noOpenChallenge:Bool {
         return self.openChallenges.count == 0
     }
@@ -55,21 +53,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if segue.identifier == "FriendsViewPushSegue" {
-            let vc = segue.destinationViewController as FriendsViewController
-        } else if segue.identifier == "ProfileViewPushSegue" {
-//            let vc = segue.destinationViewController
-        }
-        
-    }
-    
     //MARK:- Actions
-    @IBAction func logoutClicked(sender: AnyObject) {
-        FBSession.activeSession().closeAndClearTokenInformation()
-        NetworkClient.sharedClient.logout()
-        NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLogoutNotificationKey, object: self, userInfo:nil)
-    }
     
     @IBAction func quickGameAction(sender: UIButton) {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)

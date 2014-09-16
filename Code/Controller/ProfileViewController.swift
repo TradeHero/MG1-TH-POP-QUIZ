@@ -64,8 +64,13 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
                 strongSelf.closedChallenges.sort {
                     $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
                 }
-                
                 strongSelf.tableView.reloadData()
+                if strongSelf.closedChallenges.count > 0 {
+                    strongSelf.tableView.hidden =  true
+                } else {
+                    strongSelf.tableView.hidden =  false
+                }
+                
                 hud.dismissAnimated(true)
             }
         }
@@ -181,7 +186,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return closedChallenges.count > 0 ? 1 : 0
     }
         
     //MARK:- UIImagePickerControllerDelegate methods

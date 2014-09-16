@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1C62BA7F65B04C13BB4646FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2C12E80B2143C290FCDB20 /* libPods.a */; };
 		6D04887319BED33100F955D0 /* angrybirds-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D04887219BED33100F955D0 /* angrybirds-regular.ttf */; };
+		6D0BC42019C7E2F700578C90 /* SettingsControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC41E19C7E2F700578C90 /* SettingsControlTableViewCell.swift */; };
+		6D0BC42119C7E2F700578C90 /* SettingsControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BC41F19C7E2F700578C90 /* SettingsControlTableViewCell.xib */; };
 		6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */; };
 		6D3AF98419C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */; };
 		6D3AF98519C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */; };
@@ -71,6 +73,7 @@
 		6DD231B619B8219E00B5D05E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231B219B8218300B5D05E /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6DD231BB19B821D700B5D05E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231BA19B821D700B5D05E /* libz.dylib */; };
 		6DD231C619B8224C00B5D05E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231C019B8224C00B5D05E /* libTestFlight.a */; };
+		6DE06E7019C8085C00EB4D2F /* THSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE06E6F19C8085C00EB4D2F /* THSwitch.swift */; };
 		6DE3B4E719BEB3DC00F9251A /* THIndefiniteIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */; };
 		6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */; };
 		6DE3B4F119BECCBC00F9251A /* ProximaNova-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EC19BECCBC00F9251A /* ProximaNova-Light.ttf */; };
@@ -128,6 +131,8 @@
 
 /* Begin PBXFileReference section */
 		6D04887219BED33100F955D0 /* angrybirds-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "angrybirds-regular.ttf"; sourceTree = "<group>"; };
+		6D0BC41E19C7E2F700578C90 /* SettingsControlTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsControlTableViewCell.swift; sourceTree = "<group>"; };
+		6D0BC41F19C7E2F700578C90 /* SettingsControlTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsControlTableViewCell.xib; sourceTree = "<group>"; };
 		6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTimelineTableViewCell.swift; sourceTree = "<group>"; };
 		6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengesTimelineTableViewCell.xib; sourceTree = "<group>"; };
@@ -200,6 +205,7 @@
 		6DD231C319B8224C00B5D05E /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		6DD231C419B8224C00B5D05E /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		6DD231C519B8224C00B5D05E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		6DE06E6F19C8085C00EB4D2F /* THSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THSwitch.swift; sourceTree = "<group>"; };
 		6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THIndefiniteIndicatorView.swift; sourceTree = "<group>"; };
 		6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.ttf"; sourceTree = "<group>"; };
 		6DE3B4EC19BECCBC00F9251A /* ProximaNova-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.ttf"; sourceTree = "<group>"; };
@@ -235,6 +241,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D0BC41D19C7E2CB00578C90 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				6D0BC41E19C7E2F700578C90 /* SettingsControlTableViewCell.swift */,
+				6D0BC41F19C7E2F700578C90 /* SettingsControlTableViewCell.xib */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		6D3AF97F19C2ADB00085682E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,7 +419,9 @@
 				6D3AF97F19C2ADB00085682E /* Profile */,
 				6DD2315C19B8204900B5D05E /* Quiz */,
 				6DD2316819B8204900B5D05E /* Results */,
+				6D0BC41D19C7E2CB00578C90 /* Settings */,
 				6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */,
+				6DE06E6F19C8085C00EB4D2F /* THSwitch.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -657,6 +674,7 @@
 				6D3AF98519C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib in Resources */,
 				6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */,
 				6DD2319519B8204900B5D05E /* QuickChallengeTableViewCell.xib in Resources */,
+				6D0BC42119C7E2F700578C90 /* SettingsControlTableViewCell.xib in Resources */,
 				6DD2319319B8204900B5D05E /* FriendsChallengeCellTableViewCell.xib in Resources */,
 				6DD2319719B8204900B5D05E /* HomeTurnChallengesTableViewCell.xib in Resources */,
 				6DD231A019B8204900B5D05E /* QuestionViewWithAccessoryImage.xib in Resources */,
@@ -762,9 +780,11 @@
 				6DD2317819B8204900B5D05E /* GamePortfolio.swift in Sources */,
 				6DD2319D19B8204900B5D05E /* QuestionViewPlain.swift in Sources */,
 				6DD2318D19B8204900B5D05E /* AvatarRoundedView.swift in Sources */,
+				6D0BC42019C7E2F700578C90 /* SettingsControlTableViewCell.swift in Sources */,
 				6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */,
 				6DD2316C19B8204900B5D05E /* AppDelegate.swift in Sources */,
 				6DD2318E19B8204900B5D05E /* DesignableButton.swift in Sources */,
+				6DE06E7019C8085C00EB4D2F /* THSwitch.swift in Sources */,
 				6DD2317319B8204900B5D05E /* ResultsViewController.swift in Sources */,
 				6DD2318219B8204900B5D05E /* ObjCHelpers.m in Sources */,
 			);

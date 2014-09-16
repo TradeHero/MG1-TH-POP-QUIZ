@@ -555,6 +555,12 @@ class NetworkClient {
         self.authenticatedUser = nil
         self.removeCredentials()
         EGOCache.globalCache().clearCache()
+        FBSession.activeSession().closeAndClearTokenInformation()
+        NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLogoutNotificationKey, object: self, userInfo:nil)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kTHPushNotificationOnKey)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kTHSoundEffectValueKey)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kTHBackgroundMusicValueKey)
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(kTHVibrationEffectOnKey)
     }
     
     // MARK: Simple functions
@@ -640,6 +646,19 @@ class NetworkClient {
         if (headers["TH-Language-Code"] == nil) {
             headers["TH-Language-Code"] = "en-GB"
         }
+        
+        if (headers["THPQ-Client-Version"] == nil) {
+            headers["THPQ-Client-Version"] = "1.0.0.0"
+        }
+        
+        if (headers["THPQ-Client-Type"] == nil) {
+            headers["THPQ-Client-Type"] = "1"
+        }
+        
+        if (headers["THPQ-Language-Code"] == nil) {
+            headers["THPQ-Language-Code"] = "en-GB"
+        }
+        
         
         if let auth = generateAuthorisationFromKeychain() {
             headers["Authorization"] = auth

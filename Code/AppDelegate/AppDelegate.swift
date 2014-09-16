@@ -14,13 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
 
-    var bgmPlayer: AVAudioPlayer!
+    var bgmPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Electrodoodle - Kevin MacLeod", ofType: "mp3")!), error: nil)
+    
+    var soundEffectPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Electrodoodle - Kevin MacLeod", ofType: "mp3")!), error: nil)
     
     var isSoundEffectOn: Bool {
         get{
             return bgmPlayer.playing
         }
     }
+    
+    
     
     private var isNotificationRegistered: Bool = false
     
@@ -36,14 +40,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         switch kTHGamesServerMode {
-        case .Dev:
+        case .Staging:
             println("Current build points to Staging Server.\n")
         case .Prod:
             println("Current build points to Production Server.\n")
         }
-        self.bgmPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Electrodoodle - Kevin MacLeod", ofType: "mp3")!), error: nil)
-//        self.bgmPlayer.numberOfLoops = -1
-//        self.bgmPlayer.play()
+        self.bgmPlayer.numberOfLoops = -1
+        self.bgmPlayer.play()
+        self.bgmPlayer.volume = kTHBackgroundMusicValue
         self.registerLoginNotification()
 //        self.autoLogin()
 /*

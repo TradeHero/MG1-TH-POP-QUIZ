@@ -7,15 +7,16 @@
 //
 
 import Foundation
+import AudioToolbox
 
 enum Mode: Int {
-    case Dev
+    case Staging
     case Prod
 }
 
 let TestFlightToken = "c1a29f46-4c93-4e9a-8b89-0ec297bf1622"
 
-let kTHGamesServerMode = Mode.Dev
+let kTHGamesServerMode = Mode.Staging
 
 let kConstantPrefix = "TH"
 
@@ -31,7 +32,7 @@ let THProdAPIBaseURL = "\(kConnectionHTTPS)\(THProdAPIHost)\(THAPIPath)"
 let THDevAPIHost = "th-paas-test-dev1.cloudapp.net"
 let THDevAPIBaseURL = "\(kConnectionHTTP)\(THDevAPIHost)\(THAPIPath)"
 
-let THServerAPIBaseURL = kTHGamesServerMode == Mode.Dev ? "\(THDevAPIBaseURL)" : "\(THProdAPIBaseURL)"
+let THServerAPIBaseURL = kTHGamesServerMode == Mode.Staging ? "\(THDevAPIBaseURL)" : "\(THProdAPIBaseURL)"
 
 let THGameAPIBaseURL = "\(THServerAPIBaseURL)/games"
 
@@ -50,6 +51,11 @@ let kTHGameKeychainIdentifierKey = "\(kConstantPrefix)GameKeychainIdentifier"
 let kTHGameKeychainBasicAccKey = "\(kConstantPrefix)GameKeychainBasicAcc"
 let kTHGameKeychainFacebookAccKey = "\(kConstantPrefix)GameKeychainFacebookAcc"
 
+let kTHPushNotificationOnKey = "\(kConstantPrefix)PushNotificationOn"
+let kTHBackgroundMusicValueKey = "\(kConstantPrefix)BackgroundMusicValue"
+let kTHSoundEffectValueKey = "\(kConstantPrefix)SoundEffectValue"
+let kTHVibrationEffectOnKey = "\(kConstantPrefix)VibrationEffectOn"
+
 //MARK:- notification keys
 let kTHGameLoginSuccessfulNotificationKey = "\(kConstantPrefix)GameLoginSuccessfulNotification"
 let kTHGameLogoutNotificationKey = "\(kConstantPrefix)GameLogoutNotification"
@@ -62,7 +68,74 @@ let kTHQuickChallengeTableViewCellIdentifier = "\(kConstantPrefix)QuickChallenge
 let kTHQuestionResultTableViewCellIdentifier = "\(kConstantPrefix)QuestionResultTableViewCellIdentifier"
 let kTHGameResultDetailTableViewCellIdentifier = "\(kConstantPrefix)GameResultDetailTableViewCellIdentifier"
 let kTHChallengesTimelineTableViewCellIdentifier = "\(kConstantPrefix)ChallengesTimelineTableViewCellIdentifier"
+let kTHSettingsControlTableViewCellIdentifier = "\(kConstantPrefix)SettingsControlTableViewCellIdentifier"
 
 // MARK:- cache keys
 let kTHUserFriendsCacheStoreKey = "\(kConstantPrefix)UserFriendsCacheStore"
 let kTHUserCacheStoreKeyPrefix = "\(kConstantPrefix)UserCacheStoreID"
+
+//MARK:- Settings
+
+var kTHPushNotificationOn:Bool {
+    set {
+//    NetworkClient.sharedClient.updatePushNotification() 
+        NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHPushNotificationOnKey)
+    }
+
+    get {
+        if let obj = NSUserDefaults.standardUserDefaults().objectForKey(kTHPushNotificationOnKey) as? NSNumber {
+            return obj.boolValue
+        }
+        return true
+    }
+}
+
+var kTHBackgroundMusicValue:Float {
+    set {
+        NSUserDefaults.standardUserDefaults().setObject(NSNumber(float: newValue), forKey: kTHBackgroundMusicValueKey)
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
+            app.bgmPlayer.volume = newValue
+        }
+    }
+    
+    get {
+        if let obj = NSUserDefaults.standardUserDefaults().objectForKey(kTHBackgroundMusicValueKey) as? NSNumber {
+            return obj.floatValue
+        }
+        return 1
+    }
+}
+
+var kTHSoundEffectValue:Float {
+    set {
+        NSUserDefaults.standardUserDefaults().setObject(NSNumber(float: newValue), forKey: kTHSoundEffectValueKey)
+        if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
+            app.soundEffectPlayer.volume = newValue
+        }
+    }
+    
+    get {
+        if let obj = NSUserDefaults.standardUserDefaults().objectForKey(kTHSoundEffectValueKey) as? NSNumber {
+            return obj.floatValue
+        }
+        return 1
+    }
+}
+var kTHVibrationEffectOn:Bool {
+    set {
+         NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHVibrationEffectOnKey)
+    }
+
+    get {
+        if let obj = NSUserDefaults.standardUserDefaults().objectForKey(kTHVibrationEffectOnKey) as? NSNumber {
+            return obj.boolValue
+        }
+        return false
+    }
+}
+
+func vibrateIfAllowed(){
+    if kTHVibrationEffectOn {
+        AudioServicesPlayAlertSound(0x00000FFF)
+    }
+}

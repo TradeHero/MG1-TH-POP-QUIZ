@@ -852,7 +852,7 @@
     </scenes>
     <resources>
         <image name="BadgeView" width="49" height="62"/>
-        <image name="BlueCategoryBackground" width="640" height="596"/>
+        <image name="BlueCategoryBackground" width="640" height="570"/>
         <image name="CountdownTimerButtonBackground" width="163" height="163"/>
         <image name="EmptyAvatar" width="200" height="200"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
@@ -861,11 +861,11 @@
         <image name="GemIcon" width="71" height="64"/>
         <image name="GreenLongButtonBackground" width="443" height="92"/>
         <image name="LoseBoxBackground" width="455" height="208"/>
-        <image name="LoseSceneDarkRay" width="640" height="395"/>
+        <image name="LoseSceneDarkRay" width="640" height="336"/>
         <image name="QuizHeaderBackground" width="640" height="169"/>
         <image name="QuizTimerBackground" width="110" height="69"/>
         <image name="QuizViewBackground" width="640" height="1136"/>
-        <image name="RedCategoryBackground" width="640" height="577"/>
+        <image name="RedCategoryBackground" width="640" height="571"/>
         <image name="RemoveOptionsButtonBackground" width="607" height="92"/>
         <image name="WaitingStamp" width="93" height="26"/>
         <image name="WinBoxBackground" width="455" height="208"/>
