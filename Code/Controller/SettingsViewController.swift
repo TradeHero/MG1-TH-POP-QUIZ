@@ -170,6 +170,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
+    
     private func createHeaderView(title:String) -> UIView{
         var view = UIView(frame: CGRectMake(0, 0, 286, 40))
         UIView.roundView(view, onCorner: .TopRight | .TopLeft, radius: 10)

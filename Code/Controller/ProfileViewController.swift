@@ -11,6 +11,8 @@ import UIKit
 class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
 
+    @IBOutlet weak var profileUpdateButton: UIButton!
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var inGameNameEditTextField: UITextField!
@@ -31,12 +33,20 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         return picker
     }
     
+    private lazy var emptyTimelineView: UIView = {
+        var view = NSBundle.mainBundle().loadNibNamed("EmptyTimelineView", owner: nil, options: nil)[0] as UIView
+        view.x = 31
+        view.y = 194
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadClosedChallenges()
         self.tableView.registerNib(UINib(nibName: "ChallengesTimelineTableViewCell", bundle: nil), forCellReuseIdentifier: kTHChallengesTimelineTableViewCellIdentifier)
         tableView.alwaysBounceVertical = false
         self.configureUI()
+        self.view.addSubview(emptyTimelineView)
         // Do any additional setup after loading the view.
     }
     
@@ -54,6 +64,15 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     @IBAction func backAction(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    @IBAction func updateAction(sender: AnyObject) {
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view, style: .Dark)
+        hud.textLabel.text = "Updating profile..."
+        //TODO: update profile
+        hud.dismissAfterDelay(2.0)
+        self.profileUpdateButton.disable()
+    }
+    
     func loadClosedChallenges() {
         weak var weakSelf = self
         
@@ -61,16 +80,18 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         hud.textLabel.text = "Refreshing timeline.."
         NetworkClient.sharedClient.fetchClosedChallenges {
             if let strongSelf = weakSelf {
-                strongSelf.closedChallenges = $0
-                strongSelf.closedChallenges.sort {
+                var c = $0
+                c.sort {
                     $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
                 }
+                
+                strongSelf.closedChallenges = c
                 strongSelf.tableView.reloadData()
-                if strongSelf.closedChallenges.count > 0 {
-                    strongSelf.tableView.hidden =  true
-                } else {
-                    strongSelf.tableView.hidden =  false
-                }
+                
+                let shouldNotHideTableViewForEmptyView = c.count > 0
+                println(shouldNotHideTableViewForEmptyView)
+                strongSelf.tableView.hidden = !shouldNotHideTableViewForEmptyView
+                strongSelf.emptyTimelineView.hidden = shouldNotHideTableViewForEmptyView
                 
                 hud.dismissAnimated(true)
             }
@@ -127,11 +148,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
             return false
         }
         
-        //TODO: update in game name
-        NetworkClient.sharedClient.updateInGameName(textField.text) {
-            
-        }
-        
         return true
     }
     
@@ -145,7 +161,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        inGameNameEditTextField.text = defaultText
         self.view.endEditing(true)
     }
     
@@ -198,7 +213,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
             if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
                 self.profilePicView.image = selectedImage
             }
-            
+            self.profileUpdateButton.enable()
         }
     }
     

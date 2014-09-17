@@ -597,7 +597,7 @@ class NetworkClient {
         }
     }
     
-    func updateUser(user:THUser, completionHandler: THUser -> ()){
+    func refreshUser(user:THUser, completionHandler: THUser -> ()){
         self.fetchUser(user.userId, force: true) {
             if let u = $0 {
                 completionHandler(user)

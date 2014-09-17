@@ -60,16 +60,7 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
         self.friendAvatarView.layer.borderWidth = 1
         self.friendAvatarView.layer.borderColor = UIColor.whiteColor().CGColor
         self.friendAvatarView.clipsToBounds = true
-        self.layer.cornerRadius = 3
-        self.clipsToBounds = true
     }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
     
     @IBAction func challengeOrInviteAction(sender: AnyObject) {
         if self.friendUser.isTHUser {
@@ -106,6 +97,7 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
             frame.origin.y += 3
             frame.size.height -=  5;
             super.frame = frame
+            UIView.roundView(self, onCorner: .AllCorners, radius: 5)
         }
     }
     

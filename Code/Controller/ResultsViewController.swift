@@ -173,6 +173,10 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.bindQuestionResults(selfRes, opponentResult: oppRes, index:indexPath.row+1)
             cell.layoutIfNeeded()
             cell.delegate = self
+            
+            if indexPath.row == playerResult.resultDetails.count - 1 {
+                UIView.roundView(cell, onCorner: .BottomLeft | .BottomRight , radius: 5)
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
@@ -182,7 +186,8 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             
 
             cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.hintsUsed)" : "--"
-            
+            UIView.roundView(cell, onCorner: .AllCorners, radius: 5)
+
             return cell
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
@@ -191,12 +196,15 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             cell.labelTintColor = UIColor(hex: 0x457B1D)
             cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.highestCombo)" : "--"
+            UIView.roundView(cell, onCorner: .AllCorners, radius: 5)
             return cell
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
             cell.attribute = "Total Score"
             cell.selfAttributeDetail = "\(playerResult.finalScore.decimalFormattedString)"
             cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.finalScore.decimalFormattedString)" : "--"
+            UIView.roundView(cell, onCorner: .AllCorners, radius: 5)
+
             return cell
         default:
             return UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")
@@ -226,7 +234,9 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
-            return createHeaderViewForResultsView()
+            let view = createHeaderViewForResultsView()
+            UIView.roundView(view, onCorner: .TopLeft | .TopRight, radius: 5)
+            return view
         default:
             return nil
         }
@@ -254,9 +264,6 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let view = UIView(frame: CGRectMake(0, 0, 285, 50))
         
         view.backgroundColor = UIColor(hex: 0xFF4069)
-        view.layer.cornerRadius = 10.0
-        view.layer.borderWidth = 3.0
-        view.layer.borderColor = UIColor(hex: 0xF51B49).CGColor
 
         var label = UILabel(frame:CGRectMake(8, 14, 130, 21))
         label.text = "Correct Answers"

@@ -16,16 +16,17 @@ enum ChallengeStatus: Int {
 
 class HomeTurnChallengesTableViewCell: UITableViewCell {
     
+    let inset:CGFloat = 2.5
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 3
         self.challengerImageView.layer.borderWidth = 1
         self.challengerImageView.layer.borderColor = UIColor.whiteColor().CGColor
         self.challengerImageView.clipsToBounds = true
-        self.clipsToBounds = true
         self.challengerDisplayNameLabel.text = ""
         // Initialization code
     }
+    
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var challengerDisplayNameLabel: UILabel!
     @IBOutlet weak var challengerImageView: UIImageView!
@@ -114,7 +115,6 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     }
     
     func configureAsInvitedMode() {
-        
         self.actionButton.enabled = false
         self.actionButton.setTitle("Waiting..", forState: .Normal)
         self.actionButton.setBackgroundImage(UIImage(named: "BlueButtonBackground"), forState: .Normal)
@@ -123,6 +123,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         self.challengerImageView.sd_cancelCurrentImageLoad()
         self.challengerImageView.image = nil
         self.challengerDisplayNameLabel.text = ""
@@ -131,20 +132,17 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     }
     
     override var frame: CGRect {
+        set(fr) {
+            var frame = fr
+            frame.origin.y += inset
+            frame.size.height -=  2 * inset
+            super.frame = frame
+            UIView.roundView(self, onCorner: .AllCorners, radius: 5)
+        }
+        
         get {
             return super.frame
         }
-        
-        set(fr) {
-            var frame = fr
-            frame.origin.y += 3
-            frame.size.height -=  5;
-            super.frame = frame
-        }
-    }
-    
-    override func layoutIfNeeded() {
-        super.layoutIfNeeded()
     }
     
 }

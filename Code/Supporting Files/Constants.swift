@@ -80,6 +80,7 @@ let kTHUserCacheStoreKeyPrefix = "\(kConstantPrefix)UserCacheStoreID"
 
 var kTHPushNotificationOn:Bool {
     set {
+        debugPrintln("Push notifications set to \(newValue)")
 //    NetworkClient.sharedClient.updatePushNotification() 
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHPushNotificationOnKey)
     }
@@ -94,6 +95,7 @@ var kTHPushNotificationOn:Bool {
 
 var kTHBackgroundMusicValue:Float {
     set {
+        debugPrintln("Background music volume set to \(newValue)")
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(float: newValue), forKey: kTHBackgroundMusicValueKey)
         if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
             app.bgmPlayer.volume = newValue
@@ -110,6 +112,7 @@ var kTHBackgroundMusicValue:Float {
 
 var kTHSoundEffectValue:Float {
     set {
+        debugPrintln("Sound effect volume set to \(newValue)")
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(float: newValue), forKey: kTHSoundEffectValueKey)
         if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
             app.soundEffectPlayer.volume = newValue
@@ -125,7 +128,8 @@ var kTHSoundEffectValue:Float {
 }
 var kTHVibrationEffectOn:Bool {
     set {
-         NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHVibrationEffectOnKey)
+        debugPrintln("Vibration effect set to \(newValue)")
+        NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHVibrationEffectOnKey)
     }
 
     get {

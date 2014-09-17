@@ -46,6 +46,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.showNavigationBar()
+        self.tableView.reloadData()
+        self.tableView.forceUpdateTable()
     }
     
     override func didReceiveMemoryWarning() {
@@ -151,7 +153,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 48
+        return 48 + 5
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
