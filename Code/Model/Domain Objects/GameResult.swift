@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias QuestionResultDetail = (id:Int, rawScore:Int, time:CGFloat)
+typealias QuestionResultDetail = (id:Int, rawScore:Int, time:Float)
 typealias QuestionResultFinalDetail = (id:Int, finalScore:Int)
 
 final class GameResult {
@@ -66,7 +66,7 @@ final class GameResult {
         
         for detail in details {
             let dComps = detail.componentsSeparatedByString(", ")
-            qrd.append((id:dComps[0].intValue, rawScore:dComps[1].intValue, time:dComps[2].CGFloatValue))
+            qrd.append((id:dComps[0].intValue, rawScore:dComps[1].intValue, time:(dComps[2] as NSString).floatValue))
         }
         
         return qrd

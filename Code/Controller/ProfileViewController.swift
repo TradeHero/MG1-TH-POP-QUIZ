@@ -11,16 +11,16 @@ import UIKit
 class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
 
-    @IBOutlet weak var profileUpdateButton: UIButton!
+    @IBOutlet private weak var profileUpdateButton: UIButton!
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
-    @IBOutlet weak var inGameNameEditTextField: UITextField!
+    @IBOutlet private weak var inGameNameEditTextField: UITextField!
     
-    @IBOutlet weak var profilePicView: AvatarRoundedView!
+    @IBOutlet private weak var profilePicView: AvatarRoundedView!
     private var defaultText:String!
     
-    @IBOutlet weak var rankViewButton: DesignableButton!
+    @IBOutlet private weak var rankViewButton: DesignableButton!
     
     private var closedChallenges: [Game] = []
     
@@ -47,6 +47,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         tableView.alwaysBounceVertical = false
         self.configureUI()
         self.view.addSubview(emptyTimelineView)
+        tableView.hidden = true
+        emptyTimelineView.hidden = true
         // Do any additional setup after loading the view.
     }
     
@@ -82,14 +84,13 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
             if let strongSelf = weakSelf {
                 var c = $0
                 c.sort {
-                    $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
+                    $1.createdAt.timeIntervalSinceReferenceDate > $0.createdAt.timeIntervalSinceReferenceDate
                 }
                 
                 strongSelf.closedChallenges = c
                 strongSelf.tableView.reloadData()
                 
                 let shouldNotHideTableViewForEmptyView = c.count > 0
-                println(shouldNotHideTableViewForEmptyView)
                 strongSelf.tableView.hidden = !shouldNotHideTableViewForEmptyView
                 strongSelf.emptyTimelineView.hidden = shouldNotHideTableViewForEmptyView
                 
@@ -164,7 +165,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         self.view.endEditing(true)
     }
     
-    // MARK:- UITextField delegate methods
+    // MARK:- UITableView delegate methods
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kTHChallengesTimelineTableViewCellIdentifier) as ChallengesTimelineTableViewCell
         cell.bindGame(closedChallenges[indexPath.row])
@@ -216,20 +217,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
             self.profileUpdateButton.enable()
         }
     }
-    
+    //MARK:- UINavigationControllerDelegate methods
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .None)
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

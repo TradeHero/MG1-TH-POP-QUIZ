@@ -10,13 +10,13 @@ import Foundation
 
 final class QuestionResult {
     var questionId: Int
-    var timeTaken: CGFloat
+    var timeTaken: Float
     var isCorrect: Bool = false
     var rawScore: Int
     var bonus: Int!
     var finalScore: Int!
     
-    init(questionID: Int, timeTaken:CGFloat, correct:Bool, score: Int) {
+    init(questionID: Int, timeTaken:Float, correct:Bool, score: Int) {
         self.questionId = questionID
         self.timeTaken = timeTaken
         self.isCorrect = correct

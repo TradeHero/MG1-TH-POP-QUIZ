@@ -104,7 +104,7 @@ class QuizViewController: UIViewController {
     
     private var opponentQuestionCorrect: Int = 0
     
-    private var combos: Int = -1 {
+    private var combos: Int = 0 {
         didSet {
             if combos > highestCombo {
                 highestCombo = combos
@@ -320,9 +320,9 @@ class QuizViewController: UIViewController {
             UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                 self.questionView.alpha = 0
                 
-                }, completion: { c in
+                }) { c in
                     self.setUpViewWithQuestion(self.game.questionSet[self.current_q])
-            })
+            }
         }
     }
     
@@ -373,7 +373,7 @@ class QuizViewController: UIViewController {
         
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Calculating results..."
-        NetworkClient.sharedClient.postGameResults(self.game, highestCombo: highestCombo, noOfHintsUsed: self.hintUsed, currentScore: currentTurnScore, questionResults: results) {
+        NetworkClient.sharedClient.postGameResults(self.game, highestCombo: self.highestCombo, noOfHintsUsed: self.totalHintUsed, currentScore: currentTurnScore, questionResults: results) {
             var sself = wself!
             hud.dismissAnimated(true)
             sself.game = $0
@@ -524,7 +524,6 @@ class QuizViewController: UIViewController {
         }
         
         opponentDisplayNameLabel.text = opponent.displayName
-        println("\(self.opponentQuestionCorrect)")
         opponentProgressView.progress = CGFloat(self.opponentQuestionCorrect)/CGFloat(self.game.questionSet.count)
         opponentScoreLabel.text = "\(opponentScore.decimalFormattedString)"
         
@@ -565,7 +564,7 @@ class QuizViewController: UIViewController {
     }
     
     private func produceResultForCurrentQuestion(isCorrect:Bool, score:Int){
-        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: (10 - current_timeLeft).roundToNearest1DecimalPlace(), correct: isCorrect, score: score))
+        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: Float(10 - current_timeLeft), correct: isCorrect, score: score))
     }
     
     func bindGameAndUsers(game:Game, player:THUser, opponent:THUser){

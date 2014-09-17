@@ -44,40 +44,61 @@ let THAuthFacebookPrefix = "TH-Facebook"
 // MARK:- keys
 
 let kTHGameLoggedInKey = "\(kConstantPrefix)GameLoggedIn"
+
 let kTHGameLoginIDKey = "\(kConstantPrefix)GameLoginID"
 
+
 let kTHGameLoginPasswordKey = "\(kConstantPrefix)GameLoginPassword"
+
 let kTHGameKeychainIdentifierKey = "\(kConstantPrefix)GameKeychainIdentifier"
+
 let kTHGameKeychainBasicAccKey = "\(kConstantPrefix)GameKeychainBasicAcc"
+
 let kTHGameKeychainFacebookAccKey = "\(kConstantPrefix)GameKeychainFacebookAcc"
 
+
 let kTHPushNotificationOnKey = "\(kConstantPrefix)PushNotificationOn"
+
 let kTHBackgroundMusicValueKey = "\(kConstantPrefix)BackgroundMusicValue"
+
 let kTHSoundEffectValueKey = "\(kConstantPrefix)SoundEffectValue"
+
 let kTHVibrationEffectOnKey = "\(kConstantPrefix)VibrationEffectOn"
+
 
 //MARK:- notification keys
 let kTHGameLoginSuccessfulNotificationKey = "\(kConstantPrefix)GameLoginSuccessfulNotification"
+
 let kTHGameLogoutNotificationKey = "\(kConstantPrefix)GameLogoutNotification"
+
 
 
 // MARK:- view identifiers
 let kTHFriendsChallengeCellTableViewCellIdentifier = "\(kConstantPrefix)FriendsChallengeCellTableViewCellIdentifier"
+
 let kTHHomeTurnChallengesTableViewCellIdentifier = "\(kConstantPrefix)HomeTurnChallengesTableViewCellIdentifier"
+
 let kTHQuickChallengeTableViewCellIdentifier = "\(kConstantPrefix)QuickChallengeTableViewCellIdentifier"
+
 let kTHQuestionResultTableViewCellIdentifier = "\(kConstantPrefix)QuestionResultTableViewCellIdentifier"
+
 let kTHGameResultDetailTableViewCellIdentifier = "\(kConstantPrefix)GameResultDetailTableViewCellIdentifier"
+
 let kTHChallengesTimelineTableViewCellIdentifier = "\(kConstantPrefix)ChallengesTimelineTableViewCellIdentifier"
+
 let kTHSettingsControlTableViewCellIdentifier = "\(kConstantPrefix)SettingsControlTableViewCellIdentifier"
+
 let kTHSettingsSliderTableViewCellIdentifier = "\(kConstantPrefix)SettingsSliderTableViewCellIdentifier"
 
 
 // MARK:- cache keys
 let kTHUserFriendsCacheStoreKey = "\(kConstantPrefix)UserFriendsCacheStore"
+
 let kTHUserCacheStoreKeyPrefix = "\(kConstantPrefix)UserCacheStoreID"
 
-//MARK:- Settings
 
+
+//MARK:- Settings
 var kTHPushNotificationOn:Bool {
     set {
         debugPrintln("Push notifications set to \(newValue)")
