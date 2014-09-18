@@ -135,9 +135,6 @@ var kTHSoundEffectValue:Float {
     set {
         debugPrintln("Sound effect volume set to \(newValue)")
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(float: newValue), forKey: kTHSoundEffectValueKey)
-        if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
-            app.soundEffectPlayer.volume = newValue
-        }
     }
     
     get {

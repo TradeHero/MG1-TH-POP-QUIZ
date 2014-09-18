@@ -7,6 +7,7 @@
 //
 
 @import UIKit;
+@import AVFoundation;
 
 @interface UIImage (Helper)
 
@@ -35,6 +36,13 @@ typedef NS_ENUM(NSInteger,UITableViewCellLoadWaveAnimationDirection) {
 - (void)reloadDataAnimateWithWave:(UITableViewCellLoadWaveAnimationDirection)animation;
 
 @end
+
+@interface AVAudioPlayer (FadeControl)
+
+- (void)fadeOutWithDuration:(NSTimeInterval)inFadeOutTime;
+
+@end
+
 
 @interface JMMarkSlider : UISlider
 @property (nonatomic) UIColor *markColor;

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 extension UINavigationController {
     func hideNavigationBar() {
@@ -407,6 +408,35 @@ extension UIViewController {
 extension UIFont {
     func ProximaNovaFont(size:CGFloat) -> UIFont {
         return UIFont(name: "ProximaNova-Regular", size: size)
+    }
+}
+/*
+-(void)doVolumeFade
+{
+if (self.player.volume > 0.1) {
+self.player.volume = self.player.volume - 0.1;
+[self performSelector:@selector(doVolumeFade) withObject:nil afterDelay:0.1];
+} else {
+// Stop and get the sound ready for playing again
+[self.player stop];
+self.player.currentTime = 0;
+[self.player prepareToPlay];
+self.player.volume = 1.0;
+}
+}
+*/
+extension AVAudioPlayer {
+    class func createAudioPlayer(fileName: String, extensionName:String) -> AVAudioPlayer {
+        let url = NSBundle.mainBundle().URLForResource(fileName, withExtension: extensionName)
+        return AVAudioPlayer(contentsOfURL: url!, error: nil)
+    }
+    
+    func fadeToStop() {
+        var originalVolume = self.volume
+        self.fadeOutWithDuration(1.0)
+        self.currentTime = 0
+        self.volume = originalVolume
+        self.prepareToPlay()
     }
 }
 

@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     @IBOutlet private weak var inGameNameEditTextField: UITextField!
     
     @IBOutlet private weak var profilePicView: AvatarRoundedView!
+    
     private var defaultText:String!
     
     @IBOutlet private weak var rankViewButton: DesignableButton!

@@ -82,39 +82,6 @@
     [view.layer setMask:maskLayer];
 }
 
-//
-//-(void)roundCornersOnTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius {
-//    
-//    if (tl || tr || bl || br) {
-//        
-//        UIRectCorner corner; //holds the corner
-//        //Determine which corner(s) should be changed
-//        if (tl) {
-//            corner = UIRectCornerTopLeft;
-//        }
-//        if (tr) {
-//            UIRectCorner add = corner | UIRectCornerTopRight;
-//            corner = add;
-//        }
-//        if (bl) {
-//            UIRectCorner add = corner | UIRectCornerBottomLeft;
-//            corner = add;
-//        }
-//        if (br) {
-//            UIRectCorner add = corner | UIRectCornerBottomRight;
-//            corner = add;
-//        }
-//        
-//        UIView *v = self;
-//        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:v.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(radius, radius)];
-//        CAShapeLayer *maskLayer = [CAShapeLayer layer];
-//        maskLayer.frame = v.bounds;
-//        maskLayer.path = maskPath.CGPath;
-//        v.layer.mask = maskLayer;
-//    } else {
-//    }
-//}
-
 @end
 
 
@@ -194,30 +161,35 @@
 @end
 
 
-@implementation NSDateFormatter (RFC822)
+#define     kFadeSteps  20.0
 
-+ (instancetype)rfc822Formatter {
-    static NSDateFormatter *formatter = nil;
-    if (formatter == nil) {
-        formatter = [[NSDateFormatter alloc] init];
-        NSLocale *enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-        [formatter setLocale:enUS];
-        [formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss z"];
+@implementation AVAudioPlayer (FadeControl)
+
+-(void)fadeOutWithDuration:(NSTimeInterval)inFadeOutTime
+{
+    NSTimeInterval fireInterval = inFadeOutTime/kFadeSteps;
+    float volumeDecrement = 1.0/kFadeSteps;
+    float originalVolume = self.volume;
+    self.volume = originalVolume - volumeDecrement;
+    [NSTimer scheduledTimerWithTimeInterval:fireInterval target:self selector:@selector(fadeOutTimerMethod:) userInfo:[NSNumber numberWithFloat:originalVolume] repeats:YES];
+}
+
+- (void)fadeOutTimerMethod:(NSTimer*)theTimer
+{
+    float volumeDecrement = 1.0/kFadeSteps;
+    if (self.volume > volumeDecrement) {
+        self.volume = self.volume - volumeDecrement;
+    } else if ([theTimer isValid]) {
+        [self stop];
+        NSNumber* originalVolume = [theTimer userInfo];
+        self.volume = [originalVolume floatValue];
+        [theTimer invalidate];
+    } else {
+        [self stop];
     }
-    return formatter;
-}
-
-
-@end
-
-@implementation NSDate (RFC822)
-
-+ (instancetype)dateFromRFC822:(NSString *)date {
-    return [[NSDateFormatter rfc822Formatter] dateFromString:date];
 }
 
 @end
-
 
 
 @implementation JMMarkSlider

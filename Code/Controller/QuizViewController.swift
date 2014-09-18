@@ -118,6 +118,8 @@ class QuizViewController: UIViewController {
     
     private var totalHintUsed: UInt = 0
     
+    private var gameMusicPlayer: AVAudioPlayer!
+    
     // MARK:- init
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -132,6 +134,8 @@ class QuizViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.gameMusicPlayer = createBackgroundMusicPlayer()
+        self.gameMusicPlayer.play()
         self.navigationController?.hideNavigationBar()
         weak var wself = self
         dispatch_after(1, dispatch_get_main_queue()) {
@@ -210,6 +214,12 @@ class QuizViewController: UIViewController {
         }
     }
     
+    private func createBackgroundMusicPlayer() -> AVAudioPlayer{
+        let p = AVAudioPlayer.createAudioPlayer("MonkeysSpinningMonkeys", extensionName: "mp3")
+        p.numberOfLoops = -1
+        p.volume = kTHBackgroundMusicValue
+        return p
+    }
     
     func prepareToEndRound() {
         current_q++
@@ -374,17 +384,24 @@ class QuizViewController: UIViewController {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Calculating results..."
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: self.highestCombo, noOfHintsUsed: self.totalHintUsed, currentScore: currentTurnScore, questionResults: results) {
-            var sself = wself!
-            hud.dismissAnimated(true)
-            sself.game = $0
-            if $0.isGameCompletedByBothPlayer {
-                self.performSegueWithIdentifier("QuizWinLoseSegue", sender: nil)
-                return
-            }
-            
-            if $0.isGameCompletedByChallenger {
-                self.performSegueWithIdentifier("PartialQuizResultSegue", sender: nil)
-                return
+            if let sself = wself {
+                
+                sself.gameMusicPlayer.stop()
+                
+                if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
+                    app.bgmPlayer.play()
+                }
+                hud.dismissAnimated(true)
+                sself.game = $0
+                if $0.isGameCompletedByBothPlayer {
+                    self.performSegueWithIdentifier("QuizWinLoseSegue", sender: nil)
+                    return
+                }
+                
+                if $0.isGameCompletedByChallenger {
+                    self.performSegueWithIdentifier("PartialQuizResultSegue", sender: nil)
+                    return
+                }
             }
         }
     }
