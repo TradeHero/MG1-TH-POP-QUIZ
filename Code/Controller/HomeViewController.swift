@@ -43,11 +43,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
+        self.tableView.forceUpdateTable()
+    }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.showNavigationBar()
-        self.tableView.reloadData()
-        self.tableView.forceUpdateTable()
     }
     
     override func didReceiveMemoryWarning() {

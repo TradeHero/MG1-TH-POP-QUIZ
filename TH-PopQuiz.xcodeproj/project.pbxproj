@@ -11,6 +11,7 @@
 		6D04887319BED33100F955D0 /* angrybirds-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D04887219BED33100F955D0 /* angrybirds-regular.ttf */; };
 		6D0BC42019C7E2F700578C90 /* SettingsControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC41E19C7E2F700578C90 /* SettingsControlTableViewCell.swift */; };
 		6D0BC42119C7E2F700578C90 /* SettingsControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BC41F19C7E2F700578C90 /* SettingsControlTableViewCell.xib */; };
+		6D3413E919D00A43002D4D5E /* Correct-Bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D3413E819D00A43002D4D5E /* Correct-Bell.mp3 */; };
 		6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */; };
 		6D3AF98419C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */; };
 		6D3AF98519C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */; };
@@ -136,6 +137,7 @@
 		6D04887219BED33100F955D0 /* angrybirds-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "angrybirds-regular.ttf"; sourceTree = "<group>"; };
 		6D0BC41E19C7E2F700578C90 /* SettingsControlTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsControlTableViewCell.swift; sourceTree = "<group>"; };
 		6D0BC41F19C7E2F700578C90 /* SettingsControlTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsControlTableViewCell.xib; sourceTree = "<group>"; };
+		6D3413E819D00A43002D4D5E /* Correct-Bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Correct-Bell.mp3"; sourceTree = "<group>"; };
 		6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTimelineTableViewCell.swift; sourceTree = "<group>"; };
 		6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengesTimelineTableViewCell.xib; sourceTree = "<group>"; };
@@ -272,15 +274,18 @@
 		6DA1287819CA9037000687C0 /* Background Musics */ = {
 			isa = PBXGroup;
 			children = (
+				6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */,
+				6DD2314B19B8204900B5D05E /* Electrodoodle.mp3 */,
 			);
-			name = "Background Musics";
+			path = "Background Musics";
 			sourceTree = "<group>";
 		};
 		6DA1287919CA9040000687C0 /* Sound Effects */ = {
 			isa = PBXGroup;
 			children = (
+				6D3413E819D00A43002D4D5E /* Correct-Bell.mp3 */,
 			);
-			name = "Sound Effects";
+			path = "Sound Effects";
 			sourceTree = "<group>";
 		};
 		6DD230F619B81FFA00B5D05E = {
@@ -431,8 +436,6 @@
 			children = (
 				6DA1287919CA9040000687C0 /* Sound Effects */,
 				6DA1287819CA9037000687C0 /* Background Musics */,
-				6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */,
-				6DD2314B19B8204900B5D05E /* Electrodoodle.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -718,6 +721,7 @@
 				6DD2318319B8204900B5D05E /* Quiz.storyboard in Resources */,
 				6DD053A519C6CBB100831B6C /* ChallengesSectionHeader.xib in Resources */,
 				6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */,
+				6D3413E919D00A43002D4D5E /* Correct-Bell.mp3 in Resources */,
 				6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
