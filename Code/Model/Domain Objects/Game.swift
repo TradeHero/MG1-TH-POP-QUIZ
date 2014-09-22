@@ -111,10 +111,10 @@ final class Game {
             if counter == 2 {
                 var sself = wself!
 
-                if client.authenticatedUser.userId == sself.opponentPlayer.userId {
+                if client.user.userId == sself.opponentPlayer.userId {
                     sself.selfUser = sself.opponentPlayer
                     sself.awayUser = sself.initiatingPlayer
-                } else if client.authenticatedUser.userId == sself.initiatingPlayer.userId {
+                } else if client.user.userId == sself.initiatingPlayer.userId {
                     sself.selfUser = sself.initiatingPlayer
                     sself.awayUser = sself.opponentPlayer
                 }

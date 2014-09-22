@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var openChallenges: [Game] = []
     private var opponentPendingChallenges: [Game] = []
     
-    private var user: THUser = NetworkClient.sharedClient.authenticatedUser
+    private var user: THUser = NetworkClient.sharedClient.user
 
     private var noOpenChallenge:Bool {
         return self.openChallenges.count == 0

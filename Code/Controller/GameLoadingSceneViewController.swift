@@ -36,7 +36,7 @@ class GameLoadingSceneViewController: UIViewController {
     @IBOutlet private weak var opponentBadgeImageView: UIImageView!
     
     @IBOutlet weak var roundTimerImageView: UIImageView!
-    private var user = NetworkClient.sharedClient.authenticatedUser
+    private var user = NetworkClient.sharedClient.user
     private var game: Game!
     
     private var player: THUser!

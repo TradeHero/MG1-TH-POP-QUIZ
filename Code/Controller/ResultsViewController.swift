@@ -120,7 +120,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     private func determineUserRoles(game:Game) {
-        let user = NetworkClient.sharedClient.authenticatedUser
+        let user = NetworkClient.sharedClient.user
         if game.initiatingPlayer.userId == user.userId {
             player = game.initiatingPlayer
             playerResult = game.initiatingPlayerResult

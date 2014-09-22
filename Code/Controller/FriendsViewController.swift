@@ -20,7 +20,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     private var searchKey: String = ""
     
     private lazy var user: THUser = {
-        return NetworkClient.sharedClient.authenticatedUser
+        return NetworkClient.sharedClient.user
         }()
     
     @IBOutlet private weak var friendsTableView: UITableView!

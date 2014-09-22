@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     
     private var closedChallenges: [Game] = []
     
-    private var user = NetworkClient.sharedClient.authenticatedUser
+    private var user = NetworkClient.sharedClient.user
     
     private var imagePicker:UIImagePickerController {
         let picker = UIImagePickerController()

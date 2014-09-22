@@ -28,13 +28,18 @@ class NetworkClient {
     }
     
     /// Authenticated user
-    var authenticatedUser: THUser!
+    private var authenticatedUser: THUser!
     
+    var user: THUser! {
+        get {
+            return authenticatedUser
+        }
+    }
     /// Credential dictionary (FB Token)
     var credentials: String!
     
     /// default JSON encoding
-    private let JSONEncoding = Alamofire.ParameterEncoding.JSON
+    let JSONEncoding = Alamofire.ParameterEncoding.JSON
     
     // MARK:- Methods
     
@@ -49,7 +54,7 @@ class NetworkClient {
         
         var headers = Alamofire.Manager.sharedInstance.defaultHeaders
         if (headers["TH-Client-Version"] == nil) {
-            headers["TH-Client-Version"] = "2.3.0.4245"
+            headers["TH-Client-Version"] = "2.4.0"
         }
         
         if (headers["TH-Client-Type"] == nil) {
