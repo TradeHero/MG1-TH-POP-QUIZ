@@ -146,24 +146,15 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     // MARK:- UITextField delegate methods
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        if textField.text == defaultText || countElements(textField.text) <= 0{
+        if textField.text == self.user.displayName || countElements(textField.text) <= 0 {
             return false
         }
-        
+        profileUpdateButton.enabled = self.user.displayName != textField.text
         return true
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        defaultText = textField.text
         return true
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        textField.text = defaultText
-    }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.view.endEditing(true)
     }
     
     // MARK:- UITableView delegate methods

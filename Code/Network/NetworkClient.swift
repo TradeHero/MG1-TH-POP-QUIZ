@@ -50,7 +50,7 @@ class NetworkClient {
     :param: loginSuccessHandler Takes a THUser and perform operation
     */
     func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:(THUser -> ())!) {
-        let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.3.0"]
+        let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.4.0"]
         
         var headers = Alamofire.Manager.sharedInstance.defaultHeaders
         if (headers["TH-Client-Version"] == nil) {

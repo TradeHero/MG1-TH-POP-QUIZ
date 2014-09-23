@@ -158,7 +158,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBy-om-abg">
-                                <rect key="frame" x="80" y="511" width="160.5" height="49"/>
+                                <rect key="frame" x="80" y="511" width="161" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pBy-om-abg" secondAttribute="height" multiplier="85:26" id="Klz-FC-Oj8"/>
                                 </constraints>
@@ -245,6 +245,9 @@
                                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Ies-gW-fkc" appends="YES" id="60A-Hp-P6q"/>
+                                        </connections>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageEditIcon" translatesAutoresizingMaskIntoConstraints="NO" id="U5x-DK-cGC">
                                         <rect key="frame" x="63" y="55" width="25" height="25"/>
@@ -324,9 +327,6 @@
                                     <constraint firstItem="9Af-Gg-R8C" firstAttribute="leading" secondItem="7l1-NF-sDD" secondAttribute="leading" constant="20" id="tr3-qU-VPI"/>
                                     <constraint firstItem="m9T-s3-uQZ" firstAttribute="leading" secondItem="9Af-Gg-R8C" secondAttribute="trailing" constant="13" id="wk3-vt-lvw"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Ies-gW-fkc" appends="YES" id="VOG-Jo-CfP"/>
-                                </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="cMt-vN-DXN">
                                 <rect key="frame" x="10" y="130" width="301" height="438"/>
