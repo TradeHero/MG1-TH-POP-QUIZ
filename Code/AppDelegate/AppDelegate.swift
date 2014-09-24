@@ -29,11 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBLoginView.self
         FBProfilePictureView.self
 
-        #if TF
-            TestFlight.takeOff(TestFlightToken)
-        #endif
-
-        
         switch kTHGamesServerMode {
         case .Staging:
             println("Current build points to Staging Server.\n")
@@ -41,8 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println("Current build points to Production Server.\n")
         }
         self.bgmPlayer.numberOfLoops = -1
-        self.bgmPlayer.play()
         self.bgmPlayer.volume = kTHBackgroundMusicValue
+        self.bgmPlayer.play()
         self.registerLoginNotification()
 //        self.autoLogin()
 /*

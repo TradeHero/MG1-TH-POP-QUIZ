@@ -168,6 +168,7 @@ class GameLoadingSceneViewController: UIViewController {
         self.opponentLevelLabel.alpha = 0
         self.opponentBadgeImageView.alpha = 0
         weak var wself = self
+        
         NetworkClient.fetchImageFromURLString(player.pictureURL, progressHandler: nil) { image, error in
             var sself = wself!
             if let err = error {
@@ -196,6 +197,7 @@ class GameLoadingSceneViewController: UIViewController {
         if segue.identifier == "PresentQuizSegue" {
             if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
                 app.bgmPlayer.stop()
+
             }
             let vc =  segue.destinationViewController as QuizViewController
             vc.bindGameAndUsers(self.game, player: self.player, opponent: self.opponent)

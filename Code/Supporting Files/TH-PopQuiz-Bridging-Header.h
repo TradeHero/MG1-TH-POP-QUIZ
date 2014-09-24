@@ -24,7 +24,5 @@
 
 #import <SSKeychain/SSKeychain.h>
 
-#import "TestFlight.h"
-
 #pragma mark - non-library
 #import "ObjCHelpers.h"

@@ -185,12 +185,14 @@ class QuizViewController: UIViewController {
         
         if sender.is_answer {
             sender.configureAsCorrect()
+            playSoundEffect(.CorrectSound)
             combos++
             currentQuestionCorrect = true
             let currentQuestionScore = calculateScore()
             produceResultForCurrentQuestion(true, score: currentQuestionScore)
         } else {
             sender.configureAsFalse()
+            playSoundEffect(.WrongSound)
             revealCorrectAnswer()
             combos = -1
             let currentQuestionScore = calculateScore()
@@ -345,6 +347,7 @@ class QuizViewController: UIViewController {
                 showImageObfuscationWithTimeFactor(factor: timeLeft/10)
             }
         } else if timeLeft <= 0 {
+            playSoundEffect(.WrongSound)
             current_timeLeft = 0
             timerStop()
             preventFurtherActions()
@@ -391,6 +394,7 @@ class QuizViewController: UIViewController {
                 if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
                     app.bgmPlayer.play()
                 }
+                
                 hud.dismissAnimated(true)
                 sself.game = $0
                 if $0.isGameCompletedByBothPlayer {
@@ -593,6 +597,7 @@ class QuizViewController: UIViewController {
                 self.opponentQuestionCorrect = game.initiatingPlayerResult.questionCorrect
             }
         } else {
+            
             if game.opponentPlayerResult != nil {
                 self.opponentScore = game.opponentPlayerResult.rawScore
                 self.opponentQuestionCorrect = game.opponentPlayerResult.questionCorrect
@@ -612,4 +617,19 @@ class QuizViewController: UIViewController {
             vc.bindGame(self.game)
         }
     }
+    
+    private func playSoundEffect(effect:THSoundEffect) {
+        switch effect {
+        case .CorrectSound:
+            var player = AVAudioPlayer.createAudioPlayer("Correct-Bell", extensionName: "caf")
+            player.volume = kTHSoundEffectValue
+            player.play()
+
+        case .WrongSound:
+            var player = AVAudioPlayer.createAudioPlayer("Wrong-Buzzer", extensionName: "caf")
+            player.volume = kTHSoundEffectValue
+            player.play()
+        }
+    }
+
 }

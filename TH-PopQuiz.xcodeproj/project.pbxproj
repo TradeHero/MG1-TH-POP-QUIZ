@@ -20,6 +20,7 @@
 		6DA1287519CA8251000687C0 /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1287419CA8251000687C0 /* THExtensions.swift */; };
 		6DA1287719CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */; };
 		6DBE9DB119D159DE00FACB1D /* Correct-Bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE9DB019D159DE00FACB1D /* Correct-Bell.caf */; };
+		6DBE9DB519D162E500FACB1D /* Wrong-Buzzer.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE9DB319D15D8100FACB1D /* Wrong-Buzzer.caf */; };
 		6DD053A319C6BDAF00831B6C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */; };
 		6DD053A519C6CBB100831B6C /* ChallengesSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DD053A419C6CBB100831B6C /* ChallengesSectionHeader.xib */; };
 		6DD2311819B81FFA00B5D05E /* TH_PopQuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2311719B81FFA00B5D05E /* TH_PopQuizTests.swift */; };
@@ -76,7 +77,6 @@
 		6DD231B519B8219E00B5D05E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231B219B8218300B5D05E /* Alamofire.framework */; };
 		6DD231B619B8219E00B5D05E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231B219B8218300B5D05E /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6DD231BB19B821D700B5D05E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231BA19B821D700B5D05E /* libz.dylib */; };
-		6DD231C619B8224C00B5D05E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231C019B8224C00B5D05E /* libTestFlight.a */; };
 		6DE06E7019C8085C00EB4D2F /* THSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE06E6F19C8085C00EB4D2F /* THSwitch.swift */; };
 		6DE3B4E719BEB3DC00F9251A /* THIndefiniteIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */; };
 		6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */; };
@@ -146,6 +146,7 @@
 		6DA1287419CA8251000687C0 /* THExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THExtensions.swift; sourceTree = "<group>"; };
 		6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MonkeysSpinningMonkeys.mp3; sourceTree = "<group>"; };
 		6DBE9DB019D159DE00FACB1D /* Correct-Bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Correct-Bell.caf"; sourceTree = "<group>"; };
+		6DBE9DB319D15D8100FACB1D /* Wrong-Buzzer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wrong-Buzzer.caf"; sourceTree = "<group>"; };
 		6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6DD053A419C6CBB100831B6C /* ChallengesSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengesSectionHeader.xib; sourceTree = "<group>"; };
 		6DD230FF19B81FFA00B5D05E /* TH-PopQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TH-PopQuiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,7 +178,7 @@
 		6DD2313E19B8204900B5D05E /* ObjCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCHelpers.m; sourceTree = "<group>"; };
 		6DD2313F19B8204900B5D05E /* Quiz.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Quiz.storyboard; sourceTree = "<group>"; };
 		6DD2314119B8204900B5D05E /* FadeInSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeInSegue.swift; sourceTree = "<group>"; };
-		6DD2314319B8204900B5D05E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6DD2314319B8204900B5D05E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; tabWidth = 3; };
 		6DD2314419B8204900B5D05E /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		6DD2314519B8204900B5D05E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DD2314B19B8204900B5D05E /* Electrodoodle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Electrodoodle.mp3; sourceTree = "<group>"; };
@@ -207,12 +208,6 @@
 		6DD231A819B8208700B5D05E /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		6DD231AC19B8218300B5D05E /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		6DD231BA19B821D700B5D05E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		6DD231C019B8224C00B5D05E /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		6DD231C119B8224C00B5D05E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		6DD231C219B8224C00B5D05E /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = release_notes.md; sourceTree = "<group>"; };
-		6DD231C319B8224C00B5D05E /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		6DD231C419B8224C00B5D05E /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		6DD231C519B8224C00B5D05E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		6DE06E6F19C8085C00EB4D2F /* THSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THSwitch.swift; sourceTree = "<group>"; };
 		6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THIndefiniteIndicatorView.swift; sourceTree = "<group>"; };
 		6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.ttf"; sourceTree = "<group>"; };
@@ -234,7 +229,6 @@
 				6DD231BB19B821D700B5D05E /* libz.dylib in Frameworks */,
 				6DD053A319C6BDAF00831B6C /* FacebookSDK.framework in Frameworks */,
 				6DD231B519B8219E00B5D05E /* Alamofire.framework in Frameworks */,
-				6DD231C619B8224C00B5D05E /* libTestFlight.a in Frameworks */,
 				1C62BA7F65B04C13BB4646FA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +277,7 @@
 		6DA1287919CA9040000687C0 /* Sound Effects */ = {
 			isa = PBXGroup;
 			children = (
+				6DBE9DB319D15D8100FACB1D /* Wrong-Buzzer.caf */,
 				6DBE9DB019D159DE00FACB1D /* Correct-Bell.caf */,
 			);
 			path = "Sound Effects";
@@ -546,24 +541,10 @@
 			isa = PBXGroup;
 			children = (
 				6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */,
-				6DD231BF19B8224C00B5D05E /* TestFlightSDK3 */,
 				6DD231BA19B821D700B5D05E /* libz.dylib */,
 				7C2C12E80B2143C290FCDB20 /* libPods.a */,
 			);
 			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		6DD231BF19B8224C00B5D05E /* TestFlightSDK3 */ = {
-			isa = PBXGroup;
-			children = (
-				6DD231C019B8224C00B5D05E /* libTestFlight.a */,
-				6DD231C119B8224C00B5D05E /* README.md */,
-				6DD231C219B8224C00B5D05E /* release_notes.md */,
-				6DD231C319B8224C00B5D05E /* TestFlight+AsyncLogging.h */,
-				6DD231C419B8224C00B5D05E /* TestFlight+ManualSessions.h */,
-				6DD231C519B8224C00B5D05E /* TestFlight.h */,
-			);
-			path = TestFlightSDK3;
 			sourceTree = "<group>";
 		};
 		6DE3B4E919BECC8700F9251A /* Fonts */ = {
@@ -702,6 +683,7 @@
 				6D3AF98519C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib in Resources */,
 				6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */,
 				6D0BC42119C7E2F700578C90 /* SettingsControlTableViewCell.xib in Resources */,
+				6DBE9DB519D162E500FACB1D /* Wrong-Buzzer.caf in Resources */,
 				6DD2319319B8204900B5D05E /* FriendsChallengeCellTableViewCell.xib in Resources */,
 				6DD2319719B8204900B5D05E /* HomeTurnChallengesTableViewCell.xib in Resources */,
 				6DBE9DB119D159DE00FACB1D /* Correct-Bell.caf in Resources */,
@@ -943,7 +925,7 @@
 					"$(PROJECT_DIR)/Frameworks/TestFlightSDK3",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4c27ca5c-2fe0-479b-88ea-58c0005af526";
+				PROVISIONING_PROFILE = "2217df77-1052-44e5-8e81-255019537d0a";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Code/Supporting Files/TH-PopQuiz-Bridging-Header.h";
 			};
 			name = Debug;
@@ -968,7 +950,7 @@
 					"$(PROJECT_DIR)/Frameworks/TestFlightSDK3",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7f61fe8c-457b-4aeb-8651-894248b25334";
+				PROVISIONING_PROFILE = "d25bf43f-9086-490b-86c2-9a9ecda513db";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Code/Supporting Files/TH-PopQuiz-Bridging-Header.h";
 			};
 			name = Release;
