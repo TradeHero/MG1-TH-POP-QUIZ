@@ -16,12 +16,14 @@ class SleekNavigationBar: UINavigationBar {
     override func drawRect(rect: CGRect)
     {
         // Drawing code
+
         let image = UIImage(named: "NavigationBarBackground")
-        image.drawInRect(CGRectMake(0, 0, 320, preferredHeight))
+        image.drawInRect(CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, preferredHeight))
+        
     }
     
     override func sizeThatFits(size: CGSize) -> CGSize {
-        return CGSizeMake(self.frame.size.width, preferredHeight)
+        return CGSizeMake(UIScreen.mainScreen().bounds.width, preferredHeight)
     }
     
 }
