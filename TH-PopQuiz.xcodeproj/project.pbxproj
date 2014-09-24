@@ -76,7 +76,6 @@
 		6DD231A919B8208700B5D05E /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DD231A819B8208700B5D05E /* Home.storyboard */; };
 		6DD231B519B8219E00B5D05E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231B219B8218300B5D05E /* Alamofire.framework */; };
 		6DD231B619B8219E00B5D05E /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231B219B8218300B5D05E /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6DD231BB19B821D700B5D05E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD231BA19B821D700B5D05E /* libz.dylib */; };
 		6DE06E7019C8085C00EB4D2F /* THSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE06E6F19C8085C00EB4D2F /* THSwitch.swift */; };
 		6DE3B4E719BEB3DC00F9251A /* THIndefiniteIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3B4E619BEB3DC00F9251A /* THIndefiniteIndicatorView.swift */; };
 		6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EB19BECCBC00F9251A /* ProximaNova-Bold.ttf */; };
@@ -226,7 +225,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DD231BB19B821D700B5D05E /* libz.dylib in Frameworks */,
 				6DD053A319C6BDAF00831B6C /* FacebookSDK.framework in Frameworks */,
 				6DD231B519B8219E00B5D05E /* Alamofire.framework in Frameworks */,
 				1C62BA7F65B04C13BB4646FA /* libPods.a in Frameworks */,
@@ -920,10 +918,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Code/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks/TestFlightSDK3",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2217df77-1052-44e5-8e81-255019537d0a";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Code/Supporting Files/TH-PopQuiz-Bridging-Header.h";
@@ -945,10 +940,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Code/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks/TestFlightSDK3",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d25bf43f-9086-490b-86c2-9a9ecda513db";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Code/Supporting Files/TH-PopQuiz-Bridging-Header.h";
