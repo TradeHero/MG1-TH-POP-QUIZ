@@ -207,7 +207,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBy-om-abg">
                                 <rect key="frame" x="80" y="511" width="161" height="49"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="pBy-om-abg" secondAttribute="height" multiplier="85:26" id="Klz-FC-Oj8"/>
+                                    <constraint firstAttribute="width" constant="161" id="AGK-Ef-nQX"/>
+                                    <constraint firstAttribute="height" constant="49" id="e07-au-XYf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                 <state key="normal" title="Logout" backgroundImage="RedButtonBackground">
@@ -221,10 +222,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="355-1K-Ern" firstAttribute="top" secondItem="Zjw-oR-Gn8" secondAttribute="top" constant="57" id="7Nf-NV-5KQ"/>
-                            <constraint firstAttribute="trailing" secondItem="pBy-om-abg" secondAttribute="trailing" constant="79.5" id="AMc-il-XGN"/>
                             <constraint firstItem="355-1K-Ern" firstAttribute="leading" secondItem="Zjw-oR-Gn8" secondAttribute="leading" constant="17" id="J7R-Ln-tzx"/>
+                            <constraint firstAttribute="centerX" secondItem="pBy-om-abg" secondAttribute="centerX" id="M98-h9-I6F"/>
                             <constraint firstItem="pBy-om-abg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="355-1K-Ern" secondAttribute="bottom" constant="15" id="Ndf-bN-JiN"/>
-                            <constraint firstItem="pBy-om-abg" firstAttribute="leading" secondItem="Zjw-oR-Gn8" secondAttribute="leading" constant="80" id="Qau-BH-L0q"/>
                             <constraint firstAttribute="bottom" secondItem="KkU-jk-ctP" secondAttribute="bottom" id="VE3-It-QNp"/>
                             <constraint firstItem="KkU-jk-ctP" firstAttribute="leading" secondItem="Zjw-oR-Gn8" secondAttribute="leading" id="Wbh-co-9Ka"/>
                             <constraint firstAttribute="trailing" secondItem="KkU-jk-ctP" secondAttribute="trailing" id="cLh-pc-JUF"/>
