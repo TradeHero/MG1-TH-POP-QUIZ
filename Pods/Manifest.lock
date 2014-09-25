@@ -1,8 +1,9 @@
 PODS:
   - EGOCache (2.1)
   - GPUImage (0.1.4)
-  - JGProgressHUD (1.2.1)
+  - JGProgressHUD (1.2.2)
   - LDProgressView (1.2.1)
+  - PureLayout (1.1.0)
   - SDWebImage (3.7.1):
     - SDWebImage/Core
   - SDWebImage/Core (3.7.1)
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - GPUImage (from `https://github.com/BradLarson/GPUImage.git`, commit `ea9c96c32d375fd78d2336be340ad490c3c8cff9`)
   - JGProgressHUD (~> 1.2.1)
   - LDProgressView (~> 1.2.1)
+  - PureLayout (~> 1.1.0)
   - SDWebImage (~> 3.7.1)
   - SSKeychain (~> 1.2.2)
 
@@ -24,8 +26,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   EGOCache: bf414333c425fe47f5182351d1dd47ebf72d8352
   GPUImage: f9b32e12350792a630e596ffc7b050bea3662670
-  JGProgressHUD: f3c0258684f318bc0009e893fdac0701de5cb75b
+  JGProgressHUD: a7c58f711eec0b67f257a0821c0bac9194c72398
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
+  PureLayout: c8960fa0f3b40d849d5e177d699d0148faa63b63
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
 

@@ -18,6 +18,8 @@
 
 #import <LDProgressView/LDProgressView.h>
 
+#import <PureLayout/PureLayout.h>
+
 #import <SDWebImage/SDWebImageManager.h>
 
 #import <SDWebImage/UIImageView+WebCache.h>
