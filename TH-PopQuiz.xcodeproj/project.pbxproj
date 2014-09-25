@@ -574,6 +574,7 @@
 				6DD230FD19B81FFA00B5D05E /* Resources */,
 				6DD231B919B8219F00B5D05E /* Embed Frameworks */,
 				FAABAE068FD743C1A17F7B17 /* Copy Pods Resources */,
+				6DF3D45519D3C0A7000B08F0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -720,6 +721,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6DF3D45519D3C0A7000B08F0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# set new $IFS\nSAVEIFS=$IFS\nIFS=$(echo -en \"\\n\\b\")\nFILES=\"Code/Supporting Files/*.plist\"\nfor plist in $FILES\ndo\necho \"Updating $plist\"\n\nif [[ -z \"$CFBundleVersionNew\" ]]\nthen\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$plist\")\nCFBundleVersionNew=$(($CFBundleVersion + 2))\nfi\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $CFBundleVersionNew\" \"$plist\"\n\nCFBuildDate=$(date)\n\n/usr/libexec/PlistBuddy -c \"Set :CFBuildDate $CFBuildDate\" \"$plist\"\n\ntouch \"$plist\"\ndone\n# restore $IFS\nIFS=$SAVEIFS";
+		};
 		8316322567934EEC819A120C /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

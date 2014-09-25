@@ -24,7 +24,8 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.challengerImageView.layer.borderColor = UIColor.whiteColor().CGColor
         self.challengerImageView.clipsToBounds = true
         self.challengerDisplayNameLabel.text = ""
-        // Initialization code
+        self.layer.cornerRadius = 5
+        super.layoutIfNeeded()
     }
     
     @IBOutlet weak var actionButton: UIButton!
@@ -137,7 +138,6 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             frame.origin.y += inset
             frame.size.height -=  2 * inset
             super.frame = frame
-            UIView.roundView(self, onCorner: .AllCorners, radius: 5)
         }
         
         get {

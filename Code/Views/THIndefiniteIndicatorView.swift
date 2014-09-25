@@ -11,7 +11,11 @@ import UIKit
 class THIndefiniteIndicatorView: JGProgressHUDIndicatorView {
 
     init(style:JGProgressHUDStyle) {
-        var indicatorView = THIndefiniteAnnularIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+        var width: CGFloat = 50
+        if UIScreen.mainScreen().bounds.width > 640 {
+            width = 100
+        }
+        var indicatorView = THIndefiniteAnnularIndicatorView(frame: CGRectMake(0, 0, width, width))
         switch style {
         case .ExtraLight:
             indicatorView.strokeColor = UIColor.blackColor()

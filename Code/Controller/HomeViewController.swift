@@ -41,6 +41,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         setupSubviews()
         self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 53
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -152,12 +154,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         cell.layoutIfNeeded()
+        
+        cell.setNeedsUpdateConstraints()
+        cell.updateConstraintsIfNeeded()
+        
         cell.delegate = self
         return cell
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 48 + 5
+        return 53
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -240,50 +246,93 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //MARK:- UI methods
-    private func createHeaderViewForEmptyTurn() -> UIView {
-        var headerView = UIView(frame: CGRectMake(0, 0, 286, 119))
-        var logoView = UIImageView(frame: CGRectMake(119, 23, 51, 51))
-        logoView.image = UIImage(named: "NoChallengeEmoticon")
-        headerView.addSubview(logoView)
-        
-        var leftLabelView = UILabel(frame: CGRectMake(4, 4, 72, 21))
+    private func createHeaderViewForEmptyTurn() -> UITableViewHeaderFooterView {
+        var headerView = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, 286, 119))
+        var leftLabelView = UILabel.newAutoLayoutView()
+        leftLabelView.frame = CGRectMake(4, 4, 72, 21)
         leftLabelView.text = "Your Turn"
         leftLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
         leftLabelView.textColor = UIColor.whiteColor()
-        headerView.addSubview(leftLabelView)
+        headerView.contentView.addSubview(leftLabelView)
         
-        var rightLabelView = UILabel(frame: CGRectMake(178, 4, 100, 21))
+        var rightLabelView = UILabel.newAutoLayoutView()
+        rightLabelView.frame = CGRectMake(178, 4, 100, 21)
         rightLabelView.text = "0 games"
         rightLabelView.textAlignment = .Right
         rightLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
         rightLabelView.textColor = UIColor.whiteColor()
-        headerView.addSubview(rightLabelView)
+        headerView.contentView.addSubview(rightLabelView)
         
-        var textLabel = UILabel(frame: CGRectMake(40, 81, 208, 38))
+        var logoView = UIImageView.newAutoLayoutView()
+        logoView.frame = CGRectMake(119, 23, 51, 51)
+        logoView.image = UIImage(named: "NoChallengeEmoticon")
+        headerView.contentView.addSubview(logoView)
+
+        var textLabel = UILabel.newAutoLayoutView()
+        textLabel.frame = CGRectMake(40, 81, 208, 38)
         textLabel.text = "No pending game. \r Why don’t you start a challenge?"
         textLabel.numberOfLines = 2
         textLabel.textAlignment = .Center
         textLabel.font = UIFont(name: "AvenirNext-Regular", size: 13)
         textLabel.textColor = UIColor.whiteColor()
         textLabel.lineBreakMode = .ByWordWrapping
-        headerView.addSubview(textLabel)
+        headerView.contentView.addSubview(textLabel)
+        
+        UIView.autoSetPriority(750) {
+            leftLabelView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
+            rightLabelView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
+            logoView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
+            textLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
+        }
+        
+        leftLabelView.autoPinEdgeToSuperviewEdge(.Top, withInset: 4)
+        leftLabelView.autoPinEdgeToSuperviewEdge(.Leading, withInset: 4)
+        
+        rightLabelView.autoPinEdgeToSuperviewEdge(.Top, withInset: 4)
+        rightLabelView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 8)
+        
+        logoView.autoPinEdgeToSuperviewEdge(.Top, withInset: 23)
+        logoView.autoConstrainAttribute(NSLayoutAttribute.CenterX.toRaw(), toAttribute: NSLayoutAttribute.CenterX.toRaw(), ofView: logoView.superview, withMultiplier: 1)
+        logoView.autoConstrainAttribute(NSLayoutAttribute.Width.toRaw(), toAttribute: NSLayoutAttribute.Height.toRaw(), ofView: logoView, withMultiplier: 1.0)
+        logoView.autoSetDimension(.Height, toSize: 51)
+
+        textLabel.autoConstrainAttribute(NSLayoutAttribute.CenterX.toRaw(), toAttribute: NSLayoutAttribute.CenterX.toRaw(), ofView: textLabel.superview, withMultiplier: 1)
+        textLabel.autoSetDimensionsToSize(CGSizeMake(208, 38))
+        textLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: logoView, withOffset: 7)
+        
         return headerView
     }
     
-    private func createHeaderView(title:String, numberOfGames:Int) -> UIView {
-        var headerView = UIView(frame: CGRectMake(0, 0, 286, 25))
-        var leftLabelView = UILabel(frame: CGRectMake(4, 4, 72, 21))
+    private func createHeaderView(title:String, numberOfGames:Int) -> UITableViewHeaderFooterView {
+        var headerView = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, 286, 25))
+        var leftLabelView = UILabel.newAutoLayoutView()
+        leftLabelView.frame = CGRectMake(4, 4, 72, 21)
         leftLabelView.text = title
         leftLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
         leftLabelView.textColor = UIColor.whiteColor()
-        headerView.addSubview(leftLabelView)
+        headerView.contentView.addSubview(leftLabelView)
         
-        var rightLabelView = UILabel(frame: CGRectMake(178, 4, 100, 21))
+        var rightLabelView = UILabel.newAutoLayoutView()
+        rightLabelView.frame = CGRectMake(178, 4, 100, 21)
         rightLabelView.text = numberOfGames == 1 ? "1 game" : "\(numberOfGames) games"
         rightLabelView.textAlignment = .Right
         rightLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
         rightLabelView.textColor = UIColor.whiteColor()
-        headerView.addSubview(rightLabelView)
+        headerView.contentView.addSubview(rightLabelView)
+        
+        UIView.autoSetPriority(1000) {
+            leftLabelView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
+            rightLabelView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
+        }
+        
+        leftLabelView.autoPinEdgeToSuperviewEdge(.Top, withInset: 4)
+        leftLabelView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 0)
+        leftLabelView.autoPinEdgeToSuperviewEdge(.Leading, withInset: 4)
+        
+        rightLabelView.autoPinEdgeToSuperviewEdge(.Top, withInset: 4)
+        rightLabelView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 0)
+        rightLabelView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 8)
+
         return headerView
     }
     

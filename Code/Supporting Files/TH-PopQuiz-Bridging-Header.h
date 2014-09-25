@@ -18,7 +18,7 @@
 
 #import <LDProgressView/LDProgressView.h>
 
-#import <PureLayout/PureLayout.h>
+#import "PureLayout.h"
 
 #import <SDWebImage/SDWebImageManager.h>
 
