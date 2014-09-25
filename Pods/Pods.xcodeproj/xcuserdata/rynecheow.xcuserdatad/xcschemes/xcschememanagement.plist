@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-GPUImage.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-JGProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,42 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>23EEFB16B8B540779973A7C1</key>
+		<key>19C5C4CE08664078808FAA2C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>554CC81CF62B44F8B5B90AB6</key>
+		<key>84009128744541AD9BBB8C56</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B1B68E010804723A7D075F8</key>
+		<key>86746751159C47B8A3A7A22B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>798B4606195A4F849CFDF73B</key>
+		<key>9124B32E9A5842149020F1A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7D748577F21B4DF8840951C4</key>
+		<key>9EFD46924BD244CA8856C544</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>801698AECA3C4025A51B37E2</key>
+		<key>A0CC859A65F74E28B0CBCA12</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9B868A131A244EB08C21FC11</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C822E9056EDC4EA597626024</key>
+		<key>D253E2A5FC97451A816A9118</key>
 		<dict>
 			<key>primary</key>
 			<true/>

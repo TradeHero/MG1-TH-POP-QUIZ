@@ -83,6 +83,7 @@
 		6DE3B4F219BECCBC00F9251A /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4ED19BECCBC00F9251A /* ProximaNova-Regular.ttf */; };
 		6DE3B4F319BECCBC00F9251A /* ProximaNova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EE19BECCBC00F9251A /* ProximaNova-Semibold.ttf */; };
 		6DE6DDFA19C6E92E00A44620 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE6DDF919C6E92E00A44620 /* SettingsViewController.swift */; };
+		6DF3D45319D3BFBC000B08F0 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF3D45219D3BFBC000B08F0 /* GPUImage.framework */; };
 		6DF8BD5F19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */; };
 		6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -214,6 +215,7 @@
 		6DE3B4ED19BECCBC00F9251A /* ProximaNova-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.ttf"; sourceTree = "<group>"; };
 		6DE3B4EE19BECCBC00F9251A /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
 		6DE6DDF919C6E92E00A44620 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6DF3D45219D3BFBC000B08F0 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
 		6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameResultDetailTableViewCell.xib; sourceTree = "<group>"; };
 		7C2C12E80B2143C290FCDB20 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DD053A319C6BDAF00831B6C /* FacebookSDK.framework in Frameworks */,
+				6DF3D45319D3BFBC000B08F0 /* GPUImage.framework in Frameworks */,
 				6DD231B519B8219E00B5D05E /* Alamofire.framework in Frameworks */,
 				1C62BA7F65B04C13BB4646FA /* libPods.a in Frameworks */,
 			);
@@ -538,6 +541,7 @@
 		6DD231BC19B821DB00B5D05E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DF3D45219D3BFBC000B08F0 /* GPUImage.framework */,
 				6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */,
 				6DD231BA19B821D700B5D05E /* libz.dylib */,
 				7C2C12E80B2143C290FCDB20 /* libPods.a */,
