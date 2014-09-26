@@ -53,11 +53,6 @@ class LogoCanvasView: UIView {
         self.backgroundColor = UIColor.whiteColor()
     }
     
-    func mosaic(tileSize:Int){
-        self.imageView.image = UIImage(CGImage: rasterizedImage.CGImage).mosaicEffectOnImage(tileSize)
-        
-    }
-    
     func reset(){
         UIView.transitionWithView(self, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             self.imageView.image = self.rasterizedImage

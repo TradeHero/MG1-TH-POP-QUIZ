@@ -216,6 +216,14 @@ extension UIView {
     class func animateWithDuration(duration: NSTimeInterval, options: UIViewAnimationOptions, animations: () -> ()) {
         self.animateWithDuration(duration, delay: 0, options: options, animations: animations, completion: nil)
     }
+    
+    class func roundView(view:UIView, onCorner rectCorner:UIRectCorner, radius:CGFloat) {
+        let maskPath = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: rectCorner, cornerRadii: CGSizeMake(radius, radius))
+        var maskLayer = CAShapeLayer()
+        maskLayer.frame = view.bounds
+        maskLayer.path = maskPath.CGPath
+        view.layer.mask = maskLayer
+    }
 }
 
 
@@ -239,45 +247,55 @@ extension UIImage {
         return image
     }
     
+    func centerCropImage() -> UIImage {
+        // Use smallest side length as crop square length
+        let squareLength = min(self.size.width, self.size.height)
+        // Center the crop area
+        let clippedRect = CGRectMake((self.size.width - squareLength) / 2, (self.size.height - squareLength) / 2, squareLength, squareLength)
+        // Crop logic
+        let imageRef = CGImageCreateWithImageInRect(self.CGImage, clippedRect)
+
+        return UIImage(CGImage: imageRef)
+    }
+    
     func transparencyToWhiteMatte() -> UIImage {
         return UIImage(data: UIImageJPEGRepresentation(self, 1))
     }
-    
-    func mosaicEffectOnImage(tileSize:Int) -> UIImage{
-        var originalImage = self
-        let imageSize = originalImage.size
-        let ctx = createARGBBitmapContext(originalImage.CGImage)
-        UIGraphicsBeginImageContext(imageSize)
-        let context = UIGraphicsGetCurrentContext()
-        originalImage.drawInRect(CGRectMake(0, 0, imageSize.width, imageSize.height))
-        
-        let tilesPerRow = Int(imageSize.width)/tileSize
-        let tilesPerColumn = Int(imageSize.height)/tileSize
-        
-        for var j = 0 ; j < tilesPerColumn ; j++ {
-            for var i = 0 ; i < tilesPerRow ; i++ {
-                let xPt = CGFloat(i * tileSize + tileSize/2)
-                let yPt = CGFloat(j * tileSize + tileSize/2)
-                
-                let fillColor = getPixelColorAtLocation(ctx, point: CGPointMake(xPt, yPt), inImage: originalImage.CGImage)
-                
-                let a = CGRectMake(CGFloat(i * tileSize), CGFloat(j * tileSize), CGFloat(tileSize), CGFloat(tileSize))
-                
-                CGContextSetFillColorWithColor(context, fillColor.CGColor)
-                
-                CGContextAddRect(context, a)
-                
-                let a2 = CGRectMake(CGFloat(i * tileSize), CGFloat(j * tileSize), CGFloat(tileSize), CGFloat(tileSize))
-                
-                UIImage.imageWithColor(fillColor, size: CGSizeMake(CGFloat(tileSize), CGFloat(tileSize))).drawInRect(a2, blendMode: kCGBlendModeNormal, alpha: 1)
-                
-            }
-        }
-        
-        let newImg = UIGraphicsGetImageFromCurrentImageContext()
-        return newImg
-    }
-    
+//    
+//    func whiteMatteToTransparency() -> UIImage {
+//        let imageRef = self.CGImage
+//        let pixelsWide = CGImageGetWidth(imageRef)
+//        let pixelsHigh = CGImageGetHeight(imageRef)
+//        
+//        let bitmapBytesPerRow = Int(pixelsWide) * 4
+//        let bitmapByteCount = bitmapBytesPerRow * Int(pixelsHigh)
+//        
+//        let bitmapData = malloc(CUnsignedLong(bitmapByteCount))
+//        let colorSpace = CGColorSpaceCreateDeviceRGB()
+//        let bitmapInfo = CGBitmapInfo.fromRaw(CGImageAlphaInfo.PremultipliedLast.toRaw())! | CGBitmapInfo.fromRaw(CGBitmapInfo.ByteOrder32Big.toRaw())!
+//        let context = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, CUnsignedLong(8), CUnsignedLong(bitmapBytesPerRow), colorSpace, bitmapInfo)
+//        
+//        CGContextDrawImage(context, CGRectMake(0, 0, CGFloat(pixelsWide), CGFloat(pixelsHigh)), imageRef)
+//        
+//        let data:COpaquePointer = COpaquePointer(CGBitmapContextGetData(context))
+//        var dataType = UnsafePointer<UInt8>(data)
+//
+//        var byteIndex = 0
+//        
+//        while byteIndex < bitmapByteCount {
+//            let red = dataType[byteIndex]
+//            let green = dataType[byteIndex + 1]
+//            let blue = dataType[byteIndex + 2]
+//            
+//            let whiteRed = red >= 245 && red <= 255
+//            let whiteGreen = green >= 245 && green <= 255
+//            let whiteBlue = blue >= 245 && blue <= 255
+//            
+//            if whiteRed && whiteGreen && whiteBlue {
+//                dataType[byteIndex] = 0
+//            }
+//        }
+//    }
     
     
     private func createARGBBitmapContext(inImage: CGImageRef) -> CGContext {
@@ -318,8 +336,7 @@ extension UIImage {
         
         let pixelsWide = CGImageGetWidth(inImage)
         let pixelsHigh = CGImageGetHeight(inImage)
-        let rect = CGRect(x:0, y:0, width:Int(pixelsWide), height:Int(pixelsHigh))
-        
+        let rect = CGRectMake(0, 0, CGFloat(pixelsWide), CGFloat(pixelsHigh))
         //Clear the context
         CGContextClearRect(context, rect)
         

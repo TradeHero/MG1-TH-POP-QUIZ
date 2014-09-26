@@ -12,13 +12,6 @@
 @interface UIImage (Helper)
 
 - (instancetype) replaceWhiteinImageWithTransparency;
-- (instancetype) centerCropImage;
-
-@end
-
-@interface UIView (roundedCorners)
-+ (void)roundView:(UIView *)view onCorner:(UIRectCorner)rectCorner radius:(float)radius;
-//- (void)roundCornersOnTopLeft:(BOOL)tl topRight:(BOOL)tr bottomLeft:(BOOL)bl bottomRight:(BOOL)br radius:(float)radius;
 
 @end
 
@@ -29,7 +22,6 @@ typedef NS_ENUM(NSInteger,UITableViewCellLoadWaveAnimationDirection) {
     UITableViewCellLoadWaveAnimationDirectionLeftToRight = -1,
     UITableViewCellLoadWaveAnimationDirectionRightToLeft = 1
 };
-
 
 @interface UITableView (Wave)
 
@@ -42,7 +34,6 @@ typedef NS_ENUM(NSInteger,UITableViewCellLoadWaveAnimationDirection) {
 - (void)fadeOutWithDuration:(NSTimeInterval)inFadeOutTime;
 
 @end
-
 
 @interface JMMarkSlider : UISlider
 @property (nonatomic) UIColor *markColor;

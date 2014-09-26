@@ -52,38 +52,7 @@
     return result;
 }
 
-- (instancetype)centerCropImage
-{
-    // Use smallest side length as crop square length
-    CGFloat squareLength = MIN(self.size.width, self.size.height);
-    // Center the crop area
-    CGRect clippedRect = CGRectMake((self.size.width - squareLength) / 2, (self.size.height - squareLength) / 2, squareLength, squareLength);
-    
-    // Crop logic
-    CGImageRef imageRef = CGImageCreateWithImageInRect([self CGImage], clippedRect);
-    UIImage * croppedImage = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
-    return croppedImage;
-}
-
 @end
-
-
-@implementation UIView (roundedCorners)
-
-+ (void)roundView:(UIView *)view onCorner:(UIRectCorner)rectCorner radius:(float)radius
-{
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:view.bounds
-                                                   byRoundingCorners:rectCorner
-                                                         cornerRadii:CGSizeMake(radius, radius)];
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = view.bounds;
-    maskLayer.path = maskPath.CGPath;
-    [view.layer setMask:maskLayer];
-}
-
-@end
-
 
 @implementation UITableView (Wave)
 
@@ -156,10 +125,7 @@
     
 }
 
-
-
 @end
-
 
 #define     kFadeSteps  20.0
 
@@ -190,7 +156,6 @@
 }
 
 @end
-
 
 @implementation JMMarkSlider
 
