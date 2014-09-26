@@ -34,6 +34,7 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     
     @IBOutlet weak var friendAvatarView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
+    @IBOutlet weak var friendLevelLabel: UILabel!
     
     var friendUser: THUserFriend! {
         didSet {

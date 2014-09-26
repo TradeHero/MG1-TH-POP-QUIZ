@@ -23,7 +23,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         return NetworkClient.sharedClient.user
         }()
     
-    @IBOutlet private weak var friendsTableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
     
     //MARK:- Init
@@ -36,11 +36,12 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Friend List"
-        self.friendsTableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
+        self.tableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
         self.searchBar.placeholder = "Search friends"
         self.searchBar.text = ""
-        self.friendsTableView.tableHeaderView = self.searchBar
-        
+        self.tableView.tableHeaderView = self.searchBar
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 53
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -57,14 +58,14 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         self.FBFriendList.removeAll(keepCapacity: true)
         self.THFriendList.removeAll(keepCapacity: true)
         
-        self.friendsTableView.reloadData()
+        self.tableView.reloadData()
         
         weak var wself = self
         let loadCompleteHandler:((fbFriends: [THUserFriend], thFriends:[THUserFriend]) -> ()) = {
             var sself = wself!
             sself.FBFriendList = $0
             sself.THFriendList = $1
-            sself.friendsTableView.reloadData()
+            sself.tableView.reloadData()
         }
         
         let object = EGOCache.globalCache().objectForKey(kTHUserFriendsCacheStoreKey)
@@ -131,6 +132,8 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         }
         
         cell.layoutIfNeeded()
+        cell.setNeedsUpdateConstraints()
+        cell.updateConstraintsIfNeeded()
         cell.delegate = self
         return cell
     }
@@ -143,7 +146,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 48.0
+        return 53
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

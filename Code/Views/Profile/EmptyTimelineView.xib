@@ -10,11 +10,19 @@
             <rect key="frame" x="0.0" y="0.0" width="258" height="284"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="EmptyTimelineBoxView" translatesAutoresizingMaskIntoConstraints="NO" id="Xxf-54-kwG">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EmptyTimelineBoxView" translatesAutoresizingMaskIntoConstraints="NO" id="Xxf-54-kwG">
                     <rect key="frame" x="98" y="74" width="63" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="iC3-vM-yqf"/>
+                        <constraint firstAttribute="width" constant="63" id="mjz-lu-QAn"/>
+                    </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBS-IP-b0Z">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBS-IP-b0Z">
                     <rect key="frame" x="14" y="132" width="230" height="52"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="230" id="BEf-Ln-YuO"/>
+                        <constraint firstAttribute="height" constant="52" id="ae0-Hm-ECp"/>
+                    </constraints>
                     <string key="text">No activity yet.
 Why don't you start a challenge?</string>
                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
@@ -23,6 +31,13 @@ Why don't you start a challenge?</string>
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Xxf-54-kwG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="74" id="7Vy-j0-9HF"/>
+                <constraint firstAttribute="centerX" secondItem="fBS-IP-b0Z" secondAttribute="centerX" id="9PM-Ig-4Cd"/>
+                <constraint firstItem="fBS-IP-b0Z" firstAttribute="top" secondItem="Xxf-54-kwG" secondAttribute="bottom" constant="8" id="9zS-x7-LPR"/>
+                <constraint firstAttribute="bottom" secondItem="fBS-IP-b0Z" secondAttribute="bottom" constant="100" id="QNq-Un-uZd"/>
+                <constraint firstAttribute="centerX" secondItem="Xxf-54-kwG" secondAttribute="centerX" id="rsm-o8-eth"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

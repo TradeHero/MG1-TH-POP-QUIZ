@@ -25,7 +25,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.challengerImageView.clipsToBounds = true
         self.challengerDisplayNameLabel.text = ""
         self.layer.cornerRadius = 5
-        super.layoutIfNeeded()
+        self.clipsToBounds = true
     }
     
     @IBOutlet weak var actionButton: UIButton!
@@ -133,18 +133,18 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     }
     
     override var frame: CGRect {
-        set(fr) {
-            var frame = fr
-            frame.origin.y += inset
-            frame.size.height -=  2 * inset
-            super.frame = frame
-        }
-        
         get {
             return super.frame
         }
+        
+        set(fr) {
+            var frame = fr
+            frame.origin.y += 3
+            frame.size.height -=  5;
+            super.frame = frame
+            UIView.roundView(self, onCorner: .AllCorners, radius: 5)
+        }
     }
-    
 }
 
 protocol HomeTurnChallengesTableViewCellDelegate : class, NSObjectProtocol {

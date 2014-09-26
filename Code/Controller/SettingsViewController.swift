@@ -83,7 +83,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
                 cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
                 (cell as SettingsControlTableViewCell).configureControlType(.PushNotification)
                 (cell as SettingsControlTableViewCell).delegate = self
-                UIView.roundView(cell, onCorner: .BottomLeft | .BottomRight, radius: 5)
+//                UIView.roundView(cell.contentView, onCorner: .BottomLeft | .BottomRight, radius: 5)
                 return cell
             default:
                 break
@@ -104,7 +104,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
                 cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
                 (cell as SettingsControlTableViewCell).configureControlType(.VibrationEffect)
                 (cell as SettingsControlTableViewCell).delegate = self
-                UIView.roundView(cell, onCorner: .BottomLeft | .BottomRight, radius: 5)
+//                UIView.roundView(cell.contentView, onCorner: .BottomLeft | .BottomRight, radius: 5)
                 return cell
             default:
                 break
@@ -172,16 +172,31 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         return 40
     }
     
-    private func createHeaderView(title:String) -> UIView{
-        var view = UIView(frame: CGRectMake(0, 0, 286, 40))
-        UIView.roundView(view, onCorner: .TopRight | .TopLeft, radius: 10)
-        
-        view.backgroundColor = UIColor(hex: 0xFF4069)
-        let label = UILabel(frame: CGRectMake(8, 9, 152, 21))
+    private func createHeaderView(title:String) -> UITableViewHeaderFooterView {
+        var view = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, 286, 40))
+        view.contentView.backgroundColor = UIColor(hex: 0xFF4069)
+        let label = UILabel.newAutoLayoutView()
+        label.frame = CGRectMake(8, 9, 152, 21)
         label.text = title
         label.font = UIFont(name: "AvenirNext-Regular", size: 15)
         label.textColor = UIColor.whiteColor()
-        view.addSubview(label)
+        view.contentView.addSubview(label)
+        
+        
+        UIView.autoSetPriority(750) {
+            label.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
+        }
+        
+        label.autoPinEdgeToSuperviewEdge(.Top, withInset: 8)
+        label.autoPinEdgeToSuperviewEdge(.Leading, withInset: 8)
+        label.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 0)
+        
+        view.setNeedsUpdateConstraints()
+        view.updateConstraintsIfNeeded()
+        
+        view.clipsToBounds = true
+//        UIView.roundView(view.contentView, onCorner: .TopRight | .TopLeft, radius: 10)
+        view.layoutSubviews()
         return view
     }
 }

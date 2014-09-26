@@ -36,7 +36,7 @@ class SettingsControlTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var controlTitleLabel: UILabel!
     
-    private var toggleSwitch = THSwitch(frame: CGRectMake(214, 8.5, 65, 25))
+    private var toggleSwitch = THSwitch.newAutoLayoutView()
     
     var type: SettingsControlType!
     
@@ -44,6 +44,10 @@ class SettingsControlTableViewCell: UITableViewCell {
         super.awakeFromNib()
         configureSwitch()
         self.contentView.addSubview(toggleSwitch)
+        
+        toggleSwitch.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 5)
+        toggleSwitch.autoConstrainAttribute(NSLayoutAttribute.CenterY.toRaw(), toAttribute: NSLayoutAttribute.CenterY.toRaw(), ofView: toggleSwitch.superview, withMultiplier: 1)
+        self.toggleSwitch.autoSetDimensionsToSize(CGSizeMake(65, 25))
         toggleSwitch.addTarget(self, action: "toggleAction:", forControlEvents: .ValueChanged)
         // Initialization code
     }

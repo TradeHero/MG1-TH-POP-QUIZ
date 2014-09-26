@@ -36,8 +36,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     
     private lazy var emptyTimelineView: UIView = {
         var view = NSBundle.mainBundle().loadNibNamed("EmptyTimelineView", owner: nil, options: nil)[0] as UIView
-        view.x = 31
-        view.y = 194
         return view
     }()
     
@@ -47,7 +45,8 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         self.tableView.registerNib(UINib(nibName: "ChallengesTimelineTableViewCell", bundle: nil), forCellReuseIdentifier: kTHChallengesTimelineTableViewCellIdentifier)
         tableView.alwaysBounceVertical = false
         self.configureUI()
-        self.view.addSubview(emptyTimelineView)
+        
+        
         tableView.hidden = true
         emptyTimelineView.hidden = true
         // Do any additional setup after loading the view.
@@ -142,6 +141,20 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         }
         
         self.inGameNameEditTextField.text = user.displayName
+        
+        //Empty timeline view
+        self.view.addSubview(emptyTimelineView)
+        
+        self.emptyTimelineView.setNeedsUpdateConstraints()
+        self.emptyTimelineView.updateConstraintsIfNeeded()
+        
+        UIView.autoSetPriority(750) {
+//            self.emptyTimelineView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
+        }
+        
+        self.emptyTimelineView.autoConstrainAttribute(NSLayoutAttribute.CenterX.toRaw(), toAttribute: NSLayoutAttribute.CenterX.toRaw(), ofView: self.emptyTimelineView.superview, withMultiplier: 1)
+        self.emptyTimelineView.autoConstrainAttribute(NSLayoutAttribute.CenterY.toRaw(), toAttribute: NSLayoutAttribute.CenterY.toRaw(), ofView: self.emptyTimelineView.superview, withMultiplier: 1)
+        self.emptyTimelineView.autoSetDimensionsToSize(CGSizeMake(258, 284))
     }
     // MARK:- UITextField delegate methods
     func textFieldShouldReturn(textField: UITextField) -> Bool {
