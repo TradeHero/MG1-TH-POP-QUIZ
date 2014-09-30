@@ -152,7 +152,9 @@ class GameLoadingSceneViewController: UIViewController {
         
         self.countdownTimerWidthConstraint.constant = 0
         self.countdownTimerHeightConstraint.constant = 0
-        
+        self.view.setNeedsUpdateConstraints()
+        self.upperView.setNeedsUpdateConstraints()
+        self.lowerView.setNeedsUpdateConstraints()
         weak var wself = self
         UIView.animateWithDuration(1, delay: 1, options: .TransitionNone, animations: {
             var sself = wself!

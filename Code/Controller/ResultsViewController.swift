@@ -186,7 +186,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             
 
             cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.hintsUsed)" : "--"
-            UIView.roundView(cell, onCorner: .AllCorners, radius: 5)
+
 
             return cell
         case 2:
@@ -196,14 +196,14 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             cell.labelTintColor = UIColor(hex: 0x457B1D)
             cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.highestCombo)" : "--"
-            UIView.roundView(cell, onCorner: .AllCorners, radius: 5)
+
             return cell
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
             cell.attribute = "Total Score"
             cell.selfAttributeDetail = "\(playerResult.finalScore.decimalFormattedString)"
             cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.finalScore.decimalFormattedString)" : "--"
-            UIView.roundView(cell, onCorner: .AllCorners, radius: 5)
+            
 
             return cell
         default:
@@ -235,7 +235,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         switch section {
         case 0:
             let view = createHeaderViewForResultsView()
-            UIView.roundView(view, onCorner: .TopLeft | .TopRight, radius: 5)
+//            UIView.roundView(view, onCorner: .TopLeft | .TopRight, radius: 5)
             return view
         default:
             return nil
@@ -260,21 +260,23 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     //MARK:- Private functions
-    private func createHeaderViewForResultsView() -> UIView {
-        let view = UIView(frame: CGRectMake(0, 0, 285, 50))
+    private func createHeaderViewForResultsView() -> UITableViewHeaderFooterView {
+        let view = UITableViewHeaderFooterView.newAutoLayoutView()
+        view.frame = CGRectMake(0, 0, 285, 50)
         
-        view.backgroundColor = UIColor(hex: 0xFF4069)
+        view.contentView.backgroundColor = UIColor(hex: 0xFF4069)
 
         var label = UILabel(frame:CGRectMake(8, 14, 130, 21))
         label.text = "Correct Answers"
         label.font = UIFont(name: "AvenirNext-Medium", size: 17.0)
         label.textColor = UIColor.whiteColor()
-        view.addSubview(label)
+        view.contentView.addSubview(label)
         
         var selfAvatarView = AvatarRoundedView(frame: CGRectMake(152, 5, 40, 40))
         selfAvatarView.borderWidth = 1
         selfAvatarView.borderColor = UIColor.whiteColor()
-        view.addSubview(selfAvatarView)
+        view.contentView.addSubview(selfAvatarView)
+        
         NetworkClient.fetchImageFromURLString(player.pictureURL, progressHandler: nil) {
             (image, error) in
             if let e = error {
@@ -285,7 +287,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     
         var opponentAvatarView = AvatarRoundedView(frame: CGRectMake(223, 5, 40, 40))
-        view.addSubview(opponentAvatarView)
+        view.contentView.addSubview(opponentAvatarView)
         opponentAvatarView.borderWidth = 1
         opponentAvatarView.borderColor = UIColor.whiteColor()
         NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) {
@@ -296,7 +298,6 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             opponentAvatarView.image = image
         }
-//        view.roundCornersOnTopLeft(true, topRight: true, bottomLeft: false, bottomRight: false, radius: 5.0)
         return view
     }
 }

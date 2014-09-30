@@ -468,7 +468,12 @@ class QuizViewController: UIViewController {
         didRemoveOptions = false
         hintUsed = 0
         questionView.removeAllSubviews()
-        questionView.addSubview(setUpQuestionViewWithQuestion(question))
+        let contentView = setUpQuestionViewWithQuestion(question)
+        questionView.addSubview(contentView)
+        contentView.autoPinEdgeToSuperviewEdge(.Top, withInset: 0)
+        contentView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 0)
+        contentView.autoPinEdgeToSuperviewEdge(.Leading, withInset: 0)
+        contentView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 0)
         
         let optionSet = question.options.allOptions
         
@@ -494,7 +499,7 @@ class QuizViewController: UIViewController {
         
         
         
-        UIView.animateWithDuration(1, delay: 0.0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+        UIView.animateWithDuration(1, delay: 0.0, options: .TransitionCrossDissolve, animations: {
             self.roundIndicatorLabel.alpha = 1
             }) { complete in
                 UIView.animateWithDuration(1, options: .TransitionCrossDissolve) {

@@ -18,7 +18,7 @@ class LogoCanvasView: UIView {
     
     private var rasterizedImage: UIImage!
     
-    var imageView: UIImageView!
+    var imageView: UIImageView = UIImageView.newAutoLayoutView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,10 +46,16 @@ class LogoCanvasView: UIView {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.imageView = UIImageView(frame: CGRectMake(10, 10, 240, 110))
+        self.imageView.frame = CGRectMake(10, 10, 240, 110)
         self.addSubview(self.imageView)
+        self.imageView.autoPinEdgeToSuperviewEdge(.Top, withInset: 0)
+        self.imageView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 0)
+        self.imageView.autoPinEdgeToSuperviewEdge(.Leading, withInset: 0)
+        self.imageView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 0)
         self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        self.imageView.clipsToBounds = true
         self.contentMode = UIViewContentMode.ScaleAspectFit
+
         self.backgroundColor = UIColor.whiteColor()
     }
     
