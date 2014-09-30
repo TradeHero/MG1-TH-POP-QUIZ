@@ -13,9 +13,3 @@ enum THSoundEffect {
     case CorrectSound
     case WrongSound
 }
-
-var tableViewEssentialWidth: CGFloat {
-get {
-    return 0.9 * UIScreen.mainScreen().bounds.width
-}
-}

@@ -16,6 +16,7 @@ class GameLoadingSceneViewController: UIViewController {
     @IBOutlet private weak var prepareViewDetailLabel: UILabel!
     // top view
     
+    @IBOutlet weak var upperView: UIView!
     @IBOutlet private weak var topBoxBackgroundImageView: UIImageView!
     @IBOutlet private weak var categoryIconImageView: UIImageView!
     @IBOutlet private weak var categoryNameLabel: UILabel!
@@ -26,8 +27,11 @@ class GameLoadingSceneViewController: UIViewController {
     @IBOutlet private weak var selfLevelLabel: UILabel!
     @IBOutlet private weak var selfBadgeImageView: UIImageView!
     
+    @IBOutlet weak var upperviewTrailingSpaceToSuperview: NSLayoutConstraint!
+    @IBOutlet weak var upperviewLeadingSpaceToSuperview: NSLayoutConstraint!
     // bottom view
     
+    @IBOutlet weak var lowerView: UIView!
     @IBOutlet private weak var bottomBoxBackgroundImageView: UIImageView!
     @IBOutlet private weak var opponentAvatarView: AvatarRoundedView!
     @IBOutlet private weak var opponentDisplayNameLabel: UILabel!
@@ -36,6 +40,13 @@ class GameLoadingSceneViewController: UIViewController {
     @IBOutlet private weak var opponentBadgeImageView: UIImageView!
     
     @IBOutlet weak var roundTimerImageView: UIImageView!
+    
+    @IBOutlet weak var countdownTimerWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var countdownTimerHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var lowerviewLeadingSpaceToSuperview: NSLayoutConstraint!
+    
+    @IBOutlet weak var lowerViewTrailingSpaceToSuperview: NSLayoutConstraint!
     private var user = NetworkClient.sharedClient.user
     private var game: Game!
     
@@ -134,24 +145,19 @@ class GameLoadingSceneViewController: UIViewController {
     }
     
     private func startGame(){
+        self.upperviewLeadingSpaceToSuperview.constant += 1000
+        self.upperviewTrailingSpaceToSuperview.constant -= 1000
+        self.lowerviewLeadingSpaceToSuperview.constant -= 1000
+        self.lowerViewTrailingSpaceToSuperview.constant += 1000
         
-        let topView = topBoxBackgroundImageView.superview!
-        let bottomView = bottomBoxBackgroundImageView.superview!
-        
-        var topEndFrame = topView.frame
-        topEndFrame.origin.x += 500
-        
-        var bottomEndFrame = bottomView.frame
-        bottomEndFrame.origin.x -= 500
+        self.countdownTimerWidthConstraint.constant = 0
+        self.countdownTimerHeightConstraint.constant = 0
         
         weak var wself = self
-        
         UIView.animateWithDuration(1, delay: 1, options: .TransitionNone, animations: {
             var sself = wself!
             sself.countdownTimerLabel.alpha = 0
-            topView.frame = topEndFrame
-            bottomView.frame = bottomEndFrame
-            sself.roundTimerImageView.bounds.size = CGSizeZero
+            sself.view.layoutIfNeeded()
             }) { complete in
                 if complete {
                     var sself = wself!
