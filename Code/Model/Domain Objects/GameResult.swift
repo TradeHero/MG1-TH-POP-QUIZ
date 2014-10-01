@@ -11,15 +11,43 @@ import UIKit
 typealias QuestionResultDetail = (id:Int, rawScore:Int, time:Float)
 typealias QuestionResultFinalDetail = (id:Int, finalScore:Int)
 
-final class GameResult {
+final class GameResult: NSCoding {
+    private let kGameResultGameIDKey = "GameResultGameID"
+    private let kGameResultUserIDKey = "GameResultUserID"
+    private let kGameResultScoreKey = "GameResultScore"
+    private let kGameResultDetailsKey = "GameResultDetails"
+    private let kGameResultExtraDetailsKey = "GameResultExtraDetails"
+    private let kGameResultHintsUsedKey = "GameResultHintsUsed"
+    private let kGameResultHighestComboKey = "GameResultHighestCombo"
+    private let kGameResultSubmittedAtUtcStringKey = "GameResultSubmittedAtUtcString"
     
-    var gameId: Int!
-    var userId: Int!
-    var score: Int!
-    var details: String!
-    var extraDetails: String!
-    var hintsUsed: Int!
-    var highestCombo: Int!
+    var gameId: Int! //NSCoding
+    var userId: Int! //NSCoding
+    var score: Int! //NSCoding
+    var details: String! //NSCoding
+    var extraDetails: String! //NSCoding
+    var hintsUsed: Int! //NSCoding
+    var highestCombo: Int! //NSCoding
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeInteger(gameId, forKey: kGameResultGameIDKey)
+        
+        aCoder.encodeInteger(userId, forKey: kGameResultUserIDKey)
+        
+        aCoder.encodeInteger(score, forKey: kGameResultScoreKey)
+        
+        aCoder.encodeObject(details, forKey: kGameResultDetailsKey)
+        
+        aCoder.encodeObject(extraDetails, forKey: kGameResultExtraDetailsKey)
+        
+        aCoder.encodeInteger(hintsUsed, forKey: kGameResultHintsUsedKey)
+        
+        aCoder.encodeInteger(highestCombo, forKey: kGameResultHighestComboKey)
+        
+        aCoder.encodeObject(submittedAtUtcString, forKey: kGameResultSubmittedAtUtcStringKey)
+    }
+    
+    
     
     var rawScore: Int {
         var rScore = 0
@@ -51,7 +79,7 @@ final class GameResult {
         return qCorrect
     }
     
-    private var submittedAtUtcString:String!
+    private var submittedAtUtcString:String! //NSCoding
     
     lazy var submittedAt: NSDate! = {
         let df = NSDateFormatter()
@@ -116,5 +144,24 @@ final class GameResult {
         if let h: AnyObject = resultDTO["hintsUsed"] {
             self.hintsUsed = h as Int
         }
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        self.gameId = aDecoder.decodeIntegerForKey(kGameResultGameIDKey)
+        
+        self.userId = aDecoder.decodeIntegerForKey(kGameResultUserIDKey)
+        
+        self.score = aDecoder.decodeIntegerForKey(kGameResultScoreKey)
+        
+        self.details = aDecoder.decodeObjectForKey(kGameResultDetailsKey) as String
+        
+        self.extraDetails = aDecoder.decodeObjectForKey(kGameResultExtraDetailsKey) as String
+        
+        self.hintsUsed = aDecoder.decodeIntegerForKey(kGameResultHintsUsedKey)
+        
+        self.highestCombo = aDecoder.decodeIntegerForKey(kGameResultHighestComboKey)
+        
+        self.submittedAtUtcString = aDecoder.decodeObjectForKey(kGameResultSubmittedAtUtcStringKey) as String
+        
     }
 }
