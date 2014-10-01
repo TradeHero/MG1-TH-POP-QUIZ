@@ -168,40 +168,6 @@ class NetworkClient {
         //        debugPrintln(r)
     }
     
-    /*
-    GET api/games/\(id)/details
-    */
-    func fetchGameByGameId(gameId:Int, completionHandler: (Game! -> ())!){
-        let url = "\(THGameAPIBaseURL)/\(gameId)/details"
-        configureCompulsoryHeaders()
-        debugPrintln("Fetching game with game ID: \(gameId)...")
-        
-        
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
-            _, response, content, error in
-            if error != nil {
-                debugPrintln(error)
-            }
-            weak var wself = self
-            if response?.statusCode == 200 {
-                var sself = wself!
-                let responseJSON = content as [String: AnyObject]
-                //                println(responseJSON)
-                let game = Game(gameDTO: responseJSON)
-                debugPrintln("Game created with game ID: \(game.gameID)")
-                
-                game.fetchUsers {
-                    game.fetchResults {
-                        if let c = completionHandler {
-                            c(game)
-                        }
-                    }
-                }
-            }
-            
-        }
-        //        debugPrintln(r)
-    }
     /**
     GET api/games/open
     */
@@ -223,7 +189,6 @@ class NetworkClient {
                     debugPrintln("User has no open challenges.")
                     completionHandler([])
                 } else {
-                    //                    debugPrintln("Parsing \(openChallengesDTOs.count) objects as open challenges...")
                     var numberCompleted = 0
                     var total = openChallengesDTOs.count
                     var openChallenges: [Game] = []
@@ -309,9 +274,6 @@ class NetworkClient {
                             }
                         }
                     }
-                    
-                    
-                    //                    completionHandler([])
                 }
             }
         }
@@ -374,6 +336,65 @@ class NetworkClient {
                     
                     
                     //                    completionHandler([])
+                }
+            }
+        }
+        //        debugPrintln(r)
+    }
+
+    /**
+    GET api/games/unfinished
+    */
+    func fetchIncompleteChallenges(completionHandler: ([Game] -> ())!){
+        let url = "\(THGameAPIBaseURL)/unfinished"
+        
+        configureCompulsoryHeaders()
+        debugPrintln("Fetching all incomplete challenges for authenticated user...")
+        weak var wself = self
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
+            _, response, content, error in
+            var sself = wself!
+            if error != nil {
+                debugPrintln(error)
+            }
+            var incompleteChallenges: [Game] = []
+            if let incompleteChallengesDTOs = content as? [AnyObject] {
+                if incompleteChallengesDTOs.count == 0 {
+                    debugPrintln("User has no incomplete challenges.")
+                    completionHandler(incompleteChallenges)
+                } else {
+
+                    var numberCompleted = 0
+                    var total = incompleteChallengesDTOs.count
+                    
+                    let fetchUserHandler: () -> () = {
+                        numberCompleted++
+                        if numberCompleted == total {
+                            debugPrintln("Successfully fetched \(total) incomplete challenge(s).")
+                            if let handler = completionHandler {
+                                handler(incompleteChallenges)
+                            }
+                        }
+                    }
+                    for incompleteChallengeDTO in incompleteChallengesDTOs as [[String: AnyObject]] {
+                        let game = Game(compactGameDTO: incompleteChallengeDTO)
+                        
+                        var initiatorID: Int!
+                        if let i: AnyObject = incompleteChallengeDTO["createdByUserId"]{
+                            initiatorID = i as Int
+                        }
+                        
+                        var opponentID: Int!
+                        if let i: AnyObject = incompleteChallengeDTO["opponentUserId"]{
+                            opponentID = i as Int
+                        }
+                        game.fetchUsers{
+                            game.fetchResults {
+                                incompleteChallenges.append(game)
+                                fetchUserHandler()
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -578,11 +599,9 @@ class NetworkClient {
     */
     func fetchUser(userId: Int, force:Bool = false, completionHandler: THUser! -> ()) {
         configureCompulsoryHeaders()
-        let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(userId)"
+        
         if !force {
-            let obj = EGOCache.globalCache().objectForKey(userCacheKey)
-            if obj != nil {
-                let user = obj as THUser
+            if let user = THCache.getUserFromCache(userId) {
                 completionHandler(user)
                 return
             }
@@ -596,7 +615,7 @@ class NetworkClient {
             }
             if let profileDTODict = content as? [String: AnyObject] {
                 var user = THUser(profileDTO: profileDTODict)
-                EGOCache.globalCache().setObject(user, forKey: userCacheKey)
+                THCache.saveUserToCache(user, userId: userId)
                 completionHandler(user)
             }
         }
@@ -610,6 +629,47 @@ class NetworkClient {
         }
     }
     
+    /*
+    GET api/games/\(id)/details
+    */
+    func fetchGame(gameId:Int, force:Bool = false, completionHandler: (Game! -> ())!){
+        let url = "\(THGameAPIBaseURL)/\(gameId)/details"
+        configureCompulsoryHeaders()
+        debugPrintln("Fetching game with game ID: \(gameId)...")
+        
+        if !force {
+            if let game = THCache.getGameFromCache(gameId) {
+                completionHandler(game)
+                return
+            }
+        }
+        
+        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
+            _, response, content, error in
+            if error != nil {
+                debugPrintln(error)
+            }
+            weak var wself = self
+            if response?.statusCode == 200 {
+                var sself = wself!
+                let responseJSON = content as [String: AnyObject]
+                //                println(responseJSON)
+                let game = Game(gameDTO: responseJSON)
+                debugPrintln("Game created with game ID: \(game.gameID)")
+                
+                game.fetchUsers {
+                    game.fetchResults {
+                        if let c = completionHandler {
+                            c(game)
+                        }
+                    }
+                }
+            }
+            
+        }
+        //        debugPrintln(r)
+    }
+
     
     // MARK:- Class functions
     

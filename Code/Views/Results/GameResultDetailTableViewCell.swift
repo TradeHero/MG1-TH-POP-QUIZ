@@ -43,9 +43,9 @@ class GameResultDetailTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        UIView.roundView(self, onCorner: .AllCorners, radius: 5)
-//        self.layer.cornerRadius = 3
-//        self.clipsToBounds = true
+//        UIView.roundView(self, onCorner: .AllCorners, radius: 5)
+        self.layer.cornerRadius = 5
+        self.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

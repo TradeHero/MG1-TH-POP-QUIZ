@@ -218,7 +218,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             hud.textLabel.text = "Accepting \(name)'s challenge"
             hud.detailTextLabel.text = "Initiating game"
             weak var weakSelf = self
-            NetworkClient.sharedClient.fetchGameByGameId(game.gameID) {
+            NetworkClient.sharedClient.fetchGame(game.gameID, force: true) {
                 var strongSelf = weakSelf!
                 var i = 0
                 for game in strongSelf.openChallenges {

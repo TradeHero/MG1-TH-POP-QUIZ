@@ -96,7 +96,7 @@ let kTHUserFriendsCacheStoreKey = "\(kConstantPrefix)UserFriendsCacheStore"
 
 let kTHUserCacheStoreKeyPrefix = "\(kConstantPrefix)UserCacheStoreID"
 
-
+let kGameCacheStoreIDPrefix = "\(kConstantPrefix)GameCacheStoreID"
 
 //MARK:- Settings
 var kTHPushNotificationOn:Bool {

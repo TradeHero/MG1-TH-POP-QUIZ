@@ -9,9 +9,6 @@
 import UIKit
 
 class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate, UISearchBarDelegate {
-    private let kFBFriendsDictionaryKey = "FBFriendsDictionaryKey"
-    
-    private let kTHFriendsDictionaryKey = "THFriendsDictionaryKey"
     
     private var THFriendList: [THUserFriend] = []
     
@@ -76,32 +73,21 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
                 var sself = wself!
                 hud.dismissAnimated(true)
-                let fbF = $0.fbFriends
-                let thF = $0.thFriends
-                let dict = [sself.kFBFriendsDictionaryKey: fbF, sself.kTHFriendsDictionaryKey: thF]
-                EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
-                debugPrintln("\($0.fbFriends.count + $0.thFriends.count) friends cached.")
-                loadCompleteHandler(fbFriends: fbF, thFriends: thF)
+                THCache.saveFriendsListToCache($0.fbFriends, tradeheroFriends: $0.thFriends)
+                loadCompleteHandler(fbFriends: $0.fbFriends, thFriends: $0.thFriends)
             }
             return
         }
         
         hud.textLabel.text = "Loading friends..."
-        var cachedFriends = object as [String : [THUserFriend]]
         
-        if let cFBFrnd = cachedFriends[kFBFriendsDictionaryKey] {
-            if let cTHFrnd = cachedFriends[kTHFriendsDictionaryKey] {
-                debugPrintln("Retrieved \(cFBFrnd.count + cTHFrnd.count) friend(s) from cache.")
-                loadCompleteHandler(fbFriends: cFBFrnd, thFriends: cTHFrnd)
-            }
-        }
+        var cacheFriends = THCache.getFriendsListFromCache()
+        loadCompleteHandler(fbFriends: cacheFriends.facebookFriends, thFriends: cacheFriends.tradeheroFriends)
         
         hud.dismissAnimated(true)
     }
     
     @IBAction func backAction(sender: AnyObject) {
-        let dict = [self.kFBFriendsDictionaryKey: self.FBFriendList, kTHFriendsDictionaryKey: self.THFriendList]
-        EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
         self.navigationController?.popViewControllerAnimated(true)
     }
     

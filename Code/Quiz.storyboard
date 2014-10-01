@@ -573,7 +573,11 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="∞" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lx2-jI-fDc">
-                                <rect key="frame" x="149" y="269" width="21" height="30"/>
+                                <rect key="frame" x="145" y="269" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="gQ4-5X-dGZ"/>
+                                    <constraint firstAttribute="width" constant="30" id="jH9-qe-qgP"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -987,7 +991,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhh-X0-Fxb">
-                                <rect key="frame" x="78" y="260" width="165" height="80"/>
+                                <rect key="frame" x="78" y="261" width="165" height="80"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LoseBoxBackground" translatesAutoresizingMaskIntoConstraints="NO" id="RlX-pF-V00">
                                         <rect key="frame" x="0.0" y="0.0" width="165" height="80"/>
@@ -1121,14 +1125,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="9cE-Lt-rTi" firstAttribute="top" secondItem="EFc-dS-UBs" secondAttribute="bottom" id="E8F-cL-6Iv"/>
-                            <constraint firstItem="ULh-2C-YAn" firstAttribute="leading" secondItem="k8A-Yk-yV1" secondAttribute="leadingMargin" constant="-16" id="E9B-CD-fcz"/>
+                            <constraint firstItem="ULh-2C-YAn" firstAttribute="leading" secondItem="k8A-Yk-yV1" secondAttribute="leading" id="E9B-CD-fcz"/>
                             <constraint firstItem="fuW-KN-qNd" firstAttribute="top" secondItem="hxZ-bl-t5U" secondAttribute="bottom" id="Gxj-xy-B3c"/>
                             <constraint firstItem="TO4-9k-RPR" firstAttribute="top" secondItem="EFc-dS-UBs" secondAttribute="bottom" constant="7" id="Jvt-Ub-Wzh"/>
                             <constraint firstItem="877-Dh-xA9" firstAttribute="top" secondItem="HgP-KO-yTF" secondAttribute="bottom" constant="8" id="NEd-K8-6qK"/>
                             <constraint firstAttribute="centerX" secondItem="9cE-Lt-rTi" secondAttribute="centerX" id="PKb-9s-WQW"/>
                             <constraint firstItem="hxZ-bl-t5U" firstAttribute="bottom" secondItem="wpo-Qs-ZL9" secondAttribute="centerY" id="Q0Z-l3-a9z"/>
                             <constraint firstItem="hxZ-bl-t5U" firstAttribute="top" secondItem="TO4-9k-RPR" secondAttribute="bottom" constant="9" id="XC0-Gx-CSU"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ULh-2C-YAn" secondAttribute="trailing" constant="-16" id="Z8A-cS-yMQ"/>
+                            <constraint firstAttribute="trailing" secondItem="ULh-2C-YAn" secondAttribute="trailing" id="Z8A-cS-yMQ"/>
                             <constraint firstAttribute="centerX" secondItem="hhh-X0-Fxb" secondAttribute="centerX" id="dYO-oc-QrG"/>
                             <constraint firstItem="bIk-hs-kaU" firstAttribute="top" secondItem="ULh-2C-YAn" secondAttribute="bottom" id="fBy-QB-S9w"/>
                             <constraint firstItem="EFc-dS-UBs" firstAttribute="top" secondItem="k8A-Yk-yV1" secondAttribute="top" constant="20" id="i9K-j1-Nf0"/>
