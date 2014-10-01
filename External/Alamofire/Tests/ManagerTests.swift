@@ -1,4 +1,4 @@
-// ResponseTests.swift
+// RequestTests.swift
 //
 // Copyright (c) 2014 Alamofire (http://alamofire.org)
 //
@@ -24,24 +24,23 @@ import Foundation
 import Alamofire
 import XCTest
 
-class AlamofireJSONResponseTestCase: XCTestCase {
-    func testJSONResponse() {
+class AlamofireManagerTestCase: XCTestCase {
+    func testSetStartRequestsImmediatelyToFalseAndResumeRequest() {
+        let manager = Alamofire.Manager()
+        manager.startRequestsImmediately = false
+
         let URL = "http://httpbin.org/get"
+        let URLRequest = NSURLRequest(URL: NSURL(string: URL))
+
         let expectation = expectationWithDescription("\(URL)")
 
-        Alamofire.request(.GET, URL, parameters: ["foo": "bar"])
-                 .responseJSON { (request, response, JSON, error) in
-                    expectation.fulfill()
-                    XCTAssertNotNil(request, "request should not be nil")
-                    XCTAssertNotNil(response, "response should not be nil")
-                    XCTAssertNotNil(JSON, "JSON should not be nil")
-                    XCTAssertNil(error, "error should be nil")
-
-                    XCTAssertEqual(JSON!["args"] as NSObject, ["foo": "bar"], "args should be equal")
-                 }
+        manager.request(URLRequest)
+            .response { (_,_,_,_) in expectation.fulfill() }
+            .resume()
 
         waitForExpectationsWithTimeout(10) { (error) in
             XCTAssertNil(error, "\(error)")
         }
     }
 }
+
