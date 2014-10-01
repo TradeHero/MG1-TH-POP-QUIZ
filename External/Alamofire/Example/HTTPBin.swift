@@ -1,4 +1,4 @@
-// ResponseTests.swift
+// MasterViewController.swift
 //
 // Copyright (c) 2014 Alamofire (http://alamofire.org)
 //
@@ -22,26 +22,23 @@
 
 import Foundation
 import Alamofire
-import XCTest
 
-class AlamofireJSONResponseTestCase: XCTestCase {
-    func testJSONResponse() {
-        let URL = "http://httpbin.org/get"
-        let expectation = expectationWithDescription("\(URL)")
+enum HTTPBinRoute: URLStringConvertible {
+    case Method(Alamofire.Method)
+    case BasicAuth(String, String)
 
-        Alamofire.request(.GET, URL, parameters: ["foo": "bar"])
-                 .responseJSON { (request, response, JSON, error) in
-                    expectation.fulfill()
-                    XCTAssertNotNil(request, "request should not be nil")
-                    XCTAssertNotNil(response, "response should not be nil")
-                    XCTAssertNotNil(JSON, "JSON should not be nil")
-                    XCTAssertNil(error, "error should be nil")
+    var URLString: String {
+        let baseURLString = "http://httpbin.org/"
+        let path: String = {
+            switch self {
+            case .Method(let method):
+                return "/\(method.toRaw().lowercaseString)"
+            case .BasicAuth(let user, let password):
+                return "/basic-auth/\(user)/\(password)"
+            }
+        }()
 
-                    XCTAssertEqual(JSON!["args"] as NSObject, ["foo": "bar"], "args should be equal")
-                 }
-
-        waitForExpectationsWithTimeout(10) { (error) in
-            XCTAssertNil(error, "\(error)")
-        }
+        return NSURL(string: path, relativeToURL: NSURL(string: baseURLString)).absoluteString!
     }
 }
+

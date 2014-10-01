@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A361c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,19 +11,36 @@
             <rect key="frame" x="0.0" y="0.0" width="140" height="102"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Apple Inc." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="9hk-qM-pja">
-                    <rect key="frame" x="3" y="7" width="137" height="17"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Apple Inc." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="9hk-qM-pja">
+                    <rect key="frame" x="2" y="7" width="137" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="137" id="fQ4-QQ-DNa"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="g9k-PT-sqS"/>
+                        <constraint firstAttribute="height" constant="17" id="v6o-9u-5yF"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="137" id="vSL-Gz-p5q"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="13"/>
                     <color key="textColor" red="0.047058823529411764" green="0.30980392156862746" blue="0.68235294117647061" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="highlightedColor" red="0.2823529541" green="0.32549020649999999" blue="0.39607846740000002" alpha="1" colorSpace="deviceRGB"/>
                     <color key="shadowColor" cocoaTouchSystemColor="lightTextColor"/>
                     <size key="shadowOffset" width="0.0" height="0.0"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xfU-jo-XHD">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xfU-jo-XHD">
                     <rect key="frame" x="8" y="31" width="124" height="63"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="124" id="Vgd-AF-TZJ"/>
+                        <constraint firstAttribute="width" secondItem="xfU-jo-XHD" secondAttribute="height" multiplier="124:63" id="mMo-TP-VTP"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="9hk-qM-pja" secondAttribute="centerX" id="AWw-l4-Zzr"/>
+                <constraint firstItem="9hk-qM-pja" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="PUh-AI-m8F"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xfU-jo-XHD" secondAttribute="bottom" constant="8" id="Z8N-Df-jQn"/>
+                <constraint firstAttribute="centerX" secondItem="xfU-jo-XHD" secondAttribute="centerX" id="lXh-NQ-y4b"/>
+                <constraint firstItem="xfU-jo-XHD" firstAttribute="top" secondItem="9hk-qM-pja" secondAttribute="bottom" constant="7" id="zae-uQ-bhZ"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

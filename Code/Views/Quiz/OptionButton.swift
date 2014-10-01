@@ -319,14 +319,16 @@ class OptionButton: DesignableButton {
                 self.titleLabel?.removeFromSuperview()
             }
         }
-        
-        //        self.imageView.hidden = true
         trendingTopLayerView = NSBundle.mainBundle().loadNibNamed("OptionButtonAccessoryImageLayer", owner: self, options: nil)[0] as OptionButtonAccessoryImageLayer
         trendingTopLayerView.titleLabel.text = self.labelText
         trendingTopLayerView.imageView.image = self.accessoryImage
         trendingTopLayerView.userInteractionEnabled = false
+        
         self.addSubview(trendingTopLayerView)
-        //        self.bringSubviewToFront(topLayer)
+        trendingTopLayerView.autoConstrainAttribute(NSLayoutAttribute.CenterX.toRaw(), toAttribute: NSLayoutAttribute.CenterX.toRaw(), ofView: trendingTopLayerView.superview, withMultiplier: 1)
+        trendingTopLayerView.autoConstrainAttribute(NSLayoutAttribute.CenterY.toRaw(), toAttribute: NSLayoutAttribute.CenterY.toRaw(), ofView: trendingTopLayerView.superview, withMultiplier: 1)
+        
+        trendingTopLayerView.autoSetDimensionsToSize(CGSizeMake(140, 102))
     }
     
     private func configureAsNormalStyle() {

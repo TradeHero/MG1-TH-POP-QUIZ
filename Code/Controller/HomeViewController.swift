@@ -15,15 +15,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet private weak var rankView: UILabel!
     
     private var refreshControl: UIRefreshControl!
-    private var openChallenges: [Game] = []
-    private var opponentPendingChallenges: [Game] = []
-    
+    private var openChallenges = [Game]()
+    private var opponentPendingChallenges = [Game]()
+    private var unfinishedChallenges = [Game]()
     private var user: THUser = NetworkClient.sharedClient.user
 
-    private var noOpenChallenge:Bool {
+    private var noOpenChallenges:Bool {
         return self.openChallenges.count == 0
     }
     
+    private var noUnfinishedChallenges:Bool {
+        return self.unfinishedChallenges.count == 0
+    }
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -111,7 +114,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             numberLoaded++
             var sself = wself!
             
-            if numberLoaded == 2 {
+            if numberLoaded == 3 {
                 hud?.dismissAnimated(true)
                 sself.tableView.reloadData()
                 sself.tableView.forceUpdateTable()
@@ -139,6 +142,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             completionHandler()
         }
+        
+        NetworkClient.sharedClient.fetchIncompleteChallenges {
+            var sself = wself!
+            sself.unfinishedChallenges = $0
+            sself.unfinishedChallenges.sort {
+                $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
+            }
+            completionHandler()
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -146,8 +158,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         switch indexPath.section {
         case 0:
-            cell.bindChalllenge(openChallenges[indexPath.row], status:.Accept)
+            cell.bindChalllenge(unfinishedChallenges[indexPath.row], status:.Play)
         case 1:
+            cell.bindChalllenge(openChallenges[indexPath.row], status:.Accept)
+        case 2:
             cell.bindChalllenge(opponentPendingChallenges[indexPath.row], status:.Nudge)
         default:
             break
@@ -169,8 +183,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return openChallenges.count
+            return unfinishedChallenges.count
         case 1:
+            return openChallenges.count
+        case 2:
             return opponentPendingChallenges.count
         default:
             return 0
@@ -180,11 +196,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView! {
         switch section {
         case 0:
-            if noOpenChallenge {
+            return noUnfinishedChallenges ? nil : createHeaderView("Unfinished challenge", numberOfGames: unfinishedChallenges.count)
+        case 1:
+            if noOpenChallenges {
                 return createHeaderViewForEmptyTurn()
             }
             return createHeaderView("Your turn", numberOfGames: openChallenges.count)
-        case 1:
+        case 2:
             return createHeaderView("Their turn", numberOfGames: opponentPendingChallenges.count)
         default:
             return nil
@@ -192,17 +210,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            if noOpenChallenge {
+            if noUnfinishedChallenges {
+                return 0
+            }
+            return 25
+
+        case 1:
+            if noOpenChallenges {
                 return 119
             }
             return 25
-        case 1:
+        case 2:
             return 25
         default:
             return 0

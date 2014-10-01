@@ -22,10 +22,23 @@ class NetworkClient {
         dispatch_once(&Singleton.onceToken) {
             Singleton.instance = NetworkClient()
             Singleton.instance.loadCredentials()
+            
+            var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
+            defaultHeaders.updateValue("2.4.0", forKey: "TH-Client-Version")
+            defaultHeaders.updateValue("1", forKey: "TH-Client-Type")
+            defaultHeaders.updateValue("en-GB", forKey: "TH-Language-Code")
+            defaultHeaders.updateValue("2.4.0", forKey: "THPQ-Client-Version")
+            defaultHeaders.updateValue("1", forKey: "THPQ-Client-Type")
+            defaultHeaders.updateValue("en-GB", forKey: "THPQ-Language-Code")
+            let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+            configuration.HTTPAdditionalHeaders = defaultHeaders
+            Singleton.instance.manager = Alamofire.Manager(configuration: configuration)
         }
         
         return Singleton.instance
     }
+    
+    private var manager: Alamofire.Manager!
     
     /// Authenticated user
     private var authenticatedUser: THUser!
@@ -51,27 +64,13 @@ class NetworkClient {
     */
     func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:(THUser -> ())!) {
         let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.4.0"]
-        
-        var headers = Alamofire.Manager.sharedInstance.defaultHeaders
-        if (headers["TH-Client-Version"] == nil) {
-            headers["TH-Client-Version"] = "2.4.0"
-        }
-        
-        if (headers["TH-Client-Type"] == nil) {
-            headers["TH-Client-Type"] = "1"
-        }
-        
-        if (headers["TH-Language-Code"] == nil) {
-            headers["TH-Language-Code"] = "en-GB"
-        }
-        headers["Authorization"] = "\(THAuthFacebookPrefix) \(accessToken)"
-        Alamofire.Manager.sharedInstance.defaultHeaders = headers
+        let auth = "\(THAuthFacebookPrefix) \(accessToken)"
         weak var weakSelf = self
-        let r = Alamofire.request(.POST,
+        let r = self.request(.POST,
             THServerAPIBaseURL + "/login",
             parameters: param,
-            encoding: JSONEncoding)
-            .responseJSON {
+            encoding: JSONEncoding,
+            authentication: auth).responseJSON {
                 _, response, content, error in
                 var strongSelf = weakSelf!
                 if let responseError = error {
@@ -80,6 +79,7 @@ class NetworkClient {
                 }
                 
                 if response?.statusCode == 200 {
+                    self.saveCredentials(auth)
                     let responseJSON = content as [String: AnyObject]
                     let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
                     
@@ -93,20 +93,18 @@ class NetworkClient {
                     }
                 }
         }
-        
-        //        debugPrintln(r)
+//                debugPrintln(r)
     }
     
     /**
     Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
     func createChallenge(numberOfQuestions:Int = 7, opponentId:Int, completionHandler: (Game! -> ())!) {
-        configureCompulsoryHeaders()
         debugPrintln("Creating challenge with user \(opponentId) with \(numberOfQuestions) questions(s)")
         
         weak var wself = self
-        Alamofire.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
-            ], encoding: JSONEncoding).responseJSON {
+        self.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
+            ], encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
                 _, response, content, error in
                 var sself = wself!
                 if let responseError = error {
@@ -137,10 +135,9 @@ class NetworkClient {
     typealias TFBHUserFriendTuple = (fbFriends:[THUserFriend], thFriends:[THUserFriend])
     func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (TFBHUserFriendTuple -> ())!){
         let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
-        configureCompulsoryHeaders()
         debugPrintln("Fetching Facebook friends for user \(userId)...")
         
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -174,10 +171,9 @@ class NetworkClient {
     func fetchOpenChallenges(completionHandler: ([Game] -> ())!){
         let url = "\(THGameAPIBaseURL)/open"
         
-        configureCompulsoryHeaders()
         debugPrintln("Fetching all open challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -226,10 +222,9 @@ class NetworkClient {
     func fetchTakenChallenges(completionHandler: ([Game] -> ())!){
         let url = "\(THGameAPIBaseURL)/taken"
         
-        configureCompulsoryHeaders()
         debugPrintln("Fetching all taken challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -286,10 +281,9 @@ class NetworkClient {
     func fetchOpponentPendingChallenges(completionHandler: ([Game] -> ())!){
         let url = "\(THGameAPIBaseURL)/theirturn"
         
-        configureCompulsoryHeaders()
         debugPrintln("Fetching all opponent pending challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -348,10 +342,9 @@ class NetworkClient {
     func fetchIncompleteChallenges(completionHandler: ([Game] -> ())!){
         let url = "\(THGameAPIBaseURL)/unfinished"
         
-        configureCompulsoryHeaders()
         debugPrintln("Fetching all incomplete challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -407,10 +400,9 @@ class NetworkClient {
     func fetchClosedChallenges(completionHandler: ([Game] -> ())!){
         let url = "\(THGameAPIBaseURL)/closed"
         
-        configureCompulsoryHeaders()
         debugPrintln("Fetching all closed challenges for authenticated user...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -485,7 +477,7 @@ class NetworkClient {
     */
     func postGameResults(game:Game, highestCombo:Int, noOfHintsUsed hints: UInt,currentScore:Int, questionResults:[QuestionResult], completionHandler:(Game -> ())!){
         let url = "\(THGameAPIBaseURL)/postResults"
-        configureCompulsoryHeaders()
+        
         debugPrintln("Posting results for game \(game.gameID)...")
         var resultSet:[[String:AnyObject]] = []
         for result in questionResults {
@@ -494,7 +486,7 @@ class NetworkClient {
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
         weak var wself = self
-        let r = Alamofire.request(.POST, url, parameters: param, encoding: JSONEncoding).responseJSON {
+        let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -516,10 +508,10 @@ class NetworkClient {
     typealias THGameResultsTuple = (challengerResult:GameResult?, opponentResult:GameResult?)
     func getResultForGame(gameId:Int, completionHandler:(THGameResultsTuple -> ())!){
         let url = "\(THGameAPIBaseURL)/\(gameId)/results"
-        configureCompulsoryHeaders()
+
         debugPrintln("Fetching results for game \(gameId)...")
         weak var wself = self
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -598,7 +590,6 @@ class NetworkClient {
     :param: completionHandler Handles fetched user if succeed
     */
     func fetchUser(userId: Int, force:Bool = false, completionHandler: THUser! -> ()) {
-        configureCompulsoryHeaders()
         
         if !force {
             if let user = THCache.getUserFromCache(userId) {
@@ -607,7 +598,7 @@ class NetworkClient {
             }
         }
         
-       let r = Alamofire.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding).responseJSON {
+       let r = self.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -634,7 +625,6 @@ class NetworkClient {
     */
     func fetchGame(gameId:Int, force:Bool = false, completionHandler: (Game! -> ())!){
         let url = "\(THGameAPIBaseURL)/\(gameId)/details"
-        configureCompulsoryHeaders()
         debugPrintln("Fetching game with game ID: \(gameId)...")
         
         if !force {
@@ -644,7 +634,7 @@ class NetworkClient {
             }
         }
         
-        let r = Alamofire.request(.GET, url, parameters: nil, encoding: JSONEncoding).responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: generateAuthorisationFromKeychain() ?? "").responseJSON {
             _, response, content, error in
             if error != nil {
                 debugPrintln(error)
@@ -697,40 +687,6 @@ class NetworkClient {
     }
     
     // MARK:- private functions
-    
-    func configureCompulsoryHeaders(){
-        var headers = Alamofire.Manager.sharedInstance.defaultHeaders
-        if (headers["TH-Client-Version"] == nil) {
-            headers["TH-Client-Version"] = "2.3.0.4245"
-        }
-        
-        if (headers["TH-Client-Type"] == nil) {
-            headers["TH-Client-Type"] = "1"
-        }
-        
-        if (headers["TH-Language-Code"] == nil) {
-            headers["TH-Language-Code"] = "en-GB"
-        }
-        
-        if (headers["THPQ-Client-Version"] == nil) {
-            headers["THPQ-Client-Version"] = "1.0.0.0"
-        }
-        
-        if (headers["THPQ-Client-Type"] == nil) {
-            headers["THPQ-Client-Type"] = "1"
-        }
-        
-        if (headers["THPQ-Language-Code"] == nil) {
-            headers["THPQ-Language-Code"] = "en-GB"
-        }
-        
-        
-        if let auth = generateAuthorisationFromKeychain() {
-            headers["Authorization"] = auth
-        }
-        Alamofire.Manager.sharedInstance.defaultHeaders = headers
-    }
-    
     ///
     /// Generates authorisation header from saved credential in device keychain.
     ///
@@ -791,6 +747,15 @@ class NetworkClient {
         }
     }
     
-    
-    
+    private func request(method: Alamofire.Method, _ URLString: Alamofire.URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: Alamofire.ParameterEncoding = .URL, authentication: String) -> Request {
+        return manager.request(encoding.encode(authenticatedURLRequest(method, URLString: URLString, authentication: authentication), parameters: parameters).0)
+    }
+
+    private func authenticatedURLRequest(method: Alamofire.Method, URLString: Alamofire.URLStringConvertible, authentication: String) -> NSURLRequest {
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: URLString.URLString))
+        mutableURLRequest.HTTPMethod = method.toRaw()
+        mutableURLRequest.setValue(authentication, forHTTPHeaderField: "Authorization")
+        
+        return mutableURLRequest
+    }
 }

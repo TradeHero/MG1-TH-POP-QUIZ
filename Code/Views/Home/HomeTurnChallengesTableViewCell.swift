@@ -64,7 +64,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.status = status
         self.player = game.selfUser
         self.opponent = game.awayUser
-        
+        self.scoreDetailLabel.attributedText = NSAttributedString(string: "")
         switch status {
         case .Nudge, .Invited:
             if game.isGameCompletedByChallenger {
