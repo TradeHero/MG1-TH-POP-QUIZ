@@ -49,7 +49,7 @@ class THIndefiniteAnnularIndicatorView: UIView {
         }
     }
     
-    var radius: CGFloat {
+    var radii: CGFloat {
         didSet {
             indefiniteAnimatedLayer.removeFromSuperlayer()
             indefiniteAnimatedLayer = nil
@@ -67,10 +67,10 @@ class THIndefiniteAnnularIndicatorView: UIView {
     private var indefiniteAnimatedLayer: CAShapeLayer!  {
         get {
             if _indefiniteAnimatedLayer == nil {
-                let arcCenter = CGPointMake(self.radius + self.strokeThickness/2 + 5, self.radius + self.strokeThickness/2 + 5)
+                let arcCenter = CGPointMake(self.radii + self.strokeThickness/2 + 5, self.radii + self.strokeThickness/2 + 5)
                 let rect = CGRectMake(0, 0, arcCenter.x * 2, arcCenter.y * 2)
                 
-                let smoothedPath = UIBezierPath(arcCenter: arcCenter, radius: self.radius, startAngle: CGFloat(M_PI) * 3 / 2, endAngle: CGFloat(M_PI) / 2 + CGFloat(M_PI) * 5, clockwise: true)
+                let smoothedPath = UIBezierPath(arcCenter: arcCenter, radius: self.radii, startAngle: CGFloat(M_PI) * 3 / 2, endAngle: CGFloat(M_PI) / 2 + CGFloat(M_PI) * 5, clockwise: true)
                 _indefiniteAnimatedLayer = CAShapeLayer()
                 _indefiniteAnimatedLayer.contentsScale = UIScreen.mainScreen().scale
                 _indefiniteAnimatedLayer.frame = rect
@@ -126,7 +126,7 @@ class THIndefiniteAnnularIndicatorView: UIView {
     
     override init(frame: CGRect) {
         strokeThickness = THIndefiniteIndicatorViewRingThickness
-        radius = THIndefiniteIndicatorViewRingRadius
+        radii = THIndefiniteIndicatorViewRingRadius
         strokeColor = THIndefiniteIndicatorViewForegroundColor
         super.init(frame: frame)
     }
@@ -134,7 +134,7 @@ class THIndefiniteAnnularIndicatorView: UIView {
     
     required init(coder aDecoder: NSCoder) {
         strokeThickness = THIndefiniteIndicatorViewRingThickness
-        radius = THIndefiniteIndicatorViewRingRadius
+        radii = THIndefiniteIndicatorViewRingRadius
         strokeColor = THIndefiniteIndicatorViewForegroundColor
         super.init(coder: aDecoder)
     }
@@ -155,7 +155,7 @@ class THIndefiniteAnnularIndicatorView: UIView {
     }
     
     override func sizeThatFits(size: CGSize) -> CGSize {
-        return CGSizeMake((self.radius + self.strokeThickness / 2 + 5) * 2, (self.radius + self.strokeThickness / 2 + 5) * 2)
+        return CGSizeMake((self.radii + self.strokeThickness / 2 + 5) * 2, (self.radii + self.strokeThickness / 2 + 5) * 2)
     }
     
     override var frame: CGRect {
