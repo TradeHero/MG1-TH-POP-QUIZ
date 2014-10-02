@@ -11,6 +11,7 @@ import UIKit
 enum SettingsControlType: Int {
     case PushNotification
     case BackgroundMusic
+    case NotificationHead
     case SoundEffect
     case VibrationEffect
     
@@ -20,6 +21,8 @@ enum SettingsControlType: Int {
             return "Push Notification"
         case .BackgroundMusic:
             return "Background Music"
+        case .NotificationHead:
+            return "Notification Head"
         case .SoundEffect:
             return "Sound Effect"
         case .VibrationEffect:
@@ -74,6 +77,8 @@ class SettingsControlTableViewCell: UITableViewCell {
         case .VibrationEffect:
             toggleSwitch.on = kTHVibrationEffectOn
             controlLogoImageView.image = UIImage(named: "VibrationSettingsIcon")
+        case .NotificationHead:
+            toggleSwitch.on = kTHNotificationHeadOn
         default:
             println("Wrong type of control")
             break

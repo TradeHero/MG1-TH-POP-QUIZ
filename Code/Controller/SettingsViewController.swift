@@ -106,6 +106,10 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
                 (cell as SettingsControlTableViewCell).delegate = self
 //                UIView.roundView(cell.contentView, onCorner: .BottomLeft | .BottomRight, radius: 5)
                 return cell
+            case 3:
+                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
+                (cell as SettingsControlTableViewCell).configureControlType(.VibrationEffect)
+                (cell as SettingsControlTableViewCell).delegate = self
             default:
                 break
             }

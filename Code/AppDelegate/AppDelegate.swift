@@ -10,11 +10,21 @@ import UIKit
 import AVFoundation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDelegate {
                             
     var window: UIWindow?
 
     var bgmPlayer = AVAudioPlayer.createAudioPlayer("Electrodoodle", extensionName: "mp3")
+    
+    var _draggableView: CHDraggableView!
+    
+    var _draggingCoordinator : CHDraggingCoordinator!
+    
+    var draggableView: CHDraggableView! {
+        get {
+            return _draggableView
+        }
+    }
     
     var isSoundEffectOn: Bool {
         get{
@@ -28,7 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FBLoginView.self
         FBProfilePictureView.self
-
+        
+        setupNotificationHead()
+        
         switch kTHGamesServerMode {
         case .Staging:
             println("Current build points to Staging Server.\n")
@@ -120,6 +132,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.unregisterLoginNotification()
             self.registerOtherNotification()
         }
+        self.window?.addSubview(_draggableView)
+        
     }
     
     func registerLoginNotification() {
@@ -152,6 +166,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.loggedIn = false
     }
     
+    func registerNotificationHeadOnNotification(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "chatHeadTurnOn", name: kTHGameNotificationHeadNotificationOnKey, object: nil)
+    }
     
+    func unregisterNotificationHeadOnNotification() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: kTHGameNotificationHeadNotificationOnKey, object: nil)
+    }
+    
+    func chatHeadTurnOn(){
+        
+    }
+    
+    private func setupNotificationHead(){
+        let window = self.window!
+        _draggableView = CHDraggableView(image: UIImage(named: "NotificationHeadImage"))
+        _draggableView.tag = 1
+        _draggingCoordinator = CHDraggingCoordinator(window: window, draggableViewBounds: _draggableView.bounds)
+        _draggingCoordinator.delegate = self
+        _draggingCoordinator.snappingEdge = CHSnappingEdgeBoth
+        _draggableView.delegate = _draggingCoordinator
+        
+    }
+    
+    func draggingCoordinator(coordinator: CHDraggingCoordinator!, viewControllerForDraggableView draggableView: CHDraggableView!) -> UIViewController! {
+        let controller = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("SettingsViewController") as? UIViewController
+        return controller
+    }
 }
 

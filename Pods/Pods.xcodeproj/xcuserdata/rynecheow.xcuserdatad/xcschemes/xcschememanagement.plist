@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-CAAnimationBlocks.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-ChatHeads.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-EGOCache.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SKBounceAnimation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SSKeychain.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,37 +57,52 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>10C4A38746194425AC5C17F6</key>
+		<key>0DF142E8B4D1A4ADC53E0D66</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1E85714036DC4099AD798553</key>
+		<key>13D217B189D81F965829448E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>36258AA435664FA78FD4D8D9</key>
+		<key>2C71C86D3644F32DB22B49FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3F5849E93A61444C9C828FCC</key>
+		<key>2CB1DCA13594833723007A56</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>42AE62C33C104A58B11C7E74</key>
+		<key>3362D2354D1F1B9923192D3A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>53BC63BBAAAB480C800CF11B</key>
+		<key>71992E9D1837C7F112C4AE76</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BC9576B721864084BA5F21DA</key>
+		<key>80EB9169671FA25AAC4AA012</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8EDA6E5C0B72659B7112BAC6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A5FC6FB888A0115DF425D8EA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A9DD93C4F773BA167975399E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

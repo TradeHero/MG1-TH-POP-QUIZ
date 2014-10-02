@@ -26,6 +26,14 @@
 
 #import <SSKeychain/SSKeychain.h>
 
+#import <ChatHeads/CHAvatarView.h>
+
+#import <ChatHeads/CHDraggableView.h>
+
+#import <ChatHeads/CHDraggableView+Avatar.h>
+
+#import <ChatHeads/CHDraggingCoordinator.h>
+
 #pragma mark - non-library
 
 #import "ObjCHelpers.h"

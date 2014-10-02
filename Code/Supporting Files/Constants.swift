@@ -56,7 +56,7 @@ let kTHGameKeychainBasicAccKey = "\(kConstantPrefix)GameKeychainBasicAcc"
 
 let kTHGameKeychainFacebookAccKey = "\(kConstantPrefix)GameKeychainFacebookAcc"
 
-
+//MARK:- global settings key
 let kTHPushNotificationOnKey = "\(kConstantPrefix)PushNotificationOn"
 
 let kTHBackgroundMusicValueKey = "\(kConstantPrefix)BackgroundMusicValue"
@@ -65,13 +65,17 @@ let kTHSoundEffectValueKey = "\(kConstantPrefix)SoundEffectValue"
 
 let kTHVibrationEffectOnKey = "\(kConstantPrefix)VibrationEffectOn"
 
+let kTHNotificationHeadOnKey = "\(kConstantPrefix)NotificationHeadOn"
+
 
 //MARK:- notification keys
 let kTHGameLoginSuccessfulNotificationKey = "\(kConstantPrefix)GameLoginSuccessfulNotification"
 
 let kTHGameLogoutNotificationKey = "\(kConstantPrefix)GameLogoutNotification"
 
+let kTHGameNotificationHeadNotificationOnKey = "\(kConstantPrefix)GameNotificationHeadNotificationOn"
 
+let kTHGameNotificationHeadNotificationOffKey = "\(kConstantPrefix)GameNotificationHeadNotificationOff"
 
 // MARK:- view identifiers
 let kTHFriendsChallengeCellTableViewCellIdentifier = "\(kConstantPrefix)FriendsChallengeCellTableViewCellIdentifier"
@@ -89,6 +93,7 @@ let kTHChallengesTimelineTableViewCellIdentifier = "\(kConstantPrefix)Challenges
 let kTHSettingsControlTableViewCellIdentifier = "\(kConstantPrefix)SettingsControlTableViewCellIdentifier"
 
 let kTHSettingsSliderTableViewCellIdentifier = "\(kConstantPrefix)SettingsSliderTableViewCellIdentifier"
+
 
 
 // MARK:- cache keys
@@ -156,6 +161,20 @@ var kTHVibrationEffectOn:Bool {
         }
         return false
     }
+}
+
+var kTHNotificationHeadOn:Bool {
+   set {
+      debugPrintln("Notification head set to \(newValue)")
+      NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHNotificationHeadOnKey)
+   }
+
+   get {
+      if let obj = NSUserDefaults.standardUserDefaults().objectForKey(kTHNotificationHeadOnKey) as? NSNumber {
+         return obj.boolValue
+      }
+      return false
+   }
 }
 
 func vibrateIfAllowed(){
