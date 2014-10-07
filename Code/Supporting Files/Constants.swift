@@ -73,9 +73,7 @@ let kTHGameLoginSuccessfulNotificationKey = "\(kConstantPrefix)GameLoginSuccessf
 
 let kTHGameLogoutNotificationKey = "\(kConstantPrefix)GameLogoutNotification"
 
-let kTHGameNotificationHeadNotificationOnKey = "\(kConstantPrefix)GameNotificationHeadNotificationOn"
-
-let kTHGameNotificationHeadNotificationOffKey = "\(kConstantPrefix)GameNotificationHeadNotificationOff"
+let kTHGameNotificationHeadNotificationToggleKey = "\(kConstantPrefix)GameNotificationHeadNotificationToggle"
 
 // MARK:- view identifiers
 let kTHFriendsChallengeCellTableViewCellIdentifier = "\(kConstantPrefix)FriendsChallengeCellTableViewCellIdentifier"
@@ -151,7 +149,8 @@ var kTHSoundEffectValue:Float {
 }
 var kTHVibrationEffectOn:Bool {
     set {
-        debugPrintln("Vibration effect set to \(newValue)")
+        let on = newValue ? "on": "off"
+        debugPrintln("Vibration effect set to \(on)")
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHVibrationEffectOnKey)
     }
 
@@ -165,8 +164,10 @@ var kTHVibrationEffectOn:Bool {
 
 var kTHNotificationHeadOn:Bool {
    set {
-      debugPrintln("Notification head set to \(newValue)")
+      let show = newValue ? "show": "hidden"
+      debugPrintln("Notification head set to \(show)")
       NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHNotificationHeadOnKey)
+      NSNotificationCenter.defaultCenter().postNotificationName(kTHGameNotificationHeadNotificationToggleKey, object: nil)
    }
 
    get {

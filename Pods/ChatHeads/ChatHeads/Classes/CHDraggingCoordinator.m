@@ -181,7 +181,8 @@ typedef enum {
 - (BOOL)shouldRemoveDraggableView:(CHDraggableView *)view
 {
     // this determines if based on the draggable and close view positions, the draggable should be closed aka removed
-    return CGRectIntersectsRect(view.frame, self.closeView.frame);
+//    return CGRectIntersectsRect(view.frame, self.closeView.frame);
+    return NO;
 }
 
 - (void)draggableView:(CHDraggableView *)view didMoveToPoint:(CGPoint)point

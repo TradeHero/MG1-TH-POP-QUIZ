@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Notif 3.png"
+      "filename" : "icn-newnotif.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Notif 3@2x.png"
+      "filename" : "icn-newnotif@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Notif 3@3x.png"
+      "filename" : "icn-newnotif@3x.png"
     }
   ],
   "info" : {

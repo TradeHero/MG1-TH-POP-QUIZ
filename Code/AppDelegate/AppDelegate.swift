@@ -147,6 +147,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     func registerOtherNotification(){
         if !self.isNotificationRegistered {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout:", name: kTHGameLogoutNotificationKey, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificationHeadViewToggle", name: kTHGameNotificationHeadNotificationToggleKey, object: nil)
             self.isNotificationRegistered = true
         }
     }
@@ -154,6 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     func unregisterOtherNotification(){
         if self.isNotificationRegistered {
             NSNotificationCenter.defaultCenter().removeObserver(self, name: kTHGameLogoutNotificationKey, object: nil)
+            NSNotificationCenter.defaultCenter().removeObserver(self, name: kTHGameNotificationHeadNotificationToggleKey, object: nil)
             self.isNotificationRegistered = false
         }
     }
@@ -166,16 +168,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         self.loggedIn = false
     }
     
-    func registerNotificationHeadOnNotification(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "chatHeadTurnOn", name: kTHGameNotificationHeadNotificationOnKey, object: nil)
-    }
-    
-    func unregisterNotificationHeadOnNotification() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: kTHGameNotificationHeadNotificationOnKey, object: nil)
-    }
-    
-    func chatHeadTurnOn(){
-        
+    func notificationHeadViewToggle(){
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+            if kTHNotificationHeadOn {
+                self._draggableView.alpha = 0
+                self._draggableView.hidden = false
+                self._draggableView.alpha = 1
+            } else {
+                self._draggableView.alpha = 0
+            }
+            }) { complete in
+                if !kTHNotificationHeadOn {
+                    self._draggableView.hidden = true
+                }
+        }
     }
     
     private func setupNotificationHead(){
@@ -186,7 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         _draggingCoordinator.delegate = self
         _draggingCoordinator.snappingEdge = CHSnappingEdgeBoth
         _draggableView.delegate = _draggingCoordinator
-        
+        _draggableView.hidden = !kTHNotificationHeadOn
     }
     
     func draggingCoordinator(coordinator: CHDraggingCoordinator!, viewControllerForDraggableView draggableView: CHDraggableView!) -> UIViewController! {

@@ -193,17 +193,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SettingsSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="KkU-jk-ctP">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="355-1K-Ern">
-                                <rect key="frame" x="17" y="57" width="286" height="348"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="348" id="dmx-d1-HuC"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="X7x-Ie-Iwf" id="Fna-bg-23G"/>
-                                    <outlet property="delegate" destination="X7x-Ie-Iwf" id="ePX-KO-ESW"/>
-                                </connections>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBy-om-abg">
                                 <rect key="frame" x="80" y="511" width="161" height="49"/>
                                 <constraints>
@@ -218,13 +207,24 @@
                                     <action selector="logoutAction:" destination="X7x-Ie-Iwf" eventType="touchUpInside" id="Edn-TR-b7k"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="355-1K-Ern">
+                                <rect key="frame" x="17" y="57" width="286" height="439"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="448" id="dmx-d1-HuC"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="X7x-Ie-Iwf" id="Fna-bg-23G"/>
+                                    <outlet property="delegate" destination="X7x-Ie-Iwf" id="ePX-KO-ESW"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="355-1K-Ern" firstAttribute="top" secondItem="Zjw-oR-Gn8" secondAttribute="top" constant="57" id="7Nf-NV-5KQ"/>
                             <constraint firstItem="355-1K-Ern" firstAttribute="leading" secondItem="Zjw-oR-Gn8" secondAttribute="leading" constant="17" id="J7R-Ln-tzx"/>
                             <constraint firstAttribute="centerX" secondItem="pBy-om-abg" secondAttribute="centerX" id="M98-h9-I6F"/>
-                            <constraint firstItem="pBy-om-abg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="355-1K-Ern" secondAttribute="bottom" constant="15" id="Ndf-bN-JiN"/>
+                            <constraint firstItem="pBy-om-abg" firstAttribute="top" secondItem="355-1K-Ern" secondAttribute="bottom" constant="15" id="Ndf-bN-JiN"/>
                             <constraint firstAttribute="bottom" secondItem="KkU-jk-ctP" secondAttribute="bottom" id="VE3-It-QNp"/>
                             <constraint firstItem="KkU-jk-ctP" firstAttribute="leading" secondItem="Zjw-oR-Gn8" secondAttribute="leading" id="Wbh-co-9Ka"/>
                             <constraint firstAttribute="trailing" secondItem="KkU-jk-ctP" secondAttribute="trailing" id="cLh-pc-JUF"/>
@@ -254,7 +254,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6N5-jO-rUw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1656.5" y="-503"/>
+            <point key="canvasLocation" x="1656" y="-503"/>
         </scene>
         <!--Profile-->
         <scene sceneID="IeC-3H-rzM">

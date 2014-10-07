@@ -184,7 +184,7 @@
 		6DD2313E19B8204900B5D05E /* ObjCHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCHelpers.m; sourceTree = "<group>"; };
 		6DD2313F19B8204900B5D05E /* Quiz.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Quiz.storyboard; sourceTree = "<group>"; };
 		6DD2314119B8204900B5D05E /* FadeInSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeInSegue.swift; sourceTree = "<group>"; };
-		6DD2314319B8204900B5D05E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; tabWidth = 3; };
+		6DD2314319B8204900B5D05E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; tabWidth = 4; };
 		6DD2314419B8204900B5D05E /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		6DD2314519B8204900B5D05E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DD2314B19B8204900B5D05E /* Electrodoodle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Electrodoodle.mp3; sourceTree = "<group>"; };
