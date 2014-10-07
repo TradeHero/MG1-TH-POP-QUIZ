@@ -264,43 +264,7 @@ extension UIImage {
     
     func transparencyToWhiteMatte() -> UIImage {
         return UIImage(data: UIImageJPEGRepresentation(self, 1))
-    }
-//    
-//    func whiteMatteToTransparency() -> UIImage {
-//        let imageRef = self.CGImage
-//        let pixelsWide = CGImageGetWidth(imageRef)
-//        let pixelsHigh = CGImageGetHeight(imageRef)
-//        
-//        let bitmapBytesPerRow = Int(pixelsWide) * 4
-//        let bitmapByteCount = bitmapBytesPerRow * Int(pixelsHigh)
-//        
-//        let bitmapData = malloc(CUnsignedLong(bitmapByteCount))
-//        let colorSpace = CGColorSpaceCreateDeviceRGB()
-//        let bitmapInfo = CGBitmapInfo.fromRaw(CGImageAlphaInfo.PremultipliedLast.toRaw())! | CGBitmapInfo.fromRaw(CGBitmapInfo.ByteOrder32Big.toRaw())!
-//        let context = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, CUnsignedLong(8), CUnsignedLong(bitmapBytesPerRow), colorSpace, bitmapInfo)
-//        
-//        CGContextDrawImage(context, CGRectMake(0, 0, CGFloat(pixelsWide), CGFloat(pixelsHigh)), imageRef)
-//        
-//        let data:COpaquePointer = COpaquePointer(CGBitmapContextGetData(context))
-//        var dataType = UnsafePointer<UInt8>(data)
-//
-//        var byteIndex = 0
-//        
-//        while byteIndex < bitmapByteCount {
-//            let red = dataType[byteIndex]
-//            let green = dataType[byteIndex + 1]
-//            let blue = dataType[byteIndex + 2]
-//            
-//            let whiteRed = red >= 245 && red <= 255
-//            let whiteGreen = green >= 245 && green <= 255
-//            let whiteBlue = blue >= 245 && blue <= 255
-//            
-//            if whiteRed && whiteGreen && whiteBlue {
-//                dataType[byteIndex] = 0
-//            }
-//        }
-//    }
-    
+    }    
     
     private func createARGBBitmapContext(inImage: CGImageRef) -> CGContext {
         var bitmapByteCount = 0
@@ -396,21 +360,6 @@ extension String {
     }
 }
 
-extension UIStoryboard {
-    class func mainStoryboard() -> UIStoryboard {
-        return UIStoryboard(name: "Home", bundle: nil)
-    }
-    
-    class func loginStoryboard() -> UIStoryboard {
-        return UIStoryboard(name: "Login", bundle: NSBundle.mainBundle())
-    }
-    
-    
-    class func quizStoryboard() -> UIStoryboard {
-        return UIStoryboard(name: "Quiz", bundle: NSBundle.mainBundle())
-    }
-}
-
 extension UIViewController {
     func setNavigationTintColor(barColor:UIColor?, buttonColor:UIColor?){
         if let nav = self.navigationController {
@@ -431,21 +380,7 @@ extension UIFont {
         return UIFont(name: "ProximaNova-Regular", size: size)
     }
 }
-/*
--(void)doVolumeFade
-{
-if (self.player.volume > 0.1) {
-self.player.volume = self.player.volume - 0.1;
-[self performSelector:@selector(doVolumeFade) withObject:nil afterDelay:0.1];
-} else {
-// Stop and get the sound ready for playing again
-[self.player stop];
-self.player.currentTime = 0;
-[self.player prepareToPlay];
-self.player.volume = 1.0;
-}
-}
-*/
+
 extension AVAudioPlayer {
     class func createAudioPlayer(fileName: String, extensionName:String) -> AVAudioPlayer {
         let url = NSBundle.mainBundle().URLForResource(fileName, withExtension: extensionName)

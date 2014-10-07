@@ -196,7 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     }
     
     func draggingCoordinator(coordinator: CHDraggingCoordinator!, viewControllerForDraggableView draggableView: CHDraggableView!) -> UIViewController! {
-        let controller = UIStoryboard.mainStoryboard().instantiateViewControllerWithIdentifier("SettingsViewController") as? UIViewController
+        let controller = UIStoryboard.inAppNotificationStoryboard().instantiateViewControllerWithIdentifier("InAppNotificationTableViewController") as? UIViewController
         return controller
     }
 }
