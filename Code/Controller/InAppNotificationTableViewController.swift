@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InAppNotificationTableViewController: UITableViewController {
+class InAppNotificationTableViewController: UITableViewController, NotificationTableViewCellDelegate {
     
     private var notifications = [GameNotification]()
     
@@ -43,6 +43,7 @@ class InAppNotificationTableViewController: UITableViewController {
         for i in 0..<15 {
             let notification = GameNotification(type: .New, title: "Lorem ipsum", details: "Dolor sit amet", urlString: "http://i.imgur.com/lYhUHw6.png")
             notification.read = i % 2 == 0 ? true : false
+            notification.type = i % 2 == 0 ? .Nudged : .New
             notifications.append(notification)
         }
         self.tableView.reloadData()
@@ -52,12 +53,17 @@ class InAppNotificationTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(kTHNotificationTableViewCellIdentifier, forIndexPath: indexPath) as NotificationTableViewCell
         
         cell.bindNotification(notifications[indexPath.row])
+        cell.delegate = self
         
         return cell
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 70
+    }
+    
+    func notificationTableViewCell(cell: NotificationTableViewCell, didTapActionButton notification: GameNotification) {
+        
     }
     /*
     // MARK: - Navigation
