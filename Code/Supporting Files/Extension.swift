@@ -31,11 +31,15 @@ extension UITableView {
 }
 extension UIControl {
     func disable() {
-        enabled = false
+        if enabled {
+            enabled = false
+        }
     }
     
     func enable() {
-        enabled = true
+        if !enabled {
+            enabled = true
+        }
     }
 }
 
@@ -408,14 +412,14 @@ extension UIStoryboard {
 }
 
 extension UIViewController {
-    func setNavigationTintColor(barColor:UIColor!, buttonColor:UIColor!){
-        if self.navigationController != nil {
-            if barColor != nil {
-                self.navigationController?.navigationBar.barTintColor = barColor
+    func setNavigationTintColor(barColor:UIColor?, buttonColor:UIColor?){
+        if let nav = self.navigationController {
+            if let color = barColor {
+                nav.navigationBar.barTintColor = color
             }
             
-            if buttonColor != nil {
-                self.navigationController?.navigationBar.tintColor = buttonColor
+            if let color = buttonColor {
+                nav.navigationBar.tintColor = color
             }
         }
     }

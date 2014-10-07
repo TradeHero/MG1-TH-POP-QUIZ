@@ -38,7 +38,7 @@ typedef enum {
     UIView *aCloseView = [[UIView alloc] initWithFrame:bounds];
     aCloseView.layer.cornerRadius = 30;
     aCloseView.backgroundColor = [UIColor lightGrayColor];
-    aCloseView.alpha = 0.8;
+    aCloseView.alpha = 0;
     
     return [self initWithWindow:window draggableViewBounds:bounds closeView:aCloseView];
 }
