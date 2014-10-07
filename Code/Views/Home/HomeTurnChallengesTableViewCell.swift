@@ -28,11 +28,11 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.clipsToBounds = true
     }
     
-    @IBOutlet weak var actionButton: UIButton!
-    @IBOutlet weak var challengerDisplayNameLabel: UILabel!
-    @IBOutlet weak var challengerImageView: UIImageView!
-    @IBOutlet weak var scoreDetailLabel: UILabel!
-    @IBOutlet weak var gameStatusImageView: UIImageView!
+    @IBOutlet private weak var actionButton: UIButton!
+    @IBOutlet private weak var challengerDisplayNameLabel: UILabel!
+    @IBOutlet private weak var challengerImageView: UIImageView!
+    @IBOutlet private weak var scoreDetailLabel: UILabel!
+    @IBOutlet private weak var gameStatusImageView: UIImageView!
     
     var game: Game!
     

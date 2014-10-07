@@ -169,19 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     }
     
     func notificationHeadViewToggle(){
-        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-            if kTHNotificationHeadOn {
-                self._draggableView.alpha = 0
-                self._draggableView.hidden = false
-                self._draggableView.alpha = 1
-            } else {
-                self._draggableView.alpha = 0
-            }
-            }) { complete in
-                if !kTHNotificationHeadOn {
-                    self._draggableView.hidden = true
-                }
-        }
+        self._draggableView.hideWithAnimation(kTHNotificationHeadOn)
     }
     
     private func setupNotificationHead(){

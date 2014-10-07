@@ -14,6 +14,10 @@
 		6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */; };
 		6D3AF98419C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */; };
 		6D3AF98519C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */; };
+		6D3DB3B919E3C15E006BC11B /* NotificationNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DB3B819E3C15E006BC11B /* NotificationNavigationBar.swift */; };
+		6D3DB3BF19E3CDF5006BC11B /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DB3BD19E3CDF5006BC11B /* NotificationTableViewCell.swift */; };
+		6D3DB3C019E3CDF5006BC11B /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3DB3BE19E3CDF5006BC11B /* NotificationTableViewCell.xib */; };
+		6D3DB3C219E3D29C006BC11B /* GameNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3DB3C119E3D29C006BC11B /* GameNotification.swift */; };
 		6D69E50B19C82A58006490D0 /* SettingsSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D69E50919C82A58006490D0 /* SettingsSliderTableViewCell.swift */; };
 		6D69E50C19C82A58006490D0 /* SettingsSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */; };
 		6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */; };
@@ -143,6 +147,10 @@
 		6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTimelineTableViewCell.swift; sourceTree = "<group>"; };
 		6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengesTimelineTableViewCell.xib; sourceTree = "<group>"; };
+		6D3DB3B819E3C15E006BC11B /* NotificationNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNavigationBar.swift; sourceTree = "<group>"; };
+		6D3DB3BD19E3CDF5006BC11B /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		6D3DB3BE19E3CDF5006BC11B /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
+		6D3DB3C119E3D29C006BC11B /* GameNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameNotification.swift; sourceTree = "<group>"; };
 		6D69E50919C82A58006490D0 /* SettingsSliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSliderTableViewCell.swift; sourceTree = "<group>"; };
 		6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSliderTableViewCell.xib; sourceTree = "<group>"; };
 		6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTimelineView.xib; sourceTree = "<group>"; };
@@ -282,6 +290,24 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		6D3DB3B619E3C116006BC11B /* Navigation Bar */ = {
+			isa = PBXGroup;
+			children = (
+				6D3DB3B819E3C15E006BC11B /* NotificationNavigationBar.swift */,
+			);
+			path = "Navigation Bar";
+			sourceTree = "<group>";
+		};
+		6D3DB3BC19E3CDCB006BC11B /* In App Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				6D3DB3BD19E3CDF5006BC11B /* NotificationTableViewCell.swift */,
+				6D3DB3BE19E3CDF5006BC11B /* NotificationTableViewCell.xib */,
+			);
+			name = "In App Notifications";
+			path = "In App Notification";
+			sourceTree = "<group>";
+		};
 		6D8A8BC519DBA6BD000A9E8B /* Caching */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +437,7 @@
 				6DD2313619B8204900B5D05E /* QuestionResult.swift */,
 				6DD2313719B8204900B5D05E /* THUser.swift */,
 				6DD2313819B8204900B5D05E /* THUserFriend.swift */,
+				6D3DB3C119E3D29C006BC11B /* GameNotification.swift */,
 			);
 			path = "Domain Objects";
 			sourceTree = "<group>";
@@ -466,6 +493,8 @@
 		6DD2314D19B8204900B5D05E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6D3DB3BC19E3CDCB006BC11B /* In App Notifications */,
+				6D3DB3B619E3C116006BC11B /* Navigation Bar */,
 				6DD2314E19B8204900B5D05E /* Designables */,
 				6DD2315419B8204900B5D05E /* Friends */,
 				6DD2315919B8204900B5D05E /* Home */,
@@ -735,6 +764,7 @@
 				6DA1287719CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 in Resources */,
 				6DD2318319B8204900B5D05E /* Quiz.storyboard in Resources */,
 				6DD053A519C6CBB100831B6C /* ChallengesSectionHeader.xib in Resources */,
+				6D3DB3C019E3CDF5006BC11B /* NotificationTableViewCell.xib in Resources */,
 				6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */,
 				6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */,
 			);
@@ -823,8 +853,10 @@
 				6D69E50B19C82A58006490D0 /* SettingsSliderTableViewCell.swift in Sources */,
 				6DD2319B19B8204900B5D05E /* OptionButtonAccessoryImageLayer.swift in Sources */,
 				6DD2316D19B8204900B5D05E /* SleekNavigationBar.swift in Sources */,
+				6D3DB3B919E3C15E006BC11B /* NotificationNavigationBar.swift in Sources */,
 				6DD2317A19B8204900B5D05E /* Option.swift in Sources */,
 				6DA1287519CA8251000687C0 /* THExtensions.swift in Sources */,
+				6D3DB3BF19E3CDF5006BC11B /* NotificationTableViewCell.swift in Sources */,
 				6DD2318119B8204900B5D05E /* NetworkClient.swift in Sources */,
 				6DD231A119B8204900B5D05E /* QuestionViewWithImage.swift in Sources */,
 				6DF8BD5F19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift in Sources */,
@@ -846,6 +878,7 @@
 				6DD2318E19B8204900B5D05E /* DesignableButton.swift in Sources */,
 				6DE06E7019C8085C00EB4D2F /* THSwitch.swift in Sources */,
 				6DD2317319B8204900B5D05E /* ResultsViewController.swift in Sources */,
+				6D3DB3C219E3D29C006BC11B /* GameNotification.swift in Sources */,
 				6DD2318219B8204900B5D05E /* ObjCHelpers.m in Sources */,
 				6D8A8BC719DBA6E1000A9E8B /* THCache.swift in Sources */,
 			);

@@ -43,7 +43,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.addSubview(refreshControl)
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         setupSubviews()
-        self.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
+        self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 53

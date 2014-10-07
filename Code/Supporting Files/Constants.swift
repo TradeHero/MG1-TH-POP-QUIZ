@@ -92,7 +92,7 @@ let kTHSettingsControlTableViewCellIdentifier = "\(kConstantPrefix)SettingsContr
 
 let kTHSettingsSliderTableViewCellIdentifier = "\(kConstantPrefix)SettingsSliderTableViewCellIdentifier"
 
-
+let kTHNotificationTableViewCellIdentifier = "\(kConstantPrefix)NotificationTableViewCellIdentifier"
 
 // MARK:- cache keys
 let kTHUserFriendsCacheStoreKey = "\(kConstantPrefix)UserFriendsCacheStore"

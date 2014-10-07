@@ -10,9 +10,9 @@ import UIKit
 
 class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate, UISearchBarDelegate {
     
-    private var THFriendList: [THUserFriend] = []
+    private var THFriendList = [THUserFriend]()
     
-    private var FBFriendList: [THUserFriend] = []
+    private var FBFriendList = [THUserFriend]()
     
     private var searchKey: String = ""
     
@@ -26,8 +26,6 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     //MARK:- Init
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        
     }
     
     override func viewDidLoad() {
@@ -46,6 +44,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         self.navigationController?.showNavigationBar()
         self.loadFriends()
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -58,6 +57,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         self.tableView.reloadData()
         
         weak var wself = self
+        
         let loadCompleteHandler:((fbFriends: [THUserFriend], thFriends:[THUserFriend]) -> ()) = {
             var sself = wself!
             sself.FBFriendList = $0

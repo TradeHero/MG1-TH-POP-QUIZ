@@ -9,41 +9,56 @@
 import UIKit
 
 class InAppNotificationTableViewController: UITableViewController {
-        
+    
+    private var notifications = [GameNotification]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+//        self.navigationItem.title = "Notifications"
+       self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0xFF4069))
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
+        
+        self.tableView.registerNib(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: kTHNotificationTableViewCellIdentifier)
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 70
+        self.navigationController?.navigationBar.translucent = false
+        self.loadNotifications()
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return notifications.count
     }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
-
-        // Configure the cell...
-
+    func loadNotifications(){
+        self.notifications.removeAll(keepCapacity: true)
+        self.tableView.reloadData()
+        for i in 0..<15 {
+            let notification = GameNotification(type: .New, title: "Lorem ipsum", details: "Dolor sit amet", urlString: "http://i.imgur.com/lYhUHw6.png")
+            notification.read = i % 2 == 0 ? true : false
+            notifications.append(notification)
+        }
+        self.tableView.reloadData()
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(kTHNotificationTableViewCellIdentifier, forIndexPath: indexPath) as NotificationTableViewCell
+        
+        cell.bindNotification(notifications[indexPath.row])
+        
         return cell
     }
-    */
 
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 70
+    }
     /*
     // MARK: - Navigation
 

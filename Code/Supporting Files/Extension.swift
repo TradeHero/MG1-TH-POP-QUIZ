@@ -228,6 +228,24 @@ extension UIView {
         maskLayer.path = maskPath.CGPath
         view.layer.mask = maskLayer
     }
+    
+    func hideWithAnimation(hide:Bool) {
+        
+        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+            [unowned self] in
+            if hide {
+                self.alpha = 0
+                self.hidden = false
+                self.alpha = 1
+            } else {
+                self.alpha = 0
+            }
+            }) { complete in
+                if !hide {
+                    self.hidden = true
+                }
+        }
+    }
 }
 
 
@@ -360,19 +378,17 @@ extension String {
     }
 }
 
-extension UIViewController {
-    func setNavigationTintColor(barColor:UIColor?, buttonColor:UIColor?){
-        if let nav = self.navigationController {
-            if let color = barColor {
-                nav.navigationBar.barTintColor = color
-            }
-            
-            if let color = buttonColor {
-                nav.navigationBar.tintColor = color
-            }
+extension UINavigationController {
+    func setNavigationTintColor(barColor:UIColor? = nil, buttonColor:UIColor? = nil){
+        if let color = barColor {
+              self.navigationBar.barTintColor = color
         }
+        
+        if let color = buttonColor {
+            self.navigationBar.tintColor = color
+        }
+        
     }
-    
 }
 
 extension UIFont {
