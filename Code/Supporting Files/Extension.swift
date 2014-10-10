@@ -435,3 +435,14 @@ extension Int {
         return NSNumberFormatter.localizedStringFromNumber(NSNumber(integer: self), numberStyle: .DecimalStyle)
     }
 }
+
+
+
+extension NSData {
+    func deviceTokenString() -> String {
+        var token = self.description
+        token = token.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
+        token = token.stringByReplacingOccurrencesOfString(" ", withString: "")
+        return token
+    }
+}

@@ -93,6 +93,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
     }
     
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        NetworkClient.sharedClient.deviceToken = deviceToken.deviceTokenString()
+        println(deviceToken.deviceTokenString())
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        debugPrintln("Fail to register for push notification: \(error)")
+    }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        application.registerForRemoteNotifications()
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        //TODO: Implement
+    }
+
+    
     func autoLogin() {
 //        let client = NetworkClient.sharedClient
 //        if let credential = client.credentials {
@@ -118,10 +136,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     }
     
     func loginSuccessful(notification:NSNotification) {
+        
+        if !UIApplication.sharedApplication().isRegisteredForRemoteNotifications() {
+            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge | .Sound | .Alert, categories: nil))
+        }
+        
+        
         self.becomeFirstResponder()
         let obj = notification.userInfo
         let obj2: AnyObject? = obj!["user"]
         if let user = obj2 as? THUser {
+            
             var vc: AnyObject! = UIStoryboard.mainStoryboard().instantiateInitialViewController()
             if let v = vc as? UINavigationController {
                 self.window?.rootViewController = v

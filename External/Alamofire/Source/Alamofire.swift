@@ -113,7 +113,7 @@ public enum ParameterEncoding {
                     mutableURLRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
                 }
 
-                mutableURLRequest.HTTPBody = (CFURLCreateStringByAddingPercentEscapes(nil, query(parameters!) as NSString, nil, nil, CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)) as NSString).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+                mutableURLRequest.HTTPBody = query(parameters!).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             }
         case .JSON:
             let options = NSJSONWritingOptions.allZeros
@@ -151,7 +151,7 @@ public enum ParameterEncoding {
     }
 
     func escape(string: String) -> String {
-        let allowedCharacters =  NSCharacterSet(charactersInString:"=\"#%/<>?@\\^`{}[]|&").invertedSet
+        let allowedCharacters =  NSCharacterSet(charactersInString:" =\"#%/<>?@\\^`{}[]|&").invertedSet
         return string.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters) ?? string
     }
 }
@@ -618,23 +618,21 @@ public class Request {
     /**
         Adds a handler to be called once the request has finished.
 
-        :param: priority The dispatch priority / quality of service used to process the response handler. `DISPATCH_QUEUE_PRIORITY_DEFAULT` by default.
         :param: queue The queue on which the completion handler is dispatched.
         :param: serializer The closure responsible for serializing the request, response, and data.
         :param: completionHandler The code to be executed once the request has finished.
 
         :returns: The request.
     */
-    public func response(priority: Int = DISPATCH_QUEUE_PRIORITY_DEFAULT, queue: dispatch_queue_t? = nil, serializer: Serializer, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
-        dispatch_async(delegate.queue, {
-            dispatch_async(dispatch_get_global_queue(priority, 0), {
-                let (responseObject: AnyObject?, serializationError: NSError?) = serializer(self.request, self.response, self.delegate.data)
+    public func response(queue: dispatch_queue_t? = nil, serializer: Serializer, completionHandler: (NSURLRequest, NSHTTPURLResponse?, AnyObject?, NSError?) -> Void) -> Self {
+        let delegate = self.delegate
+        dispatch_async(delegate.queue) { [weak delegate] in
+            let (responseObject: AnyObject?, serializationError: NSError?) = serializer(self.request, self.response, delegate?.data)
 
-                dispatch_async(queue ?? dispatch_get_main_queue(), {
-                    completionHandler(self.request, self.response, responseObject, self.delegate.error ?? serializationError)
-                })
-            })
-        })
+            dispatch_async(queue ?? dispatch_get_main_queue()) {
+                completionHandler(self.request, self.response, responseObject, delegate?.error ?? serializationError)
+            }
+        }
 
         return self
     }

@@ -38,6 +38,17 @@ class NetworkClient {
         return Singleton.instance
     }
     
+    var deviceToken: String {
+        get {
+            return _device_token
+        }
+        set {
+            _device_token = newValue
+        }
+    }
+    
+    private var _device_token: String = ""
+    
     private var manager: Alamofire.Manager!
     
     /// Authenticated user

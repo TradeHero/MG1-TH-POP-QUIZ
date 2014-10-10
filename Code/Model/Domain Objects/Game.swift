@@ -82,6 +82,7 @@ final class Game {
     }
     
     init(compactGameDTO:[String: AnyObject]){
+        
         if let cuid: AnyObject = compactGameDTO["createdByUserId"] {
             self.initiatingPlayerID = cuid as Int
         }
