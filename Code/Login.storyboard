@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i3Y-gV-xhx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="i3Y-gV-xhx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -26,36 +26,50 @@
                                     <constraint firstAttribute="width" secondItem="oPh-tF-PXQ" secondAttribute="height" multiplier="271:331" id="jfO-7Y-HOT"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhz-W5-BUP" customClass="FBLoginView">
-                                <rect key="frame" x="44" y="478" width="232" height="50"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8IQ-kO-GaY" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
+                                <rect key="frame" x="57" y="507" width="207" height="41"/>
+                                <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Dhz-W5-BUP" secondAttribute="height" multiplier="116:25" id="zcv-OE-79h"/>
+                                    <constraint firstAttribute="width" constant="207" id="5SK-Ln-KKA"/>
+                                    <constraint firstAttribute="height" constant="41" id="b8L-xY-hAS"/>
                                 </constraints>
-                            </view>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
+                                <state key="normal" title="Continue with Facebook">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="l2w-cF-deM" secondAttribute="bottom" id="3bl-QV-GyW"/>
-                            <constraint firstItem="Dhz-W5-BUP" firstAttribute="top" relation="greaterThanOrEqual" secondItem="oPh-tF-PXQ" secondAttribute="bottom" constant="10" id="HKp-mO-hAi"/>
-                            <constraint firstAttribute="trailing" secondItem="Dhz-W5-BUP" secondAttribute="trailing" constant="44" id="Lrj-TA-BXp"/>
+                            <constraint firstItem="whF-0h-7WK" firstAttribute="top" secondItem="8IQ-kO-GaY" secondAttribute="bottom" constant="20" id="Kos-w4-p6w"/>
                             <constraint firstAttribute="trailing" secondItem="l2w-cF-deM" secondAttribute="trailing" id="S1t-S1-1hN"/>
-                            <constraint firstAttribute="bottom" secondItem="Dhz-W5-BUP" secondAttribute="bottom" constant="40" id="TDK-yt-Hdl"/>
                             <constraint firstItem="l2w-cF-deM" firstAttribute="leading" secondItem="2j7-GK-TDo" secondAttribute="leading" id="cLh-FY-LyB"/>
                             <constraint firstItem="oPh-tF-PXQ" firstAttribute="leading" secondItem="2j7-GK-TDo" secondAttribute="leading" constant="25" id="dAH-dS-hZ5"/>
                             <constraint firstItem="oPh-tF-PXQ" firstAttribute="top" secondItem="2j7-GK-TDo" secondAttribute="top" constant="41" id="iVs-zQ-Ihf"/>
+                            <constraint firstAttribute="centerX" secondItem="8IQ-kO-GaY" secondAttribute="centerX" id="lA3-JK-JXU"/>
                             <constraint firstAttribute="trailing" secondItem="oPh-tF-PXQ" secondAttribute="trailing" constant="24" id="lDO-lg-wSY"/>
                             <constraint firstItem="l2w-cF-deM" firstAttribute="top" secondItem="2j7-GK-TDo" secondAttribute="top" id="n0p-Ay-aRF"/>
-                            <constraint firstItem="Dhz-W5-BUP" firstAttribute="leading" secondItem="2j7-GK-TDo" secondAttribute="leading" constant="44" id="rDO-nJ-I17"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="2XT-mF-vUg"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <connections>
-                        <outlet property="fbLoginView" destination="Dhz-W5-BUP" id="PUG-tt-Xfu"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LBp-PP-LNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="8Lw-oh-8HR">
+                    <connections>
+                        <action selector="facebookTapped:" destination="i3Y-gV-xhx" id="L7S-Ex-fra"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-350" y="130"/>
         </scene>

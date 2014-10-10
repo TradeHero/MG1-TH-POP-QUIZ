@@ -90,7 +90,9 @@ class NetworkClient {
                 }
                 
                 if response?.statusCode == 200 {
-                    self.saveCredentials(auth)
+                    self.saveCredentials(accessToken)
+                    let x = self.loadCredentials()
+                    println(x)
                     let responseJSON = content as [String: AnyObject]
                     let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
                     
@@ -725,6 +727,7 @@ class NetworkClient {
     private func saveCredentials(credentialString:String){
         
         SSKeychain.setPassword("\(credentialString)", forService: kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccKey)
+        
         self.credentials = credentialString
     }
     
@@ -742,20 +745,22 @@ class NetworkClient {
         }
     }
     
-    private func loadCredentials() {
+    private func loadCredentials() -> String? {
         if let keychainAcc = SSKeychain.accountsForService(kTHGameKeychainIdentifierKey) {
             if keychainAcc.count == 0 {
                 println("No credentials found")
             }
             
             for userData in keychainAcc {
-                if let data = userData as? [String: String] {
+                if let data = userData as? [String: AnyObject] {
                     let secret = SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccKey)
                     self.credentials = secret
+                    return secret
                 }
             }
             
         }
+        return nil
     }
     
     private func request(method: Alamofire.Method, _ URLString: Alamofire.URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: Alamofire.ParameterEncoding = .URL, authentication: String) -> Request {

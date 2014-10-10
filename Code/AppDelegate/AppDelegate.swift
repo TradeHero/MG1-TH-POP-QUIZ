@@ -36,8 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
-        FBLoginView.self
-        FBProfilePictureView.self
         
         setupNotificationHead()
         
@@ -51,7 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         self.bgmPlayer.volume = kTHBackgroundMusicValue
         self.bgmPlayer.play()
         self.registerLoginNotification()
-//        self.autoLogin()
 
 //        for familyName in UIFont.familyNames() as [String]{
 //            for fontName in UIFont.fontNamesForFamilyName(familyName){
@@ -111,16 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     }
 
     
-    func autoLogin() {
-//        let client = NetworkClient.sharedClient
-//        if let credential = client.credentials {
-//            client.loginUserWithFacebookAuth(credential, errorHandler: {error in
-//                }, loginSuccessHandler: {
-//                user in
-//                
-//            })
-//        }
-    }
+    
     
     //MARK: Login/Logout
     

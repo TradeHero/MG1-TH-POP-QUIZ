@@ -7,22 +7,21 @@
 //
 
 import UIKit
+import Social
+import Accounts
 
-class LoginViewController: UIViewController, FBLoginViewDelegate {
+class LoginViewController: UIViewController {
     
-    @IBOutlet private weak var emailField: UITextField!
-    @IBOutlet private weak var passwordField: UITextField!
-    @IBOutlet private weak var fbLoginView: FBLoginView!
+    private var accountStore = ACAccountStore()
+    
+    private var facebookAccount: ACAccount!
+    
     private var fbFlag = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        self.fbLoginView.delegate = self
-        self.fbLoginView.readPermissions = ["public_profile", "email", "user_friends"]
-        
-        
+        self.autoLogin()
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,21 +37,40 @@ class LoginViewController: UIViewController, FBLoginViewDelegate {
         fbFlag = false
     }
     
-    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        
-        if !fbFlag {
-            fbFlag = true
-        } else {
-            return
-        }
-        
+    func autoLogin() {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.indicatorView = nil
-        
         hud.textLabel.text = "Logging in..."
-        
-        NetworkClient.sharedClient.loginUserWithFacebookAuth(FBSession.activeSession().accessTokenData.accessToken) { user in
-            hud.dismissAfterDelay(1.5, animated: true)
+        if let credential = NetworkClient.sharedClient.credentials {
+            NetworkClient.sharedClient.loginUserWithFacebookAuth(credential) {
+                user in
+                hud.dismissAfterDelay(1.5, animated: true)
+            }
         }
     }
-}
+  
+    @IBAction func facebookTapped(sender: AnyObject) {
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        let facebookTypeAccount = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
+        hud.indicatorView = nil
+        hud.textLabel.text = "Logging in..."
+        accountStore.requestAccessToAccountsWithType(facebookTypeAccount, options: [ACFacebookAppIdKey : kTHFacebookAppID]) { [unowned self] (granted, error) -> Void in
+            if hud != nil { hud.dismissAfterDelay(1.5, animated: true) }
+            if granted {
+                if let accts = self.accountStore.accountsWithAccountType(facebookTypeAccount) as? [ACAccount] {
+                    self.facebookAccount = accts.last
+                    let accessToken = self.facebookAccount.credential.oauthToken
+                    NetworkClient.sharedClient.loginUserWithFacebookAuth(accessToken) { user in
+                    }
+                }
+            } else {
+                if let e = error {
+                    hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
+                    hud.textLabel.text = "Please login to Facebook from Settings >> Facebook."
+                    hud.dismissAfterDelay(2.5, animated: true)
+                }
+            }
+        }
+
+    }
+    }
