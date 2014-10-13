@@ -37,7 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
         
-        setupNotificationHead()
+        //next revision
+//        setupNotificationHead()
         
         switch kTHGamesServerMode {
         case .Staging:
@@ -49,13 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         self.bgmPlayer.volume = kTHBackgroundMusicValue
         self.bgmPlayer.play()
         self.registerLoginNotification()
-
-//        for familyName in UIFont.familyNames() as [String]{
-//            for fontName in UIFont.fontNamesForFamilyName(familyName){
-//                println("\(fontName) - \(familyName)")
-//            }
-//        }
-
         return true
     }
 
@@ -145,7 +139,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
             self.unregisterLoginNotification()
             self.registerOtherNotification()
         }
-        self.window?.addSubview(_draggableView)
+        
+        if let d = _draggableView {
+            self.window?.addSubview(_draggableView)
+        }
+        
         
     }
     

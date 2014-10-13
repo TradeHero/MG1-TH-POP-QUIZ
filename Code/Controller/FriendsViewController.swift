@@ -8,7 +8,9 @@
 
 import UIKit
 
-class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate, UISearchBarDelegate {
+class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate, UISearchBarDelegate, StaffChallengeCellTableViewCellDelegate {
+    
+    private var THStaffList = [StaffUser]()
     
     private var THFriendList = [THUserFriend]()
     
@@ -32,6 +34,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         self.navigationItem.title = "Friend List"
         self.tableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
+        self.tableView.registerNib(UINib(nibName: "StaffChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHStaffChallengeCellTableViewCellIdentifier)
         self.searchBar.placeholder = "Search friends"
         self.searchBar.text = ""
         self.tableView.tableHeaderView = self.searchBar
@@ -42,11 +45,42 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.showNavigationBar()
-        self.loadFriends()
+        self.loadStaff {
+            self.loadFriends()
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    private func loadStaff(completionHandler:()->()){
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        self.THStaffList.removeAll(keepCapacity: true)
+        
+        self.tableView.reloadData()
+        let object = EGOCache.globalCache().objectForKey(kTHStaffUserCacheStoreKey)
+        
+        if !THCache.objectExistForCacheKey(kTHStaffUserCacheStoreKey) {
+            debugPrintln("Nothing cached.")
+            hud.textLabel.text = "Retrieving staff user..."
+            NetworkClient.sharedClient.fetchStaffList() {
+                [unowned self] in
+                hud.dismissAnimated(true)
+                THCache.saveStaffListToCache($0)
+                self.THStaffList = $0.filter {$0.userId != self.user.userId}
+                self.tableView.reloadData()
+                completionHandler()
+            }
+            return
+        }
+        
+        var cachedStaff = THCache.getStaffListFromCache().filter {[unowned self] in $0.userId != self.user.userId}
+        self.THStaffList = cachedStaff
+        self.tableView.reloadData()
+        completionHandler()
+        
+        hud.dismissAnimated(true)
     }
     
     private func loadFriends() {
@@ -65,9 +99,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             sself.tableView.reloadData()
         }
         
-        let object = EGOCache.globalCache().objectForKey(kTHUserFriendsCacheStoreKey)
-        
-        if object == nil {
+        if !THCache.objectExistForCacheKey(kTHUserFriendsCacheStoreKey) {
             debugPrintln("Nothing cached.")
             hud.textLabel.text = "Retrieving friends..."
             NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
@@ -95,8 +127,10 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return THFriendList.count
+            return THStaffList.count
         case 1:
+            return THFriendList.count
+        case 2:
             return FBFriendList.count
         default:
             return 0
@@ -104,31 +138,46 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
+        
         
         switch indexPath.section {
         case 0:
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHStaffChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as StaffChallengeCellTableViewCell
+            let staffUser = THStaffList[indexPath.row]
+            cell.bindStaffUser(staffUser)
+            cell.layoutIfNeeded()
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
+            cell.delegate = self
+            return cell
+        case 1:
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
             let friendUser = THFriendList[indexPath.row]
             cell.bindFriendUser(friendUser, index: indexPath.row)
-        case 1:
+            cell.layoutIfNeeded()
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
+            cell.delegate = self
+            return cell
+        case 2:
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
             let friendUser = FBFriendList[indexPath.row]
             cell.bindFriendUser(friendUser, index: indexPath.row)
+            cell.layoutIfNeeded()
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
+            cell.delegate = self
+            return cell
         default:
-            break
+            return UITableViewCell()
         }
-        
-        cell.layoutIfNeeded()
-        cell.setNeedsUpdateConstraints()
-        cell.updateConstraintsIfNeeded()
-        cell.delegate = self
-        return cell
     }
     
     
     
     //MARK:- UITableViewDelegate
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -138,11 +187,16 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
+            if THStaffList.count == 0 {
+                return nil
+            }
+            return self.createTradeHeroStaffTableSectionHeaderView()
+        case 1:
             if THFriendList.count == 0 {
                 return nil
             }
             return self.createTradeHeroFriendsTableSectionHeaderView()
-        case 1:
+        case 2:
             if FBFriendList.count == 0 {
                 return nil
             }
@@ -154,6 +208,11 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
+        case 1:
+            if THStaffList.count == 0 {
+                return 0
+            }
+            return 25
         case 0:
             if THFriendList.count == 0 {
                 return 0
@@ -195,6 +254,21 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         FBFriendList[cell.index] = friendUser
     }
     
+    func staffChallengeCellTableViewCell(cell: StaffChallengeCellTableViewCell, didTapChallengeWithStaffUser userId: Int) {
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        hud.textLabel.text = "Creating challenge..."
+        hud.detailTextLabel.text = "Creating game with user.."
+        NetworkClient.sharedClient.createChallenge(opponentId: userId) {
+            [unowned self] in
+            if let g = $0 {
+                hud.dismissAnimated(true)
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                vc.bindGame($0)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+
+    }
     //MARK:- Search bar delegate
     func searchBarShouldBeginEditing(searchBar: UISearchBar!) -> Bool {
         searchBar.setShowsCancelButton(true, animated: true)
@@ -232,6 +306,21 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         headerView.addSubview(labelView)
         return headerView
     }
+    
+    private func createTradeHeroStaffTableSectionHeaderView() -> UIView {
+        var headerView = UIView(frame: CGRectMake(0, 0, 286, 22))
+        var logoView = UIImageView(frame: CGRectMake(2, 2, 19, 19))
+        logoView.image = UIImage(named: "TradeHeroFriendsBullIcon")
+        headerView.addSubview(logoView)
+        
+        var labelView = UILabel(frame: CGRectMake(28, 1, 142, 21))
+        labelView.text = "TradeHero's Staff"
+        labelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
+        labelView.textColor = UIColor.whiteColor()
+        headerView.addSubview(labelView)
+        return headerView
+    }
+
     
     private func createFacebookFriendsTableSectionHeaderView() -> UIView {
         var headerView = UIView(frame: CGRectMake(0, 0, 286, 22))

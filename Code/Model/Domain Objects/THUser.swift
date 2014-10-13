@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class THUser : NSObject, NSCoding {
+class THUser : NSObject, NSCoding {
     
     let userId: Int!
     var firstName: String = ""
@@ -68,7 +68,7 @@ final class THUser : NSObject, NSCoding {
         
     }
     
-    init(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         super.init()
         self.userId = aDecoder.decodeIntegerForKey(kUserIdKey)
         self.pictureURL = aDecoder.decodeObjectForKey(kPictureURLKey) as String
@@ -77,6 +77,13 @@ final class THUser : NSObject, NSCoding {
         self.displayName = aDecoder.decodeObjectForKey(kDispNameKey) as String
     }
     
+    init(userId:Int, pictureURL:String!, firstName:String!, lastName:String!, displayName:String) {
+        self.userId = userId
+        self.pictureURL = pictureURL
+        self.firstName = firstName
+        self.lastName = lastName
+        self.displayName = displayName
+    }
 }
 
 extension THUser: Printable {

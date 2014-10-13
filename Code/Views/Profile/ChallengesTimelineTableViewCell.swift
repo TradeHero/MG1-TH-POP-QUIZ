@@ -46,7 +46,7 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
             setDotColor()
             
             opponentImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL)) {
-                (image, _, _, _) in
+                [unowned self] (image, _, _, _) in
                 self.opponentImageView.image = image.centerCropImage()
             }
             opponentDisplayNameLabel.text = opponent.displayName

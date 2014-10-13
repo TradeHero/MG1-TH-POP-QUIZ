@@ -30,11 +30,11 @@ extension UIButton {
         self.alpha = 0.5
     }
 }
+
 class FriendsChallengeCellTableViewCell: UITableViewCell {
     
     @IBOutlet weak var friendAvatarView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
-    @IBOutlet weak var friendLevelLabel: UILabel!
     
     var friendUser: THUserFriend! {
         didSet {
@@ -82,7 +82,7 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     func bindFriendUser(friendUser:THUserFriend, index:Int){
         self.friendUser = friendUser
         self.friendNameLabel.text = friendUser.name
-        self.friendAvatarView.sd_setImageWithURL(NSURL(string: friendUser.facebookPictureURL)) { (image, _, _, _) in
+        self.friendAvatarView.sd_setImageWithURL(NSURL(string: friendUser.facebookPictureURL)) { [unowned self] (image, _, _, _) in
             self.friendAvatarView.image = image.centerCropImage()
         }
         self.index = index

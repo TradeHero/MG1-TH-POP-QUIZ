@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -13,26 +13,6 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0C5-Lh-eer" id="mNt-YA-VS2">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dominic Morris" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmU-mv-ege">
-                        <rect key="frame" x="48" y="7" width="140" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="B7K-jo-t6F"/>
-                            <constraint firstAttribute="width" constant="140" id="Okz-1H-gY4"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPI-Iq-wbP">
-                        <rect key="frame" x="48" y="25" width="140" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="D9Y-76-WP0"/>
-                            <constraint firstAttribute="width" constant="140" id="pQd-Nq-mjI"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FjV-U2-XUr">
                         <rect key="frame" x="205" y="11" width="78" height="31"/>
                         <constraints>
@@ -48,6 +28,16 @@
                             <action selector="challengeOrInviteAction:" destination="0C5-Lh-eer" eventType="touchUpInside" id="dhh-OQ-xFV"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dominic Morris" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmU-mv-ege">
+                        <rect key="frame" x="54" y="17" width="98" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="B7K-jo-t6F"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="140" id="Okz-1H-gY4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EmptyAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="hDF-JR-SkK">
                         <rect key="frame" x="8" y="7" width="38" height="39"/>
                         <constraints>
@@ -58,19 +48,16 @@
                 </subviews>
                 <color key="backgroundColor" red="1" green="0.94509803920000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstItem="hDF-JR-SkK" firstAttribute="top" secondItem="hmU-mv-ege" secondAttribute="top" id="4vR-5l-hvq"/>
                     <constraint firstAttribute="centerY" secondItem="FjV-U2-XUr" secondAttribute="centerY" id="7YB-s5-dxB"/>
                     <constraint firstAttribute="trailing" secondItem="FjV-U2-XUr" secondAttribute="trailing" constant="3" id="9fE-Bh-xCr"/>
                     <constraint firstAttribute="centerY" secondItem="hDF-JR-SkK" secondAttribute="centerY" id="Dqc-vs-g91"/>
-                    <constraint firstItem="hmU-mv-ege" firstAttribute="leading" secondItem="hDF-JR-SkK" secondAttribute="trailing" constant="2" id="Faz-o4-5xl"/>
+                    <constraint firstItem="hmU-mv-ege" firstAttribute="leading" secondItem="hDF-JR-SkK" secondAttribute="trailing" constant="8" id="Faz-o4-5xl"/>
                     <constraint firstItem="hDF-JR-SkK" firstAttribute="leading" secondItem="mNt-YA-VS2" secondAttribute="leading" constant="8" id="Smj-kk-LdB"/>
-                    <constraint firstItem="RPI-Iq-wbP" firstAttribute="leading" secondItem="hmU-mv-ege" secondAttribute="leading" id="ZA0-hT-v7K"/>
-                    <constraint firstItem="RPI-Iq-wbP" firstAttribute="top" secondItem="hmU-mv-ege" secondAttribute="bottom" constant="-2" id="ha6-Xh-Z7S"/>
+                    <constraint firstItem="hDF-JR-SkK" firstAttribute="centerY" secondItem="hmU-mv-ege" secondAttribute="centerY" id="ocS-2W-bss"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="friendAvatarView" destination="hDF-JR-SkK" id="eci-Ba-j8x"/>
-                <outlet property="friendLevelLabel" destination="RPI-Iq-wbP" id="gRN-oE-544"/>
                 <outlet property="friendNameLabel" destination="hmU-mv-ege" id="5UV-ot-Lev"/>
                 <outlet property="inviteOrChallengeButton" destination="FjV-U2-XUr" id="bLn-mo-k41"/>
             </connections>

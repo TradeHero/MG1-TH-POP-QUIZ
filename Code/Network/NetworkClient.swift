@@ -76,6 +76,7 @@ class NetworkClient {
     func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:(THUser -> ())!) {
         let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.4.0"]
         let auth = "\(THAuthFacebookPrefix) \(accessToken)"
+        println(auth)
         weak var weakSelf = self
         let r = self.request(.POST,
             THServerAPIBaseURL + "/login",
@@ -92,7 +93,7 @@ class NetworkClient {
                 if response?.statusCode == 200 {
                     self.saveCredentials(accessToken)
                     let x = self.loadCredentials()
-                    println(x)
+                    
                     let responseJSON = content as [String: AnyObject]
                     let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
                     
@@ -112,12 +113,17 @@ class NetworkClient {
     /**
     Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int, completionHandler: (Game! -> ())!) {
-        debugPrintln("Creating challenge with user \(opponentId) with \(numberOfQuestions) questions(s)")
+    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int!, completionHandler: (Game! -> ())!) {
+        var param:[String:AnyObject] = ["numberOfQuestions": numberOfQuestions]
+        if let id = opponentId {
+            debugPrintln("Creating challenge with user \(id) with \(numberOfQuestions) questions(s)")
+            param.updateValue(id, forKey: "opponentId")
+        } else {
+            debugPrintln("Creating quick game with \(numberOfQuestions) questions(s)")
+        }
         
         weak var wself = self
-        self.request(.POST, "\(THGameAPIBaseURL)/create", parameters: ["numberOfQuestions": numberOfQuestions, "opponentId" : opponentId
-            ], encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
+        let r = self.request(.POST, "\(THGameAPIBaseURL)/create", parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
                 _, response, content, error in
                 var sself = wself!
                 if let responseError = error {
@@ -140,6 +146,7 @@ class NetworkClient {
                     
                 }
         }
+        debugPrintln(r)
     }
     
     /**
@@ -150,7 +157,7 @@ class NetworkClient {
         let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
         debugPrintln("Fetching Facebook friends for user \(userId)...")
         
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -186,7 +193,7 @@ class NetworkClient {
         
         debugPrintln("Fetching all open challenges for authenticated user...")
         weak var wself = self
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -237,7 +244,7 @@ class NetworkClient {
         
         debugPrintln("Fetching all taken challenges for authenticated user...")
         weak var wself = self
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -296,7 +303,7 @@ class NetworkClient {
         
         debugPrintln("Fetching all opponent pending challenges for authenticated user...")
         weak var wself = self
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -357,7 +364,7 @@ class NetworkClient {
         
         debugPrintln("Fetching all incomplete challenges for authenticated user...")
         weak var wself = self
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -404,7 +411,7 @@ class NetworkClient {
                 }
             }
         }
-        //        debugPrintln(r)
+                debugPrintln(r)
     }
 
     /**
@@ -415,7 +422,7 @@ class NetworkClient {
         
         debugPrintln("Fetching all closed challenges for authenticated user...")
         weak var wself = self
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -471,14 +478,8 @@ class NetworkClient {
     
     ///
     func createQuickGame(completionHandler: (Game! -> ())!){
-        var fakeID: Int!
-        if self.authenticatedUser.userId == 2415 {
-            fakeID = 617543
-        } else {
-            fakeID = 2415
-        }
         
-        createChallenge(numberOfQuestions: 7, opponentId: fakeID) {
+        createChallenge(numberOfQuestions: 7, opponentId: nil) {
             if let handler = completionHandler {
                 handler($0)
             }
@@ -499,7 +500,7 @@ class NetworkClient {
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
         weak var wself = self
-        let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
+        let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -524,7 +525,7 @@ class NetworkClient {
 
         debugPrintln("Fetching results for game \(gameId)...")
         weak var wself = self
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             var sself = wself!
             if error != nil {
@@ -577,7 +578,28 @@ class NetworkClient {
 //        }
     }
     
-    
+    func fetchStaffList(completionHandler:[StaffUser]->()){
+        var staffArr = [StaffUser]()
+        var numberCompleted = 0
+        let fetchUserHandler: () -> () = {
+            numberCompleted++
+            if numberCompleted == staffs_g.count {
+                staffArr.sort {
+                    $0.userId < $1.userId
+                }
+                debugPrintln("Successfully fetched \(numberCompleted) staffs.")
+                    completionHandler(staffArr)
+            }
+        }
+
+        for staff in staffs_g {
+            self.fetchUser(staff.id, force: false) {
+                $0.displayName = staff.name
+                staffArr.append(StaffUser(user: $0, funnyName: staff.funnyName))
+                fetchUserHandler()
+            }
+        }
+    }
     
     ///
     /// Logs out current session, removing credentials and user details stored in keychain or in device.
@@ -611,7 +633,7 @@ class NetworkClient {
             }
         }
         
-       let r = self.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding, authentication:generateAuthorisationFromKeychain() ?? "").responseJSON {
+       let r = self.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)

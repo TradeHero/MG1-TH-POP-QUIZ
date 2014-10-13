@@ -27,10 +27,6 @@ class WinLoseViewController: UIViewController {
     
     @IBOutlet private weak var largeBoxNameLabel: UILabel!
     
-    @IBOutlet private weak var largeBoxRankLabel: UILabel!
-    
-    @IBOutlet private weak var largeBoxLevelLabel: UILabel!
-    
     @IBOutlet private weak var largeBoxScoreLabel: UILabel!
     
     @IBOutlet private weak var smallBoxBackground: UIImageView!
@@ -38,10 +34,6 @@ class WinLoseViewController: UIViewController {
     @IBOutlet private weak var smallBoxAvatarView: AvatarRoundedView!
     
     @IBOutlet private weak var smallBoxNameLabel: UILabel!
-    
-    @IBOutlet private weak var smallBoxRankLabel: UILabel!
-    
-    @IBOutlet private weak var smallBoxLevelLabel: UILabel!
     
     @IBOutlet private weak var smallBoxScoreLabel: UILabel!
     

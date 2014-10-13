@@ -47,27 +47,6 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BadgeView" translatesAutoresizingMaskIntoConstraints="NO" id="fE7-Hx-EcL">
-                                        <rect key="frame" x="90" y="43" width="22" height="30"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Knight" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9FL-g8-xZG">
-                                        <rect key="frame" x="115" y="40" width="133" height="20"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Level 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Te-mY-oNH">
-                                        <rect key="frame" x="115" y="54" width="60" height="20"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ryne Cheow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjv-r9-yGC">
-                                        <rect key="frame" x="90" y="14" width="203" height="24"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQN-Sv-0eE">
                                         <rect key="frame" x="263" y="30" width="39" height="40"/>
                                         <constraints>
@@ -80,12 +59,24 @@
                                             <segue destination="ReR-pk-HA9" kind="push" identifier="ProfileViewPushSegue" id="0P9-Bg-hQB"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ryne Cheow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjv-r9-yGC">
+                                        <rect key="frame" x="91" y="34" width="104" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="HwR-lT-KTk"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="164" id="o5Y-fz-cDF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="hOW-Oh-vVN" firstAttribute="leading" secondItem="qTb-Ny-vYW" secondAttribute="leading" constant="20" id="31e-9F-9Uw"/>
                                     <constraint firstAttribute="bottom" secondItem="ZQN-Sv-0eE" secondAttribute="bottom" constant="23" id="4gc-b9-1Av"/>
+                                    <constraint firstItem="Rjv-r9-yGC" firstAttribute="leading" secondItem="hOW-Oh-vVN" secondAttribute="trailing" constant="8" id="FF8-G4-A78"/>
                                     <constraint firstItem="CQM-YR-lFB" firstAttribute="leading" secondItem="qTb-Ny-vYW" secondAttribute="leading" id="Gr9-S4-ROe"/>
+                                    <constraint firstItem="hOW-Oh-vVN" firstAttribute="centerY" secondItem="Rjv-r9-yGC" secondAttribute="centerY" id="Sv0-SH-cPD"/>
                                     <constraint firstItem="hOW-Oh-vVN" firstAttribute="top" secondItem="qTb-Ny-vYW" secondAttribute="top" constant="14" id="Vbi-Lr-YxO"/>
                                     <constraint firstAttribute="bottom" secondItem="CQM-YR-lFB" secondAttribute="bottom" constant="-1" id="X58-2Z-abg"/>
                                     <constraint firstItem="CQM-YR-lFB" firstAttribute="top" secondItem="qTb-Ny-vYW" secondAttribute="top" id="fBz-i0-vmF"/>
@@ -170,7 +161,6 @@
                     <connections>
                         <outlet property="avatarView" destination="hOW-Oh-vVN" id="ctn-4b-AMG"/>
                         <outlet property="fullNameView" destination="Rjv-r9-yGC" id="V4L-dQ-nJj"/>
-                        <outlet property="rankView" destination="9FL-g8-xZG" id="bmR-zY-m9g"/>
                         <outlet property="tableView" destination="eIl-7I-DR2" id="3oX-pF-vEo"/>
                     </connections>
                 </viewController>
@@ -256,7 +246,7 @@
             </objects>
             <point key="canvasLocation" x="1656" y="-503"/>
         </scene>
-        <!--Profile-->
+        <!--Timeline-->
         <scene sceneID="IeC-3H-rzM">
             <objects>
                 <viewController id="ReR-pk-HA9" customClass="ProfileViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
@@ -277,6 +267,17 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProfileHeaderBackgroundv2" translatesAutoresizingMaskIntoConstraints="NO" id="0OY-qD-QHC">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
                                     </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ryne Cheow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QI-QY-a2r">
+                                        <rect key="frame" x="91" y="34" width="104" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="221" id="Q7U-uF-FxT"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="WqL-gZ-4hw"/>
+                                            <constraint firstAttribute="height" constant="24" id="tzh-hp-85a"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Af-Gg-R8C" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="20" y="14" width="63" height="63"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -292,77 +293,20 @@
                                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="Ies-gW-fkc" appends="YES" id="60A-Hp-P6q"/>
-                                        </connections>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImageEditIcon" translatesAutoresizingMaskIntoConstraints="NO" id="U5x-DK-cGC">
-                                        <rect key="frame" x="63" y="55" width="25" height="25"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ryne Cheow" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="m9T-s3-uQZ">
-                                        <rect key="frame" x="96" y="14" width="151" height="30"/>
-                                        <color key="backgroundColor" red="0.23529411764705882" green="0.22745098039215686" blue="0.22745098039215686" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="done"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="ReR-pk-HA9" id="rdE-Jb-uKh"/>
-                                        </connections>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="io0-Bs-qcv" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
-                                        <rect key="frame" x="96" y="52" width="151" height="30"/>
-                                        <color key="backgroundColor" red="0.23529411759999999" green="0.2274509804" blue="0.2274509804" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="151" id="PH8-Mj-ZPv"/>
-                                            <constraint firstAttribute="height" constant="30" id="TNv-6b-609"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="15"/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Knight">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="7"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cLH-fp-s9Z">
-                                        <rect key="frame" x="268" y="27" width="39" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="cLH-fp-s9Z" secondAttribute="height" multiplier="39:40" id="2HD-zk-Rih"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="ProfileUpdateIcon">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="updateAction:" destination="ReR-pk-HA9" eventType="touchUpInside" id="otv-R2-SLc"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="io0-Bs-qcv" firstAttribute="leading" secondItem="m9T-s3-uQZ" secondAttribute="leading" id="0Tp-7X-VBN"/>
                                     <constraint firstItem="9Af-Gg-R8C" firstAttribute="top" secondItem="7l1-NF-sDD" secondAttribute="top" constant="14" id="5Hz-XP-ck6"/>
-                                    <constraint firstAttribute="bottom" secondItem="cLH-fp-s9Z" secondAttribute="bottom" constant="26" id="5k7-UK-D5j"/>
                                     <constraint firstAttribute="trailing" secondItem="0OY-qD-QHC" secondAttribute="trailing" id="CJa-BY-VmO"/>
-                                    <constraint firstItem="m9T-s3-uQZ" firstAttribute="top" secondItem="9Af-Gg-R8C" secondAttribute="top" id="Gbq-v9-p1h"/>
-                                    <constraint firstItem="cLH-fp-s9Z" firstAttribute="top" secondItem="7l1-NF-sDD" secondAttribute="top" constant="27" id="HJN-az-tzH"/>
-                                    <constraint firstItem="m9T-s3-uQZ" firstAttribute="width" secondItem="io0-Bs-qcv" secondAttribute="width" id="NA6-g4-UR7"/>
-                                    <constraint firstItem="cLH-fp-s9Z" firstAttribute="leading" secondItem="io0-Bs-qcv" secondAttribute="trailing" constant="21" id="Obo-vI-6yU"/>
+                                    <constraint firstItem="0QI-QY-a2r" firstAttribute="leading" secondItem="9Af-Gg-R8C" secondAttribute="trailing" constant="8" id="MM0-hP-PCV"/>
                                     <constraint firstAttribute="bottom" secondItem="9Af-Gg-R8C" secondAttribute="bottom" constant="16" id="Ti7-Tn-j9G"/>
-                                    <constraint firstItem="cLH-fp-s9Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m9T-s3-uQZ" secondAttribute="leading" constant="21" id="UvS-9o-5eL"/>
                                     <constraint firstItem="0OY-qD-QHC" firstAttribute="leading" secondItem="7l1-NF-sDD" secondAttribute="leading" id="YBo-1w-7xo"/>
-                                    <constraint firstItem="m9T-s3-uQZ" firstAttribute="leading" secondItem="9Af-Gg-R8C" secondAttribute="trailing" constant="13" id="aPX-7k-2BA"/>
-                                    <constraint firstAttribute="trailing" secondItem="cLH-fp-s9Z" secondAttribute="trailing" constant="13" id="ag8-fI-3dO"/>
                                     <constraint firstAttribute="height" constant="93" id="bsO-qY-7Ch"/>
-                                    <constraint firstItem="io0-Bs-qcv" firstAttribute="height" secondItem="m9T-s3-uQZ" secondAttribute="height" id="cGc-z6-XVq"/>
                                     <constraint firstItem="9Af-Gg-R8C" firstAttribute="leading" secondItem="7l1-NF-sDD" secondAttribute="leading" constant="20" id="cRH-li-Rpb"/>
                                     <constraint firstAttribute="bottom" secondItem="0OY-qD-QHC" secondAttribute="bottom" constant="-1" id="g5f-uT-1qo"/>
-                                    <constraint firstItem="io0-Bs-qcv" firstAttribute="top" secondItem="m9T-s3-uQZ" secondAttribute="bottom" constant="8" id="g8I-1x-wCU"/>
                                     <constraint firstItem="0OY-qD-QHC" firstAttribute="top" secondItem="7l1-NF-sDD" secondAttribute="top" id="nyV-bq-OUF"/>
-                                    <constraint firstItem="m9T-s3-uQZ" firstAttribute="trailing" secondItem="io0-Bs-qcv" secondAttribute="trailing" id="z3T-1N-Qdt"/>
+                                    <constraint firstItem="9Af-Gg-R8C" firstAttribute="centerY" secondItem="0QI-QY-a2r" secondAttribute="centerY" id="vNh-4e-5Ny"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="cMt-vN-DXN">
@@ -393,7 +337,7 @@
                             <constraint firstItem="By3-up-24F" firstAttribute="leading" secondItem="lJT-wv-uRW" secondAttribute="leading" id="qU2-vY-IzE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="BIe-Oe-6JY">
+                    <navigationItem key="navigationItem" title="Timeline" id="BIe-Oe-6JY">
                         <barButtonItem key="leftBarButtonItem" id="inW-vQ-iUX">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Db2-JP-gnK">
                                 <rect key="frame" x="129" y="143" width="28" height="28"/>
@@ -408,19 +352,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="inGameNameEditTextField" destination="m9T-s3-uQZ" id="OAl-gv-ueY"/>
-                        <outlet property="profilePicView" destination="9Af-Gg-R8C" id="ynS-Jl-b6K"/>
-                        <outlet property="profileUpdateButton" destination="cLH-fp-s9Z" id="ldk-xY-6Dk"/>
-                        <outlet property="rankViewButton" destination="io0-Bs-qcv" id="aHk-sy-PFb"/>
+                        <outlet property="displayNameLabel" destination="0QI-QY-a2r" id="cmb-oq-Q2c"/>
+                        <outlet property="profilePicView" destination="9Af-Gg-R8C" id="mUc-dv-t0O"/>
                         <outlet property="tableView" destination="cMt-vN-DXN" id="T6S-dq-IpX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Fo-NU-auB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Ies-gW-fkc">
-                    <connections>
-                        <action selector="imageTapped:" destination="ReR-pk-HA9" id="1nT-18-LJx"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1637" y="962"/>
         </scene>
@@ -527,16 +464,13 @@
     <resources>
         <image name="BackButtonImage" width="21" height="34"/>
         <image name="BackButtonImagev2" width="61" height="63"/>
-        <image name="BadgeView" width="49" height="62"/>
         <image name="ChallengeFriendButtonBackground" width="271" height="89"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
         <image name="FriendSceneBackground" width="640" height="1136"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
-        <image name="ImageEditIcon" width="47" height="48"/>
         <image name="ProfileDetailDisclosureButton" width="85" height="88"/>
         <image name="ProfileHeaderBackground" width="640" height="192"/>
         <image name="ProfileHeaderBackgroundv2" width="640" height="202"/>
-        <image name="ProfileUpdateIcon" width="85" height="88"/>
         <image name="RandomChallengeButtonBackground" width="271" height="89"/>
         <image name="RedButtonBackground" width="163" height="61"/>
         <image name="SettingsIcon" width="58" height="58"/>

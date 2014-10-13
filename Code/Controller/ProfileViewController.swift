@@ -8,31 +8,20 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDataSource
 {
-
-    @IBOutlet private weak var profileUpdateButton: UIButton!
     
     @IBOutlet private weak var tableView: UITableView!
-    
-    @IBOutlet private weak var inGameNameEditTextField: UITextField!
-    
+
+    @IBOutlet private weak var displayNameLabel: UILabel!
+
     @IBOutlet private weak var profilePicView: AvatarRoundedView!
     
     private var defaultText:String!
     
-    @IBOutlet private weak var rankViewButton: DesignableButton!
-    
     private var closedChallenges: [Game] = []
     
     private var user = NetworkClient.sharedClient.user
-    
-    private var imagePicker:UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        return picker
-    }
     
     private lazy var emptyTimelineView: UIView = {
         var view = NSBundle.mainBundle().loadNibNamed("EmptyTimelineView", owner: nil, options: nil)[0] as UIView
@@ -72,75 +61,40 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         hud.textLabel.text = "Updating profile..."
         //TODO: update profile
         hud.dismissAfterDelay(2.0)
-        self.profileUpdateButton.disable()
     }
     
     func loadClosedChallenges() {
-        weak var weakSelf = self
-        
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Refreshing timeline.."
         NetworkClient.sharedClient.fetchClosedChallenges {
-            if let strongSelf = weakSelf {
+            [unowned self] in
                 var c = $0
                 c.sort {
                     $1.createdAt.timeIntervalSinceReferenceDate > $0.createdAt.timeIntervalSinceReferenceDate
                 }
                 
-                strongSelf.closedChallenges = c
-                strongSelf.tableView.reloadData()
+                self.closedChallenges = c
+                self.tableView.reloadData()
                 
                 let shouldNotHideTableViewForEmptyView = c.count > 0
-                strongSelf.tableView.hidden = !shouldNotHideTableViewForEmptyView
-                strongSelf.emptyTimelineView.hidden = shouldNotHideTableViewForEmptyView
+                self.tableView.hidden = !shouldNotHideTableViewForEmptyView
+                self.emptyTimelineView.hidden = shouldNotHideTableViewForEmptyView
                 
                 hud.dismissAnimated(true)
-            }
+            
         }
     }
     
-    @IBAction func imageTapped(sender: AnyObject) {
-        let actionSheet = UIAlertController(title: "Change display picture", message: "Select a photo from the library or take a new one.", preferredStyle: .ActionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        weak var weakSelf = self
-        
-        let takePhotoAction = UIAlertAction(title: "Take photo", style: .Default) {
-            a in
-            if let strongSelf = weakSelf {
-                let picker = strongSelf.imagePicker
-                picker.sourceType = .Camera
-                strongSelf.presentViewController(picker, animated: true, completion: nil)
-            }
-        }
-        
-        let chooseFromlibraryAction = UIAlertAction(title: "Choose existing", style: .Default) {
-            a in
-            if let strongSelf = weakSelf {
-                let picker = strongSelf.imagePicker
-                picker.sourceType = .PhotoLibrary
-                strongSelf.presentViewController(picker, animated: true, completion: nil)
-            }
-        }
-        
-        actionSheet.addAction(cancelAction)
-        actionSheet.addAction(takePhotoAction)
-        actionSheet.addAction(chooseFromlibraryAction)
-        self.presentViewController(actionSheet, animated: true, completion: nil)
-    }
-
     private func configureUI() {
-        weak var weakSelf = self
         NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: nil) {
-            image, error in
+            [unowned self] image, error in
             if error != nil {
                 println(error)
             }
-            if let strongSelf = weakSelf {
-                strongSelf.profilePicView.image  = image
-            }
+            self.profilePicView.image  = image
         }
         
-        self.inGameNameEditTextField.text = user.displayName
+        self.displayNameLabel.text = user.displayName
         
         //Empty timeline view
         self.view.addSubview(emptyTimelineView)
@@ -155,19 +109,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
         self.emptyTimelineView.autoConstrainAttribute(NSLayoutAttribute.CenterX.toRaw(), toAttribute: NSLayoutAttribute.CenterX.toRaw(), ofView: self.emptyTimelineView.superview, withMultiplier: 1)
         self.emptyTimelineView.autoConstrainAttribute(NSLayoutAttribute.CenterY.toRaw(), toAttribute: NSLayoutAttribute.CenterY.toRaw(), ofView: self.emptyTimelineView.superview, withMultiplier: 1)
         self.emptyTimelineView.autoSetDimensionsToSize(CGSizeMake(258, 284))
-    }
-    // MARK:- UITextField delegate methods
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        if textField.text == self.user.displayName || countElements(textField.text) <= 0 {
-            return false
-        }
-        profileUpdateButton.enabled = self.user.displayName != textField.text
-        return true
-    }
-    
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        return true
     }
     
     // MARK:- UITableView delegate methods
@@ -209,21 +150,5 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UITableViewD
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return closedChallenges.count > 0 ? 1 : 0
-    }
-        
-    //MARK:- UIImagePickerControllerDelegate methods
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        picker.dismissViewControllerAnimated(true) {
-            [unowned self] in
-            if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-                self.profilePicView.image = selectedImage
-            }
-            self.profileUpdateButton.enable()
-        }
-    }
-    //MARK:- UINavigationControllerDelegate methods
-    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .None)
     }
 }

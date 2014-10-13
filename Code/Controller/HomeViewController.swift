@@ -70,15 +70,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func quickGameAction(sender: UIButton) {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Creating quick game..."
-        weak var weakSelf = self
         NetworkClient.sharedClient.createQuickGame {
-            var strongSelf = weakSelf!
+            [unowned self] in
             if let g = $0 {
                 hud.textLabel.text = "Creating game with user.."
                 
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.pushViewController(vc, animated: true)
                 hud.dismissAnimated(true)
             }
         }
@@ -86,7 +85,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK:- Private functions
     private func setupSubviews() {
-        NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: nil)  {
+        NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: nil)  {[unowned self]
             (image: UIImage!, error:NSError!) in
             if image != nil {
                 self.avatarView.image = image
@@ -110,15 +109,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         hud?.textLabel.text = "Loading challenges.."
         
-        weak var wself = self
-        let completionHandler: () -> () = {
+        let completionHandler: () -> () = {[unowned self] in
             numberLoaded++
-            var sself = wself!
             
             if numberLoaded == 3 {
                 hud?.dismissAnimated(true)
-                sself.tableView.reloadData()
-                sself.tableView.forceUpdateTable()
+                self.tableView.reloadData()
+                self.tableView.forceUpdateTable()
             }
             if loadCompleteHandler != nil {
                 loadCompleteHandler()
@@ -126,28 +123,28 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         NetworkClient.sharedClient.fetchOpenChallenges {
-            var sself = wself!
-            sself.openChallenges = $0
+            [unowned self] in
+            self.openChallenges = $0
            
-            sself.openChallenges.sort {
+            self.openChallenges.sort {
                 $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
             }
             completionHandler()
         }
         
         NetworkClient.sharedClient.fetchOpponentPendingChallenges {
-            var sself = wself!
-            sself.opponentPendingChallenges = $0
-            sself.opponentPendingChallenges.sort {
+            [unowned self] in
+            self.opponentPendingChallenges = $0
+            self.opponentPendingChallenges.sort {
                 $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
             }
             completionHandler()
         }
         
         NetworkClient.sharedClient.fetchIncompleteChallenges {
-            var sself = wself!
-            sself.unfinishedChallenges = $0
-            sself.unfinishedChallenges.sort {
+            [unowned self] in
+            self.unfinishedChallenges = $0
+            self.unfinishedChallenges.sort {
                 $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
             }
             completionHandler()
@@ -240,16 +237,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         case .Accept, .Play:
             var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
             let name = cell.player.displayName == "" || cell.player.displayName == nil ? "opponent" : cell.player.displayName
-            hud.textLabel.text = "Accepting \(name)'s challenge"
+            if self.user.displayName == name {
+                hud.textLabel.text = "Accepting \(name)'s challenge"
+            } else {
+                hud.textLabel.text = "Complete previous challenge"
+            }
+            
             hud.detailTextLabel.text = "Initiating game"
-            weak var weakSelf = self
+            
             NetworkClient.sharedClient.fetchGame(game.gameID, force: true) {
-                var strongSelf = weakSelf!
+                [unowned self] in
                 var i = 0
-                for game in strongSelf.openChallenges {
+                for game in self.openChallenges {
                     if $0.gameID == game.gameID  {
-                        strongSelf.openChallenges.removeAtIndex(i)
-                        strongSelf.tableView.reloadData()
+                        self.openChallenges.removeAtIndex(i)
+                        self.tableView.reloadData()
                         break
                     }
                     i++
@@ -258,7 +260,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if let g = $0 {
                     let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                     vc.bindGame($0)
-                    strongSelf.navigationController?.pushViewController(vc, animated: true)
+                    self.navigationController?.pushViewController(vc, animated: true)
                     hud.dismissAnimated(true)
                 }
             }

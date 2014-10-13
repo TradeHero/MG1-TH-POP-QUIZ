@@ -84,7 +84,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         }
         
         self.challengerDisplayNameLabel.text = opponent!.displayName
-        self.challengerImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL)) { (image, _, _, _) in
+        self.challengerImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL)) { [unowned self] (image, _, _, _) in
             self.challengerImageView.image = image.centerCropImage()
         }
 

@@ -16,7 +16,7 @@ class LoginViewController: UIViewController {
     
     private var facebookAccount: ACAccount!
     
-    private var fbFlag = false
+    private var loginOnce = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,18 +33,17 @@ class LoginViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    override func viewDidDisappear(animated: Bool) {
-        fbFlag = false
-    }
-    
     func autoLogin() {
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
-        hud.indicatorView = nil
-        hud.textLabel.text = "Logging in..."
-        if let credential = NetworkClient.sharedClient.credentials {
-            NetworkClient.sharedClient.loginUserWithFacebookAuth(credential) {
-                user in
-                hud.dismissAfterDelay(1.5, animated: true)
+        if !loginOnce {
+            var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+            hud.indicatorView = nil
+            hud.textLabel.text = "Logging in..."
+            if let credential = NetworkClient.sharedClient.credentials {
+                NetworkClient.sharedClient.loginUserWithFacebookAuth(credential) {
+                    [unowned self] user in
+                    self.loginOnce = true
+                    hud.dismissAfterDelay(0, animated: true)
+                }
             }
         }
     }
@@ -66,8 +65,8 @@ class LoginViewController: UIViewController {
             } else {
                 if let e = error {
                     hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
-                    hud.textLabel.text = "Please login to Facebook from Settings >> Facebook."
-                    hud.dismissAfterDelay(2.5, animated: true)
+                    hud.textLabel.text = "Please login to Facebook from Settings >> Facebook, you should only have one Facebook account logged in at one time."
+                    hud.dismissAfterDelay(5, animated: true)
                 }
             }
         }

@@ -23,9 +23,6 @@ class GameLoadingSceneViewController: UIViewController {
     
     @IBOutlet private weak var selfAvatarView: AvatarRoundedView!
     @IBOutlet private weak var selfDisplayNameLabel: UILabel!
-    @IBOutlet private weak var selfRankLabel: UILabel!
-    @IBOutlet private weak var selfLevelLabel: UILabel!
-    @IBOutlet private weak var selfBadgeImageView: UIImageView!
     
     @IBOutlet weak var upperviewTrailingSpaceToSuperview: NSLayoutConstraint!
     @IBOutlet weak var upperviewLeadingSpaceToSuperview: NSLayoutConstraint!
@@ -35,9 +32,6 @@ class GameLoadingSceneViewController: UIViewController {
     @IBOutlet private weak var bottomBoxBackgroundImageView: UIImageView!
     @IBOutlet private weak var opponentAvatarView: AvatarRoundedView!
     @IBOutlet private weak var opponentDisplayNameLabel: UILabel!
-    @IBOutlet private weak var opponentRankLabel: UILabel!
-    @IBOutlet private weak var opponentLevelLabel: UILabel!
-    @IBOutlet private weak var opponentBadgeImageView: UIImageView!
     
     @IBOutlet weak var roundTimerImageView: UIImageView!
     
@@ -63,22 +57,18 @@ class GameLoadingSceneViewController: UIViewController {
         self.navigationController?.hideNavigationBar()
         self.configureUI()
         
-        weak var wself = self
         self.prepareGame(self.game){
-            var sself = wself!
-            sself.prepareViewDetailLabel.text = "Done fetching image."
+            [unowned self] in
+            self.prepareViewDetailLabel.text = "Done fetching image."
             UIView.animateWithDuration(1.0, delay: 0, options: .TransitionCrossDissolve , animations: {
-                sself.prepareView.alpha = 0
-                }) { complete in
+                self.prepareView.alpha = 0
+                }) { [unowned self] complete in
                     if complete {
                         UIView.animateWithDuration(1, options: .TransitionCrossDissolve){
-                            sself.opponentAvatarView.alpha = 1
-                            sself.opponentDisplayNameLabel.alpha = 1
-                            sself.opponentRankLabel.alpha = 1
-                            sself.opponentLevelLabel.alpha = 1
-                            sself.opponentBadgeImageView.alpha = 1
+                            self.opponentAvatarView.alpha = 1
+                            self.opponentDisplayNameLabel.alpha = 1
                         }
-                        sself.timerStart()
+                        self.timerStart()
                     }
             }
         }
@@ -114,14 +104,13 @@ class GameLoadingSceneViewController: UIViewController {
         var qSet = game.questionSet
         var count:Int = 0
         var tcount = game.questionSet.count
-        weak var wself = self
         for q in qSet {
             q.fetchImage {
-                var sself = wself!
+                [unowned self] in
                 count += 1
-                sself.prepareViewDetailLabel.text = "\(count) of \(tcount)"
+                self.prepareViewDetailLabel.text = "\(count) of \(tcount)"
                 if count == game.questionSet.count {
-                    sself.game = game
+                    self.game = game
                     completionHandler()
                 }
             }
@@ -155,16 +144,14 @@ class GameLoadingSceneViewController: UIViewController {
         self.view.setNeedsUpdateConstraints()
         self.upperView.setNeedsUpdateConstraints()
         self.lowerView.setNeedsUpdateConstraints()
-        weak var wself = self
         UIView.animateWithDuration(1, delay: 1, options: .TransitionNone, animations: {
-            var sself = wself!
-            sself.countdownTimerLabel.alpha = 0
-            sself.view.layoutIfNeeded()
-            }) { complete in
+            [unowned self] in
+            self.countdownTimerLabel.alpha = 0
+            self.view.layoutIfNeeded()
+            }) { [unowned self] complete in
                 if complete {
-                    var sself = wself!
                     usleep(1)
-                    sself.performSegueWithIdentifier("PresentQuizSegue", sender: sself)
+                    self.performSegueWithIdentifier("PresentQuizSegue", sender: self)
                 }
         }
     }
@@ -172,26 +159,22 @@ class GameLoadingSceneViewController: UIViewController {
     private func configureUI(){
         self.opponentAvatarView.alpha = 0
         self.opponentDisplayNameLabel.alpha = 0
-        self.opponentRankLabel.alpha = 0
-        self.opponentLevelLabel.alpha = 0
-        self.opponentBadgeImageView.alpha = 0
-        weak var wself = self
         
-        NetworkClient.fetchImageFromURLString(player.pictureURL, progressHandler: nil) { image, error in
-            var sself = wself!
+        NetworkClient.fetchImageFromURLString(player.pictureURL, progressHandler: nil) { [unowned self] image, error in
+
             if let err = error {
                 println(err)
             }
-            sself.selfAvatarView.image = image
+            self.selfAvatarView.image = image
         }
         self.selfDisplayNameLabel.text = player.displayName
         
-        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) { image, error in
-            var sself = wself!
+        NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) { [unowned self] image, error in
+
             if let err = error {
                 println(err)
             }
-            sself.opponentAvatarView.image = image
+            self.opponentAvatarView.image = image
         }
         self.opponentDisplayNameLabel.text = opponent.displayName
     }

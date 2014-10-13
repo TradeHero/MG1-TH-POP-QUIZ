@@ -18,14 +18,10 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     //self
     @IBOutlet private weak var selfAvatarView: AvatarRoundedView!
     @IBOutlet private weak var selfDispNameLabel: UILabel!
-    @IBOutlet private weak var selfRankLabel: UILabel!
-    @IBOutlet private weak var selfLevelLabel: UILabel!
     
     //opponent
     @IBOutlet private weak var opponentAvatarView: AvatarRoundedView!
     @IBOutlet private weak var opponentDisplayNameLabel: UILabel!
-    @IBOutlet private weak var opponentRankLabel: UILabel!
-    @IBOutlet private weak var opponentLevelLabel: UILabel!
     @IBOutlet private weak var opponentWaitingImageView: UIImageView!
     
     @IBOutlet weak var nextOrRematchButton: UIButton!
@@ -63,19 +59,17 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     @IBAction func rematchAction() {
-        weak var weakSelf = self
-        
         if game.isGameCompletedByBothPlayer {
             var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
             hud.textLabel.text = "Re-matching..."
             hud.detailTextLabel.text = "Creating game with user.."
             NetworkClient.sharedClient.createChallenge(numberOfQuestions: 7, opponentId: opponent.userId) {
-                var strongSelf = weakSelf!
+                [unowned self] in
                 if let g = $0 {
                     hud.dismissAnimated(true)
                     let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                     vc.bindGame($0)
-                    strongSelf.navigationController?.pushViewController(vc, animated: true)
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
         } else {
@@ -96,27 +90,25 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
              opponentWaitingImageView.alpha = 1
         }
-        weak var wself = self
         NetworkClient.fetchImageFromURLString(player.pictureURL, progressHandler: nil) {
-            (image, error) in
-            var sself = wself!
+            [unowned self] (image, error) in
+            
             if let e = error {
                 println(e)
                 return
             }
-            sself.selfAvatarView.image = image
+            self.selfAvatarView.image = image
         }
 
         
         opponentDisplayNameLabel.text = self.opponent.displayName
         NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) {
-            (image, error) in
-            var sself = wself!
+            [unowned self] (image, error) in
             if let e = error {
                 println(e)
                 return
             }
-            sself.opponentAvatarView.image = image
+            self.opponentAvatarView.image = image
         }
     }
     private func determineUserRoles(game:Game) {

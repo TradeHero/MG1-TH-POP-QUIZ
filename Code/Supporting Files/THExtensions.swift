@@ -14,8 +14,6 @@ enum THSoundEffect {
     case WrongSound
 }
 
-
-
 extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard {
         return UIStoryboard(name: "Home", bundle: nil)

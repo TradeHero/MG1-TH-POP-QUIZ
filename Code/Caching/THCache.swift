@@ -12,6 +12,9 @@ struct THCache {
     static let kFBFriendsDictionaryKey = "FBFriendsDictionaryKey"
     static let kTHFriendsDictionaryKey = "THFriendsDictionaryKey"
     
+    static func objectExistForCacheKey(key:String) -> Bool {
+        return EGOCache.globalCache().objectForKey(key) != nil
+    }
     //User
     static func saveUserToCache(user:THUser, userId:Int){
         let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(userId)"
@@ -59,6 +62,21 @@ struct THCache {
         }
         return (facebookFriends:[], tradeheroFriends:[])
     }
+    
+    static func saveStaffListToCache(staffList:[StaffUser]) {
+        EGOCache.globalCache().setObject(staffList, forKey: kTHStaffUserCacheStoreKey)
+        debugPrintln("\(staffList.count) staff cached.")
+    }
+    
+    static func getStaffListFromCache() -> [StaffUser]{
+        let object = EGOCache.globalCache().objectForKey(kTHStaffUserCacheStoreKey)
+        
+        if let arr = object as? [StaffUser] {
+            return arr
+        }
+        return []
+    }
+
     
     //Game
     static func saveGameToCache(game:Game, gameId:Int){
