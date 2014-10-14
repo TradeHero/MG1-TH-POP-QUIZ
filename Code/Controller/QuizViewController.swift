@@ -30,8 +30,6 @@ class QuizViewController: UIViewController {
     
     @IBOutlet private weak var selfDisplayNameLabel: UILabel!
     
-    @IBOutlet private weak var selfRankLabel: UILabel!
-    
     @IBOutlet private var opponentProgressView: LDProgressView!
     
     @IBOutlet private weak var opponentAvatarView: AvatarRoundedView!
@@ -39,8 +37,6 @@ class QuizViewController: UIViewController {
     @IBOutlet private weak var opponentScoreLabel: UILabel!
     
     @IBOutlet private weak var opponentDisplayNameLabel: UILabel!
-    
-    @IBOutlet private var opponentRankLabel: UILabel!
     
     
     @IBOutlet private weak var buttonSetContentView: UIView!
@@ -137,10 +133,10 @@ class QuizViewController: UIViewController {
         self.gameMusicPlayer = createBackgroundMusicPlayer()
         self.gameMusicPlayer.play()
         self.navigationController?.hideNavigationBar()
-        weak var wself = self
+        
         dispatch_after(1, dispatch_get_main_queue()) {
-            var sself = wself!
-            sself.proceedToNextQuestion()
+            [unowned self] in
+            self.proceedToNextQuestion()
         }
     }
     
@@ -382,21 +378,19 @@ class QuizViewController: UIViewController {
     private func endTurn(){
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
-        weak var wself = self
         
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Calculating results..."
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: self.highestCombo, noOfHintsUsed: self.totalHintUsed, currentScore: currentTurnScore, questionResults: results) {
-            if let sself = wself {
-                
-                sself.gameMusicPlayer.stop()
+            [unowned self] in
+                self.gameMusicPlayer.stop()
                 
                 if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
                     app.bgmPlayer.play()
                 }
                 
                 hud.dismissAnimated(true)
-                sself.game = $0
+                self.game = $0
                 if $0.isGameCompletedByBothPlayer {
                     self.performSegueWithIdentifier("QuizWinLoseSegue", sender: nil)
                     return
@@ -406,7 +400,7 @@ class QuizViewController: UIViewController {
                     self.performSegueWithIdentifier("PartialQuizResultSegue", sender: nil)
                     return
                 }
-            }
+            
         }
     }
     

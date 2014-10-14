@@ -90,20 +90,18 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.reloadData()
         
-        weak var wself = self
-        
         let loadCompleteHandler:((fbFriends: [THUserFriend], thFriends:[THUserFriend]) -> ()) = {
-            var sself = wself!
-            sself.FBFriendList = $0
-            sself.THFriendList = $1
-            sself.tableView.reloadData()
+            [unowned self] in
+            self.FBFriendList = $0
+            self.THFriendList = $1
+            self.tableView.reloadData()
         }
         
         if !THCache.objectExistForCacheKey(kTHUserFriendsCacheStoreKey) {
             debugPrintln("Nothing cached.")
             hud.textLabel.text = "Retrieving friends..."
             NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
-                var sself = wself!
+                [unowned self] in
                 hud.dismissAnimated(true)
                 THCache.saveFriendsListToCache($0.fbFriends, tradeheroFriends: $0.thFriends)
                 loadCompleteHandler(fbFriends: $0.fbFriends, thFriends: $0.thFriends)
@@ -234,14 +232,13 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Creating challenge..."
         hud.detailTextLabel.text = "Creating game with user.."
-        weak var weakSelf = self
         NetworkClient.sharedClient.createChallenge(opponentId: userID) {
-            var strongSelf = weakSelf!
+            [unowned self] in
             if let g = $0 {
                 hud.dismissAnimated(true)
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)
-                strongSelf.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

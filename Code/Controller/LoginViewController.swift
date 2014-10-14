@@ -9,19 +9,19 @@
 import UIKit
 import Social
 import Accounts
-
+var loginOnce = false
 class LoginViewController: UIViewController {
     
     private var accountStore = ACAccountStore()
     
     private var facebookAccount: ACAccount!
     
-    private var loginOnce = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.autoLogin()
+        if !loginOnce {
+            self.autoLogin()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,20 +34,19 @@ class LoginViewController: UIViewController {
     }
     
     func autoLogin() {
-        if !loginOnce {
+        if let credential = NetworkClient.sharedClient.credentials {
             var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
             hud.indicatorView = nil
             hud.textLabel.text = "Logging in..."
-            if let credential = NetworkClient.sharedClient.credentials {
-                NetworkClient.sharedClient.loginUserWithFacebookAuth(credential) {
-                    [unowned self] user in
-                    self.loginOnce = true
-                    hud.dismissAfterDelay(0, animated: true)
-                }
+            NetworkClient.sharedClient.loginUserWithFacebookAuth(credential) {
+                [unowned self] user in
+                loginOnce = true
+                hud.dismissAfterDelay(0, animated: true)
             }
+            
         }
     }
-  
+    
     @IBAction func facebookTapped(sender: AnyObject) {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         let facebookTypeAccount = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
@@ -70,6 +69,6 @@ class LoginViewController: UIViewController {
                 }
             }
         }
-
+        
     }
-    }
+}

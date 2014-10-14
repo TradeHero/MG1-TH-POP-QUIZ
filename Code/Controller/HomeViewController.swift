@@ -115,7 +115,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if numberLoaded == 3 {
                 hud?.dismissAnimated(true)
                 self.tableView.reloadData()
-                self.tableView.forceUpdateTable()
+//                self.tableView.forceUpdateTable()
             }
             if loadCompleteHandler != nil {
                 loadCompleteHandler()
@@ -236,14 +236,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch cell.status {
         case .Accept, .Play:
             var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
-            let name = cell.player.displayName == "" || cell.player.displayName == nil ? "opponent" : cell.player.displayName
-            if self.user.displayName == name {
-                hud.textLabel.text = "Accepting \(name)'s challenge"
-            } else {
-                hud.textLabel.text = "Complete previous challenge"
-            }
+//            let name = cell.player.displayName == "" || cell.player.displayName == nil ? "opponent" : cell.player.displayName
+            hud.textLabel.text = "Retrieving challenge.."
             
-            hud.detailTextLabel.text = "Initiating game"
+//            hud.detailTextLabel.text = "Initiating game"
             
             NetworkClient.sharedClient.fetchGame(game.gameID, force: true) {
                 [unowned self] in

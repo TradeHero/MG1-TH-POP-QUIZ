@@ -22,7 +22,7 @@ class NetworkClient {
         dispatch_once(&Singleton.onceToken) {
             Singleton.instance = NetworkClient()
             Singleton.instance.loadCredentials()
-            
+            Singleton.instance.loadDeviceToken()
             var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
             defaultHeaders.updateValue("2.4.0", forKey: "TH-Client-Version")
             defaultHeaders.updateValue("1", forKey: "TH-Client-Type")
@@ -38,16 +38,17 @@ class NetworkClient {
         return Singleton.instance
     }
     
-    var deviceToken: String {
+    var deviceToken: String! {
         get {
             return _device_token
         }
         set {
             _device_token = newValue
+            saveDeviceToken(newValue)
         }
     }
     
-    private var _device_token: String = ""
+    private var _device_token: String!
     
     private var manager: Alamofire.Manager!
     
@@ -74,17 +75,20 @@ class NetworkClient {
     :param: loginSuccessHandler Takes a THUser and perform operation
     */
     func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:(THUser -> ())!) {
-        let param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.4.0"]
+        var param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.4.0"]
         let auth = "\(THAuthFacebookPrefix) \(accessToken)"
         println(auth)
-        weak var weakSelf = self
+        
+        if _device_token != nil {
+            param.updateValue(_device_token, forKey: "deviceToken")
+        }
+        
         let r = self.request(.POST,
             THServerAPIBaseURL + "/login",
             parameters: param,
             encoding: JSONEncoding,
             authentication: auth).responseJSON {
-                _, response, content, error in
-                var strongSelf = weakSelf!
+                [unowned self] _, response, content, error in
                 if let responseError = error {
                     println(responseError)
                     return
@@ -92,7 +96,6 @@ class NetworkClient {
                 
                 if response?.statusCode == 200 {
                     self.saveCredentials(accessToken)
-                    let x = self.loadCredentials()
                     
                     let responseJSON = content as [String: AnyObject]
                     let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
@@ -100,7 +103,7 @@ class NetworkClient {
                     if let profileDTODict = profileDTOPart as? [String: AnyObject] {
                         var loginUser = THUser(profileDTO: profileDTODict)
                         println("Signed in as \(loginUser)")
-                        strongSelf.authenticatedUser = loginUser
+                        self.authenticatedUser = loginUser
                         let userInfo = ["user": loginUser]
                         NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLoginSuccessfulNotificationKey, object: self, userInfo:userInfo)
                         loginSuccessHandler(loginUser)
@@ -122,10 +125,9 @@ class NetworkClient {
             debugPrintln("Creating quick game with \(numberOfQuestions) questions(s)")
         }
         
-        weak var wself = self
+        
         let r = self.request(.POST, "\(THGameAPIBaseURL)/create", parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-                _, response, content, error in
-                var sself = wself!
+            [unowned self] _, response, content, error in
                 if let responseError = error {
                     println(responseError)
                     return
@@ -192,10 +194,9 @@ class NetworkClient {
         let url = "\(THGameAPIBaseURL)/open"
         
         debugPrintln("Fetching all open challenges for authenticated user...")
-        weak var wself = self
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            var sself = wself!
+            [unowned self] _, response, content, error in
+            
             if error != nil {
                 debugPrintln(error)
             }
@@ -243,10 +244,8 @@ class NetworkClient {
         let url = "\(THGameAPIBaseURL)/taken"
         
         debugPrintln("Fetching all taken challenges for authenticated user...")
-        weak var wself = self
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            var sself = wself!
+            [unowned self] _, response, content, error in
             if error != nil {
                 debugPrintln(error)
             }
@@ -302,10 +301,10 @@ class NetworkClient {
         let url = "\(THGameAPIBaseURL)/theirturn"
         
         debugPrintln("Fetching all opponent pending challenges for authenticated user...")
-        weak var wself = self
+        
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            var sself = wself!
+            [unowned self] _, response, content, error in
+            
             if error != nil {
                 debugPrintln(error)
             }
@@ -363,10 +362,8 @@ class NetworkClient {
         let url = "\(THGameAPIBaseURL)/unfinished"
         
         debugPrintln("Fetching all incomplete challenges for authenticated user...")
-        weak var wself = self
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            var sself = wself!
+            [unowned self] _, response, content, error in
             if error != nil {
                 debugPrintln(error)
             }
@@ -421,10 +418,9 @@ class NetworkClient {
         let url = "\(THGameAPIBaseURL)/closed"
         
         debugPrintln("Fetching all closed challenges for authenticated user...")
-        weak var wself = self
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            var sself = wself!
+            [unowned self] _, response, content, error in
+           
             if error != nil {
                 debugPrintln(error)
             }
@@ -499,10 +495,9 @@ class NetworkClient {
             resultSet.append(resultData)
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
-        weak var wself = self
         let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            var sself = wself!
+            [unowned self] _, response, content, error in
+            
             if error != nil {
                 debugPrintln(error)
             }
@@ -524,10 +519,9 @@ class NetworkClient {
         let url = "\(THGameAPIBaseURL)/\(gameId)/results"
 
         debugPrintln("Fetching results for game \(gameId)...")
-        weak var wself = self
+        
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            var sself = wself!
+            [unowned self] _, response, content, error in
             if error != nil {
                 debugPrintln(error)
             }
@@ -566,15 +560,12 @@ class NetworkClient {
 //        let url = "\(THGameAPIBaseURL)/??"
 //        configureCompulsoryHeaders()
 //        
-//        
-//        weak var wself = self
+//
 //        let r = Alamofire.request(.POST, url, parameters: ["ign" : newName], encoding: JSONEncoding).responseJSON {
-//            _, response, content, error in
-//            if let sself = wself {
+//            [unowned self] _, response, content, error in
 //                sself.updateUser(sself.authenticatedUser) {
 //                    sself.authenticatedUser = $0
 //                }
-//            }
 //        }
     }
     
@@ -606,7 +597,7 @@ class NetworkClient {
     ///
     func logout() {
         self.authenticatedUser = nil
-        self.removeCredentials()
+        self.closeAndClearKeychainInformation()
         EGOCache.globalCache().clearCache()
         FBSession.activeSession().closeAndClearTokenInformation()
         NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLogoutNotificationKey, object: self, userInfo:nil)
@@ -669,14 +660,12 @@ class NetworkClient {
             }
         }
         
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: generateAuthorisationFromKeychain() ?? "").responseJSON {
-            _, response, content, error in
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+            [unowned self] _, response, content, error in
             if error != nil {
                 debugPrintln(error)
             }
-            weak var wself = self
             if response?.statusCode == 200 {
-                var sself = wself!
                 let responseJSON = content as [String: AnyObject]
                 //                println(responseJSON)
                 let game = Game(gameDTO: responseJSON)
@@ -756,11 +745,13 @@ class NetworkClient {
     ///
     /// Remove completely credentials from system.
     ///
-    private func removeCredentials() {
+    private func closeAndClearKeychainInformation() {
         if let accs = SSKeychain.accountsForService(kTHGameKeychainIdentifierKey) {
             for userData in accs {
-                if let data = userData as? [String: String] {
-                    SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: data["acct"])
+                if let data = userData as? [String: AnyObject] {
+                    if let acct: AnyObject? = data["acct"] {
+                        SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: acct as String)
+                    }
                 }
             }
             self.credentials = nil
@@ -781,6 +772,27 @@ class NetworkClient {
                 }
             }
             
+        }
+        return nil
+    }
+    
+    private func saveDeviceToken(token:String){
+        SSKeychain.setPassword("\(token)", forService: kTHGameKeychainIdentifierKey, account: kTHGameKeychainDeviceTokenKey)
+    }
+    
+    private func loadDeviceToken() -> String? {
+        if let keychainAcc = SSKeychain.accountsForService(kTHGameKeychainIdentifierKey) {
+            if keychainAcc.count == 0 {
+                println("No credentials found")
+            }
+            
+            for userData in keychainAcc {
+                if let data = userData as? [String: AnyObject] {
+                    let secret = SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainDeviceTokenKey)
+                    self._device_token = secret
+                    return secret
+                }
+            }
         }
         return nil
     }

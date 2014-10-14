@@ -56,6 +56,9 @@ let kTHGameKeychainBasicAccKey = "\(kConstantPrefix)GameKeychainBasicAcc"
 
 let kTHGameKeychainFacebookAccKey = "\(kConstantPrefix)GameKeychainFacebookAcc"
 
+let kTHGameKeychainDeviceTokenKey = "\(kConstantPrefix)GameKeychainDeviceToken"
+
+
 //MARK:- global settings key
 let kTHPushNotificationOnKey = "\(kConstantPrefix)PushNotificationOn"
 
@@ -199,7 +202,7 @@ var staffs_g: [StaffInfo] = {
     staffInfo.append((name:"Stella", id: 653913, funnyName:"The Whip"))
     staffInfo.append((name:"Ryne", id: 2415, funnyName:"Mind muncher"))
     staffInfo.append((name:"Albert", id: 2207, funnyName:"Protector of Pixels"))
-    staffInfo.append((name:"Jinesha", id: 431854, funnyName:"Third Eye"))
+    staffInfo.append((name:"Jinesh", id: 589267, funnyName:"Third Eye"))
     staffInfo.append((name:"Xavier", id: 313346, funnyName:"Code Landscapist"))
     staffInfo.append((name:"Cheryl", id: 429690, funnyName:"The Sleuth"))
     staffInfo.append((name:"Sai Heng", id: 320258, funnyName:"Postman"))
@@ -213,6 +216,7 @@ var staffs_g: [StaffInfo] = {
 //    staffInfo.append((name:"Vincent Tee", id: 0, funnyName:"BigFoot"))
 //    staffInfo.append((name:"Akash Kedia", id: 0, funnyName:"The Godfather"))
     staffInfo.append((name:"Sathya", id: 511858, funnyName:"The Imp"))
+    staffInfo.append((name:"Daniel", id: 531201, funnyName:""))
     
     staffInfo.append((name:"Constant", id: 3488, funnyName:"C3PO"))
 //    staffInfo.append((name:"David", id: 0, funnyName:"Hardcore Player"))
@@ -224,7 +228,7 @@ var staffs_g: [StaffInfo] = {
     staffInfo.append((name:"Erin", id: 536172, funnyName:""))
     staffInfo.append((name:"William", id: 518543, funnyName:""))
 //    staffInfo.append((name:"Takun Chen", id: 0, funnyName:""))
-    
+    staffInfo.append((name:"Alvin", id: 250163, funnyName:""))
     return staffInfo
 }()
 

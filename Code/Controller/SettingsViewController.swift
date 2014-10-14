@@ -12,11 +12,30 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
 
     @IBOutlet private weak var tableView: UITableView!
     
+    @IBOutlet weak var environmentLabel: UILabel!
+    
+    lazy var appVersionStringWithBuildNumber: String = {
+        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        if let vNum: AnyObject = infoDictionary["CFBundleShortVersionString"] {
+            let versionNumber = vNum as String
+            if let bNum: AnyObject? = infoDictionary[kCFBundleVersionKey as NSString] {
+                let buildNumber = bNum as String
+                return "v\(versionNumber)(\(buildNumber))"
+            }
+        }
+        return "Error build number"
+        }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: "SettingsControlTableViewCell", bundle: nil), forCellReuseIdentifier: kTHSettingsControlTableViewCellIdentifier)
         self.tableView.registerNib(UINib(nibName: "SettingsSliderTableViewCell", bundle: nil), forCellReuseIdentifier: kTHSettingsSliderTableViewCellIdentifier)
         // Do any additional setup after loading the view.
+        switch kTHGamesServerMode {
+        case .Staging:
+            environmentLabel.text = "Staging - \(appVersionStringWithBuildNumber)"
+        case .Prod:
+            environmentLabel.text = "Production - \(appVersionStringWithBuildNumber)"
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -206,4 +225,6 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         view.layoutSubviews()
         return view
     }
+    
+    
 }

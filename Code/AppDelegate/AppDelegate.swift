@@ -36,10 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
-        
+        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge | .Sound | .Alert, categories: nil))
         //next revision
 //        setupNotificationHead()
-        
+//        NetworkClient.sharedClient.logout()
         switch kTHGamesServerMode {
         case .Staging:
             println("Current build points to Staging Server.\n")
@@ -85,7 +85,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        NetworkClient.sharedClient.deviceToken = deviceToken.deviceTokenString()
+        if let token = NetworkClient.sharedClient.deviceToken {
+            if !(NetworkClient.sharedClient.deviceToken == deviceToken.deviceTokenString()) {
+                NetworkClient.sharedClient.deviceToken = deviceToken.deviceTokenString()
+            }
+        }
+        
         println(deviceToken.deviceTokenString())
     }
     
@@ -100,9 +105,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
         //TODO: Implement
     }
-
-    
-    
     
     //MARK: Login/Logout
     
@@ -118,11 +120,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     }
     
     func loginSuccessful(notification:NSNotification) {
-        
-        if !UIApplication.sharedApplication().isRegisteredForRemoteNotifications() {
-            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge | .Sound | .Alert, categories: nil))
-        }
-        
         
         self.becomeFirstResponder()
         let obj = notification.userInfo
