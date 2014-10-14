@@ -10,6 +10,7 @@ import UIKit
 
 class WinLoseViewController: UIViewController {
     
+    @IBOutlet weak var THDollarWonLabel: UILabel!
     @IBOutlet private weak var winLoseLabel: UILabel!
     
     @IBOutlet private weak var winLoseBackgroundImageView: UIImageView!
@@ -135,7 +136,13 @@ class WinLoseViewController: UIViewController {
         for extraDetail in oppResult.resultExtraDetails {
             opponentScore += extraDetail.finalScore
         }
+        let differenceInScore = selfScore - opponentScore
         
+        if differenceInScore > 0 {
+            THDollarWonLabel.text = "TH$ \(differenceInScore.decimalFormattedString)"
+        } else {
+            THDollarWonLabel.text = "TH$ 0"
+        }
     }
     
     // MARK: - Navigation

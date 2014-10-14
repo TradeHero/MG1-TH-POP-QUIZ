@@ -46,7 +46,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         super.viewDidAppear(animated)
         self.navigationController?.showNavigationBar()
         self.loadStaff {
-            self.loadFriends()
+//            self.loadFriends()
         }
     }
     
@@ -126,10 +126,10 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         switch section {
         case 0:
             return THStaffList.count
-        case 1:
-            return THFriendList.count
-        case 2:
-            return FBFriendList.count
+//        case 1:
+//            return THFriendList.count
+//        case 2:
+//            return FBFriendList.count
         default:
             return 0
         }
@@ -148,24 +148,24 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             cell.updateConstraintsIfNeeded()
             cell.delegate = self
             return cell
-        case 1:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
-            let friendUser = THFriendList[indexPath.row]
-            cell.bindFriendUser(friendUser, index: indexPath.row)
-            cell.layoutIfNeeded()
-            cell.setNeedsUpdateConstraints()
-            cell.updateConstraintsIfNeeded()
-            cell.delegate = self
-            return cell
-        case 2:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
-            let friendUser = FBFriendList[indexPath.row]
-            cell.bindFriendUser(friendUser, index: indexPath.row)
-            cell.layoutIfNeeded()
-            cell.setNeedsUpdateConstraints()
-            cell.updateConstraintsIfNeeded()
-            cell.delegate = self
-            return cell
+//        case 1:
+//            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
+//            let friendUser = THFriendList[indexPath.row]
+//            cell.bindFriendUser(friendUser, index: indexPath.row)
+//            cell.layoutIfNeeded()
+//            cell.setNeedsUpdateConstraints()
+//            cell.updateConstraintsIfNeeded()
+//            cell.delegate = self
+//            return cell
+//        case 2:
+//            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
+//            let friendUser = FBFriendList[indexPath.row]
+//            cell.bindFriendUser(friendUser, index: indexPath.row)
+//            cell.layoutIfNeeded()
+//            cell.setNeedsUpdateConstraints()
+//            cell.updateConstraintsIfNeeded()
+//            cell.delegate = self
+//            return cell
         default:
             return UITableViewCell()
         }
@@ -175,7 +175,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     //MARK:- UITableViewDelegate
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -189,16 +189,16 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                 return nil
             }
             return self.createTradeHeroStaffTableSectionHeaderView()
-        case 1:
-            if THFriendList.count == 0 {
-                return nil
-            }
-            return self.createTradeHeroFriendsTableSectionHeaderView()
-        case 2:
-            if FBFriendList.count == 0 {
-                return nil
-            }
-            return self.createFacebookFriendsTableSectionHeaderView()
+//        case 1:
+//            if THFriendList.count == 0 {
+//                return nil
+//            }
+//            return self.createTradeHeroFriendsTableSectionHeaderView()
+//        case 2:
+//            if FBFriendList.count == 0 {
+//                return nil
+//            }
+//            return self.createFacebookFriendsTableSectionHeaderView()
         default:
             return nil
         }
@@ -211,16 +211,16 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                 return 0
             }
             return 25
-        case 1:
-            if THFriendList.count == 0 {
-                return 0
-            }
-            return 25
-        case 2:
-            if FBFriendList.count == 0 {
-                return 0
-            }
-            return 25
+//        case 1:
+//            if THFriendList.count == 0 {
+//                return 0
+//            }
+//            return 25
+//        case 2:
+//            if FBFriendList.count == 0 {
+//                return 0
+//            }
+//            return 25
         default:
             return 0
         }

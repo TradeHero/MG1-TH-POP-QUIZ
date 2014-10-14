@@ -196,7 +196,7 @@ typealias StaffInfo = (name:String, id:Int, funnyName:String)
 var staffs_g: [StaffInfo] = {
     var staffInfo = [StaffInfo]()
     
-    staffInfo.append((name:"Dinesh", id: 572993, funnyName:"High Frequency TradeHero"))
+    staffInfo.append((name:"Dinesh", id: 1156, funnyName:"High Frequency TradeHero"))
     staffInfo.append((name:"Dominic", id: 1180, funnyName:"GW2310FB-1"))
     staffInfo.append((name:"Seb", id: 527887, funnyName:"Toast Provisioner"))
     staffInfo.append((name:"Stella", id: 653913, funnyName:"The Whip"))
