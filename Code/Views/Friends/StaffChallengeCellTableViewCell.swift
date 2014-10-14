@@ -34,6 +34,8 @@ class StaffChallengeCellTableViewCell: UITableViewCell {
         NetworkClient.fetchImageFromURLString(staffUser.pictureURL, progressHandler: nil) { [unowned self] (image, error) -> () in
             if let img = image {
                 self.avatarView.image = image.centerCropImage()
+            } else {
+                self.avatarView.image = UIImage(named: "EmptyAvatar")
             }
         }
     }
