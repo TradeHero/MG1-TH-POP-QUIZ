@@ -54,7 +54,7 @@ let kTHGameKeychainIdentifierKey = "\(kConstantPrefix)GameKeychainIdentifier"
 
 let kTHGameKeychainBasicAccKey = "\(kConstantPrefix)GameKeychainBasicAcc"
 
-let kTHGameKeychainFacebookAccKey = "\(kConstantPrefix)GameKeychainFacebookAcc"
+let kTHGameKeychainFacebookAccountKey = "\(kConstantPrefix)GameKeychainFacebookAccount"
 
 let kTHGameKeychainDeviceTokenKey = "\(kConstantPrefix)GameKeychainDeviceToken"
 
@@ -201,7 +201,7 @@ var staffs_g: [StaffInfo] = {
     staffInfo.append((name:"Seb", id: 527887, funnyName:"Toast Provisioner"))
     staffInfo.append((name:"Stella", id: 653913, funnyName:"The Whip"))
     staffInfo.append((name:"Ryne", id: 2415, funnyName:"Mind muncher"))
-    staffInfo.append((name:"Albert", id: 2207, funnyName:"Protector of Pixels"))
+    staffInfo.append((name:"Albert", id: 593250, funnyName:"Protector of Pixels"))
     staffInfo.append((name:"Jinesh", id: 589267, funnyName:"Third Eye"))
     staffInfo.append((name:"Xavier", id: 313346, funnyName:"Code Landscapist"))
     staffInfo.append((name:"Cheryl", id: 429690, funnyName:"The Sleuth"))

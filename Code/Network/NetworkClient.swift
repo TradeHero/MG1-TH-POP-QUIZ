@@ -737,7 +737,7 @@ class NetworkClient {
     ///
     private func saveCredentials(credentialString:String){
         
-        SSKeychain.setPassword("\(credentialString)", forService: kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccKey)
+        SSKeychain.setPassword("\(credentialString)", forService: kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccountKey)
         
         self.credentials = credentialString
     }
@@ -766,7 +766,7 @@ class NetworkClient {
             
             for userData in keychainAcc {
                 if let data = userData as? [String: AnyObject] {
-                    let secret = SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccKey)
+                    let secret = SSKeychain.passwordForService(kTHGameKeychainIdentifierKey, account: kTHGameKeychainFacebookAccountKey)
                     self.credentials = secret
                     return secret
                 }

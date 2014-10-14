@@ -39,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge | .Sound | .Alert, categories: nil))
         //next revision
 //        setupNotificationHead()
-//        NetworkClient.sharedClient.logout()
         switch kTHGamesServerMode {
         case .Staging:
             println("Current build points to Staging Server.\n")
