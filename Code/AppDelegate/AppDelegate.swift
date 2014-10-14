@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
+        SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: "THGameKeychainFacebookAcc")
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge | .Sound | .Alert, categories: nil))
         //next revision
 //        setupNotificationHead()

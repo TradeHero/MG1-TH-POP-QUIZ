@@ -38,10 +38,14 @@ class LoginViewController: UIViewController {
             var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
             hud.indicatorView = nil
             hud.textLabel.text = "Logging in..."
-            NetworkClient.sharedClient.loginUserWithFacebookAuth(credential) {
+            NetworkClient.sharedClient.loginUserWithFacebookAuth(credential, loginSuccessHandler: {
                 [unowned self] user in
                 loginOnce = true
                 hud.dismissAfterDelay(0, animated: true)
+                }) {
+            error in
+                    hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
+                    hud.textLabel.text = "\(error)"
             }
             
         }
@@ -53,12 +57,26 @@ class LoginViewController: UIViewController {
         hud.indicatorView = nil
         hud.textLabel.text = "Logging in..."
         accountStore.requestAccessToAccountsWithType(facebookTypeAccount, options: [ACFacebookAppIdKey : kTHFacebookAppID]) { [unowned self] (granted, error) -> Void in
-            if hud != nil { hud.dismissAfterDelay(1.5, animated: true) }
+            
             if granted {
                 if let accts = self.accountStore.accountsWithAccountType(facebookTypeAccount) as? [ACAccount] {
+                    if accts.count > 1 {
+                        hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
+                        hud.textLabel.text = "You have more than one Facebook account linked, please make sure that you only have on Facebook account connected."
+                    }
                     self.facebookAccount = accts.last
-                    let accessToken = self.facebookAccount.credential.oauthToken
-                    NetworkClient.sharedClient.loginUserWithFacebookAuth(accessToken) { user in
+                    if let fb = self.facebookAccount {
+                        let accessToken = self.facebookAccount.credential.oauthToken
+                        NetworkClient.sharedClient.loginUserWithFacebookAuth(accessToken, loginSuccessHandler: {user in
+                            
+                            }) {
+                            error in
+                            hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
+                            hud.textLabel.text = "\(error)"
+                        }
+                    } else {
+                        hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
+                        hud.textLabel.text = "Facebook token does not exist."
                     }
                 }
             } else {
@@ -68,6 +86,7 @@ class LoginViewController: UIViewController {
                     hud.dismissAfterDelay(5, animated: true)
                 }
             }
+                hud.dismissAfterDelay(1.5, animated: true)
         }
         
     }
