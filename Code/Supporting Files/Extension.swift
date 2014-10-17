@@ -425,7 +425,7 @@ extension JGProgressHUD {
     
     class func progressHUDWithCustomisedStyleInView(view:UIView, style:JGProgressHUDStyle = .ExtraLight) -> JGProgressHUD! {
         let hud = self.progressHUDWithCustomisedStyle(style)
-        hud.showInView(view)
+        hud.showInView(UIApplication.sharedApplication().delegate?.window!)
         return hud
     }
 }
