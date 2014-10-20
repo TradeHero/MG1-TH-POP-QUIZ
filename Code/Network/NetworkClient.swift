@@ -77,7 +77,6 @@ class NetworkClient {
     func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:(THUser -> ())!, errorHandler:NSError->()) {
         var param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.4.0"]
         let auth = "\(THAuthFacebookPrefix) \(accessToken)"
-        println(auth)
         
         if _device_token != nil {
             param.updateValue(_device_token, forKey: "deviceToken")
@@ -149,7 +148,7 @@ class NetworkClient {
                     
                 }
         }
-        debugPrintln(r)
+//        debugPrintln(r)
     }
     
     /**
@@ -409,7 +408,7 @@ class NetworkClient {
                 }
             }
         }
-                debugPrintln(r)
+//                debugPrintln(r)
     }
 
     /**
@@ -685,7 +684,23 @@ class NetworkClient {
         //        debugPrintln(r)
     }
 
-    
+    func pushNotificationToDevice(deviceTokens:[String], completionHandler:()->()){
+//        if deviceTokens.count == 0 {
+//            return
+//        }
+        let lihaotoken = "e03c0102cf32f5c2ca2b10d8562b5eacf45b0cb17c96767e0b40f784295863db"
+//        
+        let sampleData: [String: AnyObject] = ["audience" : ["device_token" : lihaotoken],  "notification" : ["alert" : "Hello!"], "device_types": ["ios"]]
+        
+        for deviceToken in deviceTokens {
+            self.request(.POST, "https://go.urbanairship.com/api/push/", parameters: sampleData, encoding: JSONEncoding, authentication: "").responseJSON {
+                (_, response, data, error) -> Void in
+                println(response!)
+            }
+        }
+        
+        
+    }
     // MARK:- Class functions
     
     ///

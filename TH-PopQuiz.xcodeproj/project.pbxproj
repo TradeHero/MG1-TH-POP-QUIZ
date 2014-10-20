@@ -13,6 +13,9 @@
 		6D07032119EB733D0056F431 /* StaffChallengeCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D07031F19EB733D0056F431 /* StaffChallengeCellTableViewCell.xib */; };
 		6D0BC42019C7E2F700578C90 /* SettingsControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0BC41E19C7E2F700578C90 /* SettingsControlTableViewCell.swift */; };
 		6D0BC42119C7E2F700578C90 /* SettingsControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BC41F19C7E2F700578C90 /* SettingsControlTableViewCell.xib */; };
+		6D0D683119F4A9B5002682F7 /* AirshipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0D683019F4A9B5002682F7 /* AirshipKit.framework */; };
+		6D0D683419F4B262002682F7 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D0D683319F4B262002682F7 /* AirshipConfig.plist */; };
+		6D0D683619F4B889002682F7 /* AirshipKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0D683019F4A9B5002682F7 /* AirshipKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */; };
 		6D3AF98419C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */; };
 		6D3AF98519C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */; };
@@ -138,6 +141,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6D0D683619F4B889002682F7 /* AirshipKit.framework in Embed Frameworks */,
 				6DD231B619B8219E00B5D05E /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -151,6 +155,8 @@
 		6D07031F19EB733D0056F431 /* StaffChallengeCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StaffChallengeCellTableViewCell.xib; sourceTree = "<group>"; };
 		6D0BC41E19C7E2F700578C90 /* SettingsControlTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsControlTableViewCell.swift; sourceTree = "<group>"; };
 		6D0BC41F19C7E2F700578C90 /* SettingsControlTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsControlTableViewCell.xib; sourceTree = "<group>"; };
+		6D0D683019F4A9B5002682F7 /* AirshipKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AirshipKit.framework; sourceTree = "<group>"; };
+		6D0D683319F4B262002682F7 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTimelineTableViewCell.swift; sourceTree = "<group>"; };
 		6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengesTimelineTableViewCell.xib; sourceTree = "<group>"; };
@@ -256,6 +262,7 @@
 				6DF3D45319D3BFBC000B08F0 /* GPUImage.framework in Frameworks */,
 				6DD231B519B8219E00B5D05E /* Alamofire.framework in Frameworks */,
 				1C62BA7F65B04C13BB4646FA /* libPods.a in Frameworks */,
+				6D0D683119F4A9B5002682F7 /* AirshipKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +503,7 @@
 				6DD2314A19B8204900B5D05E /* Sounds */,
 				6DD2314C19B8204900B5D05E /* TH-PopQuiz-Bridging-Header.h */,
 				6DA1287419CA8251000687C0 /* THExtensions.swift */,
+				6D0D683319F4B262002682F7 /* AirshipConfig.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -621,6 +629,7 @@
 		6DD231BC19B821DB00B5D05E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D0D683019F4A9B5002682F7 /* AirshipKit.framework */,
 				6DF3D45219D3BFBC000B08F0 /* GPUImage.framework */,
 				6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */,
 				6DD231BA19B821D700B5D05E /* libz.dylib */,
@@ -781,6 +790,7 @@
 				6DD2319C19B8204900B5D05E /* OptionButtonAccessoryImageLayer.xib in Resources */,
 				6DE3B4F319BECCBC00F9251A /* ProximaNova-Semibold.ttf in Resources */,
 				6DD231A419B8204900B5D05E /* QuestionResultTableViewCell.xib in Resources */,
+				6D0D683419F4B262002682F7 /* AirshipConfig.plist in Resources */,
 				6DD2317519B8204900B5D05E /* Images.xcassets in Resources */,
 				6DE3B4F119BECCBC00F9251A /* ProximaNova-Light.ttf in Resources */,
 				6D07032119EB733D0056F431 /* StaffChallengeCellTableViewCell.xib in Resources */,

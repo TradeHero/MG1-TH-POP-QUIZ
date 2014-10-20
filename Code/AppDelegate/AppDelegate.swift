@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AirshipKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDelegate {
@@ -36,8 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
-        SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: "THGameKeychainFacebookAcc")
-        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge | .Sound | .Alert, categories: nil))
+//        SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: "THGameKeychainFacebookAcc")
+//        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge | .Sound | .Alert, categories: nil))
         //next revision
 //        setupNotificationHead()
         switch kTHGamesServerMode {
@@ -50,6 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         self.bgmPlayer.volume = kTHBackgroundMusicValue
         self.bgmPlayer.play()
         self.registerLoginNotification()
+        
+        
+        let config = UAConfig.defaultConfig()
+        UAirship.takeOff(config)
+        
+        
+        UAPush.shared().userNotificationTypes = (UIUserNotificationType.Badge | UIUserNotificationType.Sound | UIUserNotificationType.Alert)
+        UAPush.shared().userPushNotificationsEnabled = true
         return true
     }
 
@@ -99,9 +108,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         debugPrintln("Fail to register for push notification: \(error)")
     }
     
-    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
-        application.registerForRemoteNotifications()
-    }
+//    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+//        application.registerForRemoteNotifications()
+//    }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
         //TODO: Implement
