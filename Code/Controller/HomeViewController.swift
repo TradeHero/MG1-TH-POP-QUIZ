@@ -81,7 +81,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //                hud.dismissAnimated(true)
 //            }
 //        }
-        NetworkClient.sharedClient.pushNotificationToDevice([]) {
+        NetworkClient.sharedClient.pushNotificationToDevice(["e03c0102cf32f5c2ca2b10d8562b5eacf45b0cb17c96767e0b40f784295863db"], alertMessage: "Hello Li Hao") {
             
         }
     }

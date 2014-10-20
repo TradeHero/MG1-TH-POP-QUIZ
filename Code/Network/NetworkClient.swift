@@ -684,21 +684,44 @@ class NetworkClient {
         //        debugPrintln(r)
     }
 
-    func pushNotificationToDevice(deviceTokens:[String], completionHandler:()->()){
-//        if deviceTokens.count == 0 {
-//            return
-//        }
-        let lihaotoken = "e03c0102cf32f5c2ca2b10d8562b5eacf45b0cb17c96767e0b40f784295863db"
-//        
-        let sampleData: [String: AnyObject] = ["audience" : ["device_token" : lihaotoken],  "notification" : ["alert" : "Hello!"], "device_types": ["ios"]]
-        
-        for deviceToken in deviceTokens {
-            self.request(.POST, "https://go.urbanairship.com/api/push/", parameters: sampleData, encoding: JSONEncoding, authentication: "").responseJSON {
-                (_, response, data, error) -> Void in
-                println(response!)
-            }
+    func pushNotificationToDevice(deviceTokens:[String], alertMessage:String?, completionHandler:()->()){
+        if deviceTokens.count == 0 {
+            return
         }
+        var appKey = "zH67PxmUQBCrerb3i9WhMQ"
+        var appMasterPW = "ytXzvUeJSnGePt4WQVDkSA"
         
+//        switch kTHGamesServerMode {
+//        case .Staging:
+//            appKey = "zH67PxmUQBCrerb3i9WhMQ"
+//            appMasterPW = "ytXzvUeJSnGePt4WQVDkSA"
+//        case .Prod:
+//            appKey = "4TqEKTVwRUWCc4xcxfvIBg"
+//            appMasterPW = "F59gvDjdRpWt9PmcDRcjuQ"
+//        }
+        
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: "https://go.urbanairship.com/api/push/".URLString))
+        mutableURLRequest.HTTPMethod = Method.POST.toRaw()
+        mutableURLRequest.setValue("application/vnd.urbanairship+json; version=3;", forHTTPHeaderField: "Accept")
+        
+        for d in deviceTokens {
+            var notificationDict = [String: String]()
+            if let a = alertMessage {
+                notificationDict.updateValue(a, forKey: "alert")
+            }
+            
+            let data: [String: AnyObject] = ["audience" : ["device_token" : d],  "notification" : notificationDict, "device_types": ["ios"]]
+            let r = self.manager.request(ParameterEncoding.JSON.encode(mutableURLRequest, parameters: data).0).authenticate(user: appKey, password: appMasterPW).responseJSON {
+                (_, response, data, error) -> Void in
+                if let err = error {
+                    debugPrintln(error)
+                }
+                if let d: AnyObject = data {
+                    debugPrintln(data)
+                }
+            }
+//            debugPrintln(r)
+        }
         
     }
     // MARK:- Class functions
