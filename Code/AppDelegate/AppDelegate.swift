@@ -37,6 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
+//        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge | .Sound | .Alert, categories: nil))
+        let config = UAConfig.defaultConfig()
+        UAirship.takeOff(config)
+        UAPush.shared().userNotificationTypes = (UIUserNotificationType.Badge | UIUserNotificationType.Sound | UIUserNotificationType.Alert)
+        UAPush.shared().userPushNotificationsEnabledByDefault = true
+        UAPush.shared().updateRegistration()
+        
         switch kTHGamesServerMode {
         case .Staging:
             println("Current build points to Staging Server.\n")
@@ -48,14 +55,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         self.bgmPlayer.play()
         self.registerLoginNotification()
         
-        
-        let config = UAConfig.defaultConfig()
-        UAirship.takeOff(config)
-        
-        
-        UAPush.shared().userNotificationTypes = (UIUserNotificationType.Badge | UIUserNotificationType.Sound | UIUserNotificationType.Alert)
-        UAPush.shared().userPushNotificationsEnabled = true
         return true
+    }
+
+    func autoLogin() {
+        if let credential = NetworkClient.sharedClient.credentials {
+            var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(UIView())
+            hud.indicatorView = nil
+            hud.textLabel.text = "Logging in..."
+            NetworkClient.sharedClient.loginUserWithFacebookAuth(credential, loginSuccessHandler: {
+                [unowned self] user in
+                loginOnce = true
+                hud.dismissAfterDelay(0, animated: true)
+                }) {
+                    error in
+                    hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
+                    hud.textLabel.text = "\(error)"
+            }
+            
+        }
     }
 
     func applicationWillResignActive(application: UIApplication!) {
@@ -97,7 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
             }
         }
         
-        println(deviceToken.deviceTokenString())
+        println("\n\(deviceToken.deviceTokenString())\n\n")
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {

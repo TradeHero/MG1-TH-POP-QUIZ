@@ -140,8 +140,10 @@ class NetworkClient {
                     debugPrintln("Game created with game ID: \(game.gameID)")
                     game.fetchUsers {
                         game.fetchResults {
-                            if let c = completionHandler {
-                                c(game)
+                            self.sendPushNotification(game.opponentPlayerID, message:"\(game.initiatingPlayer.displayName) sent you a challenge") {
+                                if let c = completionHandler {
+                                    c(game)
+                                }
                             }
                         }
                     }
@@ -686,8 +688,10 @@ class NetworkClient {
 
     func pushNotificationToDevice(deviceTokens:[String], alertMessage:String?, completionHandler:()->()){
         if deviceTokens.count == 0 {
+            debugPrintln("No device token, fail sending push notification")
             return
         }
+        
         var appKey = "zH67PxmUQBCrerb3i9WhMQ"
         var appMasterPW = "ytXzvUeJSnGePt4WQVDkSA"
         
@@ -718,12 +722,48 @@ class NetworkClient {
                 }
                 if let d: AnyObject = data {
                     debugPrintln(data)
+                    completionHandler()
                 }
             }
 //            debugPrintln(r)
         }
         
+        
     }
+    
+    /**
+        GET api/users/
+    */
+    func fetchUserDeviceTokens(id:Int, completionHandler:[String]->()){
+        let url = "\(THServerAPIBaseURL)/users/\(id)/token"
+        debugPrintln("Fetching device token with user ID: \(id)...")
+        
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+            _, response, content, error in
+            if let data: AnyObject = content {
+                if let tokens = data as? [String] {
+                    for token in tokens {
+                        println(token)
+                    }
+                    completionHandler(tokens)
+                } else {
+                    completionHandler([])
+                }
+            } else {
+                completionHandler([])
+            }
+        }
+        
+        debugPrintln(r)
+    }
+    
+    private func sendPushNotification(targetUserId:Int, message: String?, completionHandler:()->()) {
+        self.fetchUserDeviceTokens(targetUserId) {
+            [unowned self] tokens in
+            self.pushNotificationToDevice(tokens, alertMessage: message, completionHandler: completionHandler)
+        }
+    }
+
     // MARK:- Class functions
     
     ///

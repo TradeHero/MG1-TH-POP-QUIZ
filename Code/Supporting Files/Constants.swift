@@ -16,7 +16,7 @@ enum Mode: Int {
 
 let kTHFacebookAppID = "431745923529834"
 
-let kTHGamesServerMode = Mode.Prod
+let kTHGamesServerMode = Mode.Staging
 
 let kConstantPrefix = "TH"
 
@@ -211,6 +211,7 @@ var staffs_g: [StaffInfo] = {
     staffInfo.append((name:"Arup", id: 475785, funnyName:"The Magnet"))
     staffInfo.append((name:"Eva", id: 298275, funnyName:"Ads Addict"))
     staffInfo.append((name:"Vivian", id: 527491, funnyName:""))
+    staffInfo.append((name:"James", id: 6627, funnyName:"Ni Hao"))
 //    staffInfo.append((name:"Yurike Chandra", id: 0, funnyName:"Designer"))
     staffInfo.append((name:"Malvin", id: 542968, funnyName:""))
 //    staffInfo.append((name:"Vincent Tee", id: 0, funnyName:"BigFoot"))

@@ -68,21 +68,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK:- Actions
     
     @IBAction func quickGameAction(sender: UIButton) {
-//        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
-//        hud.textLabel.text = "Creating quick game..."
-//        NetworkClient.sharedClient.createQuickGame {
-//            [unowned self] in
-//            if let g = $0 {
-//                hud.textLabel.text = "Creating game with user.."
-//                
-//                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
-//                vc.bindGame($0)
-//                self.navigationController?.pushViewController(vc, animated: true)
-//                hud.dismissAnimated(true)
-//            }
-//        }
-        NetworkClient.sharedClient.pushNotificationToDevice(["e03c0102cf32f5c2ca2b10d8562b5eacf45b0cb17c96767e0b40f784295863db"], alertMessage: "Hello Li Hao") {
-            
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        hud.textLabel.text = "Creating quick game..."
+        NetworkClient.sharedClient.createQuickGame {
+            [unowned self] in
+            if let g = $0 {
+                hud.textLabel.text = "Creating game with user.."
+                
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                vc.bindGame($0)
+                self.navigationController?.pushViewController(vc, animated: true)
+                hud.dismissAnimated(true)
+            }
         }
     }
     
@@ -112,7 +109,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         hud?.textLabel.text = "Loading challenges.."
         
-        let completionHandler: () -> () = {[unowned self] in
+        let completionHandler: () -> () = {
+            [unowned self] in
             numberLoaded++
             
             if numberLoaded == 3 {
