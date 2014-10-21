@@ -49,7 +49,7 @@ class SettingsControlTableViewCell: UITableViewCell {
         self.contentView.addSubview(toggleSwitch)
         
         toggleSwitch.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 5)
-        toggleSwitch.autoConstrainAttribute(NSLayoutAttribute.CenterY.rawValue, toAttribute: NSLayoutAttribute.CenterY.rawValue, ofView: toggleSwitch.superview, withMultiplier: 1)
+        toggleSwitch.autoConstrainAttribute(.Horizontal, toAttribute: .Horizontal, ofView: toggleSwitch.superview, withMultiplier: 1)
         self.toggleSwitch.autoSetDimensionsToSize(CGSizeMake(65, 25))
         toggleSwitch.addTarget(self, action: "toggleAction:", forControlEvents: .ValueChanged)
         // Initialization code

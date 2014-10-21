@@ -18,8 +18,6 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-JGProgressHUD.xcscheme</key>
 		<dict>
@@ -30,8 +28,6 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-PureLayout.xcscheme</key>
 		<dict>
@@ -42,8 +38,6 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-SKBounceAnimation.xcscheme</key>
 		<dict>
@@ -54,65 +48,61 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0DF142E8B4D1A4ADC53E0D66</key>
+		<key>1133DDE784768D118AAAA2D7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>13D217B189D81F965829448E</key>
+		<key>35A88E6A8D77D66B35BE9AF3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2C71C86D3644F32DB22B49FD</key>
+		<key>6C2E08F1A7E3F9B238B6F297</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2CB1DCA13594833723007A56</key>
+		<key>779464F6E86E9136BD297A9B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3362D2354D1F1B9923192D3A</key>
+		<key>B631D4DC163DED2969B7F98B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>71992E9D1837C7F112C4AE76</key>
+		<key>B808D29FDB6EB1130F728AF3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>80EB9169671FA25AAC4AA012</key>
+		<key>D57BEB6B5EBA07B74E32E349</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8EDA6E5C0B72659B7112BAC6</key>
+		<key>DA587B004449CCD3CFBE4CB5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A5FC6FB888A0115DF425D8EA</key>
+		<key>EEFFEB70E77E65F2619FEEBC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A9DD93C4F773BA167975399E</key>
+		<key>F013C897E1DA3A62FA5A0E6B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

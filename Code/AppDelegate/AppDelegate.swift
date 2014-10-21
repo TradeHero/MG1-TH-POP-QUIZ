@@ -115,6 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         }
         
         println("\n\(deviceToken.deviceTokenString())\n\n")
+        autoLogin()
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {

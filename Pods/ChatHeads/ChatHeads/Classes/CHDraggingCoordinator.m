@@ -38,7 +38,7 @@ typedef enum {
     UIView *aCloseView = [[UIView alloc] initWithFrame:bounds];
     aCloseView.layer.cornerRadius = 30;
     aCloseView.backgroundColor = [UIColor lightGrayColor];
-    aCloseView.alpha = 0;
+    aCloseView.alpha = 0.8;
     
     return [self initWithWindow:window draggableViewBounds:bounds closeView:aCloseView];
 }
@@ -181,8 +181,7 @@ typedef enum {
 - (BOOL)shouldRemoveDraggableView:(CHDraggableView *)view
 {
     // this determines if based on the draggable and close view positions, the draggable should be closed aka removed
-//    return CGRectIntersectsRect(view.frame, self.closeView.frame);
-    return NO;
+    return CGRectIntersectsRect(view.frame, self.closeView.frame);
 }
 
 - (void)draggableView:(CHDraggableView *)view didMoveToPoint:(CGPoint)point

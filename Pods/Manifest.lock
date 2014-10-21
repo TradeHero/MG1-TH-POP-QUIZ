@@ -6,7 +6,7 @@ PODS:
   - EGOCache (2.1)
   - JGProgressHUD (1.2.2)
   - LDProgressView (1.2.1)
-  - PureLayout (1.1.0)
+  - PureLayout (2.0.1)
   - SDWebImage (3.7.1):
     - SDWebImage/Core
   - SDWebImage/Core (3.7.1)
@@ -18,7 +18,7 @@ DEPENDENCIES:
   - EGOCache (~> 2.1)
   - JGProgressHUD (~> 1.2.2)
   - LDProgressView (~> 1.2.1)
-  - PureLayout (~> 1.1.0)
+  - PureLayout (~> 2.0.1)
   - SDWebImage (~> 3.7.1)
   - SSKeychain (~> 1.2.2)
 
@@ -28,9 +28,9 @@ SPEC CHECKSUMS:
   EGOCache: bf414333c425fe47f5182351d1dd47ebf72d8352
   JGProgressHUD: a7c58f711eec0b67f257a0821c0bac9194c72398
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
-  PureLayout: c8960fa0f3b40d849d5e177d699d0148faa63b63
+  PureLayout: 12eca5b6dc94f1a03fdf255d640604584ff1b55b
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SKBounceAnimation: a47c30f67d3e4b948b1823ce5957d72d4382dd73
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
 
-COCOAPODS: 0.34.1
+COCOAPODS: 0.34.2

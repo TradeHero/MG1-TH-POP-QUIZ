@@ -106,8 +106,8 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
 //            self.emptyTimelineView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
         }
         
-        self.emptyTimelineView.autoConstrainAttribute(NSLayoutAttribute.CenterX.rawValue, toAttribute: NSLayoutAttribute.CenterX.rawValue, ofView: self.emptyTimelineView.superview, withMultiplier: 1)
-        self.emptyTimelineView.autoConstrainAttribute(NSLayoutAttribute.CenterY.rawValue, toAttribute: NSLayoutAttribute.CenterY.rawValue, ofView: self.emptyTimelineView.superview, withMultiplier: 1)
+        self.emptyTimelineView.autoConstrainAttribute(.Vertical, toAttribute: .Vertical, ofView: self.emptyTimelineView.superview, withMultiplier: 1)
+        self.emptyTimelineView.autoConstrainAttribute(.Horizontal, toAttribute: .Horizontal, ofView: self.emptyTimelineView.superview, withMultiplier: 1)
         self.emptyTimelineView.autoSetDimensionsToSize(CGSizeMake(258, 284))
     }
     

@@ -325,8 +325,8 @@ class OptionButton: DesignableButton {
         trendingTopLayerView.userInteractionEnabled = false
         
         self.addSubview(trendingTopLayerView)
-        trendingTopLayerView.autoConstrainAttribute(NSLayoutAttribute.CenterX.rawValue, toAttribute: NSLayoutAttribute.CenterX.rawValue, ofView: trendingTopLayerView.superview, withMultiplier: 1)
-        trendingTopLayerView.autoConstrainAttribute(NSLayoutAttribute.CenterY.rawValue, toAttribute: NSLayoutAttribute.CenterY.rawValue, ofView: trendingTopLayerView.superview, withMultiplier: 1)
+        trendingTopLayerView.autoConstrainAttribute(.Vertical, toAttribute: .Vertical, ofView: trendingTopLayerView.superview, withMultiplier: 1)
+        trendingTopLayerView.autoConstrainAttribute(.Horizontal, toAttribute: .Horizontal, ofView: trendingTopLayerView.superview, withMultiplier: 1)
         
         trendingTopLayerView.autoSetDimensionsToSize(CGSizeMake(140, 102))
     }
