@@ -115,7 +115,7 @@ class OverlayProgressView: UIView {
         CGPathAddLineToPoint(path0, nil, -width / 2, height / 2)
         CGPathAddLineToPoint(path0, nil, -width / 2, 0)
         CGPathAddLineToPoint(path0, nil, (CGFloat(cosf(Float(M_PI))) * outerRadius), 0)
-        CGPathAddArc(path0, nil, 0, 0, outerRadius, CGFloat(M_PI), 0, 1)
+        CGPathAddArc(path0, nil, 0, 0, outerRadius, CGFloat(M_PI), 0.0, true)
         CGPathAddLineToPoint(path0, nil, width / 2, 0)
         CGPathCloseSubpath(path0)
         

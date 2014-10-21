@@ -16,7 +16,7 @@ class InAppNotificationTableViewController: UITableViewController, NotificationT
         super.viewDidLoad()
 //        self.navigationItem.title = "Notifications"
        self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0xFF4069))
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
         
         self.tableView.registerNib(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: kTHNotificationTableViewCellIdentifier)
         self.tableView.rowHeight = UITableViewAutomaticDimension

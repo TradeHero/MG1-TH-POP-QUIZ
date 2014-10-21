@@ -277,11 +277,11 @@ extension UIImage {
         // Crop logic
         let imageRef = CGImageCreateWithImageInRect(self.CGImage, clippedRect)
 
-        return UIImage(CGImage: imageRef)
+        return UIImage(CGImage: imageRef)!
     }
     
     func transparencyToWhiteMatte() -> UIImage {
-        return UIImage(data: UIImageJPEGRepresentation(self, 1))
+        return UIImage(data: UIImageJPEGRepresentation(self, 1)!)!
     }    
     
     private func createARGBBitmapContext(inImage: CGImageRef) -> CGContext {
@@ -304,7 +304,7 @@ extension UIImage {
         // Allocate memory for image data. This is the destination in memory
         // where any drawing to the bitmap context will be rendered.
         let bitmapData = malloc(CUnsignedLong(bitmapByteCount))
-        let bitmapInfo = CGBitmapInfo.fromRaw(CGImageAlphaInfo.PremultipliedFirst.toRaw())!
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
         
         // Create the bitmap context. We want pre-multiplied ARGB, 8-bits
         // per component. Regardless of what the source image format is
@@ -350,14 +350,14 @@ extension String {
     
     func encodeToBase64Encoding() -> String {
         let utf8str = self.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        let base64EncodedString = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!)
+        let base64EncodedString = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
         return base64EncodedString!
     }
     
     func decodeFromBase64Encoding() -> String {
-        let base64data = NSData(base64EncodedString: self, options: NSDataBase64DecodingOptions.fromRaw(0)!)
-        let decodedString = NSString(data: base64data, encoding: NSUTF8StringEncoding)
-        return decodedString
+        let base64data = NSData(base64EncodedString: self, options: NSDataBase64DecodingOptions(0))
+        let decodedString = NSString(data: base64data!, encoding: NSUTF8StringEncoding)
+        return decodedString!
     }
     
     var floatValue: Float {
@@ -393,7 +393,7 @@ extension UINavigationController {
 
 extension UIFont {
     func ProximaNovaFont(size:CGFloat) -> UIFont {
-        return UIFont(name: "ProximaNova-Regular", size: size)
+        return UIFont(name: "ProximaNova-Regular", size: size)!
     }
 }
 
@@ -414,12 +414,12 @@ extension AVAudioPlayer {
 
 extension JGProgressHUD {
     class func progressHUDWithCustomisedStyle(style:JGProgressHUDStyle) -> JGProgressHUD! {
-        var hud = JGProgressHUD.progressHUDWithStyle(style)
+        var hud = JGProgressHUD(style: style)
         hud.textLabel.font = UIFont(name: "AngryBirds-Regular", size: 18)
         hud.detailTextLabel.font = UIFont(name: "AngryBirds-Regular", size: 14)
         hud.indicatorView = THIndefiniteIndicatorView(style: style)
         hud.interactionType = .BlockAllTouches
-        hud.animation = JGProgressHUDFadeZoomAnimation()
+//        hud.animation = JGProgressHUDFadeZoomAnimation()
         return hud
     }
     

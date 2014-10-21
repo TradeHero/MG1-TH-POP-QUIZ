@@ -41,8 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         let config = UAConfig.defaultConfig()
         UAirship.takeOff(config)
         UAPush.shared().userNotificationTypes = (UIUserNotificationType.Badge | UIUserNotificationType.Sound | UIUserNotificationType.Alert)
-        UAPush.shared().userPushNotificationsEnabledByDefault = true
-        UAPush.shared().updateRegistration()
+        UAPush.shared().userPushNotificationsEnabled = true
         
         switch kTHGamesServerMode {
         case .Staging:

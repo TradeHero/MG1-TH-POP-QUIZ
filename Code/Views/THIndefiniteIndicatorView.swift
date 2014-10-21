@@ -82,7 +82,7 @@ class THIndefiniteAnnularIndicatorView: UIView {
                 _indefiniteAnimatedLayer.path = smoothedPath.CGPath
                 
                 var maskLayer = CALayer()
-                maskLayer.contents = UIImage(named: "IndefiniteViewAngleMask").CGImage
+                maskLayer.contents = UIImage(named: "IndefiniteViewAngleMask")!.CGImage
                 maskLayer.frame = layer.bounds
                 _indefiniteAnimatedLayer.mask = maskLayer
                 

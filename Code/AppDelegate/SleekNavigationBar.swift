@@ -17,7 +17,7 @@ class SleekNavigationBar: UINavigationBar {
     {
         // Drawing code
 
-        let image = UIImage(named: "NavigationBarBackground")
+        let image = UIImage(named: "NavigationBarBackground")!
         image.drawInRect(CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, preferredHeight))
         
     }

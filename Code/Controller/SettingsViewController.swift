@@ -15,7 +15,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
     @IBOutlet weak var environmentLabel: UILabel!
     
     lazy var appVersionStringWithBuildNumber: String = {
-        let infoDictionary = NSBundle.mainBundle().infoDictionary
+        let infoDictionary = NSBundle.mainBundle().infoDictionary!
         if let vNum: AnyObject = infoDictionary["CFBundleShortVersionString"] {
             let versionNumber = vNum as String
             if let bNum: AnyObject? = infoDictionary[kCFBundleVersionKey as NSString] {

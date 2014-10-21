@@ -369,7 +369,7 @@ class QuizViewController: UIViewController {
     private func revealCorrectAnswer() {
         for option in self.optionGroup {
             if option.is_answer {
-                option.backgroundColor = UIColor(patternImage: UIImage(named: "CorrectAnswerBackground"))
+                option.backgroundColor = UIColor(patternImage: UIImage(named: "CorrectAnswerBackground")!)
                 option.unshrink()
             }
         }

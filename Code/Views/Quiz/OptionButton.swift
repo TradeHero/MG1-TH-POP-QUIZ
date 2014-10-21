@@ -206,14 +206,14 @@ class OptionButton: DesignableButton {
     }
     
     func configureAsCorrect(){
-        self.backgroundColor = UIColor(patternImage: UIImage(named: "CorrectAnswerBackground"))
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "CorrectAnswerBackground")!)
         self.patchTickLogo()
         self.tiltRight()
         self.titleLabel?.textColor = UIColor.whiteColor()
     }
     
     func configureAsFalse(){
-        self.backgroundColor = UIColor(patternImage: UIImage(named: "FalseAnswerBackground"))
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "FalseAnswerBackground")!)
         self.patchCrossLogo()
         self.tiltLeft()
         self.titleLabel?.textColor = UIColor.whiteColor()
@@ -325,8 +325,8 @@ class OptionButton: DesignableButton {
         trendingTopLayerView.userInteractionEnabled = false
         
         self.addSubview(trendingTopLayerView)
-        trendingTopLayerView.autoConstrainAttribute(NSLayoutAttribute.CenterX.toRaw(), toAttribute: NSLayoutAttribute.CenterX.toRaw(), ofView: trendingTopLayerView.superview, withMultiplier: 1)
-        trendingTopLayerView.autoConstrainAttribute(NSLayoutAttribute.CenterY.toRaw(), toAttribute: NSLayoutAttribute.CenterY.toRaw(), ofView: trendingTopLayerView.superview, withMultiplier: 1)
+        trendingTopLayerView.autoConstrainAttribute(NSLayoutAttribute.CenterX.rawValue, toAttribute: NSLayoutAttribute.CenterX.rawValue, ofView: trendingTopLayerView.superview, withMultiplier: 1)
+        trendingTopLayerView.autoConstrainAttribute(NSLayoutAttribute.CenterY.rawValue, toAttribute: NSLayoutAttribute.CenterY.rawValue, ofView: trendingTopLayerView.superview, withMultiplier: 1)
         
         trendingTopLayerView.autoSetDimensionsToSize(CGSizeMake(140, 102))
     }

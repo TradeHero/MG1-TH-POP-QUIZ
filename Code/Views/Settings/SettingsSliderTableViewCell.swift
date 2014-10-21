@@ -44,7 +44,7 @@ class SettingsSliderTableViewCell: UITableViewCell {
     private func configureSlider(){
         controlSlider.selectedBarColor = UIColor(hex: 0xFAD961)
         controlSlider.unselectedBarColor = UIColor.whiteColor()
-        controlSlider.handlerImage = UIImage.imageWithImage(UIImage(named: "SliderHandlerControlBackground"), newSize: CGSizeMake(30, 30))
+        controlSlider.handlerImage = UIImage.imageWithImage(UIImage(named: "SliderHandlerControlBackground")!, newSize: CGSizeMake(30, 30))
         controlSlider.markPositions = nil
     }
 

@@ -704,8 +704,8 @@ class NetworkClient {
 //            appMasterPW = "F59gvDjdRpWt9PmcDRcjuQ"
 //        }
         
-        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: "https://go.urbanairship.com/api/push/".URLString))
-        mutableURLRequest.HTTPMethod = Method.POST.toRaw()
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: "https://go.urbanairship.com/api/push/".URLString)!)
+        mutableURLRequest.HTTPMethod = Method.POST.rawValue
         mutableURLRequest.setValue("application/vnd.urbanairship+json; version=3;", forHTTPHeaderField: "Accept")
         
         for d in deviceTokens {
@@ -881,8 +881,8 @@ class NetworkClient {
     }
 
     private func authenticatedURLRequest(method: Alamofire.Method, URLString: Alamofire.URLStringConvertible, authentication: String) -> NSURLRequest {
-        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: URLString.URLString))
-        mutableURLRequest.HTTPMethod = method.toRaw()
+        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: URLString.URLString)!)
+        mutableURLRequest.HTTPMethod = method.rawValue
         mutableURLRequest.setValue(authentication, forHTTPHeaderField: "Authorization")
         
         return mutableURLRequest

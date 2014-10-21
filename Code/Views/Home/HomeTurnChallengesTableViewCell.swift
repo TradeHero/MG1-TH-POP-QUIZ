@@ -69,14 +69,14 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         case .Nudge, .Invited:
             if game.isGameCompletedByChallenger {
                 var attributedString = NSMutableAttributedString(string:"Your Score: ")
-                var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 14)])
+                var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 14)!])
                 attributedString.appendAttributedString(boldStr)
                 self.scoreDetailLabel.attributedText  = attributedString
             }
         case .Play, .Accept:
             if game.isGameCompletedByChallenger {
                 var attributedString = NSMutableAttributedString(string:"Score: ")
-                var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 14)])
+                var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 14)!])
                 attributedString.appendAttributedString(boldStr)
 
                 self.scoreDetailLabel.attributedText  = attributedString

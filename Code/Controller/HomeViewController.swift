@@ -44,7 +44,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         setupSubviews()
         self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18), NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 53
     }
@@ -316,11 +316,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         rightLabelView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 8)
         
         logoView.autoPinEdgeToSuperviewEdge(.Top, withInset: 23)
-        logoView.autoConstrainAttribute(NSLayoutAttribute.CenterX.toRaw(), toAttribute: NSLayoutAttribute.CenterX.toRaw(), ofView: logoView.superview, withMultiplier: 1)
-        logoView.autoConstrainAttribute(NSLayoutAttribute.Width.toRaw(), toAttribute: NSLayoutAttribute.Height.toRaw(), ofView: logoView, withMultiplier: 1.0)
+        logoView.autoConstrainAttribute(NSLayoutAttribute.CenterX.rawValue, toAttribute: NSLayoutAttribute.CenterX.rawValue, ofView: logoView.superview, withMultiplier: 1)
+        logoView.autoConstrainAttribute(NSLayoutAttribute.Width.rawValue, toAttribute: NSLayoutAttribute.Height.rawValue, ofView: logoView, withMultiplier: 1.0)
         logoView.autoSetDimension(.Height, toSize: 51)
 
-        textLabel.autoConstrainAttribute(NSLayoutAttribute.CenterX.toRaw(), toAttribute: NSLayoutAttribute.CenterX.toRaw(), ofView: textLabel.superview, withMultiplier: 1)
+        textLabel.autoConstrainAttribute(NSLayoutAttribute.CenterX.rawValue, toAttribute: NSLayoutAttribute.CenterX.rawValue, ofView: textLabel.superview, withMultiplier: 1)
         textLabel.autoSetDimensionsToSize(CGSizeMake(208, 38))
         textLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: logoView, withOffset: 7)
         
