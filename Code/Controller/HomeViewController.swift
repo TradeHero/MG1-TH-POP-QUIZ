@@ -13,7 +13,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet private weak var avatarView: AvatarRoundedView!
     @IBOutlet private weak var fullNameView: UILabel!
     @IBOutlet private weak var rankView: UILabel!
-    @IBOutlet weak var bannerBGImageView: DesignableRoundedRectangleView!
     
     private var refreshControl: UIRefreshControl!
     private var openChallenges = [Game]()
@@ -84,18 +83,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func uncheckFBShareAction(sender: AnyObject) {
-        let alertView = UIAlertController(title: "Facebook Sharing", message: "Are you sure you want to do this?", preferredStyle: .Alert)
-        let okAction = UIAlertAction(title: "Yes, challenge my friends!", style: .Default) {
-            action in
+        func showAlertViewConfirmation(){
+            let alertView = UIAlertController(title: "Facebook Sharing", message: "Are you sure you want to do this?", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "Yes, challenge my friends!", style: .Default, handler: nil)
             
+            let cancelAction = UIAlertAction(title: "Later", style: .Cancel) {
+                action in
+                
+            }
+            alertView.addAction(okAction)
+            alertView.addAction(cancelAction)
+            
+            self.presentViewController(alertView, animated: true, completion: nil)
         }
-        
-        let cancelAction = UIAlertAction(title: "Later", style: .Cancel, handler: nil)
-        alertView.addAction(okAction)
-        alertView.addAction(cancelAction)
-        
-        self.presentViewController(alertView, animated: true, completion: nil)
     }
+    
     @IBOutlet weak var uncheckAction: UIImageView!
     //MARK:- Private functions
     private func setupSubviews() {

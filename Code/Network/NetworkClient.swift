@@ -66,6 +66,8 @@ class NetworkClient {
     /// default JSON encoding
     let JSONEncoding = Alamofire.ParameterEncoding.JSON
     
+    var userShareEnabled = false
+    
     // MARK:- Methods
     
     /**
