@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jzv-90-m6Z">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jzv-90-m6Z">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -19,7 +19,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvB-7H-ejU">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HomeSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-z3-tZB">
@@ -34,6 +33,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hOW-Oh-vVN" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="20" y="14" width="63" height="63"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="hOW-Oh-vVN" secondAttribute="height" multiplier="1:1" id="myR-k4-Whz"/>
                                         </constraints>
@@ -46,19 +46,10 @@
                                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQN-Sv-0eE">
-                                        <rect key="frame" x="263" y="30" width="39" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="ZQN-Sv-0eE" secondAttribute="height" multiplier="39:40" id="V96-jO-aF7"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="ProfileDetailDisclosureButton">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
                                         <connections>
-                                            <segue destination="ReR-pk-HA9" kind="push" identifier="ProfileViewPushSegue" id="0P9-Bg-hQB"/>
+                                            <outletCollection property="gestureRecognizers" destination="WJa-VW-SCz" appends="YES" id="45q-aT-t3L"/>
                                         </connections>
-                                    </button>
+                                    </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ryne Cheow" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjv-r9-yGC">
                                         <rect key="frame" x="91" y="34" width="104" height="24"/>
                                         <constraints>
@@ -73,35 +64,22 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="hOW-Oh-vVN" firstAttribute="leading" secondItem="qTb-Ny-vYW" secondAttribute="leading" constant="20" id="31e-9F-9Uw"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZQN-Sv-0eE" secondAttribute="bottom" constant="23" id="4gc-b9-1Av"/>
                                     <constraint firstItem="Rjv-r9-yGC" firstAttribute="leading" secondItem="hOW-Oh-vVN" secondAttribute="trailing" constant="8" id="FF8-G4-A78"/>
                                     <constraint firstItem="CQM-YR-lFB" firstAttribute="leading" secondItem="qTb-Ny-vYW" secondAttribute="leading" id="Gr9-S4-ROe"/>
                                     <constraint firstItem="hOW-Oh-vVN" firstAttribute="centerY" secondItem="Rjv-r9-yGC" secondAttribute="centerY" id="Sv0-SH-cPD"/>
                                     <constraint firstItem="hOW-Oh-vVN" firstAttribute="top" secondItem="qTb-Ny-vYW" secondAttribute="top" constant="14" id="Vbi-Lr-YxO"/>
                                     <constraint firstAttribute="bottom" secondItem="CQM-YR-lFB" secondAttribute="bottom" constant="-1" id="X58-2Z-abg"/>
                                     <constraint firstItem="CQM-YR-lFB" firstAttribute="top" secondItem="qTb-Ny-vYW" secondAttribute="top" id="fBz-i0-vmF"/>
-                                    <constraint firstItem="ZQN-Sv-0eE" firstAttribute="top" secondItem="qTb-Ny-vYW" secondAttribute="top" constant="30" id="hI8-Wq-z01"/>
                                     <constraint firstAttribute="bottom" secondItem="hOW-Oh-vVN" secondAttribute="bottom" constant="16" id="lbX-7Y-UgQ"/>
                                     <constraint firstAttribute="trailing" secondItem="CQM-YR-lFB" secondAttribute="trailing" id="pZ2-Dk-f4O"/>
                                     <constraint firstAttribute="height" constant="93" id="uPB-92-R2M"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZQN-Sv-0eE" secondAttribute="trailing" constant="18" id="xuK-69-Lql"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyA-dZ-ZWs">
-                                <rect key="frame" x="165" y="140" width="135" height="44"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
-                                <state key="normal" backgroundImage="ChallengeFriendButtonBackground">
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="aaP-JZ-Z0I" kind="push" identifier="FriendsViewPushSegue" id="ITW-b9-4cc"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDK-mj-G2c">
-                                <rect key="frame" x="20" y="140" width="135" height="44"/>
+                                <rect key="frame" x="17" y="212" width="286" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="135" id="CCh-ZA-Kt1"/>
-                                    <constraint firstAttribute="height" constant="44" id="dl6-jJ-En3"/>
+                                    <constraint firstAttribute="height" constant="44" id="obm-UV-VOE"/>
+                                    <constraint firstAttribute="width" constant="286" id="ojN-9B-0pN"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="RandomChallengeButtonBackground">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -111,10 +89,10 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="eIl-7I-DR2">
-                                <rect key="frame" x="16" y="192" width="286" height="363"/>
+                                <rect key="frame" x="17" y="314" width="286" height="246"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="270" id="5jc-CU-3C2"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="NNS-9K-8Eg"/>
                                 </constraints>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -122,31 +100,86 @@
                                     <outlet property="delegate" destination="mQ1-C7-5Us" id="CQQ-Of-8lc"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H9M-CS-BIC" customClass="DesignableRoundedRectangleView" customModule="TH_PopQuiz" customModuleProvider="target">
+                                <rect key="frame" x="17" y="140" width="286" height="64"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FacebookBannerBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Y2j-ue-FGf">
+                                        <rect key="frame" x="0.0" y="0.0" width="286" height="64"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CheckboxSelected" translatesAutoresizingMaskIntoConstraints="NO" id="TaD-Je-3yG">
+                                        <rect key="frame" x="8" y="15" width="36" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="36" id="r73-1P-0vQ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FacebookBannerText" translatesAutoresizingMaskIntoConstraints="NO" id="s3X-Od-Ff5">
+                                        <rect key="frame" x="49" y="9" width="229" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="229" id="xeJ-ua-1k6"/>
+                                            <constraint firstAttribute="height" constant="45" id="z7a-39-eFG"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="1iz-l8-yDY"/>
+                                    <constraint firstItem="TaD-Je-3yG" firstAttribute="leading" secondItem="H9M-CS-BIC" secondAttribute="leading" constant="8" id="Bge-Qu-Rcn"/>
+                                    <constraint firstAttribute="centerY" secondItem="s3X-Od-Ff5" secondAttribute="centerY" id="CFy-fD-EJh"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y2j-ue-FGf" secondAttribute="bottom" id="Cdu-EL-rA5"/>
+                                    <constraint firstAttribute="centerY" secondItem="TaD-Je-3yG" secondAttribute="centerY" id="apE-Zb-QH6"/>
+                                    <constraint firstItem="Y2j-ue-FGf" firstAttribute="top" secondItem="H9M-CS-BIC" secondAttribute="top" id="arK-5a-uJ3"/>
+                                    <constraint firstAttribute="trailing" secondItem="Y2j-ue-FGf" secondAttribute="trailing" id="gt4-8J-UAB"/>
+                                    <constraint firstItem="Y2j-ue-FGf" firstAttribute="leading" secondItem="H9M-CS-BIC" secondAttribute="leading" id="kWG-zc-Ghe"/>
+                                    <constraint firstAttribute="centerX" secondItem="s3X-Od-Ff5" secondAttribute="centerX" constant="-20" id="x5q-Uv-gBR"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="qrs-wb-eoj" appends="YES" id="gSg-6q-gzX"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyA-dZ-ZWs">
+                                <rect key="frame" x="16" y="262" width="287" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="8gx-VV-077"/>
+                                    <constraint firstAttribute="width" constant="287" id="xnS-Ia-Fqz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" backgroundImage="ChallengeFriendButtonBackground">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="aaP-JZ-Z0I" kind="push" identifier="FriendsViewPushSegue" id="ITW-b9-4cc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="tyA-dZ-ZWs" firstAttribute="width" secondItem="vDK-mj-G2c" secondAttribute="width" id="1zl-ja-wxV"/>
-                            <constraint firstItem="eIl-7I-DR2" firstAttribute="leading" secondItem="gi5-tJ-xMN" secondAttribute="leading" constant="16" id="3mS-hX-IVZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="H9M-CS-BIC" secondAttribute="trailing" constant="1" id="5gh-8h-yHQ"/>
+                            <constraint firstItem="eIl-7I-DR2" firstAttribute="top" secondItem="tyA-dZ-ZWs" secondAttribute="bottom" constant="8" id="6Ny-MM-J2a"/>
                             <constraint firstAttribute="bottom" secondItem="Raq-z3-tZB" secondAttribute="bottom" id="6Vl-be-SIO"/>
-                            <constraint firstItem="vDK-mj-G2c" firstAttribute="leading" secondItem="gi5-tJ-xMN" secondAttribute="leading" constant="20" id="7YD-FR-c4D"/>
                             <constraint firstItem="qTb-Ny-vYW" firstAttribute="leading" secondItem="gi5-tJ-xMN" secondAttribute="leading" id="7ap-O0-D2u"/>
-                            <constraint firstItem="eIl-7I-DR2" firstAttribute="top" secondItem="vDK-mj-G2c" secondAttribute="bottom" constant="8" id="7rb-UB-bht"/>
-                            <constraint firstAttribute="bottom" secondItem="eIl-7I-DR2" secondAttribute="bottom" constant="13" id="Cxl-az-sf9"/>
+                            <constraint firstItem="H9M-CS-BIC" firstAttribute="leading" secondItem="gi5-tJ-xMN" secondAttribute="leadingMargin" constant="1" id="Cqu-jp-MRg"/>
                             <constraint firstAttribute="trailing" secondItem="qTb-Ny-vYW" secondAttribute="trailing" id="E45-R2-CMi"/>
-                            <constraint firstAttribute="trailing" secondItem="eIl-7I-DR2" secondAttribute="trailing" constant="18" id="FRQ-Uc-0HY"/>
-                            <constraint firstItem="tyA-dZ-ZWs" firstAttribute="top" secondItem="qTb-Ny-vYW" secondAttribute="bottom" constant="8" id="FVM-0p-u24"/>
                             <constraint firstItem="qTb-Ny-vYW" firstAttribute="top" secondItem="gi5-tJ-xMN" secondAttribute="top" constant="39" id="GVM-Iw-rxf"/>
-                            <constraint firstItem="tyA-dZ-ZWs" firstAttribute="height" secondItem="vDK-mj-G2c" secondAttribute="height" id="Hwq-oD-vfF"/>
+                            <constraint firstItem="vDK-mj-G2c" firstAttribute="top" secondItem="H9M-CS-BIC" secondAttribute="bottom" constant="8" id="Gwe-4g-8uD"/>
+                            <constraint firstItem="GpJ-pI-HPo" firstAttribute="top" secondItem="eIl-7I-DR2" secondAttribute="bottom" constant="8" id="Jnv-xa-VcT"/>
+                            <constraint firstAttribute="trailing" secondItem="eIl-7I-DR2" secondAttribute="trailing" constant="17" id="KFS-H1-PK2"/>
+                            <constraint firstItem="eIl-7I-DR2" firstAttribute="leading" secondItem="gi5-tJ-xMN" secondAttribute="leading" constant="17" id="SDy-Od-l0P"/>
                             <constraint firstItem="Raq-z3-tZB" firstAttribute="top" secondItem="gi5-tJ-xMN" secondAttribute="top" id="TbQ-Qz-F9U"/>
-                            <constraint firstItem="tyA-dZ-ZWs" firstAttribute="leading" secondItem="vDK-mj-G2c" secondAttribute="trailing" priority="750" constant="10" id="YXi-n1-7ce"/>
-                            <constraint firstItem="vDK-mj-G2c" firstAttribute="top" secondItem="qTb-Ny-vYW" secondAttribute="bottom" constant="8" id="eQy-7u-5Sr"/>
                             <constraint firstAttribute="trailing" secondItem="Raq-z3-tZB" secondAttribute="trailing" id="fBx-ye-lc9"/>
-                            <constraint firstAttribute="trailing" secondItem="tyA-dZ-ZWs" secondAttribute="trailing" constant="20" id="jzW-ye-OsI"/>
+                            <constraint firstAttribute="centerX" secondItem="eIl-7I-DR2" secondAttribute="centerX" id="jCa-Bt-f6w"/>
+                            <constraint firstItem="H9M-CS-BIC" firstAttribute="top" secondItem="qTb-Ny-vYW" secondAttribute="bottom" constant="8" id="kHu-KP-c5h"/>
+                            <constraint firstAttribute="centerX" secondItem="tyA-dZ-ZWs" secondAttribute="centerX" id="nHf-x0-AXZ"/>
                             <constraint firstItem="Raq-z3-tZB" firstAttribute="leading" secondItem="gi5-tJ-xMN" secondAttribute="leading" id="wLg-yH-ncF"/>
-                            <constraint firstItem="eIl-7I-DR2" firstAttribute="top" secondItem="tyA-dZ-ZWs" secondAttribute="bottom" constant="8" id="yR9-ol-xav"/>
+                            <constraint firstAttribute="centerX" secondItem="vDK-mj-G2c" secondAttribute="centerX" id="xBf-pV-Pdz"/>
+                            <constraint firstItem="tyA-dZ-ZWs" firstAttribute="top" secondItem="vDK-mj-G2c" secondAttribute="bottom" constant="6" id="z9B-ZF-SZe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TradeHero PopQuiz" id="boz-3P-itM">
-                        <barButtonItem key="rightBarButtonItem" id="88y-cA-JYA">
+                        <barButtonItem key="leftBarButtonItem" id="88y-cA-JYA">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7oK-7S-SeK">
                                 <rect key="frame" x="147" y="198" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -160,11 +193,22 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="avatarView" destination="hOW-Oh-vVN" id="ctn-4b-AMG"/>
+                        <outlet property="bannerBGImageView" destination="H9M-CS-BIC" id="Iqm-Uh-YbU"/>
                         <outlet property="fullNameView" destination="Rjv-r9-yGC" id="V4L-dQ-nJj"/>
                         <outlet property="tableView" destination="eIl-7I-DR2" id="3oX-pF-vEo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKQ-gI-9GF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="WJa-VW-SCz">
+                    <connections>
+                        <segue destination="ReR-pk-HA9" kind="push" id="2EO-uE-ntV"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="qrs-wb-eoj">
+                    <connections>
+                        <action selector="uncheckFBShareAction:" destination="mQ1-C7-5Us" id="13P-CJ-4lU"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1637" y="160"/>
         </scene>
@@ -477,14 +521,16 @@
     <resources>
         <image name="BackButtonImage" width="21" height="34"/>
         <image name="BackButtonImagev2" width="61" height="63"/>
-        <image name="ChallengeFriendButtonBackground" width="271" height="89"/>
+        <image name="ChallengeFriendButtonBackground" width="582" height="89"/>
+        <image name="CheckboxSelected" width="35" height="35"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
+        <image name="FacebookBannerBackground" width="286" height="64"/>
+        <image name="FacebookBannerText" width="229" height="48"/>
         <image name="FriendSceneBackground" width="640" height="1136"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
-        <image name="ProfileDetailDisclosureButton" width="85" height="88"/>
         <image name="ProfileHeaderBackground" width="640" height="192"/>
         <image name="ProfileHeaderBackgroundv2" width="640" height="202"/>
-        <image name="RandomChallengeButtonBackground" width="271" height="89"/>
+        <image name="RandomChallengeButtonBackground" width="582" height="89"/>
         <image name="RedButtonBackground" width="163" height="61"/>
         <image name="SettingsIcon" width="58" height="58"/>
         <image name="SettingsSceneBackground" width="640" height="1136"/>

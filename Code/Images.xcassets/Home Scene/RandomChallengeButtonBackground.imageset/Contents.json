@@ -3,23 +3,17 @@
     {
       "idiom" : "iphone",
       "scale" : "1x",
-      "filename" : "Random Game.png"
+      "filename" : "Random.png"
     },
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "Random Game@2x.png"
-    },
-    {
-      "idiom" : "iphone",
-      "filename" : "Random Game@r2x.png",
-      "subtype" : "retina4",
-      "scale" : "2x"
+      "filename" : "Random@2x.png"
     },
     {
       "idiom" : "iphone",
       "scale" : "3x",
-      "filename" : "Random Game@3x.png"
+      "filename" : "Random@3x.png"
     }
   ],
   "info" : {

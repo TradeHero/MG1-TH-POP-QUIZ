@@ -13,6 +13,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet private weak var avatarView: AvatarRoundedView!
     @IBOutlet private weak var fullNameView: UILabel!
     @IBOutlet private weak var rankView: UILabel!
+    @IBOutlet weak var bannerBGImageView: DesignableRoundedRectangleView!
     
     private var refreshControl: UIRefreshControl!
     private var openChallenges = [Game]()
@@ -35,7 +36,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.loadChallenges()
         refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -83,10 +83,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    @IBAction func uncheckFBShareAction(sender: AnyObject) {
+        let alertView = UIAlertController(title: "Facebook Sharing", message: "Are you sure you want to do this?", preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "Yes, challenge my friends!", style: .Default) {
+            action in
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Later", style: .Cancel, handler: nil)
+        alertView.addAction(okAction)
+        alertView.addAction(cancelAction)
+        
+        self.presentViewController(alertView, animated: true, completion: nil)
+    }
+    @IBOutlet weak var uncheckAction: UIImageView!
     //MARK:- Private functions
     private func setupSubviews() {
-        NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: nil)  {[unowned self]
-            (image: UIImage!, error:NSError!) in
+        NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: nil)  { [unowned self] (image: UIImage!, error:NSError!) in
             if image != nil {
                 self.avatarView.image = image
             }
@@ -237,10 +250,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch cell.status {
         case .Accept, .Play:
             var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
-//            let name = cell.player.displayName == "" || cell.player.displayName == nil ? "opponent" : cell.player.displayName
-            hud.textLabel.text = "Retrieving challenge.."
-            
-//            hud.detailTextLabel.text = "Initiating game"
+            hud.textLabel.text = "Getting ready.."
             
             NetworkClient.sharedClient.fetchGame(game.gameID, force: true) {
                 [unowned self] in
@@ -316,11 +326,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         rightLabelView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 8)
         
         logoView.autoPinEdgeToSuperviewEdge(.Top, withInset: 23)
-//        logoView.autoConstrainAttribute(NSLayoutAttribute.CenterX.rawValue, toAttribute: NSLayoutAttribute.CenterX.rawValue, ofView: logoView.superview, withMultiplier: 1)
-//        logoView.autoConstrainAttribute(NSLayoutAttribute.Width.rawValue, toAttribute: NSLayoutAttribute.Height.rawValue, ofView: logoView, withMultiplier: 1.0)
-//        logoView.autoSetDimension(.Height, toSize: 51)
-//
-//        textLabel.autoConstrainAttribute(NSLayoutAttribute.CenterX.rawValue, toAttribute: NSLayoutAttribute.CenterX.rawValue, ofView: textLabel.superview, withMultiplier: 1)
         logoView.autoConstrainAttribute(.Vertical, toAttribute: .Vertical, ofView: logoView.superview, withMultiplier: 1)
         logoView.autoConstrainAttribute(.Width, toAttribute: .Height, ofView: logoView, withMultiplier: 1.0)
         logoView.autoSetDimension(.Height, toSize: 51)
