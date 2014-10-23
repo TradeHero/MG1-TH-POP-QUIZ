@@ -12,7 +12,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet private weak var avatarView: AvatarRoundedView!
     @IBOutlet private weak var fullNameView: UILabel!
-    @IBOutlet private weak var rankView: UILabel!
     
     private var refreshControl: UIRefreshControl!
     private var openChallenges = [Game]()
@@ -36,10 +35,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadChallenges()
-        refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
-        self.tableView.addSubview(refreshControl)
+//        refreshControl = UIRefreshControl()
+//        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+//        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+//        self.tableView.addSubview(refreshControl)
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         setupSubviews()
         self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))

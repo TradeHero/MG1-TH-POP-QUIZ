@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
-//        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Badge | .Sound | .Alert, categories: nil))
         let config = UAConfig.defaultConfig()
         UAirship.takeOff(config)
         UAPush.shared().userNotificationTypes = (UIUserNotificationType.Badge | UIUserNotificationType.Sound | UIUserNotificationType.Alert)
@@ -108,9 +107,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        if let token = NetworkClient.sharedClient.deviceToken {
-            if !(NetworkClient.sharedClient.deviceToken == deviceToken.deviceTokenString()) {
-                NetworkClient.sharedClient.deviceToken = deviceToken.deviceTokenString()
+        if let token = NetworkClient.sharedClient._device_token {
+            if !(NetworkClient.sharedClient._device_token == deviceToken.deviceTokenString()) {
+                NetworkClient.sharedClient._device_token = deviceToken.deviceTokenString()
             }
         }
         

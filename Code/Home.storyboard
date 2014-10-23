@@ -193,7 +193,6 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="avatarView" destination="hOW-Oh-vVN" id="ctn-4b-AMG"/>
-                        <outlet property="bannerBGImageView" destination="H9M-CS-BIC" id="Iqm-Uh-YbU"/>
                         <outlet property="fullNameView" destination="Rjv-r9-yGC" id="V4L-dQ-nJj"/>
                         <outlet property="tableView" destination="eIl-7I-DR2" id="3oX-pF-vEo"/>
                     </connections>
@@ -210,7 +209,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1637" y="160"/>
+            <point key="canvasLocation" x="1637" y="175"/>
         </scene>
         <!--Settings-->
         <scene sceneID="8by-l1-bbK">

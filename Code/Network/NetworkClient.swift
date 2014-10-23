@@ -38,17 +38,9 @@ class NetworkClient {
         return Singleton.instance
     }
     
-    var deviceToken: String! {
-        get {
-            return _device_token
-        }
-        set {
-            _device_token = newValue
-            saveDeviceToken(newValue)
-        }
-    }
     
-    private var _device_token: String!
+    
+    var _device_token: String!
     
     private var manager: Alamofire.Manager!
     
@@ -112,7 +104,7 @@ class NetworkClient {
                     }
                 }
         }
-//                debugPrintln(r)
+                debugPrintln(r)
     }
     
     /**
@@ -691,6 +683,7 @@ class NetworkClient {
     func pushNotificationToDevice(deviceTokens:[String], alertMessage:String?, completionHandler:()->()){
         if deviceTokens.count == 0 {
             debugPrintln("No device token, fail sending push notification")
+            completionHandler()
             return
         }
         
@@ -723,13 +716,13 @@ class NetworkClient {
                     debugPrintln(error)
                 }
                 if let d: AnyObject = data {
-                    debugPrintln(data)
-                    completionHandler()
+                    debugPrintln(d)
+                    
                 }
             }
-//            debugPrintln(r)
+            debugPrintln(r)
         }
-        
+        completionHandler()
         
     }
     
