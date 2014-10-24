@@ -24,10 +24,10 @@ class NetworkClient {
             Singleton.instance.loadCredentials()
             Singleton.instance.loadDeviceToken()
             var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
-            defaultHeaders.updateValue("2.4.0", forKey: "TH-Client-Version")
+            defaultHeaders.updateValue("3.0.0", forKey: "TH-Client-Version")
             defaultHeaders.updateValue("1", forKey: "TH-Client-Type")
             defaultHeaders.updateValue("en-GB", forKey: "TH-Language-Code")
-            defaultHeaders.updateValue("2.4.0", forKey: "THPQ-Client-Version")
+            defaultHeaders.updateValue("1.5.0", forKey: "THPQ-Client-Version")
             defaultHeaders.updateValue("1", forKey: "THPQ-Client-Type")
             defaultHeaders.updateValue("en-GB", forKey: "THPQ-Language-Code")
             let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
@@ -37,8 +37,6 @@ class NetworkClient {
         
         return Singleton.instance
     }
-    
-    
     
     var _device_token: String!
     
@@ -69,7 +67,7 @@ class NetworkClient {
     :param: loginSuccessHandler Takes a THUser and perform operation
     */
     func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:(THUser -> ())!, errorHandler:NSError->()) {
-        var param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "2.4.0"]
+        var param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "3.0.0"]
         let auth = "\(THAuthFacebookPrefix) \(accessToken)"
         
         if _device_token != nil {
@@ -134,7 +132,7 @@ class NetworkClient {
                     debugPrintln("Game created with game ID: \(game.gameID)")
                     game.fetchUsers {
                         game.fetchResults {
-                            self.sendPushNotification(game.opponentPlayerID, message:"\(game.initiatingPlayer.displayName) sent you a challenge") {
+                            self.sendPushNotification(game.opponentPlayerID, message:"\(game.initiatingPlayer.displayName) sent you a challenge!") {
                                 if let c = completionHandler {
                                     c(game)
                                 }
@@ -565,6 +563,7 @@ class NetworkClient {
 //        }
     }
     
+    
     func fetchStaffList(completionHandler:[StaffUser]->()){
         var staffArr = [StaffUser]()
         var numberCompleted = 0
@@ -752,7 +751,7 @@ class NetworkClient {
         debugPrintln(r)
     }
     
-    private func sendPushNotification(targetUserId:Int, message: String?, completionHandler:()->()) {
+    func sendPushNotification(targetUserId:Int, message: String?, completionHandler:()->()) {
         self.fetchUserDeviceTokens(targetUserId) {
             [unowned self] tokens in
             self.pushNotificationToDevice(tokens, alertMessage: message, completionHandler: completionHandler)

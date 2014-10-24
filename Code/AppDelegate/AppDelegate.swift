@@ -12,7 +12,7 @@ import AirshipKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDelegate {
-                            
+    
     var window: UIWindow?
 
     var bgmPlayer = AVAudioPlayer.createAudioPlayer("Electrodoodle", extensionName: "mp3")
@@ -111,6 +111,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
             if !(NetworkClient.sharedClient._device_token == deviceToken.deviceTokenString()) {
                 NetworkClient.sharedClient._device_token = deviceToken.deviceTokenString()
             }
+        } else {
+            NetworkClient.sharedClient._device_token = deviceToken.deviceTokenString()
         }
         
         println("\n\(deviceToken.deviceTokenString())\n\n")

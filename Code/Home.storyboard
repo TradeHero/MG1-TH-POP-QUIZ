@@ -19,6 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvB-7H-ejU">
+                                <rect key="frame" x="43" y="80" width="50" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HomeSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-z3-tZB">
@@ -106,16 +107,6 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FacebookBannerBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Y2j-ue-FGf">
                                         <rect key="frame" x="0.0" y="0.0" width="286" height="64"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CheckboxSelected" translatesAutoresizingMaskIntoConstraints="NO" id="TaD-Je-3yG">
-                                        <rect key="frame" x="8" y="15" width="36" height="35"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="36" id="r73-1P-0vQ"/>
-                                        </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="JcM-9T-NaI" appends="YES" id="Zv1-m1-uXV"/>
-                                        </connections>
-                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FacebookBannerText" translatesAutoresizingMaskIntoConstraints="NO" id="s3X-Od-Ff5">
                                         <rect key="frame" x="49" y="9" width="229" height="45"/>
                                         <constraints>
@@ -123,17 +114,31 @@
                                             <constraint firstAttribute="height" constant="45" id="z7a-39-eFG"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7p-7W-MAo">
+                                        <rect key="frame" x="8" y="14" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="VKE-Bf-xOw"/>
+                                            <constraint firstAttribute="height" constant="35" id="fco-ya-oQc"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="CheckboxUnselected">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" backgroundImage="CheckboxSelected"/>
+                                        <connections>
+                                            <action selector="uncheckFBShareAction:" destination="mQ1-C7-5Us" eventType="touchUpInside" id="23c-Uk-Jc9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="1iz-l8-yDY"/>
-                                    <constraint firstItem="TaD-Je-3yG" firstAttribute="leading" secondItem="H9M-CS-BIC" secondAttribute="leading" constant="8" id="Bge-Qu-Rcn"/>
                                     <constraint firstAttribute="centerY" secondItem="s3X-Od-Ff5" secondAttribute="centerY" id="CFy-fD-EJh"/>
                                     <constraint firstAttribute="bottom" secondItem="Y2j-ue-FGf" secondAttribute="bottom" id="Cdu-EL-rA5"/>
-                                    <constraint firstAttribute="centerY" secondItem="TaD-Je-3yG" secondAttribute="centerY" id="apE-Zb-QH6"/>
+                                    <constraint firstItem="S7p-7W-MAo" firstAttribute="leading" secondItem="H9M-CS-BIC" secondAttribute="leading" constant="8" id="OZ6-hX-bLk"/>
                                     <constraint firstItem="Y2j-ue-FGf" firstAttribute="top" secondItem="H9M-CS-BIC" secondAttribute="top" id="arK-5a-uJ3"/>
                                     <constraint firstAttribute="trailing" secondItem="Y2j-ue-FGf" secondAttribute="trailing" id="gt4-8J-UAB"/>
                                     <constraint firstItem="Y2j-ue-FGf" firstAttribute="leading" secondItem="H9M-CS-BIC" secondAttribute="leading" id="kWG-zc-Ghe"/>
+                                    <constraint firstAttribute="centerY" secondItem="S7p-7W-MAo" secondAttribute="centerY" id="lmZ-6p-eFx"/>
                                     <constraint firstAttribute="centerX" secondItem="s3X-Od-Ff5" secondAttribute="centerX" constant="-20" id="x5q-Uv-gBR"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -202,11 +207,6 @@
                 <tapGestureRecognizer id="WJa-VW-SCz">
                     <connections>
                         <segue destination="ReR-pk-HA9" kind="push" id="2EO-uE-ntV"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="JcM-9T-NaI">
-                    <connections>
-                        <action selector="uncheckFBShareAction:" destination="mQ1-C7-5Us" id="qKs-13-HGY"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -523,6 +523,7 @@
         <image name="BackButtonImagev2" width="61" height="63"/>
         <image name="ChallengeFriendButtonBackground" width="582" height="89"/>
         <image name="CheckboxSelected" width="35" height="35"/>
+        <image name="CheckboxUnselected" width="34" height="34"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
         <image name="FacebookBannerBackground" width="286" height="64"/>
         <image name="FacebookBannerText" width="229" height="48"/>

@@ -12,6 +12,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet private weak var avatarView: AvatarRoundedView!
     @IBOutlet private weak var fullNameView: UILabel!
+    @IBOutlet weak var tickImageView: UIImageView!
     
     private var refreshControl: UIRefreshControl!
     private var openChallenges = [Game]()
@@ -35,16 +36,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadChallenges()
-//        refreshControl = UIRefreshControl()
-//        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-//        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
-//        self.tableView.addSubview(refreshControl)
+        refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+        self.tableView.addSubview(refreshControl)
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         setupSubviews()
         self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 53
+        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.width, 0.01))
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -81,20 +83,29 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    @IBAction func uncheckFBShareAction(sender: AnyObject) {
+    @IBAction func uncheckFBShareAction(sender: UIButton) {
+        println("tapped")
         func showAlertViewConfirmation(){
             let alertView = UIAlertController(title: "Facebook Sharing", message: "Are you sure you want to do this?", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "Yes, challenge my friends!", style: .Default, handler: nil)
+            let okAction = UIAlertAction(title: "Yes, challenge my friends!", style: .Cancel, handler: nil)
             
-            let cancelAction = UIAlertAction(title: "Later", style: .Cancel) {
-                action in
-                
+            let cancelAction = UIAlertAction(title: "Later", style: .Default) {
+                [unowned self] action in
+                kFaceBookShare = false
+                sender.selected = false
             }
             alertView.addAction(okAction)
             alertView.addAction(cancelAction)
             
             self.presentViewController(alertView, animated: true, completion: nil)
         }
+        if kFaceBookShare {
+           showAlertViewConfirmation()
+        } else {
+            kFaceBookShare = true
+            sender.selected = true
+        }
+        
     }
     
     @IBOutlet weak var uncheckAction: UIImageView!
@@ -110,6 +121,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private func loadChallenges(loadCompleteHandler:(()->())! = nil){
         var hud: JGProgressHUD?
+        
         if loadCompleteHandler == nil {
             hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
 
@@ -274,6 +286,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         case .Nudge:
             //TODO send notification
+            NetworkClient.sharedClient.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) nudged you! Come back and face the challenge!") {
+                
+            }
             cell.configureAsInvitedMode()
         default:
             break
@@ -338,7 +353,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func createHeaderView(title:String, numberOfGames:Int) -> UITableViewHeaderFooterView {
-        var headerView = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, 286, 25))
+        var headerView = UITableViewHeaderFooterView.newAutoLayoutView()
+        headerView.frame = CGRectMake(0, 0, 286, 25)
         var leftLabelView = UILabel.newAutoLayoutView()
         leftLabelView.frame = CGRectMake(4, 4, 72, 21)
         leftLabelView.text = title
@@ -372,6 +388,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func refresh(sender: UIRefreshControl){
         self.loadChallenges {
+            [unowned self] in
             self.refreshControl.endRefreshing()
         }
     }

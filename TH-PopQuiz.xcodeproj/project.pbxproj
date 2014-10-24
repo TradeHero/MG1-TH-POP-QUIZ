@@ -35,7 +35,6 @@
 		6DB9A19019E3A300001DEDFB /* InAppNotification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DB9A18F19E3A300001DEDFB /* InAppNotification.storyboard */; };
 		6DBE9DB119D159DE00FACB1D /* Correct-Bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE9DB019D159DE00FACB1D /* Correct-Bell.caf */; };
 		6DBE9DB519D162E500FACB1D /* Wrong-Buzzer.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE9DB319D15D8100FACB1D /* Wrong-Buzzer.caf */; };
-		6DD053A319C6BDAF00831B6C /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */; };
 		6DD053A519C6CBB100831B6C /* ChallengesSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DD053A419C6CBB100831B6C /* ChallengesSectionHeader.xib */; };
 		6DD2311819B81FFA00B5D05E /* TH_PopQuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2311719B81FFA00B5D05E /* TH_PopQuizTests.swift */; };
 		6DD2316C19B8204900B5D05E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2312219B8204900B5D05E /* AppDelegate.swift */; };
@@ -179,7 +178,6 @@
 		6DB9A18F19E3A300001DEDFB /* InAppNotification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InAppNotification.storyboard; sourceTree = "<group>"; };
 		6DBE9DB019D159DE00FACB1D /* Correct-Bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Correct-Bell.caf"; sourceTree = "<group>"; };
 		6DBE9DB319D15D8100FACB1D /* Wrong-Buzzer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wrong-Buzzer.caf"; sourceTree = "<group>"; };
-		6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		6DD053A419C6CBB100831B6C /* ChallengesSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengesSectionHeader.xib; sourceTree = "<group>"; };
 		6DD230FF19B81FFA00B5D05E /* TH-PopQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TH-PopQuiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD2311119B81FFA00B5D05E /* TH-PopQuizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TH-PopQuizTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,7 +256,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DD053A319C6BDAF00831B6C /* FacebookSDK.framework in Frameworks */,
 				6DF3D45319D3BFBC000B08F0 /* GPUImage.framework in Frameworks */,
 				6DD231B519B8219E00B5D05E /* Alamofire.framework in Frameworks */,
 				6D0D683119F4A9B5002682F7 /* AirshipKit.framework in Frameworks */,
@@ -622,7 +619,6 @@
 			children = (
 				6D0D683019F4A9B5002682F7 /* AirshipKit.framework */,
 				6DF3D45219D3BFBC000B08F0 /* GPUImage.framework */,
-				6DD053A219C6BDAF00831B6C /* FacebookSDK.framework */,
 				6DD231BA19B821D700B5D05E /* libz.dylib */,
 				0D6DCDAC304B0EE468E1F157 /* libPods.a */,
 			);
