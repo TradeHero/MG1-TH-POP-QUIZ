@@ -63,7 +63,6 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         
         if !THCache.objectExistForCacheKey(kTHStaffUserCacheStoreKey) {
             debugPrintln("Nothing cached.")
-//            hud.textLabel.text = "Retrieving staff user..."
             hud.textLabel.text = "Just a sec.."
             NetworkClient.sharedClient.fetchStaffList() {
                 [unowned self] in

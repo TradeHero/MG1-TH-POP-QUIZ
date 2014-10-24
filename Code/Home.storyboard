@@ -108,9 +108,13 @@
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CheckboxSelected" translatesAutoresizingMaskIntoConstraints="NO" id="TaD-Je-3yG">
                                         <rect key="frame" x="8" y="15" width="36" height="35"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="36" id="r73-1P-0vQ"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="JcM-9T-NaI" appends="YES" id="Zv1-m1-uXV"/>
+                                        </connections>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FacebookBannerText" translatesAutoresizingMaskIntoConstraints="NO" id="s3X-Od-Ff5">
                                         <rect key="frame" x="49" y="9" width="229" height="45"/>
@@ -137,9 +141,6 @@
                                         <real key="value" value="17"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="qrs-wb-eoj" appends="YES" id="gSg-6q-gzX"/>
-                                </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyA-dZ-ZWs">
                                 <rect key="frame" x="16" y="262" width="287" height="44"/>
@@ -203,9 +204,9 @@
                         <segue destination="ReR-pk-HA9" kind="push" id="2EO-uE-ntV"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="qrs-wb-eoj">
+                <tapGestureRecognizer id="JcM-9T-NaI">
                     <connections>
-                        <action selector="uncheckFBShareAction:" destination="mQ1-C7-5Us" id="13P-CJ-4lU"/>
+                        <action selector="uncheckFBShareAction:" destination="mQ1-C7-5Us" id="qKs-13-HGY"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

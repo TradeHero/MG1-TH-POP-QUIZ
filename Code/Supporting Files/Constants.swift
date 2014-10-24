@@ -16,7 +16,7 @@ enum Mode: Int {
 
 let kTHFacebookAppID = "431745923529834"
 
-let kTHGamesServerMode = Mode.Staging
+let kTHGamesServerMode = Mode.Prod
 
 let kConstantPrefix = "TH"
 

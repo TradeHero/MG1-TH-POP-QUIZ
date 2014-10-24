@@ -68,11 +68,11 @@ class LoginViewController: UIViewController {
                     if let fb = self.facebookAccount {
                         let accessToken = self.facebookAccount.credential.oauthToken
                         NetworkClient.sharedClient.loginUserWithFacebookAuth(accessToken, loginSuccessHandler: {user in
-                            
+                            //succeed
                             }) {
-                            error in
+                            //failure
                             hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
-                            hud.textLabel.text = "\(error)"
+                            hud.textLabel.text = "\($0)"
                         }
                     } else {
                         hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)

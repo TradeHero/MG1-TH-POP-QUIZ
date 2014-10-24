@@ -251,5 +251,4 @@
         [self setThumbTintColor:self.handlerColor];
     }
 }
-
 @end
