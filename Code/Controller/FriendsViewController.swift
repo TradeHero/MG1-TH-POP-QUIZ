@@ -103,8 +103,8 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
                 [unowned self] in
                 hud.dismissAnimated(true)
-                THCache.saveFriendsListToCache($0.fbFriends, tradeheroFriends: $0.thFriends)
-                loadCompleteHandler(fbFriends: $0.fbFriends, thFriends: $0.thFriends)
+                THCache.saveFriendsListToCache($0.facebookFriends, tradeheroFriends: $0.tradeheroFriends)
+                loadCompleteHandler(fbFriends: $0.facebookFriends, thFriends: $0.tradeheroFriends)
             }
             return
         }

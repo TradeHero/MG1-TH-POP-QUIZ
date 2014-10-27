@@ -10,6 +10,7 @@ import UIKit
 
 class QuizViewController: UIViewController {
     
+    let MAX_ALLOWED_TIME:CGFloat = 15.0
     let basicScorePerQuestion = 1000
     // MARK:- UI var
     @IBOutlet private var optionGroup: [OptionButton]!
@@ -44,13 +45,13 @@ class QuizViewController: UIViewController {
     // MARK:- ivar
     private var current_q: Int = 0
     
-    private var current_timeLeft: CGFloat = 10.0 {
+    private var current_timeLeft: CGFloat = 15.0 {
         didSet{
             let timeString = Double(current_timeLeft).format(".1")
             timeLeftLabel.text = timeString
-            if current_timeLeft < 3.0 {
+            if current_timeLeft < 5.0 {
                 timeLeftLabel.textColor = UIColor(hex: 0xfe0000)
-            } else if current_timeLeft < 7.5 {
+            } else if current_timeLeft < 8 {
                 timeLeftLabel.textColor = UIColor(hex :0x10634A)
             } else {
                 timeLeftLabel.textColor = UIColor(hex :0x1063D9)
@@ -64,7 +65,7 @@ class QuizViewController: UIViewController {
     
     private var stopwatchStartTime: NSDate!
     
-    private var stopwatchCurrTime: CGFloat = 10.0
+    private var stopwatchCurrTime: CGFloat = 15.0
     
     private var currentQuestionCorrect: Bool = false {
         didSet {
@@ -269,7 +270,7 @@ class QuizViewController: UIViewController {
     }
     
     private func getTimeBonus(timeLeft:CGFloat) -> CGFloat {
-        let timeAllowed:CGFloat = 10.0
+        let timeAllowed:CGFloat = 15.0
         
         let timeRange = (timeAllowed - timeLeft)/timeAllowed * 100
         
@@ -298,7 +299,7 @@ class QuizViewController: UIViewController {
     
     //MARK:- Timer functions
     private func timerStart() {
-        stopwatchCurrTime = 10.0
+        stopwatchCurrTime = MAX_ALLOWED_TIME
         if stopwatch == nil {
             stopwatch = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
         }
@@ -340,7 +341,7 @@ class QuizViewController: UIViewController {
         if timeLeft > 0 {
             current_timeLeft = timeLeft
             if isTimedObfuscatorQuestion {
-                showImageObfuscationWithTimeFactor(factor: timeLeft/10)
+                showImageObfuscationWithTimeFactor(factor: timeLeft/MAX_ALLOWED_TIME)
             }
         } else if timeLeft <= 0 {
             playSoundEffect(.WrongSound)
@@ -501,15 +502,16 @@ class QuizViewController: UIViewController {
                 }
         }
         
-        UIView.animateWithDuration(1.5, delay: 1.50, options: .TransitionCrossDissolve, animations: {
+        UIView.animateWithDuration(1.5, delay: 2.0, options: .TransitionCrossDissolve, animations: {
             self.questionView.alpha = 1
             }, completion: nil)
         
-        UIView.animateWithDuration(1.0, delay: 3.0, options: .TransitionCrossDissolve, animations: {
+        UIView.animateWithDuration(2.0, delay: 4.5, options: .TransitionCrossDissolve, animations: {
+            [unowned self] in
             self.buttonSetContentView.alpha = 1
-            }){ completed in
+            }){ [unowned self] completed in
                 if completed {
-                    self.resetRemoveOptionsButton()
+                    dispatch_after(4000, dispatch_get_main_queue(), { self.resetRemoveOptionsButton() })
                     for option in self.optionGroup {
                         option.enable()
                     }
@@ -527,7 +529,7 @@ class QuizViewController: UIViewController {
         self.setupProgressBar(self.opponentProgressView)
         
         NetworkClient.fetchImageFromURLString(thisPlayer.pictureURL, progressHandler: nil) {
-            image, error in
+            [unowned self] image, error in
             if image != nil {
                 self.selfAvatarView.image = image
             }
@@ -537,7 +539,7 @@ class QuizViewController: UIViewController {
         selfTotalScore = 0
         
         NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) {
-            image, error in
+            [unowned self] image, error in
             if image != nil {
                 self.opponentAvatarView.image = image
             }

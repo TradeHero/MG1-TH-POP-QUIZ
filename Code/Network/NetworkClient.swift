@@ -148,7 +148,7 @@ class NetworkClient {
     /**
     GET api/Users/{userId}/getnewfriends?socialNetwork=FB
     */
-    typealias TFBHUserFriendTuple = (fbFriends:[THUserFriend], thFriends:[THUserFriend])
+    typealias TFBHUserFriendTuple = (facebookFriends:[THUserFriend], tradeheroFriends:[THUserFriend])
     func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (TFBHUserFriendTuple -> ())!){
         let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
         debugPrintln("Fetching Facebook friends for user \(userId)...")
@@ -541,7 +541,7 @@ class NetworkClient {
                 }
             }
         }
-        //                debugPrintln(r)
+                        debugPrintln(r)
     }
     
     /**
@@ -741,27 +741,29 @@ class NetworkClient {
         mutableURLRequest.HTTPMethod = Method.POST.rawValue
         mutableURLRequest.setValue("application/vnd.urbanairship+json; version=3;", forHTTPHeaderField: "Accept")
         
+        var deviceTokenArray = [[String:String]]()
         for d in deviceTokens {
-            var notificationDict = [String: String]()
-            if let a = alertMessage {
-                notificationDict.updateValue(a, forKey: "alert")
+            deviceTokenArray.append(["device_token" : d])
+        }
+        
+        var notificationDict = [String: String]()
+        if let a = alertMessage {
+            notificationDict.updateValue(a, forKey: "alert")
+        }
+            
+        let data: [String: AnyObject] = ["audience" : ["OR" : deviceTokenArray],  "notification" : notificationDict, "device_types": ["ios"]]
+        let r = self.manager.request(ParameterEncoding.JSON.encode(mutableURLRequest, parameters: data).0).authenticate(user: appKey, password: appMasterPW).responseJSON {
+            (_, response, data, error) -> Void in
+            if let err = error {
+                debugPrintln(error)
+            }
+            if let d: AnyObject = data {
+                debugPrintln(d)
             }
             
-            let data: [String: AnyObject] = ["audience" : ["device_token" : d],  "notification" : notificationDict, "device_types": ["ios"]]
-            let r = self.manager.request(ParameterEncoding.JSON.encode(mutableURLRequest, parameters: data).0).authenticate(user: appKey, password: appMasterPW).responseJSON {
-                (_, response, data, error) -> Void in
-                if let err = error {
-                    debugPrintln(error)
-                }
-                if let d: AnyObject = data {
-                    debugPrintln(d)
-                    
-                }
-            }
-            debugPrintln(r)
         }
+        debugPrintln(r)
         completionHandler()
-        
     }
     
     /**
@@ -795,6 +797,28 @@ class NetworkClient {
             [unowned self] tokens in
             self.pushNotificationToDevice(tokens, alertMessage: message, completionHandler: completionHandler)
         }
+    }
+    
+    func nudgeGameUser(game: Game, completionHandler:()->()) {
+        var url = "\(THGameAPIBaseURL)/\(game.gameID)/nudge"
+        if kFaceBookShare {
+            url = "\(url)?share=true"
+        }
+        
+//        debugPrintln("Fetching device token with user ID: \(id)...")
+        
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+            [unowned self] _, response, content, error in
+            if let e = error {
+                
+            }
+            
+            NetworkClient.sharedClient.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) nudged you! Come back and face the challenge!") {
+                completionHandler()
+            }
+        }
+            
+        debugPrintln(r)
     }
 
     // MARK:- Class functions
