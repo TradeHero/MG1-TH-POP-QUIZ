@@ -181,6 +181,45 @@ class NetworkClient {
         //        debugPrintln(r)
     }
     
+    func getRandomFBFriendsForUser(numberOfUsers count:Int, forUser userId:Int, completionHandler:[THUserFriend]->()){
+        let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB&count=100"
+        debugPrintln("Fetching Facebook friends for user \(userId)...")
+        
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+            _, response, content, error in
+            if let responseError = error {
+                println(responseError)
+                return
+            }
+            
+            var friends: [THUserFriend] = []
+            
+            if var arr = content as? [AnyObject] {
+                arr.shuffle()
+                debugPrintln("Parsing \(arr.count) objects as THUserFriend...")
+                
+                for friendObj in arr {
+                    if friends.count == count {
+                        break
+                    }
+                    let friendDictionary = friendObj as [String: AnyObject]
+                    if let uID: AnyObject = friendDictionary["thUserId"] {
+                        let uIDInt = uID as Int
+                        if uIDInt != 0 {
+                            friends.append(THUserFriend(friendDTO: friendDictionary))
+                        }
+                    }
+                }
+                debugPrintln("Completely parsed \(friends.count) objects as THUserFriend(s).")
+                completionHandler(friends)
+            }
+            
+        }
+        debugPrintln(r)
+        
+        
+    }
+    
     /**
     GET api/games/open
     */
@@ -228,7 +267,7 @@ class NetworkClient {
                 }
             }
         }
-        //        debugPrintln(r)
+                debugPrintln(r)
     }
     
     /**
@@ -346,7 +385,7 @@ class NetworkClient {
                 }
             }
         }
-        //        debugPrintln(r)
+                debugPrintln(r)
     }
 
     /**
@@ -402,7 +441,7 @@ class NetworkClient {
                 }
             }
         }
-//                debugPrintln(r)
+                debugPrintln(r)
     }
 
     /**
@@ -594,7 +633,7 @@ class NetworkClient {
         self.authenticatedUser = nil
         self.closeAndClearKeychainInformation()
         EGOCache.globalCache().clearCache()
-        FBSession.activeSession().closeAndClearTokenInformation()
+//        FBSession.activeSession().closeAndClearTokenInformation()
         NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLogoutNotificationKey, object: self, userInfo:nil)
         NSUserDefaults.standardUserDefaults().removeObjectForKey(kTHPushNotificationOnKey)
         NSUserDefaults.standardUserDefaults().removeObjectForKey(kTHSoundEffectValueKey)

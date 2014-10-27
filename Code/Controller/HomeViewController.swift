@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, HomeTurnChallengesTableViewCellDelegate {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, HomeTurnChallengesTableViewCellDelegate, FriendsChallengeCellTableViewCellDelegate {
     
     @IBOutlet private weak var avatarView: AvatarRoundedView!
     @IBOutlet private weak var fullNameView: UILabel!
@@ -20,6 +20,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var unfinishedChallenges = [Game]()
     private var user: THUser = NetworkClient.sharedClient.user
 
+    private var facebookFriendsChallenge = [THUserFriend]()
+    
     private var noOpenChallenges:Bool {
         return self.openChallenges.count == 0
     }
@@ -41,6 +43,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
         self.tableView.addSubview(refreshControl)
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
+        self.tableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
         setupSubviews()
         self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
@@ -139,11 +142,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             [unowned self] in
             numberLoaded++
             
-            if numberLoaded == 3 {
+            if numberLoaded == 4 {
                 hud?.dismissAnimated(true)
                 self.tableView.reloadData()
 //                self.tableView.forceUpdateTable()
             }
+            
             if loadCompleteHandler != nil {
                 loadCompleteHandler()
             }
@@ -152,7 +156,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         NetworkClient.sharedClient.fetchOpenChallenges {
             [unowned self] in
             self.openChallenges = $0
-           
             self.openChallenges.sort {
                 $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
             }
@@ -176,29 +179,55 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             completionHandler()
         }
+        
+        NetworkClient.sharedClient.getRandomFBFriendsForUser(numberOfUsers: 3, forUser: user.userId) {
+            [unowned self] in
+            self.facebookFriendsChallenge = $0
+            completionHandler()
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath:indexPath) as HomeTurnChallengesTableViewCell
-        
         switch indexPath.section {
         case 0:
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath:indexPath) as HomeTurnChallengesTableViewCell
             cell.bindChalllenge(unfinishedChallenges[indexPath.row], status:.Play)
+            cell.layoutIfNeeded()
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
+            cell.delegate = self
+            return cell
         case 1:
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath:indexPath) as HomeTurnChallengesTableViewCell
             cell.bindChalllenge(openChallenges[indexPath.row], status:.Accept)
+            cell.layoutIfNeeded()
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
+            cell.delegate = self
+            return cell
         case 2:
-            cell.bindChalllenge(opponentPendingChallenges[indexPath.row], status:.Nudge)
+            let row = indexPath.row
+            let offset = opponentPendingChallenges.count
+            if row < offset {
+                var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath:indexPath) as HomeTurnChallengesTableViewCell
+                cell.bindChalllenge(opponentPendingChallenges[row], status:.Nudge)
+                cell.layoutIfNeeded()
+                cell.setNeedsUpdateConstraints()
+                cell.updateConstraintsIfNeeded()
+                cell.delegate = self
+                return cell
+            } else {
+                var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath:indexPath) as FriendsChallengeCellTableViewCell
+                cell.bindFriendUser(facebookFriendsChallenge[row - offset], index: 0)
+                cell.delegate = self
+                cell.layoutIfNeeded()
+                cell.setNeedsUpdateConstraints()
+                cell.updateConstraintsIfNeeded()
+                return cell
+            }
         default:
-            break
+            return UITableViewCell()
         }
-        
-        cell.layoutIfNeeded()
-        
-        cell.setNeedsUpdateConstraints()
-        cell.updateConstraintsIfNeeded()
-        
-        cell.delegate = self
-        return cell
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -212,7 +241,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         case 1:
             return openChallenges.count
         case 2:
-            return opponentPendingChallenges.count
+            return opponentPendingChallenges.count + facebookFriendsChallenge.count
         default:
             return 0
         }
@@ -294,7 +323,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             break
         }
     }
+    func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapChallengeUser userID: Int) {
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        hud.textLabel.text = "Creating challenge..."
+        NetworkClient.sharedClient.createChallenge(opponentId: userID) {
+            [unowned self] in
+            if let g = $0 {
+                hud.dismissAnimated(true)
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                vc.bindGame($0)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
     
+    func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapInviteUser facebookID: Int) {
+    }
     //MARK:- UI methods
     private func createHeaderViewForEmptyTurn() -> UITableViewHeaderFooterView {
         var headerView = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, 286, 119))

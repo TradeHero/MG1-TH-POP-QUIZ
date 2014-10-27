@@ -4,8 +4,6 @@
 
 #pragma mark - Frameworks/Pods
 
-#import <FacebookSDK/FacebookSDK.h>
-
 #import <EGOCache/EGOCache.h>
 
 #import <GPUImage/GPUImage.h>
