@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import AirshipKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDelegate {

@@ -32,6 +32,12 @@
 
 #import <ChatHeads/CHDraggingCoordinator.h>
 
+#import <UrbanAirship-iOS-SDK/UAirship.h>
+
+#import <UrbanAirship-iOS-SDK/UAConfig.h>
+
+#import <UrbanAirship-iOS-SDK/UAPush.h>
+
 #pragma mark - non-library
 
 #import "ObjCHelpers.h"

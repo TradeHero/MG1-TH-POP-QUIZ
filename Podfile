@@ -12,5 +12,6 @@ pod 'PureLayout', '~> 2.0.1'
 pod 'SDWebImage', '~> 3.7.1'
 pod 'SSKeychain', '~> 1.2.2'
 pod 'ChatHeads'
+pod 'UrbanAirship-iOS-SDK', '5.0.3'
 
 xcodeproj 'TH-PopQuiz.xcodeproj'
