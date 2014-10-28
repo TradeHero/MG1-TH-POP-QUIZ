@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D01613119FF87D90024A3A0 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D01613019FF87D90024A3A0 /* Launch Screen.xib */; };
 		6D04887319BED33100F955D0 /* angrybirds-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D04887219BED33100F955D0 /* angrybirds-regular.ttf */; };
 		6D07032019EB733D0056F431 /* StaffChallengeCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D07031E19EB733D0056F431 /* StaffChallengeCellTableViewCell.swift */; };
 		6D07032119EB733D0056F431 /* StaffChallengeCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D07031F19EB733D0056F431 /* StaffChallengeCellTableViewCell.xib */; };
@@ -148,6 +149,7 @@
 /* Begin PBXFileReference section */
 		0D6DCDAC304B0EE468E1F157 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		37F08ED0D1D9FA4B6686B575 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6D01613019FF87D90024A3A0 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		6D04887219BED33100F955D0 /* angrybirds-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "angrybirds-regular.ttf"; sourceTree = "<group>"; };
 		6D07031E19EB733D0056F431 /* StaffChallengeCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffChallengeCellTableViewCell.swift; sourceTree = "<group>"; };
 		6D07031F19EB733D0056F431 /* StaffChallengeCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StaffChallengeCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 				6DD2313F19B8204900B5D05E /* Quiz.storyboard */,
 				6DD2312D19B8204900B5D05E /* Login.storyboard */,
 				6DB9A18F19E3A300001DEDFB /* InAppNotification.storyboard */,
+				6D01613019FF87D90024A3A0 /* Launch Screen.xib */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -789,6 +792,7 @@
 				6DD2318319B8204900B5D05E /* Quiz.storyboard in Resources */,
 				6DD053A519C6CBB100831B6C /* ChallengesSectionHeader.xib in Resources */,
 				6D3DB3C019E3CDF5006BC11B /* NotificationTableViewCell.xib in Resources */,
+				6D01613119FF87D90024A3A0 /* Launch Screen.xib in Resources */,
 				6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */,
 				6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */,
 			);

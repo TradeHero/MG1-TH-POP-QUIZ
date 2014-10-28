@@ -19,7 +19,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvB-7H-ejU">
-                                <rect key="frame" x="43" y="80" width="50" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HomeSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Raq-z3-tZB">
@@ -61,15 +60,31 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jf0-BO-XOU">
+                                        <rect key="frame" x="261" y="27" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Nbl-WI-jUo"/>
+                                            <constraint firstAttribute="width" constant="40" id="v46-f0-wUn"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="ProfileUpdateIcon">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="refresh:" destination="mQ1-C7-5Us" eventType="touchUpInside" id="bnC-n4-fk4"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="hOW-Oh-vVN" firstAttribute="leading" secondItem="qTb-Ny-vYW" secondAttribute="leading" constant="20" id="31e-9F-9Uw"/>
                                     <constraint firstItem="Rjv-r9-yGC" firstAttribute="leading" secondItem="hOW-Oh-vVN" secondAttribute="trailing" constant="8" id="FF8-G4-A78"/>
                                     <constraint firstItem="CQM-YR-lFB" firstAttribute="leading" secondItem="qTb-Ny-vYW" secondAttribute="leading" id="Gr9-S4-ROe"/>
+                                    <constraint firstItem="jf0-BO-XOU" firstAttribute="leading" secondItem="Rjv-r9-yGC" secondAttribute="trailing" constant="66" id="GvV-zJ-Mpp"/>
                                     <constraint firstItem="hOW-Oh-vVN" firstAttribute="centerY" secondItem="Rjv-r9-yGC" secondAttribute="centerY" id="Sv0-SH-cPD"/>
                                     <constraint firstItem="hOW-Oh-vVN" firstAttribute="top" secondItem="qTb-Ny-vYW" secondAttribute="top" constant="14" id="Vbi-Lr-YxO"/>
                                     <constraint firstAttribute="bottom" secondItem="CQM-YR-lFB" secondAttribute="bottom" constant="-1" id="X58-2Z-abg"/>
+                                    <constraint firstAttribute="trailing" secondItem="jf0-BO-XOU" secondAttribute="trailing" constant="19" id="XOs-uP-MSw"/>
+                                    <constraint firstAttribute="centerY" secondItem="jf0-BO-XOU" secondAttribute="centerY" id="aDL-6E-z4i"/>
                                     <constraint firstItem="CQM-YR-lFB" firstAttribute="top" secondItem="qTb-Ny-vYW" secondAttribute="top" id="fBz-i0-vmF"/>
                                     <constraint firstAttribute="bottom" secondItem="hOW-Oh-vVN" secondAttribute="bottom" constant="16" id="lbX-7Y-UgQ"/>
                                     <constraint firstAttribute="trailing" secondItem="CQM-YR-lFB" secondAttribute="trailing" id="pZ2-Dk-f4O"/>
@@ -531,6 +546,7 @@
         <image name="HomeSceneBackground" width="640" height="1136"/>
         <image name="ProfileHeaderBackground" width="640" height="192"/>
         <image name="ProfileHeaderBackgroundv2" width="640" height="202"/>
+        <image name="ProfileUpdateIcon" width="85" height="88"/>
         <image name="RandomChallengeButtonBackground" width="582" height="89"/>
         <image name="RedButtonBackground" width="163" height="61"/>
         <image name="SettingsIcon" width="58" height="58"/>

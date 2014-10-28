@@ -145,7 +145,8 @@ final class Game {
 //        weak var wself = self
         
         NetworkClient.sharedClient.getResultForGame(self.gameID) {
-//            var sself = wself!
+            [unowned self] in
+            
             if let cResults = $0.challengerResult {
                 if self.initiatingPlayer.userId == cResults.userId {
                     self.initiatingPlayerResult = cResults

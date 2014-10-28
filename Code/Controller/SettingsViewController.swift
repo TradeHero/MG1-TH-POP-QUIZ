@@ -127,11 +127,11 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
                 (cell as SettingsControlTableViewCell).delegate = self
 //                UIView.roundView(cell.contentView, onCorner: .BottomLeft | .BottomRight, radius: 5)
                 return cell
-            case 3:
-                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
-                (cell as SettingsControlTableViewCell).configureControlType(.NotificationHead)
-                (cell as SettingsControlTableViewCell).delegate = self
-                return cell
+//            case 3:
+//                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
+//                (cell as SettingsControlTableViewCell).configureControlType(.NotificationHead)
+//                (cell as SettingsControlTableViewCell).delegate = self
+//                return cell
             default:
                 break
             }
@@ -148,7 +148,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         case 0:
             return 1
         case 1:
-            return 4
+            return 3
         default:
             return 0
         }
@@ -171,7 +171,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
             switch indexPath.row {
             case 0, 1:
                 return 70
-            case 2, 3:
+            case 2:
                 return 42
             default:
                 break

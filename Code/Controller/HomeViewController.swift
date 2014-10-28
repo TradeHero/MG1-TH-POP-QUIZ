@@ -14,7 +14,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet private weak var fullNameView: UILabel!
     @IBOutlet weak var tickImageView: UIImageView!
     
-    private var refreshControl: UIRefreshControl!
     private var openChallenges = [Game]()
     private var opponentPendingChallenges = [Game]()
     private var unfinishedChallenges = [Game]()
@@ -38,10 +37,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadChallenges()
-        refreshControl = UIRefreshControl()
-        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
-        self.tableView.addSubview(refreshControl)
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         self.tableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
         setupSubviews()
@@ -87,19 +82,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func uncheckFBShareAction(sender: UIButton) {
-        println("tapped")
         func showAlertViewConfirmation(){
             let alertView = UIAlertController(title: "Facebook Sharing", message: "Are you sure you want to do this?", preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "Yes, challenge my friends!", style: .Cancel){
+            let cancelAction = UIAlertAction(title: "Yes, challenge my friends!", style: .Cancel, handler: nil)
+            
+            let okAction = UIAlertAction(title: "Later", style: .Default) {
                 [unowned self] action in
                 kFaceBookShare = false
                 sender.selected = false
             }
             
-            let okAction = UIAlertAction(title: "Later", style: .Default, handler: nil)
-            alertView.addAction(okAction)
             alertView.addAction(cancelAction)
-            
+            alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
         }
         if kFaceBookShare {
@@ -123,21 +117,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func loadChallenges(loadCompleteHandler:(()->())! = nil){
-        var hud: JGProgressHUD?
+        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         
         if loadCompleteHandler == nil {
-            hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
-
+            hud.textLabel.text = "Loading challenges.."
             self.openChallenges.removeAll(keepCapacity: true)
             self.opponentPendingChallenges.removeAll(keepCapacity: true)
             self.tableView.reloadData()
             self.tableView.forceUpdateTable()
+        } else {
+            hud.textLabel.text = "Syncing.."
         }
         
         var numberLoaded = 0
-        
-        hud?.textLabel.text = "Loading challenges.."
-        
+
         let completionHandler: () -> () = {
             [unowned self] in
             numberLoaded++
@@ -145,7 +138,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if numberLoaded == 4 {
                 hud?.dismissAnimated(true)
                 self.tableView.reloadData()
-//                self.tableView.forceUpdateTable()
             }
             
             if loadCompleteHandler != nil {
@@ -460,10 +452,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return headerView
     }
     
-    func refresh(sender: UIRefreshControl){
+    @IBAction func refresh(sender: AnyObject){
         self.loadChallenges {
-            [unowned self] in
-            self.refreshControl.endRefreshing()
         }
     }
     

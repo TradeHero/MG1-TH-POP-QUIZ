@@ -142,7 +142,7 @@ class NetworkClient {
                     
                 }
         }
-//        debugPrintln(r)
+        debugPrintln(r)
     }
     
     /**
@@ -535,13 +535,18 @@ class NetworkClient {
                 debugPrintln(error)
             }
             
-            game.fetchResults() {
-                if let c = completionHandler {
-                    c(game)
+            game.fetchResults {
+                [unowned self] in
+                if game.isGameCompletedByBothPlayer {
+                    self.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) has finished the challenge! Check your timeline for results!") {
+                        if let c = completionHandler {
+                            c(game)
+                        }
+                    }
                 }
             }
         }
-                        debugPrintln(r)
+        debugPrintln(r)
     }
     
     /**

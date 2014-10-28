@@ -47,6 +47,7 @@ enum QuestionCategory : Int {
     case CompanyNameToExchangeSymbolCategory
     case OddOneOutCategory
     case CompanyNameToSectorCategory
+    case StaticCategory
     
     func description() -> String {
         switch self {
@@ -72,6 +73,8 @@ enum QuestionCategory : Int {
             return "[9] Odd one out"
         case .CompanyNameToSectorCategory:
             return "[10] Company Name -> Sector"
+        case .StaticCategory:
+            return "[11] Static questions"
         }
     }
 }
@@ -174,6 +177,10 @@ final class Question {
                 self.questionType = .TextualType
                 self.questionCategory = .CompanyNameToSectorCategory
                 self.questionContent = "In which sector does the \(mainContent) operate?"
+            case 11:
+                self.questionType = .TextualType
+                self.questionCategory = .StaticCategory
+                self.questionContent = "\(mainContent)"
             default:
                 self.questionType = QuestionType.UnknownType
                 self.questionContent = "~ \(contentStr) ~"

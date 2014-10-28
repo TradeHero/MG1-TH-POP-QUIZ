@@ -586,7 +586,7 @@ class QuizViewController: UIViewController {
     }
     
     private func produceResultForCurrentQuestion(isCorrect:Bool, score:Int){
-        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: Float(10 - current_timeLeft), correct: isCorrect, score: score))
+        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: Float(MAX_ALLOWED_TIME - current_timeLeft), correct: isCorrect, score: score))
     }
     
     func bindGameAndUsers(game:Game, player:THUser, opponent:THUser){
