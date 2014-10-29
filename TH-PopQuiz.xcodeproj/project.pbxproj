@@ -28,6 +28,15 @@
 		6D69E50C19C82A58006490D0 /* SettingsSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */; };
 		6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */; };
 		6D8A8BC719DBA6E1000A9E8B /* THCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8BC619DBA6E1000A9E8B /* THCache.swift */; };
+		6D8C03AA1A00861C001F599F /* bee68_1.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03A51A00861C001F599F /* bee68_1.mid */; };
+		6D8C03AB1A00861C001F599F /* bee68_2.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03A61A00861C001F599F /* bee68_2.mid */; };
+		6D8C03AC1A00861C001F599F /* bee68_3.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03A71A00861C001F599F /* bee68_3.mid */; };
+		6D8C03AD1A00861C001F599F /* bee68_4.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03A81A00861C001F599F /* bee68_4.mid */; };
+		6D8C03AE1A00861C001F599F /* bee68_5.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03A91A00861C001F599F /* bee68_5.mid */; };
+		6D8C03B31A008623001F599F /* chopineb.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03AF1A008623001F599F /* chopineb.mid */; };
+		6D8C03B41A008623001F599F /* k165.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03B01A008623001F599F /* k165.mid */; };
+		6D8C03B51A008623001F599F /* turca.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03B11A008623001F599F /* turca.mid */; };
+		6D8C03B61A008623001F599F /* valse_n.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03B21A008623001F599F /* valse_n.mid */; };
 		6DA1287519CA8251000687C0 /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1287419CA8251000687C0 /* THExtensions.swift */; };
 		6DA1287719CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */; };
 		6DB9A18C19E3A21D001DEDFB /* InAppNotificationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB9A18A19E3A21D001DEDFB /* InAppNotificationTableViewController.swift */; };
@@ -170,6 +179,15 @@
 		6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSliderTableViewCell.xib; sourceTree = "<group>"; };
 		6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTimelineView.xib; sourceTree = "<group>"; };
 		6D8A8BC619DBA6E1000A9E8B /* THCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THCache.swift; sourceTree = "<group>"; };
+		6D8C03A51A00861C001F599F /* bee68_1.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = bee68_1.mid; sourceTree = "<group>"; };
+		6D8C03A61A00861C001F599F /* bee68_2.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = bee68_2.mid; sourceTree = "<group>"; };
+		6D8C03A71A00861C001F599F /* bee68_3.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = bee68_3.mid; sourceTree = "<group>"; };
+		6D8C03A81A00861C001F599F /* bee68_4.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = bee68_4.mid; sourceTree = "<group>"; };
+		6D8C03A91A00861C001F599F /* bee68_5.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = bee68_5.mid; sourceTree = "<group>"; };
+		6D8C03AF1A008623001F599F /* chopineb.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = chopineb.mid; sourceTree = "<group>"; };
+		6D8C03B01A008623001F599F /* k165.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = k165.mid; sourceTree = "<group>"; };
+		6D8C03B11A008623001F599F /* turca.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = turca.mid; sourceTree = "<group>"; };
+		6D8C03B21A008623001F599F /* valse_n.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = valse_n.mid; sourceTree = "<group>"; };
 		6DA1287419CA8251000687C0 /* THExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THExtensions.swift; sourceTree = "<group>"; };
 		6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MonkeysSpinningMonkeys.mp3; sourceTree = "<group>"; };
 		6DB9A18A19E3A21D001DEDFB /* InAppNotificationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppNotificationTableViewController.swift; sourceTree = "<group>"; };
@@ -326,9 +344,34 @@
 			path = Caching;
 			sourceTree = "<group>";
 		};
+		6D8C03A21A0085E6001F599F /* Orchestral */ = {
+			isa = PBXGroup;
+			children = (
+				6D8C03A51A00861C001F599F /* bee68_1.mid */,
+				6D8C03A61A00861C001F599F /* bee68_2.mid */,
+				6D8C03A71A00861C001F599F /* bee68_3.mid */,
+				6D8C03A81A00861C001F599F /* bee68_4.mid */,
+				6D8C03A91A00861C001F599F /* bee68_5.mid */,
+			);
+			path = Orchestral;
+			sourceTree = "<group>";
+		};
+		6D8C03A41A0085EC001F599F /* Piano */ = {
+			isa = PBXGroup;
+			children = (
+				6D8C03AF1A008623001F599F /* chopineb.mid */,
+				6D8C03B01A008623001F599F /* k165.mid */,
+				6D8C03B11A008623001F599F /* turca.mid */,
+				6D8C03B21A008623001F599F /* valse_n.mid */,
+			);
+			path = Piano;
+			sourceTree = "<group>";
+		};
 		6DA1287819CA9037000687C0 /* Background Musics */ = {
 			isa = PBXGroup;
 			children = (
+				6D8C03A41A0085EC001F599F /* Piano */,
+				6D8C03A21A0085E6001F599F /* Orchestral */,
 				6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */,
 				6DD2314B19B8204900B5D05E /* Electrodoodle.mp3 */,
 			);
@@ -769,6 +812,7 @@
 				6DB9A19019E3A300001DEDFB /* InAppNotification.storyboard in Resources */,
 				6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */,
 				6D0BC42119C7E2F700578C90 /* SettingsControlTableViewCell.xib in Resources */,
+				6D8C03B41A008623001F599F /* k165.mid in Resources */,
 				6DBE9DB519D162E500FACB1D /* Wrong-Buzzer.caf in Resources */,
 				6DD2319319B8204900B5D05E /* FriendsChallengeCellTableViewCell.xib in Resources */,
 				6DD2319719B8204900B5D05E /* HomeTurnChallengesTableViewCell.xib in Resources */,
@@ -779,19 +823,27 @@
 				6D69E50C19C82A58006490D0 /* SettingsSliderTableViewCell.xib in Resources */,
 				6DD2317619B8204900B5D05E /* Login.storyboard in Resources */,
 				6DD2318C19B8204900B5D05E /* Electrodoodle.mp3 in Resources */,
+				6D8C03AE1A00861C001F599F /* bee68_5.mid in Resources */,
 				6DD231A919B8208700B5D05E /* Home.storyboard in Resources */,
+				6D8C03AA1A00861C001F599F /* bee68_1.mid in Resources */,
 				6DD2319C19B8204900B5D05E /* OptionButtonAccessoryImageLayer.xib in Resources */,
 				6DE3B4F319BECCBC00F9251A /* ProximaNova-Semibold.ttf in Resources */,
 				6DD231A419B8204900B5D05E /* QuestionResultTableViewCell.xib in Resources */,
 				6D0D683419F4B262002682F7 /* AirshipConfig.plist in Resources */,
 				6DD2317519B8204900B5D05E /* Images.xcassets in Resources */,
 				6DE3B4F119BECCBC00F9251A /* ProximaNova-Light.ttf in Resources */,
+				6D8C03AC1A00861C001F599F /* bee68_3.mid in Resources */,
+				6D8C03AB1A00861C001F599F /* bee68_2.mid in Resources */,
 				6D07032119EB733D0056F431 /* StaffChallengeCellTableViewCell.xib in Resources */,
 				6DE3B4F219BECCBC00F9251A /* ProximaNova-Regular.ttf in Resources */,
 				6DA1287719CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 in Resources */,
+				6D8C03B31A008623001F599F /* chopineb.mid in Resources */,
+				6D8C03B51A008623001F599F /* turca.mid in Resources */,
 				6DD2318319B8204900B5D05E /* Quiz.storyboard in Resources */,
 				6DD053A519C6CBB100831B6C /* ChallengesSectionHeader.xib in Resources */,
 				6D3DB3C019E3CDF5006BC11B /* NotificationTableViewCell.xib in Resources */,
+				6D8C03AD1A00861C001F599F /* bee68_4.mid in Resources */,
+				6D8C03B61A008623001F599F /* valse_n.mid in Resources */,
 				6D01613119FF87D90024A3A0 /* Launch Screen.xib in Resources */,
 				6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */,
 				6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */,
@@ -834,7 +886,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# set new $IFS\nSAVEIFS=$IFS\nIFS=$(echo -en \"\\n\\b\")\nFILES=\"Code/Supporting Files/*.plist\"\nfor plist in $FILES\ndo\necho \"Updating $plist\"\n\nif [[ -z \"$CFBundleVersionNew\" ]]\nthen\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$plist\")\nCFBundleVersionNew=$(($CFBundleVersion + 2))\nfi\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $CFBundleVersionNew\" \"$plist\"\n\nCFBuildDate=$(date)\n\n/usr/libexec/PlistBuddy -c \"Set :CFBuildDate $CFBuildDate\" \"$plist\"\n\ntouch \"$plist\"\ndone\n# restore $IFS\nIFS=$SAVEIFS";
+			shellScript = "# set new $IFS\nSAVEIFS=$IFS\nIFS=$(echo -en \"\\n\\b\")\nplist=\"Code/Supporting Files/Info.plist\"\n\necho \"Updating $plist\"\n\nif [[ -z \"$CFBundleVersionNew\" ]]\nthen\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$plist\")\nCFBundleVersionNew=$(($CFBundleVersion + 2))\nfi\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $CFBundleVersionNew\" \"$plist\"\n\nCFBuildDate=$(date)\n\n/usr/libexec/PlistBuddy -c \"Set :CFBuildDate $CFBuildDate\" \"$plist\"\n\ntouch \"$plist\"\n# restore $IFS\nIFS=$SAVEIFS\n";
 		};
 		92186A708B2A42D934FE351E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

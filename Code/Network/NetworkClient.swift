@@ -536,8 +536,9 @@ class NetworkClient {
             }
             
             game.fetchResults {
-                [unowned self] in
+                
                 if game.isGameCompletedByBothPlayer {
+                 
                     self.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) has finished the challenge! Check your timeline for results!") {
                         if let c = completionHandler {
                             c(game)
