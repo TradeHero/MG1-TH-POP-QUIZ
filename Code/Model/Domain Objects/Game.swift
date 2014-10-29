@@ -79,6 +79,47 @@ final class Game {
             }
             self.questionSet = qSet
         }
+        
+        if let rs: AnyObject = gameDTO["results"] {
+            populateResult(rs)
+        }
+    }
+    
+    private func populateResult(result:AnyObject) {
+        var challengerResult:GameResult?
+        var opponentResult:GameResult?
+        
+        if let resultsDTO = result as? [String : AnyObject] {
+            let inner: AnyObject? = resultsDTO["result"]
+            if let innerResultDTO = inner as? [String : AnyObject] {
+                if let challengerResultDTO: AnyObject = innerResultDTO["challenger"] {
+                    debugPrintln("Parsing game initiator result..")
+                    let dto = challengerResultDTO as [String : AnyObject]
+                    challengerResult = GameResult(gameId:self.gameID, resultDTO: dto)
+                }
+                if let opponentResultDTO: AnyObject = innerResultDTO["opponent"] {
+                    debugPrintln("Parsing game opponent result..")
+                    let dto = opponentResultDTO as [String : AnyObject]
+                    opponentResult = GameResult(gameId:self.gameID, resultDTO: dto)
+                }
+            }
+        }
+        
+        if let cResults = challengerResult {
+            if self.initiatingPlayer.userId == cResults.userId {
+                self.initiatingPlayerResult = cResults
+            } else {
+                self.opponentPlayerResult = cResults
+            }
+        }
+        
+        if let oResults = opponentResult {
+            if self.opponentPlayer.userId == oResults.userId {
+                self.opponentPlayerResult = oResults
+            } else {
+                self.initiatingPlayerResult = oResults
+            }
+        }
     }
     
     init(compactGameDTO:[String: AnyObject]){

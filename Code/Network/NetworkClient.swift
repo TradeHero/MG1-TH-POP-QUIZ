@@ -254,13 +254,11 @@ class NetworkClient {
                     }
                     
                     for openChallengeDTO in openChallengesDTOs as [[String: AnyObject]] {
-                        let game = Game(compactGameDTO: openChallengeDTO)
+                        let game = Game(gameDTO: openChallengeDTO)
                         
                         game.fetchUsers{
-                            game.fetchResults {
-                                openChallenges.append(game)
-                                fetchUserHandler()
-                            }
+                            openChallenges.append(game)
+                            fetchUserHandler()
                         }
                     }
                     
@@ -315,10 +313,8 @@ class NetworkClient {
                             opponentID = i as Int
                         }
                         game.fetchUsers{
-                            game.fetchResults {
-                                takenChallenges.append(game)
-                                fetchUserHandler()
-                            }
+                            takenChallenges.append(game)
+                            fetchUserHandler()
                         }
                     }
                 }
@@ -373,10 +369,8 @@ class NetworkClient {
                             opponentID = i as Int
                         }
                         game.fetchUsers{
-                            game.fetchResults {
-                                pendingChallenges.append(game)
-                                fetchUserHandler()
-                            }
+                            pendingChallenges.append(game)
+                            fetchUserHandler()
                         }
                     }
                     
@@ -432,10 +426,8 @@ class NetworkClient {
                             opponentID = i as Int
                         }
                         game.fetchUsers{
-                            game.fetchResults {
-                                incompleteChallenges.append(game)
-                                fetchUserHandler()
-                            }
+                            incompleteChallenges.append(game)
+                            fetchUserHandler()
                         }
                     }
                 }
