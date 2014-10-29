@@ -28,15 +28,6 @@
 		6D69E50C19C82A58006490D0 /* SettingsSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */; };
 		6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */; };
 		6D8A8BC719DBA6E1000A9E8B /* THCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8BC619DBA6E1000A9E8B /* THCache.swift */; };
-		6D8C03AA1A00861C001F599F /* bee68_1.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03A51A00861C001F599F /* bee68_1.mid */; };
-		6D8C03AB1A00861C001F599F /* bee68_2.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03A61A00861C001F599F /* bee68_2.mid */; };
-		6D8C03AC1A00861C001F599F /* bee68_3.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03A71A00861C001F599F /* bee68_3.mid */; };
-		6D8C03AD1A00861C001F599F /* bee68_4.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03A81A00861C001F599F /* bee68_4.mid */; };
-		6D8C03AE1A00861C001F599F /* bee68_5.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03A91A00861C001F599F /* bee68_5.mid */; };
-		6D8C03B31A008623001F599F /* chopineb.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03AF1A008623001F599F /* chopineb.mid */; };
-		6D8C03B41A008623001F599F /* k165.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03B01A008623001F599F /* k165.mid */; };
-		6D8C03B51A008623001F599F /* turca.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03B11A008623001F599F /* turca.mid */; };
-		6D8C03B61A008623001F599F /* valse_n.mid in Resources */ = {isa = PBXBuildFile; fileRef = 6D8C03B21A008623001F599F /* valse_n.mid */; };
 		6D8C03EF1A00C64D001F599F /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C03EE1A00C64D001F599F /* MusicPlayer.swift */; };
 		6DA1287519CA8251000687C0 /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1287419CA8251000687C0 /* THExtensions.swift */; };
 		6DA1287719CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */; };
@@ -109,6 +100,15 @@
 		6DF8BD5F19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */; };
 		6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */; };
 		8DC4878C5EB7F43611E1F852 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D6DCDAC304B0EE468E1F157 /* libPods.a */; };
+		F6A7D92F1A00DAAC00056EB1 /* chopineb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D92B1A00DAAC00056EB1 /* chopineb.mp3 */; };
+		F6A7D9301A00DAAC00056EB1 /* k165.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D92C1A00DAAC00056EB1 /* k165.mp3 */; };
+		F6A7D9311A00DAAC00056EB1 /* turca.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D92D1A00DAAC00056EB1 /* turca.mp3 */; };
+		F6A7D9321A00DAAC00056EB1 /* valse_n.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D92E1A00DAAC00056EB1 /* valse_n.mp3 */; };
+		F6A7D9381A00DBB600056EB1 /* bee68_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D9331A00DBB600056EB1 /* bee68_1.mp3 */; };
+		F6A7D9391A00DBB600056EB1 /* bee68_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D9341A00DBB600056EB1 /* bee68_2.mp3 */; };
+		F6A7D93A1A00DBB600056EB1 /* bee68_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D9351A00DBB600056EB1 /* bee68_3.mp3 */; };
+		F6A7D93B1A00DBB600056EB1 /* bee68_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D9361A00DBB600056EB1 /* bee68_4.mp3 */; };
+		F6A7D93C1A00DBB600056EB1 /* bee68_5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D9371A00DBB600056EB1 /* bee68_5.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,15 +180,6 @@
 		6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSliderTableViewCell.xib; sourceTree = "<group>"; };
 		6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTimelineView.xib; sourceTree = "<group>"; };
 		6D8A8BC619DBA6E1000A9E8B /* THCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THCache.swift; sourceTree = "<group>"; };
-		6D8C03A51A00861C001F599F /* bee68_1.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = bee68_1.mid; sourceTree = "<group>"; };
-		6D8C03A61A00861C001F599F /* bee68_2.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = bee68_2.mid; sourceTree = "<group>"; };
-		6D8C03A71A00861C001F599F /* bee68_3.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = bee68_3.mid; sourceTree = "<group>"; };
-		6D8C03A81A00861C001F599F /* bee68_4.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = bee68_4.mid; sourceTree = "<group>"; };
-		6D8C03A91A00861C001F599F /* bee68_5.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = bee68_5.mid; sourceTree = "<group>"; };
-		6D8C03AF1A008623001F599F /* chopineb.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = chopineb.mid; sourceTree = "<group>"; };
-		6D8C03B01A008623001F599F /* k165.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = k165.mid; sourceTree = "<group>"; };
-		6D8C03B11A008623001F599F /* turca.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = turca.mid; sourceTree = "<group>"; };
-		6D8C03B21A008623001F599F /* valse_n.mid */ = {isa = PBXFileReference; lastKnownFileType = audio.midi; path = valse_n.mid; sourceTree = "<group>"; };
 		6D8C03EE1A00C64D001F599F /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		6DA1287419CA8251000687C0 /* THExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THExtensions.swift; sourceTree = "<group>"; };
 		6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MonkeysSpinningMonkeys.mp3; sourceTree = "<group>"; };
@@ -267,6 +258,15 @@
 		6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameResultDetailTableViewCell.xib; sourceTree = "<group>"; };
 		99D837D0AF7C3AD56E53845B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F6A7D92B1A00DAAC00056EB1 /* chopineb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chopineb.mp3; sourceTree = "<group>"; };
+		F6A7D92C1A00DAAC00056EB1 /* k165.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = k165.mp3; sourceTree = "<group>"; };
+		F6A7D92D1A00DAAC00056EB1 /* turca.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = turca.mp3; sourceTree = "<group>"; };
+		F6A7D92E1A00DAAC00056EB1 /* valse_n.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = valse_n.mp3; sourceTree = "<group>"; };
+		F6A7D9331A00DBB600056EB1 /* bee68_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bee68_1.mp3; sourceTree = "<group>"; };
+		F6A7D9341A00DBB600056EB1 /* bee68_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bee68_2.mp3; sourceTree = "<group>"; };
+		F6A7D9351A00DBB600056EB1 /* bee68_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bee68_3.mp3; sourceTree = "<group>"; };
+		F6A7D9361A00DBB600056EB1 /* bee68_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bee68_4.mp3; sourceTree = "<group>"; };
+		F6A7D9371A00DBB600056EB1 /* bee68_5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bee68_5.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,11 +349,11 @@
 		6D8C03A21A0085E6001F599F /* Orchestral */ = {
 			isa = PBXGroup;
 			children = (
-				6D8C03A51A00861C001F599F /* bee68_1.mid */,
-				6D8C03A61A00861C001F599F /* bee68_2.mid */,
-				6D8C03A71A00861C001F599F /* bee68_3.mid */,
-				6D8C03A81A00861C001F599F /* bee68_4.mid */,
-				6D8C03A91A00861C001F599F /* bee68_5.mid */,
+				F6A7D9331A00DBB600056EB1 /* bee68_1.mp3 */,
+				F6A7D9341A00DBB600056EB1 /* bee68_2.mp3 */,
+				F6A7D9351A00DBB600056EB1 /* bee68_3.mp3 */,
+				F6A7D9361A00DBB600056EB1 /* bee68_4.mp3 */,
+				F6A7D9371A00DBB600056EB1 /* bee68_5.mp3 */,
 			);
 			path = Orchestral;
 			sourceTree = "<group>";
@@ -361,10 +361,10 @@
 		6D8C03A41A0085EC001F599F /* Piano */ = {
 			isa = PBXGroup;
 			children = (
-				6D8C03AF1A008623001F599F /* chopineb.mid */,
-				6D8C03B01A008623001F599F /* k165.mid */,
-				6D8C03B11A008623001F599F /* turca.mid */,
-				6D8C03B21A008623001F599F /* valse_n.mid */,
+				F6A7D92B1A00DAAC00056EB1 /* chopineb.mp3 */,
+				F6A7D92C1A00DAAC00056EB1 /* k165.mp3 */,
+				F6A7D92D1A00DAAC00056EB1 /* turca.mp3 */,
+				F6A7D92E1A00DAAC00056EB1 /* valse_n.mp3 */,
 			);
 			path = Piano;
 			sourceTree = "<group>";
@@ -421,12 +421,12 @@
 		6DD2310119B81FFA00B5D05E /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				6D8C03BD1A00C35B001F599F /* Music */,
 				6DD2312119B8204900B5D05E /* AppDelegate */,
 				6D8A8BC519DBA6BD000A9E8B /* Caching */,
 				6DD2312419B8204900B5D05E /* Controller */,
 				6DD2312C19B8204900B5D05E /* Images.xcassets */,
 				6DD2312E19B8204900B5D05E /* Model */,
+				6D8C03BD1A00C35B001F599F /* Music */,
 				6DD2313A19B8204900B5D05E /* Network */,
 				6DD2313C19B8204900B5D05E /* Obj-C Helpers */,
 				6DD2314019B8204900B5D05E /* Segue */,
@@ -819,42 +819,42 @@
 			files = (
 				6DD231A219B8204900B5D05E /* QuestionViewWithImage.xib in Resources */,
 				6DD2319E19B8204900B5D05E /* QuestionViewPlain.xib in Resources */,
+				F6A7D9311A00DAAC00056EB1 /* turca.mp3 in Resources */,
 				6D3AF98519C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib in Resources */,
+				F6A7D9391A00DBB600056EB1 /* bee68_2.mp3 in Resources */,
+				F6A7D93A1A00DBB600056EB1 /* bee68_3.mp3 in Resources */,
 				6DB9A19019E3A300001DEDFB /* InAppNotification.storyboard in Resources */,
 				6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */,
 				6D0BC42119C7E2F700578C90 /* SettingsControlTableViewCell.xib in Resources */,
-				6D8C03B41A008623001F599F /* k165.mid in Resources */,
+				F6A7D93C1A00DBB600056EB1 /* bee68_5.mp3 in Resources */,
 				6DBE9DB519D162E500FACB1D /* Wrong-Buzzer.caf in Resources */,
 				6DD2319319B8204900B5D05E /* FriendsChallengeCellTableViewCell.xib in Resources */,
 				6DD2319719B8204900B5D05E /* HomeTurnChallengesTableViewCell.xib in Resources */,
 				6DBE9DB119D159DE00FACB1D /* Correct-Bell.caf in Resources */,
+				F6A7D9381A00DBB600056EB1 /* bee68_1.mp3 in Resources */,
 				6DD231A019B8204900B5D05E /* QuestionViewWithAccessoryImage.xib in Resources */,
 				6DD2319919B8204900B5D05E /* LogoCanvasView.xib in Resources */,
 				6D04887319BED33100F955D0 /* angrybirds-regular.ttf in Resources */,
+				F6A7D92F1A00DAAC00056EB1 /* chopineb.mp3 in Resources */,
 				6D69E50C19C82A58006490D0 /* SettingsSliderTableViewCell.xib in Resources */,
 				6DD2317619B8204900B5D05E /* Login.storyboard in Resources */,
 				6DD2318C19B8204900B5D05E /* Electrodoodle.mp3 in Resources */,
-				6D8C03AE1A00861C001F599F /* bee68_5.mid in Resources */,
 				6DD231A919B8208700B5D05E /* Home.storyboard in Resources */,
-				6D8C03AA1A00861C001F599F /* bee68_1.mid in Resources */,
+				F6A7D9301A00DAAC00056EB1 /* k165.mp3 in Resources */,
 				6DD2319C19B8204900B5D05E /* OptionButtonAccessoryImageLayer.xib in Resources */,
 				6DE3B4F319BECCBC00F9251A /* ProximaNova-Semibold.ttf in Resources */,
 				6DD231A419B8204900B5D05E /* QuestionResultTableViewCell.xib in Resources */,
 				6D0D683419F4B262002682F7 /* AirshipConfig.plist in Resources */,
+				F6A7D9321A00DAAC00056EB1 /* valse_n.mp3 in Resources */,
 				6DD2317519B8204900B5D05E /* Images.xcassets in Resources */,
 				6DE3B4F119BECCBC00F9251A /* ProximaNova-Light.ttf in Resources */,
-				6D8C03AC1A00861C001F599F /* bee68_3.mid in Resources */,
-				6D8C03AB1A00861C001F599F /* bee68_2.mid in Resources */,
 				6D07032119EB733D0056F431 /* StaffChallengeCellTableViewCell.xib in Resources */,
 				6DE3B4F219BECCBC00F9251A /* ProximaNova-Regular.ttf in Resources */,
 				6DA1287719CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 in Resources */,
-				6D8C03B31A008623001F599F /* chopineb.mid in Resources */,
-				6D8C03B51A008623001F599F /* turca.mid in Resources */,
 				6DD2318319B8204900B5D05E /* Quiz.storyboard in Resources */,
+				F6A7D93B1A00DBB600056EB1 /* bee68_4.mp3 in Resources */,
 				6DD053A519C6CBB100831B6C /* ChallengesSectionHeader.xib in Resources */,
 				6D3DB3C019E3CDF5006BC11B /* NotificationTableViewCell.xib in Resources */,
-				6D8C03AD1A00861C001F599F /* bee68_4.mid in Resources */,
-				6D8C03B61A008623001F599F /* valse_n.mid in Resources */,
 				6D01613119FF87D90024A3A0 /* Launch Screen.xib in Resources */,
 				6DE3B4F019BECCBC00F9251A /* ProximaNova-Bold.ttf in Resources */,
 				6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */,

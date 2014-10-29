@@ -6,5 +6,19 @@
 //  Copyright (c) 2014 TradeHero. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
+
+var musicPlayer: AVAudioPlayer!
+
+var isSoundEffectOn: Bool {
+get{
+    return musicPlayer.playing
+}
+}
+
+func prepareForMusicPlayer(soundName:String) {
+    musicPlayer = AVAudioPlayer.createAudioPlayer(soundName, extensionName: "mp3")
+    musicPlayer.numberOfLoops = -1
+    musicPlayer.volume = kTHBackgroundMusicValue
+}
 

@@ -131,8 +131,8 @@ class QuizViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.gameMusicPlayer = createBackgroundMusicPlayer()
-        self.gameMusicPlayer.play()
+        prepareForMusicPlayer("turca")
+        musicPlayer.play()
         self.navigationController?.hideNavigationBar()
         
         dispatch_after(1, dispatch_get_main_queue()) {
@@ -213,12 +213,12 @@ class QuizViewController: UIViewController {
         }
     }
     
-    private func createBackgroundMusicPlayer() -> AVAudioPlayer{
-        let p = AVAudioPlayer.createAudioPlayer("MonkeysSpinningMonkeys", extensionName: "mp3")
-        p.numberOfLoops = -1
-        p.volume = kTHBackgroundMusicValue
-        return p
-    }
+//    private func createBackgroundMusicPlayer() -> AVAudioPlayer{
+//        let p = AVAudioPlayer.createAudioPlayer("MonkeysSpinningMonkeys", extensionName: "mp3")
+//        p.numberOfLoops = -1
+//        p.volume = kTHBackgroundMusicValue
+//        return p
+//    }
     
     func prepareToEndRound() {
         current_q++
@@ -384,12 +384,10 @@ class QuizViewController: UIViewController {
         hud.textLabel.text = "Calculating results..."
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: self.highestCombo, noOfHintsUsed: self.totalHintUsed, currentScore: currentTurnScore, questionResults: results) {
             [unowned self] in
-                self.gameMusicPlayer.stop()
-                
-                if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
-                    app.bgmPlayer.play()
-                }
-                
+                musicPlayer.stop()
+                prepareForMusicPlayer("chopineb")
+                musicPlayer.play()
+            
                 hud.dismissAnimated(true)
                 self.game = $0
                 if $0.isGameCompletedByBothPlayer {

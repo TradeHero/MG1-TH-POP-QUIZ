@@ -86,7 +86,6 @@ class LoginViewController: UIViewController {
                     hud.dismissAfterDelay(5, animated: true)
                 }
             }
-                hud.dismissAfterDelay(1.5, animated: true)
         }
         
     }

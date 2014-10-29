@@ -130,9 +130,7 @@ var kTHBackgroundMusicValue:Float {
     set {
         debugPrintln("Background music volume set to \(newValue)")
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(float: newValue), forKey: kTHBackgroundMusicValueKey)
-        if let app = UIApplication.sharedApplication().delegate as? AppDelegate {
-            app.bgmPlayer.volume = newValue
-        }
+        musicPlayer.volume = newValue
     }
     
     get {
