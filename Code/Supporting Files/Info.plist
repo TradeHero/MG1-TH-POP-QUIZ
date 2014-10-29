@@ -18,17 +18,8 @@
 	<string>1.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb431745923529834</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
-	<string>22</string>
+	<string>30</string>
 	<key>FacebookAppID</key>
 	<string>431745923529834</string>
 	<key>LSApplicationCategoryType</key>
