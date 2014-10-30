@@ -117,7 +117,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func loadChallenges(loadCompleteHandler:(()->())! = nil){
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        var hud = JGProgressHUD.progressHUDWithRingStyle(JGProgressHUDStyle.ExtraLight)
         
         if loadCompleteHandler == nil {
             hud.textLabel.text = "Loading challenges.."
@@ -128,6 +128,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             hud.textLabel.text = "Syncing.."
         }
+        hud.detailTextLabel.text = "0% complete"
+        
         
         var numberLoaded = 0
 
@@ -135,8 +137,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             [unowned self] in
             numberLoaded++
             
+            let progress = (Double(numberLoaded)*100/4).format(".1")
+            hud.setProgress(Float(numberLoaded)/4, animated: false)
+            hud.detailTextLabel.text = "\(progress)% complete"
+
             if numberLoaded == 4 {
-                hud?.dismissAnimated(true)
+                hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                hud.layoutChangeAnimationDuration = 0.3
+                hud.textLabel.text = nil
+                hud.detailTextLabel.text = nil
+                hud?.dismissAfterDelay(1, animated: true)
                 self.tableView.reloadData()
             }
             

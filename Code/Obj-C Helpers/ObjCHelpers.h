@@ -8,6 +8,7 @@
 
 @import UIKit;
 @import AVFoundation;
+@import AudioToolbox;
 
 @interface UIImage (Helper)
 
@@ -44,3 +45,5 @@ typedef NS_ENUM(NSInteger,UITableViewCellLoadWaveAnimationDirection) {
 @property (nonatomic) UIImage *handlerImage;
 @property (nonatomic) UIColor *handlerColor;
 @end
+
+void playSound(NSString* path);

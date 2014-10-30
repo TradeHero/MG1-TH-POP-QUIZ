@@ -9,7 +9,9 @@
 import UIKit
 import Social
 import Accounts
+
 var loginOnce = false
+
 class LoginViewController: UIViewController {
     
     private var accountStore = ACAccountStore()
@@ -54,7 +56,7 @@ class LoginViewController: UIViewController {
     @IBAction func facebookTapped(sender: AnyObject) {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         let facebookTypeAccount = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
-        hud.indicatorView = nil
+        hud.indicatorView = JGProgressHUDIndeterminateIndicatorView(HUDStyle:hud.style)
         hud.textLabel.text = "Logging in..."
         accountStore.requestAccessToAccountsWithType(facebookTypeAccount, options: [ACFacebookAppIdKey : kTHFacebookAppID]) { [unowned self] (granted, error) -> Void in
             

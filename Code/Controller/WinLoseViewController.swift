@@ -52,7 +52,13 @@ class WinLoseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
+        let differenceInScore = selfScore - opponentScore
+        let dStr = NSNumberFormatter.localizedStringFromNumber(NSNumber(integer: differenceInScore), numberStyle: .DecimalStyle)
+        if differenceInScore > 0 {
+            THDollarWonLabel.text = "TH$ " + dStr
+        } else {
+            THDollarWonLabel.text = "TH$ 0"
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -136,13 +142,7 @@ class WinLoseViewController: UIViewController {
         for extraDetail in oppResult.resultExtraDetails {
             opponentScore += extraDetail.finalScore
         }
-        let differenceInScore = selfScore - opponentScore
         
-        if differenceInScore > 0 {
-            THDollarWonLabel.text = "TH$ \(differenceInScore.decimalFormattedString)"
-        } else {
-            THDollarWonLabel.text = "TH$ 0"
-        }
     }
     
     // MARK: - Navigation

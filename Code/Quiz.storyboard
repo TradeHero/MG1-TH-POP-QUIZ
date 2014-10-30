@@ -1047,7 +1047,7 @@
                     <navigationItem key="navigationItem" id="uhP-XX-9u4"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="THDollarWonLabel" destination="dEJ-BT-dEn" id="Bcf-An-zqz"/>
+                        <outlet property="THDollarWonLabel" destination="dEJ-BT-dEn" id="R3c-9u-Mel"/>
                         <outlet property="largeBoxAvatarView" destination="4uj-A8-DNu" id="pLJ-El-vay"/>
                         <outlet property="largeBoxBackground" destination="dgX-r4-Jrb" id="NtF-AI-P8Y"/>
                         <outlet property="largeBoxNameLabel" destination="Nya-Cl-XPK" id="8D5-Xt-Smd"/>
@@ -1101,6 +1101,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="42N-oZ-ona"/>
+        <segue reference="Nq6-Kd-3IX"/>
     </inferredMetricsTieBreakers>
 </document>

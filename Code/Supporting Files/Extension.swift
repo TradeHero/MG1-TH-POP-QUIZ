@@ -428,6 +428,17 @@ extension JGProgressHUD {
         hud.showInView(UIApplication.sharedApplication().delegate?.window!)
         return hud
     }
+    
+    class func progressHUDWithRingStyle(style:JGProgressHUDStyle) -> JGProgressHUD! {
+        var hud = JGProgressHUD(style: style)
+        hud.textLabel.font = UIFont(name: "AngryBirds-Regular", size: 18)
+        hud.detailTextLabel.font = UIFont(name: "AngryBirds-Regular", size: 14)
+        hud.layoutChangeAnimationDuration = 0.5
+        hud.indicatorView = JGProgressHUDRingIndicatorView(HUDStyle: style)
+        hud.interactionType = .BlockAllTouches
+        hud.showInView(UIApplication.sharedApplication().delegate?.window!)
+        return hud
+    }
 }
 
 extension Int {

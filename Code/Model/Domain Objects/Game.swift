@@ -90,12 +90,10 @@ final class Game {
             let inner: AnyObject? = resultsDTO["result"]
             if let innerResultDTO = inner as? [String : AnyObject] {
                 if let challengerResultDTO: AnyObject = innerResultDTO["challenger"] {
-                    debugPrintln("Parsing game initiator result..")
                     let dto = challengerResultDTO as [String : AnyObject]
                     challengerResult = GameResult(gameId:self.gameID, resultDTO: dto)
                 }
                 if let opponentResultDTO: AnyObject = innerResultDTO["opponent"] {
-                    debugPrintln("Parsing game opponent result..")
                     let dto = opponentResultDTO as [String : AnyObject]
                     opponentResult = GameResult(gameId:self.gameID, resultDTO: dto)
                 }
@@ -188,7 +186,6 @@ final class Game {
         
         NetworkClient.sharedClient.getResultForGame(self.gameID) {
             [unowned self] in
-            
             if let cResults = $0.challengerResult {
                 if self.initiatingPlayer.userId == cResults.userId {
                     self.initiatingPlayerResult = cResults
@@ -196,7 +193,6 @@ final class Game {
                     self.opponentPlayerResult = cResults
                 }
             }
-            
             if let oResults = $0.opponentResult {
                 if self.opponentPlayer.userId == oResults.userId {
                     self.opponentPlayerResult = oResults

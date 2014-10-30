@@ -14,6 +14,12 @@
 
 #import <JGProgressHUD/JGProgressHUDFadeZoomAnimation.h>
 
+#import <JGProgressHUD/JGProgressHUDRingIndicatorView.h>
+
+#import <JGProgressHUD/JGProgressHUDSuccessIndicatorView.h>
+
+#import <JGProgressHUD/JGProgressHUDIndeterminateIndicatorView.h>
+
 #import <LDProgressView/LDProgressView.h>
 
 #import "PureLayout.h"

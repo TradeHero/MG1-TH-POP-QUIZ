@@ -252,3 +252,12 @@
     }
 }
 @end
+
+void playSound(NSString* fileName){
+    SystemSoundID soundID = 0;
+    NSString *path = [[NSBundle mainBundle]
+                            pathForResource:fileName ofType:@"caf"];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundID);
+    AudioServicesPlaySystemSound(soundID);
+}

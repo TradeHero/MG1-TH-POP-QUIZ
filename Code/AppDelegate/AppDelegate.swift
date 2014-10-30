@@ -48,13 +48,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     }
 
     func autoLogin() {
+        if loginOnce == true { return }
+        loginOnce = true
         if let credential = NetworkClient.sharedClient.credentials {
             var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(UIView())
             hud.indicatorView = nil
             hud.textLabel.text = "Logging in..."
             NetworkClient.sharedClient.loginUserWithFacebookAuth(credential, loginSuccessHandler: {
                 [unowned self] user in
-                loginOnce = true
+                
                 hud.dismissAfterDelay(0, animated: true)
                 }) {
                     error in

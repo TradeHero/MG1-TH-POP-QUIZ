@@ -255,7 +255,6 @@ class NetworkClient {
                     
                     for openChallengeDTO in openChallengesDTOs as [[String: AnyObject]] {
                         let game = Game(compactGameDTO: openChallengeDTO)
-                        
                         game.fetchUsers{
                             openChallenges.append(game)
                             fetchUserHandler()
@@ -302,16 +301,6 @@ class NetworkClient {
                     }
                     for takenChallengeDTO in takenChallengesDTOs as [[String: AnyObject]] {
                         let game = Game(compactGameDTO: takenChallengeDTO)
-                        
-                        var initiatorID: Int!
-                        if let i: AnyObject = takenChallengeDTO["createdByUserId"]{
-                            initiatorID = i as Int
-                        }
-                        
-                        var opponentID: Int!
-                        if let i: AnyObject = takenChallengeDTO["opponentUserId"]{
-                            opponentID = i as Int
-                        }
                         game.fetchUsers{
                             takenChallenges.append(game)
                             fetchUserHandler()
@@ -358,16 +347,6 @@ class NetworkClient {
                     }
                     for pendingChallengeDTO in pendingChallengesDTOs as [[String: AnyObject]] {
                         let game = Game(compactGameDTO: pendingChallengeDTO)
-                        
-                        var initiatorID: Int!
-                        if let i: AnyObject = pendingChallengeDTO["createdByUserId"]{
-                            initiatorID = i as Int
-                        }
-                        
-                        var opponentID: Int!
-                        if let i: AnyObject = pendingChallengeDTO["opponentUserId"]{
-                            opponentID = i as Int
-                        }
                         game.fetchUsers{
                             pendingChallenges.append(game)
                             fetchUserHandler()
@@ -415,16 +394,6 @@ class NetworkClient {
                     }
                     for incompleteChallengeDTO in incompleteChallengesDTOs as [[String: AnyObject]] {
                         let game = Game(compactGameDTO: incompleteChallengeDTO)
-                        
-                        var initiatorID: Int!
-                        if let i: AnyObject = incompleteChallengeDTO["createdByUserId"]{
-                            initiatorID = i as Int
-                        }
-                        
-                        var opponentID: Int!
-                        if let i: AnyObject = incompleteChallengeDTO["opponentUserId"]{
-                            opponentID = i as Int
-                        }
                         game.fetchUsers{
                             incompleteChallenges.append(game)
                             fetchUserHandler()
@@ -481,10 +450,8 @@ class NetworkClient {
                             opponentID = i as Int
                         }
                         game.fetchUsers{
-                            game.fetchResults {
                                 closedChallenges.append(game)
                                 fetchUserHandler()
-                            }
                         }
                     }
                     
@@ -528,14 +495,13 @@ class NetworkClient {
             }
             
             game.fetchResults {
-                
                 if game.isGameCompletedByBothPlayer {
-                 
                     self.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) has finished the challenge! Check your timeline for results!") {
-                        if let c = completionHandler {
-                            c(game)
-                        }
                     }
+                }
+                
+                if let c = completionHandler {
+                    c(game)
                 }
             }
         }
@@ -556,17 +522,17 @@ class NetworkClient {
             if error != nil {
                 debugPrintln(error)
             }
+            var challengerResult:GameResult?
+            var opponentResult:GameResult?
             
             if let resultsDTO = content as? [String : AnyObject] {
                 let inner: AnyObject? = resultsDTO["result"]
                 if let innerResultDTO = inner as? [String : AnyObject] {
-                    var challengerResult:GameResult?
                     if let challengerResultDTO: AnyObject = innerResultDTO["challenger"] {
                         debugPrintln("Parsing game initiator result..")
                         let dto = challengerResultDTO as [String : AnyObject]
                         challengerResult = GameResult(gameId:gameId, resultDTO: dto)
                     }
-                    var opponentResult:GameResult?
                     if let opponentResultDTO: AnyObject = innerResultDTO["opponent"] {
                         debugPrintln("Parsing game opponent result..")
                         let dto = opponentResultDTO as [String : AnyObject]
@@ -744,11 +710,15 @@ class NetworkClient {
             deviceTokenArray.append(["device_token" : d])
         }
         
-        var notificationDict = [String: String]()
+        
+        var iosFields = [String: AnyObject]()
         if let a = alertMessage {
-            notificationDict.updateValue(a, forKey: "alert")
+            iosFields.updateValue(a, forKey: "alert")
+            iosFields.updateValue("notification.caf", forKey: "sound")
+            iosFields.updateValue(1, forKey: "badge")
         }
-            
+        var notificationDict = ["ios": iosFields]
+        
         let data: [String: AnyObject] = ["audience" : ["OR" : deviceTokenArray],  "notification" : notificationDict, "device_types": ["ios"]]
         let r = self.manager.request(ParameterEncoding.JSON.encode(mutableURLRequest, parameters: data).0).authenticate(user: appKey, password: appMasterPW).responseJSON {
             (_, response, data, error) -> Void in

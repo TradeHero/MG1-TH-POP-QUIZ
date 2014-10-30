@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate, UISearchBarDelegate, StaffChallengeCellTableViewCellDelegate {
+class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate, StaffChallengeCellTableViewCellDelegate {
     
     private var THStaffList = [StaffUser]()
     
@@ -23,7 +23,6 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         }()
     
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var searchBar: UISearchBar!
     
     //MARK:- Init
     required init(coder aDecoder: NSCoder) {
@@ -35,11 +34,9 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         self.navigationItem.title = "Friend List"
         self.tableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
         self.tableView.registerNib(UINib(nibName: "StaffChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHStaffChallengeCellTableViewCellIdentifier)
-        self.searchBar.placeholder = "Search friends"
-        self.searchBar.text = ""
-        self.tableView.tableHeaderView = self.searchBar
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 53
+        self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.width, 0.01))
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -266,28 +263,6 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             }
         }
 
-    }
-    //MARK:- Search bar delegate
-    func searchBarShouldBeginEditing(searchBar: UISearchBar!) -> Bool {
-        searchBar.setShowsCancelButton(true, animated: true)
-        return true
-    }
-    
-    func searchBarShouldEndEditing(searchBar: UISearchBar!) -> Bool {
-        searchBar.setShowsCancelButton(false, animated: true)
-        return true
-    }
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar!) {
-        if (searchBar.text.length <= 0) {
-            return
-        }
-        
-        searchBar.resignFirstResponder()
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar!) {
-        searchBar.resignFirstResponder()
     }
     
     //MARK:- UI construct

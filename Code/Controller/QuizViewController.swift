@@ -182,14 +182,14 @@ class QuizViewController: UIViewController {
         
         if sender.is_answer {
             sender.configureAsCorrect()
-            playSoundEffect(.CorrectSound)
+            playSound("Correct-Bell")
             combos++
             currentQuestionCorrect = true
             let currentQuestionScore = calculateScore()
             produceResultForCurrentQuestion(true, score: currentQuestionScore)
         } else {
             sender.configureAsFalse()
-            playSoundEffect(.WrongSound)
+            playSound("Wrong-Buzzer")
             revealCorrectAnswer()
             combos = -1
             let currentQuestionScore = calculateScore()
