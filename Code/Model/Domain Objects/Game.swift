@@ -104,7 +104,7 @@ final class Game {
         }
         
         if let cResults = challengerResult {
-            if self.initiatingPlayer.userId == cResults.userId {
+            if self.initiatingPlayerID == cResults.userId {
                 self.initiatingPlayerResult = cResults
             } else {
                 self.opponentPlayerResult = cResults
@@ -112,7 +112,7 @@ final class Game {
         }
         
         if let oResults = opponentResult {
-            if self.opponentPlayer.userId == oResults.userId {
+            if self.opponentPlayerID == oResults.userId {
                 self.opponentPlayerResult = oResults
             } else {
                 self.initiatingPlayerResult = oResults
