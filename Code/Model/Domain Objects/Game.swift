@@ -30,6 +30,10 @@ final class Game {
         return initiatingPlayerResult != nil
     }
     
+    var isGameCompletedByOpponent: Bool {
+        return opponentPlayerResult != nil
+    }
+    
     var isGameCompletedByBothPlayer: Bool {
         return initiatingPlayerResult != nil && opponentPlayerResult != nil
     }

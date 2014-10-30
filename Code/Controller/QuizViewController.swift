@@ -395,11 +395,10 @@ class QuizViewController: UIViewController {
                     return
                 }
                 
-                if $0.isGameCompletedByChallenger {
+                if $0.isGameCompletedByChallenger || $0.isGameCompletedByOpponent {
                     self.performSegueWithIdentifier("PartialQuizResultSegue", sender: nil)
                     return
                 }
-            
         }
     }
     
