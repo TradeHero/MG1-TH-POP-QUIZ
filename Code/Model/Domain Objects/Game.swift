@@ -11,6 +11,7 @@ import UIKit
 final class Game {
     
     let gameID: Int!
+    
     private let createdAtUTCStr: String!
     
     var initiatingPlayer: THUser!
@@ -80,7 +81,7 @@ final class Game {
             self.questionSet = qSet
         }
         
-        if let rs: AnyObject = gameDTO["results"] {
+        if let rs: AnyObject = gameDTO["GameResults"] {
             populateResult(rs)
         }
     }
@@ -102,6 +103,7 @@ final class Game {
                     let dto = opponentResultDTO as [String : AnyObject]
                     opponentResult = GameResult(gameId:self.gameID, resultDTO: dto)
                 }
+
             }
         }
         
@@ -123,7 +125,6 @@ final class Game {
     }
     
     init(compactGameDTO:[String: AnyObject]){
-        
         if let cuid: AnyObject = compactGameDTO["createdByUserId"] {
             self.initiatingPlayerID = cuid as Int
         }
@@ -132,8 +133,10 @@ final class Game {
             self.opponentPlayerID = opuid as Int
         }
         
+        var gameId: Int!
         if let id: AnyObject = compactGameDTO["id"] {
             self.gameID = id as Int
+            gameId = id as Int
         }
         
         if let s: AnyObject = compactGameDTO["createdAtUtc"] {
@@ -141,49 +144,51 @@ final class Game {
         }
         
         self.questionSet = nil
+        
+        if let rs: AnyObject = compactGameDTO["GameResults"] {
+            populateResult(rs)
+        }
+
     }
     
     func fetchUsers(completionHandler:()->()) {
-        weak var wself = self
+        
         var client = NetworkClient.sharedClient
         
         var counter = 0
         var partialCompletionHandler: () -> () = {
+            [unowned self] in
             counter++
             if counter == 2 {
-                var sself = wself!
-
-                if client.user.userId == sself.opponentPlayer.userId {
-                    sself.selfUser = sself.opponentPlayer
-                    sself.awayUser = sself.initiatingPlayer
-                } else if client.user.userId == sself.initiatingPlayer.userId {
-                    sself.selfUser = sself.initiatingPlayer
-                    sself.awayUser = sself.opponentPlayer
+                if client.user.userId == self.opponentPlayer.userId {
+                    self.selfUser = self.opponentPlayer
+                    self.awayUser = self.initiatingPlayer
+                } else if client.user.userId == self.initiatingPlayer.userId {
+                    self.selfUser = self.initiatingPlayer
+                    self.awayUser = self.opponentPlayer
                 }
-                
                 completionHandler()
             }
         }
         
-        client.fetchUser(opponentPlayerID, force: true) {
-            var sself = wself!
+        client.fetchUser(opponentPlayerID, force: false) {
+            [unowned self] in
             if let u = $0 {
-                sself.opponentPlayer = u
+                self.opponentPlayer = u
             }
             partialCompletionHandler()
         }
         
-        client.fetchUser(initiatingPlayerID, force: true) {
-            var sself = wself!
+        client.fetchUser(initiatingPlayerID, force: false) {
+            [unowned self] in
             if let u = $0 {
-                sself.initiatingPlayer = u
+                self.initiatingPlayer = u
             }
             partialCompletionHandler()
         }
     }
     
     func fetchResults(completionHandler:()->()){
-//        weak var wself = self
         
         NetworkClient.sharedClient.getResultForGame(self.gameID) {
             [unowned self] in

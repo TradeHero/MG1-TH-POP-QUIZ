@@ -210,11 +210,11 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="tMO-vt-0Qa">
+                        <barButtonItem key="rightBarButtonItem" id="tMO-vt-0Qa">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="v2l-XP-UQc">
-                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
+                                <rect key="frame" x="276" y="7" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" backgroundImage="MuteIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -553,6 +553,7 @@
         <image name="FacebookBannerText" width="229" height="48"/>
         <image name="FriendSceneBackground" width="640" height="1136"/>
         <image name="HomeSceneBackground" width="640" height="1136"/>
+        <image name="MuteIcon" width="58" height="58"/>
         <image name="ProfileHeaderBackground" width="640" height="192"/>
         <image name="ProfileHeaderBackgroundv2" width="640" height="202"/>
         <image name="ProfileUpdateIcon" width="85" height="88"/>
