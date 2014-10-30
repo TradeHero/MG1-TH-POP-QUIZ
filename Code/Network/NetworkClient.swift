@@ -254,7 +254,7 @@ class NetworkClient {
                     }
                     
                     for openChallengeDTO in openChallengesDTOs as [[String: AnyObject]] {
-                        let game = Game(gameDTO: openChallengeDTO)
+                        let game = Game(compactGameDTO: openChallengeDTO)
                         
                         game.fetchUsers{
                             openChallenges.append(game)

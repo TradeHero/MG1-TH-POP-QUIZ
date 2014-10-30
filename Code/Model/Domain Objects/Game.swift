@@ -80,10 +80,6 @@ final class Game {
             }
             self.questionSet = qSet
         }
-        
-        if let rs: AnyObject = gameDTO["GameResults"] {
-            populateResult(rs)
-        }
     }
     
     private func populateResult(result:AnyObject) {
