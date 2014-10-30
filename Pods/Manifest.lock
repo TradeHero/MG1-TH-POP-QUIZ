@@ -15,7 +15,7 @@ PODS:
   - UrbanAirship-iOS-SDK (5.0.3)
 
 DEPENDENCIES:
-  - ChatHeads
+  - ChatHeads (~> 1.0)
   - EGOCache (~> 2.1)
   - JGProgressHUD (~> 1.2.2)
   - LDProgressView (~> 1.2.1)
