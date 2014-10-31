@@ -483,10 +483,11 @@ class NetworkClient {
         debugPrintln("Posting results for game \(game.gameID)...")
         var resultSet:[[String:AnyObject]] = []
         for result in questionResults {
-            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "correctStreak": highestCombo, "time" : result.timeTaken, "rawScore": result.rawScore, "hintsUsed": hints]
+            var resultData:[String:AnyObject] = ["questionId" : result.questionId, "time" : result.timeTaken, "rawScore": result.rawScore]
             resultSet.append(resultData)
         }
-        var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet]
+        var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet,"correctStreak": highestCombo, "hintsUsed": hints]
+        println(param)
         let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             

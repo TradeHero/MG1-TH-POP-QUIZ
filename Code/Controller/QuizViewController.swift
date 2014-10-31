@@ -103,8 +103,10 @@ class QuizViewController: UIViewController {
     
     private var combos: Int = 0 {
         didSet {
+            println("Current highest: \(highestCombo)")
             if combos > highestCombo {
                 highestCombo = combos
+                println("New highest: \(highestCombo)")
             }
         }
     }
@@ -382,7 +384,7 @@ class QuizViewController: UIViewController {
     private func endTurn(){
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
-        
+        println(highestCombo)
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Calculating results..."
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: self.highestCombo, noOfHintsUsed: self.totalHintUsed, currentScore: currentTurnScore, questionResults: results) {
