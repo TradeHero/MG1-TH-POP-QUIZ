@@ -127,6 +127,9 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.prepareFirstQuestionUISetup()
+        for b in optionGroup {
+            b.exclusiveTouch = true
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

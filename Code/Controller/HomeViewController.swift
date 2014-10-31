@@ -14,6 +14,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet private weak var fullNameView: UILabel!
     @IBOutlet weak var tickImageView: UIImageView!
     
+    @IBOutlet weak var muteButton: UIButton!
+    
     private var openChallenges = [Game]()
     private var opponentPendingChallenges = [Game]()
     private var unfinishedChallenges = [Game]()
@@ -51,6 +53,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewWillAppear(animated)
         self.tableView.reloadData()
         self.tableView.forceUpdateTable()
+        self.muteButton.selected = kTHBackgroundMusicValue == 0
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -63,6 +66,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func muteAction(sender: AnyObject) {
+        if self.muteButton.selected {
+            self.muteButton.selected = false
+            kTHBackgroundMusicValue = 0.5
+        } else {
+            self.muteButton.selected = true
+            kTHBackgroundMusicValue = 0
+        }
+    }
     //MARK:- Actions
     
     @IBAction func quickGameAction(sender: UIButton) {
@@ -181,35 +193,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             completionHandler()
         }
-        
-//        func getFacebookFriendsFromTuple(tuple:(facebookFriends:[THUserFriend], tradeheroFriends:[THUserFriend]),numberOfUsers count:Int) -> [THUserFriend]{
-//            var fbThFriends = tuple.tradeheroFriends
-//            fbThFriends.shuffle()
-//            
-//            var selectedFriends = [THUserFriend]()
-//            for friend in fbThFriends {
-//                if selectedFriends.count == count {
-//                    break
-//                }
-//                selectedFriends.append(friend)
-//            }
-//            return selectedFriends
-//        }
-//        
-//        if !THCache.objectExistForCacheKey(kTHUserFriendsCacheStoreKey) {
-//            debugPrintln("Nothing cached.")
-//            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
-//                [unowned self] in
-//                THCache.saveFriendsListToCache($0.facebookFriends, tradeheroFriends: $0.tradeheroFriends)
-//                self.facebookFriendsChallenge = getFacebookFriendsFromTuple($0, numberOfUsers: 3)
-//                completionHandler()
-//            }
-//        } else {
-//            var friendList = THCache.getFriendsListFromCache()
-//            self.facebookFriendsChallenge = getFacebookFriendsFromTuple(friendList, numberOfUsers: 3)
-//            completionHandler()
-//        }
-
         
         NetworkClient.sharedClient.getRandomFBFriendsForUser(numberOfUsers: 3, forUser: user.userId) {
             [unowned self] in

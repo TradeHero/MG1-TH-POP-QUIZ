@@ -685,14 +685,14 @@ class NetworkClient {
         var appKey = "zH67PxmUQBCrerb3i9WhMQ"
         var appMasterPW = "ytXzvUeJSnGePt4WQVDkSA"
         
-//        switch kTHGamesServerMode {
-//        case .Staging:
-//            appKey = "zH67PxmUQBCrerb3i9WhMQ"
-//            appMasterPW = "ytXzvUeJSnGePt4WQVDkSA"
-//        case .Prod:
-//            appKey = "4TqEKTVwRUWCc4xcxfvIBg"
-//            appMasterPW = "F59gvDjdRpWt9PmcDRcjuQ"
-//        }
+        switch kTHGamesServerMode {
+        case .Staging:
+            appKey = "zH67PxmUQBCrerb3i9WhMQ"
+            appMasterPW = "ytXzvUeJSnGePt4WQVDkSA"
+        case .Prod:
+            appKey = "4TqEKTVwRUWCc4xcxfvIBg"
+            appMasterPW = "F59gvDjdRpWt9PmcDRcjuQ"
+        }
         
         let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: "https://go.urbanairship.com/api/push/".URLString)!)
         mutableURLRequest.HTTPMethod = Method.POST.rawValue

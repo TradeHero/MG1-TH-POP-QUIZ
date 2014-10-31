@@ -211,12 +211,16 @@
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="tMO-vt-0Qa">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="v2l-XP-UQc">
-                                <rect key="frame" x="276" y="7" width="28" height="28"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="v2l-XP-UQc">
+                                <rect key="frame" x="276" y="-7" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="MuteIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" backgroundImage="UnmuteIcon"/>
+                                <connections>
+                                    <action selector="muteAction:" destination="mQ1-C7-5Us" eventType="touchUpInside" id="Jwt-eN-cwR"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -224,6 +228,7 @@
                     <connections>
                         <outlet property="avatarView" destination="hOW-Oh-vVN" id="ctn-4b-AMG"/>
                         <outlet property="fullNameView" destination="Rjv-r9-yGC" id="V4L-dQ-nJj"/>
+                        <outlet property="muteButton" destination="v2l-XP-UQc" id="W03-Oj-CXf"/>
                         <outlet property="tableView" destination="eIl-7I-DR2" id="3oX-pF-vEo"/>
                     </connections>
                 </viewController>
@@ -552,6 +557,7 @@
         <image name="RedButtonBackground" width="163" height="61"/>
         <image name="SettingsIcon" width="58" height="58"/>
         <image name="SettingsSceneBackground" width="640" height="1136"/>
+        <image name="UnmuteIcon" width="58" height="58"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

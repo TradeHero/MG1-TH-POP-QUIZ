@@ -71,10 +71,10 @@ class THUser : NSObject, NSCoding {
     required init(coder aDecoder: NSCoder) {
         super.init()
         self.userId = aDecoder.decodeIntegerForKey(kUserIdKey)
-        self.pictureURL = aDecoder.decodeObjectForKey(kPictureURLKey) as String
+        self.pictureURL = aDecoder.decodeObjectForKey(kPictureURLKey) as? String
         self.firstName = aDecoder.decodeObjectForKey(kFirstNameKey) as String
         self.lastName = aDecoder.decodeObjectForKey(kLastNameKey) as String
-        self.displayName = aDecoder.decodeObjectForKey(kDispNameKey) as String
+        self.displayName = aDecoder.decodeObjectForKey(kDispNameKey) as? String
     }
     
     init(userId:Int, pictureURL:String!, firstName:String!, lastName:String!, displayName:String) {

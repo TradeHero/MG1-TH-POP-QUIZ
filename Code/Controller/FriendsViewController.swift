@@ -43,7 +43,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         super.viewDidAppear(animated)
         self.navigationController?.showNavigationBar()
         self.loadStaff {
-//            self.loadFriends()
+            self.loadFriends()
         }
     }
     

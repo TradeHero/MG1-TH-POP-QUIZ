@@ -7,7 +7,7 @@
 	<key>developmentAppSecret</key>
 	<string>F8D2laJOTdCViZIRLuBDlg</string>
 	<key>inProduction</key>
-	<false/>
+	<true/>
 	<key>productionAppKey</key>
 	<string>4TqEKTVwRUWCc4xcxfvIBg</string>
 	<key>productionAppSecret</key>
