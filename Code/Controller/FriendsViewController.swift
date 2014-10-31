@@ -61,7 +61,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         if !THCache.objectExistForCacheKey(kTHStaffUserCacheStoreKey) {
             debugPrintln("Nothing cached.")
             hud.textLabel.text = "Just a sec.."
-            NetworkClient.sharedClient.fetchStaffList() {
+            NetworkClient.sharedClient.fetchStaffList({progress in}, errorHandler: {error in}){
                 [unowned self] in
                 hud.dismissAnimated(true)
                 THCache.saveStaffListToCache($0)

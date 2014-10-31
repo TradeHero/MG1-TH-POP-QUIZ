@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 
+let kTHGamesServerMode = Mode.Staging
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDelegate {
     

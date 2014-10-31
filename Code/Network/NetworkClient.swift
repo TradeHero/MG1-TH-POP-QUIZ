@@ -178,7 +178,7 @@ class NetworkClient {
             debugPrintln("Successfully fetched \(friends.count) friend(s).")
             completionHandler((fbFrnds, thFrnds))
         }
-        //        debugPrintln(r)
+                debugPrintln(r)
     }
     
     func getRandomFBFriendsForUser(numberOfUsers count:Int, forUser userId:Int, completionHandler:[THUserFriend]->()){
@@ -547,47 +547,40 @@ class NetworkClient {
         }
 //        debugPrintln(r)
     }
+
     
-    ///MARK:- Game profile
-    
-    /**
-    POST api/games/?
-    */
-    func updateInGameName(newName: String, completionHandler:()->()){
-//        let url = "\(THGameAPIBaseURL)/??"
-//        configureCompulsoryHeaders()
-//        
-//
-//        let r = Alamofire.request(.POST, url, parameters: ["ign" : newName], encoding: JSONEncoding).responseJSON {
-//            [unowned self] _, response, content, error in
-//                sself.updateUser(sself.authenticatedUser) {
-//                    sself.authenticatedUser = $0
-//                }
-//        }
-    }
-    
-    
-    func fetchStaffList(completionHandler:[StaffUser]->()){
-        var staffArr = [StaffUser]()
-        var numberCompleted = 0
-        let fetchUserHandler: () -> () = {
-            numberCompleted++
-            if numberCompleted == staffs_g.count {
+    func fetchStaffList(progressHandler:Float->(), errorHandler:NSError->(),completionHandler:[StaffUser]->()){
+        let url = "\(THServerAPIBaseURL)/users/internal?mgTestSet=true"
+        debugPrintln("Fetching staff users..")
+        
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+            [unowned self] _, response, content, error in
+            if let e = error {
+                errorHandler(e)
+            }
+            var staffArr = [StaffUser]()
+            println(content)
+            if let staffList = content as? [AnyObject] {
+                debugPrintln("Parsing \(staffList.count) staff users..")
+                for staffData in staffList {
+                    let staffUserDTO = staffData as [String: AnyObject]
+                    let user = THUser(profileDTO: staffUserDTO)
+                    for staffinfo in staffs_g {
+                        if staffinfo.id == user.userId {
+                            staffArr.append(StaffUser(user: user, funnyName: staffinfo.funnyName))
+                            break
+                        }
+                    }
+                }
                 staffArr.sort {
                     $0.userId < $1.userId
                 }
-                debugPrintln("Successfully fetched \(numberCompleted) staffs.")
-                    completionHandler(staffArr)
+                debugPrintln("Successfully parsed \(staffArr.count) staffs.")
+                completionHandler(staffArr)
             }
         }
-
-        for staff in staffs_g {
-            self.fetchUser(staff.id, force: false) {
-                $0.displayName = staff.name
-                staffArr.append(StaffUser(user: $0, funnyName: staff.funnyName))
-                fetchUserHandler()
-            }
-        }
+        
+        debugPrintln(r)
     }
     
     ///

@@ -182,40 +182,40 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             completionHandler()
         }
         
-        func getFacebookFriendsFromTuple(tuple:(facebookFriends:[THUserFriend], tradeheroFriends:[THUserFriend]),numberOfUsers count:Int) -> [THUserFriend]{
-            var fbThFriends = tuple.tradeheroFriends
-            fbThFriends.shuffle()
-            
-            var selectedFriends = [THUserFriend]()
-            for friend in fbThFriends {
-                if selectedFriends.count == count {
-                    break
-                }
-                selectedFriends.append(friend)
-            }
-            return selectedFriends
-        }
-        
-        if !THCache.objectExistForCacheKey(kTHUserFriendsCacheStoreKey) {
-            debugPrintln("Nothing cached.")
-            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
-                [unowned self] in
-                THCache.saveFriendsListToCache($0.facebookFriends, tradeheroFriends: $0.tradeheroFriends)
-                self.facebookFriendsChallenge = getFacebookFriendsFromTuple($0, numberOfUsers: 3)
-                completionHandler()
-            }
-        } else {
-            var friendList = THCache.getFriendsListFromCache()
-            self.facebookFriendsChallenge = getFacebookFriendsFromTuple(friendList, numberOfUsers: 3)
-            completionHandler()
-        }
-
+//        func getFacebookFriendsFromTuple(tuple:(facebookFriends:[THUserFriend], tradeheroFriends:[THUserFriend]),numberOfUsers count:Int) -> [THUserFriend]{
+//            var fbThFriends = tuple.tradeheroFriends
+//            fbThFriends.shuffle()
+//            
+//            var selectedFriends = [THUserFriend]()
+//            for friend in fbThFriends {
+//                if selectedFriends.count == count {
+//                    break
+//                }
+//                selectedFriends.append(friend)
+//            }
+//            return selectedFriends
+//        }
 //        
-//        NetworkClient.sharedClient.getRandomFBFriendsForUser(numberOfUsers: 3, forUser: user.userId) {
-//            [unowned self] in
-//            self.facebookFriendsChallenge = $0
+//        if !THCache.objectExistForCacheKey(kTHUserFriendsCacheStoreKey) {
+//            debugPrintln("Nothing cached.")
+//            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
+//                [unowned self] in
+//                THCache.saveFriendsListToCache($0.facebookFriends, tradeheroFriends: $0.tradeheroFriends)
+//                self.facebookFriendsChallenge = getFacebookFriendsFromTuple($0, numberOfUsers: 3)
+//                completionHandler()
+//            }
+//        } else {
+//            var friendList = THCache.getFriendsListFromCache()
+//            self.facebookFriendsChallenge = getFacebookFriendsFromTuple(friendList, numberOfUsers: 3)
 //            completionHandler()
 //        }
+
+        
+        NetworkClient.sharedClient.getRandomFBFriendsForUser(numberOfUsers: 3, forUser: user.userId) {
+            [unowned self] in
+            self.facebookFriendsChallenge = $0
+            completionHandler()
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
