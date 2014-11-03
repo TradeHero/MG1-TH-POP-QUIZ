@@ -596,7 +596,7 @@ class NetworkClient {
         GET api/users/
     */
     func fetchUserDeviceTokens(id:Int, completionHandler:[String]->()){
-        let url = "\(THServerAPIBaseURL)/users/\(id)/token"
+        let url = "\(THServerAPIBaseURL)/users/\(id)/token?deviceType=1"
         debugPrintln("Fetching device token with user ID: \(id)...")
         
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
