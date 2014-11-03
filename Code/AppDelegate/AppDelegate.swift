@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-let kTHGamesServerMode = Mode.Staging
+let kTHGamesServerMode = Mode.Prod
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDelegate {
@@ -25,8 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
             return _draggableView
         }
     }
-    
-    
     
     private var isNotificationRegistered: Bool = false
     

@@ -141,23 +141,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             hud.textLabel.text = "Syncing.."
         }
         hud.detailTextLabel.text = "0% complete"
-        
-        
         var numberLoaded = 0
 
         let completionHandler: () -> () = {
             [unowned self] in
             numberLoaded++
             
-            let progress = (Double(numberLoaded)*100/4).format(".1")
-            hud.setProgress(Float(numberLoaded)/4, animated: false)
+            let progress = (Double(numberLoaded)*100/2).format(".1")
+            hud.setProgress(Float(numberLoaded)/2, animated: false)
             hud.detailTextLabel.text = "\(progress)% complete"
 
-            if numberLoaded == 4 {
-                hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-                hud.layoutChangeAnimationDuration = 0.3
-                hud.textLabel.text = nil
-                hud.detailTextLabel.text = nil
+            if numberLoaded == 2 {
+//                hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+//                hud.layoutChangeAnimationDuration = 0.3
+//                hud.textLabel.text = nil
+//                hud.detailTextLabel.text = nil
                 hud?.dismissAfterDelay(1, animated: true)
                 self.tableView.reloadData()
             }
@@ -167,30 +165,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         
-        NetworkClient.sharedClient.fetchOpenChallenges {
+        NetworkClient.sharedClient.fetchAllChallenges({error in
+                debugPrintln(error)
+            }) {
             [unowned self] in
-            self.openChallenges = $0
-            self.openChallenges.sort {
-                $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
-            }
-            completionHandler()
-        }
-        
-        NetworkClient.sharedClient.fetchOpponentPendingChallenges {
-            [unowned self] in
-            self.opponentPendingChallenges = $0
-            self.opponentPendingChallenges.sort {
-                $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
-            }
-            completionHandler()
-        }
-        
-        NetworkClient.sharedClient.fetchIncompleteChallenges {
-            [unowned self] in
-            self.unfinishedChallenges = $0
+            
+            self.unfinishedChallenges = $0.unfinishedChallenges
             self.unfinishedChallenges.sort {
                 $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
             }
+            self.openChallenges = $0.openChallenges
+            self.openChallenges.sort {
+                $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
+            }
+            self.opponentPendingChallenges = $0.opponentPendingChallenges
+            self.opponentPendingChallenges.sort {
+                $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
+            }
+            
             completionHandler()
         }
         

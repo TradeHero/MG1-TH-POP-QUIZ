@@ -221,194 +221,95 @@ class NetworkClient {
     }
     
     /**
-    GET api/games/open
+    GET api/games/home
     */
-    func fetchOpenChallenges(completionHandler: ([Game] -> ())!){
-        let url = "\(THGameAPIBaseURL)/open"
+    typealias THMGChallengesTuple = (unfinishedChallenges:[Game], openChallenges:[Game],opponentPendingChallenges:[Game])
+    func fetchAllChallenges(errorHandler:NSError->(), completionHandler: THMGChallengesTuple -> ()) {
+        let url = "\(THGameAPIBaseURL)/home"
         
-        debugPrintln("Fetching all open challenges for authenticated user...")
+        debugPrintln("Fetching all all (open, unfinished, opponent pending) challenges for authenticated user...")
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             
-            if error != nil {
-                debugPrintln(error)
+            if let e = error {
+                errorHandler(e)
             }
             
-            if let openChallengesDTOs = content as? [AnyObject] {
-                if openChallengesDTOs.count == 0 {
-                    debugPrintln("User has no open challenges.")
-                    completionHandler([])
-                } else {
-                    var numberCompleted = 0
-                    var total = openChallengesDTOs.count
-                    var openChallenges: [Game] = []
-                    
-                    let fetchUserHandler: () -> () = {
-                        numberCompleted++
-                        if numberCompleted == total {
-                            debugPrintln("Successfully fetched \(total) open challenge(s).")
-                            if let handler = completionHandler {
-                                handler(openChallenges)
-                            }
-                        }
-                    }
-                    
-                    for openChallengeDTO in openChallengesDTOs as [[String: AnyObject]] {
-                        let game = Game(compactGameDTO: openChallengeDTO)
-                        game.fetchUsers{
-                            openChallenges.append(game)
-                            fetchUserHandler()
-                        }
-                    }
-                    
+            var openChallenges = [Game]()
+            var unfinishedChallenges = [Game]()
+            var opponentPendingChallenges = [Game]()
+            
+            var count = 0
+            let intermediateHandler: () -> () = {
+                count++
+                if count == 3 {
+                    completionHandler((unfinishedChallenges, openChallenges, opponentPendingChallenges))
                 }
             }
-        }
-                debugPrintln(r)
-    }
-    
-    /**
-    GET api/games/taken
-    */
-    func fetchTakenChallenges(completionHandler: ([Game] -> ())!){
-        let url = "\(THGameAPIBaseURL)/taken"
-        
-        debugPrintln("Fetching all taken challenges for authenticated user...")
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-            if error != nil {
-                debugPrintln(error)
-            }
             
-            if let takenChallengesDTOs = content as? [AnyObject] {
-                if takenChallengesDTOs.count == 0 {
-                    debugPrintln("User has no taken challenges.")
-                    completionHandler([])
-                } else {
-                    //                    debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
-                    var numberCompleted = 0
-                    var total = takenChallengesDTOs.count
-                    var takenChallenges: [Game] = []
-                    
-                    let fetchUserHandler: () -> () = {
-                        numberCompleted++
-                        if numberCompleted == total {
-                            debugPrintln("Successfully fetched \(total) taken challenge(s).")
-                            if let handler = completionHandler {
-                                handler(takenChallenges)
-                            }
-                        }
+            if let allChallengeDtos = content as? [String: AnyObject] {
+                //parse unfinished challenges
+                if let unfinishedChallengeDtos = allChallengeDtos["unfinishedChallenges"] as? [AnyObject] {
+                    println("Parsing \(unfinishedChallengeDtos.count) unfinished challenges.")
+                    self.parseChallenges(unfinishedChallengeDtos){
+                        unfinishedChallenges = $0
+                        intermediateHandler()
+                        println("Parsed \(unfinishedChallenges.count) unfinished challenges.")
                     }
-                    for takenChallengeDTO in takenChallengesDTOs as [[String: AnyObject]] {
-                        let game = Game(compactGameDTO: takenChallengeDTO)
-                        game.fetchUsers{
-                            takenChallenges.append(game)
-                            fetchUserHandler()
-                        }
+                }
+                
+                //parse open challenges
+                if let openChallengeDtos = allChallengeDtos["openChallenges"] as? [AnyObject] {
+                    println("Parsing \(openChallengeDtos.count) open challenges.")
+                    self.parseChallenges(openChallengeDtos){
+                        openChallenges = $0
+                        intermediateHandler()
+                        println("Parsed \(openChallenges.count) open challenges.")
+                    }
+                }
+                
+                //parse opponent pending challenges
+                if let opponentPendingChallengeDtos = allChallengeDtos["opponnentPendingChallenges"] as? [AnyObject] {
+                    println("Parsing \(opponentPendingChallengeDtos.count) opponent pending challenges.")
+                    self.parseChallenges(opponentPendingChallengeDtos){
+                        opponentPendingChallenges = $0
+                        intermediateHandler()
+                        println("Parsed \(opponentPendingChallenges.count) opponent pending challenges.")
                     }
                 }
             }
         }
-        //        debugPrintln(r)
-    }
-    
-    /**
-    GET api/games/theirturn
-    */
-    func fetchOpponentPendingChallenges(completionHandler: ([Game] -> ())!){
-        let url = "\(THGameAPIBaseURL)/theirturn"
-        
-        debugPrintln("Fetching all opponent pending challenges for authenticated user...")
-        
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-            
-            if error != nil {
-                debugPrintln(error)
-            }
-            var pendingChallenges: [Game] = []
-            if let pendingChallengesDTOs = content as? [AnyObject] {
-                if pendingChallengesDTOs.count == 0 {
-                    debugPrintln("User has no opponent pending challenges.")
-                    completionHandler(pendingChallenges)
-                } else {
-                    //                    debugPrintln("Parsing \(takenChallengesDTOs.count) objects as taken challenges...")
-                    var numberCompleted = 0
-                    var total = pendingChallengesDTOs.count
-                    
-                    let fetchUserHandler: () -> () = {
-                        numberCompleted++
-                        if numberCompleted == total {
-                            debugPrintln("Successfully fetched \(total) opponent pending challenge(s).")
-                            if let handler = completionHandler {
-                                handler(pendingChallenges)
-                            }
-                        }
-                    }
-                    for pendingChallengeDTO in pendingChallengesDTOs as [[String: AnyObject]] {
-                        let game = Game(compactGameDTO: pendingChallengeDTO)
-                        game.fetchUsers{
-                            pendingChallenges.append(game)
-                            fetchUserHandler()
-                        }
-                    }
-                    
-                    
-                    //                    completionHandler([])
-                }
-            }
-        }
-                debugPrintln(r)
+        debugPrintln(r)
     }
 
-    /**
-    GET api/games/unfinished
-    */
-    func fetchIncompleteChallenges(completionHandler: ([Game] -> ())!){
-        let url = "\(THGameAPIBaseURL)/unfinished"
-        
-        debugPrintln("Fetching all incomplete challenges for authenticated user...")
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-            if error != nil {
-                debugPrintln(error)
+    private func parseChallenges(challengeDtos:[AnyObject], completionHandler:[Game]->()) {
+        if challengeDtos.count == 0 {
+            completionHandler([])
+        } else {
+            var completed = 0
+            var total = challengeDtos.count
+            var challenges = [Game]()
+            
+            let fetchUserHandler: () -> () = {
+                completed++
+                if completed == total {
+                    completionHandler(challenges)
+                }
             }
-            var incompleteChallenges: [Game] = []
-            if let incompleteChallengesDTOs = content as? [AnyObject] {
-                if incompleteChallengesDTOs.count == 0 {
-                    debugPrintln("User has no incomplete challenges.")
-                    completionHandler(incompleteChallenges)
-                } else {
-
-                    var numberCompleted = 0
-                    var total = incompleteChallengesDTOs.count
-                    
-                    let fetchUserHandler: () -> () = {
-                        numberCompleted++
-                        if numberCompleted == total {
-                            debugPrintln("Successfully fetched \(total) incomplete challenge(s).")
-                            if let handler = completionHandler {
-                                handler(incompleteChallenges)
-                            }
-                        }
-                    }
-                    for incompleteChallengeDTO in incompleteChallengesDTOs as [[String: AnyObject]] {
-                        let game = Game(compactGameDTO: incompleteChallengeDTO)
-                        game.fetchUsers{
-                            incompleteChallenges.append(game)
-                            fetchUserHandler()
-                        }
-                    }
+            for challengeDto in challengeDtos as [[String: AnyObject]] {
+                let game = Game(compactGameDTO: challengeDto)
+                game.fetchUsers{
+                    challenges.append(game)
+                    fetchUserHandler()
                 }
             }
         }
-                debugPrintln(r)
     }
-
+        
     /**
     GET api/games/closed
     */
-    func fetchClosedChallenges(completionHandler: ([Game] -> ())!){
+    func fetchClosedChallenges(completionHandler: [Game] -> ()){
         let url = "\(THGameAPIBaseURL)/closed"
         
         debugPrintln("Fetching all closed challenges for authenticated user...")
@@ -420,43 +321,8 @@ class NetworkClient {
             }
             
             if let closedChallengesDTOs = content as? [AnyObject] {
-                if closedChallengesDTOs.count == 0 {
-                    debugPrintln("User has no closed challenges.")
-                    completionHandler([])
-                } else {
-                    var numberCompleted = 0
-                    var total = closedChallengesDTOs.count
-                    var closedChallenges: [Game] = []
-                    
-                    let fetchUserHandler: () -> () = {
-                        numberCompleted++
-                        if numberCompleted == total {
-                            debugPrintln("Successfully fetched \(total) closed challenge(s).")
-                            if let handler = completionHandler {
-                                handler(closedChallenges)
-                            }
-                        }
-                    }
-                    for closedChallengeDTO in closedChallengesDTOs as [[String: AnyObject]] {
-                        let game = Game(compactGameDTO: closedChallengeDTO)
-                        
-                        var initiatorID: Int!
-                        if let i: AnyObject = closedChallengeDTO["createdByUserId"]{
-                            initiatorID = i as Int
-                        }
-                        
-                        var opponentID: Int!
-                        if let i: AnyObject = closedChallengeDTO["opponentUserId"]{
-                            opponentID = i as Int
-                        }
-                        game.fetchUsers{
-                                closedChallenges.append(game)
-                                fetchUserHandler()
-                        }
-                    }
-                    
-                    
-                    //                    completionHandler([])
+                self.parseChallenges(closedChallengesDTOs){
+                    completionHandler($0)
                 }
             }
         }
@@ -466,8 +332,7 @@ class NetworkClient {
     
     ///
     func createQuickGame(completionHandler: (Game! -> ())!){
-        
-        createChallenge(numberOfQuestions: 7, opponentId: nil) {
+        self.createChallenge(numberOfQuestions: 7, opponentId: nil) {
             if let handler = completionHandler {
                 handler($0)
             }
