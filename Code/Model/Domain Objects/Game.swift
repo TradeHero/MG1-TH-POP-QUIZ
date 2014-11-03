@@ -188,7 +188,7 @@ final class Game {
     
     func fetchResults(completionHandler:()->()){
         
-        NetworkClient.sharedClient.getResultForGame(self.gameID) {
+        NetworkClient.sharedClient.getResultForGame(self.gameID, errorHandler:{error in}) {
             [unowned self] in
             if let cResults = $0.challengerResult {
                 if self.initiatingPlayer.userId == cResults.userId {

@@ -384,10 +384,9 @@ class QuizViewController: UIViewController {
     private func endTurn(){
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
-        println(highestCombo)
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Calculating results..."
-        NetworkClient.sharedClient.postGameResults(self.game, highestCombo: self.highestCombo, noOfHintsUsed: self.totalHintUsed, currentScore: currentTurnScore, questionResults: results) {
+        NetworkClient.sharedClient.postGameResults(self.game, highestCombo: self.highestCombo, noOfHintsUsed: self.totalHintUsed, currentScore: currentTurnScore, questionResults: results, errorHandler:{error in}) {
             [unowned self] in
                 musicPlayer.stop()
                 prepareForMusicPlayer("chopineb")

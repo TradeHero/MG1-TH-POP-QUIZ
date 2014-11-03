@@ -12,16 +12,17 @@
 
 @interface UIImage (Helper)
 
-- (instancetype) replaceWhiteinImageWithTransparency;
+- (instancetype)replaceWhiteinImageWithTransparency;
 
 @end
 
 #define kBOUNCE_DISTANCE  4.f
 #define kWAVE_DURATION   .5f
 
-typedef NS_ENUM(NSInteger,UITableViewCellLoadWaveAnimationDirection) {
-    UITableViewCellLoadWaveAnimationDirectionLeftToRight = -1,
-    UITableViewCellLoadWaveAnimationDirectionRightToLeft = 1
+typedef NS_ENUM(NSInteger, UITableViewCellLoadWaveAnimationDirection
+) {
+UITableViewCellLoadWaveAnimationDirectionLeftToRight = -1,
+        UITableViewCellLoadWaveAnimationDirectionRightToLeft = 1
 };
 
 @interface UITableView (Wave)
@@ -37,13 +38,13 @@ typedef NS_ENUM(NSInteger,UITableViewCellLoadWaveAnimationDirection) {
 @end
 
 @interface JMMarkSlider : UISlider
-@property (nonatomic) UIColor *markColor;
-@property (nonatomic) CGFloat markWidth;
-@property (nonatomic) NSArray *markPositions;
-@property (nonatomic) UIColor *selectedBarColor;
-@property (nonatomic) UIColor *unselectedBarColor;
-@property (nonatomic) UIImage *handlerImage;
-@property (nonatomic) UIColor *handlerColor;
+@property(nonatomic) UIColor *markColor;
+@property(nonatomic) CGFloat markWidth;
+@property(nonatomic) NSArray *markPositions;
+@property(nonatomic) UIColor *selectedBarColor;
+@property(nonatomic) UIColor *unselectedBarColor;
+@property(nonatomic) UIImage *handlerImage;
+@property(nonatomic) UIColor *handlerColor;
 @end
 
-void playSound(NSString* path);
+void playSound(NSString *path);

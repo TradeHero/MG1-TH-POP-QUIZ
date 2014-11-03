@@ -342,7 +342,7 @@ class NetworkClient {
     /**
     POST api/games/postresults
     */
-    func postGameResults(game:Game, highestCombo:Int, noOfHintsUsed hints: UInt,currentScore:Int, questionResults:[QuestionResult], completionHandler:(Game -> ())!){
+    func postGameResults(game:Game, highestCombo:Int, noOfHintsUsed hints: UInt,currentScore:Int, questionResults:[QuestionResult], errorHandler:NSError->(),completionHandler:(Game -> ())!){
         let url = "\(THGameAPIBaseURL)/postResults"
         
         debugPrintln("Posting results for game \(game.gameID)...")
@@ -356,8 +356,8 @@ class NetworkClient {
         let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             
-            if error != nil {
-                debugPrintln(error)
+            if let e = error {
+                errorHandler(e)
             }
             
             game.fetchResults {
@@ -378,15 +378,15 @@ class NetworkClient {
     GET api/games/\(gameId)/results
     */
     typealias THGameResultsTuple = (challengerResult:GameResult?, opponentResult:GameResult?)
-    func getResultForGame(gameId:Int, completionHandler:(THGameResultsTuple -> ())!){
+    func getResultForGame(gameId:Int, errorHandler:NSError->(),completionHandler:(THGameResultsTuple -> ())!){
         let url = "\(THGameAPIBaseURL)/\(gameId)/results"
 
         debugPrintln("Fetching results for game \(gameId)...")
         
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
-            if error != nil {
-                debugPrintln(error)
+            if let e = error {
+                errorHandler(e)
             }
             var challengerResult:GameResult?
             var opponentResult:GameResult?
@@ -411,7 +411,7 @@ class NetworkClient {
                 }
             }
         }
-//        debugPrintln(r)
+        debugPrintln(r)
     }
 
     
@@ -445,7 +445,6 @@ class NetworkClient {
                 completionHandler(staffArr)
             }
         }
-        
         debugPrintln(r)
     }
     
@@ -538,7 +537,7 @@ class NetworkClient {
             }
             
         }
-        //        debugPrintln(r)
+        debugPrintln(r)
     }
 
     func pushNotificationToDevice(deviceTokens:[String], alertMessage:String?, completionHandler:()->()){
