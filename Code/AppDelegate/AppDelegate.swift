@@ -15,7 +15,7 @@ let kTHGamesServerMode = Mode.Prod
 class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDelegate {
     
     var window: UIWindow?
-    
+    var loginOnce = false
     var _draggableView: CHDraggableView!
     
     var _draggingCoordinator : CHDraggingCoordinator!

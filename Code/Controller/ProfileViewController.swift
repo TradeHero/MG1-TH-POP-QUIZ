@@ -63,24 +63,22 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
         hud.dismissAfterDelay(2.0)
     }
     
+    
     func loadClosedChallenges() {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Refreshing timeline.."
-        NetworkClient.sharedClient.fetchClosedChallenges {
+        NetworkClient.sharedClient.fetchClosedChallenges({error in debugPrintln(error)}) {
             [unowned self] in
-                var c = $0
-                c.sort {
-                    $1.createdAt.timeIntervalSinceReferenceDate > $0.createdAt.timeIntervalSinceReferenceDate
-                }
-                
-                self.closedChallenges = c
-                self.tableView.reloadData()
-                
-                let shouldNotHideTableViewForEmptyView = c.count > 0
-                self.tableView.hidden = !shouldNotHideTableViewForEmptyView
-                self.emptyTimelineView.hidden = shouldNotHideTableViewForEmptyView
-                
-                hud.dismissAnimated(true)
+            var challenges = $0
+            challenges.sort { $1.createdAt.timeIntervalSinceReferenceDate > $0.createdAt.timeIntervalSinceReferenceDate }
+            
+            self.closedChallenges = challenges
+            self.tableView.reloadData()
+            let shouldNotHideTableViewForEmptyView = challenges.count > 0
+            self.tableView.hidden = !shouldNotHideTableViewForEmptyView
+            self.emptyTimelineView.hidden = shouldNotHideTableViewForEmptyView
+            
+            hud.dismissAnimated(true)
             
         }
     }
@@ -99,13 +97,10 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
         //Empty timeline view
         self.view.addSubview(emptyTimelineView)
         
+        //Auto-layout constraints
         self.emptyTimelineView.setNeedsUpdateConstraints()
         self.emptyTimelineView.updateConstraintsIfNeeded()
-        
-        UIView.autoSetPriority(750) {
-//            self.emptyTimelineView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
-        }
-        
+        UIView.autoSetPriority(750) { }
         self.emptyTimelineView.autoConstrainAttribute(.Vertical, toAttribute: .Vertical, ofView: self.emptyTimelineView.superview, withMultiplier: 1)
         self.emptyTimelineView.autoConstrainAttribute(.Horizontal, toAttribute: .Horizontal, ofView: self.emptyTimelineView.superview, withMultiplier: 1)
         self.emptyTimelineView.autoSetDimensionsToSize(CGSizeMake(258, 284))

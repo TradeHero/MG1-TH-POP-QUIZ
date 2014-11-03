@@ -169,7 +169,7 @@ final class Game {
             }
         }
         
-        client.fetchUser(opponentPlayerID, force: false) {
+        client.fetchUser(opponentPlayerID, force: false, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in
             if let u = $0 {
                 self.opponentPlayer = u
@@ -177,7 +177,7 @@ final class Game {
             partialCompletionHandler()
         }
         
-        client.fetchUser(initiatingPlayerID, force: false) {
+        client.fetchUser(initiatingPlayerID, force: false, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in
             if let u = $0 {
                 self.initiatingPlayer = u
@@ -188,7 +188,7 @@ final class Game {
     
     func fetchResults(completionHandler:()->()){
         
-        NetworkClient.sharedClient.getResultForGame(self.gameID, errorHandler:{error in}) {
+        NetworkClient.sharedClient.getResultForGame(self.gameID, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in
             if let cResults = $0.challengerResult {
                 if self.initiatingPlayer.userId == cResults.userId {

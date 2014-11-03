@@ -97,7 +97,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         if !THCache.objectExistForCacheKey(kTHUserFriendsCacheStoreKey) {
             debugPrintln("Nothing cached.")
             hud.textLabel.text = "Retrieving friends..."
-            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: nil) {
+            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler:{error in debugPrintln(error)}) {
                 [unowned self] in
                 hud.dismissAnimated(true)
                 THCache.saveFriendsListToCache($0.facebookFriends, tradeheroFriends: $0.tradeheroFriends)
@@ -230,7 +230,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Creating challenge..."
         hud.detailTextLabel.text = "Creating game with user.."
-        NetworkClient.sharedClient.createChallenge(opponentId: userID) {
+        NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in
             if let g = $0 {
                 hud.dismissAnimated(true)
@@ -253,7 +253,7 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Creating challenge..."
         hud.detailTextLabel.text = "Creating game with user.."
-        NetworkClient.sharedClient.createChallenge(opponentId: userId) {
+        NetworkClient.sharedClient.createChallenge(opponentId: userId, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in
             if let g = $0 {
                 hud.dismissAnimated(true)

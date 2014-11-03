@@ -80,16 +80,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func quickGameAction(sender: UIButton) {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Creating quick game..."
-        NetworkClient.sharedClient.createQuickGame {
+        NetworkClient.sharedClient.createQuickGame({error in debugPrintln(error)}){
             [unowned self] in
-            if let g = $0 {
-                hud.textLabel.text = "Creating game with user.."
-                
-                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
-                vc.bindGame($0)
-                self.navigationController?.pushViewController(vc, animated: true)
-                hud.dismissAnimated(true)
-            }
+            hud.textLabel.text = "Creating game with user.."
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            vc.bindGame($0)
+            self.navigationController?.pushViewController(vc, animated: true)
+            hud.dismissAnimated(true)
         }
     }
     
@@ -186,7 +183,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             completionHandler()
         }
         
-        NetworkClient.sharedClient.getRandomFBFriendsForUser(numberOfUsers: 3, forUser: user.userId) {
+        NetworkClient.sharedClient.getRandomFBFriendsForUser(numberOfUsers: 3, forUser: user.userId, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in
             self.facebookFriendsChallenge = $0
             completionHandler()
@@ -300,7 +297,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
             hud.textLabel.text = "Getting ready.."
             
-            NetworkClient.sharedClient.fetchGame(game.gameID, force: true) {
+            NetworkClient.sharedClient.fetchGame(game.gameID, force: true, errorHandler:{error in debugPrintln(error)}) {
                 [unowned self] in
                 var i = 0
                 for game in self.openChallenges {
@@ -312,12 +309,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     i++
                 }
                 
-                if let g = $0 {
-                    let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
-                    vc.bindGame($0)
-                    self.navigationController?.pushViewController(vc, animated: true)
-                    hud.dismissAnimated(true)
-                }
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                vc.bindGame($0)
+                self.navigationController?.pushViewController(vc, animated: true)
+                hud.dismissAnimated(true)
             }
         case .Nudge:
             //TODO send notification
@@ -333,7 +328,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapChallengeUser userID: Int) {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Creating challenge..."
-        NetworkClient.sharedClient.createChallenge(opponentId: userID) {
+        NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in
             if let g = $0 {
                 hud.dismissAnimated(true)

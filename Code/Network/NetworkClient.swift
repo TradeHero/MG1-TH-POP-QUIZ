@@ -108,7 +108,7 @@ class NetworkClient {
     /**
     Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int!, completionHandler: (Game! -> ())!) {
+    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int!, errorHandler:NSError -> (), completionHandler: (Game! -> ())!) {
         var param:[String:AnyObject] = ["numberOfQuestions": numberOfQuestions]
         if let id = opponentId {
             debugPrintln("Creating challenge with user \(id) with \(numberOfQuestions) questions(s)")
@@ -149,15 +149,14 @@ class NetworkClient {
     GET api/Users/{userId}/getnewfriends?socialNetwork=FB
     */
     typealias TFBHUserFriendTuple = (facebookFriends:[THUserFriend], tradeheroFriends:[THUserFriend])
-    func fetchFriendListForUser(userId:Int, errorHandler:(NSError -> ())!, completionHandler: (TFBHUserFriendTuple -> ())!){
+    func fetchFriendListForUser(userId:Int, errorHandler:NSError -> (), completionHandler: TFBHUserFriendTuple -> ()){
         let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
         debugPrintln("Fetching Facebook friends for user \(userId)...")
         
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
-            if let responseError = error {
-                println(responseError)
-                return
+            if let e = error {
+                errorHandler(e)
             }
             var friends: [THUserFriend] = []
             
@@ -178,11 +177,12 @@ class NetworkClient {
             debugPrintln("Successfully fetched \(friends.count) friend(s).")
             completionHandler((fbFrnds, thFrnds))
         }
-                debugPrintln(r)
+        
+        debugPrintln(r)
     }
     
-    func getRandomFBFriendsForUser(numberOfUsers count:Int, forUser userId:Int, completionHandler:[THUserFriend]->()){
-        let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB&count=100"
+    func getRandomFBFriendsForUser(numberOfUsers count:Int, forUser userId:Int, errorHandler:NSError -> (), completionHandler:[THUserFriend]->()){
+        let url = "\(THServerAPIBaseURL)/users/\(userId)/getnewfriends?socialNetwork=FB&count=100"
         debugPrintln("Fetching Facebook friends for user \(userId)...")
         
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
@@ -309,15 +309,15 @@ class NetworkClient {
     /**
     GET api/games/closed
     */
-    func fetchClosedChallenges(completionHandler: [Game] -> ()){
+    func fetchClosedChallenges(errorHandler:NSError -> (), completionHandler: [Game] -> ()){
         let url = "\(THGameAPIBaseURL)/closed"
         
         debugPrintln("Fetching all closed challenges for authenticated user...")
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
            
-            if error != nil {
-                debugPrintln(error)
+            if let e = error {
+                errorHandler(e)
             }
             
             if let closedChallengesDTOs = content as? [AnyObject] {
@@ -331,11 +331,9 @@ class NetworkClient {
 
     
     ///
-    func createQuickGame(completionHandler: (Game! -> ())!){
-        self.createChallenge(numberOfQuestions: 7, opponentId: nil) {
-            if let handler = completionHandler {
-                handler($0)
-            }
+    func createQuickGame(errorHandler:NSError -> (), completionHandler: Game -> ()){
+        self.createChallenge(numberOfQuestions: 7, opponentId: nil, errorHandler:errorHandler) {
+            completionHandler($0)
         }
     }
     
@@ -346,13 +344,14 @@ class NetworkClient {
         let url = "\(THGameAPIBaseURL)/postResults"
         
         debugPrintln("Posting results for game \(game.gameID)...")
+        
         var resultSet:[[String:AnyObject]] = []
         for result in questionResults {
             var resultData:[String:AnyObject] = ["questionId" : result.questionId, "time" : result.timeTaken, "rawScore": result.rawScore]
             resultSet.append(resultData)
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet,"correctStreak": highestCombo, "hintsUsed": hints]
-        println(param)
+        
         let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             
@@ -378,7 +377,7 @@ class NetworkClient {
     GET api/games/\(gameId)/results
     */
     typealias THGameResultsTuple = (challengerResult:GameResult?, opponentResult:GameResult?)
-    func getResultForGame(gameId:Int, errorHandler:NSError->(),completionHandler:(THGameResultsTuple -> ())!){
+    func getResultForGame(gameId:Int, errorHandler:NSError->(), completionHandler:THGameResultsTuple -> ()){
         let url = "\(THGameAPIBaseURL)/\(gameId)/results"
 
         debugPrintln("Fetching results for game \(gameId)...")
@@ -388,6 +387,7 @@ class NetworkClient {
             if let e = error {
                 errorHandler(e)
             }
+            
             var challengerResult:GameResult?
             var opponentResult:GameResult?
             
@@ -404,18 +404,16 @@ class NetworkClient {
                         let dto = opponentResultDTO as [String : AnyObject]
                         opponentResult = GameResult(gameId:gameId, resultDTO: dto)
                     }
-                    
-                    if let c = completionHandler{
-                        c((challengerResult:challengerResult, opponentResult:opponentResult))
-                    }
+                    completionHandler((challengerResult:challengerResult, opponentResult:opponentResult))
                 }
             }
         }
+        
         debugPrintln(r)
     }
 
     
-    func fetchStaffList(progressHandler:Float->(), errorHandler:NSError->(),completionHandler:[StaffUser]->()){
+    func fetchStaffList(progressHandler:Float->(), errorHandler:NSError->(), completionHandler:[StaffUser]->()){
         let url = "\(THServerAPIBaseURL)/users/internal?mgTestSet=true"
         debugPrintln("Fetching staff users..")
         
@@ -471,7 +469,7 @@ class NetworkClient {
     :param: userId User ID to fetch
     :param: completionHandler Handles fetched user if succeed
     */
-    func fetchUser(userId: Int, force:Bool = false, completionHandler: THUser! -> ()) {
+    func fetchUser(userId: Int, force:Bool = false, errorHandler:NSError->(), completionHandler: THUser! -> ()) {
         
         if !force {
             if let user = THCache.getUserFromCache(userId) {
@@ -482,8 +480,8 @@ class NetworkClient {
         
        let r = self.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
-            if let responseError = error {
-                println(responseError)
+            if let e = error {
+                errorHandler(e)
                 return
             }
             if let profileDTODict = content as? [String: AnyObject] {
@@ -495,7 +493,10 @@ class NetworkClient {
     }
     
     func refreshUser(user:THUser, completionHandler: THUser -> ()){
-        self.fetchUser(user.userId, force: true) {
+        self.fetchUser(user.userId, force: true, errorHandler:{
+            error in
+            debugPrintln(error)
+            }) {
             if let u = $0 {
                 completionHandler(user)
             }
@@ -505,7 +506,7 @@ class NetworkClient {
     /*
     GET api/games/\(id)/details
     */
-    func fetchGame(gameId:Int, force:Bool = false, completionHandler: (Game! -> ())!){
+    func fetchGame(gameId:Int, force:Bool = false, errorHandler:NSError->(), completionHandler: Game -> ()){
         let url = "\(THGameAPIBaseURL)/\(gameId)/details"
         debugPrintln("Fetching game with game ID: \(gameId)...")
         
@@ -518,9 +519,10 @@ class NetworkClient {
         
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
-            if error != nil {
-                debugPrintln(error)
+            if let e = error {
+                errorHandler(e)
             }
+            
             if response?.statusCode == 200 {
                 let responseJSON = content as [String: AnyObject]
                 //                println(responseJSON)
@@ -529,9 +531,7 @@ class NetworkClient {
                 
                 game.fetchUsers {
                     game.fetchResults {
-                        if let c = completionHandler {
-                            c(game)
-                        }
+                        completionHandler(game)
                     }
                 }
             }
@@ -581,7 +581,7 @@ class NetworkClient {
         let r = self.manager.request(ParameterEncoding.JSON.encode(mutableURLRequest, parameters: data).0).authenticate(user: appKey, password: appMasterPW).responseJSON {
             (_, response, data, error) -> Void in
             if let err = error {
-                debugPrintln(error)
+                debugPrintln(err)
             }
             if let d: AnyObject = data {
                 debugPrintln(d)
@@ -666,7 +666,7 @@ class NetworkClient {
         SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: urlString), options: .CacheMemoryOnly, progress: progressHandler) {
             (image, error, cacheType, finished, url) -> () in
             if error != nil {
-                println(error)
+                debugPrintln(error)
             }
             completionHandler(image, error)
         }

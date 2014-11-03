@@ -63,14 +63,12 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
             hud.textLabel.text = "Re-matching..."
             hud.detailTextLabel.text = "Creating game with user.."
-            NetworkClient.sharedClient.createChallenge(numberOfQuestions: 7, opponentId: opponent.userId) {
+            NetworkClient.sharedClient.createChallenge(numberOfQuestions: 7, opponentId: opponent.userId, {error in debugPrintln(error)}) {
                 [unowned self] in
-                if let g = $0 {
-                    hud.dismissAnimated(true)
-                    let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
-                    vc.bindGame($0)
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
+                hud.dismissAnimated(true)
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                vc.bindGame($0)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         } else {
             self.navigationController?.showNavigationBar()

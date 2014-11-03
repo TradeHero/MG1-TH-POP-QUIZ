@@ -24,7 +24,7 @@ final class THUserFriend: NSObject, NSCoding {
     
     lazy var isTHUser: Bool = {
         return self.userID != 0
-        }()
+    }()
     
     init(friendDTO:[String: AnyObject]) {
         self.facebookID = 0
@@ -73,8 +73,8 @@ final class THUserFriend: NSObject, NSCoding {
     init(coder aDecoder: NSCoder) {
         super.init()
         self.facebookID = aDecoder.decodeIntegerForKey(kFacebookIDKey)
-        self.facebookPictureURL = aDecoder.decodeObjectForKey(kFacebookPictureURLKey) as String
-        self.name = aDecoder.decodeObjectForKey(kNameKey) as String
+        self.facebookPictureURL = aDecoder.decodeObjectForKey(kFacebookPictureURLKey) as? String
+        self.name = aDecoder.decodeObjectForKey(kNameKey) as? String
         self.userID = aDecoder.decodeIntegerForKey(kUserIdKey)
     }
 }
