@@ -111,8 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         } else {
             NetworkClient.sharedClient._device_token = deviceToken.deviceTokenString()
         }
-        
-        println("\n\(deviceToken.deviceTokenString())\n\n")
         autoLogin()
     }
     

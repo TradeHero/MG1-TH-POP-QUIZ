@@ -142,7 +142,7 @@ class NetworkClient {
                     
                 }
         }
-        debugPrintln(r)
+        //debugPrintln(r)
     }
     
     /**
@@ -178,7 +178,7 @@ class NetworkClient {
             completionHandler((fbFrnds, thFrnds))
         }
         
-        debugPrintln(r)
+        //debugPrintln(r)
     }
     
     func getRandomFBFriendsForUser(numberOfUsers count:Int, forUser userId:Int, errorHandler:NSError -> (), completionHandler:[THUserFriend]->()){
@@ -215,7 +215,7 @@ class NetworkClient {
             }
             
         }
-        debugPrintln(r)
+        //debugPrintln(r)
         
         
     }
@@ -279,7 +279,7 @@ class NetworkClient {
                 }
             }
         }
-        debugPrintln(r)
+        //debugPrintln(r)
     }
 
     private func parseChallenges(challengeDtos:[AnyObject], completionHandler:[Game]->()) {
@@ -370,7 +370,7 @@ class NetworkClient {
                 }
             }
         }
-        debugPrintln(r)
+        //debugPrintln(r)
     }
     
     /**
@@ -409,7 +409,7 @@ class NetworkClient {
             }
         }
         
-        debugPrintln(r)
+        //debugPrintln(r)
     }
 
     
@@ -443,7 +443,7 @@ class NetworkClient {
                 completionHandler(staffArr)
             }
         }
-        debugPrintln(r)
+        //debugPrintln(r)
     }
     
     ///
@@ -537,7 +537,7 @@ class NetworkClient {
             }
             
         }
-        debugPrintln(r)
+        //debugPrintln(r)
     }
 
     func pushNotificationToDevice(deviceTokens:[String], alertMessage:String?, completionHandler:()->()){
@@ -588,7 +588,7 @@ class NetworkClient {
             }
             
         }
-        debugPrintln(r)
+        //debugPrintln(r)
         completionHandler()
     }
     
@@ -603,9 +603,6 @@ class NetworkClient {
             _, response, content, error in
             if let data: AnyObject = content {
                 if let tokens = data as? [String] {
-                    for token in tokens {
-                        println(token)
-                    }
                     completionHandler(tokens)
                 } else {
                     completionHandler([])
@@ -615,13 +612,13 @@ class NetworkClient {
             }
         }
         
-        debugPrintln(r)
+        //debugPrintln(r)
     }
     
     func sendPushNotification(targetUserId:Int, message: String?, completionHandler:()->()) {
         self.fetchUserDeviceTokens(targetUserId) {
-            [unowned self] tokens in
-            self.pushNotificationToDevice(tokens, alertMessage: message, completionHandler: completionHandler)
+            [unowned self] in
+            self.pushNotificationToDevice($0, alertMessage: message, completionHandler: completionHandler)
         }
     }
     
@@ -636,7 +633,7 @@ class NetworkClient {
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             if let e = error {
-                
+                debugPrintln(error)
             }
             
             NetworkClient.sharedClient.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) nudged you! Come back and face the challenge!") {
@@ -644,7 +641,7 @@ class NetworkClient {
             }
         }
             
-        debugPrintln(r)
+        //debugPrintln(r)
     }
 
     // MARK:- Class functions
