@@ -403,6 +403,10 @@ extension AVAudioPlayer {
         return AVAudioPlayer(contentsOfURL: url!, error: nil)
     }
     
+    class func createAudioPlayer(urlResource: NSURL) -> AVAudioPlayer {
+        return AVAudioPlayer(contentsOfURL: urlResource, error: nil)
+    }
+    
     func fadeToStop() {
         var originalVolume = self.volume
         self.fadeOutWithDuration(1.0)

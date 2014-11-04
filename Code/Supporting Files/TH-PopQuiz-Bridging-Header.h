@@ -44,6 +44,10 @@
 
 #import <UrbanAirship-iOS-SDK/UAPush.h>
 
+#import <WYPopoverController/WYPopoverController.h>
+
+#import <WYPopoverController/WYStoryboardPopoverSegue.h>
+
 #pragma mark - non-library
 
 #import "ObjCHelpers.h"

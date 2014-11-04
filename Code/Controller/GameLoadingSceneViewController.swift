@@ -187,7 +187,7 @@ class GameLoadingSceneViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "PresentQuizSegue" {
             
-            musicPlayer.stop()
+            switchMusic(countdownMusic)
             let vc =  segue.destinationViewController as QuizViewController
             vc.bindGameAndUsers(self.game, player: self.player, opponent: self.opponent)
         }

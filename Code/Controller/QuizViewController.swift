@@ -103,10 +103,8 @@ class QuizViewController: UIViewController {
     
     private var combos: Int = 0 {
         didSet {
-            println("Current highest: \(highestCombo)")
             if combos > highestCombo {
                 highestCombo = combos
-                println("New highest: \(highestCombo)")
             }
         }
     }
@@ -136,7 +134,7 @@ class QuizViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        prepareForMusicPlayer("turca")
+        prepareForMusicPlayer(pianoMusic["turca"]!)
         musicPlayer.play()
         self.navigationController?.hideNavigationBar()
         
@@ -218,13 +216,6 @@ class QuizViewController: UIViewController {
         }
     }
     
-//    private func createBackgroundMusicPlayer() -> AVAudioPlayer{
-//        let p = AVAudioPlayer.createAudioPlayer("MonkeysSpinningMonkeys", extensionName: "mp3")
-//        p.numberOfLoops = -1
-//        p.volume = kTHBackgroundMusicValue
-//        return p
-//    }
-    
     func prepareToEndRound() {
         current_q++
         if game.questionSet.count > current_q {
@@ -304,6 +295,7 @@ class QuizViewController: UIViewController {
     
     //MARK:- Timer functions
     private func timerStart() {
+        switchMusic(countdownMusic)
         stopwatchCurrTime = MAX_ALLOWED_TIME
         if stopwatch == nil {
             stopwatch = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
@@ -311,6 +303,7 @@ class QuizViewController: UIViewController {
     }
     
     private func timerStop() {
+        musicPlayer.stop()
         stopwatch?.invalidate()
         stopwatch = nil
     }
@@ -388,10 +381,7 @@ class QuizViewController: UIViewController {
         hud.textLabel.text = "Calculating results..."
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: self.highestCombo, noOfHintsUsed: self.totalHintUsed, currentScore: currentTurnScore, questionResults: results, errorHandler:{error in}) {
             [unowned self] in
-                musicPlayer.stop()
-                prepareForMusicPlayer("chopineb")
-                musicPlayer.play()
-            
+                switchMusic(pianoMusic["chopineb"]!)
                 hud.dismissAnimated(true)
                 self.game = $0
                 if $0.isGameCompletedByBothPlayer {
