@@ -17,8 +17,10 @@ func prepareForMusicPlayer(soundURL:NSURL) {
 }
 
 func switchMusic(urlForMusic:NSURL){
-    if musicPlayer.playing {
-        musicPlayer.stop()
+    if let m = musicPlayer {
+        if m.playing {
+            m.stop()
+        }
     }
     prepareForMusicPlayer(urlForMusic)
     musicPlayer.prepareToPlay()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, HomeTurnChallengesTableViewCellDelegate, FriendsChallengeCellTableViewCellDelegate {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, HomeTurnChallengesTableViewCellDelegate, FriendsChallengeCellTableViewCellDelegate, WYPopoverControllerDelegate {
     
     @IBOutlet private weak var avatarView: AvatarRoundedView!
     @IBOutlet private weak var fullNameView: UILabel!
@@ -27,6 +27,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return self.openChallenges.count == 0
     }
     
+    var popoverController: WYPopoverController!
+    
     private var noUnfinishedChallenges:Bool {
         return self.unfinishedChallenges.count == 0
     }
@@ -38,7 +40,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadChallenges()
+//        self.loadChallenges()
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         self.tableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
         setupSubviews()
@@ -51,6 +53,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.loadChallenges()
         self.tableView.reloadData()
         self.tableView.forceUpdateTable()
         self.muteButton.selected = kTHBackgroundMusicValue == 0
@@ -66,14 +69,31 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func muteAction(sender: AnyObject) {
-        if self.muteButton.selected {
-            self.muteButton.selected = false
-            kTHBackgroundMusicValue = 0.5
-        } else {
-            self.muteButton.selected = true
-            kTHBackgroundMusicValue = 0
-        }
+    @IBAction func muteAction(sender: UIButton) {
+//        if self.muteButton.selected {
+//            self.muteButton.selected = false
+//            kTHBackgroundMusicValue = 0.5
+//        } else {
+//            self.muteButton.selected = true
+//            kTHBackgroundMusicValue = 0
+//        }
+        
+        let content = UIStoryboard.inAppNotificationStoryboard().instantiateViewControllerWithIdentifier("MusicChooserTableViewController") as? UIViewController
+        
+        content?.preferredContentSize = CGSizeMake(320, 400)
+        popoverController = WYPopoverController(contentViewController: content)
+        
+        popoverController.delegate = self
+        var theme = WYPopoverTheme.themeForIOS7()
+        theme.tintColor = UIColor(hex: 0xDB0231)
+        theme.fillTopColor = UIColor(hex: 0xDB0231)
+        theme.fillBottomColor = UIColor(hex: 0xDB0231)
+        WYPopoverController.setDefaultTheme(theme)
+        popoverController.wantsDefaultContentAppearance = false
+        
+//        appearance.fillBottomColor = UIColor(hex: 0xDB0231)
+        popoverController.presentPopoverFromRect(sender.bounds, inView: sender, permittedArrowDirections: .Any, animated: true)
+        
     }
     //MARK:- Actions
     
@@ -435,6 +455,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func refresh(sender: AnyObject){
         self.loadChallenges {
         }
+    }
+    
+    func popoverControllerShouldDismissPopover(popoverController: WYPopoverController!) -> Bool {
+        return true
     }
     
 }

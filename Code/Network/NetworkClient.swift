@@ -185,6 +185,12 @@ class NetworkClient {
         let url = "\(THServerAPIBaseURL)/users/\(userId)/getnewfriends?socialNetwork=FB&count=100"
         debugPrintln("Fetching Facebook friends for user \(userId)...")
         
+        if THCache.objectExistForCacheKey(kTHRandomFBFriendsCacheStoreKey) {
+            var friends = THCache.getRandomFBFriendsFromCache()
+            completionHandler([friends[0],friends[1],friends[2]])
+            return
+        }
+        
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
             _, response, content, error in
             if let responseError = error {
@@ -193,15 +199,11 @@ class NetworkClient {
             }
             
             var friends: [THUserFriend] = []
-            
             if var arr = content as? [AnyObject] {
                 arr.shuffle()
                 debugPrintln("Parsing \(arr.count) objects as THUserFriend...")
                 
                 for friendObj in arr {
-                    if friends.count == count {
-                        break
-                    }
                     let friendDictionary = friendObj as [String: AnyObject]
                     if let uID: AnyObject = friendDictionary["thUserId"] {
                         let uIDInt = uID as Int
@@ -211,11 +213,12 @@ class NetworkClient {
                     }
                 }
                 debugPrintln("Completely parsed \(friends.count) objects as THUserFriend(s).")
-                completionHandler(friends)
+                THCache.saveRandomFBFriends(friends)
+                completionHandler([friends[0],friends[1],friends[2]])
             }
             
         }
-        //debugPrintln(r)
+        debugPrintln(r)
         
         
     }
@@ -443,7 +446,7 @@ class NetworkClient {
                 completionHandler(staffArr)
             }
         }
-        //debugPrintln(r)
+        debugPrintln(r)
     }
     
     ///
@@ -578,7 +581,7 @@ class NetworkClient {
         var notificationDict = ["ios": iosFields]
         
         let data: [String: AnyObject] = ["audience" : ["OR" : deviceTokenArray],  "notification" : notificationDict, "device_types": ["ios"]]
-        let r = self.manager.request(ParameterEncoding.JSON.encode(mutableURLRequest, parameters: data).0).authenticate(user: appKey, password: appMasterPW).validate().responseJSON {
+        let r = self.manager.request(ParameterEncoding.JSON.encode(mutableURLRequest, parameters: data).0).authenticate(user: appKey, password: appMasterPW).responseJSON {
             (_, response, data, error) -> Void in
             if let err = error {
                 debugPrintln(err)
@@ -588,7 +591,7 @@ class NetworkClient {
             }
             
         }
-        //debugPrintln(r)
+        debugPrintln(r)
         completionHandler()
     }
     
@@ -599,7 +602,7 @@ class NetworkClient {
         let url = "\(THServerAPIBaseURL)/users/\(id)/token?deviceType=1"
         debugPrintln("Fetching device token with user ID: \(id)...")
         
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             if let data: AnyObject = content {
                 if let tokens = data as? [String] {
@@ -612,7 +615,7 @@ class NetworkClient {
             }
         }
         
-        //debugPrintln(r)
+        debugPrintln(r)
     }
     
     func sendPushNotification(targetUserId:Int, message: String?, completionHandler:()->()) {
@@ -630,7 +633,7 @@ class NetworkClient {
         
 //        debugPrintln("Fetching device token with user ID: \(id)...")
         
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             if let e = error {
                 debugPrintln(error)
@@ -641,7 +644,7 @@ class NetworkClient {
             }
         }
             
-        //debugPrintln(r)
+        debugPrintln(r)
     }
 
     // MARK:- Class functions

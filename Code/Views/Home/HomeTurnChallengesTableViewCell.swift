@@ -85,7 +85,11 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         
         self.challengerDisplayNameLabel.text = opponent!.displayName
         self.challengerImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL)) { [unowned self] (image, _, _, _) in
-            self.challengerImageView.image = image.centerCropImage()
+            if let i = image {
+                self.challengerImageView.image = i.centerCropImage()
+            } else {
+                self.challengerImageView.image = UIImage(named: "EmptyAvatar")!
+            }
         }
 
     }

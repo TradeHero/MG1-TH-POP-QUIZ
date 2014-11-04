@@ -63,6 +63,22 @@ struct THCache {
         return (facebookFriends:[], tradeheroFriends:[])
     }
     
+    static func saveRandomFBFriends(users: [THUserFriend]) {
+        EGOCache.globalCache().setObject(users, forKey: kTHRandomFBFriendsCacheStoreKey)
+        debugPrintln("\(users.count) random friends users cached.")
+    }
+    
+    
+    static func getRandomFBFriendsFromCache() -> [THUserFriend]{
+        let object = EGOCache.globalCache().objectForKey(kTHRandomFBFriendsCacheStoreKey)
+        
+        if let arr = object as? [THUserFriend] {
+            debugPrintln("Retrieved \(arr.count) random friends from cache.")
+            return arr
+        }
+        return []
+    }
+    
     static func saveStaffListToCache(staffList:[StaffUser]) {
         EGOCache.globalCache().setObject(staffList, forKey: kTHStaffUserCacheStoreKey)
         debugPrintln("\(staffList.count) staff cached.")
@@ -72,6 +88,7 @@ struct THCache {
         let object = EGOCache.globalCache().objectForKey(kTHStaffUserCacheStoreKey)
         
         if let arr = object as? [StaffUser] {
+            debugPrintln("Retrieved \(arr.count) staff from cache.")
             return arr
         }
         return []

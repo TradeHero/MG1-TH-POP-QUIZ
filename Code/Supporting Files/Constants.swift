@@ -101,6 +101,7 @@ let kTHSettingsSliderTableViewCellIdentifier = "\(kConstantPrefix)SettingsSlider
 
 let kTHNotificationTableViewCellIdentifier = "\(kConstantPrefix)NotificationTableViewCellIdentifier"
 
+let kTHMusicChooserTableViewCellIdentifier = "\(kConstantPrefix)MusicChooserTableViewCellIdentifier"
 // MARK:- cache keys
 let kTHUserFriendsCacheStoreKey = "\(kConstantPrefix)UserFriendsCacheStore"
 
@@ -109,6 +110,8 @@ let kTHStaffUserCacheStoreKey = "\(kConstantPrefix)StaffUserCacheStore"
 let kTHUserCacheStoreKeyPrefix = "\(kConstantPrefix)UserCacheStoreID"
 
 let kGameCacheStoreIDPrefix = "\(kConstantPrefix)GameCacheStoreID"
+
+let kTHRandomFBFriendsCacheStoreKey = "\(kConstantPrefix)RandomFBFriendsCacheStore"
 
 //MARK:- Settings
 var kTHPushNotificationOn:Bool {
