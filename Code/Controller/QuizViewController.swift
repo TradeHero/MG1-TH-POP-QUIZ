@@ -272,9 +272,9 @@ class QuizViewController: UIViewController {
         let timeRange = (timeAllowed - timeLeft)/timeAllowed * 100
         
         switch timeRange {
-        case 0..<2:
+        case 0..<0.5:
             return 10
-        case 2..<5:
+        case 0.5..<5:
             return 5
         case 5..<10:
             return 2
