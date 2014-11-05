@@ -134,7 +134,7 @@ class QuizViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        prepareForMusicPlayer(pianoMusic["turca"]!)
+        playMusic("Piano 3")
         musicPlayer.play()
         self.navigationController?.hideNavigationBar()
         
