@@ -141,7 +141,7 @@ var kTHBackgroundMusicValue:Float {
         if let obj = NSUserDefaults.standardUserDefaults().objectForKey(kTHBackgroundMusicValueKey) as? NSNumber {
             return obj.floatValue
         }
-        return 1
+        return 0.5
     }
 }
 
@@ -155,7 +155,7 @@ var kTHSoundEffectValue:Float {
         if let obj = NSUserDefaults.standardUserDefaults().objectForKey(kTHSoundEffectValueKey) as? NSNumber {
             return obj.floatValue
         }
-        return 1
+        return 0.25
     }
 }
 

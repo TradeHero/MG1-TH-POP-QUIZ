@@ -185,19 +185,20 @@ class QuizViewController: UIViewController {
         
         if sender.is_answer {
             sender.configureAsCorrect()
-            playSound("Correct-Bell")
+            playCorrectSound()
             combos++
             currentQuestionCorrect = true
             let currentQuestionScore = calculateScore()
             produceResultForCurrentQuestion(true, score: currentQuestionScore)
         } else {
             sender.configureAsFalse()
-            playSound("Wrong-Buzzer")
+            playWrongSound()
             revealCorrectAnswer()
-            combos = -1
+            combos = 0
             let currentQuestionScore = calculateScore()
             produceResultForCurrentQuestion(false, score: currentQuestionScore)
             vibrateIfAllowed()
+            
         }
         
         unmaskContentViewIfNecessary()
@@ -344,7 +345,7 @@ class QuizViewController: UIViewController {
                 showImageObfuscationWithTimeFactor(factor: timeLeft/MAX_ALLOWED_TIME)
             }
         } else if timeLeft <= 0 {
-            playSoundEffect(.WrongSound)
+            playWrongSound()
             current_timeLeft = 0
             timerStop()
             preventFurtherActions()

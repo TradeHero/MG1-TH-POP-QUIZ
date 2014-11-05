@@ -28,8 +28,27 @@ var countdownMusic = NSBundle.mainBundle().URLForResource("The Countdown Clock-1
 var musicPlayer: AVAudioPlayer!
 var secondaryMusicPlayer = AVAudioPlayer.createAudioPlayer(countdownMusic)
 
+var correctSoundPlayer = AVAudioPlayer.createAudioPlayer(NSBundle.mainBundle().URLForResource("Correct-Bell", withExtension: "caf")!)
 
+var wrongSoundPlayer = AVAudioPlayer.createAudioPlayer(NSBundle.mainBundle().URLForResource("Wrong-Buzzer", withExtension: "caf")!)
 
+func playCorrectSound(){
+    if correctSoundPlayer.playing {
+        correctSoundPlayer.stop()
+    }
+    correctSoundPlayer.numberOfLoops = 0
+    correctSoundPlayer.volume = kTHSoundEffectValue
+    correctSoundPlayer.play()
+}
+
+func playWrongSound(){
+    if wrongSoundPlayer.playing {
+        wrongSoundPlayer.stop()
+    }
+    wrongSoundPlayer.numberOfLoops = 0
+    wrongSoundPlayer.volume = kTHSoundEffectValue
+    wrongSoundPlayer.play()
+}
 
 func prepareForMusicPlayer(soundURL:NSURL) {
     musicPlayer = AVAudioPlayer.createAudioPlayer(soundURL)
