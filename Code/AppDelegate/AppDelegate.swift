@@ -41,8 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         case .Prod:
             println("Current build points to Production Server.\n")
         }
-        playRandomMusic()
-//        prepareForMusicPlayer(r[0])
+        
+        playMusic(kTHDefaultSong)
+        
         self.registerLoginNotification()
         
         return true

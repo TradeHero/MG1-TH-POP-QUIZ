@@ -72,6 +72,7 @@ let kTHVibrationEffectOnKey = "\(kConstantPrefix)VibrationEffectOn"
 
 let kTHNotificationHeadOnKey = "\(kConstantPrefix)NotificationHeadOn"
 
+let kTHDefaultSongKey = "\(kConstantPrefix)DefaultSong"
 
 //MARK:- notification keys
 let kTHGameLoginSuccessfulNotificationKey = "\(kConstantPrefix)GameLoginSuccessfulNotification"
@@ -157,6 +158,7 @@ var kTHSoundEffectValue:Float {
         return 1
     }
 }
+
 var kTHVibrationEffectOn:Bool {
     set {
         let on = newValue ? "on": "off"
@@ -186,6 +188,21 @@ var kTHNotificationHeadOn:Bool {
       }
       return false
    }
+}
+
+var kTHDefaultSong:String {
+    set {
+        debugPrintln("Default background music set to \(newValue)")
+        NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: kTHDefaultSongKey)
+    }
+
+    get {
+        if let obj = NSUserDefaults.standardUserDefaults().objectForKey(kTHDefaultSongKey) as? String {
+            return obj
+        }
+        
+        return getRandomMusicName()
+    }
 }
 
 func vibrateIfAllowed(){

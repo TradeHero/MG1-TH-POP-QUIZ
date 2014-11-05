@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ExSwift
 
 class MusicChooserTableViewController: UITableViewController, MusicChooserTableViewCellDelegate {
     
@@ -65,20 +64,39 @@ class MusicChooserTableViewController: UITableViewController, MusicChooserTableV
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kTHMusicChooserTableViewCellIdentifier, forIndexPath: indexPath) as MusicChooserTableViewCell
+        
         switch indexPath.section{
         case 0:
-            cell.bindMusicURL(orchestralMusic[orchestralMusic.keys.array[indexPath.row]]!, name: orchestralMusic.keys.array[indexPath.row])
+            var orchestralNames = orchestralMusic.keys.array
+            orchestralNames.sort {
+                $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending
+            }
+
+            cell.bindMusicURL(orchestralMusic[orchestralNames[indexPath.row]]!, name: orchestralNames[indexPath.row])
             cell.delegate = self
             return cell
         case 1:
-            cell.bindMusicURL(pianoMusic[pianoMusic.keys.array[indexPath.row]]!, name: pianoMusic.keys.array[indexPath.row])
+            var pianoNames = pianoMusic.keys.array
+            pianoNames.sort {
+                $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending
+            }
+            
+            cell.bindMusicURL(pianoMusic[pianoNames[indexPath.row]]!, name: pianoNames[indexPath.row])
             cell.delegate = self
             return cell
         default:
             return UITableViewCell()
         }
     }
-
+    
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let v = view as? UITableViewHeaderFooterView {
+            v.textLabel.textColor = UIColor(hex: 0xFFFFFF)
+            v.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 13)
+            v.contentView.backgroundColor  = UIColor(hex: 0xFF4069)
+        }
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -94,6 +112,8 @@ class MusicChooserTableViewController: UITableViewController, MusicChooserTableV
     }
     
     func musicChooserTableViewCell(cell: MusicChooserTableViewCell, didTapVoteButton musicToVote: String) {
-        println(musicToVote)
+        playMusic(musicToVote)
+        kTHDefaultSong = musicToVote
+        self.tableView.reloadData()
     }
 }

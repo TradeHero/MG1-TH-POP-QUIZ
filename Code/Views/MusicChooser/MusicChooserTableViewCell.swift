@@ -13,6 +13,7 @@ class MusicChooserTableViewCell: UITableViewCell {
     @IBOutlet weak var musicNameLabel: UILabel!
     var musicURL: NSURL!
     
+    @IBOutlet weak var defaultButton: UIButton!
     var delegate: MusicChooserTableViewCellDelegate!
     
     override func awakeFromNib() {
@@ -23,6 +24,7 @@ class MusicChooserTableViewCell: UITableViewCell {
     func bindMusicURL(url: NSURL, name: String){
         musicURL = url
         musicNameLabel.text = name
+        defaultButton.enabled = musicNameLabel.text != kTHDefaultSong
     }
     
     @IBAction func voteAction(sender: AnyObject) {
@@ -33,6 +35,8 @@ class MusicChooserTableViewCell: UITableViewCell {
     @IBAction func playAction(sender: AnyObject) {
         self.delegate.musicChooserTableViewCell(self, didTapPlayButton: musicURL)
     }
+    
+    
 }
 
 protocol MusicChooserTableViewCellDelegate :class, NSObjectProtocol {

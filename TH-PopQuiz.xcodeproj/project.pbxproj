@@ -590,11 +590,11 @@
 		6DD2314D19B8204900B5D05E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6DAFBCF21A08B44E009C41EC /* Music Chooser */,
 				6DD2314E19B8204900B5D05E /* Designables */,
 				6DD2315419B8204900B5D05E /* Friends */,
 				6DD2315919B8204900B5D05E /* Home */,
 				6D3DB3BC19E3CDCB006BC11B /* In App Notifications */,
+				6DAFBCF21A08B44E009C41EC /* Music Chooser */,
 				6D3DB3B619E3C116006BC11B /* Navigation Bar */,
 				6D3AF97F19C2ADB00085682E /* Profile */,
 				6DD2315C19B8204900B5D05E /* Quiz */,

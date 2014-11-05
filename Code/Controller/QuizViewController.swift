@@ -266,7 +266,7 @@ class QuizViewController: UIViewController {
     }
     
     private func getTimeBonus(timeLeft:CGFloat) -> CGFloat {
-        let timeAllowed:CGFloat = 15.0
+        let timeAllowed:CGFloat = MAX_ALLOWED_TIME
         
         let timeRange = (timeAllowed - timeLeft)/timeAllowed * 100
         
@@ -295,7 +295,6 @@ class QuizViewController: UIViewController {
     
     //MARK:- Timer functions
     private func timerStart() {
-        switchMusic(countdownMusic)
         stopwatchCurrTime = MAX_ALLOWED_TIME
         if stopwatch == nil {
             stopwatch = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
@@ -303,7 +302,7 @@ class QuizViewController: UIViewController {
     }
     
     private func timerStop() {
-        musicPlayer.stop()
+        stopCountdownMusic()
         stopwatch?.invalidate()
         stopwatch = nil
     }
@@ -338,6 +337,9 @@ class QuizViewController: UIViewController {
         var timeLeft = stopwatchCurrTime
         if timeLeft > 0 {
             current_timeLeft = timeLeft
+            if timeLeft < MAX_ALLOWED_TIME - 1 {
+                playCountdownMusic()
+            }
             if isTimedObfuscatorQuestion {
                 showImageObfuscationWithTimeFactor(factor: timeLeft/MAX_ALLOWED_TIME)
             }
@@ -381,7 +383,7 @@ class QuizViewController: UIViewController {
         hud.textLabel.text = "Calculating results..."
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: self.highestCombo, noOfHintsUsed: self.totalHintUsed, currentScore: currentTurnScore, questionResults: results, errorHandler:{error in}) {
             [unowned self] in
-                switchMusic(pianoMusic["chopineb"]!)
+                playMusic(kTHDefaultSong)
                 hud.dismissAnimated(true)
                 self.game = $0
                 if $0.isGameCompletedByBothPlayer {

@@ -56,7 +56,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.loadChallenges()
         self.tableView.reloadData()
         self.tableView.forceUpdateTable()
-        self.muteButton.selected = kTHBackgroundMusicValue == 0
+        self.muteButton.selected = true
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -8,7 +8,28 @@
 
 import AVFoundation
 
+var orchestralMusic = [
+    "Orchestral 1" :NSBundle.mainBundle().URLForResource("bee68_1", withExtension: "mp3")!,
+    "Orchestral 2" :NSBundle.mainBundle().URLForResource("bee68_2", withExtension: "mp3")!,
+    "Orchestral 3" :NSBundle.mainBundle().URLForResource("bee68_3", withExtension: "mp3")!,
+    "Orchestral 4" :NSBundle.mainBundle().URLForResource("bee68_4", withExtension: "mp3")!,
+    "Orchestral 5" :NSBundle.mainBundle().URLForResource("bee68_5", withExtension: "mp3")!,
+]
+
+var pianoMusic = [
+    "Piano 1" :NSBundle.mainBundle().URLForResource("chopineb", withExtension: "mp3")!,
+    "Piano 2" :NSBundle.mainBundle().URLForResource("k165", withExtension: "mp3")!,
+    "Piano 3" :NSBundle.mainBundle().URLForResource("turca", withExtension: "mp3")!,
+    "Piano 4" :NSBundle.mainBundle().URLForResource("valse_n", withExtension: "mp3")!
+]
+
+var countdownMusic = NSBundle.mainBundle().URLForResource("The Countdown Clock-15s", withExtension: "mp3")!
+
 var musicPlayer: AVAudioPlayer!
+var secondaryMusicPlayer = AVAudioPlayer.createAudioPlayer(countdownMusic)
+
+
+
 
 func prepareForMusicPlayer(soundURL:NSURL) {
     musicPlayer = AVAudioPlayer.createAudioPlayer(soundURL)
@@ -27,26 +48,55 @@ func switchMusic(urlForMusic:NSURL){
     musicPlayer.play()
 }
 
-func playRandomMusic(){
-    var r = Array(orchestralMusic.values)
-    r += Array(pianoMusic.values)
-    r.shuffle()
-    switchMusic(r[0])
+func += <KeyType, ValueType> (inout left: Dictionary<KeyType, ValueType>, right: Dictionary<KeyType, ValueType>) {
+    for (k, v) in right {
+        left.updateValue(v, forKey: k)
+    }
 }
 
-var orchestralMusic = [
-    "bee68_1" :NSBundle.mainBundle().URLForResource("bee68_1", withExtension: "mp3")!,
-    "bee68_2" :NSBundle.mainBundle().URLForResource("bee68_2", withExtension: "mp3")!,
-    "bee68_3" :NSBundle.mainBundle().URLForResource("bee68_3", withExtension: "mp3")!,
-    "bee68_4" :NSBundle.mainBundle().URLForResource("bee68_4", withExtension: "mp3")!,
-    "bee68_5" :NSBundle.mainBundle().URLForResource("bee68_5", withExtension: "mp3")!,
-]
+func playMusic(name: String){
+    var p = orchestralMusic
+    p += pianoMusic
+    switchMusic(p[name]!)
+}
 
-var pianoMusic = [
-    "chopineb" :NSBundle.mainBundle().URLForResource("chopineb", withExtension: "mp3")!,
-    "k165" :NSBundle.mainBundle().URLForResource("k165", withExtension: "mp3")!,
-    "turca" :NSBundle.mainBundle().URLForResource("turca", withExtension: "mp3")!,
-    "valse_n" :NSBundle.mainBundle().URLForResource("valse_n", withExtension: "mp3")!
-]
+func getRandomMusicName() -> String {
+    var r = Array(orchestralMusic.keys)
+    r += Array(pianoMusic.keys)
+    r.shuffle()
+    return r[0]
+}
 
-var countdownMusic = NSBundle.mainBundle().URLForResource("The Countdown Clock-15s", withExtension: "mp3")!
+func playCountdownMusic(){
+    if secondaryMusicPlayer.playing {
+        return
+    }
+    
+    secondaryMusicPlayer = AVAudioPlayer.createAudioPlayer(countdownMusic)
+    secondaryMusicPlayer.numberOfLoops = 0
+    secondaryMusicPlayer.volume = kTHBackgroundMusicValue / 2
+    secondaryMusicPlayer.prepareToPlay()
+    secondaryMusicPlayer.play()
+    
+    if let m = musicPlayer {
+        if m.playing {
+            m.pause()
+        }
+    }
+}
+
+func stopCountdownMusic(){
+    secondaryMusicPlayer.stop()
+    secondaryMusicPlayer.currentTime = 0
+    secondaryMusicPlayer = AVAudioPlayer.createAudioPlayer(countdownMusic)
+    secondaryMusicPlayer.numberOfLoops = 0
+    secondaryMusicPlayer.volume = 0
+    secondaryMusicPlayer.prepareToPlay()
+    
+    if let m = musicPlayer {
+        if !m.playing {
+            m.play()
+        }
+    }
+}
+
