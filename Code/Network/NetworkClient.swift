@@ -187,7 +187,15 @@ class NetworkClient {
         
         if THCache.objectExistForCacheKey(kTHRandomFBFriendsCacheStoreKey) {
             var friends = THCache.getRandomFBFriendsFromCache()
-            completionHandler([friends[0],friends[1],friends[2]])
+            friends.shuffle()
+            var filteredFriends = [THUserFriend]()
+            for f in friends {
+                if filteredFriends.count == count {
+                    break
+                }
+                filteredFriends.append(f)
+            }
+            completionHandler(filteredFriends)
             return
         }
         
@@ -214,7 +222,14 @@ class NetworkClient {
                 }
                 debugPrintln("Completely parsed \(friends.count) objects as THUserFriend(s).")
                 THCache.saveRandomFBFriends(friends)
-                completionHandler([friends[0],friends[1],friends[2]])
+                var filteredFriends = [THUserFriend]()
+                for f in friends {
+                    if filteredFriends.count == count {
+                        break
+                    }
+                    filteredFriends.append(f)
+                }
+                completionHandler(filteredFriends)
             }
             
         }

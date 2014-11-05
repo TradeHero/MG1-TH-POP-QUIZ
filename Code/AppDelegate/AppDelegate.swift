@@ -30,6 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        application.applicationIconBadgeNumber = 0
+        
         let config = UAConfig.defaultConfig()
         UAirship.takeOff(config)
         UAPush.shared().userNotificationTypes = (UIUserNotificationType.Badge | UIUserNotificationType.Sound | UIUserNotificationType.Alert)
@@ -58,12 +61,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
             hud.textLabel.text = "Logging in..."
             NetworkClient.sharedClient.loginUserWithFacebookAuth(credential, loginSuccessHandler: {
                 [unowned self] user in
-                
-                hud.dismissAfterDelay(0, animated: true)
+                hud.dismissAnimated(true)
                 }) {
                     error in
                     hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
                     hud.textLabel.text = "\(error)"
+                    hud.dismissAfterDelay(2, animated: true)
             }
             
         }
