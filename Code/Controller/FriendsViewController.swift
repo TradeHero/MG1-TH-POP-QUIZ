@@ -232,12 +232,11 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         hud.detailTextLabel.text = "Creating game with user.."
         NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in
-            if let g = $0 {
-                hud.dismissAnimated(true)
-                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
-                vc.bindGame($0)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            hud.dismissAnimated(true)
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            vc.bindGame($0)
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         }
     }
     
@@ -255,12 +254,11 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         hud.detailTextLabel.text = "Creating game with user.."
         NetworkClient.sharedClient.createChallenge(opponentId: userId, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in
-            if let g = $0 {
-                hud.dismissAnimated(true)
-                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
-                vc.bindGame($0)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            hud.dismissAnimated(true)
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            vc.bindGame($0)
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         }
 
     }
