@@ -358,7 +358,7 @@ class NetworkClient {
     /**
     POST api/games/postresults
     */
-    func postGameResults(game:Game, highestCombo:Int, noOfHintsUsed hints: UInt,currentScore:Int, questionResults:[QuestionResult], errorHandler:NSError->(),completionHandler:(Game -> ())!){
+    func postGameResults(game:Game, highestCombo:Int, noOfHintsUsed hints: UInt,currentScore:Int, questionResults:[QuestionResult], errorHandler:NSError->(),completionHandler:Game -> ()){
         let url = "\(THGameAPIBaseURL)/postResults"
         
         debugPrintln("Posting results for game \(game.gameID)...")
@@ -377,15 +377,14 @@ class NetworkClient {
                 errorHandler(e)
             }
             
-            game.fetchResults {
+            if let gameResults = content as? [String:AnyObject] {
+                game.populateResult(gameResults)
                 if game.isGameCompletedByBothPlayer {
                     self.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) has finished the challenge! Check your timeline for results!") {
                     }
                 }
                 
-                if let c = completionHandler {
-                    c(game)
-                }
+                completionHandler(game)
             }
         }
         //debugPrintln(r)
@@ -593,7 +592,7 @@ class NetworkClient {
             iosFields.updateValue("notification.caf", forKey: "sound")
             iosFields.updateValue(1, forKey: "badge")
         }
-        var notificationDict = ["ios": iosFields]
+        var notificationDict = ["ios": iosFields, "android": ["alert":"hello"]]
         
         let data: [String: AnyObject] = ["audience" : ["OR" : deviceTokenArray],  "notification" : notificationDict, "device_types": ["ios"]]
         let r = self.manager.request(ParameterEncoding.JSON.encode(mutableURLRequest, parameters: data).0).authenticate(user: appKey, password: appMasterPW).responseJSON {

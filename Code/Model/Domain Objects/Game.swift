@@ -12,7 +12,7 @@ final class Game {
     
     let gameID: Int!
     
-    private let createdAtUTCStr: String!
+    private var createdAtUTCStr: String!
     
     var initiatingPlayer: THUser!
     
@@ -25,6 +25,19 @@ final class Game {
     var initiatingPlayerResult: GameResult!
     
     var opponentPlayerResult: GameResult!
+    
+    var expired = false
+    
+    var rejectedByOpponent = false
+    
+    private var lastNudgedOpponentAtUTCStr: String!
+    
+    lazy var lastNudgedOpponentAt: NSDate! = {
+        let df = NSDateFormatter()
+        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        df.timeZone = NSTimeZone(name: "UTC")
+        return df.dateFromString(self.lastNudgedOpponentAtUTCStr)
+        }()
     
     var isGameCompletedByChallenger: Bool {
         return initiatingPlayerResult != nil
@@ -84,26 +97,32 @@ final class Game {
             }
             self.questionSet = qSet
         }
+        
+        if let exp: AnyObject = gameDTO["expired"] {
+            self.expired = (exp as NSNumber).boolValue
+        }
+        
+        if let rej: AnyObject = gameDTO["rejectedByOpponent"] {
+            self.rejectedByOpponent = (rej as NSNumber).boolValue
+        }
     }
     
-    private func populateResult(result:AnyObject) {
+    func populateResult(resultsDTO:[String : AnyObject]) {
         var challengerResult:GameResult?
         var opponentResult:GameResult?
         
-        if let resultsDTO = result as? [String : AnyObject] {
-            let inner: AnyObject? = resultsDTO["result"]
-            if let innerResultDTO = inner as? [String : AnyObject] {
-                if let challengerResultDTO: AnyObject = innerResultDTO["challenger"] {
-                    let dto = challengerResultDTO as [String : AnyObject]
-                    challengerResult = GameResult(gameId:self.gameID, resultDTO: dto)
-                }
-                if let opponentResultDTO: AnyObject = innerResultDTO["opponent"] {
-                    let dto = opponentResultDTO as [String : AnyObject]
-                    opponentResult = GameResult(gameId:self.gameID, resultDTO: dto)
-                }
-
+        let inner: AnyObject? = resultsDTO["result"]
+        if let innerResultDTO = inner as? [String : AnyObject] {
+            if let challengerResultDTO: AnyObject = innerResultDTO["challenger"] {
+                let dto = challengerResultDTO as [String : AnyObject]
+                challengerResult = GameResult(gameId:self.gameID, resultDTO: dto)
+            }
+            if let opponentResultDTO: AnyObject = innerResultDTO["opponent"] {
+                let dto = opponentResultDTO as [String : AnyObject]
+                opponentResult = GameResult(gameId:self.gameID, resultDTO: dto)
             }
         }
+        
         
         if let cResults = challengerResult {
             if self.initiatingPlayerID == cResults.userId {
@@ -144,7 +163,17 @@ final class Game {
         self.questionSet = nil
         
         if let rs: AnyObject = compactGameDTO["GameResults"] {
-            populateResult(rs)
+            if let resultsDTO = rs as? [String : AnyObject] {
+                populateResult(resultsDTO)
+            }
+        }
+        
+        if let exp: AnyObject = compactGameDTO["expired"] {
+            self.expired = (exp as NSNumber).boolValue
+        }
+        
+        if let rej: AnyObject = compactGameDTO["rejectedByOpponent"] {
+            self.rejectedByOpponent = (rej as NSNumber).boolValue
         }
 
     }
