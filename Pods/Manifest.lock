@@ -4,6 +4,25 @@ PODS:
     - CAAnimationBlocks
     - SKBounceAnimation
   - EGOCache (2.1)
+  - FormatterKit (1.7.2):
+    - FormatterKit/AddressFormatter
+    - FormatterKit/ArrayFormatter
+    - FormatterKit/ColorFormatter
+    - FormatterKit/LocationFormatter
+    - FormatterKit/NameFormatter
+    - FormatterKit/OrdinalNumberFormatter
+    - FormatterKit/TimeIntervalFormatter
+    - FormatterKit/UnitOfInformationFormatter
+    - FormatterKit/URLRequestFormatter
+  - FormatterKit/AddressFormatter (1.7.2)
+  - FormatterKit/ArrayFormatter (1.7.2)
+  - FormatterKit/ColorFormatter (1.7.2)
+  - FormatterKit/LocationFormatter (1.7.2)
+  - FormatterKit/NameFormatter (1.7.2)
+  - FormatterKit/OrdinalNumberFormatter (1.7.2)
+  - FormatterKit/TimeIntervalFormatter (1.7.2)
+  - FormatterKit/UnitOfInformationFormatter (1.7.2)
+  - FormatterKit/URLRequestFormatter (1.7.2)
   - JGProgressHUD (1.2.2)
   - LDProgressView (1.2.1)
   - PureLayout (2.0.1)
@@ -18,18 +37,20 @@ PODS:
 DEPENDENCIES:
   - ChatHeads (~> 1.0)
   - EGOCache (~> 2.1)
+  - FormatterKit (~> 1.7.2)
   - JGProgressHUD (~> 1.2.2)
   - LDProgressView (~> 1.2.1)
   - PureLayout (~> 2.0.1)
   - SDWebImage (~> 3.7.1)
   - SSKeychain (~> 1.2.2)
   - UrbanAirship-iOS-SDK (~> 5.0.3)
-  - WYPopoverController (~> 0.3.3)
+  - WYPopoverController (~> 0.3.4)
 
 SPEC CHECKSUMS:
   CAAnimationBlocks: 981bfca79ac481f07957aa8357885e620637f926
   ChatHeads: 1b66a3ca6ae25e6ce04eb64485cf96b43b74bbcc
   EGOCache: bf414333c425fe47f5182351d1dd47ebf72d8352
+  FormatterKit: 230f6ae7a6e9ac468cb09b3ac2b7524effc8daaa
   JGProgressHUD: a7c58f711eec0b67f257a0821c0bac9194c72398
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
   PureLayout: 12eca5b6dc94f1a03fdf255d640604584ff1b55b
