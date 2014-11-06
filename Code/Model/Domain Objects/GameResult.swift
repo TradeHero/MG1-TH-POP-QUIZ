@@ -1,6 +1,6 @@
 //
 //  GameResult.swift
-//  TradeGame
+//  TH-PopQuiz
 //
 //  Created by Ryne Cheow on 8/27/14.
 //  Copyright (c) 2014 TradeHero. All rights reserved.
@@ -82,11 +82,8 @@ final class GameResult: NSCoding {
     private var submittedAtUtcString:String! //NSCoding
     
     lazy var submittedAt: NSDate! = {
-        let df = NSDateFormatter()
-        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        df.timeZone = NSTimeZone(name: "UTC")
-        return df.dateFromString(self.submittedAtUtcString)
-        }()
+        return DataFormatter.sharedClient.dateFormatter.dateFromString(self.submittedAtUtcString)
+    }()
     
     lazy var resultDetails: [QuestionResultDetail] = {
         var qrd: [QuestionResultDetail] = []

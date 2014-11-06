@@ -1,6 +1,6 @@
 //
 //  Game.swift
-//  TradeGame
+//  TH-PopQuiz
 //
 //  Created by Ryne Cheow on 8/7/14.
 //  Copyright (c) 2014 TradeHero. All rights reserved.
@@ -33,11 +33,8 @@ final class Game {
     private var lastNudgedOpponentAtUTCStr: String!
     
     lazy var lastNudgedOpponentAt: NSDate! = {
-        let df = NSDateFormatter()
-        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        df.timeZone = NSTimeZone(name: "UTC")
-        return df.dateFromString(self.lastNudgedOpponentAtUTCStr)
-        }()
+        return DataFormatter.sharedClient.dateFormatter.dateFromString(self.lastNudgedOpponentAtUTCStr)
+    }()
     
     var isGameCompletedByChallenger: Bool {
         return initiatingPlayerResult != nil
@@ -52,11 +49,8 @@ final class Game {
     }
 
     lazy var createdAt: NSDate! = {
-        let df = NSDateFormatter()
-        df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        df.timeZone = NSTimeZone(name: "UTC")
-        return df.dateFromString(self.createdAtUTCStr)
-        }()
+        return DataFormatter.sharedClient.dateFormatter.dateFromString(self.createdAtUTCStr)
+    }()
     
     var questionSet: [Question]!
     

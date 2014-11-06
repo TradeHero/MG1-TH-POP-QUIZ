@@ -6,6 +6,8 @@
 
 #import <EGOCache/EGOCache.h>
 
+#import <FormatterKit/TTTTimeIntervalFormatter.h>
+
 #import <GPUImage/GPUImage.h>
 
 #import <JGProgressHUD/JGProgressHUD.h>

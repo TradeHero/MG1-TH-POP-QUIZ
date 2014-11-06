@@ -1,6 +1,6 @@
 //
 //  WinLoseViewController.swift
-//  TradeGame
+//  TH-PopQuiz
 //
 //  Created by Ryne Cheow on 7/31/14.
 //  Copyright (c) 2014 TradeHero. All rights reserved.

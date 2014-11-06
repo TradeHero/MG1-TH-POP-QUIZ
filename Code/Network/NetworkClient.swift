@@ -1,6 +1,6 @@
 //
 //  NetworkClient.swift
-//  TradeGame
+//  TH-PopQuiz
 //
 //  Created by Ryne Cheow on 8/7/14.
 //  Copyright (c) 2014 TradeHero. All rights reserved.
@@ -32,6 +32,7 @@ class NetworkClient {
             defaultHeaders.updateValue("en-GB", forKey: "THPQ-Language-Code")
             let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
             configuration.HTTPAdditionalHeaders = defaultHeaders
+            configuration.timeoutIntervalForRequest = 10
             Singleton.instance.manager = Alamofire.Manager(configuration: configuration)
         }
         

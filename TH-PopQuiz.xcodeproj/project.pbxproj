@@ -24,6 +24,7 @@
 		6D43E98619EB796D002DBB82 /* HexagonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D43E98519EB796D002DBB82 /* HexagonalView.swift */; };
 		6D43E98919EB79B3002DBB82 /* AvatarHexagonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D43E98819EB79B3002DBB82 /* AvatarHexagonalView.swift */; };
 		6D43E98C19EB7C6B002DBB82 /* StaffUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D43E98B19EB7C6B002DBB82 /* StaffUser.swift */; };
+		6D5EF8741A0B78F9001427FD /* DataFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5EF8731A0B78F9001427FD /* DataFormatter.swift */; };
 		6D69E50B19C82A58006490D0 /* SettingsSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D69E50919C82A58006490D0 /* SettingsSliderTableViewCell.swift */; };
 		6D69E50C19C82A58006490D0 /* SettingsSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */; };
 		6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */; };
@@ -181,6 +182,7 @@
 		6D43E98519EB796D002DBB82 /* HexagonalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexagonalView.swift; sourceTree = "<group>"; };
 		6D43E98819EB79B3002DBB82 /* AvatarHexagonalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarHexagonalView.swift; sourceTree = "<group>"; };
 		6D43E98B19EB7C6B002DBB82 /* StaffUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaffUser.swift; sourceTree = "<group>"; };
+		6D5EF8731A0B78F9001427FD /* DataFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFormatter.swift; sourceTree = "<group>"; };
 		6D69E50919C82A58006490D0 /* SettingsSliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSliderTableViewCell.swift; sourceTree = "<group>"; };
 		6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSliderTableViewCell.xib; sourceTree = "<group>"; };
 		6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTimelineView.xib; sourceTree = "<group>"; };
@@ -346,6 +348,14 @@
 				6D43E98B19EB7C6B002DBB82 /* StaffUser.swift */,
 			);
 			path = Development;
+			sourceTree = "<group>";
+		};
+		6D5EF8711A0B78D5001427FD /* Data Formatter */ = {
+			isa = PBXGroup;
+			children = (
+				6D5EF8731A0B78F9001427FD /* DataFormatter.swift */,
+			);
+			path = "Data Formatter";
 			sourceTree = "<group>";
 		};
 		6D8183221A022A5E00C9F791 /* Notification */ = {
@@ -515,6 +525,7 @@
 		6DD2312E19B8204900B5D05E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6D5EF8711A0B78D5001427FD /* Data Formatter */,
 				6DD2312F19B8204900B5D05E /* Domain Objects */,
 			);
 			path = Model;
@@ -1002,6 +1013,7 @@
 				6DE3B4E719BEB3DC00F9251A /* THIndefiniteIndicatorView.swift in Sources */,
 				6DD2317819B8204900B5D05E /* GamePortfolio.swift in Sources */,
 				6DD2319D19B8204900B5D05E /* QuestionViewPlain.swift in Sources */,
+				6D5EF8741A0B78F9001427FD /* DataFormatter.swift in Sources */,
 				6DD2318D19B8204900B5D05E /* AvatarRoundedView.swift in Sources */,
 				6D0BC42019C7E2F700578C90 /* SettingsControlTableViewCell.swift in Sources */,
 				6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */,
