@@ -108,7 +108,7 @@ class NetworkClient {
     /**
     Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int!, errorHandler:NSError -> (), completionHandler: (Game! -> ())!) {
+    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int!, errorHandler:NSError -> (), completionHandler: Game -> ()) {
         var param:[String:AnyObject] = ["numberOfQuestions": numberOfQuestions]
         if let id = opponentId {
             debugPrintln("Creating challenge with user \(id) with \(numberOfQuestions) questions(s)")
@@ -132,11 +132,7 @@ class NetworkClient {
                     debugPrintln("Game created with game ID: \(game.gameID)")
                     game.fetchUsers {
                         game.fetchResults {
-                            self.sendPushNotification(game.opponentPlayerID, message:"\(game.initiatingPlayer.displayName) sent you a challenge!") {
-                                if let c = completionHandler {
-                                    c(game)
-                                }
-                            }
+                            completionHandler(game)
                         }
                     }
                     
@@ -379,11 +375,6 @@ class NetworkClient {
             
             if let gameResults = content as? [String:AnyObject] {
                 game.populateResult(gameResults)
-                if game.isGameCompletedByBothPlayer {
-                    self.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) has finished the challenge! Check your timeline for results!") {
-                    }
-                }
-                
                 completionHandler(game)
             }
         }
@@ -653,9 +644,7 @@ class NetworkClient {
                 debugPrintln(error)
             }
             
-            NetworkClient.sharedClient.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) nudged you! Come back and face the challenge!") {
-                completionHandler()
-            }
+            completionHandler()
         }
             
         debugPrintln(r)
