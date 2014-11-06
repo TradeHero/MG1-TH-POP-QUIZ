@@ -13,7 +13,7 @@ PODS:
   - SKBounceAnimation (1.0.04)
   - SSKeychain (1.2.2)
   - UrbanAirship-iOS-SDK (5.0.3)
-  - WYPopoverController (0.3.3)
+  - WYPopoverController (0.3.4)
 
 DEPENDENCIES:
   - ChatHeads (~> 1.0)
@@ -37,6 +37,6 @@ SPEC CHECKSUMS:
   SKBounceAnimation: a47c30f67d3e4b948b1823ce5957d72d4382dd73
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
   UrbanAirship-iOS-SDK: 28f557544619935e2eb59955fb7c15fa0709e3c7
-  WYPopoverController: 86aa5a8993fea95f59028d5d944d0f21f8bee9b9
+  WYPopoverController: eb1bfffb6ed0dbfa27e3f322c7eaf342db0bd3d4
 
 COCOAPODS: 0.34.4

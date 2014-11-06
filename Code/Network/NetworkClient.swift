@@ -108,7 +108,7 @@ class NetworkClient {
     /**
     Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int!, errorHandler:NSError -> (), completionHandler: (Game! -> ())!) {
+    func createChallenge(numberOfQuestions:Int = 7, opponentId:Int!, errorHandler:NSError -> (), completionHandler: Game -> ()) {
         var param:[String:AnyObject] = ["numberOfQuestions": numberOfQuestions]
         if let id = opponentId {
             debugPrintln("Creating challenge with user \(id) with \(numberOfQuestions) questions(s)")
@@ -132,11 +132,7 @@ class NetworkClient {
                     debugPrintln("Game created with game ID: \(game.gameID)")
                     game.fetchUsers {
                         game.fetchResults {
-                            self.sendPushNotification(game.opponentPlayerID, message:"\(game.initiatingPlayer.displayName) sent you a challenge!") {
-                                if let c = completionHandler {
-                                    c(game)
-                                }
-                            }
+                            completionHandler(game)
                         }
                     }
                     
@@ -187,7 +183,15 @@ class NetworkClient {
         
         if THCache.objectExistForCacheKey(kTHRandomFBFriendsCacheStoreKey) {
             var friends = THCache.getRandomFBFriendsFromCache()
-            completionHandler([friends[0],friends[1],friends[2]])
+            friends.shuffle()
+            var filteredFriends = [THUserFriend]()
+            for f in friends {
+                if filteredFriends.count == count {
+                    break
+                }
+                filteredFriends.append(f)
+            }
+            completionHandler(filteredFriends)
             return
         }
         
@@ -214,7 +218,14 @@ class NetworkClient {
                 }
                 debugPrintln("Completely parsed \(friends.count) objects as THUserFriend(s).")
                 THCache.saveRandomFBFriends(friends)
-                completionHandler([friends[0],friends[1],friends[2]])
+                var filteredFriends = [THUserFriend]()
+                for f in friends {
+                    if filteredFriends.count == count {
+                        break
+                    }
+                    filteredFriends.append(f)
+                }
+                completionHandler(filteredFriends)
             }
             
         }
@@ -343,7 +354,7 @@ class NetworkClient {
     /**
     POST api/games/postresults
     */
-    func postGameResults(game:Game, highestCombo:Int, noOfHintsUsed hints: UInt,currentScore:Int, questionResults:[QuestionResult], errorHandler:NSError->(),completionHandler:(Game -> ())!){
+    func postGameResults(game:Game, highestCombo:Int, noOfHintsUsed hints: UInt,currentScore:Int, questionResults:[QuestionResult], errorHandler:NSError->(),completionHandler:Game -> ()){
         let url = "\(THGameAPIBaseURL)/postResults"
         
         debugPrintln("Posting results for game \(game.gameID)...")
@@ -362,15 +373,9 @@ class NetworkClient {
                 errorHandler(e)
             }
             
-            game.fetchResults {
-                if game.isGameCompletedByBothPlayer {
-                    self.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) has finished the challenge! Check your timeline for results!") {
-                    }
-                }
-                
-                if let c = completionHandler {
-                    c(game)
-                }
+            if let gameResults = content as? [String:AnyObject] {
+                game.populateResult(gameResults)
+                completionHandler(game)
             }
         }
         //debugPrintln(r)
@@ -578,7 +583,7 @@ class NetworkClient {
             iosFields.updateValue("notification.caf", forKey: "sound")
             iosFields.updateValue(1, forKey: "badge")
         }
-        var notificationDict = ["ios": iosFields]
+        var notificationDict = ["ios": iosFields, "android": ["alert":"hello"]]
         
         let data: [String: AnyObject] = ["audience" : ["OR" : deviceTokenArray],  "notification" : notificationDict, "device_types": ["ios"]]
         let r = self.manager.request(ParameterEncoding.JSON.encode(mutableURLRequest, parameters: data).0).authenticate(user: appKey, password: appMasterPW).responseJSON {
@@ -639,9 +644,7 @@ class NetworkClient {
                 debugPrintln(error)
             }
             
-            NetworkClient.sharedClient.sendPushNotification(game.awayUser.userId, message: "\(game.selfUser.displayName) nudged you! Come back and face the challenge!") {
-                completionHandler()
-            }
+            completionHandler()
         }
             
         debugPrintln(r)

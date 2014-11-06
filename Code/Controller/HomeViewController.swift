@@ -350,12 +350,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         hud.textLabel.text = "Creating challenge..."
         NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in
-            if let g = $0 {
-                hud.dismissAnimated(true)
-                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
-                vc.bindGame($0)
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+            hud.dismissAnimated(true)
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            vc.bindGame($0)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
