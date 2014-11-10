@@ -96,6 +96,12 @@
 #define COCOAPODS_VERSION_MINOR_LDProgressView 2
 #define COCOAPODS_VERSION_PATCH_LDProgressView 1
 
+// MDRadialProgress
+#define COCOAPODS_POD_AVAILABLE_MDRadialProgress
+#define COCOAPODS_VERSION_MAJOR_MDRadialProgress 1
+#define COCOAPODS_VERSION_MINOR_MDRadialProgress 3
+#define COCOAPODS_VERSION_PATCH_MDRadialProgress 0
+
 // PureLayout
 #define COCOAPODS_POD_AVAILABLE_PureLayout
 #define COCOAPODS_VERSION_MAJOR_PureLayout 2
