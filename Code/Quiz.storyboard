@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4ZM-Mt-Hhv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B17" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4ZM-Mt-Hhv">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -166,35 +166,13 @@
                                     <constraint firstItem="VKw-Gz-3xx" firstAttribute="trailing" secondItem="gjK-lr-MYD" secondAttribute="trailing" id="zr0-Tp-8vr"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIo-Ic-ads">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIo-Ic-ads">
                                 <rect key="frame" x="94" y="172" width="132" height="31"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="31"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="1" height="3"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Le1-nm-wsv" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
-                                <rect key="frame" x="10" y="518" width="300" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="Tlh-mj-NZR"/>
-                                    <constraint firstAttribute="height" constant="42" id="aYq-a0-SOb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
-                                <state key="normal" title="Remove 2 Wrong Answers" backgroundImage="RemoveOptionsButtonBackground">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="removeTwoOptions:" destination="xpE-6b-INw" eventType="touchUpInside" id="Pem-g2-agx"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKh-sO-TbA">
                                 <rect key="frame" x="142" y="8" width="37" height="25"/>
                                 <constraints>
@@ -305,6 +283,28 @@
                                     <constraint firstItem="rOZ-UN-2s9" firstAttribute="top" secondItem="Lu1-RO-xB6" secondAttribute="top" id="wAN-rJ-onG"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Le1-nm-wsv" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
+                                <rect key="frame" x="73" y="518" width="174" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="Tlh-mj-NZR"/>
+                                    <constraint firstAttribute="height" constant="42" id="aYq-a0-SOb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                <state key="normal" title="Remove 2" backgroundImage="BlueMediumButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="removeTwoOptions:" destination="xpE-6b-INw" eventType="touchUpInside" id="Pem-g2-agx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -378,7 +378,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RedCategoryBackground" translatesAutoresizingMaskIntoConstraints="NO" id="DLa-O8-b3M">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="288"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzQ-Bl-6tx">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZzQ-Bl-6tx">
                                         <rect key="frame" x="71" y="6" width="178" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stock Logo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGW-vg-hqe">
@@ -1075,6 +1075,7 @@
     </scenes>
     <resources>
         <image name="BlueCategoryBackground" width="640" height="570"/>
+        <image name="BlueMediumButton" width="356" height="93"/>
         <image name="CountdownTimerButtonBackground" width="163" height="163"/>
         <image name="EmptyAvatar" width="200" height="200"/>
         <image name="EmptyAvatarAskToAdd" width="125" height="125"/>
@@ -1087,7 +1088,6 @@
         <image name="QuizTimerBackground" width="110" height="69"/>
         <image name="QuizViewBackground" width="640" height="1136"/>
         <image name="RedCategoryBackground" width="640" height="571"/>
-        <image name="RemoveOptionsButtonBackground" width="607" height="92"/>
         <image name="WaitingStamp" width="93" height="26"/>
         <image name="WinBoxBackground" width="455" height="208"/>
         <image name="WinSceneBackground" width="640" height="1136"/>
@@ -1101,6 +1101,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Nq6-Kd-3IX"/>
+        <segue reference="42N-oZ-ona"/>
     </inferredMetricsTieBreakers>
 </document>

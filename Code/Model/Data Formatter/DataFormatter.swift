@@ -10,7 +10,7 @@ import UIKit
 
 class DataFormatter {
     
-    class var sharedClient: DataFormatter {
+    class var shared: DataFormatter {
         struct Singleton {
             static var onceToken : dispatch_once_t = 0
             static var instance : DataFormatter!
@@ -25,7 +25,9 @@ class DataFormatter {
     lazy var timeIntervalFormatter: TTTTimeIntervalFormatter = {
         let tif = TTTTimeIntervalFormatter()
         tif.presentDeicticExpression = "Today"
+        tif.presentTimeIntervalMargin = 60 * 60 * 24
         tif.usesIdiomaticDeicticExpressions = true
+        return tif
     }()
 
     lazy var dateFormatter: NSDateFormatter = {

@@ -126,6 +126,7 @@ class QuizViewController: UIViewController {
     // MARK:- override calls
     override func viewDidLoad() {
         super.viewDidLoad()
+        musicPlayer.stop()
         self.prepareFirstQuestionUISetup()
         for b in optionGroup {
             b.exclusiveTouch = true
@@ -134,8 +135,8 @@ class QuizViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        playMusic("Piano 3")
-        musicPlayer.play()
+//        playMusic("Piano 3")
+//        musicPlayer.play()
         self.navigationController?.hideNavigationBar()
         
         dispatch_after(1, dispatch_get_main_queue()) {
@@ -505,7 +506,7 @@ class QuizViewController: UIViewController {
             self.buttonSetContentView.alpha = 1
             }){ [unowned self] completed in
                 if completed {
-                    dispatch_after(4000, dispatch_get_main_queue(), { self.resetRemoveOptionsButton() })
+                    self.resetRemoveOptionsButton()
                     for option in self.optionGroup {
                         option.enable()
                     }
@@ -569,12 +570,19 @@ class QuizViewController: UIViewController {
         let threshold = UInt(0.3 * CGFloat(self.game.questionSet.count))
         
         if hintUsed <= threshold {
-            if !removeOptionsButton.enabled {
-                removeOptionsButton.enable()
-            }
+            
             
             if removeOptionsButton.alpha == 0.5 {
-                removeOptionsButton.alpha = 1
+                UIView.animateWithDuration(0.0, delay: 5.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                    [unowned self] in
+                self.removeOptionsButton.alpha = 1
+                    }) { [unowned self] completed in
+                        if completed {
+                            if !self.removeOptionsButton.enabled {
+                                self.removeOptionsButton.enable()
+                            }
+                        }
+                }
             }
         }
     }

@@ -96,12 +96,6 @@ func playCountdownMusic(){
     secondaryMusicPlayer.volume = kTHBackgroundMusicValue / 2
     secondaryMusicPlayer.prepareToPlay()
     secondaryMusicPlayer.play()
-    
-    if let m = musicPlayer {
-        if m.playing {
-            m.pause()
-        }
-    }
 }
 
 func stopCountdownMusic(){
@@ -111,11 +105,5 @@ func stopCountdownMusic(){
     secondaryMusicPlayer.numberOfLoops = 0
     secondaryMusicPlayer.volume = 0
     secondaryMusicPlayer.prepareToPlay()
-    
-    if let m = musicPlayer {
-        if !m.playing {
-            m.play()
-        }
-    }
 }
 

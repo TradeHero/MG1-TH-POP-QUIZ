@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B17" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,17 +14,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ubt-S3-hyB" userLabel="Vertical line view">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubt-S3-hyB" userLabel="Vertical line view">
                         <rect key="frame" x="14" y="0.0" width="3" height="30"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="3u2-s4-YYB"/>
+                            <constraint firstAttribute="width" constant="3" id="U59-p8-WsB"/>
+                        </constraints>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5h5-ET-sdO" userLabel="Vertical line view">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5h5-ET-sdO" userLabel="Vertical line view">
                         <rect key="frame" x="14" y="30" width="3" height="30"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="0on-Jy-de9"/>
+                            <constraint firstAttribute="width" constant="3" id="PoJ-hm-Ch0"/>
+                        </constraints>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eXu-vN-MsD" customClass="DesignableRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXu-vN-MsD" customClass="DesignableRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
                         <rect key="frame" x="5" y="20" width="20" height="20"/>
                         <color key="backgroundColor" red="0.68627450980000004" green="0.86666666670000003" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="OEn-5l-QvJ"/>
+                            <constraint firstAttribute="width" constant="20" id="SJN-M1-bnu"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,7 +46,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ptD-vn-eTa" customClass="DesignableRoundedRectangleView" customModule="TH_PopQuiz" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ptD-vn-eTa" customClass="DesignableRoundedRectangleView" customModule="TH_PopQuiz" customModuleProvider="target">
                         <rect key="frame" x="38" y="6" width="257" height="48"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1M-fL-G4n">
@@ -101,6 +114,10 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.94509803920000002" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="257" id="VZw-iW-sFH"/>
+                            <constraint firstAttribute="height" constant="48" id="wfr-RF-VCN"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="15"/>
@@ -113,12 +130,32 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vjd-T4-SZO" userLabel="Horizontal line view">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vjd-T4-SZO" userLabel="Horizontal line view">
                         <rect key="frame" x="25" y="29" width="14" height="3"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="14" id="8dd-Tk-SyW"/>
+                            <constraint firstAttribute="height" constant="3" id="WCp-m1-x74"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="ubt-S3-hyB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="2WQ-dB-4DX"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ptD-vn-eTa" secondAttribute="trailing" constant="-2" id="7nL-eL-klr"/>
+                    <constraint firstItem="5h5-ET-sdO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="Bbn-iQ-PS4"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="5h5-ET-sdO" secondAttribute="bottom" constant="-8" id="LK3-dI-VWP"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="eXu-vN-MsD" secondAttribute="bottom" constant="12" id="LNl-kR-cZe"/>
+                    <constraint firstItem="eXu-vN-MsD" firstAttribute="centerY" secondItem="vjd-T4-SZO" secondAttribute="centerY" id="NEd-HJ-K0n"/>
+                    <constraint firstItem="ubt-S3-hyB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="NOC-Cz-M80"/>
+                    <constraint firstItem="5h5-ET-sdO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="22" id="Stl-Cy-Vcc"/>
+                    <constraint firstItem="ptD-vn-eTa" firstAttribute="leading" secondItem="eXu-vN-MsD" secondAttribute="trailing" constant="13" id="eJT-Ri-yKd"/>
+                    <constraint firstAttribute="centerY" secondItem="ptD-vn-eTa" secondAttribute="centerY" id="hPl-5J-bkG"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ubt-S3-hyB" secondAttribute="bottom" constant="21.5" id="nDH-Mp-YZw"/>
+                    <constraint firstItem="vjd-T4-SZO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="17" id="t3G-2A-ky6"/>
+                    <constraint firstItem="eXu-vN-MsD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-3" id="wpg-U5-qgR"/>
+                    <constraint firstItem="eXu-vN-MsD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="x1Z-Xr-xjE"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>

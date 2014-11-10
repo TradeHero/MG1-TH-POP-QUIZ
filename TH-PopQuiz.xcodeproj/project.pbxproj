@@ -28,6 +28,7 @@
 		6D69E50B19C82A58006490D0 /* SettingsSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D69E50919C82A58006490D0 /* SettingsSliderTableViewCell.swift */; };
 		6D69E50C19C82A58006490D0 /* SettingsSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */; };
 		6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */; };
+		6D72EAE21A106E7D00C50FF6 /* ChallengesSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D72EAE11A106E7D00C50FF6 /* ChallengesSectionHeader.swift */; };
 		6D8183281A02370800C9F791 /* notification.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6D8183261A022ABF00C9F791 /* notification.caf */; };
 		6D8A8BC719DBA6E1000A9E8B /* THCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8BC619DBA6E1000A9E8B /* THCache.swift */; };
 		6D8C03EF1A00C64D001F599F /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C03EE1A00C64D001F599F /* MusicPlayer.swift */; };
@@ -186,6 +187,7 @@
 		6D69E50919C82A58006490D0 /* SettingsSliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSliderTableViewCell.swift; sourceTree = "<group>"; };
 		6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSliderTableViewCell.xib; sourceTree = "<group>"; };
 		6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTimelineView.xib; sourceTree = "<group>"; };
+		6D72EAE11A106E7D00C50FF6 /* ChallengesSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesSectionHeader.swift; sourceTree = "<group>"; };
 		6D8183261A022ABF00C9F791 /* notification.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = notification.caf; sourceTree = "<group>"; };
 		6D8A8BC619DBA6E1000A9E8B /* THCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THCache.swift; sourceTree = "<group>"; };
 		6D8C03EE1A00C64D001F599F /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */,
 				6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */,
 				6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */,
+				6D72EAE11A106E7D00C50FF6 /* ChallengesSectionHeader.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D72EAE21A106E7D00C50FF6 /* ChallengesSectionHeader.swift in Sources */,
 				6DD2317C19B8204900B5D05E /* Question.swift in Sources */,
 				6D43E98619EB796D002DBB82 /* HexagonalView.swift in Sources */,
 				6DD2317119B8204900B5D05E /* LoginViewController.swift in Sources */,

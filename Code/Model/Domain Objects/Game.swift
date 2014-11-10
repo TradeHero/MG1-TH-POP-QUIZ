@@ -33,7 +33,7 @@ final class Game {
     private var lastNudgedOpponentAtUTCStr: String!
     
     lazy var lastNudgedOpponentAt: NSDate! = {
-        return DataFormatter.sharedClient.dateFormatter.dateFromString(self.lastNudgedOpponentAtUTCStr)
+        return DataFormatter.shared.dateFormatter.dateFromString(self.lastNudgedOpponentAtUTCStr)
     }()
     
     var isGameCompletedByChallenger: Bool {
@@ -49,7 +49,7 @@ final class Game {
     }
 
     lazy var createdAt: NSDate! = {
-        return DataFormatter.sharedClient.dateFormatter.dateFromString(self.createdAtUTCStr)
+        return DataFormatter.shared.dateFormatter.dateFromString(self.createdAtUTCStr)
     }()
     
     var questionSet: [Question]!
@@ -263,9 +263,11 @@ extension Game: Printable {
             d += "Opponent: \(opponentPlayer)\n"
             d += "Questions: "
             var i:Int = 0
-            for q in questionSet {
+        if let qs = questionSet {
+            for q in qs {
                 d += "Question \(++i): \(q)"
             }
+        }
             d += "\n}\n"
             return d
     }

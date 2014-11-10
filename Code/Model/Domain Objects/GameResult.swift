@@ -82,7 +82,7 @@ final class GameResult: NSCoding {
     private var submittedAtUtcString:String! //NSCoding
     
     lazy var submittedAt: NSDate! = {
-        return DataFormatter.sharedClient.dateFormatter.dateFromString(self.submittedAtUtcString)
+        return DataFormatter.shared.dateFormatter.dateFromString(self.submittedAtUtcString)
     }()
     
     lazy var resultDetails: [QuestionResultDetail] = {
