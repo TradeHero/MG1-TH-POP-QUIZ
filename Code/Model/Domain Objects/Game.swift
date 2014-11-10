@@ -30,11 +30,14 @@ final class Game {
     
     var rejectedByOpponent = false
     
-    private var lastNudgedOpponentAtUTCStr: String!
+    var lastNudgedOpponentAtUTCStr: String!
     
-    lazy var lastNudgedOpponentAt: NSDate! = {
-        return DataFormatter.shared.dateFormatter.dateFromString(self.lastNudgedOpponentAtUTCStr)
-    }()
+    var lastNudgedOpponentAt: NSDate! {
+        if let str = lastNudgedOpponentAtUTCStr {
+            return DataFormatter.shared.dateFormatter.dateFromString(str)
+        }
+        return nil
+    }
     
     var isGameCompletedByChallenger: Bool {
         return initiatingPlayerResult != nil
@@ -169,7 +172,10 @@ final class Game {
         if let rej: AnyObject = compactGameDTO["rejectedByOpponent"] {
             self.rejectedByOpponent = (rej as NSNumber).boolValue
         }
-
+        
+        if let lnoau: AnyObject = compactGameDTO["lastNudgedOpponentAtUtc"] {
+            self.lastNudgedOpponentAtUTCStr = lnoau as String
+        }
     }
     
     func fetchUsers(completionHandler:()->()) {
@@ -192,21 +198,44 @@ final class Game {
             }
         }
         
-        client.fetchUser(opponentPlayerID, force: false, errorHandler:{error in debugPrintln(error)}) {
-            [unowned self] in
-            if let u = $0 {
-                self.opponentPlayer = u
+        if initiatingPlayerID == NetworkClient.sharedClient.user.userId {
+            client.fetchUser(opponentPlayerID, force: false, errorHandler:{error in debugPrintln(error)}) {
+                [unowned self] in
+                if let u = $0 {
+                    self.opponentPlayer = u
+                }
+                partialCompletionHandler()
             }
+            self.initiatingPlayer =  NetworkClient.sharedClient.user
             partialCompletionHandler()
+        } else if opponentPlayerID == NetworkClient.sharedClient.user.userId {
+            client.fetchUser(initiatingPlayerID, force: false, errorHandler:{error in debugPrintln(error)}) {
+                [unowned self] in
+                if let u = $0 {
+                    self.initiatingPlayer = u
+                }
+                partialCompletionHandler()
+            }
+            self.opponentPlayer =  NetworkClient.sharedClient.user
+            partialCompletionHandler()
+        } else {
+            client.fetchUser(initiatingPlayerID, force: false, errorHandler:{error in debugPrintln(error)}) {
+                [unowned self] in
+                if let u = $0 {
+                    self.initiatingPlayer = u
+                }
+                partialCompletionHandler()
+            }
+            client.fetchUser(opponentPlayerID, force: false, errorHandler:{error in debugPrintln(error)}) {
+                [unowned self] in
+                if let u = $0 {
+                    self.opponentPlayer = u
+                }
+                partialCompletionHandler()
+            }
         }
         
-        client.fetchUser(initiatingPlayerID, force: false, errorHandler:{error in debugPrintln(error)}) {
-            [unowned self] in
-            if let u = $0 {
-                self.initiatingPlayer = u
-            }
-            partialCompletionHandler()
-        }
+        
     }
     
     func fetchResults(completionHandler:()->()){

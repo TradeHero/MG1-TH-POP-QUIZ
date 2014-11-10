@@ -44,7 +44,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             case .Nudge:
                 configureAsNudgeMode()
             case .Invited:
-                configureAsInvitedMode()
+                configureAsNudgedMode()
             case .Accept:
                 configureAsAcceptChallengeMode()
             }
@@ -73,6 +73,13 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
                 attributedString.appendAttributedString(boldStr)
                 self.scoreDetailLabel.attributedText  = attributedString
             }
+            
+            if let lastNudged = challenge.lastNudgedOpponentAt {
+                if lastNudged.timeIntervalSinceDate(NSDate()) < 60 * 60 {
+                    self.configureAsNudgedMode()
+                }
+            }
+            
         case .Play, .Accept:
             if game.isGameCompletedByChallenger {
                 var attributedString = NSMutableAttributedString(string:"Score: ")
@@ -119,9 +126,9 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.gameStatusImageView.image = nil
     }
     
-    func configureAsInvitedMode() {
+    func configureAsNudgedMode() {
         self.actionButton.enabled = false
-        self.actionButton.setTitle("Waiting..", forState: .Normal)
+        self.actionButton.setTitle("Nudged", forState: .Normal)
         self.actionButton.setBackgroundImage(UIImage(named: "BlueButtonBackground"), forState: .Normal)
         self.gameStatusImageView.alpha = 0
         self.gameStatusImageView.image = nil

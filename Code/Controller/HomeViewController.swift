@@ -40,7 +40,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.loadChallenges()
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         self.tableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
         setupSubviews()
@@ -49,6 +48,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 53
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.width, 0.01))
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -146,27 +146,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func loadChallenges(loadCompleteHandler:(()->())! = nil){
-        var hud = JGProgressHUD.progressHUDWithRingStyle(JGProgressHUDStyle.ExtraLight)
+        var hud = JGProgressHUD.customisedProgressHUDWithStyle(.Dark, textLabelFont: UIFont(name: "AngryBirds-Regular", size: 14)!, detailLabelFont: UIFont(name: "HelveticaNeue", size: 9)!, interactionType: .BlockTouchesOnHUDView, position: .BottomCenter, labelText: loadCompleteHandler == nil ? "Loading challenges.." : "Syncing..")
         
         if loadCompleteHandler == nil {
-            hud.textLabel.text = "Loading challenges.."
             self.openChallenges.removeAll(keepCapacity: true)
             self.opponentPendingChallenges.removeAll(keepCapacity: true)
             self.tableView.reloadData()
             self.tableView.forceUpdateTable()
-        } else {
-            hud.textLabel.text = "Syncing.."
         }
-        hud.detailTextLabel.text = "0% complete"
+//        hud.detailTextLabel.text = "0% complete"
         var numberLoaded = 0
 
         let completionHandler: () -> () = {
             [unowned self] in
             numberLoaded++
             
-            let progress = (Double(numberLoaded)*100/2).format(".1")
-            hud.setProgress(Float(numberLoaded)/2, animated: false)
-            hud.detailTextLabel.text = "\(progress)% complete"
+            let progress = (Double(numberLoaded) * 100 / 2).format(".1")
+            hud.setProgress(Float(numberLoaded) / 2, animated: false)
+//            hud.detailTextLabel.text = "\(progress)% complete"
 
             if numberLoaded == 2 {
 //                hud.indicatorView = JGProgressHUDSuccessIndicatorView()
@@ -336,11 +333,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         case .Nudge:
             //TODO send notification
-            
             NetworkClient.sharedClient.nudgeGameUser(game){
-                
             }
-            cell.configureAsInvitedMode()
+            cell.configureAsNudgedMode()
+            cell.game.lastNudgedOpponentAtUTCStr = DataFormatter.shared.dateFormatter.stringFromDate(NSDate())
         default:
             break
         }

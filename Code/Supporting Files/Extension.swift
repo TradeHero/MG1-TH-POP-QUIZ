@@ -443,6 +443,19 @@ extension JGProgressHUD {
         hud.showInView(UIApplication.sharedApplication().delegate?.window!)
         return hud
     }
+    
+    class func customisedProgressHUDWithStyle(style:JGProgressHUDStyle, textLabelFont: UIFont, detailLabelFont: UIFont, interactionType: JGProgressHUDInteractionType, position: JGProgressHUDPosition, labelText:String) -> JGProgressHUD!{
+        var hud = JGProgressHUD(style: style)
+        hud.indicatorView = nil
+        hud.textLabel.font = textLabelFont
+        hud.detailTextLabel.font = detailLabelFont
+        hud.layoutChangeAnimationDuration = 0.0
+        hud.interactionType = interactionType
+        hud.position = position
+        hud.textLabel.text = labelText
+        hud.showInView(UIApplication.sharedApplication().delegate?.window!)
+        return hud
+    }
 }
 
 extension Int {

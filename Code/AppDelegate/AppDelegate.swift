@@ -57,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         loginOnce = true
         if let credential = NetworkClient.sharedClient.credentials {
             var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(UIView())
-            hud.indicatorView = nil
             hud.textLabel.text = "Logging in..."
             NetworkClient.sharedClient.loginUserWithFacebookAuth(credential, loginSuccessHandler: {
                 [unowned self] user in

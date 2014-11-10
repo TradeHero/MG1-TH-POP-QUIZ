@@ -132,9 +132,7 @@ class NetworkClient {
                     var game = Game(gameDTO: responseJSON)
                     debugPrintln("Game created with game ID: \(game.gameID)")
                     game.fetchUsers {
-                        game.fetchResults {
-                            completionHandler(game)
-                        }
+                        completionHandler(game)
                     }
                     
                 }
