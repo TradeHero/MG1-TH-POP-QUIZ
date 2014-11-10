@@ -79,7 +79,7 @@ class NetworkClient {
             THServerAPIBaseURL + "/login",
             parameters: param,
             encoding: JSONEncoding,
-            authentication: auth).validate().responseJSON {
+            authentication: auth).responseJSON {
                 [unowned self] _, response, content, error in
                 if let responseError = error {
                     println(responseError)
@@ -119,7 +119,7 @@ class NetworkClient {
         }
         
         
-        let r = self.request(.POST, "\(THGameAPIBaseURL)/create", parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.POST, "\(THGameAPIBaseURL)/create", parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
                 if let responseError = error {
                     println(responseError)
@@ -148,7 +148,7 @@ class NetworkClient {
         let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
         debugPrintln("Fetching Facebook friends for user \(userId)...")
         
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             if let e = error {
                 errorHandler(e)
@@ -194,7 +194,7 @@ class NetworkClient {
             return
         }
         
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             if let responseError = error {
                 println(responseError)
@@ -241,7 +241,7 @@ class NetworkClient {
         let url = "\(THGameAPIBaseURL)/home"
         
         debugPrintln("Fetching all all (open, unfinished, opponent pending) challenges for authenticated user...")
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             
             if let e = error {
@@ -326,7 +326,7 @@ class NetworkClient {
         let url = "\(THGameAPIBaseURL)/closed"
         
         debugPrintln("Fetching all closed challenges for authenticated user...")
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
            
             if let e = error {
@@ -365,7 +365,7 @@ class NetworkClient {
         }
         var param:[String: AnyObject] = ["gameId": game.gameID, "results": resultSet,"correctStreak": highestCombo, "hintsUsed": hints]
         
-        let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             
             if let e = error {
@@ -389,7 +389,7 @@ class NetworkClient {
 
         debugPrintln("Fetching results for game \(gameId)...")
         
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             if let e = error {
                 errorHandler(e)
@@ -424,7 +424,7 @@ class NetworkClient {
         let url = "\(THServerAPIBaseURL)/users/internal?mgTestSet=true"
         debugPrintln("Fetching staff users..")
         
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             if let e = error {
                 errorHandler(e)
@@ -485,7 +485,7 @@ class NetworkClient {
             }
         }
         
-       let r = self.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+       let r = self.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             if let e = error {
                 errorHandler(e)
@@ -524,7 +524,7 @@ class NetworkClient {
             }
         }
         
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").validate().responseJSON {
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             if let e = error {
                 errorHandler(e)
