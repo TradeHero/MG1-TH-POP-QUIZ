@@ -21,6 +21,10 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     private var closedChallenges: [Game] = []
     
+    private var categorisedClosedChallenges = [String: [Game]]()
+    
+    private var closedChallengeCategories = [String]()
+    
     private var user = NetworkClient.sharedClient.user
     
     private lazy var emptyTimelineView: UIView = {
@@ -63,14 +67,38 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
         hud.dismissAfterDelay(2.0)
     }
     
+    func categoriseChallenges(challenges:[Game]){
+        if challenges.count == 0 {
+            return
+        }
+        
+        for game in challenges {
+//            let date = NSCalendar.currentCalendar().dateFromComponents(NSCalendar.currentCalendar().components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit, fromDate: game.createdAt))!
+            var exp = DataFormatter.shared.timeIntervalFormatter.stringForTimeIntervalFromDate(NSDate(), toDate: game.createdAt)
+            if var games = categorisedClosedChallenges[exp] {
+                games.append(game)
+                categorisedClosedChallenges.updateValue(games, forKey: exp)
+            } else {
+                closedChallengeCategories.append(exp)
+                categorisedClosedChallenges.updateValue([game], forKey: exp)
+            }
+        }
+    }
     
     func loadClosedChallenges() {
         var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
         hud.textLabel.text = "Refreshing timeline.."
+        categorisedClosedChallenges.removeAll(keepCapacity: true)
+        
         NetworkClient.sharedClient.fetchClosedChallenges({error in debugPrintln(error)}) {
             [unowned self] in
             var challenges = $0
-            challenges.sort { $1.createdAt.timeIntervalSinceReferenceDate > $0.createdAt.timeIntervalSinceReferenceDate }
+            challenges.sort { $1.createdAt.timeIntervalSinceReferenceDate < $0.createdAt.timeIntervalSinceReferenceDate }
+            
+            self.categoriseChallenges(challenges)
+            
+            println(self.categorisedClosedChallenges.keys.array)
+            println(self.closedChallengeCategories)
             
             self.closedChallenges = challenges
             self.tableView.reloadData()
@@ -109,8 +137,10 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
     // MARK:- UITableView delegate methods
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kTHChallengesTimelineTableViewCellIdentifier) as ChallengesTimelineTableViewCell
-        cell.bindGame(closedChallenges[indexPath.row])
-        if indexPath.row == closedChallenges.count - 1 {
+        let games = categorisedClosedChallenges[closedChallengeCategories[indexPath.section]]!
+        
+        cell.bindGame(games[indexPath.row])
+        if indexPath.row == games.count - 1 {
             cell.lowerVerticalBar.hidden = true
         }
         return cell
@@ -126,7 +156,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return closedChallenges.count
+        return categorisedClosedChallenges[closedChallengeCategories[section]]!.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -134,7 +164,8 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = NSBundle.mainBundle().loadNibNamed("ChallengesSectionHeader", owner: nil, options: nil)[0] as? UIView
+        let view = NSBundle.mainBundle().loadNibNamed("ChallengesSectionHeader", owner: nil, options: nil)[0] as? ChallengesSectionHeader
+        view?.dateLabel.text = closedChallengeCategories[section]
         return view
     }
     
@@ -144,6 +175,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return closedChallenges.count > 0 ? 1 : 0
+//        return closedChallenges.count > 0 ? 1 : 0
+        return closedChallengeCategories.count
     }
 }
