@@ -128,13 +128,11 @@ class NetworkClient {
                 
                 if response?.statusCode == 200 {
                     let responseJSON = content as [String: AnyObject]
-                    //                println(responseJSON)
                     var game = Game(gameDTO: responseJSON)
                     debugPrintln("Game created with game ID: \(game.gameID)")
                     game.fetchUsers {
                         completionHandler(game)
                     }
-                    
                 }
         }
         //debugPrintln(r)
@@ -453,6 +451,28 @@ class NetworkClient {
         debugPrintln(r)
     }
     
+    func updateDeviceToken(deviceToken:String, errorHandler:NSError->(), completionHandler:()->()) {
+        let url = "\(THServerAPIBaseURL)/updateDevice"
+        debugPrintln("Device token changed, updating device token..")
+        
+        let param = ["deviceToken" : deviceToken]
+        
+        let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+            [unowned self] _, response, content, error in
+            if let e = error {
+                debugPrintln("Device token update failure.")
+                errorHandler(e)
+            }
+            
+            debugPrintln("Device token updated successfully")
+            if let c: AnyObject = content {
+//                println(c)
+            }
+            
+        }
+        
+        debugPrintln(r)
+    }
     ///
     /// Logs out current session, removing credentials and user details stored in keychain or in device.
     ///

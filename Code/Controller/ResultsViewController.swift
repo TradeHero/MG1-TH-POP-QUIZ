@@ -60,7 +60,9 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func rematchAction() {
         if game.isGameCompletedByBothPlayer {
-            var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+            var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+            hud.showInWindow()
+            
             hud.textLabel.text = "Re-matching..."
             hud.detailTextLabel.text = "Creating game with user.."
             NetworkClient.sharedClient.createChallenge(numberOfQuestions: 7, opponentId: opponent.userId, {error in debugPrintln(error)}) {

@@ -98,7 +98,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK:- Actions
     
     @IBAction func quickGameAction(sender: UIButton) {
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+        hud.showInWindow()
         hud.textLabel.text = "Creating quick game..."
         NetworkClient.sharedClient.createQuickGame({error in debugPrintln(error)}){
             [unowned self] in
@@ -147,7 +148,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private func loadChallenges(loadCompleteHandler:(()->())! = nil){
         var hud = JGProgressHUD.customisedProgressHUDWithStyle(.Dark, textLabelFont: UIFont(name: "AngryBirds-Regular", size: 14)!, detailLabelFont: UIFont(name: "HelveticaNeue", size: 9)!, interactionType: .BlockTouchesOnHUDView, position: .BottomCenter, labelText: loadCompleteHandler == nil ? "Loading challenges.." : "Syncing..")
-        
+        hud.showInWindow()
         if loadCompleteHandler == nil {
             self.openChallenges.removeAll(keepCapacity: true)
             self.opponentPendingChallenges.removeAll(keepCapacity: true)
@@ -311,7 +312,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game) {
         switch cell.status {
         case .Accept, .Play:
-            var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+            var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+            hud.showInWindow()
             hud.textLabel.text = "Getting ready.."
             
             NetworkClient.sharedClient.fetchGame(game.gameID, force: true, errorHandler:{error in debugPrintln(error)}) {
@@ -342,7 +344,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapChallengeUser userID: Int) {
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+        hud.showInWindow()
         hud.textLabel.text = "Creating challenge..."
         NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler:{error in debugPrintln(error)}) {
             [unowned self] in

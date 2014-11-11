@@ -24,8 +24,8 @@ class DataFormatter {
     
     lazy var timeIntervalFormatter: TTTTimeIntervalFormatter = {
         let tif = TTTTimeIntervalFormatter()
-        tif.presentDeicticExpression = "Today"
-        tif.presentTimeIntervalMargin = 60 * 60 * 24
+//        tif.presentDeicticExpression = "Today"
+//        tif.presentTimeIntervalMargin = 60 * 60 * 24
         tif.usesIdiomaticDeicticExpressions = true
         return tif
     }()

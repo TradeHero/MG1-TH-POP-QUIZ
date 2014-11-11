@@ -30,7 +30,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func facebookTapped(sender: AnyObject) {
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+        hud.showInWindow()
         let facebookTypeAccount = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView(HUDStyle:hud.style)
         hud.textLabel.text = "Logging in..."

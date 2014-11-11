@@ -52,22 +52,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         return true
     }
 
-    func autoLogin() {
-        if loginOnce == true { return }
-        loginOnce = true
+    func autoLogin(force: Bool = false) {
+        if !force {
+            if loginOnce == true { return }
+            loginOnce = true
+        }
+        
         if let credential = NetworkClient.sharedClient.credentials {
-            var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(UIView())
+            var retry = false
+            var hud = JGProgressHUD.progressHUDWithDefaultStyle { [unowned self] HUD in
+                if retry {
+                    self.autoLogin(force: true)
+                    HUD.dismiss()
+                    retry = false
+                }
+            }
+            
             hud.textLabel.text = "Logging in..."
+            hud.showInWindow()
+            
             NetworkClient.sharedClient.loginUserWithFacebookAuth(credential, loginSuccessHandler: {
                 [unowned self] user in
                 hud.dismissAnimated(true)
-                }) {
-                    error in
+                }) { //error handler
+                    [unowned self] error in
                     hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
-                    hud.textLabel.text = "\(error)"
-                    hud.dismissAfterDelay(2, animated: true)
+                    if error.code == -1009 {
+                        hud.layoutChangeAnimationDuration = 1.0
+                        hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                        hud.textLabel.text = "Network connection lost. Please tap to retry."
+                        
+                        retry = true
+                        
+                        let animation = CABasicAnimation(keyPath: "shadowOpacity")
+                        animation.fromValue = NSNumber(float: 0.0)
+                        animation.toValue = NSNumber(float: 8.0)
+                        animation.repeatCount = 1e50
+                        animation.autoreverses = true
+                        animation.duration = 1
+                        
+                        hud.HUDView.layer.shadowColor = UIColor.redColor().CGColor
+                        hud.HUDView.layer.shadowOffset = CGSizeZero
+                        hud.HUDView.layer.shadowOpacity = 0.0
+                        hud.HUDView.layer.shadowRadius = 8.0
+                        
+                        hud.HUDView.layer.addAnimation(animation, forKey:"glow")
+                    } else {
+                        hud.textLabel.text = error.description
+                        hud.dismissAfterDelay(3, animated: true)
+                    }
             }
-            
         }
     }
 
@@ -107,9 +141,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         if let token = NetworkClient.sharedClient._device_token {
             if !(NetworkClient.sharedClient._device_token == deviceToken.deviceTokenString()) {
                 NetworkClient.sharedClient._device_token = deviceToken.deviceTokenString()
+                NetworkClient.sharedClient.updateDeviceToken(deviceToken.deviceTokenString(), errorHandler: {error in
+                    debugPrintln(error.description)
+                    }) { }
             }
         } else {
             NetworkClient.sharedClient._device_token = deviceToken.deviceTokenString()
+            NetworkClient.sharedClient.updateDeviceToken(deviceToken.deviceTokenString(), errorHandler: {error in
+                debugPrintln(error.description)
+                }) { }
         }
         autoLogin()
     }

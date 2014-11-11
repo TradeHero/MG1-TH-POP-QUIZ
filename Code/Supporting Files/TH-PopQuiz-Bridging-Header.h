@@ -12,15 +12,17 @@
 
 #import <JGProgressHUD/JGProgressHUD.h>
 
-#import <JGProgressHUD/JGProgressHUDIndicatorView.h>
+#import <JGProgressHUD/JGProgressHUDErrorIndicatorView.h>
 
 #import <JGProgressHUD/JGProgressHUDFadeZoomAnimation.h>
+
+#import <JGProgressHUD/JGProgressHUDIndeterminateIndicatorView.h>
+
+#import <JGProgressHUD/JGProgressHUDIndicatorView.h>
 
 #import <JGProgressHUD/JGProgressHUDRingIndicatorView.h>
 
 #import <JGProgressHUD/JGProgressHUDSuccessIndicatorView.h>
-
-#import <JGProgressHUD/JGProgressHUDIndeterminateIndicatorView.h>
 
 #import <LDProgressView/LDProgressView.h>
 

@@ -162,7 +162,7 @@ class QuizViewController: UIViewController {
             incorrectOptions[0].hideAndDisable(true)
             incorrectOptions[1].hideAndDisable(true)
             UIView.animateWithDuration(0.5) {
-                self.removeOptionsButton.alpha = 0.5
+                self.removeOptionsButton.alpha = 0
             }
             
             removeOptionsButton.disable()
@@ -211,7 +211,8 @@ class QuizViewController: UIViewController {
     
     private func preventFurtherActions(){
         removeOptionsButton.disable()
-        removeOptionsButton.alpha = 0.5
+        removeOptionsButton.alpha = 0
+        
         
         for option in self.optionGroup {
             option.disable()
@@ -381,7 +382,10 @@ class QuizViewController: UIViewController {
     private func endTurn(){
         let currentTurnScore = selfTotalScore
         let results = self.questionResults
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        
+        var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+        hud.showInWindow()
+        
         hud.textLabel.text = "Calculating results..."
         NetworkClient.sharedClient.postGameResults(self.game, highestCombo: self.highestCombo, noOfHintsUsed: self.totalHintUsed, currentScore: currentTurnScore, questionResults: results, errorHandler:{error in}) {
             [unowned self] in
@@ -572,7 +576,7 @@ class QuizViewController: UIViewController {
         if hintUsed <= threshold {
             
             
-            if removeOptionsButton.alpha == 0.5 {
+            if removeOptionsButton.alpha == 0 {
                 UIView.animateWithDuration(0.0, delay: 5.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
                     [unowned self] in
                 self.removeOptionsButton.alpha = 1

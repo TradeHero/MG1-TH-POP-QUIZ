@@ -75,7 +75,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             }
             
             if let lastNudged = challenge.lastNudgedOpponentAt {
-                if lastNudged.timeIntervalSinceDate(NSDate()) < 60 * 60 {
+                if lastNudged.timeIntervalSinceDate(NSDate()) < 5 {
                     self.configureAsNudgedMode()
                 }
             }

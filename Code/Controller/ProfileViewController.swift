@@ -60,12 +60,6 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func updateAction(sender: AnyObject) {
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view, style: .Dark)
-        hud.textLabel.text = "Updating profile..."
-        //TODO: update profile
-        hud.dismissAfterDelay(2.0)
-    }
     
     func categoriseChallenges(challenges:[Game]){
         if challenges.count == 0 {
@@ -74,7 +68,9 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
         
         for game in challenges {
 //            let date = NSCalendar.currentCalendar().dateFromComponents(NSCalendar.currentCalendar().components(.DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit, fromDate: game.createdAt))!
-            var exp = DataFormatter.shared.timeIntervalFormatter.stringForTimeIntervalFromDate(NSDate(), toDate: game.createdAt)
+            var exp = DataFormatter.shared.timeIntervalFormatter.stringForTimeIntervalFromDate(NSDate(), toDate: game.completedAt)
+//            println(exp)
+            
             if var games = categorisedClosedChallenges[exp] {
                 games.append(game)
                 categorisedClosedChallenges.updateValue(games, forKey: exp)
@@ -86,19 +82,22 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
     }
     
     func loadClosedChallenges() {
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+        hud.showInWindow()
         hud.textLabel.text = "Refreshing timeline.."
         categorisedClosedChallenges.removeAll(keepCapacity: true)
         
         NetworkClient.sharedClient.fetchClosedChallenges({error in debugPrintln(error)}) {
             [unowned self] in
             var challenges = $0
-            challenges.sort { $1.createdAt.timeIntervalSinceReferenceDate < $0.createdAt.timeIntervalSinceReferenceDate }
-            
+            challenges.sort { $1.completedAt.timeIntervalSinceReferenceDate < $0.completedAt.timeIntervalSinceReferenceDate }
+//            for c in challenges {
+//                println(c.completedAt)
+//            }
             self.categoriseChallenges(challenges)
             
-            println(self.categorisedClosedChallenges.keys.array)
-            println(self.closedChallengeCategories)
+//            println(self.categorisedClosedChallenges.keys.array)
+//            println(self.closedChallengeCategories)
             
             self.closedChallenges = challenges
             self.tableView.reloadData()
@@ -140,7 +139,7 @@ class ProfileViewController: UIViewController,UITableViewDelegate, UITableViewDa
         let games = categorisedClosedChallenges[closedChallengeCategories[indexPath.section]]!
         
         cell.bindGame(games[indexPath.row])
-        if indexPath.row == games.count - 1 {
+        if indexPath.row == games.count - 1 && indexPath.section == closedChallengeCategories.count - 1 {
             cell.lowerVerticalBar.hidden = true
         }
         return cell

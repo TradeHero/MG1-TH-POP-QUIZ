@@ -417,6 +417,18 @@ extension AVAudioPlayer {
 }
 
 extension JGProgressHUD {
+    class func progressHUDWithDefaultStyle() -> JGProgressHUD {
+        return JGProgressHUD.customisedProgressHUDWithStyle(.ExtraLight, textLabelFont: UIFont(name: "AngryBirds-Regular", size: 18)!, detailLabelFont: UIFont(name: "AngryBirds-Regular", size: 14)!, interactionType: .BlockAllTouches, position: .Center)
+    }
+    
+    class func progressHUDWithDefaultStyle(tapHandler:JGProgressHUD! -> ()) -> JGProgressHUD {
+        return JGProgressHUD.customisedProgressHUDWithStyle(.ExtraLight, textLabelFont: UIFont(name: "AngryBirds-Regular", size: 18)!, detailLabelFont: UIFont(name: "AngryBirds-Regular", size: 14)!, interactionType: .BlockAllTouches, position: .Center, tapHandler: tapHandler)
+    }
+    
+    func showInWindow(){
+        self.showInView(UIApplication.sharedApplication().delegate?.window!)
+    }
+    
     class func progressHUDWithCustomisedStyle(style:JGProgressHUDStyle) -> JGProgressHUD! {
         var hud = JGProgressHUD(style: style)
         hud.textLabel.font = UIFont(name: "AngryBirds-Regular", size: 18)
@@ -444,7 +456,7 @@ extension JGProgressHUD {
         return hud
     }
     
-    class func customisedProgressHUDWithStyle(style:JGProgressHUDStyle, textLabelFont: UIFont, detailLabelFont: UIFont, interactionType: JGProgressHUDInteractionType, position: JGProgressHUDPosition, labelText:String) -> JGProgressHUD!{
+    class func customisedProgressHUDWithStyle(style:JGProgressHUDStyle, textLabelFont: UIFont, detailLabelFont: UIFont, interactionType: JGProgressHUDInteractionType, position: JGProgressHUDPosition, labelText:String = "", tapHandler:(JGProgressHUD! -> ())! = nil) -> JGProgressHUD!{
         var hud = JGProgressHUD(style: style)
         hud.indicatorView = nil
         hud.textLabel.font = textLabelFont
@@ -453,7 +465,7 @@ extension JGProgressHUD {
         hud.interactionType = interactionType
         hud.position = position
         hud.textLabel.text = labelText
-        hud.showInView(UIApplication.sharedApplication().delegate?.window!)
+        hud.tapOnHUDViewBlock = tapHandler
         return hud
     }
 }

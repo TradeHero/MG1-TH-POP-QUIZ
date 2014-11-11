@@ -67,6 +67,18 @@ final class Game {
     
     var awayUser: THUser!
     
+    var completedAt: NSDate! {
+        if isGameCompletedByBothPlayer {
+            let date1 = initiatingPlayerResult.submittedAt
+            let date2 = opponentPlayerResult.submittedAt
+            if date1.compare(date2) == .OrderedAscending {
+                return date2
+            } else {
+                return date1
+            }
+        }
+        return nil
+    }
     init(gameDTO:[String: AnyObject]){
         if let cuid: AnyObject = gameDTO["createdByUserId"] {
             self.initiatingPlayerID = cuid as Int

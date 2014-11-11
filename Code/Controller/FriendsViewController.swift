@@ -52,7 +52,9 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     private func loadStaff(completionHandler:()->()){
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+        hud.showInWindow()
+        
         self.THStaffList.removeAll(keepCapacity: true)
         
         self.tableView.reloadData()
@@ -81,7 +83,9 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     private func loadFriends() {
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+        hud.showInWindow()
+        
         self.FBFriendList.removeAll(keepCapacity: true)
         self.THFriendList.removeAll(keepCapacity: true)
         
@@ -227,7 +231,9 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     
     //MARK:- FriendsChallengeCellTableViewCellDelegate
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapChallengeUser userID: Int) {
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+        hud.showInWindow()
+        
         hud.textLabel.text = "Creating challenge..."
         hud.detailTextLabel.text = "Creating game with user.."
         NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler:{error in debugPrintln(error)}) {
@@ -249,7 +255,9 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func staffChallengeCellTableViewCell(cell: StaffChallengeCellTableViewCell, didTapChallengeWithStaffUser userId: Int) {
-        var hud = JGProgressHUD.progressHUDWithCustomisedStyleInView(self.view)
+        var hud = JGProgressHUD.progressHUDWithDefaultStyle()
+        hud.showInWindow()
+        
         hud.textLabel.text = "Creating challenge..."
         hud.detailTextLabel.text = "Creating game with user.."
         NetworkClient.sharedClient.createChallenge(opponentId: userId, errorHandler:{error in debugPrintln(error)}) {

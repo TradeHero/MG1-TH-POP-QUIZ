@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B17" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4ZM-Mt-Hhv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4ZM-Mt-Hhv">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -166,7 +166,7 @@
                                     <constraint firstItem="VKw-Gz-3xx" firstAttribute="trailing" secondItem="gjK-lr-MYD" secondAttribute="trailing" id="zr0-Tp-8vr"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIo-Ic-ads">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIo-Ic-ads">
                                 <rect key="frame" x="94" y="172" width="132" height="31"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="31"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -747,7 +747,7 @@
                                     <outlet property="delegate" destination="gUA-UG-Nbm" id="8Vd-BV-Wor"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVS-DZ-lNz">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVS-DZ-lNz">
                                 <rect key="frame" x="70" y="8" width="180" height="30"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EyeIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Oje-KC-r3x">
@@ -777,6 +777,16 @@
                                     <constraint firstAttribute="centerY" secondItem="iON-4U-eTO" secondAttribute="centerY" id="gbY-9j-Tme"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4g-bb-FWj">
+                                <rect key="frame" x="125" y="12" width="70" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="NiN-XV-TMz"/>
+                                    <constraint firstAttribute="width" constant="70" id="Vhc-wB-tIM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -786,12 +796,14 @@
                             <constraint firstItem="ATS-r2-pNU" firstAttribute="top" secondItem="ckH-Ga-Hf8" secondAttribute="bottom" constant="8" id="A0L-Se-bFk"/>
                             <constraint firstItem="sVS-DZ-lNz" firstAttribute="top" secondItem="jkM-sT-xbf" secondAttribute="top" constant="8" id="CtP-K7-1zV"/>
                             <constraint firstItem="YZi-NH-Sqc" firstAttribute="leading" secondItem="ckH-Ga-Hf8" secondAttribute="leading" id="NhB-So-pSJ"/>
+                            <constraint firstAttribute="centerX" secondItem="J4g-bb-FWj" secondAttribute="centerX" id="TQY-W4-Ipe"/>
                             <constraint firstItem="ckH-Ga-Hf8" firstAttribute="trailing" secondItem="pCE-eF-chY" secondAttribute="trailing" id="Vb8-eD-fAS"/>
                             <constraint firstAttribute="centerX" secondItem="sVS-DZ-lNz" secondAttribute="centerX" id="VtT-s4-Gw0"/>
                             <constraint firstItem="YZi-NH-Sqc" firstAttribute="centerY" secondItem="pCE-eF-chY" secondAttribute="centerY" id="Ydx-u0-BDQ"/>
                             <constraint firstAttribute="trailing" secondItem="ckH-Ga-Hf8" secondAttribute="trailing" constant="17" id="c7l-ln-cYw"/>
                             <constraint firstItem="ckH-Ga-Hf8" firstAttribute="leading" secondItem="jkM-sT-xbf" secondAttribute="leading" constant="17" id="ccF-bD-LIN"/>
                             <constraint firstAttribute="trailing" secondItem="INm-D4-z36" secondAttribute="trailing" id="dDH-QM-Oyp"/>
+                            <constraint firstItem="J4g-bb-FWj" firstAttribute="top" secondItem="4Oj-CU-0d7" secondAttribute="bottom" constant="12" id="hFp-S3-CrJ"/>
                             <constraint firstItem="INm-D4-z36" firstAttribute="top" secondItem="jkM-sT-xbf" secondAttribute="top" id="l6E-SJ-fDT"/>
                             <constraint firstAttribute="bottom" secondItem="ATS-r2-pNU" secondAttribute="bottom" constant="20" id="npa-o3-RQd"/>
                             <constraint firstAttribute="centerX" secondItem="ATS-r2-pNU" secondAttribute="centerX" id="oOr-s2-Ib1"/>
