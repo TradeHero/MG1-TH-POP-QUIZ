@@ -318,11 +318,11 @@
 		6D3AF97F19C2ADB00085682E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				6D72EAE11A106E7D00C50FF6 /* ChallengesSectionHeader.swift */,
 				6DD053A419C6CBB100831B6C /* ChallengesSectionHeader.xib */,
 				6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */,
 				6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */,
 				6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */,
-				6D72EAE11A106E7D00C50FF6 /* ChallengesSectionHeader.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";

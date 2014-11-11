@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_ChatHeads 0
 #define COCOAPODS_VERSION_PATCH_ChatHeads 0
 
+// DZNSegmentedControl
+#define COCOAPODS_POD_AVAILABLE_DZNSegmentedControl
+#define COCOAPODS_VERSION_MAJOR_DZNSegmentedControl 1
+#define COCOAPODS_VERSION_MINOR_DZNSegmentedControl 2
+#define COCOAPODS_VERSION_PATCH_DZNSegmentedControl 1
+
 // EGOCache
 #define COCOAPODS_POD_AVAILABLE_EGOCache
 #define COCOAPODS_VERSION_MAJOR_EGOCache 2
@@ -106,7 +112,7 @@
 #define COCOAPODS_POD_AVAILABLE_PureLayout
 #define COCOAPODS_VERSION_MAJOR_PureLayout 2
 #define COCOAPODS_VERSION_MINOR_PureLayout 0
-#define COCOAPODS_VERSION_PATCH_PureLayout 1
+#define COCOAPODS_VERSION_PATCH_PureLayout 2
 
 // SDWebImage
 #define COCOAPODS_POD_AVAILABLE_SDWebImage
