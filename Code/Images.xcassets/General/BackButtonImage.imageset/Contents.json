@@ -1,23 +1,17 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "1x",
       "filename" : "back button.png"
     },
     {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "2x",
       "filename" : "back button@2x.png"
     },
     {
-      "idiom" : "iphone",
-      "filename" : "back button@r2x.png",
-      "subtype" : "retina4",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "3x",
       "filename" : "back button@3x.png"
     }

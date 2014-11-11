@@ -1,23 +1,17 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "1x",
       "filename" : "happy badge 4.png"
     },
     {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "2x",
       "filename" : "happy badge 4@2x.png"
     },
     {
-      "idiom" : "iphone",
-      "filename" : "happy badge 4@r2x.png",
-      "subtype" : "retina4",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "3x",
       "filename" : "happy badge 4@3x.png"
     }
