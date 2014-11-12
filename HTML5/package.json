@@ -1,0 +1,21 @@
+{
+    "name": "TradeHero_PopQuiz_JavaScript_Plugin",
+    "version": "0.0.1",
+    "devDependencies": {
+        "grunt": "0.x.x",
+        "grunt-contrib-jshint": "0.x.x",
+        "grunt-contrib-nodeunit": "0.x.x",
+        "grunt-contrib-uglify": "0.x.x",
+        "grunt-contrib-concat": "0.x.x",
+        "grunt-replace": "0.x.x",
+        "grunt-contrib-clean": "0.x.x",
+        "grunt-strip": "0.x.x"
+    },
+    "readmeFilename": "README.md",
+    "main": "Gruntfile.js",
+    "repository": {
+        "type": "git",
+        "url": "https://lihao6485@bitbucket.org/lihao6485/mg1-html.git"
+    },
+    "author": "TradeHero"
+}
