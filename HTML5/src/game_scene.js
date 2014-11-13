@@ -129,7 +129,7 @@
             if (this.questionLoaded) {
                 this.optionSetViewTimer += this.delta;
 
-                UI.View.animate(1, 1, this.optionSetViewTimer, function() {
+                UI.View.animate(1, 1, this.optionSetViewTimer, function () {
                     var gameScene = PopQuiz.GameScene;
                     gameScene.optionSetViewAlpha += gameScene.delta;
 
@@ -276,7 +276,7 @@
         },
 
         load: function () {
-            UTIL.clearCurrentView();
+            Utility.clearCurrentView();
             this.mainWindow.drawView(PopQuiz.ctx);
 
             var quizBgImageView = new UI.ImageView(0, 0, PopQuiz.currentWidth, PopQuiz.currentHeight, Asset.images.quiz_bg);
@@ -316,7 +316,7 @@
             var mainWindowCenterY = this.mainWindow.height / 2;
             var roundLabel = new UI.Label(mainWindowCenterX, mainWindowCenterY, 500, 80, "ROUND " + (this.roundNumber + 1).toString());
 
-            if(this.roundNumber + 1 === this.game.questionSet.length) {
+            if (this.roundNumber + 1 === this.game.questionSet.length) {
                 roundLabel.text = "LAST ROUND";
             }
 
@@ -408,7 +408,7 @@
             this.removeTwoOptionButton.label.font_size = "1.5";
             this.removeTwoOptionButton.image = Asset.images.remove2;
             this.removeTwoOptionButton.addTarget(function (sender) {
-                var optionButtons = UTIL.array.shuffle(PopQuiz.GameScene.optionButtons);
+                var optionButtons = Utility.array.shuffle(PopQuiz.GameScene.optionButtons);
                 var count = 0;
                 for (var i in optionButtons) {
                     if (optionButtons.hasOwnProperty(i)) {
@@ -579,7 +579,7 @@
             }
         },
 
-        getHintPenalty: function() {
+        getHintPenalty: function () {
             switch (this.hintsUsed) {
                 case 0:
                     return 1;

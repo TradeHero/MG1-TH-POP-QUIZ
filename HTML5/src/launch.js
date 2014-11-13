@@ -55,7 +55,7 @@
                 continueButtonHeight);
             continueButton.label.text = "Accept Challenge";
             continueButton.addTarget(function () {
-                UTIL.clearCurrentView();
+                Utility.clearCurrentView();
                 PopQuiz.GameScene.init(PopQuiz.Launch.mainWindow);
                 //LocalyticsSession.tagEvent("MG1UserAcceptChallenge");
             }, "touch");

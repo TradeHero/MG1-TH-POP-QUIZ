@@ -50,7 +50,7 @@ PopQuiz = {
     ua_mobile_scale: 1.7,
 
     init: function () {
-        if (!UTIL.isMobile.any()) {
+        if (!Utility.isMobile.any()) {
             PopQuiz.ua_isMobile = false;
             PopQuiz.RATIO = 0.75;
             PopQuiz.WIDTH = PopQuiz.HEIGHT * PopQuiz.RATIO;
@@ -70,14 +70,14 @@ PopQuiz = {
         // listen for clicks
         window.addEventListener('click', function (e) {
             e.preventDefault();
-            INPUT.trigger(e);
+            Input.trigger(e);
         }, false);
 
         // listen for touches
         window.addEventListener('touchstart', function (e) {
             e.preventDefault();
             // first touch from the event
-            INPUT.trigger(e.touches[0]);
+            Input.trigger(e.touches[0]);
         }, false);
         window.addEventListener('touchmove', function (e) {
             // disable zoom and scroll

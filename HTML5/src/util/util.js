@@ -1,48 +1,71 @@
-var UTIL = {};
-
-UTIL = {
-    version: "0.0.1"
+Array.prototype.clone = function () {
+    return this.slice(0);
 };
 
-(function () {
-    "use strict";
+var Utility = (function () {
 
-    UTIL.isMobile = {
-        Android: function () {
-            return navigator.userAgent.match(/android/i);
-        },
-        BlackBerry: function () {
-            return navigator.userAgent.match(/blackberry/i);
-        },
-        iOS: function () {
-            return navigator.userAgent.match(/iphone|ipad|ipod/i);
-        },
-        Opera: function () {
-            return navigator.userAgent.match(/opera mini/i);
-        },
-        Windows: function () {
-            return navigator.userAgent.match(/iemobile/i);
-        },
-        any: function () {
-            return (this.Android() || this.BlackBerry() || this.iOS() || this.Opera() || this.Windows());
+    var _isMobile = (function () {
+
+        var _Android = function () {
+                return navigator.userAgent.match(/android/i);
+            },
+            _BlackBerry = function () {
+                return navigator.userAgent.match(/blackberry/i);
+            },
+            _iOS = function () {
+                return navigator.userAgent.match(/iphone|ipad|ipod/i);
+            },
+            _Opera = function () {
+                return navigator.userAgent.match(/opera mini/i);
+            },
+            _Windows = function () {
+                return navigator.userAgent.match(/iemobile/i);
+            },
+            _any = function () {
+                return (_Android() || _BlackBerry() || _iOS() || _Opera() || _Windows());
+            };
+
+        //public interface
+        return {
+            Android: function () {
+                return _Android()
+            },
+            BlackBerry: function () {
+                return _BlackBerry();
+            },
+            iOS: function () {
+                return _iOS();
+            },
+            Opera: function () {
+                return _Opera();
+            },
+            Windows: function () {
+                return _Windows();
+            },
+            any: function () {
+                return _any();
+            }
         }
-    };
-}());
+    })();
 
-(function () {
-    UTIL.array = {
-        shuffle: function (array) {
-            for (var j, x, i = array.length; i; j = parseInt(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x);
+    var _array = (function () {
+        var __array = {
+            shuffle: function (arr) {
+                var clonedArray = arr.clone();
+                for (var j, x, i = clonedArray.length; i; j = parseInt(Math.random() * i), x = clonedArray[--i], clonedArray[i] = clonedArray[j], clonedArray[j] = x);
 
-            return array;
+                return clonedArray;
+            }
+        };
+        //public interface
+        return {
+            shuffle: function (a) {
+                return __array.shuffle(a)
+            }
         }
-    }
-}());
+    })();
 
-(function () {
-    "use strict";
-
-    UTIL.clearCurrentView = function () {
+    var _clearCurrentView = function () {
         var ctx = PopQuiz.ctx;
 
         // Store the current transformation matrix
@@ -55,6 +78,15 @@ UTIL = {
         // Restore the transform
         ctx.restore();
 
-        INPUT.registeredControls = [];
+        Input.registeredControls = [];
     };
-}());
+    //public interface
+    return {
+        version: "0.0.1",
+        isMobile: _isMobile,
+        array: _array,
+        clearCurrentView: function () {
+            _clearCurrentView()
+        }
+    }
+})();

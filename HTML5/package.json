@@ -9,7 +9,8 @@
         "grunt-contrib-concat": "0.x.x",
         "grunt-replace": "0.x.x",
         "grunt-contrib-clean": "0.x.x",
-        "grunt-strip": "0.x.x"
+        "grunt-strip": "0.x.x",
+        "grunt-yui-compressor": "0.x.x"
     },
     "readmeFilename": "README.md",
     "main": "Gruntfile.js",
