@@ -103,7 +103,6 @@
 		6DE3B4F219BECCBC00F9251A /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4ED19BECCBC00F9251A /* ProximaNova-Regular.ttf */; };
 		6DE3B4F319BECCBC00F9251A /* ProximaNova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6DE3B4EE19BECCBC00F9251A /* ProximaNova-Semibold.ttf */; };
 		6DE6DDFA19C6E92E00A44620 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE6DDF919C6E92E00A44620 /* SettingsViewController.swift */; };
-		6DF0F0591A15F7B3001066A2 /* FacebookHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF0F0581A15F7B3001066A2 /* FacebookHelper.swift */; };
 		6DF3D45319D3BFBC000B08F0 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF3D45219D3BFBC000B08F0 /* GPUImage.framework */; };
 		6DF8BD5F19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */; };
 		6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */; };
@@ -269,7 +268,6 @@
 		6DE3B4ED19BECCBC00F9251A /* ProximaNova-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.ttf"; sourceTree = "<group>"; };
 		6DE3B4EE19BECCBC00F9251A /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
 		6DE6DDF919C6E92E00A44620 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		6DF0F0581A15F7B3001066A2 /* FacebookHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookHelper.swift; sourceTree = "<group>"; };
 		6DF3D45219D3BFBC000B08F0 /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GPUImage.framework; sourceTree = "<group>"; };
 		6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultDetailTableViewCell.swift; sourceTree = "<group>"; };
 		6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameResultDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -530,7 +528,6 @@
 		6DD2312E19B8204900B5D05E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6DF0F0561A15F794001066A2 /* Helpers */,
 				6D5EF8711A0B78D5001427FD /* Data Formatter */,
 				6DD2312F19B8204900B5D05E /* Domain Objects */,
 			);
@@ -735,15 +732,6 @@
 				6DE3B4EE19BECCBC00F9251A /* ProximaNova-Semibold.ttf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		6DF0F0561A15F794001066A2 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				6DF0F0581A15F7B3001066A2 /* FacebookHelper.swift */,
-			);
-			name = Helpers;
-			path = Helper;
 			sourceTree = "<group>";
 		};
 		832BAF112C179B90950B100D /* Pods */ = {
@@ -1034,7 +1022,6 @@
 				6D0BC42019C7E2F700578C90 /* SettingsControlTableViewCell.swift in Sources */,
 				6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */,
 				6DD2316C19B8204900B5D05E /* AppDelegate.swift in Sources */,
-				6DF0F0591A15F7B3001066A2 /* FacebookHelper.swift in Sources */,
 				6DD2318E19B8204900B5D05E /* DesignableButton.swift in Sources */,
 				6D07032019EB733D0056F431 /* StaffChallengeCellTableViewCell.swift in Sources */,
 				6DE06E7019C8085C00EB4D2F /* THSwitch.swift in Sources */,
