@@ -28,6 +28,6 @@
          *
          * @type {[PopQuiz.Option]}
          */
-        this.allOption = Utility.array.shuffle(allOption);
+        this.allOption = allOption.shuffle();
     };
 }());

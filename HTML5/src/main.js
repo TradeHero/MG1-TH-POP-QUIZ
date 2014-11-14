@@ -28,12 +28,11 @@ window.requestAnimFrame = (function () {
     };
 })();
 
-var LocalyticsSession = LocalyticsSession("e3122145c99ee59b4d18f9d-99267e42-1ed8-11e4-2351-004a77f8b47f");
-LocalyticsSession.open();
-LocalyticsSession.upload();
+//var LocalyticsSession = LocalyticsSession("e3122145c99ee59b4d18f9d-99267e42-1ed8-11e4-2351-004a77f8b47f");
+//LocalyticsSession.open();
+//LocalyticsSession.upload();
 
-var PopQuiz;
-PopQuiz = {
+var PopQuiz = {
     WIDTH: window.innerWidth,
     HEIGHT: window.innerHeight,
     RATIO: 0,
@@ -158,3 +157,13 @@ function inherit(proto) {
     F.prototype = proto;
     return new F
 }
+
+Array.prototype.clone = function () {
+    return this.slice(0);
+};
+
+Array.prototype.shuffle = function(){
+    var clonedArray = this.clone();
+    for (var j, x, i = clonedArray.length; i; j = parseInt(Math.random() * i), x = clonedArray[--i], clonedArray[i] = clonedArray[j], clonedArray[j] = x);
+    return clonedArray
+};

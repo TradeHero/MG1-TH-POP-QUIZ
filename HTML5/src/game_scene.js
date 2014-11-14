@@ -408,7 +408,8 @@
             this.removeTwoOptionButton.label.font_size = "1.5";
             this.removeTwoOptionButton.image = Asset.images.remove2;
             this.removeTwoOptionButton.addTarget(function (sender) {
-                var optionButtons = Utility.array.shuffle(PopQuiz.GameScene.optionButtons);
+                //var optionButtons = Utility.array.shuffle(PopQuiz.GameScene.optionButtons);
+                var optionButtons = PopQuiz.GameScene.optionButtons.shuffle();
                 var count = 0;
                 for (var i in optionButtons) {
                     if (optionButtons.hasOwnProperty(i)) {

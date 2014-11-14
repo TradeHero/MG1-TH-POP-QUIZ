@@ -1,7 +1,3 @@
-Array.prototype.clone = function () {
-    return this.slice(0);
-};
-
 var Utility = (function () {
 
     var _isMobile = (function () {
@@ -48,23 +44,6 @@ var Utility = (function () {
         }
     })();
 
-    var _array = (function () {
-        var __array = {
-            shuffle: function (arr) {
-                var clonedArray = arr.clone();
-                for (var j, x, i = clonedArray.length; i; j = parseInt(Math.random() * i), x = clonedArray[--i], clonedArray[i] = clonedArray[j], clonedArray[j] = x);
-
-                return clonedArray;
-            }
-        };
-        //public interface
-        return {
-            shuffle: function (a) {
-                return __array.shuffle(a)
-            }
-        }
-    })();
-
     var _clearCurrentView = function () {
         var ctx = PopQuiz.ctx;
 
@@ -84,7 +63,6 @@ var Utility = (function () {
     return {
         version: "0.0.1",
         isMobile: _isMobile,
-        array: _array,
         clearCurrentView: function () {
             _clearCurrentView()
         }
