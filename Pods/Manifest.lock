@@ -1,4 +1,5 @@
 PODS:
+  - Bolts (1.1.3)
   - CAAnimationBlocks (0.0.1)
   - ChatHeads (1.0):
     - CAAnimationBlocks
@@ -37,6 +38,7 @@ PODS:
   - WYPopoverController (0.3.4)
 
 DEPENDENCIES:
+  - Bolts
   - ChatHeads (~> 1.0)
   - DZNSegmentedControl
   - EGOCache (~> 2.1)
@@ -51,6 +53,7 @@ DEPENDENCIES:
   - WYPopoverController (~> 0.3.4)
 
 SPEC CHECKSUMS:
+  Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   CAAnimationBlocks: 981bfca79ac481f07957aa8357885e620637f926
   ChatHeads: 1b66a3ca6ae25e6ce04eb64485cf96b43b74bbcc
   DZNSegmentedControl: e061b1036451fab2132a7af1ff95b266fbd58779
