@@ -6,6 +6,8 @@ PODS:
     - SKBounceAnimation
   - DZNSegmentedControl (1.2.1)
   - EGOCache (2.1)
+  - Facebook-iOS-SDK (3.20.0):
+    - Bolts (~> 1.0)
   - FormatterKit (1.7.2):
     - FormatterKit/AddressFormatter
     - FormatterKit/ArrayFormatter
@@ -38,10 +40,11 @@ PODS:
   - WYPopoverController (0.3.4)
 
 DEPENDENCIES:
-  - Bolts
+  - Bolts (~> 1.1.3)
   - ChatHeads (~> 1.0)
   - DZNSegmentedControl
   - EGOCache (~> 2.1)
+  - Facebook-iOS-SDK (~> 3.20.0)
   - FormatterKit (~> 1.7.2)
   - JGProgressHUD (~> 1.2.2)
   - LDProgressView (~> 1.2.1)
@@ -58,6 +61,7 @@ SPEC CHECKSUMS:
   ChatHeads: 1b66a3ca6ae25e6ce04eb64485cf96b43b74bbcc
   DZNSegmentedControl: e061b1036451fab2132a7af1ff95b266fbd58779
   EGOCache: bf414333c425fe47f5182351d1dd47ebf72d8352
+  Facebook-iOS-SDK: 5854404b4b651f612a8ef79ca06d766858f4cb8e
   FormatterKit: 230f6ae7a6e9ac468cb09b3ac2b7524effc8daaa
   JGProgressHUD: a7c58f711eec0b67f257a0821c0bac9194c72398
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357

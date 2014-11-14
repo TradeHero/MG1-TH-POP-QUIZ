@@ -6,6 +6,7 @@ inhibit_all_warnings!
 source 'https://github.com/CocoaPods/Specs.git'
 
 pod 'Bolts', '~> 1.1.3'
+pod 'Facebook-iOS-SDK', '~> 3.20.0'
 pod 'DZNSegmentedControl'
 pod 'EGOCache', '~> 2.1'
 pod 'FormatterKit', '~> 1.7.2'
