@@ -32,8 +32,10 @@ class NetworkClient {
             defaultHeaders.updateValue("en-GB", forKey: "THPQ-Language-Code")
             let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
             configuration.HTTPAdditionalHeaders = defaultHeaders
-            configuration.timeoutIntervalForRequest = 10
+//            configuration.timeoutIntervalForRequest = 10
             Singleton.instance.manager = Alamofire.Manager(configuration: configuration)
+            
+            
         }
         
         return Singleton.instance
@@ -456,8 +458,8 @@ class NetworkClient {
         debugPrintln("Device token changed, updating device token..")
         
         let param = ["deviceToken" : deviceToken]
-        
-        let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+        if let auth = generateAuthorisationFromKeychain() {
+        let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(auth)").responseJSON {
             [unowned self] _, response, content, error in
             if let e = error {
                 debugPrintln("Device token update failure.")
@@ -471,7 +473,8 @@ class NetworkClient {
             
         }
         
-        debugPrintln(r)
+            debugPrintln(r)
+        }
     }
     ///
     /// Logs out current session, removing credentials and user details stored in keychain or in device.

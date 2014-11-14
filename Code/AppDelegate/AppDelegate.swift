@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         // Override point for customization after application launch.
         
         application.applicationIconBadgeNumber = 0
-        
+        NetworkClient.sharedClient.logout()
         let config = UAConfig.defaultConfig()
         UAirship.takeOff(config)
         UAPush.shared().userNotificationTypes = (.Badge | .Sound | .Alert)
@@ -116,6 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         musicPlayer.stop()
         self.unregisterOtherNotification()
+         scheduleLocalNotification()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -256,5 +257,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         return controller
     }
     
+    
+    func scheduleLocalNotification(){
+        let delay:NSTimeInterval = 60 * 60 * 24 * 2
+        
+        let now = NSDate()
+        let notifcations = [now.dateByAddingTimeInterval(delay) :  "Come back and win TH$ by simply winning a challenge!"];
+        for (key, val) in notifcations {
+            scheduleLocalNotification(key, message: val)
+        }
+    }
+    
+    func scheduleLocalNotification(date:NSDate, message:String){
+        let localNotification = UILocalNotification()
+        localNotification.fireDate = date
+        localNotification.alertBody = message
+        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        localNotification.soundName = "notification.caf"
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    }
 }
 
