@@ -26,13 +26,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>thpopquiz</string>
+				<string>fb431745923529834thpopquiz</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1013</string>
+	<string>1047</string>
 	<key>FacebookAppID</key>
 	<string>431745923529834</string>
+	<key>FacebookUrlSchemeSuffix</key>
+	<string>thpopquiz</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>

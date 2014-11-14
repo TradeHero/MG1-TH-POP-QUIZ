@@ -8,6 +8,8 @@
 
 #import <EGOCache/EGOCache.h>
 
+#import <FacebookSDK.h>
+
 #import <FormatterKit/TTTTimeIntervalFormatter.h>
 
 #import <GPUImage/GPUImage.h>

@@ -18,7 +18,9 @@ var kFaceBookShare = true
 
 let kTHFacebookAppID = "431745923529834"
 
+let kTHFacebookURLScheme = "fb\(kTHFacebookAppID)thpopquiz"
 
+let kTHFacebookPermissionOption = ["public_profile", "email", "user_friends"]
 
 let kConstantPrefix = "TH"
 
