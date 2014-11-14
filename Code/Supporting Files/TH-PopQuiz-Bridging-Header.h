@@ -4,6 +4,8 @@
 
 #pragma mark - Frameworks/Pods
 
+#import <Bolts/Bolts.h>
+
 #import <EGOCache/EGOCache.h>
 
 #import <FormatterKit/TTTTimeIntervalFormatter.h>

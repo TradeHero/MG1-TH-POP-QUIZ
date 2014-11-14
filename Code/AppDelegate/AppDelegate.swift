@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         // Override point for customization after application launch.
         
         application.applicationIconBadgeNumber = 0
-        NetworkClient.sharedClient.logout()
+//        NetworkClient.sharedClient.logout()
         let config = UAConfig.defaultConfig()
         UAirship.takeOff(config)
         UAPush.shared().userNotificationTypes = (.Badge | .Sound | .Alert)
@@ -159,12 +159,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         debugPrintln("Fail to register for push notification: \(error)")
     }
     
-//    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
-//        application.registerForRemoteNotifications()
-//    }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
         //TODO: Implement
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        debugPrintln(sourceApplication)
+        let bfurl = BFURL(inboundURL: url, sourceApplication: sourceApplication)
+        if let component = bfurl.targetURL.pathComponents[1] as? String {
+            debugPrintln(component)
+        }
+        return true
     }
     
     //MARK: Login/Logout

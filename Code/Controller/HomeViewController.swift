@@ -21,6 +21,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var unfinishedChallenges = [Game]()
     private var user: THUser = NetworkClient.sharedClient.user
 
+    @IBOutlet weak var internalUserView: UIImageView!
     private var facebookFriendsChallenge = [THUserFriend]()
     
     private var noOpenChallenges:Bool {
@@ -48,7 +49,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 53
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.width, 0.01))
-        
+        self.internalUserView.hidden = !isInternalUser(user)
     }
     
     override func viewWillAppear(animated: Bool) {

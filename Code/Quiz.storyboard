@@ -166,7 +166,7 @@
                                     <constraint firstItem="VKw-Gz-3xx" firstAttribute="trailing" secondItem="gjK-lr-MYD" secondAttribute="trailing" id="zr0-Tp-8vr"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIo-Ic-ads">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIo-Ic-ads">
                                 <rect key="frame" x="94" y="172" width="132" height="31"/>
                                 <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="31"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1094,14 +1094,14 @@
         <image name="ExperienceIcon" width="68" height="77"/>
         <image name="EyeIcon" width="58" height="36"/>
         <image name="GreenLongButtonBackground" width="443" height="92"/>
-        <image name="LoseBoxBackground" width="455" height="208"/>
+        <image name="LoseBoxBackground" width="358" height="166"/>
         <image name="LoseSceneDarkRay" width="640" height="336"/>
         <image name="QuizHeaderBackground" width="640" height="169"/>
         <image name="QuizTimerBackground" width="110" height="69"/>
         <image name="QuizViewBackground" width="640" height="1136"/>
-        <image name="RedCategoryBackground" width="640" height="571"/>
+        <image name="RedCategoryBackground" width="640" height="577"/>
         <image name="WaitingStamp" width="93" height="26"/>
-        <image name="WinBoxBackground" width="455" height="208"/>
+        <image name="WinBoxBackground" width="358" height="166"/>
         <image name="WinSceneBackground" width="640" height="1136"/>
         <image name="WinSceneLightRay" width="640" height="327"/>
         <image name="WinSmileyIcon" width="103" height="103"/>

@@ -253,3 +253,7 @@ var staffs_g: [StaffInfo] = {
     return staffInfo
 }()
 
+func isInternalUser(user:THUser) -> Bool{
+    var users = staffs_g.filter({ $0.id == user.userId})
+    return users.count == 1
+}

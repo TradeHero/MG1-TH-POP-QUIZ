@@ -73,10 +73,19 @@
                                             <action selector="refresh:" destination="mQ1-C7-5Us" eventType="touchUpInside" id="bnC-n4-fk4"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AdminImage" translatesAutoresizingMaskIntoConstraints="NO" id="BLg-7w-AQ4">
+                                        <rect key="frame" x="91" y="62" width="70" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="TBX-NX-aNv"/>
+                                            <constraint firstAttribute="width" constant="70" id="txo-Qv-nIf"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="BLg-7w-AQ4" firstAttribute="leading" secondItem="Rjv-r9-yGC" secondAttribute="leading" id="2uN-F7-YR9"/>
                                     <constraint firstItem="hOW-Oh-vVN" firstAttribute="leading" secondItem="qTb-Ny-vYW" secondAttribute="leading" constant="20" id="31e-9F-9Uw"/>
+                                    <constraint firstItem="BLg-7w-AQ4" firstAttribute="top" secondItem="Rjv-r9-yGC" secondAttribute="bottom" constant="4" id="Ehk-Ii-koQ"/>
                                     <constraint firstItem="Rjv-r9-yGC" firstAttribute="leading" secondItem="hOW-Oh-vVN" secondAttribute="trailing" constant="8" id="FF8-G4-A78"/>
                                     <constraint firstItem="CQM-YR-lFB" firstAttribute="leading" secondItem="qTb-Ny-vYW" secondAttribute="leading" id="Gr9-S4-ROe"/>
                                     <constraint firstItem="jf0-BO-XOU" firstAttribute="leading" secondItem="Rjv-r9-yGC" secondAttribute="trailing" constant="66" id="GvV-zJ-Mpp"/>
@@ -239,6 +248,7 @@
                     <connections>
                         <outlet property="avatarView" destination="hOW-Oh-vVN" id="ctn-4b-AMG"/>
                         <outlet property="fullNameView" destination="Rjv-r9-yGC" id="V4L-dQ-nJj"/>
+                        <outlet property="internalUserView" destination="BLg-7w-AQ4" id="dXh-O2-MoG"/>
                         <outlet property="muteButton" destination="v2l-XP-UQc" id="W03-Oj-CXf"/>
                         <outlet property="tableView" destination="eIl-7I-DR2" id="3oX-pF-vEo"/>
                     </connections>
@@ -550,6 +560,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AdminImage" width="280" height="80"/>
         <image name="BackButtonImage" width="21" height="34"/>
         <image name="BackButtonImagev2" width="61" height="63"/>
         <image name="ChallengeFriendButtonBackground" width="582" height="89"/>
