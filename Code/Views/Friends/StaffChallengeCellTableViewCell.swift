@@ -31,11 +31,10 @@ class StaffChallengeCellTableViewCell: UITableViewCell {
         self.staffUser = staffUser
         self.nameLabel.text = staffUser.displayName
         self.titleLabel.text = staffUser.funnyName
+        self.avatarView.image = UIImage(named: "EmptyAvatar")
         NetworkClient.fetchImageFromURLString(staffUser.pictureURL, progressHandler: nil) { [unowned self] (image, error) -> () in
             if let img = image {
                 self.avatarView.image = image.centerCropImage()
-            } else {
-                self.avatarView.image = UIImage(named: "EmptyAvatar")
             }
         }
     }

@@ -25,9 +25,11 @@
 @property (nonatomic) NSInteger selectedSegmentIndex;
 /** Returns the number of segments the receiver has. */
 @property (nonatomic, readonly) NSUInteger numberOfSegments;
-/** The height of the control. Default is 56px. */
-@property (nonatomic, readonly) CGFloat height;
-/** The height of the selection indicator. Default is 2px. */
+/** The height of the control. Default is 56pts, and if not showing counts, default is 30pts. */
+@property (nonatomic, readwrite) CGFloat height UI_APPEARANCE_SELECTOR;
+/** The width of the control. Default is superview's width. */
+@property (nonatomic, readwrite) CGFloat width UI_APPEARANCE_SELECTOR;
+/** The height of the selection indicator. Default is 2pts. */
 @property (nonatomic, readwrite) CGFloat selectionIndicatorHeight UI_APPEARANCE_SELECTOR;
 /** The duration of the indicator's animation. Default is 0.2 sec. */
 @property (nonatomic, readwrite) CGFloat animationDuration UI_APPEARANCE_SELECTOR;
@@ -47,6 +49,8 @@
 @property (nonatomic) BOOL bouncySelectionIndicator;
 /** YES to format the counts with grouping separators. Default is NO. */
 @property (nonatomic) BOOL showsGroupingSeparators;
+/** YES if the font size should be reduced in order to fit the title string into the segment's width. Default is NO. */
+@property (nonatomic) BOOL adjustsFontSizeToFitWidth;
 
 /**
  Initializes and returns a segmented control with segments having the given titles or images.

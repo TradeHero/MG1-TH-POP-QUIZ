@@ -233,7 +233,7 @@ var staffs_g: [StaffInfo] = {
     staffInfo.append((name:"Arup", id: 475785, funnyName:"The Magnet"))
     staffInfo.append((name:"Eva", id: 298275, funnyName:"Ads Addict"))
     staffInfo.append((name:"Vivian", id: 527491, funnyName:""))
-    staffInfo.append((name:"James", id: 6627, funnyName:"Ni Hao"))
+    staffInfo.append((name:"James", id: 6627, funnyName:"Li Hao"))
 //    staffInfo.append((name:"Yurike Chandra", id: 0, funnyName:"Designer"))
     staffInfo.append((name:"Malvin", id: 542968, funnyName:""))
 //    staffInfo.append((name:"Vincent Tee", id: 0, funnyName:"BigFoot"))
@@ -252,6 +252,7 @@ var staffs_g: [StaffInfo] = {
     staffInfo.append((name:"William", id: 518543, funnyName:""))
 //    staffInfo.append((name:"Takun Chen", id: 0, funnyName:""))
     staffInfo.append((name:"Alvin", id: 250163, funnyName:""))
+    staffInfo.append((name:"Nihal", id:545862, funnyName:"Ni Hao"))
     return staffInfo
 }()
 
