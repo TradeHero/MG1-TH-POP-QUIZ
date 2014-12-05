@@ -39,7 +39,7 @@ PODS:
   - UrbanAirship-iOS-SDK (5.0.3):
     - UrbanAirship-iOS-SDK/Core (= 5.0.3)
   - UrbanAirship-iOS-SDK/Core (5.0.3)
-  - WYPopoverController (0.3.4)
+  - WYPopoverController (0.3.5)
 
 DEPENDENCIES:
   - Bolts (~> 1.1.3)
@@ -73,6 +73,6 @@ SPEC CHECKSUMS:
   SKBounceAnimation: a47c30f67d3e4b948b1823ce5957d72d4382dd73
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
   UrbanAirship-iOS-SDK: 453914df26836cf9957440c5f97ad9dff5aff107
-  WYPopoverController: eb1bfffb6ed0dbfa27e3f322c7eaf342db0bd3d4
+  WYPopoverController: d5350da9e8aa98d607bbc9a2e299b5982938e77b
 
-COCOAPODS: 0.35.0.rc2
+COCOAPODS: 0.35.0

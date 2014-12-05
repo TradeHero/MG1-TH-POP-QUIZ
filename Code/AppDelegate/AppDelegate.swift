@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         // Override point for customization after application launch.
         
         application.applicationIconBadgeNumber = 0
-//        NetworkClient.sharedClient.logout()
+        NetworkClient.sharedClient.logout()
         let config = UAConfig.defaultConfig()
         UAirship.takeOff(config)
         UAPush.shared().userNotificationTypes = (.Badge | .Sound | .Alert)
