@@ -166,10 +166,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         debugPrintln(sourceApplication)
-        let bfurl = BFURL(inboundURL: url, sourceApplication: sourceApplication)
-        if let component = bfurl.targetURL.pathComponents[1] as? String {
-            debugPrintln(component)
-        }
+//        let bfurl = BFURL(inboundURL: url, sourceApplication: sourceApplication)
+//        if let component = bfurl.targetURL.pathComponents[1] as? String {
+//            debugPrintln(component)
+//        }
         return true
     }
     
