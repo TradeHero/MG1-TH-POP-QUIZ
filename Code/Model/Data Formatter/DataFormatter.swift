@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FormatterKit
 
 class DataFormatter {
     

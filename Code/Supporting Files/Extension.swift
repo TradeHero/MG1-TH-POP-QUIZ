@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import JGProgressHUD
 
 extension UINavigationController {
     func hideNavigationBar() {

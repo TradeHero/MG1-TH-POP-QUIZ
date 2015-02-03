@@ -166,7 +166,7 @@ Your PodFile should look like :
 
 ```Ruby
 platform :ios, '6.0'
-pod 'WYPopoverController', '~> 0.2.2'
+pod 'WYPopoverController', '~> 0.3.6'
 ```
 
 To use the `master` branch of the repo :

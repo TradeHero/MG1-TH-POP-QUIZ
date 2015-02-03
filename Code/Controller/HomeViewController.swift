@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import WYPopoverController
+import JGProgressHUD
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, HomeTurnChallengesTableViewCellDelegate, FriendsChallengeCellTableViewCellDelegate, WYPopoverControllerDelegate {
     

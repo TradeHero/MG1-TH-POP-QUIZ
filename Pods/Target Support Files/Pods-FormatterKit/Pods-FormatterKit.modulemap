@@ -1,0 +1,6 @@
+framework module FormatterKit {
+  umbrella header "Pods-FormatterKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

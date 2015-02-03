@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, QuestionResultTableViewCellDelegate {
     

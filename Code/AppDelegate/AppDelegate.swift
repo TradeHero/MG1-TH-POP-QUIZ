@@ -8,6 +8,8 @@
 
 import UIKit
 import AVFoundation
+import ChatHeads
+import JGProgressHUD
 
 let kTHGamesServerMode = Mode.Prod
 
@@ -33,10 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         
         application.applicationIconBadgeNumber = 0
         NetworkClient.sharedClient.logout()
-        let config = UAConfig.defaultConfig()
-        UAirship.takeOff(config)
-        UAPush.shared().userNotificationTypes = (.Badge | .Sound | .Alert)
-        UAPush.shared().userPushNotificationsEnabled = true
+//        let config = UAConfig.defaultConfig()
+//        UAirship.takeOff(config)
+//        UAPush.shared().userNotificationTypes = (.Badge | .Sound | .Alert)
+//        UAPush.shared().userPushNotificationsEnabled = true
         
         switch kTHGamesServerMode {
         case .Staging:

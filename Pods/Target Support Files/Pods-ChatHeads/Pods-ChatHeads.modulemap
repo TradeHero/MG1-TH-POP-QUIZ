@@ -1,0 +1,6 @@
+framework module ChatHeads {
+  umbrella header "Pods-ChatHeads-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EGOCache
 
 struct THCache {
     static let kFBFriendsDictionaryKey = "FBFriendsDictionaryKey"

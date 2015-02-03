@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import LDProgressView
+import JGProgressHUD
 
 class QuizViewController: UIViewController {
     

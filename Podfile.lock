@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (1.1.4)
   - Bolts (1.1.3)
   - CAAnimationBlocks (0.0.1)
   - ChatHeads (1.0):
@@ -6,73 +7,77 @@ PODS:
     - SKBounceAnimation
   - DZNSegmentedControl (1.2.2)
   - EGOCache (2.1)
-  - Facebook-iOS-SDK (3.20.0):
+  - Facebook-iOS-SDK (3.22.0):
     - Bolts (~> 1.0)
-  - FormatterKit (1.7.4):
-    - FormatterKit/AddressFormatter (= 1.7.4)
-    - FormatterKit/ArrayFormatter (= 1.7.4)
-    - FormatterKit/ColorFormatter (= 1.7.4)
-    - FormatterKit/LocationFormatter (= 1.7.4)
-    - FormatterKit/NameFormatter (= 1.7.4)
-    - FormatterKit/OrdinalNumberFormatter (= 1.7.4)
-    - FormatterKit/TimeIntervalFormatter (= 1.7.4)
-    - FormatterKit/UnitOfInformationFormatter (= 1.7.4)
-    - FormatterKit/URLRequestFormatter (= 1.7.4)
-  - FormatterKit/AddressFormatter (1.7.4)
-  - FormatterKit/ArrayFormatter (1.7.4)
-  - FormatterKit/ColorFormatter (1.7.4)
-  - FormatterKit/LocationFormatter (1.7.4)
-  - FormatterKit/NameFormatter (1.7.4)
-  - FormatterKit/OrdinalNumberFormatter (1.7.4)
-  - FormatterKit/TimeIntervalFormatter (1.7.4)
-  - FormatterKit/UnitOfInformationFormatter (1.7.4)
-  - FormatterKit/URLRequestFormatter (1.7.4)
-  - JGProgressHUD (1.2.2)
+  - FormatterKit (1.7.5):
+    - FormatterKit/AddressFormatter (= 1.7.5)
+    - FormatterKit/ArrayFormatter (= 1.7.5)
+    - FormatterKit/ColorFormatter (= 1.7.5)
+    - FormatterKit/LocationFormatter (= 1.7.5)
+    - FormatterKit/NameFormatter (= 1.7.5)
+    - FormatterKit/OrdinalNumberFormatter (= 1.7.5)
+    - FormatterKit/TimeIntervalFormatter (= 1.7.5)
+    - FormatterKit/UnitOfInformationFormatter (= 1.7.5)
+    - FormatterKit/URLRequestFormatter (= 1.7.5)
+  - FormatterKit/AddressFormatter (1.7.5)
+  - FormatterKit/ArrayFormatter (1.7.5)
+  - FormatterKit/ColorFormatter (1.7.5)
+  - FormatterKit/LocationFormatter (1.7.5)
+  - FormatterKit/NameFormatter (1.7.5)
+  - FormatterKit/OrdinalNumberFormatter (1.7.5)
+  - FormatterKit/TimeIntervalFormatter (1.7.5)
+  - FormatterKit/UnitOfInformationFormatter (1.7.5)
+  - FormatterKit/URLRequestFormatter (1.7.5)
+  - GPUImage (0.1.6)
+  - JGProgressHUD (1.2.3)
   - LDProgressView (1.2.1)
   - MDRadialProgress (1.3.1)
-  - PureLayout (2.0.3)
+  - PureLayout (2.0.5)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
   - SKBounceAnimation (1.0.04)
   - SSKeychain (1.2.2)
-  - UrbanAirship-iOS-SDK (5.0.3):
-    - UrbanAirship-iOS-SDK/Core (= 5.0.3)
-  - UrbanAirship-iOS-SDK/Core (5.0.3)
-  - WYPopoverController (0.3.5)
+  - UrbanAirship-iOS-SDK (5.1.1):
+    - UrbanAirship-iOS-SDK/Core (= 5.1.1)
+  - UrbanAirship-iOS-SDK/Core (5.1.1)
+  - WYPopoverController (0.3.6)
 
 DEPENDENCIES:
-  - Bolts (~> 1.1.3)
+  - Alamofire (~> 1.1.4)
   - ChatHeads (~> 1.0)
   - DZNSegmentedControl (~> 1.2.2)
   - EGOCache (~> 2.1)
-  - Facebook-iOS-SDK (~> 3.20.0)
-  - FormatterKit (~> 1.7.4)
-  - JGProgressHUD (~> 1.2.2)
+  - Facebook-iOS-SDK (~> 3.22.0)
+  - FormatterKit (~> 1.7.5)
+  - GPUImage (~> 0.1.6)
+  - JGProgressHUD (~> 1.2.3)
   - LDProgressView (~> 1.2.1)
   - MDRadialProgress (~> 1.3.1)
-  - PureLayout (~> 2.0.3)
+  - PureLayout (~> 2.0.5)
   - SDWebImage (~> 3.7.1)
   - SSKeychain (~> 1.2.2)
-  - UrbanAirship-iOS-SDK (~> 5.0.3)
-  - WYPopoverController (~> 0.3.4)
+  - UrbanAirship-iOS-SDK (~> 5.1.1)
+  - WYPopoverController (~> 0.3.6)
 
 SPEC CHECKSUMS:
+  Alamofire: 524225da382071ee3e6d0badd0ee4b4dc36740de
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
   CAAnimationBlocks: 981bfca79ac481f07957aa8357885e620637f926
   ChatHeads: 1b66a3ca6ae25e6ce04eb64485cf96b43b74bbcc
   DZNSegmentedControl: daa91d107904f7433e73852477f08450575be331
   EGOCache: bf414333c425fe47f5182351d1dd47ebf72d8352
-  Facebook-iOS-SDK: 5854404b4b651f612a8ef79ca06d766858f4cb8e
-  FormatterKit: 54b81d587a6c448bbdbadc716b744c6aa6e3125b
-  JGProgressHUD: a7c58f711eec0b67f257a0821c0bac9194c72398
+  Facebook-iOS-SDK: 0eda8ff7120aada0a9c5f98552f7625da6c3440a
+  FormatterKit: 758bef4552d11454f0eb7e73669f81c225247904
+  GPUImage: cecb0830bb9428f50192042e3c7b53810f51388e
+  JGProgressHUD: 733523c80f69b6dfc41b88a0f33883a89a8b4c3b
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
   MDRadialProgress: 0499b76b2bd25711ac1d6687c07ac915bad1b8bd
-  PureLayout: 9658675ed95dabfcdf5154c0771ec9ed0980b370
+  PureLayout: 63a3257320223e8edddcd3afb407445f85a6bf74
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SKBounceAnimation: a47c30f67d3e4b948b1823ce5957d72d4382dd73
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
-  UrbanAirship-iOS-SDK: 453914df26836cf9957440c5f97ad9dff5aff107
-  WYPopoverController: d5350da9e8aa98d607bbc9a2e299b5982938e77b
+  UrbanAirship-iOS-SDK: 46a5fd5109c911a2d33c5a01b1bd141a3f5d3d34
+  WYPopoverController: a46116aded5979c354300ef644b9cce906ee3a57
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.36.0.beta.2

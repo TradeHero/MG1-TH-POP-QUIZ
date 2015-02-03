@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import PureLayout
+import GPUImage
 
 enum LogoCanvasObfuscationType : Int {
     case SwirlEffect

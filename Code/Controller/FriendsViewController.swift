@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import JGProgressHUD
+import EGOCache
 
 class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate, StaffChallengeCellTableViewCellDelegate {
     

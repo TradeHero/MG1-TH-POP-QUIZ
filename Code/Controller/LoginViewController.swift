@@ -9,6 +9,7 @@
 import UIKit
 import Social
 import Accounts
+import JGProgressHUD
 
 class LoginViewController: UIViewController {
     
