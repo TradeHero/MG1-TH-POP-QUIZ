@@ -279,7 +279,7 @@
             Utility.clearCurrentView();
             this.mainWindow.drawView(PopQuiz.ctx);
 
-            var quizBgImageView = new UI.ImageView(0, 0, PopQuiz.currentWidth, PopQuiz.currentHeight, Asset.images.quiz_bg);
+            var quizBgImageView = new UI.ImageView(0, 0, PopQuiz.currentWidth, PopQuiz.currentHeight, Assets.images().quiz_bg);
             this.mainWindow.addSubview(quizBgImageView);
             this.setUpRoundLabel();
             this.setUpTopBar();
@@ -328,16 +328,16 @@
         },
 
         setUpTopBar: function () {
-            var barBGRatio = Asset.images.bar_bg.width / Asset.images.bar_bg.height;
+            var barBGRatio = Assets.images().bar_bg.width / Assets.images().bar_bg.height;
             var barHeight = PopQuiz.currentWidth / barBGRatio;
-            var barBgImageView = new UI.ImageView(0, 0, PopQuiz.currentWidth, barHeight, Asset.images.bar_bg);
+            var barBgImageView = new UI.ImageView(0, 0, PopQuiz.currentWidth, barHeight, Assets.images().bar_bg);
 
             var profilePicRadius = PopQuiz.currentWidth / 8 / 2;
             var profilePicY = barHeight / 2 - profilePicRadius;
             var profilePicCenterY = profilePicY + profilePicRadius;
             var selfProfilePicX = 30;
             var selfPlayerProfilePic = new UI.RoundImageView(selfProfilePicX, profilePicY, profilePicRadius,
-                Asset.images.test_profile_pic2);
+                Assets.images().test_profile_pic2);
             var selfPlayerScoreLabelX = selfProfilePicX + profilePicRadius * 2 + 20;
             var selfPlayerScoreLabel = new UI.Label(selfPlayerScoreLabelX, profilePicCenterY, PopQuiz.currentWidth / 5,
                 30, this.selfScore.toString());
@@ -356,7 +356,7 @@
 
             var awayProfilePicX = PopQuiz.currentWidth - profilePicRadius * 2 - 30;
             var awayPlayerProfilePic = new UI.RoundImageView(awayProfilePicX, profilePicY, profilePicRadius,
-                Asset.images.test_profile_pic);
+                Assets.images().test_profile_pic);
             var awayPlayerScoreLabelX = awayProfilePicX - 20;
             var awayPlayerScoreLabel = new UI.Label(awayPlayerScoreLabelX, profilePicCenterY, PopQuiz.currentWidth / 5,
                 30, this.awayScore.toString());
@@ -406,7 +406,7 @@
             this.removeTwoOptionButton.label.text = "Remove 2";
             this.removeTwoOptionButton.label.text_color = "white";
             this.removeTwoOptionButton.label.font_size = "1.5";
-            this.removeTwoOptionButton.image = Asset.images.remove2;
+            this.removeTwoOptionButton.image = Assets.images().remove2;
             this.removeTwoOptionButton.addTarget(function (sender) {
                 //var optionButtons = Utility.array.shuffle(PopQuiz.GameScene.optionButtons);
                 var optionButtons = PopQuiz.GameScene.optionButtons.shuffle();
@@ -432,7 +432,7 @@
             if (PopQuiz.ua_isMobile) {
                 removeTwoOptionButtonGap *= PopQuiz.ua_mobile_scale;
             }
-            var barBGRatio = Asset.images.bar_bg.width / Asset.images.bar_bg.height;
+            var barBGRatio = Assets.images().bar_bg.width / Assets.images().bar_bg.height;
             var barHeight = PopQuiz.currentWidth / barBGRatio;
             var removeTwoOptionButtonHeight = PopQuiz.currentHeight / 14;
             var contentViewX = 0;
@@ -524,7 +524,7 @@
             if (PopQuiz.ua_isMobile) {
                 removeTwoOptionButtonGap *= PopQuiz.ua_mobile_scale;
             }
-            var barBGRatio = Asset.images.bar_bg.width / Asset.images.bar_bg.height;
+            var barBGRatio = Assets.images().bar_bg.width / Assets.images().bar_bg.height;
             var barHeight = PopQuiz.currentWidth / barBGRatio;
             var removeTwoOptionButtonHeight = PopQuiz.currentHeight / 14;
             var optionSetViewWidth = PopQuiz.currentWidth;

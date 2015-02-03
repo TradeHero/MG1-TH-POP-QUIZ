@@ -11,13 +11,13 @@
             PopQuiz.Launch.mainWindowCenterY = PopQuiz.Launch.mainWindow.height / 2;
             PopQuiz.Launch.mainWindow.drawView(PopQuiz.ctx);
 
-            var launchBg = new UI.ImageView(0, 0, PopQuiz.currentWidth, PopQuiz.currentHeight, Asset.images.load_bg);
-            var logoImageRatio = Asset.images.logo.width / Asset.images.logo.height;
+            var launchBg = new UI.ImageView(0, 0, PopQuiz.currentWidth, PopQuiz.currentHeight, Assets.images().load_bg);
+            var logoImageRatio = Assets.images().logo.width / Assets.images().logo.height;
             var logoImageWidth = PopQuiz.Launch.mainWindow.width * 0.8;
             var logoImageHeight = logoImageWidth / logoImageRatio;
             var logoImageX = PopQuiz.Launch.mainWindowCenterX - logoImageWidth / 2;
             var logoImageY = PopQuiz.Launch.mainWindowCenterY - logoImageHeight / 2;
-            var logoImage = new UI.ImageView(logoImageX, logoImageY, logoImageWidth, logoImageHeight, Asset.images.logo);
+            var logoImage = new UI.ImageView(logoImageX, logoImageY, logoImageWidth, logoImageHeight, Assets.images().logo);
 
             PopQuiz.Launch.mainWindow.addSubview(launchBg);
             PopQuiz.Launch.mainWindow.addSubview(logoImage);
@@ -38,7 +38,7 @@
             var challengerProfileImageViewX = PopQuiz.Launch.mainWindowCenterX - challengerProfileImageViewRadius;
             var challengerProfileImageViewY = challengerWindow.height * 0.15;
             var challengerProfileImageView = new UI.RoundImageView(challengerProfileImageViewX,
-                challengerProfileImageViewY, challengerProfileImageViewRadius, Asset.images.test_profile_pic);
+                challengerProfileImageViewY, challengerProfileImageViewRadius, Assets.images().test_profile_pic);
 
             // init for challenge msg
             var challengeLabelY = challengerProfileImageView.height + challengerProfileImageView.y +

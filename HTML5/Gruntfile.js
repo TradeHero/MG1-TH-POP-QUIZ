@@ -4,13 +4,17 @@ module.exports = function (grunt) {
     var sourceFiles, unitTestFiles, config;
     //  order is important
     sourceFiles = [
+        //thcanvas
+        //'src/lib/thcanvas.js',
         //api
-        'src/api/Localytics/localytics.js',
+        //'src/api/Localytics/localytics.js',
 
         //util
         'src/util/asset.js',
         'src/util/input.js',
         'src/util/util.js',
+        //'src/lib/thcanvas.js',
+
 
         //UI
         'src/ui/base.js',
@@ -30,10 +34,10 @@ module.exports = function (grunt) {
         'src/model/Question.js',
         'src/model/QuestionResult.js',
         'src/model/THUser.js',
-        'src/model/Game.js',
+        'src/model/Game.js'
 
         //api
-        'src/api/network.js'
+        //'src/api/network.js'
     ];
     unitTestFiles = [];
     // Project configuration.
@@ -92,7 +96,7 @@ module.exports = function (grunt) {
                 mangle: {
                     except: ['jQuery', 'Backbone', 'UI']
                 },
-                sourceMap: true,
+                sourceMap: false,
                 ASCIIOnly: false
             },
             build: {
@@ -125,6 +129,14 @@ module.exports = function (grunt) {
                     nodes: ['console.log', 'debug']
                 }
             }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 8000,
+                    keepalive: true
+                }
+            }
         }
     };
     for (var n = 0; n < sourceFiles.length; n++) {
@@ -142,6 +154,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-strip');
     grunt.loadNpmTasks('grunt-yui-compressor');
+    grunt.loadNpmTasks('grunt-contrib-connect');
     // Tasks
     grunt.registerTask('dev', ['clean', 'concat:source', 'replace:dev']);
     grunt.registerTask('prod', ['clean', 'concat:source', 'replace:dev', 'uglify', 'replace:prod', 'strip:dev', 'strip:prod']);

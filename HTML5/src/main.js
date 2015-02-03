@@ -14,23 +14,6 @@
 /*global debug*/
 /*global error*/
 
-// http://paulirish.com/2011/requestanimationframe-for-smart-animating
-// shim layer with setTimeout fallback
-window.requestAnimFrame = (function () {
-    return window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
-
-    function (callback) {
-        window.setTimeout(callback, 1000 / 60);
-    };
-})();
-
-//var LocalyticsSession = LocalyticsSession("e3122145c99ee59b4d18f9d-99267e42-1ed8-11e4-2351-004a77f8b47f");
-//LocalyticsSession.open();
-//LocalyticsSession.upload();
 
 var PopQuiz = {
     WIDTH: window.innerWidth,
@@ -88,7 +71,21 @@ var PopQuiz = {
         }, false);
 
         PopQuiz.resize();
-        Asset.downloadAll();
+
+        Assets.initialise({
+            "load_bg": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/Background.png",
+            "logo": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/profile_pic.jpg",
+            "quiz_bg": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/quiz_bg.png",
+            "test_profile_pic": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/profile_pic.jpg",
+            "test_profile_pic2": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeheroprofilepictures/BodyPart_58f65315-7ece-436c-bf90-7034afa64875",
+            "bar_bg": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/bar_bg.png",
+            "remove2": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/remove2.png"
+        }, function(){
+            var mainWindow = new UI.View(0, 0, PopQuiz.currentWidth, PopQuiz.currentHeight);
+            PopQuiz.Launch.init(mainWindow);
+        });
+
+        Assets.beginLoad();
     },
 
     resize: function () {
@@ -148,14 +145,6 @@ function debug(message) {
 function error(message) {
     "use strict";
     console.error(message);
-}
-
-function inherit(proto) {
-    function F() {
-    }
-
-    F.prototype = proto;
-    return new F
 }
 
 Array.prototype.clone = function () {
