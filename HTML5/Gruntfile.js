@@ -4,10 +4,11 @@ module.exports = function (grunt) {
     var sourceFiles, unitTestFiles, config;
     //  order is important
     sourceFiles = [
-        //thcanvas
-        //'src/lib/thcanvas.js',
+        //lib
+        //'src/lib/lz-string.min.js',
+        'src/lib/base64.js',
         //api
-        //'src/api/Localytics/localytics.js',
+        'src/api/network.js',
 
         //util
         'src/util/asset.js',
@@ -34,10 +35,11 @@ module.exports = function (grunt) {
         'src/model/Question.js',
         'src/model/QuestionResult.js',
         'src/model/THUser.js',
-        'src/model/Game.js'
+        'src/model/Game.js',
 
-        //api
-        //'src/api/network.js'
+        //conf
+        'src/conf.js'
+
     ];
     unitTestFiles = [];
     // Project configuration.

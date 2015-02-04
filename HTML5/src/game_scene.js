@@ -74,9 +74,9 @@
             this.mainWindow.subviews = [];
 
             // for testing
-            var gameDTO = '{"id": 61, "createdByUserId": 6627, "createdAtUtc": "2014-11-03T09:16:58", "opponentUserId": 2415, "questionSet": [{ "id": 2146,"category": 1,"content": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/37880.pass99.1.Canadian%20Imperial%20Bank%20Of%20Commerce.34894176.jpg.THCROPSIZED.jpg","option1": "Canadian Imperial Bank O","option2": "Great West Lifeco Pref S","option3": "Brookfield Canada Office","option4": "Alderon Iron Ore Corp"}, {"id": 1987,"category": 1,"content": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/13568.pass0.11.Wells%20Fargo%20%20Company.-1122850473.jpg.THCROPSIZED.jpg","option1": "Wells Fargo & Company","option2": "Meritage Corp","option3": "Neenah Paper","option4": "Neophotonics Corp"}, {"id": 3059,"category": 11,"content": "EPS stands for","option1": "Earnings Per Share","option2": "Earned Profit ","option3": "Estimated Profit","option4": "None"}, {"id": 2354,"category": 2,"content": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/12769.pass1.1.Pepsico.1750142287THCROPSIZED.jpg","option1": "PEP","option2": "NMR","option3": "GHL","option4": "BHLB"}, {"id": 3068,"category": 11,"content": "When you purchase a share of a company, you have","option1": "Ownership","option2": "Right to ownership","option3": "All of the above","option4": "None"}, {"id": 2546,"category": 4,"content": "Kraft Foods Inc.|http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/16901.pass0.2.Kraft%20Foods%20Inc.-2109853024.gif.THCROPSIZED.gif","option1": "US$ 48B to 71B","option2": "US$ 12B to 30B","option3": "US$ 119B to 131B","option4": "US$ 178B to 149B"}, {"id": 2467,"category": 4,"content": "Johnson & Johnson|http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/12031.pass99.1.Johnson%20%20Johnson.12242536.jpg.THCROPSIZED.jpg","option1": "US$ 243B to 364B","option2": "US$ 61B to 152B","option3": "US$ 607B to 667B","option4": "US$ 910B to 758B"}]}';
-            gameDTO = JSON.parse(gameDTO);
-            this.game = new PopQuiz.Game(gameDTO);
+            //var gameDTO = '{"id": 61, "createdByUserId": 6627, "createdAtUtc": "2014-11-03T09:16:58", "opponentUserId": 2415, "questionSet": [{ "id": 2146,"category": 1,"content": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/37880.pass99.1.Canadian%20Imperial%20Bank%20Of%20Commerce.34894176.jpg.THCROPSIZED.jpg","option1": "Canadian Imperial Bank O","option2": "Great West Lifeco Pref S","option3": "Brookfield Canada Office","option4": "Alderon Iron Ore Corp"}, {"id": 1987,"category": 1,"content": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/13568.pass0.11.Wells%20Fargo%20%20Company.-1122850473.jpg.THCROPSIZED.jpg","option1": "Wells Fargo & Company","option2": "Meritage Corp","option3": "Neenah Paper","option4": "Neophotonics Corp"}, {"id": 3059,"category": 11,"content": "EPS stands for","option1": "Earnings Per Share","option2": "Earned Profit ","option3": "Estimated Profit","option4": "None"}, {"id": 2354,"category": 2,"content": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/12769.pass1.1.Pepsico.1750142287THCROPSIZED.jpg","option1": "PEP","option2": "NMR","option3": "GHL","option4": "BHLB"}, {"id": 3068,"category": 11,"content": "When you purchase a share of a company, you have","option1": "Ownership","option2": "Right to ownership","option3": "All of the above","option4": "None"}, {"id": 2546,"category": 4,"content": "Kraft Foods Inc.|http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/16901.pass0.2.Kraft%20Foods%20Inc.-2109853024.gif.THCROPSIZED.gif","option1": "US$ 48B to 71B","option2": "US$ 12B to 30B","option3": "US$ 119B to 131B","option4": "US$ 178B to 149B"}, {"id": 2467,"category": 4,"content": "Johnson & Johnson|http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/12031.pass99.1.Johnson%20%20Johnson.12242536.jpg.THCROPSIZED.jpg","option1": "US$ 243B to 364B","option2": "US$ 61B to 152B","option3": "US$ 607B to 667B","option4": "US$ 910B to 758B"}]}';
+            //gameDTO = JSON.parse(gameDTO);
+            this.game = Config.getCurrentGame();
             if (!$.isEmptyObject(this.game)) {
                 this.lastTime = Date.now();
                 this.loop();
@@ -337,7 +337,7 @@
             var profilePicCenterY = profilePicY + profilePicRadius;
             var selfProfilePicX = 30;
             var selfPlayerProfilePic = new UI.RoundImageView(selfProfilePicX, profilePicY, profilePicRadius,
-                Assets.images().test_profile_pic2);
+                Assets.images().self_pp);
             var selfPlayerScoreLabelX = selfProfilePicX + profilePicRadius * 2 + 20;
             var selfPlayerScoreLabel = new UI.Label(selfPlayerScoreLabelX, profilePicCenterY, PopQuiz.currentWidth / 5,
                 30, this.selfScore.toString());
@@ -347,7 +347,7 @@
             selfPlayerScoreLabel.text_color = "white";
             selfPlayerScoreLabel.text_allign = "left";
             var selfPlayerNameLabel = new UI.Label(selfPlayerScoreLabelX, profilePicCenterY, PopQuiz.currentWidth / 4,
-                30, "Li Hao");
+                30, Config.getCurrentUserContext().displayName);
             selfPlayerNameLabel.text_baseline = "top";
             selfPlayerNameLabel.font_weight = "normal";
             selfPlayerNameLabel.font_size = "1.3";
@@ -356,7 +356,7 @@
 
             var awayProfilePicX = PopQuiz.currentWidth - profilePicRadius * 2 - 30;
             var awayPlayerProfilePic = new UI.RoundImageView(awayProfilePicX, profilePicY, profilePicRadius,
-                Assets.images().test_profile_pic);
+                Assets.images().opp_pp);
             var awayPlayerScoreLabelX = awayProfilePicX - 20;
             var awayPlayerScoreLabel = new UI.Label(awayPlayerScoreLabelX, profilePicCenterY, PopQuiz.currentWidth / 5,
                 30, this.awayScore.toString());
@@ -366,7 +366,7 @@
             awayPlayerScoreLabel.text_color = "white";
             awayPlayerScoreLabel.text_allign = "right";
             var awayPlayerNameLabel = new UI.Label(awayPlayerScoreLabelX, profilePicCenterY, PopQuiz.currentWidth / 4,
-                30, "James Lai");
+                30, Config.getOpponentUserContext().displayName);
             awayPlayerNameLabel.text_baseline = "top";
             awayPlayerNameLabel.font_weight = "normal";
             awayPlayerNameLabel.font_size = "1.3";
@@ -477,7 +477,7 @@
                 switch (question.questionType) {
                     case Type.QuestionType.LogoType:
                         if (question.questionImageURLString !== "") {
-                            // filter effect. e.g. swirl effect
+                            // TODO filter effect. e.g. swirl effect
 
                         }
                         break;
@@ -486,28 +486,29 @@
                 }
             } else {
                 if (question.accesoryImageContent !== "") {
-                    var contentTextLabelHeight = contentViewHeight * 0.25;
-                    var contentTextLabelY = contentViewY + contentTextLabelHeight / 2;
-                    var contentImageViewWidth = contentViewWidth * 0.8;
-                    var contentImageViewHeight = (contentViewHeight * 0.75) * 0.9;
-                    var contentImageViewX = contentViewWidth / 2 - contentImageViewWidth / 2;
-                    var contentImageViewY = contentViewY + contentTextLabelHeight + ((contentViewHeight * 0.75 - contentImageViewHeight) / 2);
-                    var contentTextLabel = new UI.Label(contentViewWidth / 2, contentTextLabelY, contentViewWidth, 30, question.questionContent);
+                    contentTextLabelHeight = contentViewHeight * 0.25;
+                    contentTextLabelY = contentViewY + contentTextLabelHeight / 2;
+                    contentImageViewWidth = contentViewWidth * 0.8;
+                    contentImageViewHeight = (contentViewHeight * 0.75) * 0.9;
+                    contentImageViewX = contentViewWidth / 2 - contentImageViewWidth / 2;
+                    contentImageViewY = contentViewY + contentTextLabelHeight + ((contentViewHeight * 0.75 - contentImageViewHeight) / 2);
+                    contentTextLabel = new UI.Label(contentViewWidth / 2, contentTextLabelY, contentViewWidth, 30, question.questionContent);
                     contentTextLabel.font_size = "1.5";
                     contentTextLabel.text_baseline = "alphabetic";
                     contentTextLabel.text_color = "white";
                     contentTextLabel.alpha = this.questionViewAlpha;
 
-                    var questionImage = new Image();
+                    questionImage = new Image();
                     questionImage.src = question.accesoryImageContent;
-                    var contentImageView = new UI.ImageView(contentImageViewX, contentImageViewY, contentImageViewWidth,
+
+                    contentImageView = new UI.ImageView(contentImageViewX, contentImageViewY, contentImageViewWidth,
                         contentImageViewHeight, questionImage);
                     contentImageView.alpha = this.questionViewAlpha;
 
                     contentView.addSubview(contentTextLabel);
                     contentView.addSubview(contentImageView);
                 } else {
-                    var contentTextLabel = new UI.Label(contentViewWidth / 2, contentViewHeight / 2 + contentViewY, contentViewWidth, 30, question.questionContent);
+                    contentTextLabel = new UI.Label(contentViewWidth / 2, contentViewHeight / 2 + contentViewY, contentViewWidth, 30, question.questionContent);
                     contentTextLabel.font_size = "1.5";
                     contentTextLabel.text_baseline = "middle";
                     contentTextLabel.text_color = "white";
@@ -521,6 +522,7 @@
 
         setUpOptionSetViewWithOption: function (optionSet) {
             var removeTwoOptionButtonGap = 22;
+
             if (PopQuiz.ua_isMobile) {
                 removeTwoOptionButtonGap *= PopQuiz.ua_mobile_scale;
             }

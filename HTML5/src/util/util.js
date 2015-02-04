@@ -59,12 +59,23 @@ var Utility = (function () {
 
         Input.registeredControls = [];
     };
+
+    var _getParameterByName = function (name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    };
+
     //public interface
     return {
         version: "0.0.1",
         isMobile: _isMobile,
         clearCurrentView: function () {
             _clearCurrentView()
+        },
+        getQueryParameter: function(parameterName){
+            return _getParameterByName(parameterName);
         }
     }
 })();

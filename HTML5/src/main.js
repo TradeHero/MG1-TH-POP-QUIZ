@@ -25,15 +25,39 @@ window.requestAnimFrame = (function () {
         };
 })();
 
+var API = (function (hostURI) {
+
+    var gameURI = hostURI + "/games/";
+    return {
+        getClosedChallengesURI: function () {
+            return gameURI + "closed";
+        },
+        postGameResultsURI: function () {
+            return gameURI + "postResults"
+        },
+        getResultForGameURI: function (gameId) {
+            return gameURI + gameId + "/results";
+        },
+        getCurrentUserURI: function (accessToken) {
+            return hostURI + "login";
+        }
+    }
+}("https://www.tradehero.mobi/api/"));
+
 
 var PopQuiz = {
-    WIDTH: window.innerWidth,
-    HEIGHT: window.innerHeight,
-    RATIO: 0,
-
+    width: window.innerWidth,
+    height: window.innerHeight,
+    ratio: 0,
     currentWidth: 0,
     currentHeight: 0,
+    /**
+     * @type {?HTMLElement}
+     */
     canvas: null,
+    /**
+     * @type {?CanvasRenderingContext2D}
+     */
     ctx: null,
 
     scale: 1,
@@ -45,19 +69,19 @@ var PopQuiz = {
     init: function () {
         if (!Utility.isMobile.any()) {
             PopQuiz.ua_isMobile = false;
-            PopQuiz.RATIO = 0.75;
-            PopQuiz.WIDTH = PopQuiz.HEIGHT * PopQuiz.RATIO;
-            PopQuiz.currentWidth = PopQuiz.WIDTH;
-            PopQuiz.currentHeight = PopQuiz.HEIGHT;
+            PopQuiz.ratio = 0.75;
+            PopQuiz.width = PopQuiz.height * PopQuiz.ratio;
+            PopQuiz.currentWidth = PopQuiz.width;
+            PopQuiz.currentHeight = PopQuiz.height;
         } else {
-            PopQuiz.RATIO = PopQuiz.WIDTH / PopQuiz.HEIGHT;
-            PopQuiz.currentWidth = PopQuiz.WIDTH;
-            PopQuiz.currentHeight = PopQuiz.HEIGHT;
+            PopQuiz.ratio = PopQuiz.width / PopQuiz.height;
+            PopQuiz.currentWidth = PopQuiz.width;
+            PopQuiz.currentHeight = PopQuiz.height;
         }
 
         PopQuiz.canvas = document.getElementById('mainCanvas');
-        PopQuiz.canvas.width = PopQuiz.WIDTH;
-        PopQuiz.canvas.height = PopQuiz.HEIGHT;
+        PopQuiz.canvas.width = PopQuiz.width;
+        PopQuiz.canvas.height = PopQuiz.height;
         PopQuiz.ctx = PopQuiz.canvas.getContext('2d');
 
         // listen for clicks
@@ -84,6 +108,8 @@ var PopQuiz = {
         PopQuiz.resize();
 
         Assets.initialise({
+            "self_pp" : Config.getCurrentUserContext().pictureURL,
+            "opp_pp" : Config.getOpponentUserContext().pictureURL,
             "load_bg": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/Background.png",
             "logo": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/profile_pic.jpg",
             "quiz_bg": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/quiz_bg.png",
@@ -91,7 +117,7 @@ var PopQuiz = {
             "test_profile_pic2": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeheroprofilepictures/BodyPart_58f65315-7ece-436c-bf90-7034afa64875",
             "bar_bg": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/bar_bg.png",
             "remove2": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/minigame1/html5_resources/remove2.png"
-        }, function(){
+        }, function () {
             var mainWindow = new UI.View(0, 0, PopQuiz.currentWidth, PopQuiz.currentHeight);
             PopQuiz.Launch.init(mainWindow);
         });
@@ -103,7 +129,7 @@ var PopQuiz = {
         PopQuiz.currentHeight = window.innerHeight;
 
         // resize width follow the ratio
-        PopQuiz.currentWidth = PopQuiz.currentHeight * PopQuiz.RATIO;
+        PopQuiz.currentWidth = PopQuiz.currentHeight * PopQuiz.ratio;
 
         // this will create some extra space on the
         // page, allowing us to scroll past
@@ -119,7 +145,7 @@ var PopQuiz = {
             window.scrollTo(0, 1);
         }, 1);
 
-        PopQuiz.scale = PopQuiz.currentWidth / PopQuiz.WIDTH;
+        PopQuiz.scale = PopQuiz.currentWidth / PopQuiz.width;
         PopQuiz.offset.top = PopQuiz.canvas.offsetTop;
         PopQuiz.offset.left = PopQuiz.canvas.offsetLeft;
     }
@@ -128,24 +154,93 @@ var PopQuiz = {
 window.addEventListener('load', PopQuiz.init, false);
 window.addEventListener('resize', PopQuiz.resize, false);
 
-(function () {
-    "use strict";
-    PopQuiz.Config = {};
+
+var Config = (function () {
     /**
-     * Constructs a UID for the instance.
-     * @constructor
+     *
+     * @type {PopQuiz.THUser}
      */
-    PopQuiz.UID = function () {
-        throw "UID cannot be instantiated";
-    };
-    PopQuiz.UID._nextID = 0;
+    var _currentUserContext = null;
     /**
-     * Get UID.
-     * @returns {number}
+     *
+     * @type {PopQuiz.THUser}
      */
-    PopQuiz.UID.get = function () {
-        return PopQuiz.UID._nextID++;
-    };
+    var _opponentUserContext = null;
+
+    /**
+     *
+     * @type {PopQuiz.Game}
+     * @private
+     */
+    var _currentGame = null;
+
+    /**
+     * @type {number}
+     */
+    var _parentGameId;
+    return {
+        /**
+         *
+         * @param encodedDTO {string}
+         */
+        setCurrentUserContext: function (encodedDTO) {
+            var dto = JSON.parse(Base64.decode(encodedDTO));
+            _currentUserContext = new PopQuiz.THUser(dto);
+        },
+        /**
+         *
+         * @returns {PopQuiz.THUser}
+         */
+        getCurrentUserContext: function () {
+            return _currentUserContext;
+        },
+        /**
+         *
+         * @param encodedDTO {string}
+         */
+        setOpponentUserContext: function(encodedDTO){
+            var dto = JSON.parse(Base64.decode(encodedDTO));
+            _opponentUserContext = new PopQuiz.THUser(dto);
+        },
+        /**
+         *
+         * @returns {PopQuiz.THUser}
+         */
+        getOpponentUserContext: function () {
+            return _opponentUserContext;
+        },
+        /**
+         *
+         * @returns {PopQuiz.Game}
+         */
+        getCurrentGame: function(){
+            return _currentGame;
+        },
+        /**
+         *
+         * @param encodedDTO {string}
+         */
+        setCurrentGame: function(encodedDTO){
+            var gameDTO = JSON.parse(Base64.decode(encodedDTO));
+            _currentGame = new PopQuiz.Game(gameDTO)
+        },
+
+        /**
+         *
+         * @returns {number}
+         */
+        getParentGameId : function(){
+            return _parentGameId;
+        },
+
+        /**
+         *
+         * @param parentId {number}
+         */
+        setParentGameId: function(parentId){
+            _parentGameId = parentId;
+        }
+    }
 }());
 
 function debug(message) {
@@ -162,7 +257,7 @@ Array.prototype.clone = function () {
     return this.slice(0);
 };
 
-Array.prototype.shuffle = function(){
+Array.prototype.shuffle = function () {
     var clonedArray = this.clone();
     for (var j, x, i = clonedArray.length; i; j = parseInt(Math.random() * i), x = clonedArray[--i], clonedArray[i] = clonedArray[j], clonedArray[j] = x);
     return clonedArray

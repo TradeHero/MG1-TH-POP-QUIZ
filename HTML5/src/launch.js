@@ -38,13 +38,13 @@
             var challengerProfileImageViewX = PopQuiz.Launch.mainWindowCenterX - challengerProfileImageViewRadius;
             var challengerProfileImageViewY = challengerWindow.height * 0.15;
             var challengerProfileImageView = new UI.RoundImageView(challengerProfileImageViewX,
-                challengerProfileImageViewY, challengerProfileImageViewRadius, Assets.images().test_profile_pic);
+                challengerProfileImageViewY, challengerProfileImageViewRadius, Assets.images().opp_pp);
 
             // init for challenge msg
             var challengeLabelY = challengerProfileImageView.height + challengerProfileImageView.y +
                 PopQuiz.Launch.mainWindow.height * 0.1;
             var challengeLabel = new UI.Label(PopQuiz.Launch.mainWindowCenterX, challengeLabelY, challengerWindowWidth,
-                70, "James Lai has challenged you!");
+                70, Config.getOpponentUserContext().displayName + " has challenged you!");
 
             // init for accept challenge button
             var continueButtonWidth = challengerWindow.width * 0.8;
@@ -57,7 +57,6 @@
             continueButton.addTarget(function () {
                 Utility.clearCurrentView();
                 PopQuiz.GameScene.init(PopQuiz.Launch.mainWindow);
-                //LocalyticsSession.tagEvent("MG1UserAcceptChallenge");
             }, "touch");
 
             challengerWindow.background_color = "rgba(117, 168, 239, 0.98)";
@@ -65,10 +64,10 @@
             challengerWindow.addSubview(challengerProfileImageView);
             challengerWindow.addSubview(challengeLabel);
             challengerWindow.addSubview(continueButton);
-            console.log("MainWindow");
-            console.log(PopQuiz.Launch.mainWindow);
-            console.log("ChallengerWindow");
-            console.log(challengerWindow);
+            //console.log("MainWindow");
+            //console.log(PopQuiz.Launch.mainWindow);
+            //console.log("ChallengerWindow");
+            //console.log(challengerWindow);
         }
     }
 }());
