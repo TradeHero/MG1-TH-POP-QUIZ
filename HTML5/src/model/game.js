@@ -6,6 +6,10 @@
         this.createdAtUTCStr = gameDTO["createdAtUtc"];
         this.initiatingPlayerId = gameDTO["createdByUserId"];
         this.opponentPlayerId = gameDTO["opponentUserId"];
+        /**
+         *
+         * @type {PopQuiz.Question[]}
+         */
         this.questionSet = [];
 
         var questionSet = gameDTO["questionSet"];

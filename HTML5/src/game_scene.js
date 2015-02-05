@@ -24,15 +24,22 @@
 
     "use strict";
     PopQuiz.GameScene = {
-        // game JSON
-        game: "",
+        /**
+         * @type {PopQuiz.Game}
+         */
+        game: null,
 
+
+        /**
+         * @type {PopQuiz.Question[]}
+         */
+        questionResults: [],
         // time for calculate fps, max on 60 due to rAF
         delta: 0,
         currentTime: 0,
         startTime: 0,
         lastTime: 0,
-
+        basicScorePerQuestion: 1000,
         // game view & game object
         mainWindow: undefined,
         optionSetView: undefined,
@@ -57,8 +64,8 @@
 
         // player's score
         selfScore: 0,
-        awayScore: 100000,
-        hitUsed: 0,
+        awayScore: 0,
+        hintsUsed: 0,
         combo: 0,
 
         // keep track game status
@@ -69,13 +76,17 @@
         countdownTimerStop: true,
         questionLoaded: false,
 
+        //UI
+        /**
+         * @type {UI.Label}
+         */
+        selfPlayerScoreLabel: null,
+
         init: function (mainWindow) {
             this.mainWindow = mainWindow;
             this.mainWindow.subviews = [];
 
             // for testing
-            //var gameDTO = '{"id": 61, "createdByUserId": 6627, "createdAtUtc": "2014-11-03T09:16:58", "opponentUserId": 2415, "questionSet": [{ "id": 2146,"category": 1,"content": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/37880.pass99.1.Canadian%20Imperial%20Bank%20Of%20Commerce.34894176.jpg.THCROPSIZED.jpg","option1": "Canadian Imperial Bank O","option2": "Great West Lifeco Pref S","option3": "Brookfield Canada Office","option4": "Alderon Iron Ore Corp"}, {"id": 1987,"category": 1,"content": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/13568.pass0.11.Wells%20Fargo%20%20Company.-1122850473.jpg.THCROPSIZED.jpg","option1": "Wells Fargo & Company","option2": "Meritage Corp","option3": "Neenah Paper","option4": "Neophotonics Corp"}, {"id": 3059,"category": 11,"content": "EPS stands for","option1": "Earnings Per Share","option2": "Earned Profit ","option3": "Estimated Profit","option4": "None"}, {"id": 2354,"category": 2,"content": "http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/12769.pass1.1.Pepsico.1750142287THCROPSIZED.jpg","option1": "PEP","option2": "NMR","option3": "GHL","option4": "BHLB"}, {"id": 3068,"category": 11,"content": "When you purchase a share of a company, you have","option1": "Ownership","option2": "Right to ownership","option3": "All of the above","option4": "None"}, {"id": 2546,"category": 4,"content": "Kraft Foods Inc.|http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/16901.pass0.2.Kraft%20Foods%20Inc.-2109853024.gif.THCROPSIZED.gif","option1": "US$ 48B to 71B","option2": "US$ 12B to 30B","option3": "US$ 119B to 131B","option4": "US$ 178B to 149B"}, {"id": 2467,"category": 4,"content": "Johnson & Johnson|http://portalvhdskgrrf4wksb8vq.blob.core.windows.net/tradeherocompanypictures/12031.pass99.1.Johnson%20%20Johnson.12242536.jpg.THCROPSIZED.jpg","option1": "US$ 243B to 364B","option2": "US$ 61B to 152B","option3": "US$ 607B to 667B","option4": "US$ 910B to 758B"}]}';
-            //gameDTO = JSON.parse(gameDTO);
             this.game = Config.getCurrentGame();
             if (!$.isEmptyObject(this.game)) {
                 this.lastTime = Date.now();
@@ -220,6 +231,7 @@
                         // effect for showing correct option
                         if (this.optionButtons[i].is_answer) {
                             this.optionButtons[i].background_color = "rgb(180, 236, 81)";
+
                         }
                     }
                 }
@@ -257,6 +269,7 @@
                         });
                     } else {
                         // render result scene
+                        console.log(this.selfScore);
                     }
                 }
             }
@@ -339,13 +352,13 @@
             var selfPlayerProfilePic = new UI.RoundImageView(selfProfilePicX, profilePicY, profilePicRadius,
                 Assets.images().self_pp);
             var selfPlayerScoreLabelX = selfProfilePicX + profilePicRadius * 2 + 20;
-            var selfPlayerScoreLabel = new UI.Label(selfPlayerScoreLabelX, profilePicCenterY, PopQuiz.currentWidth / 5,
+            this.selfPlayerScoreLabel = new UI.Label(selfPlayerScoreLabelX, profilePicCenterY, PopQuiz.currentWidth / 5,
                 30, this.selfScore.toString());
-            selfPlayerScoreLabel.text_baseline = "bottom";
-            selfPlayerScoreLabel.font_weight = "bold";
-            selfPlayerScoreLabel.font_size = "1.3";
-            selfPlayerScoreLabel.text_color = "white";
-            selfPlayerScoreLabel.text_allign = "left";
+            this.selfPlayerScoreLabel.text_baseline = "bottom";
+            this.selfPlayerScoreLabel.font_weight = "bold";
+            this.selfPlayerScoreLabel.font_size = "1.3";
+            this.selfPlayerScoreLabel.text_color = "white";
+            this.selfPlayerScoreLabel.text_allign = "left";
             var selfPlayerNameLabel = new UI.Label(selfPlayerScoreLabelX, profilePicCenterY, PopQuiz.currentWidth / 4,
                 30, Config.getCurrentUserContext().displayName);
             selfPlayerNameLabel.text_baseline = "top";
@@ -383,7 +396,7 @@
             this.mainWindow.addSubview(barBgImageView);
             this.mainWindow.addSubview(selfPlayerProfilePic);
             this.mainWindow.addSubview(awayPlayerProfilePic);
-            this.mainWindow.addSubview(selfPlayerScoreLabel);
+            this.mainWindow.addSubview(this.selfPlayerScoreLabel);
             this.mainWindow.addSubview(selfPlayerNameLabel);
             this.mainWindow.addSubview(awayPlayerScoreLabel);
             this.mainWindow.addSubview(awayPlayerNameLabel);
@@ -407,6 +420,7 @@
             this.removeTwoOptionButton.label.text_color = "white";
             this.removeTwoOptionButton.label.font_size = "1.5";
             this.removeTwoOptionButton.image = Assets.images().remove2;
+            var self = this;
             this.removeTwoOptionButton.addTarget(function (sender) {
                 //var optionButtons = Utility.array.shuffle(PopQuiz.GameScene.optionButtons);
                 var optionButtons = PopQuiz.GameScene.optionButtons.shuffle();
@@ -420,7 +434,7 @@
                     }
                 }
                 sender.enabled = false;
-                PopQuiz.GameScene.hintsUsed++;
+                self.hintsUsed++;
             }, "touch");
             this.removeTwoOptionButton.enabled = false;
             this.removeTwoOptionButton.alpha = 0.5;
@@ -521,6 +535,7 @@
         },
 
         setUpOptionSetViewWithOption: function (optionSet) {
+
             var removeTwoOptionButtonGap = 22;
 
             if (PopQuiz.ua_isMobile) {
@@ -564,24 +579,52 @@
                     this.optionButtons[i].enabled = false;
 
                     // action for wrong option is selected
-                    this.optionButtons[i].addTarget(function (sender) {
-                        PopQuiz.GameScene.answerWrong = true;
-                        PopQuiz.GameScene.selectedWrongButton = sender;
-                    }, "touch");
-
-                    // set up for correct option
-                    if (optionSet.allOption[i] === optionSet.correctOption) {
-                        this.optionButtons[i].is_answer = true;
-
-                        // action for correct option is selected
-                        this.optionButtons[i].addTarget(function () {
-                            PopQuiz.GameScene.answerCorrect = true;
+                    (function(self){
+                        self.optionButtons[i].addTarget(function (sender) {
+                            PopQuiz.GameScene.answerWrong = true;
+                            PopQuiz.GameScene.selectedWrongButton = sender;
+                            self.combo = 0;
+                            self.calculateScore(false);
                         }, "touch");
-                    }
+
+                        // set up for correct option
+                        if (optionSet.allOption[i] === optionSet.correctOption) {
+                            self.optionButtons[i].is_answer = true;
+
+                            // action for correct option is selected
+                            self.optionButtons[i].addTarget(function () {
+                                PopQuiz.GameScene.answerCorrect = true;
+                                self.combo++;
+                                self.calculateScore(true);
+                            }, "touch");
+                        }
+                    }(this));
+
                 }
             }
         },
 
+        /**
+         *
+         * @param questionCorrect
+         * @returns {number}
+         */
+        calculateScore: function(questionCorrect){
+            var timeLeftBonus = this.getTimeBonus(this.countDownTimer);
+            var comboBonus = this.getComboBonus();
+            var hintPenalty = this.getHintPenalty();
+            var correctiveFactor = questionCorrect ? 1.0 : 0.0;
+            var score = this.basicScorePerQuestion * timeLeftBonus * correctiveFactor * comboBonus * hintPenalty;
+            this.selfScore += score;
+            this.selfPlayerScoreLabel.text = this.selfScore.toString();
+            return Math.floor(score);
+        },
+
+
+        /**
+         *
+         * @returns {number}
+         */
         getHintPenalty: function () {
             switch (this.hintsUsed) {
                 case 0:
@@ -595,6 +638,10 @@
             }
         },
 
+        /**
+         *
+         * @returns {number}
+         */
         getComboBonus: function () {
             switch (this.combo) {
                 case 0:
@@ -609,6 +656,35 @@
                     return 4;
                 default:
                     return 5;
+            }
+        },
+
+        /**
+         *
+         * @param timeLeft {number}
+         * @returns {number}
+         */
+        getTimeBonus: function (timeLeft) {
+            var timeRange = (15 - timeLeft) / 15.0 * 100;
+            switch (true) {
+                case ((timeRange >= 0) && (timeRange < 0.5)):
+                    return 10;
+                case ((timeRange >= 0.5) && (timeRange <= 5)):
+                    return 5;
+                case ((timeRange >= 5) && (timeRange < 10)):
+                    return 2;
+                case ((timeRange >= 10) && (timeRange < 20)):
+                    return 1.5;
+                case ((timeRange >= 20) && (timeRange < 30)):
+                    return 1.2;
+                case ((timeRange >= 30) && (timeRange < 50)):
+                    return 1;
+                case ((timeRange >= 50) && (timeRange < 70)):
+                    return 0.8;
+                case ((timeRange >= 70) && (timeRange < 100)):
+                    return 0.4;
+                default:
+                    return 0;
             }
         }
     }
