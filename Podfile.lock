@@ -7,7 +7,7 @@ PODS:
     - SKBounceAnimation
   - DZNSegmentedControl (1.2.2)
   - EGOCache (2.1)
-  - Facebook-iOS-SDK (3.22.0):
+  - Facebook-iOS-SDK (3.23.0):
     - Bolts (~> 1.0)
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
@@ -48,7 +48,7 @@ DEPENDENCIES:
   - ChatHeads (~> 1.0)
   - DZNSegmentedControl (~> 1.2.2)
   - EGOCache (~> 2.1)
-  - Facebook-iOS-SDK (~> 3.22.0)
+  - Facebook-iOS-SDK (~> 3.23.0)
   - FormatterKit (~> 1.8.0)
   - GPUImage (~> 0.1.6)
   - JGProgressHUD (~> 1.2.3)
@@ -67,7 +67,7 @@ SPEC CHECKSUMS:
   ChatHeads: 1b66a3ca6ae25e6ce04eb64485cf96b43b74bbcc
   DZNSegmentedControl: daa91d107904f7433e73852477f08450575be331
   EGOCache: bf414333c425fe47f5182351d1dd47ebf72d8352
-  Facebook-iOS-SDK: 0eda8ff7120aada0a9c5f98552f7625da6c3440a
+  Facebook-iOS-SDK: 3d65f685348b789e46a9aacf92bfa85b60b63755
   FormatterKit: 547a808c41172136a3f3acb424ac9361d38bb32f
   GPUImage: cecb0830bb9428f50192042e3c7b53810f51388e
   JGProgressHUD: 733523c80f69b6dfc41b88a0f33883a89a8b4c3b
