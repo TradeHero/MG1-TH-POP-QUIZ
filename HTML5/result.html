@@ -2,45 +2,89 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
     <title></title>
     <link href="css/reset.css" rel="stylesheet"/>
     <style>
         div#base-container {
             background: url('./resources/popquiz-result/popquiz-result-bg.png');
             position: absolute;
-            left:0;
-            right:0;
-            margin-left:auto;
-            margin-right:auto;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        div#selfBox,#awayBox{
+        div#selfBox, #awayBox {
             background: url('./resources/popquiz-result/popquiz-result-scorebox.png');
             background-size: contain;
             position: absolute;
         }
-    </style>
 
+        div#selfAvatar, #awayAvatar {
+            border-radius: 50%;
+            border: 2px solid #fff;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background: #fff;
+        }
+
+        span.user-name {
+            font-family: "Avenir Next", sans-serif;
+            font-size: 1.2em;
+            color: #fff;
+            font-weight: 400;
+            width: 200px;
+            display: inline-block;
+            position: relative;
+        }
+
+        span#versusSpan {
+            position: absolute;
+            font-family: "Avenir Next", sans-serif;
+            font-size: 2em;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
 <div id="base-container">
-    <div id="selfBox"></div>
-    <div id="awayBox"></div>
+    <div id="selfBox">
+        <div id="selfAvatar">
+            <span class="user-name" id="selfUserName">Ryne Cheow</span>
+        </div>
+
+    </div>
+    <span id="versusSpan">VS</span>
+    <div id="awayBox">
+        <div id="awayAvatar">
+            <span class="user-name" id="awayUserName">James Lai</span>
+        </div>
+    </div>
 </div>
 <script>
+    var selfAvatarUrl = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/10897857_10152660162678602_6790690705278772203_n.jpg?oh=8780f221df3a3aae66a05fe2148b8c4a&oe=559394A0&__gda__=1431074230_4a51cab2b7edc62e3bd23317e40a2c7b';
+    var awayAvatarUrl = './resources/profile_pic.jpg'
+</script>
+<script>
+    //UI auto-resizing/layouting
     var baseContainer = document.getElementById("base-container");
     var selfBox = document.getElementById("selfBox");
     var awayBox = document.getElementById("awayBox");
+    var selfAvatar = document.getElementById("selfAvatar");
+    var awayAvatar = document.getElementById("awayAvatar");
+    var versusSpan = document.getElementById("versusSpan");
 
-    var baseHeight =  window.innerHeight;
+    /////////////////// BASE ///////////////////
+    var baseHeight = window.innerHeight;
     var baseWidth = window.innerHeight * 0.75;
     baseContainer.style.height = baseHeight + "px";
     baseContainer.style.width = baseWidth + "px";
 
-    /////////////////// BASE ///////////////////
+    /////////////////// SELF BOX ///////////////////
 
-    var selfAwayWHRatio = 258/121;
+    var selfAwayWHRatio = 258 / 121;
     var selfBoxWidth = baseWidth * 0.4;
     var selfBoxHeight = selfBoxWidth / selfAwayWHRatio;
     selfBox.style.width = selfBoxWidth + 'px';
@@ -51,7 +95,33 @@
     selfBox.style.top = selfAwayBoxTop + 'px';
     selfBox.style.left = selfBoxLeft + 'px';
 
-    /////////////////// SELF BOX ///////////////////
+    ///////// self avatar ///////
+    var selfAvatarTop = selfBoxHeight * 0.1;
+    var selfAvatarLeft = selfBoxWidth * 0.05;
+    selfAvatar.style.top = selfAvatarTop + 'px';
+    selfAvatar.style.left = selfAvatarLeft + 'px';
+
+    var selfAvatarHeight = selfBoxHeight * 0.7;
+    selfAvatar.style.width = selfAvatarHeight + 'px';
+    selfAvatar.style.height = selfAvatarHeight + 'px';
+
+    if (selfAvatarUrl != null) {
+        selfAvatar.style.background = 'url(\'' + selfAvatarUrl + '\')';
+        selfAvatar.style.backgroundSize = 'cover';
+    }
+
+    //username span
+    var selfUserNameSpan = document.getElementById('selfUserName');
+    var selfUserNameSpanWidth = 0.6 * selfBoxWidth;
+    var selfUserNameSpanHeight = 0.1 * selfBoxHeight;
+    selfUserNameSpan.style.width = selfUserNameSpanWidth + 'px';
+    selfUserNameSpan.style.height = selfUserNameSpanHeight + 'px';
+
+    var selfUserNameSpanTop = selfBoxHeight * 0.25;
+    var selfUserNameSpanLeft = selfBoxWidth * 0.05 + selfAvatarHeight;
+    selfUserNameSpan.style.top = selfUserNameSpanTop + 'px';
+    selfUserNameSpan.style.left = selfUserNameSpanLeft + 'px';
+    /////////////////// AWAY BOX ///////////////////
 
     var awayBoxWidth = baseWidth * 0.4;
     var awayBoxHeight = awayBoxWidth / selfAwayWHRatio;
@@ -62,7 +132,37 @@
     awayBox.style.top = selfAwayBoxTop + 'px';
     awayBox.style.left = awayBoxLeft + 'px';
 
-    /////////////////// AWAY BOX ///////////////////
+    ///////// AWAY avatar ///////
+    var awayAvatarTop = awayBoxHeight * 0.1;
+    var awayAvatarLeft = awayBoxWidth * 0.05;
+    awayAvatar.style.top = awayAvatarTop + 'px';
+    awayAvatar.style.left = awayAvatarLeft + 'px';
+
+    var awayAvatarHeight = awayBoxHeight * 0.7;
+    awayAvatar.style.width = awayAvatarHeight + 'px';
+    awayAvatar.style.height = awayAvatarHeight + 'px';
+    if (awayAvatarUrl) {
+        awayAvatar.style.background = 'url(\'' + awayAvatarUrl + '\')';
+        awayAvatar.style.backgroundSize = 'cover';
+    }
+    //username span
+    var awayUserNameSpan = document.getElementById('awayUserName');
+    var awayUserNameSpanWidth = 0.6 * awayBoxWidth;
+    var awayUserNameSpanHeight = 0.1 * awayBoxHeight;
+    awayUserNameSpan.style.width = awayUserNameSpanWidth + 'px';
+    awayUserNameSpan.style.height = awayUserNameSpanHeight + 'px';
+
+    var awayUserNameSpanTop = awayBoxHeight * 0.25;
+    var awayUserNameSpanLeft = awayBoxWidth * 0.05 + awayAvatarHeight;
+    awayUserNameSpan.style.top = awayUserNameSpanTop + 'px';
+    awayUserNameSpan.style.left = awayUserNameSpanLeft + 'px';
+
+    /////////////////// VERSUS SPAN ///////////////////
+    var versusSpanLeft = 1.15* selfBoxWidth;
+    var versusSpanTop = 1.5 * selfAwayBoxTop;
+
+    versusSpan.style.left = versusSpanLeft + 'px';
+    versusSpan.style.top = versusSpanTop + 'px';
 </script>
 </body>
 </html>
