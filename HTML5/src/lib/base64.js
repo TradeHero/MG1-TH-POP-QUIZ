@@ -1,23 +1,24 @@
-
 /**
  *
  *  Base64 encode / decode
  *  http://www.webtoolkit.info/
  *
  **/
+var Base64 = (function () {
+    var _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
-var Base64 = {
-
-    // private property
-    _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-
-    // public method for encoding
-    encode : function (input) {
+    /**
+     *
+     * @param input {string}
+     * @returns {string}
+     * @private
+     */
+    var _encode = function (input) {
         var output = "";
         var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
         var i = 0;
 
-        input = Base64._utf8_encode(input);
+        input = _utf8_encode(input);
 
         while (i < input.length) {
 
@@ -37,16 +38,21 @@ var Base64 = {
             }
 
             output = output +
-            this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
-            this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+            _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
+            _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
 
         }
 
         return output;
-    },
+    };
 
-    // public method for decoding
-    decode : function (input) {
+    /**
+     *
+     * @param input {string}
+     * @returns {string}
+     * @private
+     */
+    var _decode = function (input) {
         var output = "";
         var chr1, chr2, chr3;
         var enc1, enc2, enc3, enc4;
@@ -56,10 +62,10 @@ var Base64 = {
 
         while (i < input.length) {
 
-            enc1 = this._keyStr.indexOf(input.charAt(i++));
-            enc2 = this._keyStr.indexOf(input.charAt(i++));
-            enc3 = this._keyStr.indexOf(input.charAt(i++));
-            enc4 = this._keyStr.indexOf(input.charAt(i++));
+            enc1 = _keyStr.indexOf(input.charAt(i++));
+            enc2 = _keyStr.indexOf(input.charAt(i++));
+            enc3 = _keyStr.indexOf(input.charAt(i++));
+            enc4 = _keyStr.indexOf(input.charAt(i++));
 
             chr1 = (enc1 << 2) | (enc2 >> 4);
             chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
@@ -76,15 +82,20 @@ var Base64 = {
 
         }
 
-        output = Base64._utf8_decode(output);
+        output = _utf8_decode(output);
 
         return output;
 
-    },
+    };
 
-    // private method for UTF-8 encoding
-    _utf8_encode : function (string) {
-        string = string.replace(/\r\n/g,"\n");
+    /**
+     *
+     * @param string {string}
+     * @returns {string}
+     * @private
+     */
+    var _utf8_encode = function (string) {
+        string = string.replace(/\r\n/g, "\n");
         var utftext = "";
 
         for (var n = 0; n < string.length; n++) {
@@ -94,7 +105,7 @@ var Base64 = {
             if (c < 128) {
                 utftext += String.fromCharCode(c);
             }
-            else if((c > 127) && (c < 2048)) {
+            else if ((c > 127) && (c < 2048)) {
                 utftext += String.fromCharCode((c >> 6) | 192);
                 utftext += String.fromCharCode((c & 63) | 128);
             }
@@ -107,15 +118,20 @@ var Base64 = {
         }
 
         return utftext;
-    },
+    };
 
-    // private method for UTF-8 decoding
-    _utf8_decode : function (utftext) {
+    /**
+     *
+     * @param utftext {string}
+     * @returns {string}
+     * @private
+     */
+    var _utf8_decode = function (utftext) {
         var string = "";
         var i = 0;
         var c = c1 = c2 = 0;
 
-        while ( i < utftext.length ) {
+        while (i < utftext.length) {
 
             c = utftext.charCodeAt(i);
 
@@ -123,14 +139,14 @@ var Base64 = {
                 string += String.fromCharCode(c);
                 i++;
             }
-            else if((c > 191) && (c < 224)) {
-                c2 = utftext.charCodeAt(i+1);
+            else if ((c > 191) && (c < 224)) {
+                c2 = utftext.charCodeAt(i + 1);
                 string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
                 i += 2;
             }
             else {
-                c2 = utftext.charCodeAt(i+1);
-                c3 = utftext.charCodeAt(i+2);
+                c2 = utftext.charCodeAt(i + 1);
+                c3 = utftext.charCodeAt(i + 2);
                 string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
                 i += 3;
             }
@@ -138,6 +154,26 @@ var Base64 = {
         }
 
         return string;
-    }
+    };
 
-}
+    return {
+        /**
+         *
+         * @param stringToEncode {string}
+         * @returns {string}
+         * @constructor
+         */
+        Base64Encode: function (stringToEncode) {
+            return _encode(stringToEncode);
+        },
+        /**
+         *
+         * @param stringToDecode {string}
+         * @returns {string}
+         * @constructor
+         */
+        Base64Decode: function (stringToDecode) {
+            return _decode(stringToDecode);
+        }
+    }
+})();

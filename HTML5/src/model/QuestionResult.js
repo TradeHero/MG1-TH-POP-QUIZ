@@ -1,10 +1,10 @@
 (function () {
     /**
      *
-     * @param questionId
-     * @param timeTaken
-     * @param correct
-     * @param score
+     * @param questionId {number}
+     * @param timeTaken {number}
+     * @param correct {boolean}
+     * @param score {number}
      * @constructor
      */
     PopQuiz.QuestionResult = function QuestionResult(questionId, timeTaken, correct, score) {

@@ -25,24 +25,7 @@ window.requestAnimFrame = (function () {
         };
 })();
 
-var API = (function (hostURI) {
 
-    var gameURI = hostURI + "/games/";
-    return {
-        getClosedChallengesURI: function () {
-            return gameURI + "closed";
-        },
-        postGameResultsURI: function () {
-            return gameURI + "postResults"
-        },
-        getResultForGameURI: function (gameId) {
-            return gameURI + gameId + "/results";
-        },
-        getCurrentUserURI: function (accessToken) {
-            return hostURI + "login";
-        }
-    }
-}("https://www.tradehero.mobi/api/"));
 
 
 var PopQuiz = {
@@ -178,13 +161,22 @@ var Config = (function () {
      * @type {number}
      */
     var _parentGameId;
+
+    /**
+     * @type {string}
+     */
+    var _fbAccessToken;
+    /**
+     * @type {string}
+     */
+    var _host;
     return {
         /**
          *
          * @param encodedDTO {string}
          */
         setCurrentUserContext: function (encodedDTO) {
-            var dto = JSON.parse(Base64.decode(encodedDTO));
+            var dto = JSON.parse(Base64.Base64Decode(encodedDTO));
             _currentUserContext = new PopQuiz.THUser(dto);
         },
         /**
@@ -199,7 +191,7 @@ var Config = (function () {
          * @param encodedDTO {string}
          */
         setOpponentUserContext: function(encodedDTO){
-            var dto = JSON.parse(Base64.decode(encodedDTO));
+            var dto = JSON.parse(Base64.Base64Decode(encodedDTO));
             _opponentUserContext = new PopQuiz.THUser(dto);
         },
         /**
@@ -221,7 +213,7 @@ var Config = (function () {
          * @param encodedDTO {string}
          */
         setCurrentGame: function(encodedDTO){
-            var gameDTO = JSON.parse(Base64.decode(encodedDTO));
+            var gameDTO = JSON.parse(Base64.Base64Decode(encodedDTO));
             _currentGame = new PopQuiz.Game(gameDTO)
         },
 
@@ -239,9 +231,43 @@ var Config = (function () {
          */
         setParentGameId: function(parentId){
             _parentGameId = parentId;
+        },
+        /**
+         *
+         * @param token
+         */
+        setAuthToken: function(token){
+            _fbAccessToken = token;
+        },
+        /**
+         *
+         * @returns {string}
+         */
+        getAuthToken: function(){
+            return _fbAccessToken;
+        },
+
+        setHost: function(host){
+            _host = host;
+        },
+        getHost: function(){
+            return _host;
         }
     }
 }());
+
+var URI = (function (hostURI) {
+
+    return {
+        /**
+         *
+         * @returns {string}
+         */
+        resultPagePost: function () {
+            return hostURI + "/Result/";
+        }
+    }
+}(Config.getHost()+ "PopQuizWeb"));
 
 function debug(message) {
     "use strict";

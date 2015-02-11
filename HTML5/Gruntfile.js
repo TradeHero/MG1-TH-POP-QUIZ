@@ -17,6 +17,10 @@ module.exports = function (grunt) {
         //'src/lib/thcanvas.js',
 
 
+
+
+
+
         //UI
         'src/ui/base.js',
         'src/ui/view.js',
@@ -36,6 +40,9 @@ module.exports = function (grunt) {
         'src/model/QuestionResult.js',
         'src/model/THUser.js',
         'src/model/Game.js',
+
+        //client
+        'src/api/Client.js',
 
         //conf
         'src/conf.js'

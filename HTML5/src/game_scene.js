@@ -25,13 +25,18 @@
     "use strict";
     PopQuiz.GameScene = {
         /**
+         * @type {number}
+         */
+        animFrameId: 0,
+
+        /**
          * @type {PopQuiz.Game}
          */
         game: null,
 
 
         /**
-         * @type {PopQuiz.Question[]}
+         * @type {PopQuiz.QuestionResult[]}
          */
         questionResults: [],
         // time for calculate fps, max on 60 due to rAF
@@ -76,6 +81,11 @@
         countdownTimerStop: true,
         questionLoaded: false,
 
+        /**
+         * @type {PopQuiz.Question}
+         */
+        currentQuestion: null,
+
         //UI
         /**
          * @type {UI.Label}
@@ -88,6 +98,7 @@
 
             // for testing
             this.game = Config.getCurrentGame();
+            this.currentQuestion = this.game.questionSet[this.roundNumber];
             if (!$.isEmptyObject(this.game)) {
                 this.lastTime = Date.now();
                 this.loop();
@@ -95,23 +106,24 @@
         },
 
         loop: function () {
-            var self = this;
 
-            window.requestAnimFrame(function () {
-                self.loop();
-            });
-
+            var animFrameId = 0;
+            (function (self) {
+                animFrameId = window.requestAnimFrame(function () {
+                    self.loop();
+                });
+            }(this));
             fps.update();
             this.currentTime = Date.now();
             this.delta = (this.currentTime - this.lastTime) / 1000;
 
             this.load();
-            this.update();
+            this.update(animFrameId);
             this.render();
             this.lastTime = this.currentTime;
         },
 
-        update: function () {
+        update: function (animFrameId) {
             // update animation for round label
             this.roundLabelTimer += this.delta;
             UI.View.animate(1.5, 1, this.roundLabelTimer, function () {
@@ -244,6 +256,7 @@
                     this.removeTwoOptionButton.alpha = 0.5;
                     this.countdownTimerStop = true;
 
+
                     // correct answer is selected by user
                     if (this.answerCorrect === true) {
                         // calculate marks.
@@ -269,7 +282,15 @@
                         });
                     } else {
                         // render result scene
+                        var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+                        cancelAnimationFrame(animFrameId);
+                        var res = this.questionResults;
+                        Client.postResults(this.game.gameId, res, this.combo, this.hintsUsed)
+                            .then(function (data) {
+                                console.log("Hi" + data);
+                            });
                         console.log(this.selfScore);
+
                     }
                 }
             }
@@ -299,7 +320,7 @@
             this.setUpRemoveTwoOptionButton();
 
             if (this.questionViewAlpha > 0) {
-                this.setUpQuestionViewWithQuestion(this.game.questionSet[this.roundNumber]);
+                this.setUpQuestionViewWithQuestion(this.currentQuestion);
             }
         },
 
@@ -318,10 +339,20 @@
             this.optionButtons = [];
             this.optionsToRemove = [];
             this.answerCorrect = false;
-            this.timeout = false;
+            if(this.timeout){
+                //when timeout
+                if(this.timeout){
+                    console.log('timeout');
+                    this.timeout = false;
+                    this.combo = 0;
+                    var sc = this.calculateScore(false);
+                    this.produceResultForCurrentQuestion(false, sc);
+                }
+            }
+            //this.timeout = false;
             this.questionLoaded = false;
             this.selectedWrongButton = undefined;
-            this.roundNumber++;
+            this.currentQuestion = this.game.questionSet[++this.roundNumber];
         },
 
         setUpRoundLabel: function () {
@@ -579,12 +610,13 @@
                     this.optionButtons[i].enabled = false;
 
                     // action for wrong option is selected
-                    (function(self){
+                    (function (self) {
                         self.optionButtons[i].addTarget(function (sender) {
                             PopQuiz.GameScene.answerWrong = true;
                             PopQuiz.GameScene.selectedWrongButton = sender;
                             self.combo = 0;
-                            self.calculateScore(false);
+                            var sc = self.calculateScore(false);
+                            self.produceResultForCurrentQuestion(false, sc);
                         }, "touch");
 
                         // set up for correct option
@@ -595,7 +627,8 @@
                             self.optionButtons[i].addTarget(function () {
                                 PopQuiz.GameScene.answerCorrect = true;
                                 self.combo++;
-                                self.calculateScore(true);
+                                var sc = self.calculateScore(true);
+                                self.produceResultForCurrentQuestion(true, sc);
                             }, "touch");
                         }
                     }(this));
@@ -609,7 +642,7 @@
          * @param questionCorrect
          * @returns {number}
          */
-        calculateScore: function(questionCorrect){
+        calculateScore: function (questionCorrect) {
             var timeLeftBonus = this.getTimeBonus(this.countDownTimer);
             var comboBonus = this.getComboBonus();
             var hintPenalty = this.getHintPenalty();
@@ -620,6 +653,14 @@
             return Math.floor(score);
         },
 
+        /**
+         *
+         * @param correct {Boolean}
+         * @param score {number}
+         */
+        produceResultForCurrentQuestion: function (correct, score) {
+            this.questionResults.push(new PopQuiz.QuestionResult(this.currentQuestion.questionId, 15 - this.countDownTimer, correct, score))
+        },
 
         /**
          *

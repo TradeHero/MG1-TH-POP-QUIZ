@@ -60,6 +60,12 @@ var Utility = (function () {
         Input.registeredControls = [];
     };
 
+    /**
+     *
+     * @param name {string}
+     * @returns {string}
+     * @private
+     */
     var _getParameterByName = function (name) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -74,6 +80,11 @@ var Utility = (function () {
         clearCurrentView: function () {
             _clearCurrentView()
         },
+        /**
+         *
+         * @param parameterName
+         * @returns {string}
+         */
         getQueryParameter: function(parameterName){
             return _getParameterByName(parameterName);
         }

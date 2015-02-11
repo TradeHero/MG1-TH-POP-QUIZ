@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="css/reset.css" rel="stylesheet"/>
+    <style>
+        div#base-container {
+            background: url('./resources/popquiz-result/popquiz-result-bg.png');
+            position: absolute;
+            left:0;
+            right:0;
+            margin-left:auto;
+            margin-right:auto;
+        }
+
+        div#selfBox,#awayBox{
+            background: url('./resources/popquiz-result/popquiz-result-scorebox.png');
+            background-size: contain;
+            position: absolute;
+        }
+    </style>
+
+</head>
+<body>
+<div id="base-container">
+    <div id="selfBox"></div>
+    <div id="awayBox"></div>
+</div>
+<script>
+    var baseContainer = document.getElementById("base-container");
+    var selfBox = document.getElementById("selfBox");
+    var awayBox = document.getElementById("awayBox");
+
+    var baseHeight =  window.innerHeight;
+    var baseWidth = window.innerHeight * 0.75;
+    baseContainer.style.height = baseHeight + "px";
+    baseContainer.style.width = baseWidth + "px";
+
+    /////////////////// BASE ///////////////////
+
+    var selfAwayWHRatio = 258/121;
+    var selfBoxWidth = baseWidth * 0.4;
+    var selfBoxHeight = selfBoxWidth / selfAwayWHRatio;
+    selfBox.style.width = selfBoxWidth + 'px';
+    selfBox.style.height = selfBoxHeight + 'px';
+
+    var selfAwayBoxTop = baseHeight * 0.1;
+    var selfBoxLeft = baseHeight * 0.03;
+    selfBox.style.top = selfAwayBoxTop + 'px';
+    selfBox.style.left = selfBoxLeft + 'px';
+
+    /////////////////// SELF BOX ///////////////////
+
+    var awayBoxWidth = baseWidth * 0.4;
+    var awayBoxHeight = awayBoxWidth / selfAwayWHRatio;
+    awayBox.style.width = awayBoxWidth + 'px';
+    awayBox.style.height = awayBoxHeight + 'px';
+
+    var awayBoxLeft = 4 * selfBoxLeft + selfBoxWidth;
+    awayBox.style.top = selfAwayBoxTop + 'px';
+    awayBox.style.left = awayBoxLeft + 'px';
+
+    /////////////////// AWAY BOX ///////////////////
+</script>
+</body>
+</html>
