@@ -181,18 +181,6 @@ class NetworkClient {
         //debugPrintln(r)
     }
     
-    func getFacebookInvitableFriends(completionHandler:[AnyObject]->()){
-        FBRequestConnection.startWithGraphPath("/me/invitable_friends", parameters: nil, HTTPMethod: "GET")
-            { (conn, result, error) -> Void in
-                if let res = result as? [String: AnyObject]{
-                    let data: AnyObject? = res["data"]
-                    if let d = data as? [AnyObject]{
-                        completionHandler(d)
-                    }
-                }
-        }
-    }
-    
     func getRandomFBFriendsForUser(numberOfUsers count:Int, forUser userId:Int, errorHandler:NSError -> (), completionHandler:[THUserFriend]->()){
         let url = "\(THServerAPIBaseURL)/users/\(userId)/getnewfriends?socialNetwork=FB&count=100"
         debugPrintln("Fetching Facebook friends for user \(userId)...")

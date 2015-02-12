@@ -43,22 +43,14 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 53
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.width, 0.01))
-        NetworkClient.sharedClient.getFacebookInvitableFriends { [unowned self] in
-            for rawFriend in $0 {
-                if let friendConverted = FacebookInvitableFriend.decode(JSONValue.parse(rawFriend)){
-                    self.FBInvitableFriends.append(friendConverted)
-                    debugPrintln(friendConverted)
-                }
-            }
-            
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.showNavigationBar()
-        self.loadStaff {
+        self.loadStaff { [unowned self] in
             self.loadFriends()
+            self.loadInvitableFriends()
         }
     }
     
@@ -95,6 +87,16 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         completionHandler()
         
         hud.dismissAnimated(true)
+    }
+    
+    private func loadInvitableFriends(){
+        self.FBInvitableFriends.removeAll(keepCapacity: true)
+        FacebookService.sharedService.getInvitableFriends {
+            [unowned self] ivFriends in
+            self.FBInvitableFriends = ivFriends
+            self.tableView.reloadData()
+
+        }
     }
     
     private func loadFriends() {
@@ -142,10 +144,10 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         switch section {
         case 0:
             return THStaffList.count
+        case 1:
+            return FBInvitableFriends.count
         case 2:
             return THFriendList.count
-        case 1:
-            return FBFriendList.count
         default:
             return 0
         }
@@ -164,18 +166,18 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
             cell.updateConstraintsIfNeeded()
             cell.delegate = self
             return cell
-        case 2:
+        case 1:
             var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
-            let friendUser = THFriendList[indexPath.row]
-            cell.bindFriendUser(friendUser, index: indexPath.row)
+            let friendUser = FBInvitableFriends[indexPath.row]
+            cell.bindInvitableFriend(friendUser, index: indexPath.row)
             cell.layoutIfNeeded()
             cell.setNeedsUpdateConstraints()
             cell.updateConstraintsIfNeeded()
             cell.delegate = self
             return cell
-        case 1:
+        case 2:
             var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
-            let friendUser = FBFriendList[indexPath.row]
+            let friendUser = THFriendList[indexPath.row]
             cell.bindFriendUser(friendUser, index: indexPath.row)
             cell.layoutIfNeeded()
             cell.setNeedsUpdateConstraints()
@@ -261,12 +263,9 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapInviteUser facebookID: Int) {
+    func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapInviteUser inviteUser: FacebookInvitableFriend) {
         //TODO: invite user via fb
-        var friendUser = FBFriendList[cell.index]
-        friendUser.alreadyInvited = true
-        cell.friendUser = friendUser
-        FBFriendList[cell.index] = friendUser
+            FacebookService.sharedService.presentInviteFriendsDialog("I challenged you on TradeHero PopQuiz!", friendsToInvite: [inviteUser])
     }
     
     func staffChallengeCellTableViewCell(cell: StaffChallengeCellTableViewCell, didTapChallengeWithStaffUser userId: Int) {

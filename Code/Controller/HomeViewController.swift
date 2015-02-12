@@ -359,7 +359,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapInviteUser facebookID: Int) {
+    func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapInviteUser inviteUser: FacebookInvitableFriend) {
     }
     //MARK:- UI methods
     private func createHeaderViewForEmptyTurn() -> UITableViewHeaderFooterView {
@@ -453,8 +453,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func refresh(sender: AnyObject){
-        self.loadChallenges {
-        }
+        self.loadChallenges {}
     }
     
     func popoverControllerShouldDismissPopover(popoverController: WYPopoverController!) -> Bool {

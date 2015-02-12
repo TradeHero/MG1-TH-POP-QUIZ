@@ -9,6 +9,7 @@
 import FacebookSDK
 import Social
 import Accounts
+import Argo
 
 enum FacebookConnectOption {
     case NativeFallBack
@@ -90,5 +91,54 @@ class FacebookService {
             }
         }
     }
-}
+    
+    func getInvitableFriends(completionHandler:[FacebookInvitableFriend]->()){
+        FBRequestConnection.startWithGraphPath("/me/invitable_friends", parameters: nil, HTTPMethod: "GET")
+            { (conn, result, error) -> Void in
+                if let res = result as? [String: AnyObject]{
+                    let data: AnyObject? = res["data"]
+                    if let d = data as? [AnyObject]{
+                        var invitableFriends = [FacebookInvitableFriend]()
+                        for rawFriend in d {
+                            if let friendConverted = FacebookInvitableFriend.decode(JSONValue.parse(rawFriend)){
+                                invitableFriends.append(friendConverted)
+                            }
+                        }
+                        completionHandler(invitableFriends);
+                    }
+                }
+        }
 
+    }
+    
+    func presentInviteFriendsDialog(message:String!, friendsToInvite:[FacebookInvitableFriend]){
+        var inviteTokens = getCommaSeparatedTokens(friendsToInvite);
+        let params = ["to": inviteTokens, "method": "apprequests"];
+        FBWebDialogs.presentRequestsDialogModallyWithSession(nil, message: message, title: nil, parameters: nil) { (result, url, err) -> Void in
+            if let e = err {
+                println(e)
+            } else {
+                if(result == .DialogNotCompleted){
+                    println("User canceled request")
+                } else {
+                    //Handle the send request callback
+                    
+                }
+            }
+        }
+    }
+    
+    func getCommaSeparatedTokens(friends:[FacebookInvitableFriend]) -> String {
+        if(friends.isEmpty) {return "";}
+        if(friends.count == 1) {return friends[0].inviteToken;}
+        
+        var csv = ""
+        for friend in friends {
+            csv += "\(friend.inviteToken),"
+        }
+        
+        csv = csv.substringToIndex(csv.endIndex.predecessor())
+        
+        return csv;
+    }
+}
