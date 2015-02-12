@@ -522,7 +522,9 @@
 			isa = PBXGroup;
 			children = (
 				6D43E98A19EB7C4F002DBB82 /* Development */,
+				6D0FBB7D1A8C5A45006A4F4C /* FacebookInvitableFriends.swift */,
 				6DD2313019B8204900B5D05E /* Game.swift */,
+				6D3DB3C119E3D29C006BC11B /* GameNotification.swift */,
 				6DD2313119B8204900B5D05E /* GamePortfolio.swift */,
 				6DD2313219B8204900B5D05E /* GameResult.swift */,
 				6DD2313319B8204900B5D05E /* Option.swift */,
@@ -531,8 +533,6 @@
 				6DD2313619B8204900B5D05E /* QuestionResult.swift */,
 				6DD2313719B8204900B5D05E /* THUser.swift */,
 				6DD2313819B8204900B5D05E /* THUserFriend.swift */,
-				6D3DB3C119E3D29C006BC11B /* GameNotification.swift */,
-				6D0FBB7D1A8C5A45006A4F4C /* FacebookInvitableFriends.swift */,
 			);
 			path = "Domain Objects";
 			sourceTree = "<group>";
