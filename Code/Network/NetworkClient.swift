@@ -12,6 +12,7 @@ import JGProgressHUD
 import SDWebImage
 import EGOCache
 import SSKeychain
+import FacebookSDK
 
 class NetworkClient {
     
@@ -152,8 +153,9 @@ class NetworkClient {
         let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
         debugPrintln("Fetching Facebook friends for user \(userId)...")
         
+        
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
+            [unowned self] _, response, content, error in
             if let e = error {
                 errorHandler(e)
             }
@@ -172,12 +174,23 @@ class NetworkClient {
             
             fbFrnds = friends.filter { $0.userID == 0 }
             thFrnds = friends.filter { $0.userID != 0 }
-            
             debugPrintln("Successfully fetched \(friends.count) friend(s).")
             completionHandler((fbFrnds, thFrnds))
         }
         
         //debugPrintln(r)
+    }
+    
+    func getFacebookInvitableFriends(completionHandler:[AnyObject]->()){
+        FBRequestConnection.startWithGraphPath("/me/invitable_friends", parameters: nil, HTTPMethod: "GET")
+            { (conn, result, error) -> Void in
+                if let res = result as? [String: AnyObject]{
+                    let data: AnyObject? = res["data"]
+                    if let d = data as? [AnyObject]{
+                        completionHandler(d)
+                    }
+                }
+        }
     }
     
     func getRandomFBFriendsForUser(numberOfUsers count:Int, forUser userId:Int, errorHandler:NSError -> (), completionHandler:[THUserFriend]->()){

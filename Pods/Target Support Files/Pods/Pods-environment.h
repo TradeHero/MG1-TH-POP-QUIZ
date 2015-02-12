@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_Alamofire 1
 #define COCOAPODS_VERSION_PATCH_Alamofire 4
 
+// Argo
+#define COCOAPODS_POD_AVAILABLE_Argo
+#define COCOAPODS_VERSION_MAJOR_Argo 0
+#define COCOAPODS_VERSION_MINOR_Argo 2
+#define COCOAPODS_VERSION_PATCH_Argo 0
+
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts
 #define COCOAPODS_VERSION_MAJOR_Bolts 1
@@ -167,18 +173,6 @@
 #define COCOAPODS_VERSION_MAJOR_SSKeychain 1
 #define COCOAPODS_VERSION_MINOR_SSKeychain 2
 #define COCOAPODS_VERSION_PATCH_SSKeychain 2
-
-// UrbanAirship-iOS-SDK
-#define COCOAPODS_POD_AVAILABLE_UrbanAirship_iOS_SDK
-#define COCOAPODS_VERSION_MAJOR_UrbanAirship_iOS_SDK 5
-#define COCOAPODS_VERSION_MINOR_UrbanAirship_iOS_SDK 1
-#define COCOAPODS_VERSION_PATCH_UrbanAirship_iOS_SDK 1
-
-// UrbanAirship-iOS-SDK/Core
-#define COCOAPODS_POD_AVAILABLE_UrbanAirship_iOS_SDK_Core
-#define COCOAPODS_VERSION_MAJOR_UrbanAirship_iOS_SDK_Core 5
-#define COCOAPODS_VERSION_MINOR_UrbanAirship_iOS_SDK_Core 1
-#define COCOAPODS_VERSION_PATCH_UrbanAirship_iOS_SDK_Core 1
 
 // WYPopoverController
 #define COCOAPODS_POD_AVAILABLE_WYPopoverController

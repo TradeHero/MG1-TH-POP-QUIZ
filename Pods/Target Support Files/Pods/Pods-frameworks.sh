@@ -49,6 +49,7 @@ code_sign() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Alamofire.framework'
+  install_framework 'Argo.framework'
   install_framework 'Bolts.framework'
   install_framework 'CAAnimationBlocks.framework'
   install_framework 'ChatHeads.framework'
@@ -65,11 +66,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'SDWebImage.framework'
   install_framework 'SKBounceAnimation.framework'
   install_framework 'SSKeychain.framework'
-  install_framework 'UrbanAirship_iOS_SDK.framework'
   install_framework 'WYPopoverController.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Alamofire.framework'
+  install_framework 'Argo.framework'
   install_framework 'Bolts.framework'
   install_framework 'CAAnimationBlocks.framework'
   install_framework 'ChatHeads.framework'
@@ -86,6 +87,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'SDWebImage.framework'
   install_framework 'SKBounceAnimation.framework'
   install_framework 'SSKeychain.framework'
-  install_framework 'UrbanAirship_iOS_SDK.framework'
   install_framework 'WYPopoverController.framework'
 fi

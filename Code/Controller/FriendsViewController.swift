@@ -9,6 +9,8 @@
 import UIKit
 import JGProgressHUD
 import EGOCache
+import FacebookSDK
+import Argo
 
 class FriendsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate, StaffChallengeCellTableViewCellDelegate {
     
@@ -17,6 +19,8 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
     private var THFriendList = [THUserFriend]()
     
     private var FBFriendList = [THUserFriend]()
+    
+    private var FBInvitableFriends = [FacebookInvitableFriend]()
     
     private var searchKey: String = ""
     
@@ -39,6 +43,15 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 53
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.width, 0.01))
+        NetworkClient.sharedClient.getFacebookInvitableFriends { [unowned self] in
+            for rawFriend in $0 {
+                if let friendConverted = FacebookInvitableFriend.decode(JSONValue.parse(rawFriend)){
+                    self.FBInvitableFriends.append(friendConverted)
+                    debugPrintln(friendConverted)
+                }
+            }
+            
+        }
     }
     
     override func viewDidAppear(animated: Bool) {

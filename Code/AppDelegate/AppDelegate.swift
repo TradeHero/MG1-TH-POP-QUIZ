@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import ChatHeads
 import JGProgressHUD
+import FacebookSDK
 
 let kTHGamesServerMode = Mode.Prod
 
@@ -34,11 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         // Override point for customization after application launch.
         
         application.applicationIconBadgeNumber = 0
-        NetworkClient.sharedClient.logout()
-//        let config = UAConfig.defaultConfig()
-//        UAirship.takeOff(config)
-//        UAPush.shared().userNotificationTypes = (.Badge | .Sound | .Alert)
-//        UAPush.shared().userPushNotificationsEnabled = true
+//        NetworkClient.sharedClient.logout()
         
         switch kTHGamesServerMode {
         case .Staging:
@@ -172,7 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
 //        if let component = bfurl.targetURL.pathComponents[1] as? String {
 //            debugPrintln(component)
 //        }
-        return true
+        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
     }
     
     //MARK: Login/Logout

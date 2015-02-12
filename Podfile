@@ -19,7 +19,7 @@ pod 'MDRadialProgress', '~> 1.3.1'
 pod 'PureLayout', '~> 2.0.5'
 pod 'SDWebImage', '~> 3.7.1'
 pod 'SSKeychain', '~> 1.2.2'
-pod 'UrbanAirship-iOS-SDK', '~> 5.1.1'
 pod 'WYPopoverController', '~> 0.3.6'
+pod 'Argo'
 
 xcodeproj 'TH-PopQuiz.xcodeproj'
