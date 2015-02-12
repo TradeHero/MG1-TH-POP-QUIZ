@@ -120,6 +120,12 @@
 #define COCOAPODS_VERSION_MINOR_JGProgressHUD 2
 #define COCOAPODS_VERSION_PATCH_JGProgressHUD 3
 
+// KKProgressTimer
+#define COCOAPODS_POD_AVAILABLE_KKProgressTimer
+#define COCOAPODS_VERSION_MAJOR_KKProgressTimer 0
+#define COCOAPODS_VERSION_MINOR_KKProgressTimer 0
+#define COCOAPODS_VERSION_PATCH_KKProgressTimer 1
+
 // LDProgressView
 #define COCOAPODS_POD_AVAILABLE_LDProgressView
 #define COCOAPODS_VERSION_MAJOR_LDProgressView 1

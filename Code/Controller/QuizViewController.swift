@@ -9,12 +9,16 @@
 import UIKit
 import LDProgressView
 import JGProgressHUD
+import KKProgressTimer
 
 class QuizViewController: UIViewController {
     
     let MAX_ALLOWED_TIME:CGFloat = 15.0
     let basicScorePerQuestion = 1000
     // MARK:- UI var
+    
+    @IBOutlet weak var timerView: KKProgressTimer!
+    
     @IBOutlet private var optionGroup: [OptionButton]!
     
     @IBOutlet private weak var questionView: UIView!
@@ -129,6 +133,7 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         musicPlayer.stop()
+        
         self.prepareFirstQuestionUISetup()
         for b in optionGroup {
             b.exclusiveTouch = true

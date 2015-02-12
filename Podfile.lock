@@ -30,6 +30,7 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.8.0)
   - GPUImage (0.1.6)
   - JGProgressHUD (1.2.3)
+  - KKProgressTimer (0.0.1)
   - LDProgressView (1.2.1)
   - MDRadialProgress (1.3.1)
   - PureLayout (2.0.5)
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - FormatterKit (~> 1.8.0)
   - GPUImage (~> 0.1.6)
   - JGProgressHUD (~> 1.2.3)
+  - KKProgressTimer (from `http://github.com/gin0606/KKProgressTimer.git`)
   - LDProgressView (~> 1.2.1)
   - MDRadialProgress (~> 1.3.1)
   - PureLayout (~> 2.0.5)
@@ -59,6 +61,15 @@ DEPENDENCIES:
   - SSKeychain (~> 1.2.2)
   - UrbanAirship-iOS-SDK (~> 5.1.1)
   - WYPopoverController (~> 0.3.6)
+
+EXTERNAL SOURCES:
+  KKProgressTimer:
+    :git: http://github.com/gin0606/KKProgressTimer.git
+
+CHECKOUT OPTIONS:
+  KKProgressTimer:
+    :commit: 575be455a23e22c2646c09726d1219e363f36aa4
+    :git: http://github.com/gin0606/KKProgressTimer.git
 
 SPEC CHECKSUMS:
   Alamofire: 524225da382071ee3e6d0badd0ee4b4dc36740de
@@ -71,6 +82,7 @@ SPEC CHECKSUMS:
   FormatterKit: 547a808c41172136a3f3acb424ac9361d38bb32f
   GPUImage: cecb0830bb9428f50192042e3c7b53810f51388e
   JGProgressHUD: 733523c80f69b6dfc41b88a0f33883a89a8b4c3b
+  KKProgressTimer: 6a132f47ed5a24fdc0fa8a4f15dfe2ed5844772a
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
   MDRadialProgress: 0499b76b2bd25711ac1d6687c07ac915bad1b8bd
   PureLayout: 63a3257320223e8edddcd3afb407445f85a6bf74

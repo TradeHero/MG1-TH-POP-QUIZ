@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4ZM-Mt-Hhv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D72i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4ZM-Mt-Hhv">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="ProximaNova-Bold.ttf">
-            <string>ProximaNova-Bold</string>
             <string>ProximaNova-Bold</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Regular.ttf">
@@ -167,8 +166,8 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIo-Ic-ads">
-                                <rect key="frame" x="94" y="172" width="132" height="31"/>
-                                <fontDescription key="fontDescription" name="ProximaNova-Bold" family="Proxima Nova" pointSize="31"/>
+                                <rect key="frame" x="99" y="170" width="123" height="36"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="26"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="1" height="3"/>
@@ -259,6 +258,14 @@
                                             <action selector="optionSelected:" destination="xpE-6b-INw" eventType="touchUpInside" id="o2d-eZ-fjv"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dco-PR-hlJ" customClass="KKProgressTimer">
+                                        <rect key="frame" x="135" y="88" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="5mi-IR-2gf"/>
+                                            <constraint firstAttribute="width" constant="50" id="8st-Sp-O1J"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="0Nl-1b-yQq"/>
@@ -281,6 +288,8 @@
                                     <constraint firstItem="IqS-YH-5Vz" firstAttribute="top" secondItem="rOZ-UN-2s9" secondAttribute="bottom" constant="11" id="rv0-ew-xFH"/>
                                     <constraint firstAttribute="bottom" secondItem="IqS-YH-5Vz" secondAttribute="bottom" constant="5" id="uCo-ei-au6"/>
                                     <constraint firstItem="rOZ-UN-2s9" firstAttribute="top" secondItem="Lu1-RO-xB6" secondAttribute="top" id="wAN-rJ-onG"/>
+                                    <constraint firstAttribute="centerY" secondItem="Dco-PR-hlJ" secondAttribute="centerY" id="xJJ-0s-HuC"/>
+                                    <constraint firstAttribute="centerX" secondItem="Dco-PR-hlJ" secondAttribute="centerX" id="y3C-7y-DgZ"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Le1-nm-wsv" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
@@ -345,6 +354,7 @@
                         <outlet property="selfProgressView" destination="YyQ-Wi-67v" id="ZZF-wR-WQD"/>
                         <outlet property="selfScoreLabel" destination="rVh-cN-ate" id="LBF-Mw-yeU"/>
                         <outlet property="timeLeftLabel" destination="eKh-sO-TbA" id="fvn-k2-dgE"/>
+                        <outlet property="timerView" destination="Dco-PR-hlJ" id="QBB-GA-Z2W"/>
                         <outletCollection property="optionGroup" destination="Lu1-RO-xB6" collectionClass="NSMutableArray" id="RGP-wQ-JnZ"/>
                         <outletCollection property="optionGroup" destination="rOZ-UN-2s9" collectionClass="NSMutableArray" id="eGP-kt-HVx"/>
                         <outletCollection property="optionGroup" destination="IqS-YH-5Vz" collectionClass="NSMutableArray" id="MyU-3l-KyL"/>
@@ -416,11 +426,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0M-29-Bmo" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
-                                        <rect key="frame" x="123" y="102" width="75" height="75"/>
+                                        <rect key="frame" x="110" y="79" width="100" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="gcK-yI-W6i"/>
-                                            <constraint firstAttribute="height" constant="75" id="olZ-ml-1ja"/>
+                                            <constraint firstAttribute="width" constant="100" id="gcK-yI-W6i"/>
+                                            <constraint firstAttribute="height" constant="100" id="olZ-ml-1ja"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="EmptyAvatar"/>
@@ -437,13 +447,13 @@
                                     <constraint firstItem="jbV-fz-Bnm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jnU-1h-afG" secondAttribute="bottom" constant="-44" id="2GT-uc-u18"/>
                                     <constraint firstItem="ZzQ-Bl-6tx" firstAttribute="top" secondItem="aVI-sW-k5w" secondAttribute="top" constant="6" id="9Ge-Pz-oVs"/>
                                     <constraint firstAttribute="bottom" secondItem="jbV-fz-Bnm" secondAttribute="bottom" constant="80" id="Lyq-tX-108"/>
-                                    <constraint firstItem="D0M-29-Bmo" firstAttribute="top" secondItem="ZzQ-Bl-6tx" secondAttribute="bottom" constant="66" id="TN7-6H-kpq"/>
+                                    <constraint firstItem="D0M-29-Bmo" firstAttribute="top" secondItem="ZzQ-Bl-6tx" secondAttribute="bottom" constant="43" id="TN7-6H-kpq"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="TSH-1C-LAa"/>
                                     <constraint firstItem="DLa-O8-b3M" firstAttribute="leading" secondItem="aVI-sW-k5w" secondAttribute="leading" id="YhX-wF-tGk"/>
                                     <constraint firstItem="DLa-O8-b3M" firstAttribute="centerX" secondItem="ZzQ-Bl-6tx" secondAttribute="centerX" id="b7u-qf-9ut"/>
                                     <constraint firstAttribute="bottom" secondItem="DLa-O8-b3M" secondAttribute="bottom" id="btv-MG-Jzd"/>
                                     <constraint firstAttribute="centerX" secondItem="jnU-1h-afG" secondAttribute="centerX" constant="-4" id="gEu-yX-bSB"/>
-                                    <constraint firstItem="jnU-1h-afG" firstAttribute="top" secondItem="D0M-29-Bmo" secondAttribute="bottom" constant="13" id="t2p-pm-1gy"/>
+                                    <constraint firstItem="jnU-1h-afG" firstAttribute="top" secondItem="D0M-29-Bmo" secondAttribute="bottom" constant="11" id="t2p-pm-1gy"/>
                                     <constraint firstItem="DLa-O8-b3M" firstAttribute="top" secondItem="aVI-sW-k5w" secondAttribute="top" id="uzV-y6-vY8"/>
                                     <constraint firstAttribute="trailing" secondItem="DLa-O8-b3M" secondAttribute="trailing" id="x1v-pt-krN"/>
                                     <constraint firstAttribute="centerX" secondItem="D0M-29-Bmo" secondAttribute="centerX" id="xkY-oa-rmf"/>
@@ -496,12 +506,12 @@
                                             <constraint firstAttribute="height" constant="38" id="gLe-8R-EnV"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LnQ-Si-kCv" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
-                                        <rect key="frame" x="123" y="89" width="75" height="75"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LnQ-Si-kCv" customClass="AvatarRoundedView" customModule="TH_PopQuiz" customModuleProvider="target">
+                                        <rect key="frame" x="110" y="69" width="100" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="8DO-hF-JR7"/>
-                                            <constraint firstAttribute="height" constant="75" id="zng-l6-g6d"/>
+                                            <constraint firstAttribute="width" constant="100" id="8DO-hF-JR7"/>
+                                            <constraint firstAttribute="height" constant="100" id="zng-l6-g6d"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="image" keyPath="image" value="EmptyAvatar"/>
@@ -516,9 +526,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="W66-Cy-RAz" firstAttribute="top" secondItem="LnQ-Si-kCv" secondAttribute="bottom" constant="13" id="3si-w4-gRP"/>
+                                    <constraint firstItem="W66-Cy-RAz" firstAttribute="top" secondItem="LnQ-Si-kCv" secondAttribute="bottom" constant="2" id="3si-w4-gRP"/>
                                     <constraint firstAttribute="centerX" secondItem="W66-Cy-RAz" secondAttribute="centerX" id="5av-EE-tEX"/>
-                                    <constraint firstItem="LnQ-Si-kCv" firstAttribute="top" secondItem="DVZ-dJ-KYb" secondAttribute="top" constant="89" id="CO3-GJ-03G"/>
+                                    <constraint firstItem="LnQ-Si-kCv" firstAttribute="top" secondItem="DVZ-dJ-KYb" secondAttribute="top" constant="75" id="CO3-GJ-03G"/>
                                     <constraint firstItem="9vt-la-AG8" firstAttribute="centerY" secondItem="yFf-nq-S2g" secondAttribute="centerY" id="HvZ-Ks-yt4"/>
                                     <constraint firstAttribute="centerX" secondItem="LnQ-Si-kCv" secondAttribute="centerX" id="Iw1-Kd-Ay2"/>
                                     <constraint firstItem="9vt-la-AG8" firstAttribute="centerX" secondItem="yFf-nq-S2g" secondAttribute="centerX" id="QGI-GG-Iq0"/>
@@ -903,7 +913,7 @@
                                     <constraint firstAttribute="height" constant="84" id="eEb-Av-tZq"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hhh-X0-Fxb">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhh-X0-Fxb">
                                 <rect key="frame" x="78" y="261" width="165" height="64"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LoseBoxBackground" translatesAutoresizingMaskIntoConstraints="NO" id="RlX-pF-V00">
