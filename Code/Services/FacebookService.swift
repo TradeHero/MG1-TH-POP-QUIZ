@@ -114,7 +114,7 @@ class FacebookService {
     func presentInviteFriendsDialog(message:String!, friendsToInvite:[FacebookInvitableFriend]){
         var inviteTokens = getCommaSeparatedTokens(friendsToInvite);
         let params = ["to": inviteTokens, "method": "apprequests"];
-        FBWebDialogs.presentRequestsDialogModallyWithSession(nil, message: message, title: nil, parameters: nil) { (result, url, err) -> Void in
+        FBWebDialogs.presentRequestsDialogModallyWithSession(nil, message: message, title: nil, parameters: params) { (result, url, err) -> Void in
             if let e = err {
                 println(e)
             } else {

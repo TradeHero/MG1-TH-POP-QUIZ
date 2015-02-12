@@ -207,13 +207,13 @@ class FriendsViewController : UIViewController, UITableViewDelegate, UITableView
                 return nil
             }
             return self.createTradeHeroStaffTableSectionHeaderView()
-        case 2:
+        case 1:
             if FBFriendList.count == 0 {
                 return nil
             }
             return self.createFacebookFriendsTableSectionHeaderView()
 
-        case 1:
+        case 2:
             if THFriendList.count == 0 {
                 return nil
             }
