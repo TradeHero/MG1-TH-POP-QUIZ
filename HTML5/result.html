@@ -6,6 +6,11 @@
     <title></title>
     <link href="css/reset.css" rel="stylesheet"/>
     <style>
+
+        html {
+            height: 100%;
+        }
+
         div#base-container {
             background: url('./resources/popquiz-result/popquiz-result-bg.png');
             position: absolute;
@@ -39,7 +44,7 @@
 
         div#resultTable {
             margin-top: 1%;
-            overflow-y: hidden;
+            overflow: hidden;
         }
 
         span.user-name {
@@ -71,13 +76,19 @@
 
         div.score-header-avatar {
             display: inline-block;
-            width: 18%;
+            width: 23%;
             text-align: center;
+        }
+
+        div.score-row-score {
+            text-align: center;
+            display: inline-block;
+            width: 22% !important;
         }
 
         div.score-header-title {
             display: inline-block;
-            width: 60%;
+            width: 50%;
         }
 
         div.score-row {
@@ -85,6 +96,11 @@
             margin: 0 10px;
             border-bottom: solid 1px darkgray;
             vertical-align: middle;
+        }
+
+        div.score-row .score-row-title {
+            display: inline-block;
+            width: 52%;
         }
 
         div.score-row-last {
@@ -118,8 +134,8 @@
 
         #nextButtonContainer {
             position: absolute;
-            bottom: 5%;
             left: 50%;
+            margin-top: 5%;
         }
 
         #nextButtonInner {
@@ -134,8 +150,13 @@
             text-align: center;
         }
 
-        .button:hover{
+        .button:hover {
             background: darkgray;
+        }
+
+        .score-rows-container {
+            height: 100%;
+            overflow: auto;
         }
     </style>
 </head>
@@ -157,23 +178,11 @@
     <div id="resultTable" class="score-box">
         <div id="scoreHeader" class="score-header">
             <div class="score-header-title">Correct Answers</div>
-            <div class="score-header-avatar" id="selfAvatarSmall">O</div>
-            <div class="score-header-avatar" id="awayAvatarSmall">O</div>
+            <div class="score-header-avatar" id="selfAvatarSmall">You</div>
+            <div class="score-header-avatar" id="awayAvatarSmall">Someone</div>
         </div>
-        <div class="score-row">
-            Hello hellow
-        </div>
-        <div class="score-row">
-            Hello hellow
-        </div>
-        <div class="score-row">
-            Hello hellow
-        </div>
-        <div class="score-row">
-            Hello hellow
-        </div>
-        <div class="score-row score-row-last">
-            Hello hellow
+        <div id="scoreRows" class="score-rows-container">
+
         </div>
     </div>
     <div id="hintsUsedBox" class="score-box">
@@ -182,16 +191,20 @@
         </div>
     </div>
     <div id="winningStreakBox" class="score-box">
-        <div class="score-row score-row-last score-header score-header-title green-text">
-            Winning Streak
+        <div class="score-row score-row-last">
+            <div class="score-row-title green-text">
+                Winning Streak
+            </div>
+            <div class="score-row-score" id="selfHintUsed">You</div>
+            <div class="score-row-score" id="awayHintUsed">Someone</div>
         </div>
     </div>
     <div id="totalScoreBox" class="score-box">
-        <div class="score-row score-row-last score-header score-header-title black-text">
+        <div class="score-row score-row-last score-header score-row-title black-text">
             Total Score
         </div>
     </div>
-    <div id="nextButtonContainer" >
+    <div id="nextButtonContainer">
         <div id="nextButtonInner" class="button">
             Next
         </div>
@@ -210,12 +223,12 @@
     var selfAvatar = document.getElementById("selfAvatar");
     var awayAvatar = document.getElementById("awayAvatar");
     var versusSpan = document.getElementById("versusSpan");
-    var scoreTable = document.getElementById("resultTable");
+    var resultTable = document.getElementById("resultTable");
 
     /////////////////// BASE ///////////////////
     var baseHeight = window.innerHeight;
     var baseWidth = window.innerHeight * 0.75;
-    baseContainer.style.height = baseHeight + "px";
+    baseContainer.style.height = "100%";
     baseContainer.style.width = baseWidth + "px";
 
     /////////////////// SELF BOX ///////////////////
@@ -301,34 +314,48 @@
     versusSpan.style.top = versusSpanTop + 'px';
 
     var result = JSON.parse(resultString);
-    var obj = result.result.challenger.details.split('|');
+    var resultArr = result.result.challenger.details.split('|');
 
     /////
     var scoreTableTop = selfAwayBoxTop + selfBox.offsetHeight;
+    var scoreRows = document.getElementById('scoreRows');
+    resultTable.style.left = selfBox.style.left;
+    resultTable.style.top = scoreTableTop + 'px';
+    resultTable.style.width = (baseWidth - (selfBoxLeft * 2)) + 'px';
+    resultTable.style.height = baseWidth * 0.3 + 'px';
 
-    scoreTable.style.left = selfBox.style.left;
-    scoreTable.style.top = scoreTableTop + 'px';
-    scoreTable.style.width = (baseWidth - (selfBoxLeft * 2)) + 'px';
+    resultArr.forEach(function (res) {
+        var questionNode = document.createElement('div');
+        var textNode = document.createTextNode(res);
+        questionNode.className = questionNode.className + ' score-row';
+        questionNode.appendChild(textNode);
+        scoreRows.appendChild(questionNode)
+    });
 
     //Hints Used
     var hintsUsedBox = document.getElementById('hintsUsedBox');
-    var hintUsedTop = scoreTableTop + scoreTable.offsetHeight;
+    var hintUsedTop = scoreTableTop + resultTable.offsetHeight;
     hintsUsedBox.style.left = selfBox.style.left;
     hintsUsedBox.style.top = hintUsedTop + 'px';
-    hintsUsedBox.style.width = scoreTable.style.width;
+    hintsUsedBox.style.width = resultTable.style.width;
 
     //Winning Streak
     var winningStreakBox = document.getElementById('winningStreakBox');
     var winningStreakTop = hintUsedTop + hintsUsedBox.offsetHeight;
     winningStreakBox.style.left = selfBox.style.left;
     winningStreakBox.style.top = winningStreakTop + 'px';
-    winningStreakBox.style.width = scoreTable.style.width;
+    winningStreakBox.style.width = resultTable.style.width;
 
     //Total Score
     var totalScoreBox = document.getElementById('totalScoreBox');
+    var totalScoreBoxTop = winningStreakTop + winningStreakBox.offsetHeight;
     totalScoreBox.style.left = selfBox.style.left;
-    totalScoreBox.style.top = winningStreakTop + winningStreakBox.offsetHeight + 'px';
-    totalScoreBox.style.width = scoreTable.style.width;
+    totalScoreBox.style.top = totalScoreBoxTop + 'px';
+    totalScoreBox.style.width = resultTable.style.width;
+
+    //Next Button
+    var nextButton = document.getElementById('nextButtonContainer');
+    nextButton.style.top = totalScoreBoxTop + totalScoreBox.offsetHeight + 'px';
 
 </script>
 </body>
