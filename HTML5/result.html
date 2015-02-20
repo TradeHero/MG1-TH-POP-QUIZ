@@ -6,6 +6,11 @@
     <title></title>
     <link href="css/reset.css" rel="stylesheet"/>
     <style>
+
+        html {
+            height: 100%;
+        }
+
         div#base-container {
             background: url('./resources/popquiz-result/popquiz-result-bg.png');
             position: absolute;
@@ -30,6 +35,18 @@
             background: #fff;
         }
 
+        div.score-box {
+            border-radius: 3px;
+            border: 2px solid #FDDFA3;
+            background: #FFF1D5;
+            position: absolute;
+        }
+
+        div#resultTable {
+            margin-top: 1%;
+            overflow: hidden;
+        }
+
         span.user-name {
             font-family: "Avenir Next", sans-serif;
             font-size: 1.2em;
@@ -40,11 +57,106 @@
             position: relative;
         }
 
+        div.score-header {
+            background: #FF4069;
+            font-family: "Avenir Next", sans-serif;
+            font-size: 1.2em;
+            color: #fff;
+            font-weight: 400;
+            width: 96%;
+            padding: 2%;
+        }
+
         span#versusSpan {
             position: absolute;
             font-family: "Avenir Next", sans-serif;
             font-size: 2em;
             color: #fff;
+        }
+
+        div.score-header-avatar {
+            display: inline-block;
+            width: 23%;
+            text-align: center;
+        }
+
+        div.score-row-score {
+            text-align: center;
+            display: inline-block;
+            width: 22% !important;
+        }
+
+        div.score-header-title {
+            display: inline-block;
+            width: 50%;
+        }
+
+        div.score-row {
+            padding: 10px 5px;
+            margin: 0 10px;
+            border-bottom: solid 1px darkgray;
+            vertical-align: middle;
+        }
+
+        div.score-row .score-row-title {
+            display: inline-block;
+            width: 52%;
+        }
+
+        div.score-row-last {
+            border-bottom: 0;
+            background: none;
+        }
+
+        div#hintsUsedBox {
+            margin-top: 2%;
+        }
+
+        div#winningStreakBox {
+            margin-top: 3%;
+        }
+
+        div#totalScoreBox {
+            margin-top: 4%;
+        }
+
+        .red-text {
+            color: darkred !important;
+        }
+
+        .green-text {
+            color: darkgreen !important;
+        }
+
+        .black-text {
+            color: #070707 !important;
+        }
+
+        #nextButtonContainer {
+            position: absolute;
+            left: 50%;
+            margin-top: 5%;
+        }
+
+        #nextButtonInner {
+            position: relative;
+            left: -50%;
+        }
+
+        .button {
+            min-width: 300px;
+            padding: 5%;
+            background: lightgreen;
+            text-align: center;
+        }
+
+        .button:hover {
+            background: darkgray;
+        }
+
+        .score-rows-container {
+            height: 100%;
+            overflow: auto;
         }
     </style>
 </head>
@@ -57,15 +169,51 @@
 
     </div>
     <span id="versusSpan">VS</span>
+
     <div id="awayBox">
         <div id="awayAvatar">
             <span class="user-name" id="awayUserName">James Lai</span>
         </div>
     </div>
+    <div id="resultTable" class="score-box">
+        <div id="scoreHeader" class="score-header">
+            <div class="score-header-title">Correct Answers</div>
+            <div class="score-header-avatar" id="selfAvatarSmall">You</div>
+            <div class="score-header-avatar" id="awayAvatarSmall">Someone</div>
+        </div>
+        <div id="scoreRows" class="score-rows-container">
+
+        </div>
+    </div>
+    <div id="hintsUsedBox" class="score-box">
+        <div class="score-row score-row-last score-header score-header-title red-text">
+            Hints Used
+        </div>
+    </div>
+    <div id="winningStreakBox" class="score-box">
+        <div class="score-row score-row-last">
+            <div class="score-row-title green-text">
+                Winning Streak
+            </div>
+            <div class="score-row-score" id="selfHintUsed">You</div>
+            <div class="score-row-score" id="awayHintUsed">Someone</div>
+        </div>
+    </div>
+    <div id="totalScoreBox" class="score-box">
+        <div class="score-row score-row-last score-header score-row-title black-text">
+            Total Score
+        </div>
+    </div>
+    <div id="nextButtonContainer">
+        <div id="nextButtonInner" class="button">
+            Next
+        </div>
+    </div>
 </div>
 <script>
     var selfAvatarUrl = 'https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/10897857_10152660162678602_6790690705278772203_n.jpg?oh=8780f221df3a3aae66a05fe2148b8c4a&oe=559394A0&__gda__=1431074230_4a51cab2b7edc62e3bd23317e40a2c7b';
-    var awayAvatarUrl = './resources/profile_pic.jpg'
+    var awayAvatarUrl = './resources/profile_pic.jpg';
+    var resultString = '{"result":{"challenger":{"gameId":150,"hintsUsed":0,"correctStreak":5,"userId":2415,"score":110000,"details":"3398, 7500, 0.1|3252, 10000, 0.1|4001, 15000, 0.1|3633, 0, 0.6|4096, 7500, 0.1|3823, 10000, 0.3|3620, 15000, 0.3|4051, 20000, 0.3|3732, 25000, 0.1","submittedAtUtc":"2015-02-04T08:16:53"}},"gameId":150}';
 </script>
 <script>
     //UI auto-resizing/layouting
@@ -75,11 +223,12 @@
     var selfAvatar = document.getElementById("selfAvatar");
     var awayAvatar = document.getElementById("awayAvatar");
     var versusSpan = document.getElementById("versusSpan");
+    var resultTable = document.getElementById("resultTable");
 
     /////////////////// BASE ///////////////////
     var baseHeight = window.innerHeight;
     var baseWidth = window.innerHeight * 0.75;
-    baseContainer.style.height = baseHeight + "px";
+    baseContainer.style.height = "100%";
     baseContainer.style.width = baseWidth + "px";
 
     /////////////////// SELF BOX ///////////////////
@@ -158,11 +307,56 @@
     awayUserNameSpan.style.left = awayUserNameSpanLeft + 'px';
 
     /////////////////// VERSUS SPAN ///////////////////
-    var versusSpanLeft = 1.15* selfBoxWidth;
+    var versusSpanLeft = 1.15 * selfBoxWidth;
     var versusSpanTop = 1.5 * selfAwayBoxTop;
 
     versusSpan.style.left = versusSpanLeft + 'px';
     versusSpan.style.top = versusSpanTop + 'px';
+
+    var result = JSON.parse(resultString);
+    var resultArr = result.result.challenger.details.split('|');
+
+    /////
+    var scoreTableTop = selfAwayBoxTop + selfBox.offsetHeight;
+    var scoreRows = document.getElementById('scoreRows');
+    resultTable.style.left = selfBox.style.left;
+    resultTable.style.top = scoreTableTop + 'px';
+    resultTable.style.width = (baseWidth - (selfBoxLeft * 2)) + 'px';
+    resultTable.style.height = baseWidth * 0.3 + 'px';
+
+    resultArr.forEach(function (res) {
+        var questionNode = document.createElement('div');
+        var textNode = document.createTextNode(res);
+        questionNode.className = questionNode.className + ' score-row';
+        questionNode.appendChild(textNode);
+        scoreRows.appendChild(questionNode)
+    });
+
+    //Hints Used
+    var hintsUsedBox = document.getElementById('hintsUsedBox');
+    var hintUsedTop = scoreTableTop + resultTable.offsetHeight;
+    hintsUsedBox.style.left = selfBox.style.left;
+    hintsUsedBox.style.top = hintUsedTop + 'px';
+    hintsUsedBox.style.width = resultTable.style.width;
+
+    //Winning Streak
+    var winningStreakBox = document.getElementById('winningStreakBox');
+    var winningStreakTop = hintUsedTop + hintsUsedBox.offsetHeight;
+    winningStreakBox.style.left = selfBox.style.left;
+    winningStreakBox.style.top = winningStreakTop + 'px';
+    winningStreakBox.style.width = resultTable.style.width;
+
+    //Total Score
+    var totalScoreBox = document.getElementById('totalScoreBox');
+    var totalScoreBoxTop = winningStreakTop + winningStreakBox.offsetHeight;
+    totalScoreBox.style.left = selfBox.style.left;
+    totalScoreBox.style.top = totalScoreBoxTop + 'px';
+    totalScoreBox.style.width = resultTable.style.width;
+
+    //Next Button
+    var nextButton = document.getElementById('nextButtonContainer');
+    nextButton.style.top = totalScoreBoxTop + totalScoreBox.offsetHeight + 'px';
+
 </script>
 </body>
 </html>
