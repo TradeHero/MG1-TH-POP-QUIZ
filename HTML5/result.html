@@ -141,12 +141,13 @@
         #nextButtonInner {
             position: relative;
             left: -50%;
+            color: #ffffff;
         }
 
         .button {
             min-width: 300px;
             padding: 5%;
-            background: lightgreen;
+            background: #28ee28;
             text-align: center;
         }
 
@@ -156,6 +157,7 @@
 
         .score-rows-container {
             height: 100%;
+            width: 105%;
             overflow: auto;
         }
     </style>
@@ -186,22 +188,30 @@
         </div>
     </div>
     <div id="hintsUsedBox" class="score-box">
-        <div class="score-row score-row-last score-header score-header-title red-text">
-            Hints Used
+        <div class="score-row score-row-last red-text">
+            <div class="score-row-title">
+                Hints Used
+            </div>
+            <div class="score-row-score" id="selfHintsUsed">You</div>
+            <div class="score-row-score" id="awayHintsUsed"></div>
         </div>
     </div>
     <div id="winningStreakBox" class="score-box">
-        <div class="score-row score-row-last">
-            <div class="score-row-title green-text">
+        <div class="score-row score-row-last green-text">
+            <div class="score-row-title">
                 Winning Streak
             </div>
-            <div class="score-row-score" id="selfHintUsed">You</div>
-            <div class="score-row-score" id="awayHintUsed">Someone</div>
+            <div class="score-row-score" id="selfWinningStreak">You</div>
+            <div class="score-row-score" id="awayWinningStreak"></div>
         </div>
     </div>
     <div id="totalScoreBox" class="score-box">
-        <div class="score-row score-row-last score-header score-row-title black-text">
-            Total Score
+        <div class="score-row score-row-last black-text">
+            <div class="score-row-title">
+                Total Score
+            </div>
+            <div class="score-row-score" id="selfTotalScore">You</div>
+            <div class="score-row-score" id="awayTotalScore"></div>
         </div>
     </div>
     <div id="nextButtonContainer">
@@ -224,6 +234,9 @@
     var awayAvatar = document.getElementById("awayAvatar");
     var versusSpan = document.getElementById("versusSpan");
     var resultTable = document.getElementById("resultTable");
+    var awayHintsUsed = document.getElementById("awayHintsUsed");
+    var awayWinningStreak = document.getElementById("awayWinningStreak");
+    var awayTotalScore = document.getElementById("awayTotalScore");
 
     /////////////////// BASE ///////////////////
     var baseHeight = window.innerHeight;
@@ -322,13 +335,32 @@
     resultTable.style.left = selfBox.style.left;
     resultTable.style.top = scoreTableTop + 'px';
     resultTable.style.width = (baseWidth - (selfBoxLeft * 2)) + 'px';
-    resultTable.style.height = baseWidth * 0.3 + 'px';
+    resultTable.style.height = baseWidth * 0.4 + 'px';
 
     resultArr.forEach(function (res) {
+        var data = res.split(',');
         var questionNode = document.createElement('div');
-        var textNode = document.createTextNode(res);
         questionNode.className = questionNode.className + ' score-row';
-        questionNode.appendChild(textNode);
+
+
+        var questionTypeNode = document.createElement('div');
+        var questionTypeText = document.createTextNode('? Question Type');
+        questionTypeNode.className = questionTypeNode.className + ' score-row-title';
+        questionTypeNode.appendChild(questionTypeText);
+        questionNode.appendChild(questionTypeNode);
+
+        var selfScoreNode = document.createElement('div');
+        selfScoreNode.className = selfScoreNode.className + ' score-row-score';
+        var selfTextNode = document.createTextNode('You');
+        selfScoreNode.appendChild(selfTextNode);
+        questionNode.appendChild(selfScoreNode);
+
+        var awayScoreNode = document.createElement('div');
+        awayScoreNode.className = awayScoreNode.className + ' score-row-score';
+        var awayTextNode = document.createTextNode(data[2]);
+        awayScoreNode.appendChild(awayTextNode);
+        questionNode.appendChild(awayScoreNode);
+
         scoreRows.appendChild(questionNode)
     });
 
@@ -338,6 +370,8 @@
     hintsUsedBox.style.left = selfBox.style.left;
     hintsUsedBox.style.top = hintUsedTop + 'px';
     hintsUsedBox.style.width = resultTable.style.width;
+    var awayHintText = document.createTextNode(result.result.challenger.hintsUsed);
+    awayHintsUsed.appendChild(awayHintText);
 
     //Winning Streak
     var winningStreakBox = document.getElementById('winningStreakBox');
@@ -345,6 +379,8 @@
     winningStreakBox.style.left = selfBox.style.left;
     winningStreakBox.style.top = winningStreakTop + 'px';
     winningStreakBox.style.width = resultTable.style.width;
+    var awayStreakText = document.createTextNode('x' + result.result.challenger.correctStreak);
+    awayWinningStreak.appendChild(awayStreakText);
 
     //Total Score
     var totalScoreBox = document.getElementById('totalScoreBox');
@@ -352,6 +388,8 @@
     totalScoreBox.style.left = selfBox.style.left;
     totalScoreBox.style.top = totalScoreBoxTop + 'px';
     totalScoreBox.style.width = resultTable.style.width;
+    var awayScore = document.createTextNode(result.result.challenger.score);
+    awayTotalScore.appendChild(awayScore);
 
     //Next Button
     var nextButton = document.getElementById('nextButtonContainer');
