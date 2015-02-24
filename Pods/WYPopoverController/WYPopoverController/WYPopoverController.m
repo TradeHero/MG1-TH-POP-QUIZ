@@ -341,7 +341,7 @@ static char const * const UINavigationControllerEmbedInPopoverTagKey = "UINaviga
     if ([self.navigationController wy_isEmbedInPopover] == NO) {
       return;
     } else if ([self respondsToSelector:@selector(setPreferredContentSize:)]) {
-      [self.navigationController setPreferredContentSize:aSize];
+      [self.navigationController sizzled_setPreferredContentSize:aSize];
     }
 #endif
   }
@@ -443,6 +443,8 @@ static char const * const UINavigationControllerEmbedInPopoverTagKey = "UINaviga
   result.innerCornerRadius = 6;
   result.viewContentInsets = UIEdgeInsetsMake(3, 0, 0, 0);
   result.overlayColor = [UIColor clearColor];
+  result.preferredAlpha = 1.0f;
+
 
   return result;
 }
@@ -475,6 +477,8 @@ static char const * const UINavigationControllerEmbedInPopoverTagKey = "UINaviga
   result.innerCornerRadius = 0;
   result.viewContentInsets = UIEdgeInsetsZero;
   result.overlayColor = [UIColor colorWithWhite:0 alpha:0.15];
+  result.preferredAlpha = 1.0f;
+
 
   return result;
 }
@@ -970,7 +974,9 @@ static float edgeSizeFromCornerRadius(float cornerRadius) {
   [super setNeedsDisplay];
 
   [self.layer setNeedsDisplay];
-
+    
+  self.alpha = self.preferredAlpha;
+    
   if (_innerView) {
     _innerView.gradientTopColor = self.fillTopColor;
     _innerView.gradientBottomColor = self.fillBottomColor;
@@ -1495,6 +1501,7 @@ static WYPopoverTheme *defaultTheme_ = nil;
     appearance.innerCornerRadius = aTheme.innerCornerRadius;
     appearance.viewContentInsets = aTheme.viewContentInsets;
     appearance.overlayColor = aTheme.overlayColor;
+    appearance.preferredAlpha = aTheme.preferredAlpha;
   }
 }
 
@@ -1546,6 +1553,8 @@ static WYPopoverTheme *defaultTheme_ = nil;
     _theme.innerCornerRadius = appearance.innerCornerRadius;
     _theme.viewContentInsets = appearance.viewContentInsets;
     _theme.overlayColor = appearance.overlayColor;
+    _theme.preferredAlpha = appearance.preferredAlpha;
+
 
     themeIsUpdating = NO;
     themeUpdatesEnabled = YES;
@@ -1623,6 +1632,7 @@ static WYPopoverTheme *defaultTheme_ = nil;
     _backgroundView.innerShadowOffset = _theme.innerShadowOffset;
     _backgroundView.innerCornerRadius = _theme.innerCornerRadius;
     _backgroundView.viewContentInsets = _theme.viewContentInsets;
+    _backgroundView.preferredAlpha = _theme.preferredAlpha;
     [_backgroundView setNeedsDisplay];
   }
 
@@ -1860,7 +1870,7 @@ static WYPopoverTheme *defaultTheme_ = nil;
 
       if (strongSelf) {
         strongSelf->_overlayView.alpha = 1;
-        strongSelf->_backgroundView.alpha = 1;
+        strongSelf->_backgroundView.alpha = strongSelf->_backgroundView.preferredAlpha;
         strongSelf->_backgroundView.transform = endTransform;
       }
       adjustTintDimmed();
@@ -2723,7 +2733,7 @@ static float WYStatusBarHeight() {
     CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
     statusBarHeight = statusBarFrame.size.height;
 
-    if (UIDeviceOrientationIsLandscape(orientation))
+    if (UIInterfaceOrientationIsLandscape(orientation))
     {
       statusBarHeight = statusBarFrame.size.width;
     }

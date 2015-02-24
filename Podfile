@@ -6,6 +6,7 @@ inhibit_all_warnings!
 source 'https://github.com/CocoaPods/Specs.git'
 
 pod 'Alamofire', '~> 1.1.4'
+pod 'Argo'
 pod 'ChatHeads', '~> 1.0'
 pod 'DZNSegmentedControl', '~> 1.2.2'
 pod 'EGOCache', '~> 2.1'
@@ -16,10 +17,11 @@ pod 'JGProgressHUD', '~> 1.2.3'
 pod 'KKProgressTimer', :git => 'http://github.com/gin0606/KKProgressTimer.git'
 pod 'LDProgressView', '~> 1.2.1'
 pod 'MDRadialProgress', '~> 1.3.1'
+pod 'PromiseKit/Swift', '~> 1.2.4'
 pod 'PureLayout', '~> 2.0.5'
 pod 'SDWebImage', '~> 3.7.1'
 pod 'SSKeychain', '~> 1.2.2'
-pod 'WYPopoverController', '~> 0.3.6'
-pod 'Argo'
+pod 'WYPopoverController', '~> 0.3.7'
+
 
 xcodeproj 'TH-PopQuiz.xcodeproj'

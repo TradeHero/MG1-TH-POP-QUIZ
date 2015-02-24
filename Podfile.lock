@@ -34,13 +34,22 @@ PODS:
   - KKProgressTimer (0.0.1)
   - LDProgressView (1.2.1)
   - MDRadialProgress (1.3.1)
+  - OMGHTTPURLRQ (2.1):
+    - OMGHTTPURLRQ/RQ (= 2.1)
+  - OMGHTTPURLRQ/FormURLEncode (2.1)
+  - OMGHTTPURLRQ/RQ (2.1):
+    - OMGHTTPURLRQ/FormURLEncode
+    - OMGHTTPURLRQ/UserAgent
+  - OMGHTTPURLRQ/UserAgent (2.1)
+  - PromiseKit/Swift (1.2.5):
+    - OMGHTTPURLRQ
   - PureLayout (2.0.5)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
   - SKBounceAnimation (1.0.04)
   - SSKeychain (1.2.2)
-  - WYPopoverController (0.3.6)
+  - WYPopoverController (0.3.7)
 
 DEPENDENCIES:
   - Alamofire (~> 1.1.4)
@@ -55,10 +64,11 @@ DEPENDENCIES:
   - KKProgressTimer (from `http://github.com/gin0606/KKProgressTimer.git`)
   - LDProgressView (~> 1.2.1)
   - MDRadialProgress (~> 1.3.1)
+  - PromiseKit/Swift (~> 1.2.4)
   - PureLayout (~> 2.0.5)
   - SDWebImage (~> 3.7.1)
   - SSKeychain (~> 1.2.2)
-  - WYPopoverController (~> 0.3.6)
+  - WYPopoverController (~> 0.3.7)
 
 EXTERNAL SOURCES:
   KKProgressTimer:
@@ -84,10 +94,12 @@ SPEC CHECKSUMS:
   KKProgressTimer: 6a132f47ed5a24fdc0fa8a4f15dfe2ed5844772a
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
   MDRadialProgress: 0499b76b2bd25711ac1d6687c07ac915bad1b8bd
+  OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
+  PromiseKit: 27e79737441ad8b9602c769ae7731ee963269837
   PureLayout: 63a3257320223e8edddcd3afb407445f85a6bf74
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SKBounceAnimation: a47c30f67d3e4b948b1823ce5957d72d4382dd73
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
-  WYPopoverController: a46116aded5979c354300ef644b9cce906ee3a57
+  WYPopoverController: 211e8e4d5178175cc8089cf754dd8631f819d0d1
 
 COCOAPODS: 0.36.0.beta.2

@@ -92,6 +92,8 @@ typedef NS_OPTIONS(NSUInteger, WYPopoverAnimationOptions) {
 
 @property (nonatomic, strong) UIColor *overlayColor                         UI_APPEARANCE_SELECTOR;
 
+@property(nonatomic) CGFloat preferredAlpha                                 UI_APPEARANCE_SELECTOR;
+
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -266,6 +268,8 @@ typedef NS_OPTIONS(NSUInteger, WYPopoverAnimationOptions) {
 @property (nonatomic, assign) UIEdgeInsets viewContentInsets;
 
 @property (nonatomic, strong) UIColor *overlayColor;
+
+@property (nonatomic) CGFloat preferredAlpha;
 
 + (instancetype)theme;
 + (instancetype)themeForIOS6;

@@ -74,6 +74,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-OMGHTTPURLRQ.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-PromiseKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-PureLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -106,107 +116,6 @@
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>064D19682CD052750B11B4C1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>105E59B8533403F85BDAD7B1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>39E630D6A03EC1750BC00A2F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4EF3D4C43FDB236E0DCD6EE0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>54266C279022D27B7C0D74E6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5AD0E631DBA276CD0FE80D62</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6CF76EF4327B4281304874EA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>713CF3AE31F1E468DD1265C9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>75CFE86EEEDD7A540EC1A7F7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7DBCAA0B9FC2947A308C9921</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>99E50C28CA977D4049629BAB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A0CC97306C4651BF9C57D047</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A7E3966BCC9ED659AEDB374E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AA925F38270F4CAAE6D82348</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B05DC642957B054EC904CCD5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B1558432886FD6A4B60721F4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C21635B0E8F41AC346675C18</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C428BB423D16FDCA2636A040</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ED356B1266FA3E7DA338E7FC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F7D228FD36E6174EA105A517</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-	</dict>
+	<dict/>
 </dict>
 </plist>
