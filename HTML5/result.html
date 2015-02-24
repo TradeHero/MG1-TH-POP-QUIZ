@@ -85,6 +85,10 @@
             font-weight: bold;
         }
 
+        .score-row-seconds {
+            font-size: 0.6em;
+        }
+
         div.score-header-title {
             display: inline-block;
             width: 50%;
@@ -349,13 +353,13 @@
         questionNode.appendChild(questionTypeNode);
 
         var selfScoreNode = document.createElement('div');
-        selfScoreNode.className = selfScoreNode.className + ' score-row-score';
+        selfScoreNode.className = selfScoreNode.className + ' score-row-score score-row-seconds';
         var selfTextNode = document.createTextNode('You');
         selfScoreNode.appendChild(selfTextNode);
         questionNode.appendChild(selfScoreNode);
 
         var awayScoreNode = document.createElement('div');
-        awayScoreNode.className = awayScoreNode.className + ' score-row-score';
+        awayScoreNode.className = awayScoreNode.className + ' score-row-score score-row-seconds';
         var awayTextNode = document.createTextNode(data[2]);
         awayScoreNode.appendChild(awayTextNode);
         questionNode.appendChild(awayScoreNode);
