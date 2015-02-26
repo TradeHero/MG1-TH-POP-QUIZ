@@ -1,0 +1,157 @@
+
+html {
+    height: 100%;
+    font-family: "Avenir Next", sans-serif;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+div#base-container {
+    background: url('../resources/popquiz-result/popquiz-result-bg.png');
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#selfBox, #awayBox {
+    background: url('../resources/popquiz-result/popquiz-result-scorebox.png');
+    background-size: contain;
+    position: absolute;
+}
+
+div#selfAvatar, #awayAvatar {
+    border-radius: 50%;
+    border: 2px solid #fff;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: #fff;
+}
+
+div.score-box {
+    border-radius: 3px;
+    border: 2px solid #FDDFA3;
+    background: #FFF1D5;
+    position: absolute;
+}
+
+div#resultTable {
+    margin-top: 1%;
+    overflow: hidden;
+}
+
+span.user-name {
+    color: #fff;
+    width: 200px;
+    display: inline-block;
+    position: relative;
+}
+
+div.score-header {
+    background: #FF4069;
+    font-size: 1.2em;
+    color: #fff;
+    font-weight: 400;
+    width: 96%;
+    padding: 2%;
+}
+
+span#versusSpan {
+    position: absolute;
+    font-size: 2em;
+    color: #fff;
+}
+
+div.score-header-avatar {
+    display: inline-block;
+    width: 23%;
+    text-align: center;
+}
+
+div.score-row-score {
+    text-align: center;
+    display: inline-block;
+    width: 22% !important;
+    font-weight: bold;
+}
+
+.score-row-seconds {
+    font-size: 0.6em;
+}
+
+div.score-header-title {
+    display: inline-block;
+    width: 50%;
+}
+
+div.score-row {
+    padding: 10px 5px;
+    margin: 0 10px;
+    border-bottom: solid 1px darkgray;
+    vertical-align: middle;
+}
+
+div.score-row .score-row-title {
+    display: inline-block;
+    width: 52%;
+}
+
+div.score-row-last {
+    border-bottom: 0;
+    background: none;
+}
+
+div#hintsUsedBox {
+    margin-top: 2%;
+}
+
+div#winningStreakBox {
+    margin-top: 3%;
+}
+
+div#totalScoreBox {
+    margin-top: 4%;
+}
+
+.red-text {
+    color: darkred !important;
+}
+
+.green-text {
+    color: darkgreen !important;
+}
+
+.black-text {
+    color: #070707 !important;
+}
+
+#nextButtonContainer {
+    position: absolute;
+    left: 50%;
+    margin-top: 5%;
+}
+
+#nextButtonInner {
+    position: relative;
+    left: -50%;
+    color: #ffffff;
+}
+
+.button {
+    min-width: 300px;
+    padding: 5%;
+    background: #28ee28;
+    text-align: center;
+}
+
+.button:hover {
+    background: darkgray;
+}
+
+.score-rows-container {
+    height: 100%;
+    width: 105%;
+    overflow: auto;
+}
