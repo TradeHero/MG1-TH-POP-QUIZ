@@ -1,4 +1,3 @@
-
 html {
     height: 100%;
     font-family: "Avenir Next", sans-serif;
@@ -79,6 +78,14 @@ div.score-row-score {
 
 .score-row-seconds {
     font-size: 0.6em;
+}
+
+.score-row-seconds-inner {
+    background: #ffffff;
+    padding: 5% 10%;
+    display: inline-block;
+    min-width: 40%;
+    text-align: end;
 }
 
 div.score-header-title {

@@ -6,9 +6,9 @@ var selfAvatar = document.getElementById("selfAvatar");
 var awayAvatar = document.getElementById("awayAvatar");
 var versusSpan = document.getElementById("versusSpan");
 var resultTable = document.getElementById("resultTable");
-var awayHintsUsed = document.getElementById("awayHintsUsed");
-var awayWinningStreak = document.getElementById("awayWinningStreak");
-var awayTotalScore = document.getElementById("awayTotalScore");
+var selfHintsUsed = document.getElementById("selfHintsUsed");
+var selfWinningStreak = document.getElementById("selfWinningStreak");
+var selfTotalScore = document.getElementById("selfTotalScore");
 
 /////////////////// BASE ///////////////////
 var baseHeight = window.innerHeight;
@@ -109,11 +109,26 @@ resultTable.style.top = scoreTableTop + 'px';
 resultTable.style.width = (baseWidth - (selfBoxLeft * 2)) + 'px';
 resultTable.style.height = baseWidth * 0.4 + 'px';
 
+function createScore(text) {
+    var awayScoreNode = document.createElement('div');
+    awayScoreNode.className = awayScoreNode.className + ' score-row-score score-row-seconds';
+    var awayScoreInner = document.createElement('div');
+    awayScoreInner.className = awayScoreInner.className + ' score-row-seconds-inner';
+    var awayTextNode = document.createTextNode(text);
+    awayScoreInner.appendChild(awayTextNode);
+    awayScoreNode.appendChild(awayScoreInner);
+    return awayScoreNode;
+}
+
 resultArr.forEach(function (res) {
+    //id, raw, seconds
     var data = res.split(',');
     var questionNode = document.createElement('div');
     questionNode.className = questionNode.className + ' score-row';
 
+    var questionId = data[0];
+    var rawScore = data[1];
+    var timeTaken = data[2];
 
     var questionTypeNode = document.createElement('div');
     var questionTypeText = document.createTextNode('? Question Type');
@@ -121,17 +136,9 @@ resultArr.forEach(function (res) {
     questionTypeNode.appendChild(questionTypeText);
     questionNode.appendChild(questionTypeNode);
 
-    var selfScoreNode = document.createElement('div');
-    selfScoreNode.className = selfScoreNode.className + ' score-row-score score-row-seconds';
-    var selfTextNode = document.createTextNode('You');
-    selfScoreNode.appendChild(selfTextNode);
-    questionNode.appendChild(selfScoreNode);
+    questionNode.appendChild(createScore((rawScore > 0 ? data[2] + 's': 'x')));
 
-    var awayScoreNode = document.createElement('div');
-    awayScoreNode.className = awayScoreNode.className + ' score-row-score score-row-seconds';
-    var awayTextNode = document.createTextNode(data[2]);
-    awayScoreNode.appendChild(awayTextNode);
-    questionNode.appendChild(awayScoreNode);
+    questionNode.appendChild(createScore("..."));
 
     scoreRows.appendChild(questionNode)
 });
@@ -143,7 +150,7 @@ hintsUsedBox.style.left = selfBox.style.left;
 hintsUsedBox.style.top = hintUsedTop + 'px';
 hintsUsedBox.style.width = resultTable.style.width;
 var awayHintText = document.createTextNode(result.result.challenger.hintsUsed);
-awayHintsUsed.appendChild(awayHintText);
+selfHintsUsed.appendChild(awayHintText);
 
 //Winning Streak
 var winningStreakBox = document.getElementById('winningStreakBox');
@@ -151,8 +158,8 @@ var winningStreakTop = hintUsedTop + hintsUsedBox.offsetHeight;
 winningStreakBox.style.left = selfBox.style.left;
 winningStreakBox.style.top = winningStreakTop + 'px';
 winningStreakBox.style.width = resultTable.style.width;
-var awayStreakText = document.createTextNode('x' + result.result.challenger.correctStreak);
-awayWinningStreak.appendChild(awayStreakText);
+var selfStreakText = document.createTextNode('x' + result.result.challenger.correctStreak);
+selfWinningStreak.appendChild(selfStreakText);
 
 //Total Score
 var totalScoreBox = document.getElementById('totalScoreBox');
@@ -160,8 +167,8 @@ var totalScoreBoxTop = winningStreakTop + winningStreakBox.offsetHeight;
 totalScoreBox.style.left = selfBox.style.left;
 totalScoreBox.style.top = totalScoreBoxTop + 'px';
 totalScoreBox.style.width = resultTable.style.width;
-var awayScore = document.createTextNode(result.result.challenger.score);
-awayTotalScore.appendChild(awayScore);
+var selfScore = document.createTextNode(result.result.challenger.score);
+selfTotalScore.appendChild(selfScore);
 
 //Next Button
 var nextButton = document.getElementById('nextButtonContainer');
