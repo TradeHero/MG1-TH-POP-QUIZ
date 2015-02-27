@@ -99,7 +99,13 @@ versusSpan.style.left = versusSpanLeft + 'px';
 versusSpan.style.top = versusSpanTop + 'px';
 
 var result = JSON.parse(resultString);
-var resultArr = result.result.challenger.details.split('|');
+var selfResultArr = result.result.challenger.details.split('|');
+var awayResultArr;
+
+if(result.result.opponent != null)
+{
+    awayResultArr = result.result.opponent.details.split('|');
+}
 
 /////
 var scoreTableTop = selfAwayBoxTop + selfBox.offsetHeight;
@@ -120,7 +126,7 @@ function createScore(text) {
     return awayScoreNode;
 }
 
-resultArr.forEach(function (res) {
+selfResultArr.forEach(function (res) {
     //id, raw, seconds
     var data = res.split(',');
     var questionNode = document.createElement('div');
