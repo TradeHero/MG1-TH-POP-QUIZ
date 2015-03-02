@@ -100,7 +100,7 @@ html {
     vertical-align: middle;
 }
 
-.score-row .score-row-title {
+.score-row-title {
     display: inline-block;
     width: 52%;
 }
