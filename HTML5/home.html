@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+    <title></title>
+    <link href="css/reset.css" rel="stylesheet"/>
+    <style rel="stylesheet">
+        html, button {
+            height: 100%;
+            font-family: "Avenir Next", sans-serif;
+            font-size: 1.2em;
+            font-weight: 400;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        div#base-container {
+            /*background: url('./resources/popquiz-result/popquiz-result-bg.png');*/
+            background: #00a9ed;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #home-header {
+            display: table;
+            height: 15%;
+            width: 100%;
+            background: #ffa414;
+        }
+
+        #home-menus {
+            height: 15%;
+            width: 100%;
+            position: relative;
+        }
+
+        #home-menus-button-container {
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            display: table-cell;
+            vertical-align: middle;
+            right: 0;
+            position: absolute;
+            top: 0;
+        }
+
+        .home-games {
+            height: 70%;
+            width: 100%;
+            overflow-y: auto;
+        }
+
+        #profile-avatar {
+            position: relative;
+            height: inherit;
+            width: 30%;
+            text-align: center;
+        }
+
+        #profile-info {
+            color: #ffffff;
+            position: relative;
+            min-height: inherit;
+            width: 70%;
+        }
+
+        #profile-avatar, #profile-info {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            clear: both;
+            visibility: hidden;
+            line-height: 0;
+            height: 0;
+        }
+
+        .clearfix {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .game-button {
+            position: relative;
+            width: 75%;
+            height: 45%;
+            margin-top: 1%;
+            color: #ffffff;
+            background-color: #28ee28;
+        }
+
+        .game-button.red-button {
+            background-color: red;
+        }
+
+        .game-cell .game-button {
+            margin-top: 0%;
+            height: 70%;
+        }
+
+        .game-cell {
+            min-height: 15%;
+            background: #ffffff;
+        }
+
+        .game-header, .game-cell {
+            margin: 1% 5%;
+            padding: 1%;
+            display: table;
+            width: 90%;
+        }
+
+        .game-cell-avatar {
+            width: 10%;
+        }
+
+        .game-cell-action, .game-cell-avatar, .game-cell-data {
+            display: table-cell;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .game-cell-data {
+            padding: 0 2%;
+            width: 65%;
+        }
+
+        .game-cell-data-inner div{
+            display: inline-block;
+        }
+        
+        .game-cell-data .top {
+            width: 45%;
+        }
+
+        .game-cell-data .right {
+            text-align: right;
+        }
+
+        .game-cell-data .text{
+            width: 44%;
+        }
+
+        .game-cell-data .divider{
+            width: 1%;
+        }
+
+        .game-cell-action {
+            width: 30%;
+            text-align: center;
+        }
+
+        .game-cell-data p {
+            line-height: 1.5em;
+        }
+
+        .game-new-challenge {
+            font-weight: bold;
+        }
+
+        .game-header-text {
+            color: #ffffff;
+            display: inline-block;
+            width: 49.5%;
+        }
+
+        .game-header-text.right {
+            text-align: right;
+        }
+    </style>
+
+</head>
+<body>
+<div id="base-container">
+    <div id="home-header" class="clearfix">
+        <div id="profile-avatar">
+            <img style="width: 70%;" src="resources/profile_pic.jpg"/>
+        </div>
+        <div id="profile-info">
+            Robert
+        </div>
+    </div>
+    <div id="home-menus">
+        <div id="home-menus-button-container">
+            <button id="challenge-button" class="game-button">Challenge a Friend
+            </button>
+            <button style="" id="quick-button" class="game-button">Quick Game
+            </button>
+        </div>
+    </div>
+    <div class="home-games">
+        <div class="game-header">
+            <div class="game-header-text">Your Turn</div>
+            <div class="game-header-text right">5 games</div>
+        </div>
+        <div class="game-cell">
+            <div class="game-cell-avatar clearfix">
+                <img style="max-width: 100%; height: auto"
+                     src="resources/profile_pic.jpg"/>
+            </div>
+            <div class="game-cell-data">
+                <div class="game-cell-data-inner">
+                    <div class="top">Player190800</div>
+                    <div class="top right">Me</div>
+                </div>
+                <div class="game-cell-data-inner">
+                    <div class="bottom text">1</div>
+                    <div class="bottom divider">:</div>
+                    <div class="bottom text right">0</div>
+                </div>
+            </div>
+            <div class="game-cell-action">
+                <button class="game-button">Play</button>
+            </div>
+        </div>
+        <div class="game-cell">
+            <div class="game-cell-avatar clearfix">
+                <img style="max-width: 100%; height: auto"
+                     src="resources/profile_pic.jpg"/>
+            </div>
+            <div class="game-cell-data">
+                <div>
+                    <p>Player192230</p>
+                </div>
+                <div style="width: inherit">
+                    <p class="game-new-challenge">
+                        New Challenge!
+                    </p>
+                </div>
+            </div>
+            <div class="game-cell-action">
+                <button class="game-button red-button">Accept</button>
+            </div>
+        </div>
+        <div class="game-cell">Player190800</div>
+        <div class="game-cell">Player190800</div>
+        <div class="game-cell">Player190800</div>
+        <div class="game-header">
+            <div class="game-header-text">Their Turn</div>
+            <div class="game-header-text right">3 games</div>
+        </div>
+        <div class="game-cell">Player190800</div>
+        <div class="game-cell">Player190800</div>
+        <div class="game-cell">Player190800</div>
+    </div>
+</div>
+</body>
+<script type="application/javascript">
+    var baseContainer = document.getElementById("base-container");
+    var baseHeight = window.innerHeight;
+    var baseWidth = window.innerHeight * 0.75;
+    baseContainer.style.height = "100%";
+    baseContainer.style.width = baseWidth + "px";
+
+    //UI
+    var homeHeader = document.getElementById("home-header");
+    var profileAvatar = document.getElementById("profile-avatar");
+    console.log(homeHeader.offsetHeight);
+    profileAvatar.style.height = homeHeader.offsetHeight + 'px';
+</script>
+</html>
