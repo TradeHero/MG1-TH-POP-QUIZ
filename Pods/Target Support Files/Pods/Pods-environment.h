@@ -171,8 +171,8 @@
 // PromiseKit/Swift
 #define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift
 #define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift 1
-#define COCOAPODS_VERSION_MINOR_PromiseKit_Swift 2
-#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift 5
+#define COCOAPODS_VERSION_MINOR_PromiseKit_Swift 3
+#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift 0
 
 // PureLayout
 #define COCOAPODS_POD_AVAILABLE_PureLayout

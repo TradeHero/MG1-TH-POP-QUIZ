@@ -1,1 +1,1 @@
-../../../PromiseKit/swift/Sources/PromiseKit.h
+../../../PromiseKit/Swift Sources/PromiseKit.h
