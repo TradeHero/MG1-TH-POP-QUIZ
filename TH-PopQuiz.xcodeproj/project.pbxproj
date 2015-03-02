@@ -428,10 +428,10 @@
 			children = (
 				6DD231AB19B8215B00B5D05E /* External */,
 				6DD231BC19B821DB00B5D05E /* Frameworks */,
+				832BAF112C179B90950B100D /* Pods */,
 				6DD2310019B81FFA00B5D05E /* Products */,
 				6DD2310119B81FFA00B5D05E /* Source */,
 				6DD2311419B81FFA00B5D05E /* TH-PopQuizTests */,
-				832BAF112C179B90950B100D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -498,8 +498,8 @@
 				6DD2312619B8204900B5D05E /* GameLoadingSceneViewController.swift */,
 				6DD2312719B8204900B5D05E /* HomeViewController.swift */,
 				6DB9A18A19E3A21D001DEDFB /* InAppNotificationTableViewController.swift */,
-				6DAFBCD91A08ADC8009C41EC /* MusicChooserTableViewController.swift */,
 				6DD2312819B8204900B5D05E /* LoginViewController.swift */,
+				6DAFBCD91A08ADC8009C41EC /* MusicChooserTableViewController.swift */,
 				6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */,
 				6DD2312919B8204900B5D05E /* QuizViewController.swift */,
 				6DD2312A19B8204900B5D05E /* ResultsViewController.swift */,
