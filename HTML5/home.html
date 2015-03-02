@@ -17,7 +17,7 @@
             height: 100%;
         }
 
-        div#base-container {
+        #base-container {
             /*background: url('./resources/popquiz-result/popquiz-result-bg.png');*/
             background: #00a9ed;
             position: absolute;
@@ -99,13 +99,13 @@
             background-color: #28ee28;
         }
 
-        .game-button.red-button {
-            background-color: red;
-        }
-
-        .game-cell .game-button {
+        .game-button.game-cell-button {
             margin-top: 0;
             height: 70%;
+        }
+
+        .game-cell-button.red-button {
+            background-color: red;
         }
 
         .game-cell {
@@ -135,33 +135,30 @@
             width: 65%;
         }
 
-        .game-cell-data-inner div {
+        .game-cell-data-inner > div {
+            line-height: 1.5em;
             display: inline-block;
         }
 
-        .game-cell-data .top {
+        .game-cell-data-top {
             width: 45%;
         }
 
-        .game-cell-data .right {
+        .game-cell-data-right {
             text-align: right;
         }
 
-        .game-cell-data .text {
+        .game-cell-data-text {
             width: 44%;
         }
 
-        .game-cell-data .divider {
+        .game-cell-data-divider {
             width: 1%;
         }
 
         .game-cell-action {
             width: 30%;
             text-align: center;
-        }
-
-        .game-cell-data p {
-            line-height: 1.5em;
         }
 
         .game-new-challenge {
@@ -178,7 +175,7 @@
             text-align: right;
         }
 
-        .gone{
+        .gone {
             visibility: hidden;
         }
     </style>
@@ -214,17 +211,17 @@
             </div>
             <div class="game-cell-data">
                 <div class="game-cell-data-inner">
-                    <div class="top">Player190800</div>
-                    <div class="top right">Me</div>
+                    <div class="game-cell-data-top">Player190800</div>
+                    <div class="game-cell-data-top game-cell-data-right">Me</div>
                 </div>
                 <div class="game-cell-data-inner">
-                    <div class="text">1</div>
-                    <div class="divider">:</div>
-                    <div class="text right">0</div>
+                    <div class="game-cell-data-text">1</div>
+                    <div class="game-cell-data-divider">:</div>
+                    <div class="game-cell-data-text game-cell-data-right">0</div>
                 </div>
             </div>
             <div class="game-cell-action">
-                <button class="game-button">Play</button>
+                <button class="game-button game-cell-button">Play</button>
             </div>
         </div>
         <div class="game-cell">
@@ -233,17 +230,15 @@
                      src="resources/profile_pic.jpg"/>
             </div>
             <div class="game-cell-data">
-                <div>
-                    <p>Player192230</p>
+                <div class="game-cell-data-inner">
+                    <div>Player192230</div>
                 </div>
-                <div>
-                    <p class="game-new-challenge">
-                        New Challenge!
-                    </p>
+                <div class="game-cell-data-inner">
+                    <div class="game-new-challenge">New Challenge!</div>
                 </div>
             </div>
             <div class="game-cell-action">
-                <button class="game-button red-button">Accept</button>
+                <button class="game-button game-cell-button red-button">Accept</button>
             </div>
         </div>
         <div class="game-cell">Player190800</div>
@@ -253,10 +248,11 @@
             <div class="game-header-text">Their Turn</div>
             <div class="game-header-text right">3 games</div>
         </div>
-        <div class="game-cell"><div class="game-cell-avatar clearfix">
-            <img style="max-width: 100%; height: auto"
-                 src="resources/profile_pic.jpg"/>
-        </div>
+        <div class="game-cell">
+            <div class="game-cell-avatar clearfix">
+                <img style="max-width: 100%; height: auto"
+                     src="resources/profile_pic.jpg"/>
+            </div>
             <div class="game-cell-data">
                 <div class="game-cell-data-inner">
                     <div class="top">Player190800</div>
@@ -268,7 +264,8 @@
                     <div class="text right">0</div>
                 </div>
             </div>
-            <div class="game-cell-action gone"></div></div>
+            <div class="game-cell-action gone"></div>
+        </div>
         <div class="game-cell">Player190800</div>
         <div class="game-cell">Player190800</div>
     </div>
