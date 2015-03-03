@@ -1,0 +1,80 @@
+html, button {
+    height: 100%;
+    font-family: "Avenir Next", sans-serif;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.game-button {
+    position: relative;
+    width: 75%;
+    height: 45%;
+    margin-top: 1%;
+    padding: 10px 15px;
+    background: #5ee300;
+    color: #FFF;
+    border: solid 1px #3a8d0d;
+
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.game-button:hover {
+    background: #56c00c;
+    border: solid 1px #39772a;
+    text-decoration: none;
+}
+
+.game-button:active {
+    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+
+    background: #38812b;
+    border: solid 1px #335f2c;
+}
+
+.game-button.red-button {
+    background: red;
+    border: solid 1px #8d1814;
+}
+
+.game-button.red-button:hover {
+    background: #d50000;
+    border: solid 1px #770015;
+}
+
+.game-button.red-button:active {
+    background: #810612;
+    border: solid 1px #5f001d;
+}
