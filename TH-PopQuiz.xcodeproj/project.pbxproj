@@ -15,6 +15,7 @@
 		6D0BC42119C7E2F700578C90 /* SettingsControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D0BC41F19C7E2F700578C90 /* SettingsControlTableViewCell.xib */; };
 		6D0D683419F4B262002682F7 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D0D683319F4B262002682F7 /* AirshipConfig.plist */; };
 		6D0DDF411AA6BDEE005FE31C /* DevViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0DDF401AA6BDEE005FE31C /* DevViewController.swift */; };
+		6D0DDF431AA6DC3F005FE31C /* Dev.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D0DDF421AA6DC3F005FE31C /* Dev.storyboard */; };
 		6D0FBB7C1A8C54FE006A4F4C /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0FBB7B1A8C54FE006A4F4C /* FacebookService.swift */; };
 		6D0FBB7E1A8C5A45006A4F4C /* FacebookInvitableFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0FBB7D1A8C5A45006A4F4C /* FacebookInvitableFriends.swift */; };
 		6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */; };
@@ -49,7 +50,6 @@
 		6DBE9DB119D159DE00FACB1D /* Correct-Bell.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE9DB019D159DE00FACB1D /* Correct-Bell.caf */; };
 		6DBE9DB519D162E500FACB1D /* Wrong-Buzzer.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE9DB319D15D8100FACB1D /* Wrong-Buzzer.caf */; };
 		6DD053A519C6CBB100831B6C /* ChallengesSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DD053A419C6CBB100831B6C /* ChallengesSectionHeader.xib */; };
-		6DD16A5A1AA5693600D9B75B /* Development.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DD16A591AA5693600D9B75B /* Development.storyboard */; };
 		6DD16A5D1AA56B6200D9B75B /* QuizDebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD16A5C1AA56B6200D9B75B /* QuizDebugViewController.swift */; };
 		6DD2311819B81FFA00B5D05E /* TH_PopQuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2311719B81FFA00B5D05E /* TH_PopQuizTests.swift */; };
 		6DD2316C19B8204900B5D05E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD2312219B8204900B5D05E /* AppDelegate.swift */; };
@@ -156,6 +156,7 @@
 		6D0BC41F19C7E2F700578C90 /* SettingsControlTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsControlTableViewCell.xib; sourceTree = "<group>"; };
 		6D0D683319F4B262002682F7 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		6D0DDF401AA6BDEE005FE31C /* DevViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevViewController.swift; sourceTree = "<group>"; };
+		6D0DDF421AA6DC3F005FE31C /* Dev.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dev.storyboard; sourceTree = "<group>"; };
 		6D0FBB7B1A8C54FE006A4F4C /* FacebookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		6D0FBB7D1A8C5A45006A4F4C /* FacebookInvitableFriends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookInvitableFriends.swift; sourceTree = "<group>"; };
 		6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -190,7 +191,6 @@
 		6DBE9DB019D159DE00FACB1D /* Correct-Bell.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Correct-Bell.caf"; sourceTree = "<group>"; };
 		6DBE9DB319D15D8100FACB1D /* Wrong-Buzzer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wrong-Buzzer.caf"; sourceTree = "<group>"; };
 		6DD053A419C6CBB100831B6C /* ChallengesSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengesSectionHeader.xib; sourceTree = "<group>"; };
-		6DD16A591AA5693600D9B75B /* Development.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Development.storyboard; sourceTree = "<group>"; };
 		6DD16A5C1AA56B6200D9B75B /* QuizDebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizDebugViewController.swift; sourceTree = "<group>"; };
 		6DD230FF19B81FFA00B5D05E /* TH-PopQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TH-PopQuiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD2311119B81FFA00B5D05E /* TH-PopQuizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TH-PopQuizTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -701,7 +701,7 @@
 				6DD2312D19B8204900B5D05E /* Login.storyboard */,
 				6DB9A18F19E3A300001DEDFB /* InAppNotification.storyboard */,
 				6D01613019FF87D90024A3A0 /* Launch Screen.xib */,
-				6DD16A591AA5693600D9B75B /* Development.storyboard */,
+				6D0DDF421AA6DC3F005FE31C /* Dev.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -755,9 +755,9 @@
 				6DD230FC19B81FFA00B5D05E /* Frameworks */,
 				6DD230FD19B81FFA00B5D05E /* Resources */,
 				6DD231B919B8219F00B5D05E /* Embed Frameworks */,
-				6DF3D45519D3C0A7000B08F0 /* Run Script */,
 				246369206A48CDF7FD0B9376 /* Copy Pods Resources */,
 				3D1B66C9623C3ECDBAD3488C /* Embed Pods Frameworks */,
+				6DF3D45519D3C0A7000B08F0 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -852,11 +852,11 @@
 				6DAFBCF61A08B470009C41EC /* MusicChooserTableViewCell.xib in Resources */,
 				6D0BC42119C7E2F700578C90 /* SettingsControlTableViewCell.xib in Resources */,
 				F6A7D93C1A00DBB600056EB1 /* bee68_5.mp3 in Resources */,
+				6D0DDF431AA6DC3F005FE31C /* Dev.storyboard in Resources */,
 				6DBE9DB519D162E500FACB1D /* Wrong-Buzzer.caf in Resources */,
 				6DD2319319B8204900B5D05E /* FriendsChallengeCellTableViewCell.xib in Resources */,
 				6DD2319719B8204900B5D05E /* HomeTurnChallengesTableViewCell.xib in Resources */,
 				6DBE9DB119D159DE00FACB1D /* Correct-Bell.caf in Resources */,
-				6DD16A5A1AA5693600D9B75B /* Development.storyboard in Resources */,
 				F6A7D9381A00DBB600056EB1 /* bee68_1.mp3 in Resources */,
 				6DD231A019B8204900B5D05E /* QuestionViewWithAccessoryImage.xib in Resources */,
 				6D779B431AA6B61E00E4A6C1 /* SettingsCommonTableViewCell.xib in Resources */,
@@ -941,7 +941,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# set new $IFS\n: <<'COMMENT'\nSAVEIFS=$IFS\nIFS=$(echo -en \"\\n\\b\")\nplist=\"Code/Supporting Files/Info.plist\"\n\necho \"Updating $plist\"\n\nif [[ -z \"$CFBundleVersionNew\" ]]\nthen\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$plist\")\nCFBundleVersionNew=$(($CFBundleVersion + 2))\nfi\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $CFBundleVersionNew\" \"$plist\"\n\nCFBuildDate=$(date)\n\n/usr/libexec/PlistBuddy -c \"Set :CFBuildDate $CFBuildDate\" \"$plist\"\n\ntouch \"$plist\"\n# restore $IFS\nIFS=$SAVEIFS\nCOMMENT\n";
+			shellScript = "# set new $IFS\nSAVEIFS=$IFS\nIFS=$(echo -en \"\\n\\b\")\nplist=\"Code/Supporting Files/Info.plist\"\n\necho \"Updating $plist\"\n\nif [[ -z \"$CFBundleVersionNew\" ]]\nthen\nCFBundleVersion=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$plist\")\nCFBundleVersionNew=$(($CFBundleVersion + 2))\nfi\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $CFBundleVersionNew\" \"$plist\"\n\nCFBuildDate=$(date)\n\n/usr/libexec/PlistBuddy -c \"Set :CFBuildDate $CFBuildDate\" \"$plist\"\n\ntouch \"$plist\"\n# restore $IFS\nIFS=$SAVEIFS\n";
 		};
 		92186A708B2A42D934FE351E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
