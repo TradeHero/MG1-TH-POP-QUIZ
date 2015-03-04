@@ -105,6 +105,10 @@ final class Question {
     
     var accessoryImage: UIImage!
     
+    var subcategory: Int!
+    
+    var difficulty: Int!
+    
     func isGraphical() -> Bool{
         switch self.questionType {
         case .LogoType, .TimedObfuscatorType:
@@ -208,6 +212,14 @@ final class Question {
         }
         
         self.options = OptionSet(correctOption: option1, dummyOptions: [option2, option3, option4])
+        
+        if let diff: AnyObject? = questionDTO["difficulty"] {
+            self.difficulty = (diff as Int)
+        }
+        
+        if let sub: AnyObject? = questionDTO["subcategory"] {
+            self.subcategory = (sub as Int)
+        }
     }
     
     func fetchImage(completionHandler:() -> ()) {
@@ -267,6 +279,8 @@ extension Question : Printable {
             d += "ID: \(questionID)\n"
             d += "Type: \(questionType.description())\n"
             d += "Category: \(questionCategory.description())\n"
+            d += "Subcategory: \(subcategory)"
+            d += "Difficulty: \(difficulty)"
             d += "Content: \(questionContent)\n"
             let imgurl = questionImageURLString ?? "no image"
             d += "Image name: \(imgurl)\n"

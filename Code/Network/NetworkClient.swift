@@ -13,6 +13,7 @@ import SDWebImage
 import EGOCache
 import SSKeychain
 import FacebookSDK
+import Argo
 
 class NetworkClient {
     
@@ -458,7 +459,39 @@ class NetworkClient {
         debugPrintln(r)
     }
     
-    func updateDeviceToken(deviceToken:String, errorHandler:NSError->(), completionHandler:()->()) {
+    /**
+    Fetch all static questions
+    
+    :param: userId User ID to fetch
+    :param: completionHandler Handles fetched user if succeed
+    */
+    func fetchStaticQuestions(errorHandler:NSError->(), completionHandler: [QuestionDTO] -> ()) {
+        if(!isInternalUser(self.authenticatedUser)){
+            errorHandler(NSError(domain: "com.mymanisku.THPopQuiz", code: 1002, userInfo: ["message": "Non-internal user attempted retrieval"]))
+        }
+        
+        let r = self.request(.GET, "\(THGameAPIBaseURL)/staticAll)", parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+            _, response, content, error in
+            if let e = error {
+                errorHandler(e)
+                return
+            }
+            var questions = [QuestionDTO]()
+            if let d = content as? [AnyObject]{
+                for rawQuestion in d {
+                    if let question = QuestionDTO.decode(JSONValue.parse(rawQuestion)){
+                        questions.append(question)
+                    }
+                }
+            }
+        }
+    }
+    
+
+    
+    // MARK: Simple functions
+    
+        func updateDeviceToken(deviceToken:String, errorHandler:NSError->(), completionHandler:()->()) {
         let url = "\(THServerAPIBaseURL)/updateDevice"
         debugPrintln("Device token changed, updating device token..")
         
