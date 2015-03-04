@@ -1,11 +1,4 @@
-html {
-    height: 100%;
-    font-family: "Avenir Next", sans-serif;
-    font-size: 1.2em;
-    font-weight: 400;
-}
-
-div#base-container {
+#base-container {
     background: url('../resources/popquiz-result/popquiz-result-bg.png');
     position: absolute;
     left: 0;
@@ -14,13 +7,13 @@ div#base-container {
     margin-right: auto;
 }
 
-div#selfBox, #awayBox {
+#selfBox, #awayBox {
     background: url('../resources/popquiz-result/popquiz-result-scorebox.png');
     background-size: contain;
     position: absolute;
 }
 
-div#selfAvatar, #awayAvatar {
+#selfAvatar, #awayAvatar {
     border-radius: 50%;
     border: 2px solid #fff;
     position: relative;
@@ -29,26 +22,26 @@ div#selfAvatar, #awayAvatar {
     background: #fff;
 }
 
-div.score-box {
+.score-box {
     border-radius: 3px;
     border: 2px solid #FDDFA3;
     background: #FFF1D5;
     position: absolute;
 }
 
-div#resultTable {
+#resultTable {
     margin-top: 1%;
     overflow: hidden;
 }
 
-span.user-name {
+.user-name {
     color: #fff;
     width: 200px;
     display: inline-block;
     position: relative;
 }
 
-div.score-header {
+.score-header {
     background: #FF4069;
     font-size: 1.2em;
     color: #fff;
@@ -57,19 +50,19 @@ div.score-header {
     padding: 2%;
 }
 
-span#versusSpan {
+#versusSpan {
     position: absolute;
     font-size: 2em;
     color: #fff;
 }
 
-div.score-header-avatar {
+.score-header-avatar {
     display: inline-block;
     width: 23%;
     text-align: center;
 }
 
-div.score-row-score {
+.score-row-score {
     text-align: center;
     display: inline-block;
     width: 22% !important;
@@ -88,37 +81,37 @@ div.score-row-score {
     text-align: end;
 }
 
-div.score-header-title {
+.score-header-title {
     display: inline-block;
     width: 50%;
 }
 
-div.score-row {
+.score-row {
     padding: 10px 5px;
     margin: 0 10px;
     border-bottom: solid 1px darkgray;
     vertical-align: middle;
 }
 
-div.score-row .score-row-title {
+.score-row-title {
     display: inline-block;
     width: 52%;
 }
 
-div.score-row-last {
+.score-row:last-child {
     border-bottom: 0;
     background: none;
 }
 
-div#hintsUsedBox {
+#hintsUsedBox {
     margin-top: 2%;
 }
 
-div#winningStreakBox {
+#winningStreakBox {
     margin-top: 3%;
 }
 
-div#totalScoreBox {
+#totalScoreBox {
     margin-top: 4%;
 }
 
@@ -135,26 +128,17 @@ div#totalScoreBox {
 }
 
 #nextButtonContainer {
+    width: 100%;
     position: absolute;
-    left: 50%;
-    margin-top: 5%;
+    display: table-cell;
+    text-align: center;
+    margin-top: 10%;
 }
 
 #nextButtonInner {
     position: relative;
     left: -50%;
     color: #ffffff;
-}
-
-.button {
-    min-width: 300px;
-    padding: 5%;
-    background: #28ee28;
-    text-align: center;
-}
-
-.button:hover {
-    background: darkgray;
 }
 
 .score-rows-container {

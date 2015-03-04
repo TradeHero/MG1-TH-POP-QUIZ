@@ -5,19 +5,15 @@
     <meta name="viewport" content="width=device-width"/>
     <title></title>
     <link href="css/reset.css" rel="stylesheet"/>
+    <script type="application/javascript"
+            src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="css/common.css" rel="stylesheet"/>
     <style rel="stylesheet">
-        html, button {
-            height: 100%;
-            font-family: "Avenir Next", sans-serif;
-            font-size: 1.2em;
-            font-weight: 400;
-        }
-
         body {
             height: 100%;
         }
 
-        div#base-container {
+        #base-container {
             /*background: url('./resources/popquiz-result/popquiz-result-bg.png');*/
             background: #00a9ed;
             position: absolute;
@@ -31,7 +27,7 @@
             display: table;
             height: 15%;
             width: 100%;
-            background: #ffa414;
+            background: #ffc004;
         }
 
         #home-menus {
@@ -76,41 +72,15 @@
             vertical-align: middle;
         }
 
-        .clearfix:after {
-            content: ".";
-            display: block;
-            clear: both;
-            visibility: hidden;
-            line-height: 0;
-            height: 0;
-        }
-
-        .clearfix {
-            display: inline-block;
-            vertical-align: top;
-        }
-
-        .game-button {
-            position: relative;
-            width: 75%;
-            height: 45%;
-            margin-top: 1%;
-            color: #ffffff;
-            background-color: #28ee28;
-        }
-
-        .game-button.red-button {
-            background-color: red;
-        }
-
-        .game-cell .game-button {
-            margin-top: 0;
-            height: 70%;
-        }
-
         .game-cell {
             min-height: 15%;
             background: #ffffff;
+        }
+
+        .game-button.game-cell-button {
+            padding: 0;
+            margin-top: 0;
+            height: 70%;
         }
 
         .game-header, .game-cell {
@@ -135,33 +105,30 @@
             width: 65%;
         }
 
-        .game-cell-data-inner div {
+        .game-cell-data-inner > div {
+            line-height: 1.5em;
             display: inline-block;
         }
 
-        .game-cell-data .top {
+        .game-cell-data-top {
             width: 45%;
         }
 
-        .game-cell-data .right {
+        .game-cell-data-right {
             text-align: right;
         }
 
-        .game-cell-data .text {
+        .game-cell-data-text {
             width: 44%;
         }
 
-        .game-cell-data .divider {
+        .game-cell-data-divider {
             width: 1%;
         }
 
         .game-cell-action {
             width: 30%;
             text-align: center;
-        }
-
-        .game-cell-data p {
-            line-height: 1.5em;
         }
 
         .game-new-challenge {
@@ -178,11 +145,10 @@
             text-align: right;
         }
 
-        .gone{
+        .gone {
             visibility: hidden;
         }
     </style>
-
 </head>
 <body>
 <div id="base-container">
@@ -214,17 +180,17 @@
             </div>
             <div class="game-cell-data">
                 <div class="game-cell-data-inner">
-                    <div class="top">Player190800</div>
-                    <div class="top right">Me</div>
+                    <div class="game-cell-data-top">Player190800</div>
+                    <div class="game-cell-data-top game-cell-data-right">Me</div>
                 </div>
                 <div class="game-cell-data-inner">
-                    <div class="text">1</div>
-                    <div class="divider">:</div>
-                    <div class="text right">0</div>
+                    <div class="game-cell-data-text">1</div>
+                    <div class="game-cell-data-divider">:</div>
+                    <div class="game-cell-data-text game-cell-data-right">0</div>
                 </div>
             </div>
             <div class="game-cell-action">
-                <button class="game-button">Play</button>
+                <button class="game-button game-cell-button">Play</button>
             </div>
         </div>
         <div class="game-cell">
@@ -233,17 +199,15 @@
                      src="resources/profile_pic.jpg"/>
             </div>
             <div class="game-cell-data">
-                <div>
-                    <p>Player192230</p>
+                <div class="game-cell-data-inner">
+                    <div>Player192230</div>
                 </div>
-                <div>
-                    <p class="game-new-challenge">
-                        New Challenge!
-                    </p>
+                <div class="game-cell-data-inner">
+                    <div class="game-new-challenge">New Challenge!</div>
                 </div>
             </div>
             <div class="game-cell-action">
-                <button class="game-button red-button">Accept</button>
+                <button class="game-button game-cell-button red-button">Accept</button>
             </div>
         </div>
         <div class="game-cell">Player190800</div>
@@ -253,22 +217,24 @@
             <div class="game-header-text">Their Turn</div>
             <div class="game-header-text right">3 games</div>
         </div>
-        <div class="game-cell"><div class="game-cell-avatar clearfix">
-            <img style="max-width: 100%; height: auto"
-                 src="resources/profile_pic.jpg"/>
-        </div>
+        <div class="game-cell">
+            <div class="game-cell-avatar clearfix">
+                <img style="max-width: 100%; height: auto"
+                     src="resources/profile_pic.jpg"/>
+            </div>
             <div class="game-cell-data">
                 <div class="game-cell-data-inner">
-                    <div class="top">Player190800</div>
-                    <div class="top right">Me</div>
+                    <div class="game-cell-data-top">Player190800</div>
+                    <div class="game-cell-data-top game-cell-data-right">Me</div>
                 </div>
                 <div class="game-cell-data-inner">
-                    <div class="text">1</div>
-                    <div class="divider">:</div>
-                    <div class="text right">0</div>
+                    <div class="game-cell-data-text">1</div>
+                    <div class="game-cell-data-divider">:</div>
+                    <div class="game-cell-data-text game-cell-data-right">0</div>
                 </div>
             </div>
-            <div class="game-cell-action gone"></div></div>
+            <div class="game-cell-action gone"></div>
+        </div>
         <div class="game-cell">Player190800</div>
         <div class="game-cell">Player190800</div>
     </div>
@@ -286,5 +252,33 @@
     var profileAvatar = document.getElementById("profile-avatar");
     console.log(homeHeader.offsetHeight);
     profileAvatar.style.height = homeHeader.offsetHeight + 'px';
+
+    function loadGames() {
+        $.ajax({
+            url: "http://popquiz.app:8000/Games/",
+            type: "GET",
+            dataType: "json",
+            crossDomain: true,
+            contentType: "application/json; charset=utf-8",
+            cache: false,
+            beforeSend: function (xhr) {
+                /////   Authorization header////////
+                xhr.setRequestHeader("Authorization", "TH-Facebook " + "Sample Token");
+            },
+            success: function (data) {
+                console.log("submitted" + data);
+//                resolve(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error" + errorThrown);
+//                reject(errorThrown);
+            }
+        }).fail(function () {
+//            reject(null);
+        });
+    }
+
+    loadGames();
+
 </script>
 </html>
