@@ -470,10 +470,10 @@ class NetworkClient {
     */
     func fetchStaticQuestions(errorHandler:NSError->(), completionHandler: [QuestionDTO] -> ()) {
         if(!isInternalUser(self.authenticatedUser)){
-            errorHandler(NSError(domain: "com.mymanisku.THPopQuiz", code: 1002, userInfo: ["message": "Non-internal user attempted retrieval"]))
+            errorHandler(NSError(domain: "com.mymanisku.THPopQuiz", code: 1002, userInfo: [NSLocalizedDescriptionKey: "Non-internal user attempted retrieval"]))
         }
         
-        let r = self.request(.GET, "\(THGameAPIBaseURL)/staticAll)", parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+        let r = self.request(.GET, "\(THGameAPIBaseURL)/staticAll", parameters: nil, encoding: JSONEncoding, authentication:"\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             if let e = error {
                 errorHandler(e)
@@ -486,8 +486,11 @@ class NetworkClient {
                         questions.append(question)
                     }
                 }
+                
             }
+            completionHandler(questions)
         }
+        debugPrintln(r)
     }
     
 

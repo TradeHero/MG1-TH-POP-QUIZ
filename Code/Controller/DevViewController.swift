@@ -21,6 +21,16 @@ class DevViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func quizDisplayAction(sender: UIButton) {
+        NetworkClient.sharedClient.fetchStaticQuestions({
+            debugPrintln("\($0.localizedDescription)")
+            }) {
+                questionSet in
+                let controller = UIStoryboard.devStoryboard().instantiateViewControllerWithIdentifier("QuizDebugViewController") as? QuizDebugViewController
+                controller?.bindQuestionSet(questionSet)
+                self.presentViewController(controller!, animated: true, completion: nil)
+        }
+    }
 
     /*
     // MARK: - Navigation

@@ -32,6 +32,6 @@ extension UIStoryboard {
         return UIStoryboard(name: "InAppNotification", bundle: nil)
     }
     class func devStoryboard() -> UIStoryboard {
-        return UIStoryboard(name: "Development", bundle: nil)
+        return UIStoryboard(name: "Dev", bundle: nil)
     }
 }

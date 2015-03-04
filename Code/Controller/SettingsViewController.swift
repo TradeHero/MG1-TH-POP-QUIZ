@@ -221,9 +221,8 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         case 1:
             switch indexPath.row {
             case 3:
-                println("tapped debug")
-                let content = UIStoryboard.devStoryboard().instantiateViewControllerWithIdentifier("DevelopmentViewController") as? UIViewController
-                self.presentViewController(content!, animated: true, completion: nil)
+                let content = UIStoryboard.devStoryboard().instantiateViewControllerWithIdentifier("DevViewController") as? UIViewController
+                self.navigationController?.pushViewController(content!, animated: true)
             default:
                 break;
             }

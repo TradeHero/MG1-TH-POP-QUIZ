@@ -114,7 +114,7 @@ struct QuestionDTO :JSONDecodable, DebugPrintable{
         
         var options = OptionSet(correctOption: option1, dummyOptions: [option2, option3, option4])
 
-        return QuestionDTO(questionID: id, questionContent: content, questionType: questionType, questionCategory: questionCategory, options: nil, questionImageURLString: questionImageURLString, questionImage: nil, accessoryImageContent: nil, accessoryImage: nil, subcategory: subcategory, difficulty: difficulty)
+        return QuestionDTO(questionID: id, questionContent: content, questionType: questionType, questionCategory: questionCategory, options: options, questionImageURLString: questionImageURLString, questionImage: nil, accessoryImageContent: nil, accessoryImage: nil, subcategory: subcategory, difficulty: difficulty)
     }
     
     static func decode(j: JSONValue) -> QuestionDTO? {
@@ -126,8 +126,8 @@ struct QuestionDTO :JSONDecodable, DebugPrintable{
             <*> j <| "option2"
             <*> j <| "option3"
             <*> j <| "option4"
-            <*> j <| "difficulty"
             <*> j <| "subcategory"
+            <*> j <| "difficulty"
     }
     
     var debugDescription: String {

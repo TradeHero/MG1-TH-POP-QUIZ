@@ -24,11 +24,11 @@
                                     <constraint firstAttribute="height" constant="30" id="KLk-CX-Fha"/>
                                     <constraint firstAttribute="width" constant="135" id="Uoi-fj-a4U"/>
                                 </constraints>
-                                <state key="normal" title="Quiz Display">
+                                <state key="normal" title="Static Quiz Display">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="MBJ-04-Ld7" kind="modal" id="Hdb-KW-HNY"/>
+                                    <action selector="quizDisplayAction:" destination="ugn-ou-M3g" eventType="touchUpInside" id="NEg-FV-Ocy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -73,6 +73,9 @@
                                         <state key="normal" backgroundImage="PreviousQ">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickPrevious:" destination="MBJ-04-Ld7" eventType="touchUpInside" id="UYf-Xo-sqY"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bBC-hN-vof">
                                         <rect key="frame" x="257" y="23" width="40" height="40"/>
@@ -83,20 +86,45 @@
                                         <state key="normal" backgroundImage="NextQ">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickNext:" destination="MBJ-04-Ld7" eventType="touchUpInside" id="8XO-5N-gFB"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4s1-nD-xsx">
-                                        <rect key="frame" x="100" y="28" width="121" height="30"/>
+                                        <rect key="frame" x="114" y="55" width="91" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="121" id="9wH-YB-Wbd"/>
+                                            <constraint firstAttribute="width" constant="91" id="9wH-YB-Wbd"/>
                                             <constraint firstAttribute="height" constant="30" id="yod-0B-5pU"/>
                                         </constraints>
-                                        <state key="normal" title="Exit">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="EXIT DEBUG">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="dismissClicked:" destination="MBJ-04-Ld7" eventType="touchUpInside" id="VCI-od-fDc"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Difficulty: Easy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qNE-So-G2Z">
+                                        <rect key="frame" x="72" y="31" width="177" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="YQr-fd-vDD"/>
+                                            <constraint firstAttribute="width" constant="177" id="aXa-bz-kvG"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="177" id="iYx-OH-Ivy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QID: 1111" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nha-6Q-Pqy">
+                                        <rect key="frame" x="72" y="8" width="177" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="177" id="I9a-qP-TP8"/>
+                                            <constraint firstAttribute="height" constant="21" id="RFQ-Gq-cYc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -104,23 +132,20 @@
                                     <constraint firstItem="HjC-ta-BFT" firstAttribute="top" secondItem="hEa-Ro-lkf" secondAttribute="top" id="392-vi-Qh1"/>
                                     <constraint firstAttribute="bottom" secondItem="HjC-ta-BFT" secondAttribute="bottom" id="AHg-tn-Y5P"/>
                                     <constraint firstItem="vsB-tR-ppY" firstAttribute="leading" secondItem="hEa-Ro-lkf" secondAttribute="leading" constant="24" id="KDp-BR-xGF"/>
-                                    <constraint firstAttribute="centerY" secondItem="4s1-nD-xsx" secondAttribute="centerY" id="SWk-Ku-U61"/>
+                                    <constraint firstAttribute="centerY" secondItem="4s1-nD-xsx" secondAttribute="centerY" constant="-27.5" id="SWk-Ku-U61"/>
+                                    <constraint firstAttribute="centerX" secondItem="nha-6Q-Pqy" secondAttribute="centerX" id="UYZ-nH-cEx"/>
+                                    <constraint firstItem="nha-6Q-Pqy" firstAttribute="top" secondItem="hEa-Ro-lkf" secondAttribute="top" constant="8" id="VNo-XC-cQy"/>
                                     <constraint firstAttribute="trailing" secondItem="bBC-hN-vof" secondAttribute="trailing" constant="23" id="W28-7k-nTz"/>
                                     <constraint firstItem="HjC-ta-BFT" firstAttribute="leading" secondItem="hEa-Ro-lkf" secondAttribute="leading" id="Zj0-rg-fgc"/>
                                     <constraint firstAttribute="trailing" secondItem="HjC-ta-BFT" secondAttribute="trailing" id="eJC-V6-zHV"/>
                                     <constraint firstAttribute="width" secondItem="hEa-Ro-lkf" secondAttribute="height" multiplier="64:17" id="eoQ-AH-cXM"/>
+                                    <constraint firstAttribute="centerX" secondItem="qNE-So-G2Z" secondAttribute="centerX" id="fAu-rm-Ztv"/>
+                                    <constraint firstItem="qNE-So-G2Z" firstAttribute="top" secondItem="nha-6Q-Pqy" secondAttribute="bottom" constant="2" id="oQs-xT-bTK"/>
                                     <constraint firstAttribute="centerX" secondItem="4s1-nD-xsx" secondAttribute="centerX" id="pG1-sA-eir"/>
                                     <constraint firstAttribute="centerY" secondItem="vsB-tR-ppY" secondAttribute="centerY" id="u0I-Kz-C6f"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="yVJ-vV-SlI"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOF-6E-Cr3">
-                                <rect key="frame" x="99" y="170" width="123" height="36"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="26"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="1" height="3"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J78-NJ-4wq">
                                 <rect key="frame" x="0.0" y="85" width="320" height="205"/>
                                 <constraints>
@@ -142,9 +167,6 @@
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="optionSelected:" destination="MBJ-04-Ld7" eventType="touchUpInside" id="Ojh-by-Kes"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vch-UA-RgU" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="12" y="118" width="140" height="102"/>
@@ -158,9 +180,6 @@
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="optionSelected:" destination="MBJ-04-Ld7" eventType="touchUpInside" id="Gnq-IU-tMk"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9hO-Oi-cQe" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="12" y="5" width="140" height="102"/>
@@ -177,18 +196,7 @@
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="optionSelected:" destination="MBJ-04-Ld7" eventType="touchUpInside" id="e1b-Cd-rWH"/>
-                                        </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3SZ-Em-49T" customClass="KKProgressTimer">
-                                        <rect key="frame" x="135" y="88" width="50" height="50"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="CFS-5Z-OGO"/>
-                                            <constraint firstAttribute="height" constant="50" id="UrS-QX-5J1"/>
-                                        </constraints>
-                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zq6-Im-BHK" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
                                         <rect key="frame" x="165" y="118" width="140" height="102"/>
                                         <color key="backgroundColor" red="0.5450980392" green="0.85882352939999995" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -201,10 +209,15 @@
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="optionSelected:" destination="MBJ-04-Ld7" eventType="touchUpInside" id="uMd-aX-1ck"/>
-                                        </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3SZ-Em-49T" customClass="KKProgressTimer">
+                                        <rect key="frame" x="135" y="88" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="CFS-5Z-OGO"/>
+                                            <constraint firstAttribute="height" constant="50" id="UrS-QX-5J1"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="rn9-cu-spm" firstAttribute="top" secondItem="ubm-KN-LWb" secondAttribute="top" constant="5" id="1W3-kt-E8w"/>
@@ -256,7 +269,6 @@
                         </subviews>
                         <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="vOF-6E-Cr3" secondAttribute="centerX" id="3cd-G0-zTJ"/>
                             <constraint firstAttribute="centerX" secondItem="7C9-Ma-Zxn" secondAttribute="centerX" id="4RH-Rz-BLN"/>
                             <constraint firstItem="0Qq-DW-WS0" firstAttribute="top" secondItem="eeD-LY-Y2H" secondAttribute="bottom" id="4fY-Mk-JGi"/>
                             <constraint firstAttribute="bottom" secondItem="7C9-Ma-Zxn" secondAttribute="bottom" constant="8" id="HKm-ev-F2r"/>
@@ -273,16 +285,18 @@
                             <constraint firstItem="hEa-Ro-lkf" firstAttribute="leading" secondItem="0Qr-2J-WRG" secondAttribute="leading" id="jw3-bz-cZT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ubm-KN-LWb" secondAttribute="trailing" constant="-16" id="mib-52-Up2"/>
                             <constraint firstItem="eeD-LY-Y2H" firstAttribute="leading" secondItem="0Qr-2J-WRG" secondAttribute="leading" id="tpc-oT-Fna"/>
-                            <constraint firstItem="vOF-6E-Cr3" firstAttribute="centerY" secondItem="J78-NJ-4wq" secondAttribute="centerY" id="vQR-Mq-G04"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zjB-l8-gFW"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="buttonSetContentView" destination="ubm-KN-LWb" id="Xgg-cV-Wmo"/>
+                        <outlet property="difficultyLabel" destination="qNE-So-G2Z" id="1al-5I-35G"/>
+                        <outlet property="nextButton" destination="bBC-hN-vof" id="2bi-4p-flb"/>
+                        <outlet property="previousButton" destination="vsB-tR-ppY" id="Z5E-5x-W9i"/>
+                        <outlet property="questionLabel" destination="nha-6Q-Pqy" id="IND-Ar-EeI"/>
                         <outlet property="questionView" destination="J78-NJ-4wq" id="ucC-7M-4VI"/>
                         <outlet property="removeOptionsButton" destination="7C9-Ma-Zxn" id="SgI-QD-G1L"/>
-                        <outlet property="roundIndicatorLabel" destination="vOF-6E-Cr3" id="nce-o6-NfX"/>
                         <outlet property="timerView" destination="3SZ-Em-49T" id="d6X-sb-0CE"/>
                         <outletCollection property="optionGroup" destination="rn9-cu-spm" collectionClass="NSMutableArray" id="3gt-bH-plz"/>
                         <outletCollection property="optionGroup" destination="9hO-Oi-cQe" collectionClass="NSMutableArray" id="eg9-o1-LCF"/>
