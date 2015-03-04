@@ -15,8 +15,8 @@ final class QuestionResult {
     var rawScore: Int
     var bonus: Int!
     var finalScore: Int!
-    
-    init(questionID: Int, timeTaken:Float, correct:Bool, score: Int) {
+
+    init(questionID: Int, timeTaken: Float, correct: Bool, score: Int) {
         self.questionId = questionID
         self.timeTaken = timeTaken
         self.isCorrect = correct
@@ -27,13 +27,17 @@ final class QuestionResult {
 extension QuestionResult: Printable {
     var description: String {
         var d = "{\n"
-            d += "Question ID: \(self.questionId)\n"
-            d += "Time taken: \(self.timeTaken) sec(s)\n"
-            d += "Correct: \(self.isCorrect)\n"
-            d += "Raw score: \(self.rawScore)\n"
-            if self.bonus != nil { d += "Bonus: \(self.bonus)\n" }
-            if self.finalScore != nil { d += "Final Score: \(self.finalScore)\n" }
-            d += "\n}"
-            return d
+        d += "Question ID: \(self.questionId)\n"
+        d += "Time taken: \(self.timeTaken) sec(s)\n"
+        d += "Correct: \(self.isCorrect)\n"
+        d += "Raw score: \(self.rawScore)\n"
+        if self.bonus != nil {
+            d += "Bonus: \(self.bonus)\n"
+        }
+        if self.finalScore != nil {
+            d += "Final Score: \(self.finalScore)\n"
+        }
+        d += "\n}"
+        return d
     }
 }

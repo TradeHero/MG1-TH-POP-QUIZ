@@ -10,42 +10,42 @@ import UIKit
 import PureLayout
 import GPUImage
 
-enum LogoCanvasObfuscationType : Int {
+enum LogoCanvasObfuscationType: Int {
     case SwirlEffect
     case PixellateEffect
     case GaussianBlurEffect
 }
 
 class LogoCanvasView: UIView {
-    
+
     private var rasterizedImage: UIImage!
-    
+
     var imageView: UIImageView = UIImageView.newAutoLayoutView()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
-        
+
     }
-    
-    lazy var swirlFilter:GPUImageSwirlFilter = {
+
+    lazy var swirlFilter: GPUImageSwirlFilter = {
         var f = GPUImageSwirlFilter()
         f.radius = 0.7
         return f
-        }()
-    
+    }()
+
     let pixellateFilter = GPUImagePixellateFilter()
-    
-    lazy var gaussianBlurFilter:GPUImageGaussianBlurFilter = {
+
+    lazy var gaussianBlurFilter: GPUImageGaussianBlurFilter = {
         var f = GPUImageGaussianBlurFilter()
         return f
-        }()
-    
+    }()
+
     lazy var obfuscationType: LogoCanvasObfuscationType = {
         return LogoCanvasObfuscationType.SwirlEffect
-        }()
-    
-    
+    }()
+
+
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.imageView.frame = CGRectMake(10, 10, 240, 110)
@@ -60,16 +60,16 @@ class LogoCanvasView: UIView {
 
         self.backgroundColor = UIColor.whiteColor()
     }
-    
-    func reset(){
+
+    func reset() {
         UIView.transitionWithView(self, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             [unowned self] in
             self.imageView.image = self.rasterizedImage
-            }, completion: nil)
+        }, completion: nil)
     }
-    
-    var presetImage : UIImage! {
-        didSet{
+
+    var presetImage: UIImage! {
+        didSet {
             if let img = self.presetImage {
                 self.imageView.image = img.transparencyToWhiteMatte()
                 self.rasterizedImage = UIView.rasterizeView(self)
@@ -77,8 +77,8 @@ class LogoCanvasView: UIView {
             }
         }
     }
-    
-    func prepareFirstObfuscation(){
+
+    func prepareFirstObfuscation() {
         switch obfuscationType {
         case .SwirlEffect:
             applySwirlObfuscationWithAngleFactor(1)
@@ -88,9 +88,9 @@ class LogoCanvasView: UIView {
             applyGaussianBlurObfuscationWithBlurRadiusFactor(20)
         }
     }
-    
-    func obfuscateWithEffect(factor:CGFloat) {
-        let f:CGFloat = factor < 0 ? 0.01 : factor > 1 ? 1 : factor //clamp
+
+    func obfuscateWithEffect(factor: CGFloat) {
+        let f: CGFloat = factor < 0 ? 0.01 : factor > 1 ? 1 : factor //clamp
         switch obfuscationType {
         case .SwirlEffect:
             applySwirlObfuscationWithAngleFactor(f)
@@ -101,18 +101,18 @@ class LogoCanvasView: UIView {
             break
         }
     }
-    
-    func applySwirlObfuscationWithAngleFactor(factor:CGFloat) {
+
+    func applySwirlObfuscationWithAngleFactor(factor: CGFloat) {
         swirlFilter.angle = factor
         self.imageView.image = swirlFilter.imageByFilteringImage(rasterizedImage)
     }
-    
-    func applyPixellateObfuscationWithFractionalWidth(factor:CGFloat){
+
+    func applyPixellateObfuscationWithFractionalWidth(factor: CGFloat) {
         pixellateFilter.fractionalWidthOfAPixel = factor
         self.imageView.image = pixellateFilter.imageByFilteringImage(rasterizedImage)
     }
-    
-    func applyGaussianBlurObfuscationWithBlurRadiusFactor(factor:CGFloat) {
+
+    func applyGaussianBlurObfuscationWithBlurRadiusFactor(factor: CGFloat) {
         gaussianBlurFilter.blurRadiusInPixels = factor
         self.imageView.image = gaussianBlurFilter.imageByFilteringImage(rasterizedImage)
     }

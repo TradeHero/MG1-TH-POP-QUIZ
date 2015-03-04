@@ -14,7 +14,7 @@ enum SettingsControlType: Int {
     case NotificationHead
     case SoundEffect
     case VibrationEffect
-    
+
     var description: String {
         switch self {
         case .PushNotification:
@@ -32,30 +32,30 @@ enum SettingsControlType: Int {
 }
 
 class SettingsControlTableViewCell: UITableViewCell {
-    
+
     var delegate: SettingsControlTableViewCellDelegate!
-    
+
     @IBOutlet weak var controlLogoImageView: UIImageView!
-    
+
     @IBOutlet private weak var controlTitleLabel: UILabel!
-    
+
     private var toggleSwitch = THSwitch.newAutoLayoutView()
-    
+
     var type: SettingsControlType!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         configureSwitch()
         self.contentView.addSubview(toggleSwitch)
-        
+
         toggleSwitch.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 5)
         toggleSwitch.autoConstrainAttribute(.Horizontal, toAttribute: .Horizontal, ofView: toggleSwitch.superview, withMultiplier: 1)
         self.toggleSwitch.autoSetDimensionsToSize(CGSizeMake(65, 25))
         toggleSwitch.addTarget(self, action: "toggleAction:", forControlEvents: .ValueChanged)
         // Initialization code
     }
-    
-    private func configureSwitch(){
+
+    private func configureSwitch() {
         toggleSwitch.onImage = UIImage(named: "SwitchOnBackground")
         toggleSwitch.offImage = UIImage(named: "SwitchOffBackground")
         toggleSwitch.onLabel.text = "ON"
@@ -65,11 +65,11 @@ class SettingsControlTableViewCell: UITableViewCell {
         toggleSwitch.offLabel.font = UIFont(name: "AvenirNext-Regular", size: 10)
         toggleSwitch.offLabel.textColor = UIColor.whiteColor()
     }
-    
-    
-    func configureControlType(type:SettingsControlType){
+
+
+    func configureControlType(type: SettingsControlType) {
         self.type = type
-        
+
         switch type {
         case .PushNotification:
             toggleSwitch.on = kTHPushNotificationOn
@@ -84,20 +84,21 @@ class SettingsControlTableViewCell: UITableViewCell {
             println("Wrong type of control")
             break
         }
-        
+
         controlTitleLabel.text = type.description
     }
-    
+
     @IBAction func toggleAction(sender: AnyObject) {
         self.delegate.settingsControlTableViewCell(self, didToggleSwitch: toggleSwitch.on)
     }
-    
+
     override func prepareForReuse() {
         controlTitleLabel.text = ""
     }
 }
 
-protocol SettingsControlTableViewCellDelegate :class, NSObjectProtocol {
-    func settingsControlTableViewCell(cell: SettingsControlTableViewCell, didToggleSwitch on:Bool)
-    func settingsSliderTableViewCell(cell: SettingsSliderTableViewCell, didSliderValueChanged value:Float)
+protocol SettingsControlTableViewCellDelegate: class, NSObjectProtocol {
+    func settingsControlTableViewCell(cell: SettingsControlTableViewCell, didToggleSwitch on: Bool)
+
+    func settingsSliderTableViewCell(cell: SettingsSliderTableViewCell, didSliderValueChanged value: Float)
 }

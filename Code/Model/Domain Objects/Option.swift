@@ -11,23 +11,23 @@ import UIKit
 /// Choices that are of a given question.
 
 final class Option {
-    
+
     /// String content of the option
     let stringContent: String!
-    
+
     let imageContentURLString: String!
-    
+
     var imageContent: UIImage!
-    
+
     lazy var isGraphical: Bool = {
         return self.imageContentURLString != nil
-        }()
+    }()
     /**
     Initialise option with string content and image content
     
     :param: stringContent The string content of the option
     */
-    init(stringContent:String){
+    init(stringContent: String) {
         var d = stringContent.componentsSeparatedByString("|")
         if d.count == 2 {
             self.stringContent = d[0]
@@ -37,8 +37,8 @@ final class Option {
             self.imageContentURLString = nil
         }
     }
-    
-    func fetchImage(completionHandler:() -> ()){
+
+    func fetchImage(completionHandler: () -> ()) {
         if let imgName = self.imageContentURLString {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
@@ -51,15 +51,15 @@ final class Option {
                 }
                 completionHandler()
             })
-            
-        }else{
+
+        } else {
             completionHandler()
         }
     }
 }
 
-extension Option : Printable {
-    var description :String {
+extension Option: Printable {
+    var description: String {
         return "[ Option content: \(stringContent) ]"
     }
 }

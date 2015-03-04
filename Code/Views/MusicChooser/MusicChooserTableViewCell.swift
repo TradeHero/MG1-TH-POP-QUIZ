@@ -12,34 +12,35 @@ class MusicChooserTableViewCell: UITableViewCell {
 
     @IBOutlet weak var musicNameLabel: UILabel!
     var musicURL: NSURL!
-    
+
     @IBOutlet weak var defaultButton: UIButton!
     var delegate: MusicChooserTableViewCellDelegate!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
-    func bindMusicURL(url: NSURL, name: String){
+
+    func bindMusicURL(url: NSURL, name: String) {
         musicURL = url
         musicNameLabel.text = name
         defaultButton.enabled = musicNameLabel.text != kTHDefaultSong
     }
-    
+
     @IBAction func voteAction(sender: AnyObject) {
         self.delegate.musicChooserTableViewCell(self, didTapVoteButton: musicNameLabel.text!)
     }
-    
-    
+
+
     @IBAction func playAction(sender: AnyObject) {
         self.delegate.musicChooserTableViewCell(self, didTapPlayButton: musicURL)
     }
-    
-    
+
+
 }
 
-protocol MusicChooserTableViewCellDelegate :class, NSObjectProtocol {
-    func musicChooserTableViewCell(cell:MusicChooserTableViewCell, didTapVoteButton musicToVote:String)
-    func musicChooserTableViewCell(cell:MusicChooserTableViewCell, didTapPlayButton musicToPlay:NSURL)
+protocol MusicChooserTableViewCellDelegate: class, NSObjectProtocol {
+    func musicChooserTableViewCell(cell: MusicChooserTableViewCell, didTapVoteButton musicToVote: String)
+
+    func musicChooserTableViewCell(cell: MusicChooserTableViewCell, didTapPlayButton musicToPlay: NSURL)
 }

@@ -11,9 +11,9 @@ import UIKit
 class SettingsViewController: UIViewController, SettingsControlTableViewCellDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet private weak var tableView: UITableView!
-    
+
     @IBOutlet weak var environmentLabel: UILabel!
-    
+
     lazy var appVersionStringWithBuildNumber: String = {
         let infoDictionary = NSBundle.mainBundle().infoDictionary!
         if let vNum: AnyObject = infoDictionary["CFBundleShortVersionString"] {
@@ -24,7 +24,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
             }
         }
         return "Error build number"
-        }()
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: "SettingsControlTableViewCell", bundle: nil), forCellReuseIdentifier: kTHSettingsControlTableViewCellIdentifier)
@@ -40,13 +40,14 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
     }
 
     override func viewDidAppear(animated: Bool) {
-        
+
     }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @IBAction func backAction(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -57,14 +58,14 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
             action in
             NetworkClient.sharedClient.logout()
         }
-        
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         alertView.addAction(okAction)
         alertView.addAction(cancelAction)
-        
+
         self.presentViewController(alertView, animated: true, completion: nil)
     }
-    
+
     //MARK:- SettingsControlTableViewCellDelegate methods
     func settingsControlTableViewCell(cell: SettingsControlTableViewCell, didToggleSwitch on: Bool) {
         if let type = cell.type {
@@ -93,9 +94,9 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
             }
         }
     }
-    
+
     //MARK:- UITableViewDelegate, UITableViewDataSource methods
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
         switch indexPath.section {
@@ -133,13 +134,13 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
 //                UIView.roundView(cell.contentView, onCorner: .BottomLeft | .BottomRight, radius: 5)
                 return cell
             case 3:
-                if(isInternalUser(NetworkClient.sharedClient.user)){
+                if (isInternalUser(NetworkClient.sharedClient.user)) {
                     cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsCommonTableViewCellIdentifier) as UITableViewCell
                     (cell as SettingsCommonTableViewCell).controlTitleLabel.text = "Debug Mode"
 //                    (cell as SettingsCommonTableViewCell).delegate = self
                     cell.selectionStyle = .Gray
                     return cell
-                } else{
+                } else {
                     break;
                 }
             default:
@@ -148,11 +149,11 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         default:
             break
         }
-        
+
         cell.layoutIfNeeded()
         return cell
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -163,11 +164,11 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
             return 0
         }
     }
-    
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
     }
-    
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
@@ -191,7 +192,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         }
         return 0
     }
-    
+
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
@@ -201,8 +202,9 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         default:
             return nil
         }
-        
+
     }
+
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         switch indexPath.section {
         case 1:
@@ -216,6 +218,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
             return nil;
         }
     }
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section {
         case 1:
@@ -231,12 +234,12 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         }
 
     }
-    
+
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-    
-    private func createHeaderView(title:String) -> UITableViewHeaderFooterView {
+
+    private func createHeaderView(title: String) -> UITableViewHeaderFooterView {
         var view = UITableViewHeaderFooterView(frame: CGRectMake(0, 0, 286, 40))
         view.contentView.backgroundColor = UIColor(hex: 0xFF4069)
         let label = UILabel.newAutoLayoutView()
@@ -245,24 +248,24 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         label.font = UIFont(name: "AvenirNext-Regular", size: 15)
         label.textColor = UIColor.whiteColor()
         view.contentView.addSubview(label)
-        
-        
+
+
         UIView.autoSetPriority(750) {
             label.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
         }
-        
+
         label.autoPinEdgeToSuperviewEdge(.Top, withInset: 8)
         label.autoPinEdgeToSuperviewEdge(.Leading, withInset: 8)
         label.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 0)
-        
+
         view.setNeedsUpdateConstraints()
         view.updateConstraintsIfNeeded()
-        
+
         view.clipsToBounds = true
 //        UIView.roundView(view.contentView, onCorner: .TopRight | .TopLeft, radius: 10)
         view.layoutSubviews()
         return view
     }
-    
-    
+
+
 }

@@ -8,30 +8,30 @@
 
 import UIKit
 
-func radians(deg:CGFloat) -> CGFloat {
-    return (deg * CGFloat(M_PI))/180.0
+func radians(deg: CGFloat) -> CGFloat {
+    return (deg * CGFloat(M_PI)) / 180.0
 }
 
 @IBDesignable
 class OptionButton: DesignableButton {
-    
+
     private let defaultBackgroundColour = UIColor(hex: 0x8BDBFB)
-    
+
     private let defaultFontColor = UIColor(hex: 0x0C4FAE)
-    
+
     private var defaultSize: CGSize!
-    
+
     private var defaultCenter: CGPoint!
-    
+
     private var defaultFont: UIFont!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         // Initialization code
     }
-    
+
     var is_answer: Bool = false
-    
+
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.tickLogoView.image = UIImage(named: "QuizTickIcon")
@@ -41,17 +41,17 @@ class OptionButton: DesignableButton {
         }
     }
     var trendingTopLayerView: OptionButtonAccessoryImageLayer!
-    
+
     var wobbling: Bool = false
-    
+
     var isShrinked: Bool = false
-    
+
     var tilted: Bool = false
-    
+
     var tickLogoView = UIImageView(frame: CGRectMake(0, 0, 59, 56))
-    
+
     var crossLogoView = UIImageView(frame: CGRectMake(0, 0, 51, 51))
-    
+
     var accessoryImage: UIImage! {
         didSet {
             if let img = accessoryImage {
@@ -62,10 +62,10 @@ class OptionButton: DesignableButton {
     }
     var labelText: String = "" {
         didSet {
-            func getLongestWordLength(stringArray:[String]) -> Int{
+            func getLongestWordLength(stringArray: [String]) -> Int {
                 var maxLength: Int = 0
-                var length:Int = 0
-                for string in stringArray as [NSString]{
+                var length: Int = 0
+                for string in stringArray as [NSString] {
                     length = string.length
                     if length > maxLength {
                         maxLength = length
@@ -73,10 +73,10 @@ class OptionButton: DesignableButton {
                 }
                 return maxLength
             }
-            
-            func getNumberOfWordsWithWordCountApproximately(stringArray:[String], count:Int) -> Int{
+
+            func getNumberOfWordsWithWordCountApproximately(stringArray: [String], count: Int) -> Int {
                 var c: Int = 0
-                for string in stringArray as [NSString]{
+                for string in stringArray as [NSString] {
                     let length = string.length
                     if abs(length - count) < 3 {
                         ++c
@@ -84,53 +84,60 @@ class OptionButton: DesignableButton {
                 }
                 return c
             }
+
             self.setTitle(self.labelText, forState: .Normal)
             let txt = labelText
             let txtComponents = labelText.componentsSeparatedByString(" ")
             let wordCount = txtComponents.count
-            
+
             let longestWordLength = getLongestWordLength(txtComponents)
             let longestWordCount = getNumberOfWordsWithWordCountApproximately(txtComponents, longestWordLength)
-            
+
             if wordCount > 0 {
-                if longestWordLength > 7 { //chunky
-                    if longestWordCount > 3 { //long
+                if longestWordLength > 7 {
+                    //chunky
+                    if longestWordCount > 3 {
+                        //long
                         self.titleLabel?.lineBreakMode = .ByClipping
-                    } else { // short
+                    } else {
+                        // short
                         self.titleLabel?.lineBreakMode = .ByWordWrapping
                     }
-                } else { // simple
-                    if wordCount > 5 { //long
+                } else {
+                    // simple
+                    if wordCount > 5 {
+                        //long
                         self.titleLabel?.lineBreakMode = .ByClipping
-                    } else { // short
+                    } else {
+                        // short
                         self.titleLabel?.lineBreakMode = .ByWordWrapping
                     }
                 }
             }
-            
+
         }
     }
-    
-    func startWobble(){
+
+    func startWobble() {
         if !self.wobbling {
             self.wobbling = true
-            self.transform = CGAffineTransformRotate(CGAffineTransformIdentity,radians(-3))
-            
+            self.transform = CGAffineTransformRotate(CGAffineTransformIdentity, radians(-3))
+
             UIView.animateWithDuration(0.1, delay: 0, options: .AllowUserInteraction | .Repeat | .Autoreverse, animations: {
                 self.transform = CGAffineTransformRotate(CGAffineTransformIdentity, radians(3))
-                }, completion: nil)
+            }, completion: nil)
         }
     }
-    
+
     func stopWobble() {
         if self.wobbling {
             self.wobbling = false
             UIView.animateWithDuration(0.1, delay: 0, options: .AllowUserInteraction | .BeginFromCurrentState | .CurveLinear, animations: {
                 self.transform = CGAffineTransformIdentity
-                }, completion: nil)
+            }, completion: nil)
         }
     }
-    
+
     func shrink() {
         if !isShrinked {
             isShrinked = true
@@ -139,26 +146,26 @@ class OptionButton: DesignableButton {
             self.defaultSize = self.frame.size
             self.defaultCenter = self.center
             self.defaultFont = self.titleLabel?.font
-            
+
             self.titleLabel?.font = self.defaultFont.fontWithSize(14)
             rect.size.width = self.frame.size.width * 0.8
             rect.size.height = self.frame.size.height * 0.8
-            
+
             if self.trendingTopLayerView != nil {
                 var t = CGAffineTransformMakeScale(0.8, 0.8)
                 t = CGAffineTransformTranslate(t, -0.1 * self.trendingTopLayerView.frame.size.width, -0.1 * self.trendingTopLayerView.frame.size.height)
                 self.trendingTopLayerView.transform = t
             }
-            
+
             UIView.animateWithDuration(0.1, animations: {
                 self.bounds = rect
             })
-            
+
         }
     }
-    
+
     func unshrink() {
-        if isShrinked{
+        if isShrinked {
             isShrinked = false
             self.bounds.size = self.defaultSize
             self.center = self.defaultCenter
@@ -168,12 +175,12 @@ class OptionButton: DesignableButton {
             }
         }
     }
-    
-    func rotate(deg:CGFloat){
-        self.transform = CGAffineTransformRotate(CGAffineTransformIdentity,radians(deg))
+
+    func rotate(deg: CGFloat) {
+        self.transform = CGAffineTransformRotate(CGAffineTransformIdentity, radians(deg))
     }
-    
-    func tiltRight(){
+
+    func tiltRight() {
         if !tilted {
             tilted = true
             rotate(-3)
@@ -183,7 +190,7 @@ class OptionButton: DesignableButton {
             }
         }
     }
-    
+
     func tiltLeft() {
         if !tilted {
             tilted = true
@@ -192,10 +199,10 @@ class OptionButton: DesignableButton {
             if self.trendingTopLayerView != nil {
                 self.trendingTopLayerView.titleLabel.textColor = UIColor.whiteColor()
             }
-            
+
         }
     }
-    
+
     func untilt() {
         if tilted {
             tilted = false
@@ -204,23 +211,23 @@ class OptionButton: DesignableButton {
             self.crossLogoView.transform = CGAffineTransformIdentity
         }
     }
-    
-    func configureAsCorrect(){
+
+    func configureAsCorrect() {
         self.backgroundColor = UIColor(patternImage: UIImage(named: "CorrectAnswerBackground")!)
         self.patchTickLogo()
         self.tiltRight()
         self.titleLabel?.textColor = UIColor.whiteColor()
     }
-    
-    func configureAsFalse(){
+
+    func configureAsFalse() {
         self.backgroundColor = UIColor(patternImage: UIImage(named: "FalseAnswerBackground")!)
         self.patchCrossLogo()
         self.tiltLeft()
         self.titleLabel?.textColor = UIColor.whiteColor()
-        
+
     }
-    
-    func patchCrossLogo(){
+
+    func patchCrossLogo() {
         self.crossLogoView.frame.origin = getPatchableOrigin()
         var bounds = self.crossLogoView.bounds
         var bounds2 = self.crossLogoView.bounds
@@ -234,8 +241,8 @@ class OptionButton: DesignableButton {
             self.crossLogoView.bounds = bounds2
         }
     }
-    
-    func patchTickLogo(){
+
+    func patchTickLogo() {
         self.tickLogoView.frame.origin = getPatchableOrigin()
         var bounds = self.tickLogoView.bounds
         var bounds2 = self.tickLogoView.bounds
@@ -249,14 +256,14 @@ class OptionButton: DesignableButton {
             self.tickLogoView.bounds = bounds2
         }
     }
-    
+
     func getPatchableOrigin() -> CGPoint {
         var xOffset = self.frame.origin.x + self.frame.size.width * 2 / 3
         var yOffset = self.frame.origin.y + self.frame.size.height * 3 / 5
         return CGPointMake(xOffset, yOffset)
     }
-    
-    func resetButton(){
+
+    func resetButton() {
         self.configureAsNormalStyle()
         self.unpatchAllLogo()
         self.unshrink()
@@ -267,7 +274,7 @@ class OptionButton: DesignableButton {
         self.showAndEnable(false)
         self.disable()
     }
-    
+
     func unpatchAllLogo() {
         if let parent = self.superview {
             for siblingView in parent.subviews as [UIView] {
@@ -277,12 +284,12 @@ class OptionButton: DesignableButton {
             }
         }
     }
-    
-    func hideAndDisable(animated: Bool){
+
+    func hideAndDisable(animated: Bool) {
         if self.alpha == 0 && self.enabled == false {
             return
         }
-        
+
         if animated {
             UIView.animateWithDuration(0.5) {
                 self.alpha = 0
@@ -292,8 +299,8 @@ class OptionButton: DesignableButton {
             self.disable()
         }
     }
-    
-    func showAndEnable(animated: Bool){
+
+    func showAndEnable(animated: Bool) {
         if self.alpha == 1 && self.enabled == true {
             return
         }
@@ -306,14 +313,14 @@ class OptionButton: DesignableButton {
             self.enable()
         }
     }
-    
+
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        self.imageView?.image = UIImage(named:"TradeHeroFriendsBullIcon")
+        self.imageView?.image = UIImage(named: "TradeHeroFriendsBullIcon")
     }
-    
-    private func configureAsTrendingStyle(){
-        
+
+    private func configureAsTrendingStyle() {
+
         if let b = self.titleLabel?.isSubviewOf(self) {
             if b {
                 self.titleLabel?.removeFromSuperview()
@@ -323,16 +330,16 @@ class OptionButton: DesignableButton {
         trendingTopLayerView.titleLabel.text = self.labelText
         trendingTopLayerView.imageView.image = self.accessoryImage
         trendingTopLayerView.userInteractionEnabled = false
-        
+
         self.addSubview(trendingTopLayerView)
         trendingTopLayerView.autoConstrainAttribute(.Vertical, toAttribute: .Vertical, ofView: trendingTopLayerView.superview, withMultiplier: 1)
         trendingTopLayerView.autoConstrainAttribute(.Horizontal, toAttribute: .Horizontal, ofView: trendingTopLayerView.superview, withMultiplier: 1)
-        
+
         trendingTopLayerView.autoSetDimensionsToSize(CGSizeMake(140, 102))
     }
-    
+
     private func configureAsNormalStyle() {
-        
+
         if let b = self.titleLabel?.isSubviewOf(self) {
             if !b {
                 self.addSubview(self.titleLabel!)
@@ -340,15 +347,15 @@ class OptionButton: DesignableButton {
         }
         self.titleLabel?.hidden = false
         self.imageView?.hidden = false
-        for view in self.subviews as [UIView]{
+        for view in self.subviews as [UIView] {
             if view is OptionButtonAccessoryImageLayer {
                 view.removeFromSuperview()
             }
         }
         trendingTopLayerView = nil
     }
-    
-    func configureButtonWithContent(stringContent:String, imageContent:UIImage!){
+
+    func configureButtonWithContent(stringContent: String, imageContent: UIImage!) {
         self.labelText = stringContent
         if let img = imageContent {
             self.accessoryImage = img.replaceWhiteinImageWithTransparency()

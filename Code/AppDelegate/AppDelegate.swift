@@ -16,35 +16,35 @@ let kTHGamesServerMode = Mode.Prod
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDelegate {
-    
+
     var window: UIWindow?
     var loginOnce = false
     var _draggableView: CHDraggableView!
-    
-    var _draggingCoordinator : CHDraggingCoordinator!
-    
+
+    var _draggingCoordinator: CHDraggingCoordinator!
+
     var draggableView: CHDraggableView! {
         get {
             return _draggableView
         }
     }
-    
+
     private var isNotificationRegistered: Bool = false
-    
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject:AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
+
         application.applicationIconBadgeNumber = 0
-        
+
         switch kTHGamesServerMode {
         case .Staging:
             println("Current build points to Staging Server.\n")
         case .Prod:
             println("Current build points to Production Server.\n")
         }
-        
+
         playMusic(kTHDefaultSong)
-        
+
         self.registerLoginNotification()
         self.autoLogin()
         return true
@@ -52,58 +52,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
 
     func autoLogin(force: Bool = false) {
         if !force {
-            if loginOnce == true { return }
+            if loginOnce == true {
+                return
+            }
             loginOnce = true
         }
-        
+
         if let credential = NetworkClient.sharedClient.credentials {
             var retry = false
-            var hud = JGProgressHUD.progressHUDWithDefaultStyle { [unowned self] HUD in
+            var hud = JGProgressHUD.progressHUDWithDefaultStyle {
+                [unowned self] HUD in
                 if retry {
                     self.autoLogin(force: true)
                     HUD.dismiss()
                     retry = false
                 }
             }
-            
+
             hud.textLabel.text = "Logging in..."
             hud.showInWindow()
-            
+
             NetworkClient.sharedClient.loginUserWithFacebookAuth(credential, loginSuccessHandler: {
                 [unowned self] user in
                 hud.dismissAnimated(true)
-                }) { //error handler
-                    [unowned self] error in
-                    hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
-                    if error.code == -1009 {
-                        hud.layoutChangeAnimationDuration = 1.0
-                        hud.indicatorView = JGProgressHUDErrorIndicatorView()
-                        hud.textLabel.text = "Network connection lost. Please tap to retry."
-                        
-                        retry = true
-                        
-                        let animation = CABasicAnimation(keyPath: "shadowOpacity")
-                        animation.fromValue = NSNumber(float: 0.0)
-                        animation.toValue = NSNumber(float: 8.0)
-                        animation.repeatCount = 1e50
-                        animation.autoreverses = true
-                        animation.duration = 1
-                        
-                        hud.HUDView.layer.shadowColor = UIColor.redColor().CGColor
-                        hud.HUDView.layer.shadowOffset = CGSizeZero
-                        hud.HUDView.layer.shadowOpacity = 0.0
-                        hud.HUDView.layer.shadowRadius = 8.0
-                        
-                        hud.HUDView.layer.addAnimation(animation, forKey:"glow")
-                    } else if error.code == 417 {
-                        hud.layoutChangeAnimationDuration = 1.0
-                        hud.indicatorView = JGProgressHUDErrorIndicatorView()
-                        hud.textLabel.text = "Facebook access token expired. Extending token.."
-                        hud.dismissAfterDelay(3, animated: true)
-                    } else {
-                        hud.textLabel.text = error.description
-                        hud.dismissAfterDelay(3, animated: true)
-                    }
+            }) {
+                //error handler
+                [unowned self] error in
+                hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
+                if error.code == -1009 {
+                    hud.layoutChangeAnimationDuration = 1.0
+                    hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                    hud.textLabel.text = "Network connection lost. Please tap to retry."
+
+                    retry = true
+
+                    let animation = CABasicAnimation(keyPath: "shadowOpacity")
+                    animation.fromValue = NSNumber(float: 0.0)
+                    animation.toValue = NSNumber(float: 8.0)
+                    animation.repeatCount = 1e50
+                    animation.autoreverses = true
+                    animation.duration = 1
+
+                    hud.HUDView.layer.shadowColor = UIColor.redColor().CGColor
+                    hud.HUDView.layer.shadowOffset = CGSizeZero
+                    hud.HUDView.layer.shadowOpacity = 0.0
+                    hud.HUDView.layer.shadowRadius = 8.0
+
+                    hud.HUDView.layer.addAnimation(animation, forKey: "glow")
+                } else if error.code == 417 {
+                    hud.layoutChangeAnimationDuration = 1.0
+                    hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                    hud.textLabel.text = "Facebook access token expired. Extending token.."
+                    hud.dismissAfterDelay(3, animated: true)
+                } else {
+                    hud.textLabel.text = error.description
+                    hud.dismissAfterDelay(3, animated: true)
+                }
             }
         }
     }
@@ -119,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         musicPlayer.stop()
         self.unregisterOtherNotification()
-         scheduleLocalNotification()
+        scheduleLocalNotification()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -140,33 +144,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
 //    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String, annotation: AnyObject?) -> Bool {
 //        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
 //    }
-    
+
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         if let token = NetworkClient.sharedClient._device_token {
             if !(NetworkClient.sharedClient._device_token == deviceToken.deviceTokenString()) {
                 NetworkClient.sharedClient._device_token = deviceToken.deviceTokenString()
-                NetworkClient.sharedClient.updateDeviceToken(deviceToken.deviceTokenString(), errorHandler: {error in
+                NetworkClient.sharedClient.updateDeviceToken(deviceToken.deviceTokenString(), errorHandler: {
+                    error in
                     debugPrintln(error.description)
-                    }) { }
+                }) {
+                }
             }
         } else {
             NetworkClient.sharedClient._device_token = deviceToken.deviceTokenString()
-            NetworkClient.sharedClient.updateDeviceToken(deviceToken.deviceTokenString(), errorHandler: {error in
+            NetworkClient.sharedClient.updateDeviceToken(deviceToken.deviceTokenString(), errorHandler: {
+                error in
                 debugPrintln(error.description)
-                }) { }
+            }) {
+            }
         }
         autoLogin()
     }
-    
+
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         debugPrintln("Fail to register for push notification: \(error)")
     }
-    
-    
-    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+
+
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject:AnyObject], completionHandler: () -> Void) {
         //TODO: Implement
     }
-    
+
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         debugPrintln(sourceApplication)
 //        let bfurl = BFURL(inboundURL: url, sourceApplication: sourceApplication)
@@ -175,27 +183,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
 //        }
         return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
     }
-    
+
     //MARK: Login/Logout
-    
+
     var loggedIn: Bool {
-        get{
+        get {
             return NSUserDefaults.standardUserDefaults().boolForKey(kTHGameLoggedInKey)
         }
-        
+
         set(value) {
             NSUserDefaults.standardUserDefaults().setBool(value, forKey: kTHGameLoggedInKey)
             NSUserDefaults.standardUserDefaults().synchronize()
         }
     }
-    
-    func loginSuccessful(notification:NSNotification) {
-        
+
+    func loginSuccessful(notification: NSNotification) {
+
         self.becomeFirstResponder()
         let obj = notification.userInfo
         let obj2: AnyObject? = obj!["user"]
         if let user = obj2 as? THUser {
-            
+
             var vc: AnyObject! = UIStoryboard.mainStoryboard().instantiateInitialViewController()
             if let v = vc as? UINavigationController {
                 self.window?.rootViewController = v
@@ -206,51 +214,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
             self.unregisterLoginNotification()
             self.registerOtherNotification()
         }
-        
+
         if let d = _draggableView {
             self.window?.addSubview(_draggableView)
         }
-        
-        
+
+
     }
-    
+
     func registerLoginNotification() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loginSuccessful:", name: kTHGameLoginSuccessfulNotificationKey, object: nil)
     }
-    
-    func unregisterLoginNotification(){
+
+    func unregisterLoginNotification() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: kTHGameLoginSuccessfulNotificationKey, object: nil)
     }
-    
-    func registerOtherNotification(){
+
+    func registerOtherNotification() {
         if !self.isNotificationRegistered {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout:", name: kTHGameLogoutNotificationKey, object: nil)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificationHeadViewToggle", name: kTHGameNotificationHeadNotificationToggleKey, object: nil)
             self.isNotificationRegistered = true
         }
     }
-    
-    func unregisterOtherNotification(){
+
+    func unregisterOtherNotification() {
         if self.isNotificationRegistered {
             NSNotificationCenter.defaultCenter().removeObserver(self, name: kTHGameLogoutNotificationKey, object: nil)
             NSNotificationCenter.defaultCenter().removeObserver(self, name: kTHGameNotificationHeadNotificationToggleKey, object: nil)
             self.isNotificationRegistered = false
         }
     }
-    
-    func userDidLogout(notification:NSNotification){
+
+    func userDidLogout(notification: NSNotification) {
         self.window?.rootViewController = UIStoryboard.loginStoryboard().instantiateInitialViewController() as? UIViewController
         self.unregisterOtherNotification()
         self.registerLoginNotification()
-        
+
         self.loggedIn = false
     }
-    
-    func notificationHeadViewToggle(){
+
+    func notificationHeadViewToggle() {
         self._draggableView.hideWithAnimation(kTHNotificationHeadOn)
     }
-    
-    private func setupNotificationHead(){
+
+    private func setupNotificationHead() {
         let window = self.window!
         _draggableView = CHDraggableView(image: UIImage(named: "NotificationHeadImage"))
         _draggableView.tag = 1
@@ -260,24 +268,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         _draggableView.delegate = _draggingCoordinator
         _draggableView.hidden = !kTHNotificationHeadOn
     }
-    
+
     func draggingCoordinator(coordinator: CHDraggingCoordinator!, viewControllerForDraggableView draggableView: CHDraggableView!) -> UIViewController! {
         let controller = UIStoryboard.inAppNotificationStoryboard().instantiateViewControllerWithIdentifier("InAppNotificationTableViewController") as? UIViewController
         return controller
     }
-    
-    
-    func scheduleLocalNotification(){
-        let delay:NSTimeInterval = 60 * 60 * 24 * 2
-        
+
+
+    func scheduleLocalNotification() {
+        let delay: NSTimeInterval = 60 * 60 * 24 * 2
+
         let now = NSDate()
-        let notifcations = [now.dateByAddingTimeInterval(delay) :  "Come back and win TH$ by simply winning a challenge!"];
+        let notifcations = [now.dateByAddingTimeInterval(delay): "Come back and win TH$ by simply winning a challenge!"];
         for (key, val) in notifcations {
             scheduleLocalNotification(key, message: val)
         }
     }
-    
-    func scheduleLocalNotification(date:NSDate, message:String){
+
+    func scheduleLocalNotification(date: NSDate, message: String) {
         let localNotification = UILocalNotification()
         localNotification.fireDate = date
         localNotification.alertBody = message

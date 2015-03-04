@@ -9,46 +9,46 @@
 import UIKit
 
 class WinLoseViewController: UIViewController {
-    
+
     @IBOutlet weak var THDollarWonLabel: UILabel!
     @IBOutlet private weak var winLoseLabel: UILabel!
-    
+
     @IBOutlet private weak var winLoseBackgroundImageView: UIImageView!
-    
+
     @IBOutlet private weak var winLoseSmileyIcon: UIImageView!
-    
+
     @IBOutlet private weak var winningRay: UIImageView!
-    
+
     @IBOutlet private weak var losingRay: UIImageView!
-    
+
     //MARK:-
     @IBOutlet private weak var largeBoxBackground: UIImageView!
-    
+
     @IBOutlet private weak var largeBoxAvatarView: AvatarRoundedView!
-    
+
     @IBOutlet private weak var largeBoxNameLabel: UILabel!
-    
+
     @IBOutlet private weak var largeBoxScoreLabel: UILabel!
-    
+
     @IBOutlet private weak var smallBoxBackground: UIImageView!
-    
+
     @IBOutlet private weak var smallBoxAvatarView: AvatarRoundedView!
-    
+
     @IBOutlet private weak var smallBoxNameLabel: UILabel!
-    
+
     @IBOutlet private weak var smallBoxScoreLabel: UILabel!
-    
+
     @IBOutlet private var starViews: [UIImageView]!
-    
+
     private var game: Game!
-    
+
     private var selfScore = 0
-    
+
     private var opponentScore = 0
-    
+
     private var selfUser: THUser!
     private var opponentUser: THUser!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -61,36 +61,36 @@ class WinLoseViewController: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.hideNavigationBar()
         animateStars()
     }
-    
-    
+
+
     @IBAction func showResultAction(sender: AnyObject) {
         self.performSegueWithIdentifier("CompleteQuizResultSegue", sender: self)
     }
-    
-    func animateStars(){
+
+    func animateStars() {
         for star in starViews {
             var b = star.bounds
             var b2 = b
             b.size = CGSizeZero
             star.bounds = b
-            
+
             UIView.animateWithDuration(0.2) {
                 star.bounds = b2
             }
         }
     }
-    
+
     private func configureAsWinningScene() {
         winLoseLabel.text = "YOU WON!"
         for star in starViews {
@@ -99,12 +99,12 @@ class WinLoseViewController: UIViewController {
         winLoseBackgroundImageView.image = UIImage(named: "WinSceneBackground")
         largeBoxBackground.image = UIImage(named: "WinBoxBackground")
         winLoseSmileyIcon.image = UIImage(named: "WinSmileyIcon")
-        
+
         smallBoxBackground.image = UIImage(named: "LoseBoxBackground")
         winningRay.alpha = 1
         losingRay.alpha = 0
     }
-    
+
     private func configureAsLosingScene() {
         winLoseLabel.text = "YOU LOST!"
         for star in starViews {
@@ -114,17 +114,17 @@ class WinLoseViewController: UIViewController {
         largeBoxBackground.image = UIImage(named: "LoseBoxBackground")
         winLoseSmileyIcon.image = UIImage(named: "LoseSmileyIcon")
         smallBoxBackground.image = UIImage(named: "WinBoxBackground")
-        
+
         winningRay.alpha = 0
         losingRay.alpha = 1
     }
-    
-    func bindResult(game:Game, selfUser:THUser, opponentUser:THUser) {
+
+    func bindResult(game: Game, selfUser: THUser, opponentUser: THUser) {
         self.game = game
-       
+
         self.selfUser = selfUser
         self.opponentUser = opponentUser
-        
+
         var selfResult: GameResult!
         var oppResult: GameResult!
         if game.initiatingPlayerID == selfUser.userId {
@@ -134,19 +134,19 @@ class WinLoseViewController: UIViewController {
             selfResult = game.opponentPlayerResult
             oppResult = game.initiatingPlayerResult
         }
-        
+
         for extraDetail in selfResult.resultExtraDetails {
             selfScore += extraDetail.finalScore
         }
-        
+
         for extraDetail in oppResult.resultExtraDetails {
             opponentScore += extraDetail.finalScore
         }
-        
+
     }
-    
+
     // MARK: - Navigation
-    
+
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // Get the new view controller using segue.destinationViewController.
@@ -157,14 +157,14 @@ class WinLoseViewController: UIViewController {
         }
 
     }
-    
-    private func configureUI(){
+
+    private func configureUI() {
         if selfScore > opponentScore {
             configureAsWinningScene()
         } else {
             configureAsLosingScene()
         }
-        
+
         largeBoxNameLabel.text = selfUser.displayName
         //        largeBoxRankLabel = selfUser.rank
         //        largeBoxLevelLabel.text = selfUser.level
@@ -177,7 +177,7 @@ class WinLoseViewController: UIViewController {
             (image, error) in
             self.largeBoxAvatarView.image = image
         }
-        
+
         NetworkClient.fetchImageFromURLString(opponentUser.pictureURL, progressHandler: nil) {
             (image, error) in
             self.smallBoxAvatarView.image = image

@@ -11,13 +11,13 @@ import WYPopoverController
 import JGProgressHUD
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, HomeTurnChallengesTableViewCellDelegate, FriendsChallengeCellTableViewCellDelegate, WYPopoverControllerDelegate {
-    
+
     @IBOutlet private weak var avatarView: AvatarRoundedView!
     @IBOutlet private weak var fullNameView: UILabel!
     @IBOutlet weak var tickImageView: UIImageView!
-    
+
     @IBOutlet weak var muteButton: UIButton!
-    
+
     private var openChallenges = [Game]()
     private var opponentPendingChallenges = [Game]()
     private var unfinishedChallenges = [Game]()
@@ -25,35 +25,35 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var internalUserView: UIImageView!
     private var facebookFriendsChallenge = [THUserFriend]()
-    
-    private var noOpenChallenges:Bool {
+
+    private var noOpenChallenges: Bool {
         return self.openChallenges.count == 0
     }
-    
+
     var popoverController: WYPopoverController!
-    
-    private var noUnfinishedChallenges:Bool {
+
+    private var noUnfinishedChallenges: Bool {
         return self.unfinishedChallenges.count == 0
     }
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     @IBOutlet weak var tableView: UITableView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         self.tableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
         setupSubviews()
         self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName: UIColor.whiteColor(), NSBackgroundColorAttributeName: UIColor.whiteColor()]
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 53
         self.tableView.tableHeaderView = UIView(frame: CGRectMake(0, 0, self.tableView.width, 0.01))
         self.internalUserView.hidden = !isInternalUser(user)
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.loadChallenges()
@@ -61,17 +61,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.forceUpdateTable()
         self.muteButton.selected = true
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.showNavigationBar()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     @IBAction func muteAction(sender: UIButton) {
 //        if self.muteButton.selected {
 //            self.muteButton.selected = false
@@ -80,12 +80,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 //            self.muteButton.selected = true
 //            kTHBackgroundMusicValue = 0
 //        }
-        
+
         let content = UIStoryboard.inAppNotificationStoryboard().instantiateViewControllerWithIdentifier("MusicChooserTableViewController") as? UIViewController
-        
+
         content?.preferredContentSize = CGSizeMake(320, 400)
         popoverController = WYPopoverController(contentViewController: content)
-        
+
         popoverController.delegate = self
         var theme = WYPopoverTheme.themeForIOS7()
         theme.tintColor = UIColor(hex: 0xDB0231)
@@ -93,18 +93,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         theme.fillBottomColor = UIColor(hex: 0xDB0231)
         WYPopoverController.setDefaultTheme(theme)
         popoverController.wantsDefaultContentAppearance = false
-        
+
 //        appearance.fillBottomColor = UIColor(hex: 0xDB0231)
         popoverController.presentPopoverFromRect(sender.bounds, inView: sender, permittedArrowDirections: .Any, animated: true)
-        
+
     }
     //MARK:- Actions
-    
+
     @IBAction func quickGameAction(sender: UIButton) {
         var hud = JGProgressHUD.progressHUDWithDefaultStyle()
         hud.showInWindow()
         hud.textLabel.text = "Creating quick game..."
-        NetworkClient.sharedClient.createQuickGame({error in debugPrintln(error)}){
+        NetworkClient.sharedClient.createQuickGame({ error in debugPrintln(error) }) {
             [unowned self] in
             hud.textLabel.text = "Creating game with user.."
             let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
@@ -113,43 +113,45 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             hud.dismissAnimated(true)
         }
     }
-    
+
     @IBAction func uncheckFBShareAction(sender: UIButton) {
-        func showAlertViewConfirmation(){
+        func showAlertViewConfirmation() {
             let alertView = UIAlertController(title: "Facebook Sharing", message: "Are you sure you want to do this?", preferredStyle: .Alert)
             let cancelAction = UIAlertAction(title: "Yes, challenge my friends!", style: .Cancel, handler: nil)
-            
+
             let okAction = UIAlertAction(title: "Later", style: .Default) {
                 [unowned self] action in
                 kFaceBookShare = false
                 sender.selected = false
             }
-            
+
             alertView.addAction(cancelAction)
             alertView.addAction(okAction)
             self.presentViewController(alertView, animated: true, completion: nil)
         }
+
         if kFaceBookShare {
-           showAlertViewConfirmation()
+            showAlertViewConfirmation()
         } else {
             kFaceBookShare = true
             sender.selected = true
         }
-        
+
     }
-    
+
     @IBOutlet weak var uncheckAction: UIImageView!
     //MARK:- Private functions
     private func setupSubviews() {
-        NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: nil)  { [unowned self] (image: UIImage!, error:NSError!) in
+        NetworkClient.fetchImageFromURLString(user.pictureURL, progressHandler: nil) {
+            [unowned self] (image: UIImage!, error: NSError!) in
             if image != nil {
                 self.avatarView.image = image
             }
         }
         self.fullNameView.text = user.displayName
     }
-    
-    private func loadChallenges(loadCompleteHandler:(()->())! = nil){
+
+    private func loadChallenges(loadCompleteHandler: (() -> ())! = nil) {
         var hud = JGProgressHUD.customisedProgressHUDWithStyle(.Dark, textLabelFont: UIFont(name: "AngryBirds-Regular", size: 14)!, detailLabelFont: UIFont(name: "HelveticaNeue", size: 9)!, interactionType: .BlockTouchesOnHUDView, position: .BottomCenter, labelText: loadCompleteHandler == nil ? "Loading challenges.." : "Syncing..")
         hud.showInWindow()
         if loadCompleteHandler == nil {
@@ -164,7 +166,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let completionHandler: () -> () = {
             [unowned self] in
             numberLoaded++
-            
+
             let progress = (Double(numberLoaded) * 100 / 2).format(".1")
             hud.setProgress(Float(numberLoaded) / 2, animated: false)
 //            hud.detailTextLabel.text = "\(progress)% complete"
@@ -177,17 +179,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 hud?.dismissAfterDelay(1, animated: true)
                 self.tableView.reloadData()
             }
-            
+
             if loadCompleteHandler != nil {
                 loadCompleteHandler()
             }
         }
-        
-        NetworkClient.sharedClient.fetchAllChallenges({error in
-                debugPrintln(error)
-            }) {
+
+        NetworkClient.sharedClient.fetchAllChallenges({
+            error in
+            debugPrintln(error)
+        }) {
             [unowned self] in
-            
+
             self.unfinishedChallenges = $0.unfinishedChallenges
             self.unfinishedChallenges.sort {
                 $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
@@ -200,30 +203,30 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.opponentPendingChallenges.sort {
                 $0.createdAt.timeIntervalSinceReferenceDate > $1.createdAt.timeIntervalSinceReferenceDate
             }
-            
+
             completionHandler()
         }
-        
-        NetworkClient.sharedClient.getRandomFBFriendsForUser(numberOfUsers: 3, forUser: user.userId, errorHandler:{error in debugPrintln(error)}) {
+
+        NetworkClient.sharedClient.getRandomFBFriendsForUser(numberOfUsers: 3, forUser: user.userId, errorHandler: { error in debugPrintln(error) }) {
             [unowned self] in
             self.facebookFriendsChallenge = $0
             completionHandler()
         }
     }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath:indexPath) as HomeTurnChallengesTableViewCell
-            cell.bindChalllenge(unfinishedChallenges[indexPath.row], status:.Play)
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as HomeTurnChallengesTableViewCell
+            cell.bindChalllenge(unfinishedChallenges[indexPath.row], status: .Play)
             cell.layoutIfNeeded()
             cell.setNeedsUpdateConstraints()
             cell.updateConstraintsIfNeeded()
             cell.delegate = self
             return cell
         case 1:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath:indexPath) as HomeTurnChallengesTableViewCell
-            cell.bindChalllenge(openChallenges[indexPath.row], status:.Accept)
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as HomeTurnChallengesTableViewCell
+            cell.bindChalllenge(openChallenges[indexPath.row], status: .Accept)
             cell.layoutIfNeeded()
             cell.setNeedsUpdateConstraints()
             cell.updateConstraintsIfNeeded()
@@ -233,15 +236,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let row = indexPath.row
             let offset = opponentPendingChallenges.count
             if row < offset {
-                var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath:indexPath) as HomeTurnChallengesTableViewCell
-                cell.bindChalllenge(opponentPendingChallenges[row], status:.Nudge)
+                var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as HomeTurnChallengesTableViewCell
+                cell.bindChalllenge(opponentPendingChallenges[row], status: .Nudge)
                 cell.layoutIfNeeded()
                 cell.setNeedsUpdateConstraints()
                 cell.updateConstraintsIfNeeded()
                 cell.delegate = self
                 return cell
             } else {
-                var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath:indexPath) as FriendsChallengeCellTableViewCell
+                var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
                 cell.bindFriendUser(facebookFriendsChallenge[row - offset], index: 0)
                 cell.delegate = self
                 cell.layoutIfNeeded()
@@ -253,11 +256,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return UITableViewCell()
         }
     }
-    
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 53
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -270,7 +273,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return 0
         }
     }
-    
+
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView! {
         switch section {
         case 0:
@@ -286,11 +289,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return nil
         }
     }
-    
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
-    
+
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
@@ -310,27 +313,27 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             return 0
         }
     }
-    
-    
+
+
     func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game) {
         switch cell.status {
         case .Accept, .Play:
             var hud = JGProgressHUD.progressHUDWithDefaultStyle()
             hud.showInWindow()
             hud.textLabel.text = "Getting ready.."
-            
-            NetworkClient.sharedClient.fetchGame(game.gameID, force: true, errorHandler:{error in debugPrintln(error)}) {
+
+            NetworkClient.sharedClient.fetchGame(game.gameID, force: true, errorHandler: { error in debugPrintln(error) }) {
                 [unowned self] in
                 var i = 0
                 for game in self.openChallenges {
-                    if $0.gameID == game.gameID  {
+                    if $0.gameID == game.gameID {
                         self.openChallenges.removeAtIndex(i)
                         self.tableView.reloadData()
                         break
                     }
                     i++
                 }
-                
+
                 let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
                 vc.bindGame($0)
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -338,7 +341,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         case .Nudge:
             //TODO send notification
-            NetworkClient.sharedClient.nudgeGameUser(game){
+            NetworkClient.sharedClient.nudgeGameUser(game) {
             }
             cell.configureAsNudgedMode()
             cell.game.lastNudgedOpponentAtUTCStr = DataFormatter.shared.dateFormatter.stringFromDate(NSDate())
@@ -346,11 +349,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             break
         }
     }
+
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapChallengeUser userID: Int) {
         var hud = JGProgressHUD.progressHUDWithDefaultStyle()
         hud.showInWindow()
         hud.textLabel.text = "Creating challenge..."
-        NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler:{error in debugPrintln(error)}) {
+        NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler: { error in debugPrintln(error) }) {
             [unowned self] in
             hud.dismissAnimated(true)
             let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
@@ -358,7 +362,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
+
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapInviteUser inviteUser: FacebookInvitableFriend) {
     }
     //MARK:- UI methods
@@ -370,7 +374,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         leftLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
         leftLabelView.textColor = UIColor.whiteColor()
         headerView.contentView.addSubview(leftLabelView)
-        
+
         var rightLabelView = UILabel.newAutoLayoutView()
         rightLabelView.frame = CGRectMake(178, 4, 100, 21)
         rightLabelView.text = "0 games"
@@ -378,7 +382,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         rightLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
         rightLabelView.textColor = UIColor.whiteColor()
         headerView.contentView.addSubview(rightLabelView)
-        
+
         var logoView = UIImageView.newAutoLayoutView()
         logoView.frame = CGRectMake(119, 23, 51, 51)
         logoView.image = UIImage(named: "NoChallengeEmoticon")
@@ -393,20 +397,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         textLabel.textColor = UIColor.whiteColor()
         textLabel.lineBreakMode = .ByWordWrapping
         headerView.contentView.addSubview(textLabel)
-        
+
         UIView.autoSetPriority(750) {
             leftLabelView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
             rightLabelView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
             logoView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
             textLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
         }
-        
+
         leftLabelView.autoPinEdgeToSuperviewEdge(.Top, withInset: 4)
         leftLabelView.autoPinEdgeToSuperviewEdge(.Leading, withInset: 4)
-        
+
         rightLabelView.autoPinEdgeToSuperviewEdge(.Top, withInset: 4)
         rightLabelView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 8)
-        
+
         logoView.autoPinEdgeToSuperviewEdge(.Top, withInset: 23)
         logoView.autoConstrainAttribute(.Vertical, toAttribute: .Vertical, ofView: logoView.superview, withMultiplier: 1)
         logoView.autoConstrainAttribute(.Width, toAttribute: .Height, ofView: logoView, withMultiplier: 1.0)
@@ -414,11 +418,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         textLabel.autoConstrainAttribute(.Vertical, toAttribute: .Vertical, ofView: textLabel.superview, withMultiplier: 1)
         textLabel.autoSetDimensionsToSize(CGSizeMake(208, 38))
         textLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: logoView, withOffset: 7)
-        
+
         return headerView
     }
-    
-    private func createHeaderView(title:String, numberOfGames:Int) -> UITableViewHeaderFooterView {
+
+    private func createHeaderView(title: String, numberOfGames: Int) -> UITableViewHeaderFooterView {
         var headerView = UITableViewHeaderFooterView.newAutoLayoutView()
         headerView.frame = CGRectMake(0, 0, 286, 25)
         var leftLabelView = UILabel.newAutoLayoutView()
@@ -427,7 +431,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         leftLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
         leftLabelView.textColor = UIColor.whiteColor()
         headerView.contentView.addSubview(leftLabelView)
-        
+
         var rightLabelView = UILabel.newAutoLayoutView()
         rightLabelView.frame = CGRectMake(178, 4, 100, 21)
         rightLabelView.text = numberOfGames == 1 ? "1 game" : "\(numberOfGames) games"
@@ -435,29 +439,30 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         rightLabelView.font = UIFont(name: "AvenirNext-Medium", size: 15)
         rightLabelView.textColor = UIColor.whiteColor()
         headerView.contentView.addSubview(rightLabelView)
-        
+
         UIView.autoSetPriority(1000) {
             leftLabelView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
             rightLabelView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
         }
-        
+
         leftLabelView.autoPinEdgeToSuperviewEdge(.Top, withInset: 4)
         leftLabelView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 0)
         leftLabelView.autoPinEdgeToSuperviewEdge(.Leading, withInset: 4)
-        
+
         rightLabelView.autoPinEdgeToSuperviewEdge(.Top, withInset: 4)
         rightLabelView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 0)
         rightLabelView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 8)
 
         return headerView
     }
-    
-    @IBAction func refresh(sender: AnyObject){
-        self.loadChallenges {}
+
+    @IBAction func refresh(sender: AnyObject) {
+        self.loadChallenges {
+        }
     }
-    
+
     func popoverControllerShouldDismissPopover(popoverController: WYPopoverController!) -> Bool {
         return true
     }
-    
+
 }

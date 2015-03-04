@@ -9,12 +9,12 @@
 import UIKit
 
 class MusicChooserTableViewController: UITableViewController, MusicChooserTableViewCellDelegate {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0xFF4069))
-        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName : UIColor.whiteColor(), NSBackgroundColorAttributeName : UIColor.whiteColor()]
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName: UIColor.whiteColor(), NSBackgroundColorAttributeName: UIColor.whiteColor()]
+
         self.tableView.registerNib(UINib(nibName: "MusicChooserTableViewCell", bundle: nil), forCellReuseIdentifier: kTHMusicChooserTableViewCellIdentifier)
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 70
@@ -23,9 +23,9 @@ class MusicChooserTableViewController: UITableViewController, MusicChooserTableV
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         self.tableView.tableFooterView?.hidden = true
     }
-    
-    private func loadMusics(){
-        
+
+    private func loadMusics() {
+
         self.tableView.reloadData()
     }
 
@@ -61,11 +61,11 @@ class MusicChooserTableViewController: UITableViewController, MusicChooserTableV
             return nil
         }
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kTHMusicChooserTableViewCellIdentifier, forIndexPath: indexPath) as MusicChooserTableViewCell
-        
-        switch indexPath.section{
+
+        switch indexPath.section {
         case 0:
             var orchestralNames = orchestralMusic.keys.array
             orchestralNames.sort {
@@ -80,7 +80,7 @@ class MusicChooserTableViewController: UITableViewController, MusicChooserTableV
             pianoNames.sort {
                 $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending
             }
-            
+
             cell.bindMusicURL(pianoMusic[pianoNames[indexPath.row]]!, name: pianoNames[indexPath.row])
             cell.delegate = self
             return cell
@@ -88,14 +88,14 @@ class MusicChooserTableViewController: UITableViewController, MusicChooserTableV
             return UITableViewCell()
         }
     }
-    
+
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let v = view as? UITableViewHeaderFooterView {
             v.textLabel.textColor = UIColor(hex: 0xFFFFFF)
             v.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 13)
-            v.contentView.backgroundColor  = UIColor(hex: 0xFF4069)
+            v.contentView.backgroundColor = UIColor(hex: 0xFF4069)
         }
-        
+
     }
     /*
     // MARK: - Navigation
@@ -110,7 +110,7 @@ class MusicChooserTableViewController: UITableViewController, MusicChooserTableV
     func musicChooserTableViewCell(cell: MusicChooserTableViewCell, didTapPlayButton musicToPlay: NSURL) {
         switchMusic(musicToPlay)
     }
-    
+
     func musicChooserTableViewCell(cell: MusicChooserTableViewCell, didTapVoteButton musicToVote: String) {
         playMusic(musicToVote)
         kTHDefaultSong = musicToVote

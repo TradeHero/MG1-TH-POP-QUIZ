@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum ResultStatus : Int {
+enum ResultStatus: Int {
     case Partial
     case Full
 }
@@ -17,11 +17,11 @@ enum ResultStatus : Int {
 class QuestionResultTableViewCell: UITableViewCell {
 
     var delegate: QuestionResultTableViewCellDelegate!
-    
+
     private var questionId: Int = 0
     private var selfQuestionResult: QuestionResult!
     private var opponentQuestionResult: QuestionResult!
-    
+
     private var resultStatus: ResultStatus = .Partial {
         didSet {
             switch resultStatus {
@@ -32,48 +32,48 @@ class QuestionResultTableViewCell: UITableViewCell {
             }
         }
     }
-    
+
     @IBOutlet private weak var questionTypeNameLabel: UILabel!
-    
+
     @IBOutlet private weak var selfQuestionResultImageView: UIImageView!
     @IBOutlet private weak var selfQuestionTimeLabel: UILabel!
-    
+
     @IBOutlet private weak var opponentQuestionTimeLabel: UILabel!
     @IBOutlet private weak var opponentQuestionResultImageView: UIImageView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    
+
     @IBAction private func infoAction() {
         if self.delegate != nil {
             self.delegate.questionResultCell(self, didTapInfoButton: self.questionId)
         }
     }
-    
-    func bindQuestionResults(selfResult: QuestionResult, opponentResult:QuestionResult!, index:Int) {
+
+    func bindQuestionResults(selfResult: QuestionResult, opponentResult: QuestionResult!, index: Int) {
         self.selfQuestionResult = selfResult
         self.opponentQuestionResult = opponentResult
 //        if selfResult.questionId == opponentResult.questionId {
-            self.questionId = selfResult.questionId
+        self.questionId = selfResult.questionId
 //        }
         self.questionTypeNameLabel.text = "Question \(index)"
-        
+
         if opponentQuestionResult == nil {
             self.resultStatus = .Partial
         } else {
             self.resultStatus = .Full
         }
     }
-    
+
     private func configureOpponentNotReady() {
         configureSelfResult()
         opponentQuestionTimeLabel.hidden = true
         opponentQuestionResultImageView.image = UIImage(named: "ResultPendingQuestionBox")
     }
-    
+
     private func configureFullResult() {
         configureSelfResult()
         if opponentQuestionResult.isCorrect {
@@ -85,8 +85,8 @@ class QuestionResultTableViewCell: UITableViewCell {
             opponentQuestionResultImageView.image = UIImage(named: "ResultWrongQuestionBox")
         }
     }
-    
-    private func configureSelfResult(){
+
+    private func configureSelfResult() {
         if selfQuestionResult.isCorrect {
             selfQuestionTimeLabel.hidden = false
             selfQuestionTimeLabel.text = "\(NSNumber(float: selfQuestionResult.timeTaken).stringValue)s"
@@ -99,6 +99,6 @@ class QuestionResultTableViewCell: UITableViewCell {
     }
 }
 
-protocol QuestionResultTableViewCellDelegate :class, NSObjectProtocol{
-    func questionResultCell(cell:QuestionResultTableViewCell, didTapInfoButton questionID:Int)
+protocol QuestionResultTableViewCellDelegate: class, NSObjectProtocol {
+    func questionResultCell(cell: QuestionResultTableViewCell, didTapInfoButton questionID: Int)
 }

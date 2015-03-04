@@ -8,43 +8,43 @@
 
 import Argo
 
-struct QuestionDTO :JSONDecodable, DebugPrintable{
+struct QuestionDTO: JSONDecodable, DebugPrintable {
     let questionID: Int!
-    
+
     /// Textual content of the question, must not be empty.
-    let questionContent:String!
-    
+    let questionContent: String!
+
     /// Type of question.
     let questionType: QuestionType = QuestionType.UnknownType
-    
+
     let questionCategory: QuestionCategory = QuestionCategory.UnknownCategory
-    
+
     /// Set of options of this current question instance
     let options: OptionSet!
-    
+
     /// Image content url of the question, can be nil.
     let questionImageURLString: String!
-    
+
     var questionImage: UIImage!
-    
+
     let accessoryImageContent: String!
-    
+
     var accessoryImage: UIImage!
-    
+
     let subcategory: Int!
-    
+
     let difficulty: Int!
 
-    
-    static func create(id: Int)(category: Int)(content: String)(option1: String)(option2: String)(option3: String)(option4: String)(subcategory: Int)(difficulty: Int) -> QuestionDTO{
-        
+
+    static func create(id: Int)(category: Int)(content: String)(option1: String)(option2: String)(option3: String)(option4: String)(subcategory: Int)(difficulty: Int) -> QuestionDTO {
+
         var questionType = QuestionType.UnknownType
         var questionCategory = QuestionCategory.UnknownCategory
         var questionContent: String!
         var questionImageURLString: String!
         var mainContent: String!
         var accessoryImageContent: String!
-        
+
         var d = content.componentsSeparatedByString("|")
         if d.count == 2 {
             mainContent = d[0]
@@ -54,7 +54,7 @@ struct QuestionDTO :JSONDecodable, DebugPrintable{
             accessoryImageContent = nil
         }
 
-        
+
         switch category {
         case 1:
             questionType = QuestionType.LogoType
@@ -106,30 +106,30 @@ struct QuestionDTO :JSONDecodable, DebugPrintable{
             questionType = QuestionType.UnknownType
             questionContent = "~ \(content) ~"
         }
-    
+
         var option1 = Option(stringContent: option1)
         var option2 = Option(stringContent: option2)
         var option3 = Option(stringContent: option3)
         var option4 = Option(stringContent: option4)
-        
+
         var options = OptionSet(correctOption: option1, dummyOptions: [option2, option3, option4])
 
         return QuestionDTO(questionID: id, questionContent: content, questionType: questionType, questionCategory: questionCategory, options: options, questionImageURLString: questionImageURLString, questionImage: nil, accessoryImageContent: nil, accessoryImage: nil, subcategory: subcategory, difficulty: difficulty)
     }
-    
+
     static func decode(j: JSONValue) -> QuestionDTO? {
         return QuestionDTO.create
-            <^> j <| "id"
-            <*> j <| "category"
-            <*> j <| "content"
-            <*> j <| "option1"
-            <*> j <| "option2"
-            <*> j <| "option3"
-            <*> j <| "option4"
-            <*> j <| "subcategory"
-            <*> j <| "difficulty"
+                <^> j <| "id"
+                <*> j <| "category"
+                <*> j <| "content"
+                <*> j <| "option1"
+                <*> j <| "option2"
+                <*> j <| "option3"
+                <*> j <| "option4"
+                <*> j <| "subcategory"
+                <*> j <| "difficulty"
     }
-    
+
     var debugDescription: String {
         get {
             var d = "{\n"
@@ -146,8 +146,8 @@ struct QuestionDTO :JSONDecodable, DebugPrintable{
             return d
         }
     }
-    
-    func isGraphical() -> Bool{
+
+    func isGraphical() -> Bool {
         switch self.questionType {
         case .LogoType, .TimedObfuscatorType:
             return true
@@ -155,9 +155,9 @@ struct QuestionDTO :JSONDecodable, DebugPrintable{
             return false
         }
     }
-    
-    mutating func fetchImage(completionHandler:() -> ()) {
-        
+
+    mutating func fetchImage(completionHandler: () -> ()) {
+
         if let imgName = self.questionImageURLString {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
@@ -170,14 +170,14 @@ struct QuestionDTO :JSONDecodable, DebugPrintable{
                 }
                 self.fetchAccessoryImageOperation(completionHandler)
             })
-            
-        }else{
+
+        } else {
             self.fetchAccessoryImageOperation(completionHandler)
         }
     }
-    
-    func fetchOptionImageOperation(completionHandler:() -> ()){
-        var count:Int = 0
+
+    func fetchOptionImageOperation(completionHandler: () -> ()) {
+        var count: Int = 0
         for option in self.options.allOptions {
             option.fetchImage {
                 count += 1
@@ -187,8 +187,8 @@ struct QuestionDTO :JSONDecodable, DebugPrintable{
             }
         }
     }
-    
-     mutating func fetchAccessoryImageOperation(completionHandler:() -> ()){
+
+    mutating func fetchAccessoryImageOperation(completionHandler: () -> ()) {
         if let imgName = self.accessoryImageContent {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
@@ -205,5 +205,5 @@ struct QuestionDTO :JSONDecodable, DebugPrintable{
             self.fetchOptionImageOperation(completionHandler)
         }
     }
-    
+
 }

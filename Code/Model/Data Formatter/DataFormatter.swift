@@ -10,19 +10,21 @@ import UIKit
 import FormatterKit
 
 class DataFormatter {
-    
+
     class var shared: DataFormatter {
+
         struct Singleton {
-            static var onceToken : dispatch_once_t = 0
-            static var instance : DataFormatter!
+            static var onceToken: dispatch_once_t = 0
+            static var instance: DataFormatter!
         }
+
         dispatch_once(&Singleton.onceToken) {
             Singleton.instance = DataFormatter()
         }
-        
+
         return Singleton.instance
     }
-    
+
     lazy var timeIntervalFormatter: TTTTimeIntervalFormatter = {
         let tif = TTTTimeIntervalFormatter()
 //        tif.presentDeicticExpression = "Today"

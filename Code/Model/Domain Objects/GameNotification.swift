@@ -20,13 +20,14 @@ class GameNotification {
     var title: String = ""
     var details: String = ""
     var userAvatarURLString: String = ""
-    
-    init(type:GameNotificationType, title:String, details:String, urlString:String) {
+
+    init(type: GameNotificationType, title: String, details: String, urlString: String) {
         self.type = type
         self.title = title
         self.details = details
         self.userAvatarURLString = urlString
     }
-    
-    init(){}
+
+    init() {
+    }
 }

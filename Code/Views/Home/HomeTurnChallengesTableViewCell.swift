@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 enum ChallengeStatus: Int {
     case Play
     case Accept
@@ -15,9 +16,9 @@ enum ChallengeStatus: Int {
 }
 
 class HomeTurnChallengesTableViewCell: UITableViewCell {
-    
-    let inset:CGFloat = 2.5
-    
+
+    let inset: CGFloat = 2.5
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.challengerImageView.layer.borderWidth = 1
@@ -27,15 +28,15 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.layer.cornerRadius = 5
         self.clipsToBounds = true
     }
-    
+
     @IBOutlet private weak var actionButton: UIButton!
     @IBOutlet private weak var challengerDisplayNameLabel: UILabel!
     @IBOutlet private weak var challengerImageView: UIImageView!
     @IBOutlet private weak var scoreDetailLabel: UILabel!
     @IBOutlet private weak var gameStatusImageView: UIImageView!
-    
+
     var game: Game!
-    
+
     var status: ChallengeStatus = .Play {
         didSet {
             switch status {
@@ -50,16 +51,16 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             }
         }
     }
-    
+
     var player: THUser!
     var opponent: THUser!
-    
+
     var delegate: HomeTurnChallengesTableViewCellDelegate!
     @IBAction func acceptChallengeAction(sender: AnyObject) {
         self.delegate.homeTurnChallengesCell(self, didTapAcceptChallenge: self.game)
     }
-    
-    func bindChalllenge(challenge:Game, status:ChallengeStatus) {
+
+    func bindChalllenge(challenge: Game, status: ChallengeStatus) {
         self.game = challenge
         self.status = status
         self.player = game.selfUser
@@ -68,30 +69,31 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         switch status {
         case .Nudge, .Invited:
             if game.isGameCompletedByChallenger {
-                var attributedString = NSMutableAttributedString(string:"Your Score: ")
-                var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 14)!])
+                var attributedString = NSMutableAttributedString(string: "Your Score: ")
+                var boldStr = NSMutableAttributedString(string: "\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 14)!])
                 attributedString.appendAttributedString(boldStr)
-                self.scoreDetailLabel.attributedText  = attributedString
+                self.scoreDetailLabel.attributedText = attributedString
             }
-            
+
             if let lastNudged = challenge.lastNudgedOpponentAt {
                 if lastNudged.timeIntervalSinceDate(NSDate()) < 5 {
                     self.configureAsNudgedMode()
                 }
             }
-            
+
         case .Play, .Accept:
             if game.isGameCompletedByChallenger {
-                var attributedString = NSMutableAttributedString(string:"Score: ")
-                var boldStr = NSMutableAttributedString(string:"\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes:[NSFontAttributeName : UIFont(name: "AvenirNext-Bold", size: 14)!])
+                var attributedString = NSMutableAttributedString(string: "Score: ")
+                var boldStr = NSMutableAttributedString(string: "\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 14)!])
                 attributedString.appendAttributedString(boldStr)
 
-                self.scoreDetailLabel.attributedText  = attributedString
+                self.scoreDetailLabel.attributedText = attributedString
             }
         }
-        
+
         self.challengerDisplayNameLabel.text = opponent!.displayName
-        self.challengerImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL)) { [unowned self] (image, _, _, _) in
+        self.challengerImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL)) {
+            [unowned self] (image, _, _, _) in
             if let i = image {
                 self.challengerImageView.image = i.centerCropImage()
             } else {
@@ -100,16 +102,16 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         }
 
     }
-    
+
     func configureAsPlayChallengesMode() {
         self.actionButton.enabled = true
         self.actionButton.setTitle("Play", forState: .Normal)
         self.actionButton.setBackgroundImage(UIImage(named: "GreenButtonBackground"), forState: .Normal)
         self.gameStatusImageView.alpha = 1
         self.gameStatusImageView.image = UIImage(named: "BeatMeLabelBox")
-        
+
     }
-    
+
     func configureAsAcceptChallengeMode() {
         self.actionButton.enabled = true
         self.actionButton.setTitle("Accept", forState: .Normal)
@@ -117,15 +119,15 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.gameStatusImageView.alpha = 1
         self.gameStatusImageView.image = UIImage(named: "NewChallengeLabelBox")
     }
-    
-    func configureAsNudgeMode(){
+
+    func configureAsNudgeMode() {
         self.actionButton.enabled = true
         self.actionButton.setTitle("Nudge", forState: .Normal)
         self.actionButton.setBackgroundImage(UIImage(named: "BlueButtonBackground"), forState: .Normal)
         self.gameStatusImageView.alpha = 0
         self.gameStatusImageView.image = nil
     }
-    
+
     func configureAsNudgedMode() {
         self.actionButton.enabled = false
         self.actionButton.setTitle("Nudged", forState: .Normal)
@@ -133,7 +135,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.gameStatusImageView.alpha = 0
         self.gameStatusImageView.image = nil
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         self.challengerImageView.sd_cancelCurrentImageLoad()
@@ -142,23 +144,23 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.scoreDetailLabel.text = ""
         super.layoutIfNeeded()
     }
-    
+
     override var frame: CGRect {
         get {
             return super.frame
         }
-        
+
         set(fr) {
             var frame = fr
             frame.origin.y += 3
-            frame.size.height -=  5;
+            frame.size.height -= 5;
             super.frame = frame
             UIView.roundView(self, onCorner: .AllCorners, radius: 5)
         }
     }
 }
 
-protocol HomeTurnChallengesTableViewCellDelegate : class, NSObjectProtocol {
-    func homeTurnChallengesCell(cell:HomeTurnChallengesTableViewCell, didTapAcceptChallenge game:Game)
+protocol HomeTurnChallengesTableViewCellDelegate: class, NSObjectProtocol {
+    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game)
 }
 

@@ -15,12 +15,13 @@ import UIKit
 /// - GraphType: Questions that presents based on graphs of a certain interval or demographic, must contain an image.
 /// - TextualType: Questions that presents on a text-based (non-imagerial) form.
 ///
-enum QuestionType : Int {
+
+enum QuestionType: Int {
     case UnknownType = 0
     case LogoType
     case TimedObfuscatorType
     case TextualType
-    
+
     func description() -> String {
         switch self {
         case .LogoType:
@@ -35,7 +36,7 @@ enum QuestionType : Int {
     }
 }
 
-enum QuestionCategory : Int {
+enum QuestionCategory: Int {
     case UnknownCategory = 0
     case LogoToNameCategory
     case LogoToTickerSymbolCategory
@@ -48,7 +49,7 @@ enum QuestionCategory : Int {
     case OddOneOutCategory
     case CompanyNameToSectorCategory
     case StaticCategory
-    
+
     func description() -> String {
         switch self {
         case .UnknownCategory:
@@ -80,36 +81,37 @@ enum QuestionCategory : Int {
 }
 
 /// A linguistic expression used to make a request for information.
+
 final class Question {
-    
+
     /// ID
     let questionID: Int!
-    
+
     /// Textual content of the question, must not be empty.
-    var questionContent:String!
-    
+    var questionContent: String!
+
     /// Type of question.
     var questionType: QuestionType = QuestionType.UnknownType
-    
+
     var questionCategory: QuestionCategory = QuestionCategory.UnknownCategory
-    
+
     /// Set of options of this current question instance
     var options: OptionSet!
-    
+
     /// Image content url of the question, can be nil.
     var questionImageURLString: String!
-    
+
     var questionImage: UIImage!
-    
+
     var accessoryImageContent: String!
-    
+
     var accessoryImage: UIImage!
-    
+
     var subcategory: Int!
-    
+
     var difficulty: Int!
-    
-    func isGraphical() -> Bool{
+
+    func isGraphical() -> Bool {
         switch self.questionType {
         case .LogoType, .TimedObfuscatorType:
             return true
@@ -117,14 +119,14 @@ final class Question {
             return false
         }
     }
-    
-    init(questionDTO:[String:AnyObject]) {
+
+    init(questionDTO: [String:AnyObject]) {
         if let id: AnyObject? = questionDTO["id"] {
             self.questionID = (id as Int)
         }
         if let qType: AnyObject = questionDTO["category"] {
             let qTypeInt = (qType as Int)
-            var contentStr:String!
+            var contentStr: String!
             if let q: AnyObject = questionDTO["content"] {
                 contentStr = (q as String)
             }
@@ -137,7 +139,7 @@ final class Question {
                 mainContent = contentStr
                 self.accessoryImageContent = nil
             }
-            
+
             switch qTypeInt {
             case 1:
                 self.questionType = .LogoType
@@ -190,40 +192,40 @@ final class Question {
                 self.questionContent = "~ \(contentStr) ~"
             }
         }
-        
+
         var option1: Option!
         if let o: AnyObject? = questionDTO["option1"] {
             option1 = Option(stringContent: (o as String))
         }
-        
+
         var option2: Option!
         if let o: AnyObject? = questionDTO["option2"] {
             option2 = Option(stringContent: (o as String))
         }
-        
+
         var option3: Option!
         if let o: AnyObject? = questionDTO["option3"] {
             option3 = Option(stringContent: (o as String))
         }
-        
+
         var option4: Option!
         if let o: AnyObject? = questionDTO["option4"] {
             option4 = Option(stringContent: (o as String))
         }
-        
+
         self.options = OptionSet(correctOption: option1, dummyOptions: [option2, option3, option4])
-        
+
         if let diff: AnyObject? = questionDTO["difficulty"] {
             self.difficulty = (diff as Int)
         }
-        
+
         if let sub: AnyObject? = questionDTO["subcategory"] {
             self.subcategory = (sub as Int)
         }
     }
-    
-    func fetchImage(completionHandler:() -> ()) {
-        
+
+    func fetchImage(completionHandler: () -> ()) {
+
         if let imgName = self.questionImageURLString {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
@@ -236,14 +238,14 @@ final class Question {
                 }
                 self.fetchAccessoryImageOperation(completionHandler)
             })
-            
-        }else{
+
+        } else {
             self.fetchAccessoryImageOperation(completionHandler)
         }
     }
-    
-    func fetchOptionImageOperation(completionHandler:() -> ()){
-        var count:Int = 0
+
+    func fetchOptionImageOperation(completionHandler: () -> ()) {
+        var count: Int = 0
         for option in self.options.allOptions {
             option.fetchImage {
                 count += 1
@@ -253,8 +255,8 @@ final class Question {
             }
         }
     }
-    
-    func fetchAccessoryImageOperation(completionHandler:() -> ()){
+
+    func fetchAccessoryImageOperation(completionHandler: () -> ()) {
         if let imgName = self.accessoryImageContent {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
@@ -273,19 +275,19 @@ final class Question {
     }
 }
 
-extension Question : Printable {
+extension Question: Printable {
     var description: String {
         var d = "{\n"
-            d += "ID: \(questionID)\n"
-            d += "Type: \(questionType.description())\n"
-            d += "Category: \(questionCategory.description())\n"
-            d += "Subcategory: \(subcategory)"
-            d += "Difficulty: \(difficulty)"
-            d += "Content: \(questionContent)\n"
-            let imgurl = questionImageURLString ?? "no image"
-            d += "Image name: \(imgurl)\n"
-            d += "Options: \(options)"
-            d += "}\n"
-            return d
+        d += "ID: \(questionID)\n"
+        d += "Type: \(questionType.description())\n"
+        d += "Category: \(questionCategory.description())\n"
+        d += "Subcategory: \(subcategory)"
+        d += "Difficulty: \(difficulty)"
+        d += "Content: \(questionContent)\n"
+        let imgurl = questionImageURLString ?? "no image"
+        d += "Image name: \(imgurl)\n"
+        d += "Options: \(options)"
+        d += "}\n"
+        return d
     }
 }
