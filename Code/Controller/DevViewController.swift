@@ -1,14 +1,14 @@
 //
-//  DevelopmentViewController.swift
+//  DevViewController.swift
 //  TH-PopQuiz
 //
-//  Created by Ryne Cheow on 3/3/15.
+//  Created by Ryne Cheow on 4/3/15.
 //  Copyright (c) 2015 TradeHero. All rights reserved.
 //
 
 import UIKit
 
-class DevelopmentViewController: UIViewController {
+class DevViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

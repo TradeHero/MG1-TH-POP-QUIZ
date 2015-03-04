@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--DevelopmentViewController-->
+        <!--Dev View Controller-->
         <scene sceneID="MnW-lv-2oD">
             <objects>
-                <viewController storyboardIdentifier="DevelopmentViewController" title="DevelopmentViewController" id="fTi-hJ-YTr" customClass="DevelopmentViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DevelopmentViewController" id="fTi-hJ-YTr" customClass="DevViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ccC-3q-5u0"/>
                         <viewControllerLayoutGuide type="bottom" id="eIW-1c-V0Y"/>
