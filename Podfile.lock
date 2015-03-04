@@ -1,7 +1,7 @@
 PODS:
   - Alamofire (1.1.4)
   - Argo (0.2)
-  - Bolts (1.1.3)
+  - Bolts (1.1.4)
   - CAAnimationBlocks (0.0.1)
   - ChatHeads (1.0):
     - CAAnimationBlocks
@@ -31,6 +31,7 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.8.0)
   - GPUImage (0.1.6)
   - JGProgressHUD (1.2.3)
+  - KeychainAccess (1.1.3)
   - KKProgressTimer (0.0.1)
   - LDProgressView (1.2.1)
   - MDRadialProgress (1.3.1)
@@ -44,6 +45,9 @@ PODS:
   - PromiseKit/Swift (1.3.0):
     - OMGHTTPURLRQ
   - PureLayout (2.0.5)
+  - Realm (0.90.6):
+    - Realm/Headers (= 0.90.6)
+  - Realm/Headers (0.90.6)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
@@ -61,11 +65,13 @@ DEPENDENCIES:
   - FormatterKit (~> 1.8.0)
   - GPUImage (~> 0.1.6)
   - JGProgressHUD (~> 1.2.3)
+  - KeychainAccess (~> 1.1.2)
   - KKProgressTimer (from `http://github.com/gin0606/KKProgressTimer.git`)
   - LDProgressView (~> 1.2.1)
   - MDRadialProgress (~> 1.3.1)
   - PromiseKit/Swift (~> 1.3.0)
   - PureLayout (~> 2.0.5)
+  - Realm (~> 0.90.6)
   - SDWebImage (~> 3.7.1)
   - SSKeychain (~> 1.2.2)
   - WYPopoverController (~> 0.3.7)
@@ -82,7 +88,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 524225da382071ee3e6d0badd0ee4b4dc36740de
   Argo: 2a9f06b8967573caa24e1237226020b8da875a57
-  Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
+  Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
   CAAnimationBlocks: 981bfca79ac481f07957aa8357885e620637f926
   ChatHeads: 1b66a3ca6ae25e6ce04eb64485cf96b43b74bbcc
   DZNSegmentedControl: daa91d107904f7433e73852477f08450575be331
@@ -91,12 +97,14 @@ SPEC CHECKSUMS:
   FormatterKit: 547a808c41172136a3f3acb424ac9361d38bb32f
   GPUImage: cecb0830bb9428f50192042e3c7b53810f51388e
   JGProgressHUD: 733523c80f69b6dfc41b88a0f33883a89a8b4c3b
+  KeychainAccess: 7f73608d9e7bf466b71a88acdcc7f790f6a56574
   KKProgressTimer: 6a132f47ed5a24fdc0fa8a4f15dfe2ed5844772a
   LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
   MDRadialProgress: 0499b76b2bd25711ac1d6687c07ac915bad1b8bd
   OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
   PromiseKit: 4844db4448b4e387845e702b738cd87433fc02fd
   PureLayout: 63a3257320223e8edddcd3afb407445f85a6bf74
+  Realm: 6c3facc11964ab9f828f47de6d0e9bf9c4d9c818
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SKBounceAnimation: a47c30f67d3e4b948b1823ce5957d72d4382dd73
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9

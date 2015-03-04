@@ -22,7 +22,7 @@
 #define COCOAPODS_POD_AVAILABLE_Bolts
 #define COCOAPODS_VERSION_MAJOR_Bolts 1
 #define COCOAPODS_VERSION_MINOR_Bolts 1
-#define COCOAPODS_VERSION_PATCH_Bolts 3
+#define COCOAPODS_VERSION_PATCH_Bolts 4
 
 // CAAnimationBlocks
 #define COCOAPODS_POD_AVAILABLE_CAAnimationBlocks
@@ -132,6 +132,12 @@
 #define COCOAPODS_VERSION_MINOR_KKProgressTimer 0
 #define COCOAPODS_VERSION_PATCH_KKProgressTimer 1
 
+// KeychainAccess
+#define COCOAPODS_POD_AVAILABLE_KeychainAccess
+#define COCOAPODS_VERSION_MAJOR_KeychainAccess 1
+#define COCOAPODS_VERSION_MINOR_KeychainAccess 1
+#define COCOAPODS_VERSION_PATCH_KeychainAccess 3
+
 // LDProgressView
 #define COCOAPODS_POD_AVAILABLE_LDProgressView
 #define COCOAPODS_VERSION_MAJOR_LDProgressView 1
@@ -179,6 +185,18 @@
 #define COCOAPODS_VERSION_MAJOR_PureLayout 2
 #define COCOAPODS_VERSION_MINOR_PureLayout 0
 #define COCOAPODS_VERSION_PATCH_PureLayout 5
+
+// Realm
+#define COCOAPODS_POD_AVAILABLE_Realm
+#define COCOAPODS_VERSION_MAJOR_Realm 0
+#define COCOAPODS_VERSION_MINOR_Realm 90
+#define COCOAPODS_VERSION_PATCH_Realm 6
+
+// Realm/Headers
+#define COCOAPODS_POD_AVAILABLE_Realm_Headers
+#define COCOAPODS_VERSION_MAJOR_Realm_Headers 0
+#define COCOAPODS_VERSION_MINOR_Realm_Headers 90
+#define COCOAPODS_VERSION_PATCH_Realm_Headers 6
 
 // SDWebImage
 #define COCOAPODS_POD_AVAILABLE_SDWebImage
