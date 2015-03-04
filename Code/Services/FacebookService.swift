@@ -64,6 +64,18 @@ class FacebookService {
         
     }
     
+    func renewFacebookToken(completionHandler: (FBSession!, NSError!) -> ()) {
+        dispatch_async(dispatch_get_main_queue(), {
+            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes"], allowLoginUI: true, completionHandler: {
+                (session, state, error) -> Void in
+                completionHandler(session, error)
+                }
+            )
+            return
+        })
+        
+    }
+    
     private func nativeFallbackWithSDKConnect(completionHandler: (String!, NSError!) -> ()) {
         let facebookTypeAccount = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
         accountStore.requestAccessToAccountsWithType(facebookTypeAccount, options: [ACFacebookAppIdKey: kTHFacebookAppID, ACFacebookPermissionsKey: ["user_birthday, email"]]) {

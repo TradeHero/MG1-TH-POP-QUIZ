@@ -35,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         // Override point for customization after application launch.
         
         application.applicationIconBadgeNumber = 0
-//        NetworkClient.sharedClient.logout()
         
         switch kTHGamesServerMode {
         case .Staging:
@@ -47,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         playMusic(kTHDefaultSong)
         
         self.registerLoginNotification()
-        
+        self.autoLogin()
         return true
     }
 
@@ -96,6 +95,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
                         hud.HUDView.layer.shadowRadius = 8.0
                         
                         hud.HUDView.layer.addAnimation(animation, forKey:"glow")
+                    } else if error.code == 417 {
+                        hud.layoutChangeAnimationDuration = 1.0
+                        hud.indicatorView = JGProgressHUDErrorIndicatorView()
+                        hud.textLabel.text = "Facebook access token expired. Extending token.."
+                        hud.dismissAfterDelay(3, animated: true)
                     } else {
                         hud.textLabel.text = error.description
                         hud.dismissAfterDelay(3, animated: true)

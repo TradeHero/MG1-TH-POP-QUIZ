@@ -30,7 +30,7 @@ class NetworkClient {
             Singleton.instance.loadCredentials()
             Singleton.instance.loadDeviceToken()
             var defaultHeaders = Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders ?? [:]
-            defaultHeaders.updateValue("3.0.0", forKey: "TH-Client-Version")
+            defaultHeaders.updateValue("3.1.0", forKey: "TH-Client-Version")
             defaultHeaders.updateValue("1", forKey: "TH-Client-Type")
             defaultHeaders.updateValue("en-GB", forKey: "TH-Language-Code")
             defaultHeaders.updateValue("1.5.0", forKey: "THPQ-Client-Version")
@@ -76,7 +76,7 @@ class NetworkClient {
     :param: loginSuccessHandler Takes a THUser and perform operation
     */
     func loginUserWithFacebookAuth(accessToken:String, loginSuccessHandler:(THUser -> ())!, errorHandler:NSError->()) {
-        var param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "3.0.0"]
+        var param: [String: AnyObject] = ["clientType": 1, "clientVersion" : "3.1.0", "facebook_access_token" : accessToken]
         let auth = "\(THAuthFacebookPrefix) \(accessToken)"
         
         if _device_token != nil {
@@ -84,7 +84,7 @@ class NetworkClient {
         }
         
         let r = self.request(.POST,
-            THServerAPIBaseURL + "/login",
+            THServerAPIBaseURL + "/signupAndLogin",
             parameters: param,
             encoding: JSONEncoding,
             authentication: auth).responseJSON {
@@ -109,6 +109,9 @@ class NetworkClient {
                         NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLoginSuccessfulNotificationKey, object: self, userInfo:userInfo)
                         loginSuccessHandler(loginUser)
                     }
+                } else if response?.statusCode == 417 {
+                    let err = NSError(domain: "com.mymanisku.TH-PopQuiz", code: 417, userInfo: ["message" : "Expired access token"])
+                   errorHandler(err)
                 }
         }
                 debugPrintln(r)

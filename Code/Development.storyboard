@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D87h" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="fTi-hJ-YTr">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--DevelopmentViewController-->
+        <scene sceneID="MnW-lv-2oD">
+            <objects>
+                <viewController storyboardIdentifier="DevelopmentViewController" title="DevelopmentViewController" id="fTi-hJ-YTr" customClass="DevelopmentViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ccC-3q-5u0"/>
+                        <viewControllerLayoutGuide type="bottom" id="eIW-1c-V0Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qf8-Ci-B7h">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mps-ll-Eem">
+                                <rect key="frame" x="88" y="62" width="144" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="b9a-E0-A3s"/>
+                                    <constraint firstAttribute="width" constant="144" id="mBA-2I-YbD"/>
+                                </constraints>
+                                <state key="normal" title="Quiz Debug Display">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mps-ll-Eem" firstAttribute="top" secondItem="ccC-3q-5u0" secondAttribute="bottom" constant="42" id="D4v-6E-c81"/>
+                            <constraint firstAttribute="centerX" secondItem="mps-ll-Eem" secondAttribute="centerX" id="oSg-ed-fgu"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AvA-WD-HAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1168" y="106"/>
+        </scene>
+        <!--Quiz Debug View Controller-->
+        <scene sceneID="MvG-GN-8xA">
+            <objects>
+                <viewController storyboardIdentifier="QuizDebugViewController" id="80c-wD-fuJ" customClass="QuizDebugViewController" customModule="TH_PopQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="taZ-AP-8hm"/>
+                        <viewControllerLayoutGuide type="bottom" id="vN9-nY-Icf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QyW-Fc-8M5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QuizViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="pYC-zE-MJe">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lyr-jv-X43" userLabel="HeaderView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QuizHeaderBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Q0C-vA-yaU">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWg-Ec-pML">
+                                        <rect key="frame" x="24" y="23" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="WDW-ib-VCL"/>
+                                            <constraint firstAttribute="height" constant="40" id="uXc-r7-JhW"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="PreviousQ">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVR-w5-Kd6">
+                                        <rect key="frame" x="257" y="23" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="5In-ZO-2MO"/>
+                                            <constraint firstAttribute="height" constant="40" id="s4z-Fq-zJZ"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="NextQ">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gOl-nQ-N5e">
+                                        <rect key="frame" x="100" y="28" width="121" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="121" id="D2c-fj-Yd5"/>
+                                            <constraint firstAttribute="height" constant="30" id="yku-jT-iN5"/>
+                                        </constraints>
+                                        <state key="normal" title="Exit">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dismissClicked:" destination="80c-wD-fuJ" eventType="touchUpInside" id="xnN-ou-D7p"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="HWg-Ec-pML" secondAttribute="centerY" id="0WU-So-giu"/>
+                                    <constraint firstItem="Q0C-vA-yaU" firstAttribute="leading" secondItem="lyr-jv-X43" secondAttribute="leading" id="7Qc-CM-HtT"/>
+                                    <constraint firstAttribute="trailing" secondItem="xVR-w5-Kd6" secondAttribute="trailing" constant="23" id="C2H-yc-AHN"/>
+                                    <constraint firstItem="HWg-Ec-pML" firstAttribute="leading" secondItem="lyr-jv-X43" secondAttribute="leading" constant="24" id="JmS-9N-3Ia"/>
+                                    <constraint firstAttribute="width" secondItem="lyr-jv-X43" secondAttribute="height" multiplier="64:17" id="RUP-Xq-TYX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Q0C-vA-yaU" secondAttribute="trailing" id="ga7-pt-vz2"/>
+                                    <constraint firstAttribute="centerY" secondItem="gOl-nQ-N5e" secondAttribute="centerY" id="gtF-FE-JEL"/>
+                                    <constraint firstAttribute="centerY" secondItem="xVR-w5-Kd6" secondAttribute="centerY" id="hZF-3c-oWe"/>
+                                    <constraint firstItem="Q0C-vA-yaU" firstAttribute="top" secondItem="lyr-jv-X43" secondAttribute="top" id="obN-Sk-3JV"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q0C-vA-yaU" secondAttribute="bottom" id="xRR-lm-sMP"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="xWs-hK-dPD"/>
+                                    <constraint firstAttribute="centerX" secondItem="gOl-nQ-N5e" secondAttribute="centerX" id="zBD-I2-yxB"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROUND 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftL-9d-xR3">
+                                <rect key="frame" x="99" y="170" width="123" height="36"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="26"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="1" height="3"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9b-YY-rvj">
+                                <rect key="frame" x="0.0" y="85" width="320" height="205"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="v9b-YY-rvj" secondAttribute="height" multiplier="64:41" id="l3G-Fd-3aK"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IbT-v7-MU3" userLabel="Buttons Group">
+                                <rect key="frame" x="0.0" y="290" width="320" height="225"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdb-fC-mVY" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
+                                        <rect key="frame" x="165" y="5" width="140" height="102"/>
+                                        <color key="backgroundColor" red="0.5450980392" green="0.85882352939999995" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="NYSE: TSLA ">
+                                            <color key="titleColor" red="0.047058823530000002" green="0.30980392159999998" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="optionSelected:" destination="80c-wD-fuJ" eventType="touchUpInside" id="Jnv-og-a3z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRz-A3-YGj" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="118" width="140" height="102"/>
+                                        <color key="backgroundColor" red="0.5450980392" green="0.85882352939999995" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="NYSE: TSLX">
+                                            <color key="titleColor" red="0.047058823530000002" green="0.30980392159999998" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="optionSelected:" destination="80c-wD-fuJ" eventType="touchUpInside" id="aP1-4y-Z76"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nad-X4-URu" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="5" width="140" height="102"/>
+                                        <color key="backgroundColor" red="0.5450980392" green="0.85882352939999995" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="Ehw-wA-pHl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="NYSE: TSL">
+                                            <color key="titleColor" red="0.047058823530000002" green="0.30980392159999998" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="optionSelected:" destination="80c-wD-fuJ" eventType="touchUpInside" id="OAF-gu-wEh"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pfq-CR-4zA" customClass="KKProgressTimer">
+                                        <rect key="frame" x="135" y="88" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="aas-QT-jqn"/>
+                                            <constraint firstAttribute="height" constant="50" id="fy6-3K-glb"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJp-4p-0FQ" customClass="OptionButton" customModule="TH_PopQuiz" customModuleProvider="target">
+                                        <rect key="frame" x="165" y="118" width="140" height="102"/>
+                                        <color key="backgroundColor" red="0.5450980392" green="0.85882352939999995" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                                        <state key="normal" title="NYSE: TS">
+                                            <color key="titleColor" red="0.047058823530000002" green="0.30980392159999998" blue="0.68235294120000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="optionSelected:" destination="80c-wD-fuJ" eventType="touchUpInside" id="d0a-gn-vpy"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="YRz-A3-YGj" firstAttribute="trailing" secondItem="nad-X4-URu" secondAttribute="trailing" id="1Jb-NB-dml"/>
+                                    <constraint firstItem="YRz-A3-YGj" firstAttribute="leading" secondItem="nad-X4-URu" secondAttribute="leading" id="59j-9D-752"/>
+                                    <constraint firstItem="YRz-A3-YGj" firstAttribute="top" secondItem="nad-X4-URu" secondAttribute="bottom" constant="11" id="5QG-GL-9Xe"/>
+                                    <constraint firstItem="nad-X4-URu" firstAttribute="top" secondItem="IbT-v7-MU3" secondAttribute="top" constant="5" id="Ab7-Kv-U3i"/>
+                                    <constraint firstItem="YRz-A3-YGj" firstAttribute="bottom" secondItem="LJp-4p-0FQ" secondAttribute="bottom" id="AxV-Fs-TS7"/>
+                                    <constraint firstItem="YRz-A3-YGj" firstAttribute="height" secondItem="nad-X4-URu" secondAttribute="height" id="D0S-Mv-yqd"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="HI0-IB-5TI"/>
+                                    <constraint firstAttribute="centerY" secondItem="pfq-CR-4zA" secondAttribute="centerY" id="HhL-m7-Elw"/>
+                                    <constraint firstItem="gdb-fC-mVY" firstAttribute="leading" secondItem="nad-X4-URu" secondAttribute="trailing" constant="13" id="KbH-PN-vEj"/>
+                                    <constraint firstItem="nad-X4-URu" firstAttribute="leading" secondItem="IbT-v7-MU3" secondAttribute="leading" constant="12" id="MeQ-tP-vDM"/>
+                                    <constraint firstItem="gdb-fC-mVY" firstAttribute="trailing" secondItem="LJp-4p-0FQ" secondAttribute="trailing" id="Q7z-zW-qB9"/>
+                                    <constraint firstItem="YRz-A3-YGj" firstAttribute="top" secondItem="LJp-4p-0FQ" secondAttribute="top" id="TMX-Pf-lY4"/>
+                                    <constraint firstAttribute="centerX" secondItem="pfq-CR-4zA" secondAttribute="centerX" id="TnM-fW-K4T"/>
+                                    <constraint firstAttribute="bottom" secondItem="YRz-A3-YGj" secondAttribute="bottom" constant="5" id="WhK-Su-m1o"/>
+                                    <constraint firstItem="YRz-A3-YGj" firstAttribute="width" secondItem="nad-X4-URu" secondAttribute="width" id="XE0-Pu-Ch1"/>
+                                    <constraint firstItem="nad-X4-URu" firstAttribute="top" secondItem="gdb-fC-mVY" secondAttribute="top" id="but-wl-Eia"/>
+                                    <constraint firstItem="gdb-fC-mVY" firstAttribute="leading" secondItem="LJp-4p-0FQ" secondAttribute="leading" id="qVO-sg-lqh"/>
+                                    <constraint firstAttribute="trailing" secondItem="gdb-fC-mVY" secondAttribute="trailing" constant="15" id="qf9-ib-RsS"/>
+                                    <constraint firstItem="gdb-fC-mVY" firstAttribute="height" secondItem="nad-X4-URu" secondAttribute="height" id="sIe-5r-t0B"/>
+                                    <constraint firstItem="gdb-fC-mVY" firstAttribute="width" secondItem="nad-X4-URu" secondAttribute="width" id="tGv-2i-7te"/>
+                                    <constraint firstItem="gdb-fC-mVY" firstAttribute="top" secondItem="IbT-v7-MU3" secondAttribute="top" constant="5" id="vrG-gr-sVv"/>
+                                    <constraint firstItem="nad-X4-URu" firstAttribute="bottom" secondItem="gdb-fC-mVY" secondAttribute="bottom" id="yEJ-Bn-4Uk"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qLw-Yg-Zop" customClass="DesignableButton" customModule="TH_PopQuiz" customModuleProvider="target">
+                                <rect key="frame" x="73" y="518" width="174" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="1XG-23-w5L"/>
+                                    <constraint firstAttribute="height" constant="42" id="M4S-aa-Itk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                <state key="normal" title="Remove 2" backgroundImage="BlueMediumButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="removeTwoOptions:" destination="80c-wD-fuJ" eventType="touchUpInside" id="phu-Yd-Wda"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18823529410000001" green="0.18823529410000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="v9b-YY-rvj" secondAttribute="trailing" constant="-16" id="7qV-vI-V9V"/>
+                            <constraint firstAttribute="centerX" secondItem="qLw-Yg-Zop" secondAttribute="centerX" id="Ap5-oy-8Ec"/>
+                            <constraint firstItem="IbT-v7-MU3" firstAttribute="top" secondItem="v9b-YY-rvj" secondAttribute="bottom" id="DFv-Ag-fUq"/>
+                            <constraint firstItem="pYC-zE-MJe" firstAttribute="leading" secondItem="QyW-Fc-8M5" secondAttribute="leading" id="Iou-g4-oyu"/>
+                            <constraint firstItem="qLw-Yg-Zop" firstAttribute="top" secondItem="IbT-v7-MU3" secondAttribute="bottom" constant="3" id="J2H-AU-6nj"/>
+                            <constraint firstItem="pYC-zE-MJe" firstAttribute="top" secondItem="taZ-AP-8hm" secondAttribute="bottom" id="LUF-dA-Iv8"/>
+                            <constraint firstItem="vN9-nY-Icf" firstAttribute="top" secondItem="pYC-zE-MJe" secondAttribute="bottom" id="Mee-T4-lxa"/>
+                            <constraint firstItem="lyr-jv-X43" firstAttribute="top" secondItem="taZ-AP-8hm" secondAttribute="bottom" id="OSN-a5-I3Z"/>
+                            <constraint firstItem="lyr-jv-X43" firstAttribute="leading" secondItem="QyW-Fc-8M5" secondAttribute="leading" id="PKw-Xh-Y6F"/>
+                            <constraint firstAttribute="trailing" secondItem="pYC-zE-MJe" secondAttribute="trailing" id="QHd-nc-vcM"/>
+                            <constraint firstItem="IbT-v7-MU3" firstAttribute="leading" secondItem="QyW-Fc-8M5" secondAttribute="leadingMargin" constant="-16" id="Vx7-l9-pzc"/>
+                            <constraint firstItem="ftL-9d-xR3" firstAttribute="centerY" secondItem="v9b-YY-rvj" secondAttribute="centerY" id="Wbj-xP-AVp"/>
+                            <constraint firstItem="v9b-YY-rvj" firstAttribute="leading" secondItem="QyW-Fc-8M5" secondAttribute="leadingMargin" constant="-16" id="YHT-7p-UPl"/>
+                            <constraint firstAttribute="centerX" secondItem="ftL-9d-xR3" secondAttribute="centerX" id="YMF-Rc-dRU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IbT-v7-MU3" secondAttribute="trailing" constant="-16" id="YSR-NY-tRz"/>
+                            <constraint firstAttribute="bottom" secondItem="qLw-Yg-Zop" secondAttribute="bottom" constant="8" id="jZG-1U-UjR"/>
+                            <constraint firstItem="v9b-YY-rvj" firstAttribute="top" secondItem="lyr-jv-X43" secondAttribute="bottom" id="tB5-Ko-ADF"/>
+                            <constraint firstAttribute="trailing" secondItem="lyr-jv-X43" secondAttribute="trailing" id="uZN-Xs-Thx"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="gSw-mp-jEw"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="buttonSetContentView" destination="IbT-v7-MU3" id="omj-t4-3Jn"/>
+                        <outlet property="questionView" destination="v9b-YY-rvj" id="VFm-gu-E2w"/>
+                        <outlet property="removeOptionsButton" destination="qLw-Yg-Zop" id="nc6-ca-Qpb"/>
+                        <outlet property="roundIndicatorLabel" destination="ftL-9d-xR3" id="JlB-Uw-wsn"/>
+                        <outlet property="timerView" destination="pfq-CR-4zA" id="DWr-P0-2BB"/>
+                        <outletCollection property="optionGroup" destination="gdb-fC-mVY" collectionClass="NSMutableArray" id="YLT-un-MYd"/>
+                        <outletCollection property="optionGroup" destination="nad-X4-URu" collectionClass="NSMutableArray" id="Meo-RI-wwW"/>
+                        <outletCollection property="optionGroup" destination="YRz-A3-YGj" collectionClass="NSMutableArray" id="qjC-6O-Y8L"/>
+                        <outletCollection property="optionGroup" destination="LJp-4p-0FQ" collectionClass="NSMutableArray" id="V2S-Ch-wgZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xHh-HB-TNY" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1582" y="106"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="BlueMediumButton" width="356" height="93"/>
+        <image name="NextQ" width="80" height="80"/>
+        <image name="PreviousQ" width="80" height="80"/>
+        <image name="QuizHeaderBackground" width="640" height="169"/>
+        <image name="QuizViewBackground" width="640" height="1136"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

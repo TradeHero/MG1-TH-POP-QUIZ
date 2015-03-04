@@ -29,6 +29,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: "SettingsControlTableViewCell", bundle: nil), forCellReuseIdentifier: kTHSettingsControlTableViewCellIdentifier)
         self.tableView.registerNib(UINib(nibName: "SettingsSliderTableViewCell", bundle: nil), forCellReuseIdentifier: kTHSettingsSliderTableViewCellIdentifier)
+        self.tableView.registerNib(UINib(nibName: "SettingsCommonTableViewCell", bundle: nil), forCellReuseIdentifier: kTHSettingsCommonTableViewCellIdentifier)
         // Do any additional setup after loading the view.
         switch kTHGamesServerMode {
         case .Staging:
@@ -104,6 +105,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
                 cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
                 (cell as SettingsControlTableViewCell).configureControlType(.PushNotification)
                 (cell as SettingsControlTableViewCell).delegate = self
+                cell.selectionStyle = .None
 //                UIView.roundView(cell.contentView, onCorner: .BottomLeft | .BottomRight, radius: 5)
                 return cell
             default:
@@ -115,23 +117,31 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
                 cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsSliderTableViewCellIdentifier) as UITableViewCell
                 (cell as SettingsSliderTableViewCell).configureControlType(.BackgroundMusic)
                 (cell as SettingsSliderTableViewCell).delegate = self
+                cell.selectionStyle = .None
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsSliderTableViewCellIdentifier) as UITableViewCell
                 (cell as SettingsSliderTableViewCell).configureControlType(.SoundEffect)
                 (cell as SettingsSliderTableViewCell).delegate = self
+                cell.selectionStyle = .None
                 return cell
             case 2:
                 cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
                 (cell as SettingsControlTableViewCell).configureControlType(.VibrationEffect)
                 (cell as SettingsControlTableViewCell).delegate = self
+                cell.selectionStyle = .None
 //                UIView.roundView(cell.contentView, onCorner: .BottomLeft | .BottomRight, radius: 5)
                 return cell
-//            case 3:
-//                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
-//                (cell as SettingsControlTableViewCell).configureControlType(.NotificationHead)
-//                (cell as SettingsControlTableViewCell).delegate = self
-//                return cell
+            case 3:
+                if(isInternalUser(NetworkClient.sharedClient.user)){
+                    cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsCommonTableViewCellIdentifier) as UITableViewCell
+                    (cell as SettingsCommonTableViewCell).controlTitleLabel.text = "Debug Mode"
+//                    (cell as SettingsCommonTableViewCell).delegate = self
+                    cell.selectionStyle = .Gray
+                    return cell
+                } else{
+                    break;
+                }
             default:
                 break
             }
@@ -148,7 +158,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         case 0:
             return 1
         case 1:
-            return 3
+            return isInternalUser(NetworkClient.sharedClient.user) ? 4 : 3
         default:
             return 0
         }
@@ -171,7 +181,7 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
             switch indexPath.row {
             case 0, 1:
                 return 70
-            case 2:
+            case 2, 3:
                 return 42
             default:
                 break
@@ -192,6 +202,35 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
             return nil
         }
         
+    }
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        switch indexPath.section {
+        case 1:
+            switch indexPath.row {
+            case 3:
+                return indexPath;
+            default:
+                return nil;
+            }
+        default:
+            return nil;
+        }
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch indexPath.section {
+        case 1:
+            switch indexPath.row {
+            case 3:
+                println("tapped debug")
+                let content = UIStoryboard.devStoryboard().instantiateViewControllerWithIdentifier("DevelopmentViewController") as? UIViewController
+                self.presentViewController(content!, animated: true, completion: nil)
+            default:
+                break;
+            }
+        default:
+            break;
+        }
+
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

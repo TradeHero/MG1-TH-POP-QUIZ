@@ -36,14 +36,13 @@ class LoginViewController: UIViewController {
         hud.showInWindow()
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView(HUDStyle:hud.style)
         hud.textLabel.text = "Logging in..."
-        FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes"], allowLoginUI: true) {
-            [unowned self] (session, state, error) -> Void in
+        
+        FacebookService.sharedService.FacebookConnectWithSDK { (session, error) -> () in
             if let e = error{
                 
             }
             
             let accessToken = session.accessTokenData.accessToken;
-            
             NetworkClient.sharedClient.loginUserWithFacebookAuth(accessToken, loginSuccessHandler: {user in
                 //succeed
                 }) {
@@ -51,43 +50,7 @@ class LoginViewController: UIViewController {
                     hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
                     hud.textLabel.text = "\($0)"
             }
-
-            
         }
-//        let facebookTypeAccount = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
-//        
-//        accountStore.requestAccessToAccountsWithType(facebookTypeAccount, options: [ACFacebookAppIdKey : kTHFacebookAppID]) { [unowned self] (granted, error) -> Void in
-//            
-//            if granted {
-//                if let accts = self.accountStore.accountsWithAccountType(facebookTypeAccount) as? [ACAccount] {
-//                    if accts.count > 1 {
-//                        hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
-//                        hud.textLabel.text = "You have more than one Facebook account linked, please make sure that you only have on Facebook account connected."
-//                    }
-//                    self.facebookAccount = accts.last
-//                    if let fb = self.facebookAccount {
-//                        let accessToken = self.facebookAccount.credential.oauthToken
-//                        NetworkClient.sharedClient.loginUserWithFacebookAuth(accessToken, loginSuccessHandler: {user in
-//                            //succeed
-//                            }) {
-//                            //failure
-//                            hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
-//                            hud.textLabel.text = "\($0)"
-//                        }
-//                    } else {
-//                        hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
-//                        hud.textLabel.text = "Facebook token does not exist."
-//                    }
-//                }
-//            } else {
-//                if let e = error {
-//                    hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
-//                    hud.textLabel.text = "Please login to Facebook from Settings >> Facebook, you should only have one Facebook account logged in at one time."
-//                    hud.dismissAfterDelay(5, animated: true)
-//                }
-//            }
-//        }
-        
     }
     
 }

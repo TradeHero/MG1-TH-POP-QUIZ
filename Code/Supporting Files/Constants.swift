@@ -102,6 +102,8 @@ let kTHSettingsControlTableViewCellIdentifier = "\(kConstantPrefix)SettingsContr
 
 let kTHSettingsSliderTableViewCellIdentifier = "\(kConstantPrefix)SettingsSliderTableViewCellIdentifier"
 
+let kTHSettingsCommonTableViewCellIdentifier = "\(kConstantPrefix)SettingsCommonTableViewCellIdentifier"
+
 let kTHNotificationTableViewCellIdentifier = "\(kConstantPrefix)NotificationTableViewCellIdentifier"
 
 let kTHMusicChooserTableViewCellIdentifier = "\(kConstantPrefix)MusicChooserTableViewCellIdentifier"
