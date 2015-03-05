@@ -8,6 +8,7 @@
 
 import UIKit
 import Argo
+import Runes
 
 struct User: JSONDecodable, DebugPrintable {
     let userId: Int

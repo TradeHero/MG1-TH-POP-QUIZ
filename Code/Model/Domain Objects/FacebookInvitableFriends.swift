@@ -7,6 +7,7 @@
 //
 
 import Argo
+import Runes
 
 struct FacebookInvitableFriend: JSONDecodable, DebugPrintable {
     let inviteToken: String

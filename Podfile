@@ -9,7 +9,7 @@ use_frameworks!
 source 'https://github.com/CocoaPods/Specs.git'
 
 pod 'Alamofire', '~> 1.1.4'
-pod 'Argo'
+pod 'Argo', :git => 'https://github.com/thoughtbot/Argo', :branch => 'swift-1.1'
 pod 'ChatHeads', '~> 1.0'
 pod 'DZNSegmentedControl', '~> 1.2.2'
 pod 'EGOCache', '~> 2.1'

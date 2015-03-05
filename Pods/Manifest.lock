@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (1.1.4)
-  - Argo (0.2)
+  - Argo (0.3.4):
+    - Runes
   - Bolts (1.1.4)
   - CAAnimationBlocks (0.0.1)
   - ChatHeads (1.0):
@@ -49,6 +50,7 @@ PODS:
   - Realm (0.90.6):
     - Realm/Headers (= 0.90.6)
   - Realm/Headers (0.90.6)
+  - Runes (1.1.1)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
@@ -58,7 +60,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 1.1.4)
-  - Argo
+  - Argo (from `https://github.com/thoughtbot/Argo`, branch `swift-1.1`)
   - ChatHeads (~> 1.0)
   - DZNSegmentedControl (~> 1.2.2)
   - EGOCache (~> 2.1)
@@ -79,6 +81,9 @@ DEPENDENCIES:
   - WYPopoverController (~> 0.3.7)
 
 EXTERNAL SOURCES:
+  Argo:
+    :branch: swift-1.1
+    :git: https://github.com/thoughtbot/Argo
   ExSwift:
     :branch: master
     :git: https://github.com/pNre/ExSwift
@@ -86,6 +91,9 @@ EXTERNAL SOURCES:
     :git: http://github.com/gin0606/KKProgressTimer.git
 
 CHECKOUT OPTIONS:
+  Argo:
+    :commit: f31f5f3439d1ee59206e29cfaff4f79af077587c
+    :git: https://github.com/thoughtbot/Argo
   ExSwift:
     :commit: 87c8a9a87df0a4953ee1c7678199d1917a7c8799
     :git: https://github.com/pNre/ExSwift
@@ -95,7 +103,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 524225da382071ee3e6d0badd0ee4b4dc36740de
-  Argo: 2a9f06b8967573caa24e1237226020b8da875a57
+  Argo: 8aa16e20d4796306d36d44009cc8333a647c42c5
   Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
   CAAnimationBlocks: 981bfca79ac481f07957aa8357885e620637f926
   ChatHeads: 1b66a3ca6ae25e6ce04eb64485cf96b43b74bbcc
@@ -114,6 +122,7 @@ SPEC CHECKSUMS:
   PromiseKit: 4844db4448b4e387845e702b738cd87433fc02fd
   PureLayout: 63a3257320223e8edddcd3afb407445f85a6bf74
   Realm: 6c3facc11964ab9f828f47de6d0e9bf9c4d9c818
+  Runes: 5268f17b84bd4522494a3ab3291f18c84e3e9924
   SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   SKBounceAnimation: a47c30f67d3e4b948b1823ce5957d72d4382dd73
   SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
