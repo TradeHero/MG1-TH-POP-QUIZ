@@ -105,23 +105,39 @@ class FacebookService {
     }
 
     func getInvitableFriends(completionHandler: [FacebookInvitableFriend] -> ()) {
-        FBRequestConnection.startWithGraphPath("/me/invitable_friends", parameters: nil, HTTPMethod: "GET")
-        {
-            (conn, result, error) -> Void in
-            if let res = result as? [String:AnyObject] {
-                let data: AnyObject? = res["data"]
-                if let d = data as? [AnyObject] {
-                    var invitableFriends = [FacebookInvitableFriend]()
-                    for rawFriend in d {
-                        if let friendConverted = FacebookInvitableFriend.decode(JSONValue.parse(rawFriend)) {
-                            invitableFriends.append(friendConverted)
+        func FBRequestFriends(completionHandler: [FacebookInvitableFriend] -> ()){
+            FBRequestConnection.startWithGraphPath("/me/invitable_friends", parameters: nil, HTTPMethod: "GET")
+                {
+                    (conn, result, error) -> Void in
+                    if let res = result as? [String:AnyObject] {
+                        let data: AnyObject? = res["data"]
+                        if let d = data as? [AnyObject] {
+                            var invitableFriends = [FacebookInvitableFriend]()
+                            for rawFriend in d {
+                                if let friendConverted = FacebookInvitableFriend.decode(JSONValue.parse(rawFriend)) {
+                                    invitableFriends.append(friendConverted)
+                                }
+                            }
+                            completionHandler(invitableFriends);
                         }
                     }
-                    completionHandler(invitableFriends);
-                }
             }
         }
-
+        if(FBSession.activeSession().state == .CreatedTokenLoaded){
+            if(!FBSession.activeSession().isOpen){
+                dispatch_async(dispatch_get_main_queue(), {
+                    FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes"], allowLoginUI: false, completionHandler: {
+                        (session, state, error) -> Void in
+                        FBRequestFriends(completionHandler)
+                        }
+                    )
+                    return
+                })
+            }
+        } else {
+            FBRequestFriends(completionHandler)
+        }
+        
     }
 
     func presentInviteFriendsDialog(message: String!, friendsToInvite: [FacebookInvitableFriend]) {

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "09F5EB36291C700F5C684852"
+               BlueprintIdentifier = "43A7A252CB5CAA84794133F1"
                BuildableName = "EGOCache.framework"
                BlueprintName = "Pods-EGOCache"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "09F5EB36291C700F5C684852"
+            BlueprintIdentifier = "43A7A252CB5CAA84794133F1"
             BuildableName = "EGOCache.framework"
             BlueprintName = "Pods-EGOCache"
             ReferencedContainer = "container:Pods.xcodeproj">

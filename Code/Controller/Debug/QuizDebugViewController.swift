@@ -11,6 +11,7 @@ import LDProgressView
 import JGProgressHUD
 import KKProgressTimer
 import PureLayout
+import ExSwift
 
 class QuizDebugViewController: UIViewController {
 
@@ -77,7 +78,11 @@ class QuizDebugViewController: UIViewController {
         let optionSet = question.options.allOptions
 
         var optionButtonSet = self.optionGroup
-
+        for button in optionButtonSet {
+            button.resetButton()
+            button.enable()
+        }
+        
         var i = 0
         for option in optionSet {
             optionButtonSet[i].configureButtonWithContent(option.stringContent, imageContent: option.imageContent)
@@ -157,9 +162,32 @@ class QuizDebugViewController: UIViewController {
 
     @IBAction func clickNext(sender: AnyObject) {
         setupNextQuestion()
+        println("\(currentQuestionIndex)")
     }
 
     @IBAction func clickPrevious(sender: AnyObject) {
         setupPreviousQuestion()
+        println("\(currentQuestionIndex)")
+
     }
+
+    
+    @IBAction private func optionSelected(sender: OptionButton) {
+        for button in self.optionGroup {
+            if sender !== button {
+                button.shrink()
+            }
+        }
+        
+        if sender.is_answer {
+            sender.configureAsCorrect()
+            playCorrectSound()
+        } else {
+            sender.configureAsFalse()
+            playWrongSound()
+            vibrateIfAllowed()
+        }
+    }
+
+    
 }

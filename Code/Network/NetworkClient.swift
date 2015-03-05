@@ -96,7 +96,7 @@ class NetworkClient {
                 errorHandler(responseError)
                 return
             }
-
+                    
             if response?.statusCode == 200 {
                 self.saveCredentials(accessToken)
 
@@ -113,6 +113,9 @@ class NetworkClient {
                 }
             } else if response?.statusCode == 417 {
                 let err = NSError(domain: "com.mymanisku.TH-PopQuiz", code: 417, userInfo: ["message": "Expired access token"])
+                errorHandler(err)
+            } else {
+                let err = NSError(domain: "com.mymanisku.TH-PopQuiz", code: response!.statusCode, userInfo: [NSLocalizedDescriptionKey: "\(content)"])
                 errorHandler(err)
             }
         }

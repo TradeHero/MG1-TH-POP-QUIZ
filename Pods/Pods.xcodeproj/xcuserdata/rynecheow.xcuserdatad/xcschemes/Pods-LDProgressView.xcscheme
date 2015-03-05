@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "31D81F7EF36B0F05B06E05F1"
+               BlueprintIdentifier = "0C0F5E3F61FC3F7A0F2918B4"
                BuildableName = "LDProgressView.framework"
                BlueprintName = "Pods-LDProgressView"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "31D81F7EF36B0F05B06E05F1"
+            BlueprintIdentifier = "0C0F5E3F61FC3F7A0F2918B4"
             BuildableName = "LDProgressView.framework"
             BlueprintName = "Pods-LDProgressView"
             ReferencedContainer = "container:Pods.xcodeproj">

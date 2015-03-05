@@ -8,6 +8,7 @@ PODS:
     - SKBounceAnimation
   - DZNSegmentedControl (1.2.2)
   - EGOCache (2.1)
+  - ExSwift (0.1.9)
   - Facebook-iOS-SDK (3.23.0):
     - Bolts (~> 1.0)
   - FormatterKit (1.8.0):
@@ -61,6 +62,7 @@ DEPENDENCIES:
   - ChatHeads (~> 1.0)
   - DZNSegmentedControl (~> 1.2.2)
   - EGOCache (~> 2.1)
+  - ExSwift (from `https://github.com/pNre/ExSwift`, branch `master`)
   - Facebook-iOS-SDK (~> 3.23.0)
   - FormatterKit (~> 1.8.0)
   - GPUImage (~> 0.1.6)
@@ -77,10 +79,16 @@ DEPENDENCIES:
   - WYPopoverController (~> 0.3.7)
 
 EXTERNAL SOURCES:
+  ExSwift:
+    :branch: master
+    :git: https://github.com/pNre/ExSwift
   KKProgressTimer:
     :git: http://github.com/gin0606/KKProgressTimer.git
 
 CHECKOUT OPTIONS:
+  ExSwift:
+    :commit: 87c8a9a87df0a4953ee1c7678199d1917a7c8799
+    :git: https://github.com/pNre/ExSwift
   KKProgressTimer:
     :commit: 575be455a23e22c2646c09726d1219e363f36aa4
     :git: http://github.com/gin0606/KKProgressTimer.git
@@ -93,6 +101,7 @@ SPEC CHECKSUMS:
   ChatHeads: 1b66a3ca6ae25e6ce04eb64485cf96b43b74bbcc
   DZNSegmentedControl: daa91d107904f7433e73852477f08450575be331
   EGOCache: bf414333c425fe47f5182351d1dd47ebf72d8352
+  ExSwift: 66c4dcef758ad184556954610ecadcabad3c1b36
   Facebook-iOS-SDK: 3d65f685348b789e46a9aacf92bfa85b60b63755
   FormatterKit: 547a808c41172136a3f3acb424ac9361d38bb32f
   GPUImage: cecb0830bb9428f50192042e3c7b53810f51388e
