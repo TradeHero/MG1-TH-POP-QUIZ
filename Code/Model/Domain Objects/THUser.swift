@@ -7,6 +7,32 @@
 //
 
 import UIKit
+import Argo
+
+struct User: JSONDecodable, DebugPrintable {
+    let userId: Int
+    let firstName: String
+    let lastName: String
+    let displayName: String
+    let pictureURL: String?
+    
+    static func decode(j: JSONValue) -> User? {
+        return self.create
+            <^> j <| "id"
+            <*> j <|? "firstName"
+            <*> j <|? "lastName"
+            <*> j <| "displayName"
+            <*> j <|? "picture"
+    }
+    
+    static func create(id: Int)(firstName: String?)(lastName: String?)(displayName: String)(picture: String?) -> User {
+        return User(userId: id, firstName: firstName ?? "", lastName: lastName ?? "", displayName: displayName, pictureURL: picture)
+    }
+    
+     var debugDescription: String {
+        return "{\nTHUser\n======\nUser ID: \(self.userId)\nDisplay name: \(self.displayName)\nFirst name: \(self.firstName)\nLast name: \(self.lastName)\nProfile picture URL: \(self.pictureURL)\n}\n"
+    }
+}
 
 class THUser: NSObject, NSCoding {
 

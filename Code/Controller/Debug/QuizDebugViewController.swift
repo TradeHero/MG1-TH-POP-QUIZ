@@ -48,7 +48,7 @@ class QuizDebugViewController: UIViewController {
 
     func bindQuestionSet(questionSet: [QuestionDTO]) {
         self.questionSet = questionSet
-        self.questionSet.shuffle()
+//        self.questionSet.shuffle()
     }
 
 

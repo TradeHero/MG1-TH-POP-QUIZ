@@ -31,6 +31,14 @@ struct THCache {
         return nil
     }
 
+    static func cacheUser(user: User) {
+        let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(user.userId)"
+        EGOCache.globalCache().setObject(user, forKey: userCacheKey)
+    }
+    
+    static func getCachedUser(userId:Int) -> User?{
+        return nil
+    }
 
     //Friends List
     static func saveFriendsListToCache(facebookFriends: [THUserFriend], tradeheroFriends: [THUserFriend]) {
