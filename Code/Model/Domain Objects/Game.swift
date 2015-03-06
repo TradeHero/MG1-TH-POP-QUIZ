@@ -14,9 +14,9 @@ final class Game {
 
     private var createdAtUTCStr: String!
 
-    var initiatingPlayer: THUser!
+    var initiatingPlayer: User!
 
-    var opponentPlayer: THUser!
+    var opponentPlayer: User!
 
     var initiatingPlayerID: Int!
 
@@ -63,9 +63,9 @@ final class Game {
         self.questionSet = questionSet
     }
 
-    var selfUser: THUser!
+    var selfUser: User!
 
-    var awayUser: THUser!
+    var awayUser: User!
 
     var completedAt: NSDate! {
         if isGameCompletedByBothPlayer {
@@ -273,7 +273,7 @@ final class Game {
         }
     }
 
-    func selfPlayerForGame(userId: Int) -> THUser! {
+    func selfPlayerForGame(userId: Int) -> User! {
         if userId == self.initiatingPlayerID {
             return self.initiatingPlayer
         } else if userId == self.opponentPlayerID {
@@ -283,7 +283,7 @@ final class Game {
         return nil
     }
 
-    func opponentPlayerForGame(user: THUser) -> THUser! {
+    func opponentPlayerForGame(user: User) -> User! {
         if user.userId == self.initiatingPlayerID {
             return self.opponentPlayer
         } else if user.userId == self.opponentPlayerID {

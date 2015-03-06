@@ -44,8 +44,8 @@ class GameLoadingSceneViewController: UIViewController {
     private var user = NetworkClient.sharedClient.user
     private var game: Game!
 
-    private var player: THUser!
-    private var opponent: THUser!
+    private var player: User!
+    private var opponent: User!
 
     private var timer: NSTimer!
     private var startTime: NSDate!

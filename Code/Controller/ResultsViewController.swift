@@ -28,8 +28,8 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var nextOrRematchButton: UIButton!
     private var game: Game!
 
-    private var player: THUser!
-    private var opponent: THUser!
+    private var player: User!
+    private var opponent: User!
 
     private var playerResult: GameResult!
     private var opponentResult: GameResult!

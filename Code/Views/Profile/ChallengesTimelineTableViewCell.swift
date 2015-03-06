@@ -24,7 +24,7 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
 
     private var game: Game!
 
-    private var opponent: THUser!
+    private var opponent: User!
 
     private var playerResult: GameResult!
     private var opponentResult: GameResult!
@@ -34,7 +34,7 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
             self.game = game
             self.opponent = game.awayUser
 
-            if game.opponentPlayer === game.awayUser {
+            if game.opponentPlayer == game.awayUser {
                 self.opponentResult = game.opponentPlayerResult
                 self.playerResult = game.initiatingPlayerResult
             } else {
@@ -46,7 +46,7 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
             setWinLoseLabelAttrString()
             setDotColor()
 
-            opponentImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL)) {
+            opponentImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL!)) {
                 [unowned self] (image, _, _, _) in
                 self.opponentImageView.image = image.centerCropImage()
             }

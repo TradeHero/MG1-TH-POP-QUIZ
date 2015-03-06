@@ -110,7 +110,7 @@ let kTHMusicChooserTableViewCellIdentifier = "\(kConstantPrefix)MusicChooserTabl
 // MARK:- cache keys
 let kTHUserFriendsCacheStoreKey = "\(kConstantPrefix)UserFriendsCacheStore"
 
-let kTHStaffUserCacheStoreKey = "\(kConstantPrefix)StaffUserCacheStore"
+let kTHStaffUserCacheStoreKey = "\(kConstantPrefix)StaffUserCacheStoreKey"
 
 let kTHUserCacheStoreKeyPrefix = "\(kConstantPrefix)UserCacheStoreID"
 
@@ -258,7 +258,7 @@ var staffs_g: [StaffInfo] = {
     return staffInfo
 }()
 
-func isInternalUser(user: THUser) -> Bool {
+func isInternalUser(user: User) -> Bool {
     var users = staffs_g.filter({ $0.id == user.userId })
     return users.count == 1
 }

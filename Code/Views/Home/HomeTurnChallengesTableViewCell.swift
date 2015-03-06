@@ -52,8 +52,8 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         }
     }
 
-    var player: THUser!
-    var opponent: THUser!
+    var player: User!
+    var opponent: User!
 
     var delegate: HomeTurnChallengesTableViewCellDelegate!
     @IBAction func acceptChallengeAction(sender: AnyObject) {
@@ -92,7 +92,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         }
 
         self.challengerDisplayNameLabel.text = opponent!.displayName
-        self.challengerImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL)) {
+        self.challengerImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL!)) {
             [unowned self] (image, _, _, _) in
             if let i = image {
                 self.challengerImageView.image = i.centerCropImage()

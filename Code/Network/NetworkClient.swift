@@ -54,9 +54,9 @@ class NetworkClient {
     private var manager: Alamofire.Manager!
 
     /// Authenticated user
-    private var authenticatedUser: THUser!
+    private var authenticatedUser: User!
 
-    var user: THUser! {
+    var user: User! {
         get {
             return authenticatedUser
         }
@@ -77,7 +77,7 @@ class NetworkClient {
     :param: accessToken Facebook access token from active facebook session
     :param: loginSuccessHandler Takes a THUser and perform operation
     */
-    func loginUserWithFacebookAuth(accessToken: String, loginSuccessHandler: (THUser -> ())!, errorHandler: NSError -> ()) {
+    func loginUserWithFacebookAuth(accessToken: String, loginSuccessHandler: (User -> ())!, errorHandler: NSError -> ()) {
         var param: [String:AnyObject] = ["clientType": 1, "clientVersion": "3.1.0", "facebook_access_token": accessToken]
         let auth = "\(THAuthFacebookPrefix) \(accessToken)"
 
@@ -104,10 +104,10 @@ class NetworkClient {
                 let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
 
                 if let profileDTODict = profileDTOPart as? [String:AnyObject] {
-                    var loginUser = THUser(profileDTO: profileDTODict)
+                    var loginUser = User.decode(JSONValue.parse(profileDTODict))!
                     println("Signed in as \(loginUser)")
                     self.authenticatedUser = loginUser
-                    let userInfo = ["user": loginUser]
+                    let userInfo = ["user": loginUser.dictionaryRepresentation]
                     NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLoginSuccessfulNotificationKey, object: self, userInfo: userInfo)
                     loginSuccessHandler(loginUser)
                 }
@@ -151,7 +151,7 @@ class NetworkClient {
                 }
             }
         }
-        //debugPrintln(r)
+        debugPrintln(r)
     }
 
     /**
@@ -456,7 +456,7 @@ class NetworkClient {
                 debugPrintln("Parsing \(staffList.count) staff users..")
                 for staffData in staffList {
                     let staffUserDTO = staffData as [String:AnyObject]
-                    let user = THUser(profileDTO: staffUserDTO)
+                    let user = User.decode(JSONValue.parse(staffUserDTO))!
                     for staffinfo in staffs_g {
                         if staffinfo.id == user.userId {
                             staffArr.append(StaffUser(user: user, funnyName: staffinfo.funnyName))
@@ -474,38 +474,8 @@ class NetworkClient {
         debugPrintln(r)
     }
 
-    /**
-    Fetch all static questions
     
-    :param: userId User ID to fetch
-    :param: completionHandler Handles fetched user if succeed
-    */
-    func fetchStaticQuestions(errorHandler: NSError -> (), completionHandler: [QuestionDTO] -> ()) {
-        if (!isInternalUser(self.authenticatedUser)) {
-            errorHandler(NSError(domain: "com.mymanisku.THPopQuiz", code: 1002, userInfo: [NSLocalizedDescriptionKey: "Non-internal user attempted retrieval"]))
-        }
-
-        let r = self.request(.GET, "\(THGameAPIBaseURL)/staticAll", parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            if let e = error {
-                errorHandler(e)
-                return
-            }
-            var questions = [QuestionDTO]()
-            if let d = content as? [AnyObject] {
-                for rawQuestion in d {
-                    if let question = QuestionDTO.decode(JSONValue.parse(rawQuestion)) {
-                        questions.append(question)
-                    }
-                }
-
-            }
-            completionHandler(questions)
-        }
-        debugPrintln(r)
-    }
-
-
+    
 
     // MARK: Simple functions
 
@@ -555,10 +525,10 @@ class NetworkClient {
     :param: userId User ID to fetch
     :param: completionHandler Handles fetched user if succeed
     */
-    func fetchUser(userId: Int, force: Bool = false, errorHandler: NSError -> (), completionHandler: THUser! -> ()) {
+    func fetchUser(userId: Int, force: Bool = false, errorHandler: NSError -> (), completionHandler: User! -> ()) {
 
         if !force {
-            if let user = THCache.getUserFromCache(userId) {
+            if let user = THCache.getCachedUser(userId) {
                 completionHandler(user)
                 return
             }
@@ -571,14 +541,14 @@ class NetworkClient {
                 return
             }
             if let profileDTODict = content as? [String:AnyObject] {
-                var user = THUser(profileDTO: profileDTODict)
-                THCache.saveUserToCache(user, userId: userId)
+                var user = User.decode(JSONValue.parse(profileDTODict))!
+                THCache.cacheUser(user)
                 completionHandler(user)
             }
         }
     }
 
-    func refreshUser(user: THUser, completionHandler: THUser -> ()) {
+    func refreshUser(user: User, completionHandler: User -> ()) {
         self.fetchUser(user.userId, force: true, errorHandler: {
             error in
             debugPrintln(error)
@@ -714,8 +684,6 @@ class NetworkClient {
             url = "\(url)?share=true"
         }
 
-//        debugPrintln("Fetching device token with user ID: \(id)...")
-
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             if let e = error {
@@ -727,6 +695,72 @@ class NetworkClient {
 
         debugPrintln(r)
     }
+    
+    //MARK: Debug Items
+    
+    /**
+    Fetch all static questions
+    
+    :param: userId User ID to fetch
+    :param: completionHandler Handles fetched user if succeed
+    */
+    func fetchStaticQuestions(errorHandler: NSError -> (), completionHandler: [QuestionDTO] -> ()) {
+        if (!isInternalUser(self.authenticatedUser)) {
+            errorHandler(NSError(domain: "com.mymanisku.THPopQuiz", code: 1002, userInfo: [NSLocalizedDescriptionKey: "Non-internal user attempted retrieval"]))
+        }
+        
+        let r = self.request(.GET, "\(THGameAPIBaseURL)/debugStatic", parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+            _, response, content, error in
+            if let e = error {
+                errorHandler(e)
+                return
+            }
+            var questions = [QuestionDTO]()
+            if let d = content as? [AnyObject] {
+                for rawQuestion in d {
+                    if let question = QuestionDTO.decode(JSONValue.parse(rawQuestion)) {
+                        questions.append(question)
+                    }
+                }
+                
+            }
+            completionHandler(questions)
+        }
+        debugPrintln(r)
+    }
+    
+    /**
+    Fetch all static questions
+    
+    
+    :param: completionHandler Handles fetched user if succeed
+    */
+    func fetchImageQuestions(errorHandler: NSError -> (), completionHandler: [QuestionDTO] -> ()) {
+        if (!isInternalUser(self.authenticatedUser)) {
+            errorHandler(NSError(domain: "com.mymanisku.THPopQuiz", code: 1002, userInfo: [NSLocalizedDescriptionKey: "Non-internal user attempted retrieval"]))
+        }
+        
+        let r = self.request(.GET, "\(THGameAPIBaseURL)/debugImage", parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+            _, response, content, error in
+            if let e = error {
+                errorHandler(e)
+                return
+            }
+            var questions = [QuestionDTO]()
+            if let d = content as? [AnyObject] {
+                for rawQuestion in d {
+                    if let question = QuestionDTO.decode(JSONValue.parse(rawQuestion)) {
+                        questions.append(question)
+                    }
+                }
+                
+            }
+            completionHandler(questions)
+        }
+        debugPrintln(r)
+    }
+    
+
 
     // MARK:- Class functions
 

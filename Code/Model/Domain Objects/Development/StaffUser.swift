@@ -8,27 +8,40 @@
 
 import UIKit
 
-final class StaffUser: THUser {
+struct StaffUser {
 
+    let user: User
+    
+    var userId: Int {
+        return user.userId
+    }
+    
+    var firstName: String {
+        return user.firstName
+    }
+
+    var lastName: String {
+        return user.lastName
+    }
+
+    var displayName: String {
+        return user.displayName
+    }
+
+    var pictureURL: String? {
+        return user.pictureURL
+    }
+
+    
     var funnyName: String
 
-    init(profileDTO: [String:AnyObject], funnyName: String) {
+    init(user: User, funnyName: String) {
+        self.user = user
         self.funnyName = funnyName
-        super.init(profileDTO: profileDTO)
     }
 
-    init(user: THUser, funnyName: String) {
-        self.funnyName = funnyName
-        super.init(userId: user.userId, pictureURL: user.pictureURL, firstName: user.firstName, lastName: user.lastName, displayName: user.displayName)
-    }
 
-    override func encodeWithCoder(aCoder: NSCoder) {
-        super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(self.funnyName, forKey: "")
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        self.funnyName = aDecoder.decodeObjectForKey("") as String
-        super.init(coder: aDecoder)
+    var dictionaryRepresentation: [String: AnyObject] {
+        return ["id" : userId, "firstName": firstName, "lastName": lastName, "displayName": displayName, "picture" : pictureURL ?? NSNull(), "funnyName" : funnyName];
     }
 }

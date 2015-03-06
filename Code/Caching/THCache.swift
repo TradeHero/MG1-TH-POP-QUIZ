@@ -8,6 +8,8 @@
 
 import UIKit
 import EGOCache
+import Runes
+import Argo
 
 struct THCache {
     static let kFBFriendsDictionaryKey = "FBFriendsDictionaryKey"
@@ -16,29 +18,20 @@ struct THCache {
     static func objectExistForCacheKey(key: String) -> Bool {
         return EGOCache.globalCache().objectForKey(key) != nil
     }
-    //User
-    static func saveUserToCache(user: THUser, userId: Int) {
-        let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(userId)"
-        EGOCache.globalCache().setObject(user, forKey: userCacheKey)
-    }
 
-    static func getUserFromCache(userId: Int) -> THUser? {
+    static func cacheUser(user: User) {
+        let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(user.userId)"
+        EGOCache.globalCache().setObject(user.dictionaryRepresentation, forKey: userCacheKey)
+    }
+    
+    static func getCachedUser(userId:Int) -> User?{
         let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(userId)"
         let object = EGOCache.globalCache().objectForKey(userCacheKey)
-        if let user = object as? THUser {
-            return user
+        if let uJSON = object as? [String:AnyObject] {
+            return User.decode(JSONValue.parse(uJSON))
         }
         return nil
     }
-
-//    static func cacheUser(user: User) {
-//        let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(user.userId)"
-//        EGOCache.globalCache().setObject(user, forKey: userCacheKey)
-//    }
-//    
-//    static func getCachedUser(userId:Int) -> User?{
-//        return nil
-//    }
 
     //Friends List
     static func saveFriendsListToCache(facebookFriends: [THUserFriend], tradeheroFriends: [THUserFriend]) {
@@ -90,18 +83,31 @@ struct THCache {
     }
 
     static func saveStaffListToCache(staffList: [StaffUser]) {
-        EGOCache.globalCache().setObject(staffList, forKey: kTHStaffUserCacheStoreKey)
+        var staffDicts = [[String:AnyObject]]()
+        for staff in staffList {
+            staffDicts.append(staff.dictionaryRepresentation)
+        }
+        
+        EGOCache.globalCache().setObject(staffDicts, forKey: kTHStaffUserCacheStoreKey)
         debugPrintln("\(staffList.count) staff cached.")
     }
 
     static func getStaffListFromCache() -> [StaffUser] {
         let object = EGOCache.globalCache().objectForKey(kTHStaffUserCacheStoreKey)
 
-        if let arr = object as? [StaffUser] {
-            debugPrintln("Retrieved \(arr.count) staff from cache.")
-            return arr
+        var staffUsers = [StaffUser]()
+        
+        if let arr = object as? [[String:AnyObject]] {
+            for staffDict in arr {
+                if let u = User.decode(JSONValue.parse(staffDict)){
+                    let staffU = StaffUser(user: u, funnyName: (staffDict["funnyName"] as? String) ?? "")
+                    staffUsers.append(staffU)
+
+                }
+            }
         }
-        return []
+        debugPrintln("Retrieved \(staffUsers.count) staff from cache.")
+        return staffUsers
     }
 
 

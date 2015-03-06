@@ -99,9 +99,9 @@ class QuizViewController: UIViewController {
 
     private var didRemoveOptions: Bool = false
 
-    private var player: THUser!
+    private var player: User!
 
-    private var opponent: THUser!
+    private var opponent: User!
 
     private var opponentScore: Int = 0
 
@@ -606,7 +606,7 @@ class QuizViewController: UIViewController {
         self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: Float(MAX_ALLOWED_TIME - current_timeLeft), correct: isCorrect, score: score))
     }
 
-    func bindGameAndUsers(game: Game, player: THUser, opponent: THUser) {
+    func bindGameAndUsers(game: Game, player: User, opponent: User) {
         self.game = game
 
         if game.initiatingPlayer == opponent {

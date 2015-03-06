@@ -46,8 +46,8 @@ class WinLoseViewController: UIViewController {
 
     private var opponentScore = 0
 
-    private var selfUser: THUser!
-    private var opponentUser: THUser!
+    private var selfUser: User!
+    private var opponentUser: User!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,7 +119,7 @@ class WinLoseViewController: UIViewController {
         losingRay.alpha = 1
     }
 
-    func bindResult(game: Game, selfUser: THUser, opponentUser: THUser) {
+    func bindResult(game: Game, selfUser: User, opponentUser: User) {
         self.game = game
 
         self.selfUser = selfUser

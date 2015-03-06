@@ -9,6 +9,77 @@
 import Argo
 import Runes
 
+/// Type of questions, which might make question differs in presentation style.
+///
+/// - LogoType: Questions that presents based on logo-guessing mechanics. must contain an image.
+/// - GraphType: Questions that presents based on graphs of a certain interval or demographic, must contain an image.
+/// - TextualType: Questions that presents on a text-based (non-imagerial) form.
+///
+
+enum QuestionType: Int {
+    case UnknownType = 0
+    case LogoType
+    case TimedObfuscatorType
+    case TextualType
+
+    func description() -> String {
+        switch self {
+        case .LogoType:
+            return "Logo type"
+        case .TimedObfuscatorType:
+            return "Timed Obfuscator type"
+        case .TextualType:
+            return "Textual type"
+        case .UnknownType:
+            return "Unknown type"
+        }
+    }
+}
+
+enum QuestionCategory: Int {
+    case UnknownCategory = 0
+    case LogoToNameCategory
+    case LogoToTickerSymbolCategory
+    case NameToPriceRangeCategory
+    case NameToMarketCapRangeCategory
+    case PriceRangeToCompanyNameCategory
+    case HighestMarketCapCategory
+    case LowestMarketCapCategory
+    case CompanyNameToExchangeSymbolCategory
+    case OddOneOutCategory
+    case CompanyNameToSectorCategory
+    case StaticCategory
+
+    func description() -> String {
+        switch self {
+        case .UnknownCategory:
+            return "Unknown category"
+        case .LogoToNameCategory:
+            return "[1] Logo -> Name"
+        case .LogoToTickerSymbolCategory:
+            return "[2] Logo -> Ticker Symbol"
+        case .NameToPriceRangeCategory:
+            return "[3] Name -> Price Range"
+        case .NameToMarketCapRangeCategory:
+            return "[4] Name -> Market Cap Range"
+        case .PriceRangeToCompanyNameCategory:
+            return "[5] Price Range -> Company name"
+        case .HighestMarketCapCategory:
+            return "[6] Highest Market Cap"
+        case .LowestMarketCapCategory:
+            return "[7] Lowest Market Cap"
+        case .CompanyNameToExchangeSymbolCategory:
+            return "[8] Company name -> Exchange symbol"
+        case .OddOneOutCategory:
+            return "[9] Odd one out"
+        case .CompanyNameToSectorCategory:
+            return "[10] Company Name -> Sector"
+        case .StaticCategory:
+            return "[11] Static questions"
+        }
+    }
+}
+
 struct QuestionDTO: JSONDecodable, DebugPrintable {
     let questionID: Int!
 

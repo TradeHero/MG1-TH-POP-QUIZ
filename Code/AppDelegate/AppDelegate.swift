@@ -11,6 +11,8 @@ import AVFoundation
 import ChatHeads
 import JGProgressHUD
 import FacebookSDK
+import Argo
+import Runes
 
 let kTHGamesServerMode = Mode.Prod
 
@@ -201,8 +203,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         self.becomeFirstResponder()
         let obj = notification.userInfo
         let obj2: AnyObject? = obj!["user"]
-        if let user = obj2 as? THUser {
-
+        if let obj2Dto = obj2 as? [String:AnyObject] {
+            
+            var user = User.decode(JSONValue.parse(obj2Dto))
+            
             var vc: AnyObject! = UIStoryboard.mainStoryboard().instantiateInitialViewController()
             if let v = vc as? UINavigationController {
                 self.window?.rootViewController = v

@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var openChallenges = [Game]()
     private var opponentPendingChallenges = [Game]()
     private var unfinishedChallenges = [Game]()
-    private var user: THUser = NetworkClient.sharedClient.user
+    private var user: User = NetworkClient.sharedClient.user
 
     @IBOutlet weak var internalUserView: UIImageView!
     private var facebookFriendsChallenge = [THUserFriend]()
