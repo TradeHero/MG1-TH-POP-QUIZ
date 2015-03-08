@@ -9,7 +9,7 @@
 import Argo
 import Runes
 
-struct User: JSONDecodable, DebugPrintable, Equatable {
+struct User: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresentation {
     let userId: Int
     let firstName: String
     let lastName: String
@@ -29,7 +29,7 @@ struct User: JSONDecodable, DebugPrintable, Equatable {
         return User(userId: id, firstName: firstName ?? "", lastName: lastName ?? "", displayName: displayName, pictureURL: picture)
     }
     
-     var debugDescription: String {
+    var debugDescription: String {
         return "{\nTHUser\n======\nUser ID: \(self.userId)\nDisplay name: \(self.displayName)\nFirst name: \(self.firstName)\nLast name: \(self.lastName)\nProfile picture URL: \(self.pictureURL)\n}\n"
     }
     

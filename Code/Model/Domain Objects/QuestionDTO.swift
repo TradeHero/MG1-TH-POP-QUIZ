@@ -80,7 +80,7 @@ enum QuestionCategory: Int {
     }
 }
 
-struct QuestionDTO: JSONDecodable, DebugPrintable {
+struct QuestionDTO: JSONDecodable, DebugPrintable, Equatable {
     let questionID: Int!
 
     /// Textual content of the question, must not be empty.
@@ -92,7 +92,7 @@ struct QuestionDTO: JSONDecodable, DebugPrintable {
     let questionCategory: QuestionCategory = QuestionCategory.UnknownCategory
 
     /// Set of options of this current question instance
-    let options: OptionSet!
+    let options: OptionSetDTO!
 
     /// Image content url of the question, can be nil.
     let questionImageURLString: String!
@@ -179,12 +179,12 @@ struct QuestionDTO: JSONDecodable, DebugPrintable {
             questionContent = "~ \(content) ~"
         }
 
-        var option1 = Option(stringContent: option1)
-        var option2 = Option(stringContent: option2)
-        var option3 = Option(stringContent: option3)
-        var option4 = Option(stringContent: option4)
+        var option1 = OptionDTO(stringContent: option1)
+        var option2 = OptionDTO(stringContent: option2)
+        var option3 = OptionDTO(stringContent: option3)
+        var option4 = OptionDTO(stringContent: option4)
 
-        var options = OptionSet(correctOption: option1, dummyOptions: [option2, option3, option4])
+        var options = OptionSetDTO(correctOption: option1, dummyOptions: [option2, option3, option4])
 
         return QuestionDTO(questionID: id, questionContent: content, questionType: questionType, questionCategory: questionCategory, options: options, questionImageURLString: questionImageURLString, questionImage: nil, accessoryImageContent: nil, accessoryImage: nil, subcategory: subcategory, difficulty: difficulty)
     }
@@ -201,7 +201,7 @@ struct QuestionDTO: JSONDecodable, DebugPrintable {
                 <*> j <| "subcategory"
                 <*> j <| "difficulty"
     }
-
+    
     var debugDescription: String {
         get {
             var d = "{\n"
@@ -248,9 +248,10 @@ struct QuestionDTO: JSONDecodable, DebugPrintable {
         }
     }
 
-    func fetchOptionImageOperation(completionHandler: () -> ()) {
+    mutating func fetchOptionImageOperation(completionHandler: () -> ()) {
         var count: Int = 0
-        for option in self.options.allOptions {
+        let options = self.options
+        for option in options.allOptions {
             option.fetchImage {
                 count += 1
                 if count == 4 {
@@ -278,4 +279,15 @@ struct QuestionDTO: JSONDecodable, DebugPrintable {
         }
     }
 
+}
+
+func ==(lhs: QuestionDTO, rhs: QuestionDTO) -> Bool{
+    return lhs.questionID == rhs.questionID &&
+        lhs.questionContent == rhs.questionContent &&
+        lhs.questionType == rhs.questionType &&
+        lhs.questionCategory == rhs.questionCategory &&
+        lhs.questionImageURLString == rhs.questionImageURLString &&
+        lhs.accessoryImageContent == rhs.accessoryImageContent &&
+        lhs.subcategory == rhs.subcategory &&
+        lhs.difficulty == rhs.difficulty; //TODO compare options
 }

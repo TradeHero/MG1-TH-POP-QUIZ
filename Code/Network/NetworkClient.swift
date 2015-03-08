@@ -595,6 +595,29 @@ class NetworkClient {
         }
         debugPrintln(r)
     }
+    
+    func fetchGameZ(gameId: Int, force: Bool = false, errorHandler: NSError -> (), completionHandler: GameDTO -> ()) {
+        let url = "http://aa715d66c5d144cea2f12a2db4270f85.cloudapp.net/api/games/\(gameId)/details"
+        debugPrintln("Fetching game with game ID: \(gameId)...")
+        
+        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
+            [unowned self] _, response, content, error in
+            if let e = error {
+                errorHandler(e)
+            }
+            
+            if response?.statusCode == 200 {
+                if let responseJSON = content as? [String:AnyObject] {
+                    var game = GameDTO.decode(JSONValue.parse(responseJSON))!
+                    debugPrintln("Game created with game ID: \(game.id)")
+                    completionHandler(game)
+                }
+            }
+            
+        }
+        debugPrintln(r)
+    }
+
 
     func pushNotificationToDevice(deviceTokens: [String], alertMessage: String?, completionHandler: () -> ()) {
         if deviceTokens.count == 0 {

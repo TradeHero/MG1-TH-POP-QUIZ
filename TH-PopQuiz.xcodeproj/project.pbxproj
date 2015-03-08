@@ -19,6 +19,7 @@
 		6D0FBB7C1A8C54FE006A4F4C /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0FBB7B1A8C54FE006A4F4C /* FacebookService.swift */; };
 		6D0FBB7E1A8C5A45006A4F4C /* FacebookInvitableFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0FBB7D1A8C5A45006A4F4C /* FacebookInvitableFriends.swift */; };
 		6D2B96651AA9595100513ABE /* GameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B96641AA9595100513ABE /* GameDTO.swift */; };
+		6D2BCA6F1AAC93BF00174D4F /* OptionSetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2BCA6E1AAC93BF00174D4F /* OptionSetDTO.swift */; };
 		6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */; };
 		6D3AF98419C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */; };
 		6D3AF98519C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */; };
@@ -33,12 +34,16 @@
 		6D69E50B19C82A58006490D0 /* SettingsSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D69E50919C82A58006490D0 /* SettingsSliderTableViewCell.swift */; };
 		6D69E50C19C82A58006490D0 /* SettingsSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */; };
 		6D6C19DB19C94D740063BD91 /* EmptyTimelineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */; };
+		6D6ED11A1AAC5D5400E98440 /* GameResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6ED1191AAC5D5400E98440 /* GameResultDTO.swift */; };
 		6D72EAE21A106E7D00C50FF6 /* ChallengesSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D72EAE11A106E7D00C50FF6 /* ChallengesSectionHeader.swift */; };
 		6D779B421AA6B61E00E4A6C1 /* SettingsCommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D779B401AA6B61E00E4A6C1 /* SettingsCommonTableViewCell.swift */; };
 		6D779B431AA6B61E00E4A6C1 /* SettingsCommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D779B411AA6B61E00E4A6C1 /* SettingsCommonTableViewCell.xib */; };
 		6D8183281A02370800C9F791 /* notification.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6D8183261A022ABF00C9F791 /* notification.caf */; };
 		6D8A8BC719DBA6E1000A9E8B /* THCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8A8BC619DBA6E1000A9E8B /* THCache.swift */; };
 		6D8C03EF1A00C64D001F599F /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C03EE1A00C64D001F599F /* MusicPlayer.swift */; };
+		6D8DE54A1AAC86B000813E1D /* DictionaryRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DE5491AAC86B000813E1D /* DictionaryRepresentation.swift */; };
+		6D8DE54C1AAC893400813E1D /* OptionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DE54B1AAC893400813E1D /* OptionDTO.swift */; };
+		6D8DE54E1AAC899F00813E1D /* QuestionScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8DE54D1AAC899F00813E1D /* QuestionScore.swift */; };
 		6D9234F61AA6A7A400D16E89 /* QuestionDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9234F51AA6A7A400D16E89 /* QuestionDTO.swift */; };
 		6DA1287519CA8251000687C0 /* THExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA1287419CA8251000687C0 /* THExtensions.swift */; };
 		6DA1287719CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */; };
@@ -161,6 +166,7 @@
 		6D0FBB7B1A8C54FE006A4F4C /* FacebookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		6D0FBB7D1A8C5A45006A4F4C /* FacebookInvitableFriends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookInvitableFriends.swift; sourceTree = "<group>"; };
 		6D2B96641AA9595100513ABE /* GameDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDTO.swift; sourceTree = "<group>"; };
+		6D2BCA6E1AAC93BF00174D4F /* OptionSetDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSetDTO.swift; sourceTree = "<group>"; };
 		6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTimelineTableViewCell.swift; sourceTree = "<group>"; };
 		6D3AF98319C2AE2C0085682E /* ChallengesTimelineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChallengesTimelineTableViewCell.xib; sourceTree = "<group>"; };
@@ -175,12 +181,16 @@
 		6D69E50919C82A58006490D0 /* SettingsSliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSliderTableViewCell.swift; sourceTree = "<group>"; };
 		6D69E50A19C82A58006490D0 /* SettingsSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsSliderTableViewCell.xib; sourceTree = "<group>"; };
 		6D6C19DA19C94D740063BD91 /* EmptyTimelineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTimelineView.xib; sourceTree = "<group>"; };
+		6D6ED1191AAC5D5400E98440 /* GameResultDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultDTO.swift; sourceTree = "<group>"; };
 		6D72EAE11A106E7D00C50FF6 /* ChallengesSectionHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesSectionHeader.swift; sourceTree = "<group>"; };
 		6D779B401AA6B61E00E4A6C1 /* SettingsCommonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCommonTableViewCell.swift; sourceTree = "<group>"; };
 		6D779B411AA6B61E00E4A6C1 /* SettingsCommonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsCommonTableViewCell.xib; sourceTree = "<group>"; };
 		6D8183261A022ABF00C9F791 /* notification.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = notification.caf; sourceTree = "<group>"; };
 		6D8A8BC619DBA6E1000A9E8B /* THCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THCache.swift; sourceTree = "<group>"; };
 		6D8C03EE1A00C64D001F599F /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		6D8DE5491AAC86B000813E1D /* DictionaryRepresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryRepresentation.swift; sourceTree = "<group>"; };
+		6D8DE54B1AAC893400813E1D /* OptionDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionDTO.swift; sourceTree = "<group>"; };
+		6D8DE54D1AAC899F00813E1D /* QuestionScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionScore.swift; sourceTree = "<group>"; };
 		6D9234F51AA6A7A400D16E89 /* QuestionDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDTO.swift; sourceTree = "<group>"; };
 		6DA1287419CA8251000687C0 /* THExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THExtensions.swift; sourceTree = "<group>"; };
 		6DA1287619CA9025000687C0 /* MonkeysSpinningMonkeys.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MonkeysSpinningMonkeys.mp3; sourceTree = "<group>"; };
@@ -540,6 +550,7 @@
 			children = (
 				6D5EF8711A0B78D5001427FD /* Data Formatter */,
 				6DD2312F19B8204900B5D05E /* Domain Objects */,
+				6D8DE54D1AAC899F00813E1D /* QuestionScore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -554,6 +565,7 @@
 				6D3DB3C119E3D29C006BC11B /* GameNotification.swift */,
 				6DD2313119B8204900B5D05E /* GamePortfolio.swift */,
 				6DD2313219B8204900B5D05E /* GameResult.swift */,
+				6D6ED1191AAC5D5400E98440 /* GameResultDTO.swift */,
 				6DD2313319B8204900B5D05E /* Option.swift */,
 				6DD2313419B8204900B5D05E /* OptionSet.swift */,
 				6DD2313519B8204900B5D05E /* Question.swift */,
@@ -561,6 +573,9 @@
 				6DD2313619B8204900B5D05E /* QuestionResult.swift */,
 				6DD2313819B8204900B5D05E /* THUserFriend.swift */,
 				6DD2313719B8204900B5D05E /* User.swift */,
+				6D8DE5491AAC86B000813E1D /* DictionaryRepresentation.swift */,
+				6D8DE54B1AAC893400813E1D /* OptionDTO.swift */,
+				6D2BCA6E1AAC93BF00174D4F /* OptionSetDTO.swift */,
 			);
 			path = "Domain Objects";
 			sourceTree = "<group>";
@@ -984,6 +999,7 @@
 				6DAFBCF51A08B470009C41EC /* MusicChooserTableViewCell.swift in Sources */,
 				6DD2317019B8204900B5D05E /* HomeViewController.swift in Sources */,
 				6DD2317419B8204900B5D05E /* WinLoseViewController.swift in Sources */,
+				6D8DE54C1AAC893400813E1D /* OptionDTO.swift in Sources */,
 				6DD2318519B8204900B5D05E /* Constants.swift in Sources */,
 				6DB9A18C19E3A21D001DEDFB /* InAppNotificationTableViewController.swift in Sources */,
 				6DD2319019B8204900B5D05E /* DesignableRoundedView.swift in Sources */,
@@ -994,10 +1010,13 @@
 				6D8C03EF1A00C64D001F599F /* MusicPlayer.swift in Sources */,
 				6DD2317F19B8204900B5D05E /* THUserFriend.swift in Sources */,
 				6DD2319219B8204900B5D05E /* FriendsChallengeCellTableViewCell.swift in Sources */,
+				6D6ED11A1AAC5D5400E98440 /* GameResultDTO.swift in Sources */,
 				6DD2317D19B8204900B5D05E /* QuestionResult.swift in Sources */,
 				6D0FBB7C1A8C54FE006A4F4C /* FacebookService.swift in Sources */,
 				6DD2316F19B8204900B5D05E /* GameLoadingSceneViewController.swift in Sources */,
 				6D69E50B19C82A58006490D0 /* SettingsSliderTableViewCell.swift in Sources */,
+				6D8DE54E1AAC899F00813E1D /* QuestionScore.swift in Sources */,
+				6D2BCA6F1AAC93BF00174D4F /* OptionSetDTO.swift in Sources */,
 				6DD2319B19B8204900B5D05E /* OptionButtonAccessoryImageLayer.swift in Sources */,
 				6DD2316D19B8204900B5D05E /* SleekNavigationBar.swift in Sources */,
 				6D3DB3B919E3C15E006BC11B /* NotificationNavigationBar.swift in Sources */,
@@ -1034,6 +1053,7 @@
 				6DD2318219B8204900B5D05E /* ObjCHelpers.m in Sources */,
 				6D8A8BC719DBA6E1000A9E8B /* THCache.swift in Sources */,
 				6D43E98C19EB7C6B002DBB82 /* StaffUser.swift in Sources */,
+				6D8DE54A1AAC86B000813E1D /* DictionaryRepresentation.swift in Sources */,
 				6D779B421AA6B61E00E4A6C1 /* SettingsCommonTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

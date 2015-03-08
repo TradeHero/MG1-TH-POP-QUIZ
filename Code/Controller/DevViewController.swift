@@ -46,6 +46,11 @@ class DevViewController: UIViewController {
     }
 
     
+    @IBAction func APItest(sender: AnyObject) {
+        NetworkClient.sharedClient.fetchGameZ(180, force: false, errorHandler: {error in}, completionHandler: {game in
+            debugPrintln(game)
+        })
+    }
     /*
     // MARK: - Navigation
 
