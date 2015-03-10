@@ -40,7 +40,7 @@ class WinLoseViewController: UIViewController {
 
     @IBOutlet private var starViews: [UIImageView]!
 
-    private var game: Game!
+    private var game: GameDTO!
 
     private var selfScore = 0
 
@@ -119,27 +119,27 @@ class WinLoseViewController: UIViewController {
         losingRay.alpha = 1
     }
 
-    func bindResult(game: Game, selfUser: User, opponentUser: User) {
+    func bindResult(game: GameDTO, selfUser: User, opponentUser: User) {
         self.game = game
 
         self.selfUser = selfUser
         self.opponentUser = opponentUser
 
-        var selfResult: GameResult!
-        var oppResult: GameResult!
-        if game.initiatingPlayerID == selfUser.userId {
-            selfResult = game.initiatingPlayerResult
-            oppResult = game.opponentPlayerResult
+        var selfResult: GameResultDTO!
+        var oppResult: GameResultDTO!
+        if game.challenger.userId == selfUser.userId {
+            selfResult = game.challengerResult
+            oppResult = game.opponentResult
         } else {
-            selfResult = game.opponentPlayerResult
-            oppResult = game.initiatingPlayerResult
+            selfResult = game.opponentResult
+            oppResult = game.challengerResult
         }
 
-        for extraDetail in selfResult.resultExtraDetails {
+        for extraDetail in selfResult.finalResultDetails! {
             selfScore += extraDetail.finalScore
         }
 
-        for extraDetail in oppResult.resultExtraDetails {
+        for extraDetail in oppResult.finalResultDetails! {
             opponentScore += extraDetail.finalScore
         }
 

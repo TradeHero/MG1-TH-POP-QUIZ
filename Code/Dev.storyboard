@@ -44,7 +44,6 @@
                                 </state>
                                 <connections>
                                     <action selector="imageQuizDisplayAction:" destination="ugn-ou-M3g" eventType="touchUpInside" id="vnD-dW-hHu"/>
-                                    <action selector="quizDisplayAction:" destination="ugn-ou-M3g" eventType="touchUpInside" id="fkC-hZ-vrL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EA3-wj-fXC">

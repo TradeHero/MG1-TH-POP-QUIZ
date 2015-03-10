@@ -65,7 +65,7 @@ class QuizViewController: UIViewController {
         }
     }
 
-    var game: Game!
+    var game: GameDTO!
 
     private var stopwatch: NSTimer? = nil
 
@@ -90,7 +90,7 @@ class QuizViewController: UIViewController {
     }
 
 
-    private var currentQuestion: Question {
+    private var currentQuestion: QuestionDTO {
         return game.questionSet[current_q]
     }
     private var isTimedObfuscatorQuestion: Bool {
@@ -430,7 +430,7 @@ class QuizViewController: UIViewController {
         roundIndicatorLabel.alpha = 0
     }
 
-    private func setUpQuestionViewWithQuestion(question: Question) -> UIView {
+    private func setUpQuestionViewWithQuestion(question: QuestionDTO) -> UIView {
         if question.isGraphical() {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
                     , owner: self, options: nil)[0] as QuestionViewWithImage
@@ -465,7 +465,7 @@ class QuizViewController: UIViewController {
         }
     }
 
-    private func setUpViewWithQuestion(question: Question) {
+    private func setUpViewWithQuestion(question: QuestionDTO) {
         self.resetButtons()
         didRemoveOptions = false
         hintUsed = 0
@@ -477,14 +477,14 @@ class QuizViewController: UIViewController {
         contentView.autoPinEdgeToSuperviewEdge(.Leading, withInset: 0)
         contentView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 0)
 
-        let optionSet = question.options.allOptions
+        let optionSet = question.allOptions
 
         var optionButtonSet = self.optionGroup
 
         var i = 0
         for option in optionSet {
             optionButtonSet[i].configureButtonWithContent(option.stringContent, imageContent: option.imageContent)
-            if question.options.checkOptionChoiceIfIsCorrect(option) {
+            if question.checkOptionChoiceIfIsCorrect(option) {
                 optionButtonSet[i].is_answer = true
             } else {
                 optionButtonSet[i].is_answer = false
@@ -603,22 +603,22 @@ class QuizViewController: UIViewController {
     }
 
     private func produceResultForCurrentQuestion(isCorrect: Bool, score: Int) {
-        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: Float(MAX_ALLOWED_TIME - current_timeLeft), correct: isCorrect, score: score))
+        self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: Double(MAX_ALLOWED_TIME - current_timeLeft), correct: isCorrect, score: score))
     }
 
-    func bindGameAndUsers(game: Game, player: User, opponent: User) {
+    func bindGameAndUsers(game: GameDTO, player: User, opponent: User) {
         self.game = game
 
-        if game.initiatingPlayer == opponent {
-            if game.initiatingPlayerResult != nil {
-                self.opponentScore = game.initiatingPlayerResult.rawScore
-                self.opponentQuestionCorrect = game.initiatingPlayerResult.questionCorrect
+        if game.challenger == opponent {
+            if game.challengerResult != nil {
+                self.opponentScore = game.challengerResult!.rawScore
+                self.opponentQuestionCorrect = game.challengerResult!.questionCorrect
             }
         } else {
 
-            if game.opponentPlayerResult != nil {
-                self.opponentScore = game.opponentPlayerResult.rawScore
-                self.opponentQuestionCorrect = game.opponentPlayerResult.questionCorrect
+            if game.opponentResult != nil {
+                self.opponentScore = game.opponentResult!.rawScore
+                self.opponentQuestionCorrect = game.opponentResult!.questionCorrect
             }
         }
 

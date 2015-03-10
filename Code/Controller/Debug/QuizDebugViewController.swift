@@ -75,7 +75,7 @@ class QuizDebugViewController: UIViewController {
         contentView.autoPinEdgeToSuperviewEdge(.Leading, withInset: 0)
         contentView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 0)
 
-        let optionSet = question.options.allOptions
+        let optionSet = question.allOptions
 
         var optionButtonSet = self.optionGroup
         for button in optionButtonSet {
@@ -86,7 +86,7 @@ class QuizDebugViewController: UIViewController {
         var i = 0
         for option in optionSet {
             optionButtonSet[i].configureButtonWithContent(option.stringContent, imageContent: option.imageContent)
-            if question.options.checkOptionChoiceIfIsCorrect(option) {
+            if question.checkOptionChoiceIfIsCorrect(option) {
                 optionButtonSet[i].is_answer = true
             } else {
                 optionButtonSet[i].is_answer = false

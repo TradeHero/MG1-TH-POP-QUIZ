@@ -9,8 +9,6 @@
 import UIKit
 
 
-
-
 /// A linguistic expression used to make a request for information.
 
 final class Question {

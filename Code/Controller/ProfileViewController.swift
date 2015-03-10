@@ -19,9 +19,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     private var defaultText: String!
 
-    private var closedChallenges: [Game] = []
+    private var closedChallenges: [GameDTO] = []
 
-    private var categorisedClosedChallenges = [String: [Game]]()
+    private var categorisedClosedChallenges = [String: [GameDTO]]()
 
     private var closedChallengeCategories = [String]()
 
@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
 
-    func categoriseChallenges(challenges: [Game]) {
+    func categoriseChallenges(challenges: [GameDTO]) {
         if challenges.count == 0 {
             return
         }

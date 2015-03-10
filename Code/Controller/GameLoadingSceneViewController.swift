@@ -42,7 +42,7 @@ class GameLoadingSceneViewController: UIViewController {
 
     @IBOutlet weak var lowerViewTrailingSpaceToSuperview: NSLayoutConstraint!
     private var user = NetworkClient.sharedClient.user
-    private var game: Game!
+    private var game: GameDTO!
 
     private var player: User!
     private var opponent: User!
@@ -82,26 +82,26 @@ class GameLoadingSceneViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func bindGame(game: Game) {
+    func bindGame(game: GameDTO) {
         self.game = game
         self.player = game.selfUser
         self.opponent = game.awayUser
 //        self.determineUserRoles(game)
     }
 
-    private func determineUserRoles(game: Game) {
-        if game.initiatingPlayer.userId == user.userId {
-            player = game.initiatingPlayer
-            opponent = game.opponentPlayer
-        } else if game.opponentPlayer.userId == user.userId {
-            player = game.opponentPlayer
-            opponent = game.initiatingPlayer
+    private func determineUserRoles(game: GameDTO) {
+        if game.challenger.userId == user.userId {
+            player = game.challenger
+            opponent = game.opponentUser
+        } else if game.opponentUser.userId == user.userId {
+            player = game.opponentUser
+            opponent = game.challenger
         } else {
             println("Shouldn't happen")
         }
     }
 
-    private func prepareGame(game: Game, completionHandler: () -> ()) {
+    private func prepareGame(game: GameDTO, completionHandler: () -> ()) {
         var qSet = game.questionSet
         var count: Int = 0
         var tcount = game.questionSet.count

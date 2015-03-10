@@ -22,24 +22,24 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
     private var winningColor = UIColor(hex: 0x7ED321)
     private var losingColor = UIColor(hex: 0xD0021B)
 
-    private var game: Game!
+    private var game: GameDTO!
 
     private var opponent: User!
 
-    private var playerResult: GameResult!
-    private var opponentResult: GameResult!
+    private var playerResult: GameResultDTO!
+    private var opponentResult: GameResultDTO!
 
-    func bindGame(game: Game) {
+    func bindGame(game: GameDTO) {
         if game.isGameCompletedByBothPlayer {
             self.game = game
             self.opponent = game.awayUser
 
-            if game.opponentPlayer == game.awayUser {
-                self.opponentResult = game.opponentPlayerResult
-                self.playerResult = game.initiatingPlayerResult
+            if game.opponentUser == game.awayUser {
+                self.opponentResult = game.opponentResult
+                self.playerResult = game.challengerResult
             } else {
-                self.opponentResult = game.initiatingPlayerResult
-                self.playerResult = game.opponentPlayerResult
+                self.opponentResult = game.challengerResult
+                self.playerResult = game.opponentResult
             }
 
             setScoreVersusLabelAttrString()
@@ -63,9 +63,9 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
 
     private func setScoreVersusLabelAttrString() {
         var color = playerResult.finalScore > opponentResult.finalScore ? winningColor : losingColor
-        var attributedString = NSMutableAttributedString(string: playerResult.finalScore.decimalFormattedString, attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 15)!, NSForegroundColorAttributeName: color])
+        var attributedString = NSMutableAttributedString(string: playerResult.finalScore!.decimalFormattedString, attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 15)!, NSForegroundColorAttributeName: color])
         attributedString.appendAttributedString(NSAttributedString(string: " vs ", attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 15)!, NSForegroundColorAttributeName: UIColor.blackColor()]))
-        attributedString.appendAttributedString(NSAttributedString(string: opponentResult.finalScore.decimalFormattedString, attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 15)!, NSForegroundColorAttributeName: UIColor.blackColor()]))
+        attributedString.appendAttributedString(NSAttributedString(string: opponentResult.finalScore!.decimalFormattedString, attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 15)!, NSForegroundColorAttributeName: UIColor.blackColor()]))
         scoreVersusLabel.attributedText = attributedString
     }
 

@@ -26,13 +26,13 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet private weak var opponentWaitingImageView: UIImageView!
 
     @IBOutlet weak var nextOrRematchButton: UIButton!
-    private var game: Game!
+    private var game: GameDTO!
 
     private var player: User!
     private var opponent: User!
 
-    private var playerResult: GameResult!
-    private var opponentResult: GameResult!
+    private var playerResult: GameResultDTO!
+    private var opponentResult: GameResultDTO!
 
 
     override func viewDidLoad() {
@@ -79,7 +79,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
-    func bindGame(game: Game) {
+    func bindGame(game: GameDTO) {
         self.game = game
         self.determineUserRoles(game)
     }
@@ -113,18 +113,18 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
-    private func determineUserRoles(game: Game) {
+    private func determineUserRoles(game: GameDTO) {
         let user = NetworkClient.sharedClient.user
-        if game.initiatingPlayer.userId == user.userId {
-            player = game.initiatingPlayer
-            playerResult = game.initiatingPlayerResult
-            opponent = game.opponentPlayer
-            opponentResult = game.opponentPlayerResult
+        if game.challenger.userId == user.userId {
+            player = game.challenger
+            playerResult = game.challengerResult
+            opponent = game.opponentUser
+            opponentResult = game.opponentResult
         } else {
-            player = game.opponentPlayer
-            playerResult = game.opponentPlayerResult
-            opponent = game.initiatingPlayer
-            opponentResult = game.initiatingPlayerResult
+            player = game.opponentUser
+            playerResult = game.opponentResult
+            opponent = game.challenger
+            opponentResult = game.challengerResult
         }
     }
 
@@ -148,18 +148,18 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHQuestionResultTableViewCellIdentifier, forIndexPath: indexPath) as QuestionResultTableViewCell
             let selfRaw = playerResult.resultDetails[indexPath.row]
-            var selfRes = QuestionResult(questionID: selfRaw.id, timeTaken: selfRaw.time, correct: selfRaw.rawScore > 0, score: selfRaw.rawScore)
+            var selfRes = QuestionResult(questionID: selfRaw.questionId, timeTaken: selfRaw.timeTaken, correct: selfRaw.rawScore > 0, score: selfRaw.rawScore)
 
-            if let selfExtras = playerResult.resultExtraDetails {
+            if let selfExtras = playerResult.finalResultDetails {
                 selfRes.finalScore = playerResult.finalScore
             }
 
             var oppRes: QuestionResult!
             if let oResult = opponentResult {
                 let oppRaw = oResult.resultDetails[indexPath.row]
-                oppRes = QuestionResult(questionID: oppRaw.id, timeTaken: oppRaw.time, correct: oppRaw.rawScore > 0, score: oppRaw.rawScore)
+                oppRes = QuestionResult(questionID: oppRaw.questionId, timeTaken: oppRaw.timeTaken, correct: oppRaw.rawScore > 0, score: oppRaw.rawScore)
 
-                if let oppExtras = opponentResult.resultExtraDetails {
+                if let oppExtras = opponentResult.finalResultDetails {
                     oppRes.finalScore = opponentResult.finalScore
                 }
             }
@@ -186,17 +186,17 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         case 2:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
             cell.attribute = "Highest Combo"
-            cell.selfAttributeDetail = "\(playerResult.highestCombo)"
+            cell.selfAttributeDetail = "\(playerResult.correctStreak)"
 
             cell.labelTintColor = UIColor(hex: 0x457B1D)
-            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.highestCombo)" : "--"
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.correctStreak)" : "--"
 
             return cell
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
             cell.attribute = "Total Score"
-            cell.selfAttributeDetail = "\(playerResult.finalScore.decimalFormattedString)"
-            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.finalScore.decimalFormattedString)" : "--"
+            cell.selfAttributeDetail = "\(playerResult.finalScore!.decimalFormattedString)"
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.finalScore!.decimalFormattedString)" : "--"
 
 
             return cell

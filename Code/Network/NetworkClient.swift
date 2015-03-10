@@ -125,7 +125,7 @@ class NetworkClient {
     /**
     Create challenge by specifying number of question, opponent ID, and handles completion with a game object.
     */
-    func createChallenge(numberOfQuestions: Int = 7, opponentId: Int!, errorHandler: NSError -> (), completionHandler: Game -> ()) {
+    func createChallenge(numberOfQuestions: Int = 7, opponentId: Int!, errorHandler: NSError -> (), completionHandler: GameDTO -> ()) {
         var param: [String:AnyObject] = ["numberOfQuestions": numberOfQuestions]
         if let id = opponentId {
             debugPrintln("Creating challenge with user \(id) with \(numberOfQuestions) questions(s)")
@@ -143,10 +143,9 @@ class NetworkClient {
             }
 
             if response?.statusCode == 200 {
-                let responseJSON = content as [String:AnyObject]
-                var game = Game(gameDTO: responseJSON)
-                debugPrintln("Game created with game ID: \(game.gameID)")
-                game.fetchUsers {
+                if let responseJSON = content as? [String:AnyObject] {
+                    var game = GameDTO.decode(JSONValue.parse(responseJSON))!
+                    debugPrintln("Game created with game ID: \(game.id)")
                     completionHandler(game)
                 }
             }
@@ -255,7 +254,7 @@ class NetworkClient {
     /**
     GET api/games/home
     */
-    typealias THMGChallengesTuple = (unfinishedChallenges:[Game], openChallenges:[Game], opponentPendingChallenges:[Game])
+    typealias THMGChallengesTuple = (unfinishedChallenges:[GameDTO], openChallenges:[GameDTO], opponentPendingChallenges:[GameDTO])
 
     func fetchAllChallenges(errorHandler: NSError -> (), completionHandler: THMGChallengesTuple -> ()) {
         let url = "\(THGameAPIBaseURL)/home"
@@ -268,9 +267,9 @@ class NetworkClient {
                 errorHandler(e)
             }
 
-            var openChallenges = [Game]()
-            var unfinishedChallenges = [Game]()
-            var opponentPendingChallenges = [Game]()
+            var openChallenges = [GameDTO]()
+            var unfinishedChallenges = [GameDTO]()
+            var opponentPendingChallenges = [GameDTO]()
 
             var count = 0
             let intermediateHandler: () -> () = {
@@ -281,68 +280,46 @@ class NetworkClient {
             }
 
             if let allChallengeDtos = content as? [String:AnyObject] {
-                //parse unfinished challenges
-                if let unfinishedChallengeDtos = allChallengeDtos["unfinishedChallenges"] as? [AnyObject] {
-                    println("Parsing \(unfinishedChallengeDtos.count) unfinished challenges.")
-                    self.parseChallenges(unfinishedChallengeDtos) {
-                        unfinishedChallenges = $0
-                        intermediateHandler()
-                        println("Parsed \(unfinishedChallenges.count) unfinished challenges.")
-                    }
-                }
-
                 //parse open challenges
                 if let openChallengeDtos = allChallengeDtos["openChallenges"] as? [AnyObject] {
                     println("Parsing \(openChallengeDtos.count) open challenges.")
-                    self.parseChallenges(openChallengeDtos) {
-                        openChallenges = $0
-                        intermediateHandler()
-                        println("Parsed \(openChallenges.count) open challenges.")
+                    for dto in openChallengeDtos {
+                        var game = GameDTO.decode(JSONValue.parse(dto))!
+                        openChallenges.append(game)
                     }
+                    println("Parsed \(openChallenges.count) open challenges.")
                 }
 
+                //parse unfinished challenges
+                if let unfinishedChallengeDtos = allChallengeDtos["unfinishedChallenges"] as? [AnyObject] {
+                    println("Parsing \(unfinishedChallengeDtos.count) unfinished challenges.")
+                    for dto in unfinishedChallengeDtos {
+                        var game = GameDTO.decode(JSONValue.parse(dto))!
+                        unfinishedChallenges.append(game)
+                    }
+                    println("Parsed \(unfinishedChallenges.count) unfinished challenges.")
+                }
+                
                 //parse opponent pending challenges
                 if let opponentPendingChallengeDtos = allChallengeDtos["opponnentPendingChallenges"] as? [AnyObject] {
                     println("Parsing \(opponentPendingChallengeDtos.count) opponent pending challenges.")
-                    self.parseChallenges(opponentPendingChallengeDtos) {
-                        opponentPendingChallenges = $0
-                        intermediateHandler()
-                        println("Parsed \(opponentPendingChallenges.count) opponent pending challenges.")
+                    for dto in opponentPendingChallengeDtos {
+                        var game = GameDTO.decode(JSONValue.parse(dto))!
+                        opponentPendingChallenges.append(game)
                     }
+                    println("Parsed \(opponentPendingChallenges.count) opponent pending challenges.")
                 }
+                
+                completionHandler((unfinishedChallenges:unfinishedChallenges, openChallenges:openChallenges, opponentPendingChallenges:opponentPendingChallenges))
             }
         }
         //debugPrintln(r)
     }
 
-    private func parseChallenges(challengeDtos: [AnyObject], completionHandler: [Game] -> ()) {
-        if challengeDtos.count == 0 {
-            completionHandler([])
-        } else {
-            var completed = 0
-            var total = challengeDtos.count
-            var challenges = [Game]()
-
-            let fetchUserHandler: () -> () = {
-                completed++
-                if completed == total {
-                    completionHandler(challenges)
-                }
-            }
-            for challengeDto in challengeDtos as [[String:AnyObject]] {
-                let game = Game(compactGameDTO: challengeDto)
-                game.fetchUsers {
-                    challenges.append(game)
-                    fetchUserHandler()
-                }
-            }
-        }
-    }
-
     /**
     GET api/games/closed
     */
-    func fetchClosedChallenges(errorHandler: NSError -> (), completionHandler: [Game] -> ()) {
+    func fetchClosedChallenges(errorHandler: NSError -> (), completionHandler: [GameDTO] -> ()) {
         let url = "\(THGameAPIBaseURL)/closed"
 
         debugPrintln("Fetching all closed challenges for authenticated user...")
@@ -352,19 +329,24 @@ class NetworkClient {
             if let e = error {
                 errorHandler(e)
             }
-
+            var closedChallenges = [GameDTO]()
+            
             if let closedChallengesDTOs = content as? [AnyObject] {
-                self.parseChallenges(closedChallengesDTOs) {
-                    completionHandler($0)
+                println("Parsing \(closedChallenges.count) closed challenges.")
+                for dto in closedChallengesDTOs {
+                    var game = GameDTO.decode(JSONValue.parse(dto))!
+                    closedChallenges.append(game)
                 }
+                println("Parsed \(closedChallenges.count) closed challenges.")
             }
+            completionHandler(closedChallenges)
         }
         //        debugPrintln(r)
     }
 
 
     ///
-    func createQuickGame(errorHandler: NSError -> (), completionHandler: Game -> ()) {
+    func createQuickGame(errorHandler: NSError -> (), completionHandler: GameDTO -> ()) {
         self.createChallenge(numberOfQuestions: 7, opponentId: nil, errorHandler: errorHandler) {
             completionHandler($0)
         }
@@ -373,17 +355,17 @@ class NetworkClient {
     /**
     POST api/games/postresults
     */
-    func postGameResults(game: Game, highestCombo: Int, noOfHintsUsed hints: UInt, currentScore: Int, questionResults: [QuestionResult], errorHandler: NSError -> (), completionHandler: Game -> ()) {
+    func postGameResults(game: GameDTO, highestCombo: Int, noOfHintsUsed hints: UInt, currentScore: Int, questionResults: [QuestionResult], errorHandler: NSError -> (), completionHandler: GameDTO -> ()) {
         let url = "\(THGameAPIBaseURL)/postResults"
 
-        debugPrintln("Posting results for game \(game.gameID)...")
+        debugPrintln("Posting results for game \(game.id)...")
 
         var resultSet: [[String:AnyObject]] = []
         for result in questionResults {
             var resultData: [String:AnyObject] = ["questionId": result.questionId, "time": result.timeTaken, "rawScore": result.rawScore]
             resultSet.append(resultData)
         }
-        var param: [String:AnyObject] = ["gameId": game.gameID, "results": resultSet, "correctStreak": highestCombo, "hintsUsed": hints]
+        var param: [String:AnyObject] = ["gameId": game.id, "results": resultSet, "correctStreak": highestCombo, "hintsUsed": hints]
 
         let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
@@ -393,17 +375,23 @@ class NetworkClient {
             }
 
             if let gameResults = content as? [String:AnyObject] {
-                game.populateResult(gameResults)
+                if let challengerResultDTO = gameResults["challengerResult"] as? [String:AnyObject] {
+                    game.challengerResult = GameResultDTO.decode(JSONValue.parse(challengerResultDTO))
+                }
+                
+                if let opponentResultDTO = gameResults["opponentResult"] as? [String:AnyObject] {
+                    game.opponentResult = GameResultDTO.decode(JSONValue.parse(opponentResultDTO))
+                }
+                
                 completionHandler(game)
             }
         }
-        //debugPrintln(r)
     }
 
     /**
     GET api/games/\(gameId)/results
     */
-    typealias THGameResultsTuple = (challengerResult:GameResult?, opponentResult:GameResult?)
+    typealias THGameResultsTuple = (challengerResult:GameResultDTO?, opponentResult:GameResultDTO?)
 
     func getResultForGame(gameId: Int, errorHandler: NSError -> (), completionHandler: THGameResultsTuple -> ()) {
         let url = "\(THGameAPIBaseURL)/\(gameId)/results"
@@ -416,24 +404,20 @@ class NetworkClient {
                 errorHandler(e)
             }
 
-            var challengerResult: GameResult?
-            var opponentResult: GameResult?
+            var challengerResult: GameResultDTO?
+            var opponentResult: GameResultDTO?
 
             if let resultsDTO = content as? [String:AnyObject] {
-                let inner: AnyObject? = resultsDTO["result"]
-                if let innerResultDTO = inner as? [String:AnyObject] {
-                    if let challengerResultDTO: AnyObject = innerResultDTO["challenger"] {
-                        debugPrintln("Parsing game initiator result..")
-                        let dto = challengerResultDTO as [String:AnyObject]
-                        challengerResult = GameResult(gameId: gameId, resultDTO: dto)
-                    }
-                    if let opponentResultDTO: AnyObject = innerResultDTO["opponent"] {
-                        debugPrintln("Parsing game opponent result..")
-                        let dto = opponentResultDTO as [String:AnyObject]
-                        opponentResult = GameResult(gameId: gameId, resultDTO: dto)
-                    }
-                    completionHandler((challengerResult: challengerResult, opponentResult: opponentResult))
+                
+                if let challengerResultDTO = resultsDTO["challengerResult"] as? [String:AnyObject] {
+                    challengerResult = GameResultDTO.decode(JSONValue.parse(challengerResultDTO))
                 }
+                
+                if let opponentResultDTO = resultsDTO["opponentResult"] as? [String:AnyObject] {
+                    opponentResult = GameResultDTO.decode(JSONValue.parse(opponentResultDTO))
+                }
+                
+                completionHandler((challengerResult:challengerResult, opponentResult:opponentResult))
             }
         }
 
@@ -474,8 +458,6 @@ class NetworkClient {
         debugPrintln(r)
     }
 
-    
-    
 
     // MARK: Simple functions
 
@@ -562,41 +544,7 @@ class NetworkClient {
     /*
     GET api/games/\(id)/details
     */
-    func fetchGame(gameId: Int, force: Bool = false, errorHandler: NSError -> (), completionHandler: Game -> ()) {
-        let url = "\(THGameAPIBaseURL)/\(gameId)/details"
-        debugPrintln("Fetching game with game ID: \(gameId)...")
-
-        if !force {
-            if let game = THCache.getGameFromCache(gameId) {
-                completionHandler(game)
-                return
-            }
-        }
-
-        let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-            if let e = error {
-                errorHandler(e)
-            }
-
-            if response?.statusCode == 200 {
-                let responseJSON = content as [String:AnyObject]
-                //                println(responseJSON)
-                let game = Game(gameDTO: responseJSON)
-                debugPrintln("Game created with game ID: \(game.gameID)")
-
-                game.fetchUsers {
-                    game.fetchResults {
-                        completionHandler(game)
-                    }
-                }
-            }
-
-        }
-        debugPrintln(r)
-    }
-    
-    func fetchGameZ(gameId: Int, force: Bool = false, errorHandler: NSError -> (), completionHandler: GameDTO -> ()) {
+    func fetchGame(gameId: Int, force: Bool = false, errorHandler: NSError -> (), completionHandler: GameDTO -> ()) {
         let url = "http://aa715d66c5d144cea2f12a2db4270f85.cloudapp.net/api/games/\(gameId)/details"
         debugPrintln("Fetching game with game ID: \(gameId)...")
         
@@ -701,8 +649,8 @@ class NetworkClient {
         }
     }
 
-    func nudgeGameUser(game: Game, completionHandler: () -> ()) {
-        var url = "\(THGameAPIBaseURL)/\(game.gameID)/nudge"
+    func nudgeGameUser(game: GameDTO, completionHandler: () -> ()) {
+        var url = "\(THGameAPIBaseURL)/\(game.id)/nudge"
         if kFaceBookShare {
             url = "\(url)?share=true"
         }

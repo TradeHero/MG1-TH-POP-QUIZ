@@ -11,11 +11,11 @@ import UIKit
 struct StaffUser {
 
     let user: User
-    
+
     var userId: Int {
         return user.userId
     }
-    
+
     var firstName: String {
         return user.firstName
     }
@@ -32,7 +32,7 @@ struct StaffUser {
         return user.pictureURL
     }
 
-    
+
     var funnyName: String
 
     init(user: User, funnyName: String) {
@@ -41,7 +41,7 @@ struct StaffUser {
     }
 
 
-    var dictionaryRepresentation: [String: AnyObject] {
-        return ["id" : userId, "firstName": firstName, "lastName": lastName, "displayName": displayName, "picture" : pictureURL ?? NSNull(), "funnyName" : funnyName];
+    var dictionaryRepresentation: [String:AnyObject] {
+        return ["id": userId, "firstName": firstName, "lastName": lastName, "displayName": displayName, "picture": pictureURL ?? NSNull(), "funnyName": funnyName];
     }
 }

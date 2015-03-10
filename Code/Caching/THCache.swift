@@ -112,13 +112,18 @@ struct THCache {
 
 
     //Game
-    static func saveGameToCache(game: Game, gameId: Int) {
+    static func saveGameToCache(game: GameDTO, gameId: Int) {
         let gameCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(gameId)"
-//        EGOCache.globalCache().setObject(game, forKey: gameCacheKey)
+        EGOCache.globalCache().setObject(game.dictionaryRepresentation, forKey: gameCacheKey)
 
     }
 
-    static func getGameFromCache(gameId: Int) -> Game? {
+    static func getGameFromCache(gameId: Int) -> GameDTO? {
+        let gameCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(gameId)"
+        let object = EGOCache.globalCache().objectForKey(gameCacheKey)
+        if let gJSON = object as? [String:AnyObject] {
+            return GameDTO.decode(JSONValue.parse(gJSON))
+        }
         return nil
     }
 

@@ -35,7 +35,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     @IBOutlet private weak var scoreDetailLabel: UILabel!
     @IBOutlet private weak var gameStatusImageView: UIImageView!
 
-    var game: Game!
+    var game: GameDTO!
 
     var status: ChallengeStatus = .Play {
         didSet {
@@ -60,7 +60,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.delegate.homeTurnChallengesCell(self, didTapAcceptChallenge: self.game)
     }
 
-    func bindChalllenge(challenge: Game, status: ChallengeStatus) {
+    func bindChalllenge(challenge: GameDTO, status: ChallengeStatus) {
         self.game = challenge
         self.status = status
         self.player = game.selfUser
@@ -70,7 +70,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         case .Nudge, .Invited:
             if game.isGameCompletedByChallenger {
                 var attributedString = NSMutableAttributedString(string: "Your Score: ")
-                var boldStr = NSMutableAttributedString(string: "\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 14)!])
+                var boldStr = NSMutableAttributedString(string: "\(game.challengerResult!.score.decimalFormattedString)", attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 14)!])
                 attributedString.appendAttributedString(boldStr)
                 self.scoreDetailLabel.attributedText = attributedString
             }
@@ -84,7 +84,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         case .Play, .Accept:
             if game.isGameCompletedByChallenger {
                 var attributedString = NSMutableAttributedString(string: "Score: ")
-                var boldStr = NSMutableAttributedString(string: "\(game.initiatingPlayerResult.rawScore.decimalFormattedString)", attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 14)!])
+                var boldStr = NSMutableAttributedString(string: "\(game.challengerResult!.score.decimalFormattedString)", attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 14)!])
                 attributedString.appendAttributedString(boldStr)
 
                 self.scoreDetailLabel.attributedText = attributedString
@@ -161,6 +161,6 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
 }
 
 protocol HomeTurnChallengesTableViewCellDelegate: class, NSObjectProtocol {
-    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game)
+    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: GameDTO)
 }
 

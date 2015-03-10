@@ -80,11 +80,13 @@ enum QuestionCategory: Int {
     }
 }
 
-struct QuestionDTO: JSONDecodable, DebugPrintable, Equatable {
-    let questionID: Int!
+class QuestionDTO: JSONDecodable, DebugPrintable, Equatable {
+    let questionID: Int
+
+    let originalContent: String
 
     /// Textual content of the question, must not be empty.
-    let questionContent: String!
+    let questionContent: String
 
     /// Type of question.
     let questionType: QuestionType = QuestionType.UnknownType
@@ -92,23 +94,46 @@ struct QuestionDTO: JSONDecodable, DebugPrintable, Equatable {
     let questionCategory: QuestionCategory = QuestionCategory.UnknownCategory
 
     /// Set of options of this current question instance
-    let options: OptionSetDTO!
+    let correctOption: OptionDTO
+
+    let dummyOption: [OptionDTO]
 
     /// Image content url of the question, can be nil.
-    let questionImageURLString: String!
+    let questionImageURLString: String?
 
-    var questionImage: UIImage!
+    var questionImage: UIImage?
 
-    let accessoryImageContent: String!
+    let accessoryImageContent: String?
 
-    var accessoryImage: UIImage!
+    var accessoryImage: UIImage?
 
     let subcategory: Int!
 
     let difficulty: Int!
 
 
-    static func create(id: Int)(category: Int)(content: String)(option1: String)(option2: String)(option3: String)(option4: String)(subcategory: Int)(difficulty: Int) -> QuestionDTO {
+    var allOptions: [OptionDTO] {
+        var allOpts = dummyOption + [correctOption]
+        allOpts.shuffle()
+        return allOpts
+    }
+
+    init(questionID: Int, originalContent: String, questionContent: String, questionType: QuestionType, questionCategory: QuestionCategory, correctOption: OptionDTO, dummyOption: [OptionDTO], questionImageURLString: String?, accessoryImageContent: String?, subcategory: Int!, difficulty: Int!) {
+        self.questionID = questionID
+        self.originalContent = originalContent
+        self.questionContent = questionContent
+        self.questionType = questionType
+        self.questionCategory = questionCategory
+        self.correctOption = correctOption
+        self.dummyOption = dummyOption
+        self.questionImageURLString = questionImageURLString
+        self.accessoryImageContent = accessoryImageContent
+        self.subcategory = subcategory
+        self.difficulty = difficulty
+    }
+
+
+    class func create(id: Int)(category: Int)(content: String)(option1: String)(option2: String)(option3: String)(option4: String)(subcategory: Int)(difficulty: Int) -> QuestionDTO {
 
         var questionType = QuestionType.UnknownType
         var questionCategory = QuestionCategory.UnknownCategory
@@ -184,12 +209,10 @@ struct QuestionDTO: JSONDecodable, DebugPrintable, Equatable {
         var option3 = OptionDTO(stringContent: option3)
         var option4 = OptionDTO(stringContent: option4)
 
-        var options = OptionSetDTO(correctOption: option1, dummyOptions: [option2, option3, option4])
-
-        return QuestionDTO(questionID: id, questionContent: content, questionType: questionType, questionCategory: questionCategory, options: options, questionImageURLString: questionImageURLString, questionImage: nil, accessoryImageContent: nil, accessoryImage: nil, subcategory: subcategory, difficulty: difficulty)
+        return QuestionDTO(questionID: id, originalContent: content, questionContent: questionContent, questionType: questionType, questionCategory: questionCategory, correctOption: option1, dummyOption: [option2, option3, option4], questionImageURLString: questionImageURLString, accessoryImageContent: accessoryImageContent, subcategory: subcategory, difficulty: difficulty)
     }
 
-    static func decode(j: JSONValue) -> QuestionDTO? {
+    class func decode(j: JSONValue) -> QuestionDTO? {
         return QuestionDTO.create
                 <^> j <| "id"
                 <*> j <| "category"
@@ -201,7 +224,19 @@ struct QuestionDTO: JSONDecodable, DebugPrintable, Equatable {
                 <*> j <| "subcategory"
                 <*> j <| "difficulty"
     }
-    
+
+    var dictionaryRepresentation: [String:AnyObject] {
+        return ["id": questionID,
+                "category": questionCategory.rawValue,
+                "content": originalContent,
+                "option1": correctOption.originalContent,
+                "option2": dummyOption[0].originalContent,
+                "option3": dummyOption[1].originalContent,
+                "option4": dummyOption[2].originalContent,
+                "subcategory": subcategory,
+                "difficulty": difficulty]
+    }
+
     var debugDescription: String {
         get {
             var d = "{\n"
@@ -213,11 +248,12 @@ struct QuestionDTO: JSONDecodable, DebugPrintable, Equatable {
             d += "Content: \(questionContent)\n"
             let imgurl = questionImageURLString ?? "no image"
             d += "Image name: \(imgurl)\n"
-            d += "Options: \(options)"
+            d += "Options: \(allOptions)"
             d += "}\n"
             return d
         }
     }
+
 
     func isGraphical() -> Bool {
         switch self.questionType {
@@ -228,7 +264,17 @@ struct QuestionDTO: JSONDecodable, DebugPrintable, Equatable {
         }
     }
 
-    mutating func fetchImage(completionHandler: () -> ()) {
+    func checkOptionChoiceIfIsCorrect(choice: OptionDTO) -> Bool {
+        for opt in allOptions {
+            ///Choice exist
+            if opt == choice {
+                return correctOption == choice
+            }
+        }
+        return false
+    }
+
+    func fetchImage(completionHandler: () -> ()) {
 
         if let imgName = self.questionImageURLString {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
@@ -248,20 +294,7 @@ struct QuestionDTO: JSONDecodable, DebugPrintable, Equatable {
         }
     }
 
-    mutating func fetchOptionImageOperation(completionHandler: () -> ()) {
-        var count: Int = 0
-        let options = self.options
-        for option in options.allOptions {
-            option.fetchImage {
-                count += 1
-                if count == 4 {
-                    completionHandler()
-                }
-            }
-        }
-    }
-
-    mutating func fetchAccessoryImageOperation(completionHandler: () -> ()) {
+    func fetchAccessoryImageOperation(completionHandler: () -> ()) {
         if let imgName = self.accessoryImageContent {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
@@ -279,15 +312,30 @@ struct QuestionDTO: JSONDecodable, DebugPrintable, Equatable {
         }
     }
 
+    func fetchOptionImageOperation(completionHandler: () -> ()) {
+        var count: Int = 0
+        var options = [correctOption] + dummyOption
+
+        for var i = 0; i < options.count; i++ {
+            var option = options[i]
+            option.fetchImage {
+                count += 1
+                if count == 4 {
+                    completionHandler()
+                }
+            }
+        }
+    }
+
 }
 
-func ==(lhs: QuestionDTO, rhs: QuestionDTO) -> Bool{
+func ==(lhs: QuestionDTO, rhs: QuestionDTO) -> Bool {
     return lhs.questionID == rhs.questionID &&
-        lhs.questionContent == rhs.questionContent &&
-        lhs.questionType == rhs.questionType &&
-        lhs.questionCategory == rhs.questionCategory &&
-        lhs.questionImageURLString == rhs.questionImageURLString &&
-        lhs.accessoryImageContent == rhs.accessoryImageContent &&
-        lhs.subcategory == rhs.subcategory &&
-        lhs.difficulty == rhs.difficulty; //TODO compare options
+            lhs.questionContent == rhs.questionContent &&
+            lhs.questionType == rhs.questionType &&
+            lhs.questionCategory == rhs.questionCategory &&
+            lhs.questionImageURLString == rhs.questionImageURLString &&
+            lhs.accessoryImageContent == rhs.accessoryImageContent &&
+            lhs.subcategory == rhs.subcategory &&
+            lhs.difficulty == rhs.difficulty; //TODO compare options
 }

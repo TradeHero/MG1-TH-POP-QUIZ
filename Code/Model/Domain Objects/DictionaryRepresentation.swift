@@ -7,5 +7,5 @@
 //
 
 protocol DictionaryRepresentation {
-    var dictionaryRepresentation: [String: AnyObject]  { get }
+    var dictionaryRepresentation: [String:AnyObject] { get }
 }

@@ -18,9 +18,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var muteButton: UIButton!
 
-    private var openChallenges = [Game]()
-    private var opponentPendingChallenges = [Game]()
-    private var unfinishedChallenges = [Game]()
+    private var openChallenges = [GameDTO]()
+    private var opponentPendingChallenges = [GameDTO]()
+    private var unfinishedChallenges = [GameDTO]()
     private var user: User = NetworkClient.sharedClient.user
 
     @IBOutlet weak var internalUserView: UIImageView!
@@ -315,18 +315,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 
-    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game) {
+    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: GameDTO) {
         switch cell.status {
         case .Accept, .Play:
             var hud = JGProgressHUD.progressHUDWithDefaultStyle()
             hud.showInWindow()
             hud.textLabel.text = "Getting ready.."
 
-            NetworkClient.sharedClient.fetchGame(game.gameID, force: true, errorHandler: { error in debugPrintln(error) }) {
+            NetworkClient.sharedClient.fetchGame(game.id, force: true, errorHandler: { error in debugPrintln(error) }) {
                 [unowned self] in
                 var i = 0
                 for game in self.openChallenges {
-                    if $0.gameID == game.gameID {
+                    if $0.id == game.id {
                         self.openChallenges.removeAtIndex(i)
                         self.tableView.reloadData()
                         break
@@ -344,7 +344,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             NetworkClient.sharedClient.nudgeGameUser(game) {
             }
             cell.configureAsNudgedMode()
-            cell.game.lastNudgedOpponentAtUTCStr = DataFormatter.shared.dateFormatter.stringFromDate(NSDate())
+            cell.game.lastNudgedOpponentAt = NSDate()
         default:
             break
         }

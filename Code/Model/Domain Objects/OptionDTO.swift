@@ -8,24 +8,24 @@
 
 import UIKit
 
-struct OptionDTO: DebugPrintable, Equatable {
+class OptionDTO: DebugPrintable, Equatable {
     let stringContent: String!
-    
+
     let imageContentURLString: String!
-    
+
     var imageContent: UIImage!
-    
+
     lazy var isGraphical: Bool = {
         return self.imageContentURLString != nil
     }()
 
     let originalContent: String
-    
-   /**
-    Initialise option with string content and image content
-    
-    :param: stringContent The string content of the option
-    */
+
+    /**
+     Initialise option with string content and image content
+
+     :param: stringContent The string content of the option
+     */
     init(stringContent: String) {
         originalContent = stringContent
         var d = stringContent.componentsSeparatedByString("|")
@@ -38,7 +38,7 @@ struct OptionDTO: DebugPrintable, Equatable {
         }
     }
 
-    mutating func fetchImage(completionHandler: () -> ()) {
+    func fetchImage(completionHandler: () -> ()) {
         if let imgName = self.imageContentURLString {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
@@ -56,12 +56,12 @@ struct OptionDTO: DebugPrintable, Equatable {
             completionHandler()
         }
     }
-    
+
     var debugDescription: String {
         return "[ Option content: \(stringContent) ]"
     }
 }
 
-func ==(lhs:OptionDTO, rhs:OptionDTO) -> Bool {
-    return lhs.stringContent == rhs.stringContent && lhs.imageContentURLString == rhs.imageContentURLString
+func ==(lhs: OptionDTO, rhs: OptionDTO) -> Bool {
+    return lhs.originalContent == rhs.originalContent
 }
