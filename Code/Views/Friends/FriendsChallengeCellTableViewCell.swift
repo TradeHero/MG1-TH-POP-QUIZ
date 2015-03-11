@@ -36,7 +36,7 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
     @IBOutlet weak var friendAvatarView: UIImageView!
     @IBOutlet weak var friendNameLabel: UILabel!
 
-    var friendUser: THUserFriend! {
+    var friendUser: UserFriend! {
         didSet {
             if self.friendUser != nil {
                 if self.friendUser.isTHUser {
@@ -73,7 +73,7 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
         if (self.invitableFriend != nil) {
             self.delegate.friendUserCell(self, didTapInviteUser: self.invitableFriend)
         } else if self.friendUser.isTHUser {
-            self.delegate.friendUserCell(self, didTapChallengeUser: self.friendUser.userID)
+            self.delegate.friendUserCell(self, didTapChallengeUser: self.friendUser.thUserId)
         }
 
     }
@@ -88,10 +88,10 @@ class FriendsChallengeCellTableViewCell: UITableViewCell {
         super.layoutIfNeeded()
     }
 
-    func bindFriendUser(friendUser: THUserFriend, index: Int) {
+    func bindFriendUser(friendUser: UserFriend, index: Int) {
         self.friendUser = friendUser
         self.friendNameLabel.text = friendUser.name
-        self.friendAvatarView.sd_setImageWithURL(NSURL(string: friendUser.facebookPictureURL)) {
+        self.friendAvatarView.sd_setImageWithURL(NSURL(string: friendUser.fbPicUrl)) {
             [unowned self] (image, _, _, _) in
             self.friendAvatarView.image = image.centerCropImage()
         }

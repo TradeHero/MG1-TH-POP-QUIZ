@@ -34,30 +34,41 @@ struct THCache {
     }
 
     //Friends List
-    static func saveFriendsListToCache(facebookFriends: [THUserFriend], tradeheroFriends: [THUserFriend]) {
-        let dict = [kFBFriendsDictionaryKey: facebookFriends,
-                    kTHFriendsDictionaryKey: tradeheroFriends]
+    static func saveFriendsListToCache(facebookFriends: [UserFriend], tradeheroFriends: [UserFriend]) {
+        let fbFriendDicts = facebookFriends.map { $0.dictionaryRepresentation }
+        let thFriendDicts = tradeheroFriends.map { $0.dictionaryRepresentation }
+        
+        let dict: [String:AnyObject] = [kFBFriendsDictionaryKey: fbFriendDicts,
+                    kTHFriendsDictionaryKey: thFriendDicts]
         EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
-        debugPrintln("\(facebookFriends.count + tradeheroFriends.count) friends cached.")
+        debugPrintln("\(fbFriendDicts.count + thFriendDicts.count) friends cached.")
     }
 
-    typealias CacheFriendsTuple = (facebookFriends:[THUserFriend], tradeheroFriends:[THUserFriend])
+    typealias CacheFriendsTuple = (facebookFriends:[UserFriend], tradeheroFriends:[UserFriend])
 
     static func getFriendsListFromCache() -> CacheFriendsTuple {
         let object = EGOCache.globalCache().objectForKey(kTHUserFriendsCacheStoreKey)
 
-        if let dict = object as? [String:[THUserFriend]] {
-            var facebookFriends = [THUserFriend]()
-            var tradeheroFriends = [THUserFriend]()
+        if let dict = object as? [String:[[String:AnyObject]]] {
+            var facebookFriends = [UserFriend]()
+            var tradeheroFriends = [UserFriend]()
 
             if let fbF = dict[kFBFriendsDictionaryKey] {
-                facebookFriends = fbF
-                debugPrintln("Retrieved \(fbF.count) Facebook friend(s) from cache.")
+                for fbFDict in fbF {
+                    if let uf = UserFriend.decode(JSONValue.parse(fbFDict)) {
+                        facebookFriends.append(uf)
+                    }
+                }
+                debugPrintln("Retrieved \(facebookFriends.count) Facebook friend(s) from cache.")
             }
 
             if let thF = dict[kTHFriendsDictionaryKey] {
-                tradeheroFriends = thF
-                debugPrintln("Retrieved \(thF.count) TradeHero friend(s) from cache.")
+                for thFDict in thF {
+                    if let uf = UserFriend.decode(JSONValue.parse(thFDict)) {
+                        tradeheroFriends.append(uf)
+                    }
+                }
+                debugPrintln("Retrieved \(tradeheroFriends.count) TradeHero friend(s) from cache.")
             }
 
             return (facebookFriends: facebookFriends, tradeheroFriends: tradeheroFriends)
@@ -66,18 +77,24 @@ struct THCache {
         return (facebookFriends: [], tradeheroFriends: [])
     }
 
-    static func saveRandomFBFriends(users: [THUserFriend]) {
-        EGOCache.globalCache().setObject(users, forKey: kTHRandomFBFriendsCacheStoreKey)
+    static func saveRandomFBFriends(users: [UserFriend]) {
+        EGOCache.globalCache().setObject(users.map {
+            $0.dictionaryRepresentation
+            }, forKey: kTHRandomFBFriendsCacheStoreKey)
         debugPrintln("\(users.count) random friends users cached.")
     }
 
 
-    static func getRandomFBFriendsFromCache() -> [THUserFriend] {
+    static func getRandomFBFriendsFromCache() -> [UserFriend] {
         let object = EGOCache.globalCache().objectForKey(kTHRandomFBFriendsCacheStoreKey)
-
-        if let arr = object as? [THUserFriend] {
-            debugPrintln("Retrieved \(arr.count) random friends from cache.")
-            return arr
+        var friends = [UserFriend]()
+        if let arr = object as? [[String:AnyObject]] {
+            for FDict in arr {
+                if let uf = UserFriend.decode(JSONValue.parse(FDict)) {
+                    friends.append(uf)
+                }
+            }
+            return friends
         }
         return []
     }

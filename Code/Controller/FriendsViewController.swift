@@ -16,9 +16,9 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     private var THStaffList = [StaffUser]()
 
-    private var THFriendList = [THUserFriend]()
+    private var THFriendList = [UserFriend]()
 
-    private var FBFriendList = [THUserFriend]()
+    private var FBFriendList = [UserFriend]()
 
     private var FBInvitableFriends = [FacebookInvitableFriend]()
 
@@ -51,7 +51,6 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.loadStaff {
             [unowned self] in
             self.loadFriends()
-            self.loadInvitableFriends()
         }
     }
 
@@ -113,9 +112,14 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         self.tableView.reloadData()
 
-        let loadCompleteHandler: ((fbFriends:[THUserFriend], thFriends:[THUserFriend]) -> ()) = {
+        let loadCompleteHandler: ((fbFriends:[UserFriend], thFriends:[UserFriend]) -> ()) = {
             [unowned self] in
             self.FBFriendList = $0
+            self.FBInvitableFriends = self.FBFriendList.map{
+                friend in
+                var friendDict:[String: AnyObject] = ["id": friend.fbId, "name": friend.name, "picture": ["data": ["url": friend.fbPicUrl]]]
+                return FacebookInvitableFriend.decode(JSONValue.parse(friendDict))!
+            }
             self.THFriendList = $1
             self.tableView.reloadData()
         }

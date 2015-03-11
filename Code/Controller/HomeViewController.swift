@@ -24,7 +24,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var user: User = NetworkClient.sharedClient.user
 
     @IBOutlet weak var internalUserView: UIImageView!
-    private var facebookFriendsChallenge = [THUserFriend]()
+    private var facebookFriendsChallenge = [UserFriend]()
 
     private var noOpenChallenges: Bool {
         return self.openChallenges.count == 0

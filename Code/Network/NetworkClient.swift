@@ -156,10 +156,10 @@ class NetworkClient {
     /**
     GET api/Users/{userId}/getnewfriends?socialNetwork=FB
     */
-    typealias TFBHUserFriendTuple = (facebookFriends:[THUserFriend], tradeheroFriends:[THUserFriend])
+    typealias TFBHUserFriendTuple = (facebookFriends:[UserFriend], tradeheroFriends:[UserFriend])
 
     func fetchFriendListForUser(userId: Int, errorHandler: NSError -> (), completionHandler: TFBHUserFriendTuple -> ()) {
-        let url = "\(THServerAPIBaseURL)/Users/\(userId)/getnewfriends?socialNetwork=FB"
+        let url = "\(THServerAPIBaseURL)/users/\(userId)/getnewfriends?socialNetwork=FB"
         debugPrintln("Fetching Facebook friends for user \(userId)...")
 
 
@@ -168,24 +168,23 @@ class NetworkClient {
             if let e = error {
                 errorHandler(e)
             }
-            var friends: [THUserFriend] = []
+            var friends: [UserFriend] = []
 
             if let arr = content as? [AnyObject] {
                 debugPrintln("Parsing \(arr.count) objects as THUserFriend...")
                 for friendObj in arr {
-                    let friendDictionary = friendObj as [String:AnyObject]
-                    friends.append(THUserFriend(friendDTO: friendDictionary))
+                    friends.append(UserFriend.decode(JSONValue.parse(friendObj))!)
                 }
-                debugPrintln("Completely parsed objects as THUserFriend(s).")
+                debugPrintln("Completely parsed objects as User Friend(s).")
             }
-            var fbFrnds: [THUserFriend] = []
-            var thFrnds: [THUserFriend] = []
+            var fbFrnds: [UserFriend] = []
+            var thFrnds: [UserFriend] = []
 
             fbFrnds = friends.filter {
-                $0.userID == 0
+                $0.thUserId == 0
             }
             thFrnds = friends.filter {
-                $0.userID != 0
+                $0.thUserId != 0
             }
             debugPrintln("Successfully fetched \(friends.count) friend(s).")
             completionHandler((fbFrnds, thFrnds))
@@ -194,14 +193,14 @@ class NetworkClient {
         //debugPrintln(r)
     }
 
-    func getRandomFBFriendsForUser(numberOfUsers count: Int, forUser userId: Int, errorHandler: NSError -> (), completionHandler: [THUserFriend] -> ()) {
+    func getRandomFBFriendsForUser(numberOfUsers count: Int, forUser userId: Int, errorHandler: NSError -> (), completionHandler: [UserFriend] -> ()) {
         let url = "\(THServerAPIBaseURL)/users/\(userId)/getnewfriends?socialNetwork=FB&count=100"
         debugPrintln("Fetching Facebook friends for user \(userId)...")
 
         if THCache.objectExistForCacheKey(kTHRandomFBFriendsCacheStoreKey) {
             var friends = THCache.getRandomFBFriendsFromCache()
             friends.shuffle()
-            var filteredFriends = [THUserFriend]()
+            var filteredFriends = [UserFriend]()
             for f in friends {
                 if filteredFriends.count == count {
                     break
@@ -219,7 +218,7 @@ class NetworkClient {
                 return
             }
 
-            var friends: [THUserFriend] = []
+            var friends: [UserFriend] = []
             if var arr = content as? [AnyObject] {
                 arr.shuffle()
                 debugPrintln("Parsing \(arr.count) objects as THUserFriend...")
@@ -229,13 +228,15 @@ class NetworkClient {
                     if let uID: AnyObject = friendDictionary["thUserId"] {
                         let uIDInt = uID as Int
                         if uIDInt != 0 {
-                            friends.append(THUserFriend(friendDTO: friendDictionary))
+                            if let uf = UserFriend.decode(JSONValue.parse(friendDictionary)){
+                                friends.append(uf)
+                            }
                         }
                     }
                 }
                 debugPrintln("Completely parsed \(friends.count) objects as THUserFriend(s).")
                 THCache.saveRandomFBFriends(friends)
-                var filteredFriends = [THUserFriend]()
+                var filteredFriends = [UserFriend]()
                 for f in friends {
                     if filteredFriends.count == count {
                         break
@@ -545,7 +546,7 @@ class NetworkClient {
     GET api/games/\(id)/details
     */
     func fetchGame(gameId: Int, force: Bool = false, errorHandler: NSError -> (), completionHandler: Game -> ()) {
-        let url = "http://aa715d66c5d144cea2f12a2db4270f85.cloudapp.net/api/games/\(gameId)/details"
+        let url = "\(THGameAPIBaseURL)/api/games/\(gameId)/details"
         debugPrintln("Fetching game with game ID: \(gameId)...")
 
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {

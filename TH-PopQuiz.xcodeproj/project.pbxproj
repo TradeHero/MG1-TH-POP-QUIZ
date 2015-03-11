@@ -18,6 +18,7 @@
 		6D0DDF431AA6DC3F005FE31C /* Dev.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D0DDF421AA6DC3F005FE31C /* Dev.storyboard */; };
 		6D0FBB7C1A8C54FE006A4F4C /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0FBB7B1A8C54FE006A4F4C /* FacebookService.swift */; };
 		6D0FBB7E1A8C5A45006A4F4C /* FacebookInvitableFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0FBB7D1A8C5A45006A4F4C /* FacebookInvitableFriends.swift */; };
+		6D2A23121AAFEAE90024831A /* UserFriendDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2A23111AAFEAE90024831A /* UserFriendDTO.swift */; };
 		6D2B96651AA9595100513ABE /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2B96641AA9595100513ABE /* Game.swift */; };
 		6D3AF97E19C2A9C00085682E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */; };
 		6D3AF98419C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */; };
@@ -159,6 +160,7 @@
 		6D0DDF421AA6DC3F005FE31C /* Dev.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Dev.storyboard; sourceTree = "<group>"; };
 		6D0FBB7B1A8C54FE006A4F4C /* FacebookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		6D0FBB7D1A8C5A45006A4F4C /* FacebookInvitableFriends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookInvitableFriends.swift; sourceTree = "<group>"; };
+		6D2A23111AAFEAE90024831A /* UserFriendDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFriendDTO.swift; sourceTree = "<group>"; };
 		6D2B96641AA9595100513ABE /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		6D3AF97D19C2A9C00085682E /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6D3AF98219C2AE2C0085682E /* ChallengesTimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesTimelineTableViewCell.swift; sourceTree = "<group>"; };
@@ -558,6 +560,7 @@
 				6DD2313619B8204900B5D05E /* QuestionResult.swift */,
 				6DD2313819B8204900B5D05E /* THUserFriend.swift */,
 				6DD2313719B8204900B5D05E /* User.swift */,
+				6D2A23111AAFEAE90024831A /* UserFriendDTO.swift */,
 			);
 			path = "Domain Objects";
 			sourceTree = "<group>";
@@ -1023,6 +1026,7 @@
 				6DD2316C19B8204900B5D05E /* AppDelegate.swift in Sources */,
 				6DD2318E19B8204900B5D05E /* DesignableButton.swift in Sources */,
 				6D07032019EB733D0056F431 /* StaffChallengeCellTableViewCell.swift in Sources */,
+				6D2A23121AAFEAE90024831A /* UserFriendDTO.swift in Sources */,
 				6DE06E7019C8085C00EB4D2F /* THSwitch.swift in Sources */,
 				6DD2317319B8204900B5D05E /* ResultsViewController.swift in Sources */,
 				6D3DB3C219E3D29C006BC11B /* GameNotification.swift in Sources */,
