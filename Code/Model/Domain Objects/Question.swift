@@ -2,43 +2,258 @@
 //  Question.swift
 //  TH-PopQuiz
 //
-//  Created by Ryne Cheow on 7/30/14.
-//  Copyright (c) 2014 TradeHero. All rights reserved.
+//  Created by Ryne Cheow on 4/3/15.
+//  Copyright (c) 2015 TradeHero. All rights reserved.
 //
 
-import UIKit
+import Argo
+import Runes
 
+/// Type of questions, which might make question differs in presentation style.
+///
+/// - LogoType: Questions that presents based on logo-guessing mechanics. must contain an image.
+/// - TimedObfuscatorType: Questions that presents based on graphs of a certain interval or demographic, must contain an image.
+/// - TextualType: Questions that presents on a text-based (non-imagerial) form.
+///
 
-/// A linguistic expression used to make a request for information.
+enum QuestionType: Int {
+    case UnknownType = 0
+    case LogoType
+    case TimedObfuscatorType
+    case TextualType
 
-final class Question {
+    func description() -> String {
+        switch self {
+        case .LogoType:
+            return "Logo type"
+        case .TimedObfuscatorType:
+            return "Timed Obfuscator type"
+        case .TextualType:
+            return "Textual type"
+        case .UnknownType:
+            return "Unknown type"
+        }
+    }
+}
 
-    /// ID
-    let questionID: Int!
+enum QuestionCategory: Int {
+    case UnknownCategory = 0
+    case LogoToNameCategory
+    case LogoToTickerSymbolCategory
+    case NameToPriceRangeCategory
+    case NameToMarketCapRangeCategory
+    case PriceRangeToCompanyNameCategory
+    case HighestMarketCapCategory
+    case LowestMarketCapCategory
+    case CompanyNameToExchangeSymbolCategory
+    case OddOneOutCategory
+    case CompanyNameToSectorCategory
+    case StaticCategory
+
+    func description() -> String {
+        switch self {
+        case .UnknownCategory:
+            return "Unknown category"
+        case .LogoToNameCategory:
+            return "[1] Logo -> Name"
+        case .LogoToTickerSymbolCategory:
+            return "[2] Logo -> Ticker Symbol"
+        case .NameToPriceRangeCategory:
+            return "[3] Name -> Price Range"
+        case .NameToMarketCapRangeCategory:
+            return "[4] Name -> Market Cap Range"
+        case .PriceRangeToCompanyNameCategory:
+            return "[5] Price Range -> Company name"
+        case .HighestMarketCapCategory:
+            return "[6] Highest Market Cap"
+        case .LowestMarketCapCategory:
+            return "[7] Lowest Market Cap"
+        case .CompanyNameToExchangeSymbolCategory:
+            return "[8] Company name -> Exchange symbol"
+        case .OddOneOutCategory:
+            return "[9] Odd one out"
+        case .CompanyNameToSectorCategory:
+            return "[10] Company Name -> Sector"
+        case .StaticCategory:
+            return "[11] Static questions"
+        }
+    }
+}
+
+class Question: JSONDecodable, DebugPrintable, Equatable {
+    let questionID: Int
+
+    let originalContent: String
 
     /// Textual content of the question, must not be empty.
-    var questionContent: String!
+    let questionContent: String
 
     /// Type of question.
-    var questionType: QuestionType = QuestionType.UnknownType
+    let questionType: QuestionType = .UnknownType
 
-    var questionCategory: QuestionCategory = QuestionCategory.UnknownCategory
+    let questionCategory: QuestionCategory = .UnknownCategory
 
     /// Set of options of this current question instance
-    var options: OptionSet!
+    let correctOption: Option
+
+    let dummyOption: [Option]
 
     /// Image content url of the question, can be nil.
-    var questionImageURLString: String!
+    let questionImageURLString: String?
 
-    var questionImage: UIImage!
+    var questionImage: UIImage?
 
-    var accessoryImageContent: String!
+    let accessoryImageContent: String?
 
-    var accessoryImage: UIImage!
+    var accessoryImage: UIImage?
 
-    var subcategory: Int!
+    let subcategory: Int!
 
-    var difficulty: Int!
+    let difficulty: Int!
+
+
+    var allOptions: [Option] {
+        var allOpts = dummyOption + [correctOption]
+        allOpts.shuffle()
+        return allOpts
+    }
+
+    init(questionID: Int, originalContent: String, questionContent: String, questionType: QuestionType, questionCategory: QuestionCategory, correctOption: Option, dummyOption: [Option], questionImageURLString: String?, accessoryImageContent: String?, subcategory: Int!, difficulty: Int!) {
+        self.questionID = questionID
+        self.originalContent = originalContent
+        self.questionContent = questionContent
+        self.questionType = questionType
+        self.questionCategory = questionCategory
+        self.correctOption = correctOption
+        self.dummyOption = dummyOption
+        self.questionImageURLString = questionImageURLString
+        self.accessoryImageContent = accessoryImageContent
+        self.subcategory = subcategory
+        self.difficulty = difficulty
+    }
+
+
+    class func create(id: Int)(category: Int)(content: String)(option1: String)(option2: String)(option3: String)(option4: String)(subcategory: Int)(difficulty: Int) -> Question {
+
+        var questionType = QuestionType.UnknownType
+        var questionCategory = QuestionCategory.UnknownCategory
+        var questionContent: String!
+        var questionImageURLString: String!
+        var mainContent: String!
+        var accessoryImageContent: String!
+
+        var d = content.componentsSeparatedByString("|")
+        if d.count == 2 {
+            mainContent = d[0]
+            accessoryImageContent = d[1]
+        } else {
+            mainContent = content
+            accessoryImageContent = nil
+        }
+
+
+        switch category {
+        case 1:
+            questionType = .LogoType
+            questionCategory = .LogoToNameCategory
+            questionContent = "Which of the following companies does this logo correspond to?"
+            questionImageURLString = mainContent
+        case 2:
+            questionType = .LogoType
+            questionCategory = .LogoToTickerSymbolCategory
+            questionContent = "Which of the following ticker symbols does this logo correspond to?"
+            questionImageURLString = mainContent
+        case 3:
+            questionType = .TextualType
+            questionCategory = .NameToPriceRangeCategory
+            questionContent = "In which of the price ranges did \(mainContent) recently trade?"
+        case 4:
+            questionType = .TextualType
+            questionCategory = .NameToMarketCapRangeCategory
+            questionContent = "Which of the following ranges best represents the market cap of \(mainContent)?"
+        case 5:
+            questionType = .TextualType
+            questionCategory = .PriceRangeToCompanyNameCategory
+            questionContent = "Which of the 4 companies below trades in the price range of \(mainContent)"
+        case 6:
+            questionType = .TextualType
+            questionCategory = .HighestMarketCapCategory
+            questionContent = "Which of the following companies has highest market cap?"
+        case 7:
+            questionType = .TextualType
+            questionCategory = .LowestMarketCapCategory
+            questionContent = "Which of the following companies has lowest market cap?"
+        case 8:
+            questionType = .TextualType
+            questionCategory = .CompanyNameToExchangeSymbolCategory
+            questionContent = "Identify the exchange symbol of \(mainContent)."
+        case 9:
+            questionType = .TextualType
+            questionCategory = .OddOneOutCategory
+            questionContent = "Spot the odd one from the four companies below."
+        case 10:
+            questionType = .TextualType
+            questionCategory = .CompanyNameToSectorCategory
+            questionContent = "In which sector does the \(mainContent) operate?"
+        case 11:
+            questionType = .TextualType
+            questionCategory = .StaticCategory
+            questionContent = "\(mainContent)"
+        default:
+            questionType = .UnknownType
+            questionContent = "~ \(content) ~"
+        }
+
+        var option1 = Option(stringContent: option1)
+        var option2 = Option(stringContent: option2)
+        var option3 = Option(stringContent: option3)
+        var option4 = Option(stringContent: option4)
+
+        return Question(questionID: id, originalContent: content, questionContent: questionContent, questionType: questionType, questionCategory: questionCategory, correctOption: option1, dummyOption: [option2, option3, option4], questionImageURLString: questionImageURLString, accessoryImageContent: accessoryImageContent, subcategory: subcategory, difficulty: difficulty)
+    }
+
+    class func decode(j: JSONValue) -> Question? {
+        return Question.create
+                <^> j <| "id"
+                <*> j <| "category"
+                <*> j <| "content"
+                <*> j <| "option1"
+                <*> j <| "option2"
+                <*> j <| "option3"
+                <*> j <| "option4"
+                <*> j <| "subcategory"
+                <*> j <| "difficulty"
+    }
+
+    var dictionaryRepresentation: [String:AnyObject] {
+        return ["id": questionID,
+                "category": questionCategory.rawValue,
+                "content": originalContent,
+                "option1": correctOption.originalContent,
+                "option2": dummyOption[0].originalContent,
+                "option3": dummyOption[1].originalContent,
+                "option4": dummyOption[2].originalContent,
+                "subcategory": subcategory,
+                "difficulty": difficulty]
+    }
+
+    var debugDescription: String {
+        get {
+            var d = "{\n"
+            d += "ID: \(questionID)\n"
+            d += "Type: \(questionType.description())\n"
+            d += "Category: \(questionCategory.description())\n"
+            d += "Subcategory: \(subcategory)"
+            d += "Difficulty: \(difficulty)"
+            d += "Content: \(questionContent)\n"
+            let imgurl = questionImageURLString ?? "no image"
+            d += "Image name: \(imgurl)\n"
+            d += "Options: \(allOptions)"
+            d += "}\n"
+            return d
+        }
+    }
+
 
     func isGraphical() -> Bool {
         switch self.questionType {
@@ -49,108 +264,14 @@ final class Question {
         }
     }
 
-    init(questionDTO: [String:AnyObject]) {
-        if let id: AnyObject? = questionDTO["id"] {
-            self.questionID = (id as Int)
-        }
-        if let qType: AnyObject = questionDTO["category"] {
-            let qTypeInt = (qType as Int)
-            var contentStr: String!
-            if let q: AnyObject = questionDTO["content"] {
-                contentStr = (q as String)
-            }
-            var mainContent: String!
-            var d = contentStr.componentsSeparatedByString("|")
-            if d.count == 2 {
-                mainContent = d[0]
-                self.accessoryImageContent = d[1]
-            } else {
-                mainContent = contentStr
-                self.accessoryImageContent = nil
-            }
-
-            switch qTypeInt {
-            case 1:
-                self.questionType = .LogoType
-                self.questionCategory = .LogoToNameCategory
-                self.questionContent = "Which of the following companies does this logo correspond to?"
-                self.questionImageURLString = mainContent
-            case 2:
-                self.questionType = .LogoType
-                self.questionCategory = .LogoToTickerSymbolCategory
-                self.questionContent = "Which of the following ticker symbols does this logo correspond to?"
-                self.questionImageURLString = mainContent
-            case 3:
-                self.questionType = .TextualType
-                self.questionCategory = .NameToPriceRangeCategory
-                self.questionContent = "In which of the price ranges did \(mainContent) recently trade?"
-            case 4:
-                self.questionType = .TextualType
-                self.questionCategory = .NameToMarketCapRangeCategory
-                self.questionContent = "Which of the following ranges best represents the market cap of \(mainContent)?"
-            case 5:
-                self.questionType = .TextualType
-                self.questionCategory = .PriceRangeToCompanyNameCategory
-                self.questionContent = "Which of the 4 companies below trades in the price range of \(mainContent)"
-            case 6:
-                self.questionType = .TextualType
-                self.questionCategory = .HighestMarketCapCategory
-                self.questionContent = "Which of the following companies has highest market cap?"
-            case 7:
-                self.questionType = .TextualType
-                self.questionCategory = .LowestMarketCapCategory
-                self.questionContent = "Which of the following companies has lowest market cap?"
-            case 8:
-                self.questionType = .TextualType
-                self.questionCategory = .CompanyNameToExchangeSymbolCategory
-                self.questionContent = "Identify the exchange symbol of \(mainContent)."
-            case 9:
-                self.questionType = .TextualType
-                self.questionCategory = .OddOneOutCategory
-                self.questionContent = "Spot the odd one from the four companies below."
-            case 10:
-                self.questionType = .TextualType
-                self.questionCategory = .CompanyNameToSectorCategory
-                self.questionContent = "In which sector does the \(mainContent) operate?"
-            case 11:
-                self.questionType = .TextualType
-                self.questionCategory = .StaticCategory
-                self.questionContent = "\(mainContent)"
-            default:
-                self.questionType = QuestionType.UnknownType
-                self.questionContent = "~ \(contentStr) ~"
+    func checkOptionChoiceIfIsCorrect(choice: Option) -> Bool {
+        for opt in allOptions {
+            ///Choice exist
+            if opt == choice {
+                return correctOption == choice
             }
         }
-
-        var option1: Option!
-        if let o: AnyObject? = questionDTO["option1"] {
-            option1 = Option(stringContent: (o as String))
-        }
-
-        var option2: Option!
-        if let o: AnyObject? = questionDTO["option2"] {
-            option2 = Option(stringContent: (o as String))
-        }
-
-        var option3: Option!
-        if let o: AnyObject? = questionDTO["option3"] {
-            option3 = Option(stringContent: (o as String))
-        }
-
-        var option4: Option!
-        if let o: AnyObject? = questionDTO["option4"] {
-            option4 = Option(stringContent: (o as String))
-        }
-
-        self.options = OptionSet(correctOption: option1, dummyOptions: [option2, option3, option4])
-
-        if let diff: AnyObject? = questionDTO["difficulty"] {
-            self.difficulty = (diff as Int)
-        }
-
-        if let sub: AnyObject? = questionDTO["subcategory"] {
-            self.subcategory = (sub as Int)
-        }
+        return false
     }
 
     func fetchImage(completionHandler: () -> ()) {
@@ -173,18 +294,6 @@ final class Question {
         }
     }
 
-    func fetchOptionImageOperation(completionHandler: () -> ()) {
-        var count: Int = 0
-        for option in self.options.allOptions {
-            option.fetchImage {
-                count += 1
-                if count == 4 {
-                    completionHandler()
-                }
-            }
-        }
-    }
-
     func fetchAccessoryImageOperation(completionHandler: () -> ()) {
         if let imgName = self.accessoryImageContent {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
@@ -202,21 +311,31 @@ final class Question {
             self.fetchOptionImageOperation(completionHandler)
         }
     }
+
+    func fetchOptionImageOperation(completionHandler: () -> ()) {
+        var count: Int = 0
+        var options = [correctOption] + dummyOption
+
+        for var i = 0; i < options.count; i++ {
+            var option = options[i]
+            option.fetchImage {
+                count += 1
+                if count == 4 {
+                    completionHandler()
+                }
+            }
+        }
+    }
+
 }
 
-extension Question: Printable {
-    var description: String {
-        var d = "{\n"
-        d += "ID: \(questionID)\n"
-        d += "Type: \(questionType.description())\n"
-        d += "Category: \(questionCategory.description())\n"
-        d += "Subcategory: \(subcategory)"
-        d += "Difficulty: \(difficulty)"
-        d += "Content: \(questionContent)\n"
-        let imgurl = questionImageURLString ?? "no image"
-        d += "Image name: \(imgurl)\n"
-        d += "Options: \(options)"
-        d += "}\n"
-        return d
-    }
+func ==(lhs: Question, rhs: Question) -> Bool {
+    return lhs.questionID == rhs.questionID &&
+            lhs.questionContent == rhs.questionContent &&
+            lhs.questionType == rhs.questionType &&
+            lhs.questionCategory == rhs.questionCategory &&
+            lhs.questionImageURLString == rhs.questionImageURLString &&
+            lhs.accessoryImageContent == rhs.accessoryImageContent &&
+            lhs.subcategory == rhs.subcategory &&
+            lhs.difficulty == rhs.difficulty; //TODO compare options
 }

@@ -204,9 +204,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         let obj = notification.userInfo
         let obj2: AnyObject? = obj!["user"]
         if let obj2Dto = obj2 as? [String:AnyObject] {
-            
+
             var user = User.decode(JSONValue.parse(obj2Dto))
-            
+
             var vc: AnyObject! = UIStoryboard.mainStoryboard().instantiateInitialViewController()
             if let v = vc as? UINavigationController {
                 self.window?.rootViewController = v

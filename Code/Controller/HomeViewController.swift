@@ -18,9 +18,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var muteButton: UIButton!
 
-    private var openChallenges = [GameDTO]()
-    private var opponentPendingChallenges = [GameDTO]()
-    private var unfinishedChallenges = [GameDTO]()
+    private var openChallenges = [Game]()
+    private var opponentPendingChallenges = [Game]()
+    private var unfinishedChallenges = [Game]()
     private var user: User = NetworkClient.sharedClient.user
 
     @IBOutlet weak var internalUserView: UIImageView!
@@ -315,7 +315,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 
-    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: GameDTO) {
+    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game) {
         switch cell.status {
         case .Accept, .Play:
             var hud = JGProgressHUD.progressHUDWithDefaultStyle()

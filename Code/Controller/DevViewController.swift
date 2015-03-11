@@ -20,7 +20,6 @@ class DevViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
 
     @IBAction func quizDisplayAction(sender: UIButton) {
@@ -37,35 +36,34 @@ class DevViewController: UIViewController {
     @IBAction func imageQuizDisplayAction(sender: UIButton) {
         NetworkClient.sharedClient.fetchImageQuestions({
             debugPrintln("\($0.localizedDescription)")
-            }) {
-                questionSet in
-                let controller = UIStoryboard.devStoryboard().instantiateViewControllerWithIdentifier("QuizDebugViewController") as? QuizDebugViewController
-                var count = 0
-                var partialCompletionHandler: ()->() = {
-                    count++
-                    println(count)
-                    if(count == questionSet.count){
-                        controller?.bindQuestionSet(questionSet)
-                        self.presentViewController(controller!, animated: true, completion: nil)
-                    }
+        }) {
+            questionSet in
+            let controller = UIStoryboard.devStoryboard().instantiateViewControllerWithIdentifier("QuizDebugViewController") as? QuizDebugViewController
+            var count = 0
+            var partialCompletionHandler: () -> () = {
+                count++
+                println(count)
+                if (count == questionSet.count) {
+                    controller?.bindQuestionSet(questionSet)
+                    self.presentViewController(controller!, animated: true, completion: nil)
                 }
-                
-                for var i = 0; i<questionSet.count; i++  {
-                    var q = questionSet[i]
-                    q.fetchImage{
-                        partialCompletionHandler()
-                    }
+            }
+
+            for var i = 0; i < questionSet.count; i++ {
+                var q = questionSet[i]
+                q.fetchImage {
+                    partialCompletionHandler()
                 }
-                
-                
-                
-                
+            }
+
+
         }
     }
 
-    
+
     @IBAction func APItest(sender: AnyObject) {
-        NetworkClient.sharedClient.fetchGame(180, force: false, errorHandler: {error in}, completionHandler: {game in
+        NetworkClient.sharedClient.fetchGame(180, force: false, errorHandler: { error in }, completionHandler: {
+            game in
             debugPrintln(game)
         })
     }

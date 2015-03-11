@@ -35,7 +35,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
     @IBOutlet private weak var scoreDetailLabel: UILabel!
     @IBOutlet private weak var gameStatusImageView: UIImageView!
 
-    var game: GameDTO!
+    var game: Game!
 
     var status: ChallengeStatus = .Play {
         didSet {
@@ -60,7 +60,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.delegate.homeTurnChallengesCell(self, didTapAcceptChallenge: self.game)
     }
 
-    func bindChalllenge(challenge: GameDTO, status: ChallengeStatus) {
+    func bindChalllenge(challenge: Game, status: ChallengeStatus) {
         self.game = challenge
         self.status = status
         self.player = game.selfUser
@@ -161,6 +161,6 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
 }
 
 protocol HomeTurnChallengesTableViewCellDelegate: class, NSObjectProtocol {
-    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: GameDTO)
+    func homeTurnChallengesCell(cell: HomeTurnChallengesTableViewCell, didTapAcceptChallenge game: Game)
 }
 

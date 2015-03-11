@@ -26,13 +26,13 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet private weak var opponentWaitingImageView: UIImageView!
 
     @IBOutlet weak var nextOrRematchButton: UIButton!
-    private var game: GameDTO!
+    private var game: Game!
 
     private var player: User!
     private var opponent: User!
 
-    private var playerResult: GameResultDTO!
-    private var opponentResult: GameResultDTO!
+    private var playerResult: GameResult!
+    private var opponentResult: GameResult!
 
 
     override func viewDidLoad() {
@@ -79,7 +79,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
-    func bindGame(game: GameDTO) {
+    func bindGame(game: Game) {
         self.game = game
         self.determineUserRoles(game)
     }
@@ -113,7 +113,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
-    private func determineUserRoles(game: GameDTO) {
+    private func determineUserRoles(game: Game) {
         let user = NetworkClient.sharedClient.user
         if game.challenger.userId == user.userId {
             player = game.challenger

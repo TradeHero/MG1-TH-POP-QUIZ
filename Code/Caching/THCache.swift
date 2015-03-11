@@ -23,8 +23,8 @@ struct THCache {
         let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(user.userId)"
         EGOCache.globalCache().setObject(user.dictionaryRepresentation, forKey: userCacheKey)
     }
-    
-    static func getCachedUser(userId:Int) -> User?{
+
+    static func getCachedUser(userId: Int) -> User? {
         let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(userId)"
         let object = EGOCache.globalCache().objectForKey(userCacheKey)
         if let uJSON = object as? [String:AnyObject] {
@@ -83,11 +83,11 @@ struct THCache {
     }
 
     static func saveStaffListToCache(staffList: [StaffUser]) {
-        var staffDicts = [[String:AnyObject]]()
+        var staffDicts = [[String: AnyObject]]()
         for staff in staffList {
             staffDicts.append(staff.dictionaryRepresentation)
         }
-        
+
         EGOCache.globalCache().setObject(staffDicts, forKey: kTHStaffUserCacheStoreKey)
         debugPrintln("\(staffList.count) staff cached.")
     }
@@ -96,10 +96,10 @@ struct THCache {
         let object = EGOCache.globalCache().objectForKey(kTHStaffUserCacheStoreKey)
 
         var staffUsers = [StaffUser]()
-        
+
         if let arr = object as? [[String:AnyObject]] {
             for staffDict in arr {
-                if let u = User.decode(JSONValue.parse(staffDict)){
+                if let u = User.decode(JSONValue.parse(staffDict)) {
                     let staffU = StaffUser(user: u, funnyName: (staffDict["funnyName"] as? String) ?? "")
                     staffUsers.append(staffU)
 
@@ -112,17 +112,17 @@ struct THCache {
 
 
     //Game
-    static func saveGameToCache(game: GameDTO, gameId: Int) {
+    static func saveGameToCache(game: Game, gameId: Int) {
         let gameCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(gameId)"
         EGOCache.globalCache().setObject(game.dictionaryRepresentation, forKey: gameCacheKey)
 
     }
 
-    static func getGameFromCache(gameId: Int) -> GameDTO? {
+    static func getGameFromCache(gameId: Int) -> Game? {
         let gameCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(gameId)"
         let object = EGOCache.globalCache().objectForKey(gameCacheKey)
         if let gJSON = object as? [String:AnyObject] {
-            return GameDTO.decode(JSONValue.parse(gJSON))
+            return Game.decode(JSONValue.parse(gJSON))
         }
         return nil
     }

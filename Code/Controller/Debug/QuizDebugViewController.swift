@@ -41,12 +41,12 @@ class QuizDebugViewController: UIViewController {
 
     @IBOutlet weak var difficultyLabel: UILabel!
 
-    var questionSet = [QuestionDTO]()
+    var questionSet = [Question]()
 
 
     var currentQuestionIndex: Int = 0
 
-    func bindQuestionSet(questionSet: [QuestionDTO]) {
+    func bindQuestionSet(questionSet: [Question]) {
         self.questionSet = questionSet
 //        self.questionSet.shuffle()
     }
@@ -66,7 +66,7 @@ class QuizDebugViewController: UIViewController {
         setupViewWithQuestion(firstQuestion!)
     }
 
-    private func setupViewWithQuestion(question: QuestionDTO) {
+    private func setupViewWithQuestion(question: Question) {
         questionView.removeAllSubviews()
         let contentView = setUpQuestionViewWithQuestion(question)
         questionView.addSubview(contentView)
@@ -107,7 +107,7 @@ class QuizDebugViewController: UIViewController {
         }
     }
 
-    private func setUpQuestionViewWithQuestion(question: QuestionDTO) -> UIView {
+    private func setUpQuestionViewWithQuestion(question: Question) -> UIView {
         if question.isGraphical() {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
                     , owner: self, options: nil)[0] as QuestionViewWithImage

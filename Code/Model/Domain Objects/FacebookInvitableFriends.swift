@@ -9,7 +9,7 @@
 import Argo
 import Runes
 
-struct FacebookInvitableFriend: JSONDecodable, DebugPrintable {
+struct FacebookInvitableFriend: JSONDecodable, DebugPrintable, DictionaryRepresentation {
     let inviteToken: String
 
     let name: String
@@ -33,4 +33,7 @@ struct FacebookInvitableFriend: JSONDecodable, DebugPrintable {
         }
     }
 
+    var dictionaryRepresentation: [String:AnyObject] {
+        return ["id": inviteToken, "name": name, "picture": ["data": ["url": pictureUrl ?? NSNull()]]]
+    }
 }

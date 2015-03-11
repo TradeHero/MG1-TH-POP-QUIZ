@@ -65,7 +65,7 @@ class QuizViewController: UIViewController {
         }
     }
 
-    var game: GameDTO!
+    var game: Game!
 
     private var stopwatch: NSTimer? = nil
 
@@ -90,7 +90,7 @@ class QuizViewController: UIViewController {
     }
 
 
-    private var currentQuestion: QuestionDTO {
+    private var currentQuestion: Question {
         return game.questionSet[current_q]
     }
     private var isTimedObfuscatorQuestion: Bool {
@@ -430,7 +430,7 @@ class QuizViewController: UIViewController {
         roundIndicatorLabel.alpha = 0
     }
 
-    private func setUpQuestionViewWithQuestion(question: QuestionDTO) -> UIView {
+    private func setUpQuestionViewWithQuestion(question: Question) -> UIView {
         if question.isGraphical() {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
                     , owner: self, options: nil)[0] as QuestionViewWithImage
@@ -465,7 +465,7 @@ class QuizViewController: UIViewController {
         }
     }
 
-    private func setUpViewWithQuestion(question: QuestionDTO) {
+    private func setUpViewWithQuestion(question: Question) {
         self.resetButtons()
         didRemoveOptions = false
         hintUsed = 0
@@ -606,7 +606,7 @@ class QuizViewController: UIViewController {
         self.questionResults.append(QuestionResult(questionID: currentQuestion.questionID, timeTaken: Double(MAX_ALLOWED_TIME - current_timeLeft), correct: isCorrect, score: score))
     }
 
-    func bindGameAndUsers(game: GameDTO, player: User, opponent: User) {
+    func bindGameAndUsers(game: Game, player: User, opponent: User) {
         self.game = game
 
         if game.challenger == opponent {

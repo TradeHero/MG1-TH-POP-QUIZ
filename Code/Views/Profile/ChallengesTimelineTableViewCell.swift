@@ -22,14 +22,14 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
     private var winningColor = UIColor(hex: 0x7ED321)
     private var losingColor = UIColor(hex: 0xD0021B)
 
-    private var game: GameDTO!
+    private var game: Game!
 
     private var opponent: User!
 
-    private var playerResult: GameResultDTO!
-    private var opponentResult: GameResultDTO!
+    private var playerResult: GameResult!
+    private var opponentResult: GameResult!
 
-    func bindGame(game: GameDTO) {
+    func bindGame(game: Game) {
         if game.isGameCompletedByBothPlayer {
             self.game = game
             self.opponent = game.awayUser

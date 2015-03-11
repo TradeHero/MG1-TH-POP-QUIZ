@@ -2,17 +2,13 @@
 //  Option.swift
 //  TH-PopQuiz
 //
-//  Created by Ryne Cheow on 7/30/14.
-//  Copyright (c) 2014 TradeHero. All rights reserved.
+//  Created by Ryne Cheow on 8/3/15.
+//  Copyright (c) 2015 TradeHero. All rights reserved.
 //
 
 import UIKit
 
-/// Choices that are of a given question.
-
-final class Option {
-
-    /// String content of the option
+class Option: DebugPrintable, Equatable {
     let stringContent: String!
 
     let imageContentURLString: String!
@@ -22,12 +18,16 @@ final class Option {
     lazy var isGraphical: Bool = {
         return self.imageContentURLString != nil
     }()
+
+    let originalContent: String
+
     /**
-    Initialise option with string content and image content
-    
-    :param: stringContent The string content of the option
-    */
+     Initialise option with string content and image content
+
+     :param: stringContent The string content of the option
+     */
     init(stringContent: String) {
+        originalContent = stringContent
         var d = stringContent.componentsSeparatedByString("|")
         if d.count == 2 {
             self.stringContent = d[0]
@@ -56,10 +56,12 @@ final class Option {
             completionHandler()
         }
     }
-}
 
-extension Option: Printable {
-    var description: String {
+    var debugDescription: String {
         return "[ Option content: \(stringContent) ]"
     }
+}
+
+func ==(lhs: Option, rhs: Option) -> Bool {
+    return lhs.originalContent == rhs.originalContent
 }
