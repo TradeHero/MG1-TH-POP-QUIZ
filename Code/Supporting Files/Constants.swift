@@ -263,9 +263,9 @@ func isInternalUser(user: User) -> Bool {
     return users.count == 1
 }
 
-func getClassName(classType:AnyClass) -> String {
-    
+func getClassName(classType: AnyClass) -> String {
+
     let classString = NSStringFromClass(classType.self)
-    let range = classString.rangeOfString(".", options: NSStringCompareOptions.CaseInsensitiveSearch, range: Range<String.Index>(start:classString.startIndex, end: classString.endIndex), locale: nil)
+    let range = classString.rangeOfString(".", options: NSStringCompareOptions.CaseInsensitiveSearch, range: Range<String.Index>(start: classString.startIndex, end: classString.endIndex), locale: nil)
     return classString.substringFromIndex(range!.endIndex)
 }

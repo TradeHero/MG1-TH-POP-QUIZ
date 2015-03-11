@@ -96,7 +96,7 @@ class NetworkClient {
                 errorHandler(responseError)
                 return
             }
-                    
+
             if response?.statusCode == 200 {
                 self.saveCredentials(accessToken)
 
@@ -299,7 +299,7 @@ class NetworkClient {
                     }
                     println("Parsed \(unfinishedChallenges.count) unfinished challenges.")
                 }
-                
+
                 //parse opponent pending challenges
                 if let opponentPendingChallengeDtos = allChallengeDtos["opponnentPendingChallenges"] as? [AnyObject] {
                     println("Parsing \(opponentPendingChallengeDtos.count) opponent pending challenges.")
@@ -309,8 +309,8 @@ class NetworkClient {
                     }
                     println("Parsed \(opponentPendingChallenges.count) opponent pending challenges.")
                 }
-                
-                completionHandler((unfinishedChallenges:unfinishedChallenges, openChallenges:openChallenges, opponentPendingChallenges:opponentPendingChallenges))
+
+                completionHandler((unfinishedChallenges: unfinishedChallenges, openChallenges: openChallenges, opponentPendingChallenges: opponentPendingChallenges))
             }
         }
         //debugPrintln(r)
@@ -330,7 +330,7 @@ class NetworkClient {
                 errorHandler(e)
             }
             var closedChallenges = [Game]()
-            
+
             if let closedChallengesDTOs = content as? [AnyObject] {
                 println("Parsing \(closedChallenges.count) closed challenges.")
                 for dto in closedChallengesDTOs {
@@ -378,11 +378,11 @@ class NetworkClient {
                 if let challengerResultDTO = gameResults["challengerResult"] as? [String:AnyObject] {
                     game.challengerResult = GameResult.decode(JSONValue.parse(challengerResultDTO))
                 }
-                
+
                 if let opponentResultDTO = gameResults["opponentResult"] as? [String:AnyObject] {
                     game.opponentResult = GameResult.decode(JSONValue.parse(opponentResultDTO))
                 }
-                
+
                 completionHandler(game)
             }
         }
@@ -408,16 +408,16 @@ class NetworkClient {
             var opponentResult: GameResult?
 
             if let resultsDTO = content as? [String:AnyObject] {
-                
+
                 if let challengerResultDTO = resultsDTO["challengerResult"] as? [String:AnyObject] {
                     challengerResult = GameResult.decode(JSONValue.parse(challengerResultDTO))
                 }
-                
+
                 if let opponentResultDTO = resultsDTO["opponentResult"] as? [String:AnyObject] {
                     opponentResult = GameResult.decode(JSONValue.parse(opponentResultDTO))
                 }
-                
-                completionHandler((challengerResult:challengerResult, opponentResult:opponentResult))
+
+                completionHandler((challengerResult: challengerResult, opponentResult: opponentResult))
             }
         }
 
@@ -547,13 +547,13 @@ class NetworkClient {
     func fetchGame(gameId: Int, force: Bool = false, errorHandler: NSError -> (), completionHandler: Game -> ()) {
         let url = "http://aa715d66c5d144cea2f12a2db4270f85.cloudapp.net/api/games/\(gameId)/details"
         debugPrintln("Fetching game with game ID: \(gameId)...")
-        
+
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             [unowned self] _, response, content, error in
             if let e = error {
                 errorHandler(e)
             }
-            
+
             if response?.statusCode == 200 {
                 if let responseJSON = content as? [String:AnyObject] {
                     var game = Game.decode(JSONValue.parse(responseJSON))!
@@ -561,7 +561,7 @@ class NetworkClient {
                     completionHandler(game)
                 }
             }
-            
+
         }
         debugPrintln(r)
     }
@@ -666,9 +666,9 @@ class NetworkClient {
 
         debugPrintln(r)
     }
-    
+
     //MARK: Debug Items
-    
+
     /**
     Fetch all static questions
     
@@ -679,7 +679,7 @@ class NetworkClient {
         if (!isInternalUser(self.authenticatedUser)) {
             errorHandler(NSError(domain: "com.mymanisku.THPopQuiz", code: 1002, userInfo: [NSLocalizedDescriptionKey: "Non-internal user attempted retrieval"]))
         }
-        
+
         let r = self.request(.GET, "\(THGameAPIBaseURL)/debugStatic", parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             if let e = error {
@@ -693,13 +693,13 @@ class NetworkClient {
                         questions.append(question)
                     }
                 }
-                
+
             }
             completionHandler(questions)
         }
         debugPrintln(r)
     }
-    
+
     /**
     Fetch all static questions
     
@@ -710,7 +710,7 @@ class NetworkClient {
         if (!isInternalUser(self.authenticatedUser)) {
             errorHandler(NSError(domain: "com.mymanisku.THPopQuiz", code: 1002, userInfo: [NSLocalizedDescriptionKey: "Non-internal user attempted retrieval"]))
         }
-        
+
         let r = self.request(.GET, "\(THGameAPIBaseURL)/debugImage", parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
             _, response, content, error in
             if let e = error {
@@ -724,13 +724,13 @@ class NetworkClient {
                         questions.append(question)
                     }
                 }
-                
+
             }
             completionHandler(questions)
         }
         debugPrintln(r)
     }
-    
+
 
 
     // MARK:- Class functions

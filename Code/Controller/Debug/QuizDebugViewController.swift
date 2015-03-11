@@ -82,7 +82,7 @@ class QuizDebugViewController: UIViewController {
             button.resetButton()
             button.enable()
         }
-        
+
         var i = 0
         for option in optionSet {
             optionButtonSet[i].configureButtonWithContent(option.stringContent, imageContent: option.imageContent)
@@ -171,14 +171,14 @@ class QuizDebugViewController: UIViewController {
 
     }
 
-    
+
     @IBAction private func optionSelected(sender: OptionButton) {
         for button in self.optionGroup {
             if sender !== button {
                 button.shrink()
             }
         }
-        
+
         if sender.is_answer {
             sender.configureAsCorrect()
             playCorrectSound()
@@ -189,5 +189,5 @@ class QuizDebugViewController: UIViewController {
         }
     }
 
-    
+
 }
