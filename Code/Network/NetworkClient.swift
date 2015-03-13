@@ -361,11 +361,10 @@ class NetworkClient {
 
         debugPrintln("Posting results for game \(game.id)...")
 
-        var resultSet: [[String:AnyObject]] = []
-        for result in questionResults {
-            var resultData: [String:AnyObject] = ["questionId": result.questionId, "time": result.timeTaken, "rawScore": result.rawScore]
-            resultSet.append(resultData)
+        var resultSet:[[String:AnyObject]] = questionResults.map {
+             return ["questionId": $0.questionId, "time": $0.timeTaken, "rawScore": $0.rawScore]
         }
+        
         var param: [String:AnyObject] = ["gameId": game.id, "results": resultSet, "correctStreak": highestCombo, "hintsUsed": hints]
 
         let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
@@ -546,7 +545,7 @@ class NetworkClient {
     GET api/games/\(id)/details
     */
     func fetchGame(gameId: Int, force: Bool = false, errorHandler: NSError -> (), completionHandler: Game -> ()) {
-        let url = "\(THGameAPIBaseURL)/api/games/\(gameId)/details"
+        let url = "\(THGameAPIBaseURL)/\(gameId)/details"
         debugPrintln("Fetching game with game ID: \(gameId)...")
 
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
@@ -689,10 +688,9 @@ class NetworkClient {
             }
             var questions = [Question]()
             if let d = content as? [AnyObject] {
-                for rawQuestion in d {
-                    if let question = Question.decode(JSONValue.parse(rawQuestion)) {
-                        questions.append(question)
-                    }
+                
+                questions = d.map{
+                    return Question.decode(JSONValue.parse($0))!
                 }
 
             }
