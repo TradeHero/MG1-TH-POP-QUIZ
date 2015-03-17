@@ -285,12 +285,7 @@
                         var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
                         cancelAnimationFrame(animFrameId);
                         var res = this.questionResults;
-                        Client.postResults(this.game.gameId, res, this.combo, this.hintsUsed)
-                            .then(function (data) {
-                                console.log("Hi" + data);
-                            });
-                        console.log(this.selfScore);
-
+                        Client.postResults(this.game.gameId, res, this.combo, this.hintsUsed);
                     }
                 }
             }

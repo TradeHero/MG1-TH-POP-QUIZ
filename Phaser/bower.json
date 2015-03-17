@@ -1,0 +1,21 @@
+{
+  "name": "popQuizPhaser",
+  "version": "0.0.1",
+  "description": "popquiz game using Phaser framework",
+  "authors": [
+    "Malvin"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "phaser": "~2.2.2"
+  }
+}
