@@ -45,7 +45,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
             case .Nudge:
                 configureAsNudgeMode()
             case .Invited:
-                configureAsNudgedMode()
+                configureAsInvitedMode()
             case .Accept:
                 configureAsAcceptChallengeMode()
             }
@@ -77,7 +77,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
 
             if let lastNudged = challenge.lastNudgedOpponentAt {
                 if lastNudged.timeIntervalSinceDate(NSDate()) < 5 {
-                    self.configureAsNudgedMode()
+                    self.configureAsInvitedMode()
                 }
             }
 
@@ -94,11 +94,8 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.challengerDisplayNameLabel.text = opponent!.displayName
         self.challengerImageView.sd_setImageWithURL(NSURL(string: opponent!.pictureURL!)) {
             [unowned self] (image, _, _, _) in
-            if let i = image {
-                self.challengerImageView.image = i.centerCropImage()
-            } else {
-                self.challengerImageView.image = UIImage(named: "EmptyAvatar")!
-            }
+            
+            self.challengerImageView.image = image != nil ? image.centerCropImage() : UIImage(named: "EmptyAvatar")!
         }
 
     }
@@ -128,7 +125,7 @@ class HomeTurnChallengesTableViewCell: UITableViewCell {
         self.gameStatusImageView.image = nil
     }
 
-    func configureAsNudgedMode() {
+    func configureAsInvitedMode() {
         self.actionButton.enabled = false
         self.actionButton.setTitle("Nudged", forState: .Normal)
         self.actionButton.setBackgroundImage(UIImage(named: "BlueButtonBackground"), forState: .Normal)

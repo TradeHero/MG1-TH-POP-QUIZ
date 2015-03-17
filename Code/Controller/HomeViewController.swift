@@ -343,7 +343,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             //TODO send notification
             NetworkClient.sharedClient.nudgeGameUser(game) {
             }
-            cell.configureAsNudgedMode()
+            cell.configureAsInvitedMode()
             cell.game.lastNudgedOpponentAt = NSDate()
         default:
             break
@@ -364,6 +364,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func friendUserCell(cell: FriendsChallengeCellTableViewCell, didTapInviteUser inviteUser: FacebookInvitableFriend) {
+        
     }
     //MARK:- UI methods
     private func createHeaderViewForEmptyTurn() -> UITableViewHeaderFooterView {
