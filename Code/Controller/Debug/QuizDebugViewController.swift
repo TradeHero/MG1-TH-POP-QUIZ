@@ -85,7 +85,7 @@ class QuizDebugViewController: UIViewController {
 
         var i = 0
         for option in optionSet {
-            optionButtonSet[i].configureButtonWithContent(option.stringContent, imageContent: option.imageContent)
+            optionButtonSet[i].configureButtonWithContent(option.content, imageContent: option.imageContent)
             if question.checkOptionChoiceIfIsCorrect(option) {
                 optionButtonSet[i].is_answer = true
             } else {

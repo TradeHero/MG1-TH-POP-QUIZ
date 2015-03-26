@@ -96,7 +96,7 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
     /// Set of options of this current question instance
     let correctOption: Option
 
-    let dummyOption: [Option]
+    let dummyOptions: [Option]
 
     /// Image content url of the question, can be nil.
     let questionImageURLString: String?
@@ -113,19 +113,19 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
 
 
     var allOptions: [Option] {
-        var allOpts = dummyOption + [correctOption]
+        var allOpts = dummyOptions + [correctOption]
         allOpts.shuffle()
         return allOpts
     }
 
-    init(questionID: Int, originalContent: String, questionContent: String, questionType: QuestionType, questionCategory: QuestionCategory, correctOption: Option, dummyOption: [Option], questionImageURLString: String?, accessoryImageContent: String?, subcategory: Int!, difficulty: Int!) {
+    init(questionID: Int, originalContent: String, questionContent: String, questionType: QuestionType, questionCategory: QuestionCategory, correctOption: Option, dummyOptions: [Option], questionImageURLString: String?, accessoryImageContent: String?, subcategory: Int!, difficulty: Int!) {
         self.questionID = questionID
         self.originalContent = originalContent
         self.questionContent = questionContent
         self.questionType = questionType
         self.questionCategory = questionCategory
         self.correctOption = correctOption
-        self.dummyOption = dummyOption
+        self.dummyOptions = dummyOptions
         self.questionImageURLString = questionImageURLString
         self.accessoryImageContent = accessoryImageContent
         self.subcategory = subcategory
@@ -133,7 +133,7 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
     }
 
 
-    class func create(id: Int)(category: Int)(content: String)(option1: String)(option2: String)(option3: String)(option4: String)(subcategory: Int)(difficulty: Int) -> Question {
+        class func create(id: Int)(category: Int)(content: String)(correctOption: Option)(dummyOptions: [Option])(subcategory: Int)(difficulty: Int) -> Question {
 
         var questionType = QuestionType.UnknownType
         var questionCategory = QuestionCategory.UnknownCategory
@@ -204,12 +204,9 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
             questionContent = "~ \(content) ~"
         }
 
-        var option1 = Option(stringContent: option1)
-        var option2 = Option(stringContent: option2)
-        var option3 = Option(stringContent: option3)
-        var option4 = Option(stringContent: option4)
+        
 
-        return Question(questionID: id, originalContent: content, questionContent: questionContent, questionType: questionType, questionCategory: questionCategory, correctOption: option1, dummyOption: [option2, option3, option4], questionImageURLString: questionImageURLString, accessoryImageContent: accessoryImageContent, subcategory: subcategory, difficulty: difficulty)
+        return Question(questionID: id, originalContent: content, questionContent: questionContent, questionType: questionType, questionCategory: questionCategory, correctOption: correctOption, dummyOptions: dummyOptions, questionImageURLString: questionImageURLString, accessoryImageContent: accessoryImageContent, subcategory: subcategory, difficulty: difficulty)
     }
 
     class func decode(j: JSONValue) -> Question? {
@@ -217,10 +214,8 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
                 <^> j <| "id"
                 <*> j <| "category"
                 <*> j <| "content"
-                <*> j <| "option1"
-                <*> j <| "option2"
-                <*> j <| "option3"
-                <*> j <| "option4"
+                <*> j <| "correctOption"
+                <*> j <|| "dummyOptions"
                 <*> j <| "subcategory"
                 <*> j <| "difficulty"
     }
@@ -229,10 +224,10 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
         return ["id": questionID,
                 "category": questionCategory.rawValue,
                 "content": originalContent,
-                "option1": correctOption.originalContent,
-                "option2": dummyOption[0].originalContent,
-                "option3": dummyOption[1].originalContent,
-                "option4": dummyOption[2].originalContent,
+                "correctOption": correctOption.dictionaryRepresentation,
+            "dummyOptions": dummyOptions.map{
+                $0.dictionaryRepresentation
+            },
                 "subcategory": subcategory,
                 "difficulty": difficulty]
     }
@@ -314,7 +309,7 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
 
     func fetchOptionImageOperation(completionHandler: () -> ()) {
         var count: Int = 0
-        var options = [correctOption] + dummyOption
+        var options = [correctOption] + dummyOptions
 
         for var i = 0; i < options.count; i++ {
             var option = options[i]

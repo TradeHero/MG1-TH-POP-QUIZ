@@ -6,49 +6,47 @@
 //  Copyright (c) 2015 TradeHero. All rights reserved.
 //
 
-import UIKit
+import Argo
+import Runes
 
-class Option: DebugPrintable, Equatable {
-    let stringContent: String!
 
-    let imageContentURLString: String!
+class Option: DebugPrintable, Equatable, DictionaryRepresentation {
+    let content : String
+    let accessoryImageUrl : String?
 
     var imageContent: UIImage!
 
     lazy var isGraphical: Bool = {
-        return self.imageContentURLString != nil
+        return self.accessoryImageUrl != nil
     }()
 
-    let originalContent: String
-
+    init(content:String, accessoryImageUrl:String?){
+        self.content = content
+        self.accessoryImageUrl = accessoryImageUrl
+    }
+    
+    class func create(content: String)(accessoryImageUrl: String?)-> Option {
+        return Option(content: content, accessoryImageUrl: accessoryImageUrl)
+    }
     /**
      Initialise option with string content and image content
 
      :param: stringContent The string content of the option
      */
-    init(stringContent: String) {
-        originalContent = stringContent
-        var d = stringContent.componentsSeparatedByString("|")
-        if d.count == 2 {
-            self.stringContent = d[0]
-            self.imageContentURLString = d[1]
-        } else {
-            self.stringContent = stringContent
-            self.imageContentURLString = nil
-        }
-    }
-
+    
     func fetchImage(completionHandler: () -> ()) {
-        if let imgName = self.imageContentURLString {
+        if let imgName = self.accessoryImageUrl {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
                 if error != nil {
                     debugPrintln(error)
                     return
                 }
+                
                 if image != nil {
                     self.imageContent = image
                 }
+                
                 completionHandler()
             })
 
@@ -58,10 +56,14 @@ class Option: DebugPrintable, Equatable {
     }
 
     var debugDescription: String {
-        return "[ Option content: \(stringContent) ]"
+        return "[ Option content: \(content) ]"
+    }
+    
+    var dictionaryRepresentation: [String:AnyObject] {
+        return ["content": content, "accessoryImageUrl": accessoryImageUrl ?? NSNull()];
     }
 }
 
 func ==(lhs: Option, rhs: Option) -> Bool {
-    return lhs.originalContent == rhs.originalContent
+    return lhs.content == rhs.content
 }

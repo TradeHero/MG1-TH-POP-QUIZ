@@ -416,6 +416,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         logoView.autoConstrainAttribute(.Vertical, toAttribute: .Vertical, ofView: logoView.superview, withMultiplier: 1)
         logoView.autoConstrainAttribute(.Width, toAttribute: .Height, ofView: logoView, withMultiplier: 1.0)
         logoView.autoSetDimension(.Height, toSize: 51)
+        
         textLabel.autoConstrainAttribute(.Vertical, toAttribute: .Vertical, ofView: textLabel.superview, withMultiplier: 1)
         textLabel.autoSetDimensionsToSize(CGSizeMake(208, 38))
         textLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: logoView, withOffset: 7)

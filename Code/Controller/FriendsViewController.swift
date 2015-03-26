@@ -235,20 +235,11 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            if THStaffList.count == 0 {
-                return 0
-            }
-            return 25
-        case 2:
-            if THFriendList.count == 0 {
-                return 0
-            }
-            return 25
+            return THStaffList.isEmpty ? 0 : 25;
         case 1:
-            if FBFriendList.count == 0 {
-                return 0
-            }
-            return 25
+            return FBFriendList.isEmpty ? 0 : 25;
+        case 2:
+            return THFriendList.isEmpty ? 0 : 25;
         default:
             return 0
         }

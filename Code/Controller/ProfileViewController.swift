@@ -38,8 +38,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.registerNib(UINib(nibName: "ChallengesTimelineTableViewCell", bundle: nil), forCellReuseIdentifier: kTHChallengesTimelineTableViewCellIdentifier)
         tableView.alwaysBounceVertical = false
         self.configureUI()
-
-
+        
         tableView.hidden = true
         emptyTimelineView.hidden = true
         // Do any additional setup after loading the view.

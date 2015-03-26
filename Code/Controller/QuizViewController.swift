@@ -169,6 +169,7 @@ class QuizViewController: UIViewController {
             incorrectOptions[0].hideAndDisable(true)
             incorrectOptions[1].hideAndDisable(true)
             UIView.animateWithDuration(0.5) {
+                [unowned self] in
                 self.removeOptionsButton.alpha = 0
             }
 
@@ -236,11 +237,11 @@ class QuizViewController: UIViewController {
     }
 
     private func calculateScore() -> Int {
+        if(!currentQuestionCorrect) {return 0;}
         let timeLeftBonus = getTimeBonus(current_timeLeft)
         let comboBonus = getComboBonus()
         let hintPenalty = getHintPenalty()
-        let correctiveFactor: CGFloat = currentQuestionCorrect ? 1.0 : 0.0
-        let score = CGFloat(basicScorePerQuestion) * timeLeftBonus * correctiveFactor * comboBonus * hintPenalty
+        let score = CGFloat(basicScorePerQuestion) * timeLeftBonus * comboBonus * hintPenalty
         self.selfTotalScore += Int(score)
         return Int(score)
     }
@@ -483,12 +484,9 @@ class QuizViewController: UIViewController {
 
         var i = 0
         for option in optionSet {
-            optionButtonSet[i].configureButtonWithContent(option.stringContent, imageContent: option.imageContent)
-            if question.checkOptionChoiceIfIsCorrect(option) {
-                optionButtonSet[i].is_answer = true
-            } else {
-                optionButtonSet[i].is_answer = false
-            }
+            optionButtonSet[i].configureButtonWithContent(option.content, imageContent: option.imageContent)
+            optionButtonSet[i].is_answer = question.checkOptionChoiceIfIsCorrect(option)
+            
             i++
         }
         self.roundIndicatorLabel.alpha = 0
@@ -502,15 +500,17 @@ class QuizViewController: UIViewController {
 
 
         UIView.animateWithDuration(1, delay: 0.0, options: .TransitionCrossDissolve, animations: {
+            [unowned self] in
             self.roundIndicatorLabel.alpha = 1
         }) {
-            complete in
+            [unowned self] complete in
             UIView.animateWithDuration(1, options: .TransitionCrossDissolve) {
                 self.roundIndicatorLabel.alpha = 0
             }
         }
 
         UIView.animateWithDuration(1.5, delay: 2.0, options: .TransitionCrossDissolve, animations: {
+            [unowned self] in
             self.questionView.alpha = 1
         }, completion: nil)
 
