@@ -9,8 +9,7 @@
 import Argo
 import Runes
 
-
-class Option: DebugPrintable, Equatable, DictionaryRepresentation {
+class Option: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresentation {
     let content : String
     let accessoryImageUrl : String?
 
@@ -28,6 +27,13 @@ class Option: DebugPrintable, Equatable, DictionaryRepresentation {
     class func create(content: String)(accessoryImageUrl: String?)-> Option {
         return Option(content: content, accessoryImageUrl: accessoryImageUrl)
     }
+    
+    class func decode(j: JSONValue) -> Option? {
+        return Option.create
+            <^> j <| "content"
+            <*> j <| "accessoryImageUrl"
+    }
+
     /**
      Initialise option with string content and image content
 
