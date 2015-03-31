@@ -40,6 +40,7 @@ struct User: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresentation 
 
 func ==(lhs: User, rhs: User) -> Bool {
     return lhs.userId == rhs.userId &&
+        
             lhs.firstName == rhs.firstName &&
             lhs.lastName == rhs.lastName &&
             lhs.displayName == rhs.displayName &&

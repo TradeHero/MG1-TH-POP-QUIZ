@@ -29,6 +29,10 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
     private var playerResult: GameResult!
     private var opponentResult: GameResult!
 
+    private var selfWon: Bool {
+        return playerResult.finalScore > opponentResult.finalScore
+    }
+    
     func bindGame(game: Game) {
         if game.isGameCompletedByBothPlayer {
             self.game = game
@@ -62,7 +66,7 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
     }
 
     private func setScoreVersusLabelAttrString() {
-        var color = playerResult.finalScore > opponentResult.finalScore ? winningColor : losingColor
+        var color = selfWon ? winningColor : losingColor
         var attributedString = NSMutableAttributedString(string: playerResult.finalScore!.decimalFormattedString, attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 15)!, NSForegroundColorAttributeName: color])
         attributedString.appendAttributedString(NSAttributedString(string: " vs ", attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 15)!, NSForegroundColorAttributeName: UIColor.blackColor()]))
         attributedString.appendAttributedString(NSAttributedString(string: opponentResult.finalScore!.decimalFormattedString, attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 15)!, NSForegroundColorAttributeName: UIColor.blackColor()]))
@@ -70,8 +74,8 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
     }
 
     private func setWinLoseLabelAttrString() {
-        var color = playerResult.finalScore > opponentResult.finalScore ? winningColor : losingColor
-        var str = playerResult.finalScore > opponentResult.finalScore ? "WIN" : "LOSE"
+        var color = selfWon ? winningColor : losingColor
+        var str = selfWon ? "WIN" : "LOSE"
 
         var attributedString = NSMutableAttributedString(string: str, attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Bold", size: 15)!, NSForegroundColorAttributeName: color])
         attributedString.appendAttributedString(NSAttributedString(string: " vs", attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 15)!, NSForegroundColorAttributeName: UIColor.blackColor()]))
@@ -79,7 +83,7 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
     }
 
     private func setDotColor() {
-        self.circularView.backgroundColor = playerResult.finalScore > opponentResult.finalScore ? winningColor : losingColor
+        self.circularView.backgroundColor = selfWon ? winningColor : losingColor
     }
 
     override func prepareForReuse() {

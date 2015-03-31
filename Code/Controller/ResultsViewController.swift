@@ -25,7 +25,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet private weak var opponentDisplayNameLabel: UILabel!
     @IBOutlet private weak var opponentWaitingImageView: UIImageView!
 
-    @IBOutlet weak var nextOrRematchButton: UIButton!
+    @IBOutlet private weak var nextOrRematchButton: UIButton!
     private var game: Game!
 
     private var player: User!

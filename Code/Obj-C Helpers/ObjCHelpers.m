@@ -251,6 +251,9 @@
         [self setThumbImage:[UIImage new] forState:UIControlStateNormal];
         [self setThumbTintColor:self.handlerColor];
     }
+    
+    
+
 }
 @end
 
@@ -262,3 +265,4 @@ void playSound(NSString *fileName) {
     AudioServicesCreateSystemSoundID((__bridge CFURLRef) url, &soundID);
     AudioServicesPlaySystemSound(soundID);
 }
+

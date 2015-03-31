@@ -54,7 +54,7 @@ class FacebookService {
 
     func FacebookConnectWithSDK(completionHandler: (FBSession!, NSError!) -> ()) {
         dispatch_async(dispatch_get_main_queue(), {
-            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes"], allowLoginUI: true, completionHandler: {
+            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes", "user_friends"], allowLoginUI: true, completionHandler: {
                 (session, state, error) -> Void in
                 completionHandler(session, error)
             }
@@ -66,7 +66,7 @@ class FacebookService {
 
     func renewFacebookToken(completionHandler: (FBSession!, NSError!) -> ()) {
         dispatch_async(dispatch_get_main_queue(), {
-            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes"], allowLoginUI: true, completionHandler: {
+            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes", "user_friends"], allowLoginUI: true, completionHandler: {
                 (session, state, error) -> Void in
                 completionHandler(session, error)
             }
