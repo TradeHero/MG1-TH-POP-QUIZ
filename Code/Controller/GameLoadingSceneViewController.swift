@@ -190,7 +190,7 @@ class GameLoadingSceneViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "PresentQuizSegue" {
-            let vc = segue.destinationViewController as QuizViewController
+            let vc = segue.destinationViewController as! QuizViewController
             vc.bindGameAndUsers(self.game, player: self.player, opponent: self.opponent)
         }
     }

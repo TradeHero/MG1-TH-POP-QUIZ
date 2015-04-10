@@ -107,7 +107,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         NetworkClient.sharedClient.createQuickGame({ error in debugPrintln(error) }) {
             [unowned self] in
             hud.textLabel.text = "Creating game with user.."
-            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
             vc.bindGame($0)
             self.navigationController?.pushViewController(vc, animated: true)
             hud.dismissAnimated(true)
@@ -217,7 +217,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as HomeTurnChallengesTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as! HomeTurnChallengesTableViewCell
             cell.bindChalllenge(unfinishedChallenges[indexPath.row], status: .Play)
             cell.layoutIfNeeded()
             cell.setNeedsUpdateConstraints()
@@ -225,7 +225,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.delegate = self
             return cell
         case 1:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as HomeTurnChallengesTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as! HomeTurnChallengesTableViewCell
             cell.bindChalllenge(openChallenges[indexPath.row], status: .Accept)
             cell.layoutIfNeeded()
             cell.setNeedsUpdateConstraints()
@@ -236,7 +236,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let row = indexPath.row
             let offset = opponentPendingChallenges.count
             if row < offset {
-                var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as HomeTurnChallengesTableViewCell
+                var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as! HomeTurnChallengesTableViewCell
                 cell.bindChalllenge(opponentPendingChallenges[row], status: .Nudge)
                 cell.layoutIfNeeded()
                 cell.setNeedsUpdateConstraints()
@@ -244,7 +244,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.delegate = self
                 return cell
             } else {
-                var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
+                var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as! FriendsChallengeCellTableViewCell
                 cell.bindFriendUser(facebookFriendsChallenge[row - offset], index: 0)
                 cell.delegate = self
                 cell.layoutIfNeeded()
@@ -274,7 +274,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView! {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         switch section {
         case 0:
             return noUnfinishedChallenges ? nil : createHeaderView("Unfinished challenge", numberOfGames: unfinishedChallenges.count)
@@ -334,7 +334,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     i++
                 }
 
-                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
                 vc.bindGame($0)
                 self.navigationController?.pushViewController(vc, animated: true)
                 hud.dismissAnimated(true)
@@ -357,7 +357,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler: { error in debugPrintln(error) }) {
             [unowned self] in
             hud.dismissAnimated(true)
-            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
             vc.bindGame($0)
             self.navigationController?.pushViewController(vc, animated: true)
         }

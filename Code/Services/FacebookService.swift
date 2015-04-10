@@ -35,7 +35,7 @@ class FacebookService {
         return Singleton.instance
     }
 
-    func connect(completionHandler: (String!, NSError!) -> (), connectOption: FacebookConnectOption = .NativeFallBack) {
+    func connect(connectOption: FacebookConnectOption = .NativeFallBack, completionHandler: (String!, NSError!) -> ()) {
         switch connectOption {
         case .NativeFallBack:
             nativeFallbackWithSDKConnect(completionHandler)

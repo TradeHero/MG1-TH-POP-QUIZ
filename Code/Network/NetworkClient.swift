@@ -100,7 +100,7 @@ class NetworkClient {
             if response?.statusCode == 200 {
                 self.saveCredentials(accessToken)
 
-                let responseJSON = content as [String:AnyObject]
+                let responseJSON = content as! [String:AnyObject]
                 let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
 
                 if let profileDTODict = profileDTOPart as? [String:AnyObject] {
@@ -224,9 +224,9 @@ class NetworkClient {
                 debugPrintln("Parsing \(arr.count) objects as THUserFriend...")
 
                 for friendObj in arr {
-                    let friendDictionary = friendObj as [String:AnyObject]
+                    let friendDictionary = friendObj as! [String:AnyObject]
                     if let uID: AnyObject = friendDictionary["thUserId"] {
-                        let uIDInt = uID as Int
+                        let uIDInt = uID as! Int
                         if uIDInt != 0 {
                             if let uf = UserFriend.decode(JSONValue.parse(friendDictionary)){
                                 friends.append(uf)
@@ -439,7 +439,7 @@ class NetworkClient {
             if let staffList = content as? [AnyObject] {
                 debugPrintln("Parsing \(staffList.count) staff users..")
                 for staffData in staffList {
-                    let staffUserDTO = staffData as [String:AnyObject]
+                    let staffUserDTO = staffData as! [String:AnyObject]
                     let user = User.decode(JSONValue.parse(staffUserDTO))!
                     for staffinfo in staffs_g {
                         if staffinfo.id == user.userId {
@@ -797,7 +797,7 @@ class NetworkClient {
             for userData in accs {
                 if let data = userData as? [String:AnyObject] {
                     if let acct: AnyObject? = data["acct"] {
-                        SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: acct as String)
+                        SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: acct as! String)
                     }
                 }
             }

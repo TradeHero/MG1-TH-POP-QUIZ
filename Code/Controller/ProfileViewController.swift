@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     private var user = NetworkClient.sharedClient.user
 
     private lazy var emptyTimelineView: UIView = {
-        var view = NSBundle.mainBundle().loadNibNamed("EmptyTimelineView", owner: nil, options: nil)[0] as UIView
+        var view = NSBundle.mainBundle().loadNibNamed("EmptyTimelineView", owner: nil, options: nil)[0] as! UIView
         return view
     }()
 
@@ -137,7 +137,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     // MARK:- UITableView delegate methods
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kTHChallengesTimelineTableViewCellIdentifier) as ChallengesTimelineTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(kTHChallengesTimelineTableViewCellIdentifier) as! ChallengesTimelineTableViewCell
         let games = categorisedClosedChallenges[closedChallengeCategories[indexPath.section]]!
 
         cell.bindGame(games[indexPath.row])

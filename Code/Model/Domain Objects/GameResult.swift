@@ -103,18 +103,18 @@ func ==(lhs: GameResult, rhs: GameResult) -> Bool {
         //if not nil
         if let rhsFinal = rhs.finalResultDetails {
             //if not nil
-            finalResultEq &= lhsFinal == rhsFinal //true if not nil value equals
+            finalResultEq == finalResultEq && lhsFinal == rhsFinal //true if not nil value equals
         } else {
-            finalResultEq &= false //false if rhs not nil
+            finalResultEq == finalResultEq && false //false if rhs not nil
         }
     } else {
         //if lhs nil
         if let rhsFinal = rhs.finalResultDetails {
             //rhs not nil, false
-            finalResultEq &= false
+            finalResultEq == finalResultEq && false
         } else {
             //rhs nil, true
-            finalResultEq &= true
+            finalResultEq == finalResultEq && true
         }
     }
 

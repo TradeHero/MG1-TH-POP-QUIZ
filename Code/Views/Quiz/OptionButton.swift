@@ -277,7 +277,7 @@ class OptionButton: DesignableButton {
 
     func unpatchAllLogo() {
         if let parent = self.superview {
-            for siblingView in parent.subviews as [UIView] {
+            for siblingView in parent.subviews as! [UIView] {
                 if siblingView === self.tickLogoView || siblingView === self.crossLogoView {
                     siblingView.removeFromSuperview()
                 }
@@ -326,7 +326,7 @@ class OptionButton: DesignableButton {
                 self.titleLabel?.removeFromSuperview()
             }
         }
-        trendingTopLayerView = NSBundle.mainBundle().loadNibNamed("OptionButtonAccessoryImageLayer", owner: self, options: nil)[0] as OptionButtonAccessoryImageLayer
+        trendingTopLayerView = NSBundle.mainBundle().loadNibNamed("OptionButtonAccessoryImageLayer", owner: self, options: nil)[0] as! OptionButtonAccessoryImageLayer
         trendingTopLayerView.titleLabel.text = self.labelText
         trendingTopLayerView.imageView.image = self.accessoryImage
         trendingTopLayerView.userInteractionEnabled = false
@@ -347,7 +347,7 @@ class OptionButton: DesignableButton {
         }
         self.titleLabel?.hidden = false
         self.imageView?.hidden = false
-        for view in self.subviews as [UIView] {
+        for view in self.subviews as! [UIView] {
             if view is OptionButtonAccessoryImageLayer {
                 view.removeFromSuperview()
             }

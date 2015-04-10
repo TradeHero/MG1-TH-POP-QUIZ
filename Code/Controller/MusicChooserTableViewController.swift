@@ -63,7 +63,7 @@ class MusicChooserTableViewController: UITableViewController, MusicChooserTableV
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kTHMusicChooserTableViewCellIdentifier, forIndexPath: indexPath) as MusicChooserTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(kTHMusicChooserTableViewCellIdentifier, forIndexPath: indexPath) as! MusicChooserTableViewCell
 
         switch indexPath.section {
         case 0:

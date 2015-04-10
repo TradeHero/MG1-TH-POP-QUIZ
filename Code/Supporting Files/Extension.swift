@@ -79,14 +79,14 @@ extension Array {
 
 extension Double {
     func format(f: String) -> String {
-        return NSString(format: "%\(f)f", self)
+        return NSString(format: "%\(f)f", self) as String
     }
 }
 
 extension CGFloat {
 
     func format(f: String) -> String {
-        return NSString(format: "%\(f)f", self)
+        return NSString(format: "%\(f)f", self) as String
     }
 
 //    func roundToNearest1DecimalPlace() -> CGFloat {
@@ -190,13 +190,13 @@ extension UIView {
 
 
     func removeAllSubviews() {
-        for view in (self.subviews as [UIView]) {
+        for view in (self.subviews as! [UIView]) {
             view.removeFromSuperview()
         }
     }
 
     func listAllSubviews() {
-        for view in (self.subviews as [UIView]) {
+        for view in (self.subviews as! [UIView]) {
             println("\(object_getClassName(view))")
         }
     }
@@ -210,7 +210,7 @@ extension UIView {
     }
 
     func isSubviewOf(view: UIView) -> Bool {
-        for v in view.subviews as [UIView] {
+        for v in view.subviews as! [UIView] {
             if v === self {
                 return true
             }
@@ -305,14 +305,14 @@ extension UIImage {
 
         // Allocate memory for image data. This is the destination in memory
         // where any drawing to the bitmap context will be rendered.
-        let bitmapData = malloc(CUnsignedLong(bitmapByteCount))
+        let bitmapData = malloc(CLong(bitmapByteCount))
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
 
         // Create the bitmap context. We want pre-multiplied ARGB, 8-bits
         // per component. Regardless of what the source image format is
         // (CMYK, Grayscale, and so on) it will be converted over to the format
         // specified here by CGBitmapContextCreate.
-        let context = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, CUnsignedLong(8), CUnsignedLong(bitmapBytesPerRow), colorSpace, bitmapInfo)
+        let context = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, CLong(8), CLong(bitmapBytesPerRow), colorSpace, bitmapInfo)
 
         // Make sure and release colorspace before returning
 
@@ -359,7 +359,7 @@ extension String {
     func decodeFromBase64Encoding() -> String {
         let base64data = NSData(base64EncodedString: self, options: NSDataBase64DecodingOptions(0))
         let decodedString = NSString(data: base64data!, encoding: NSUTF8StringEncoding)
-        return decodedString!
+        return decodedString! as String
     }
 
     var floatValue: Float {
@@ -376,7 +376,7 @@ extension String {
     }
 
     var length: Int {
-        return self.utf16Count
+        return count(self.utf16)
     }
 }
 

@@ -29,23 +29,23 @@ final class THUserFriend: NSObject, NSCoding {
     init(friendDTO: [String:AnyObject]) {
         self.facebookID = 0
         if let fbID: AnyObject = friendDTO["fbId"] {
-            self.facebookID = (fbID as String).toInt()
+            self.facebookID = (fbID as! String).toInt()
         }
 
         if let fbPictureURL: AnyObject = friendDTO["fbPicUrl"] {
-            self.facebookPictureURL = fbPictureURL as String
+            self.facebookPictureURL = fbPictureURL as! String
         }
 
         if let n: AnyObject = friendDTO["name"] {
-            self.name = n as String
+            self.name = n as! String
         }
 
         if let uID: AnyObject = friendDTO["thUserId"] {
-            self.userID = uID as Int
+            self.userID = uID as! Int
         }
 
         if let invited: AnyObject = friendDTO["alreadyInvited"] {
-            self.alreadyInvited = invited as Bool
+            self.alreadyInvited = invited as! Bool
         }
     }
 

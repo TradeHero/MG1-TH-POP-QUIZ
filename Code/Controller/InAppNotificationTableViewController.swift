@@ -50,7 +50,7 @@ class InAppNotificationTableViewController: UITableViewController, NotificationT
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kTHNotificationTableViewCellIdentifier, forIndexPath: indexPath) as NotificationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(kTHNotificationTableViewCellIdentifier, forIndexPath: indexPath) as! NotificationTableViewCell
 
         cell.bindNotification(notifications[indexPath.row])
         cell.delegate = self

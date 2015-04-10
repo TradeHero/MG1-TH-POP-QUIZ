@@ -89,9 +89,9 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
     let questionContent: String
 
     /// Type of question.
-    let questionType: QuestionType = .UnknownType
+    let questionType: QuestionType
 
-    let questionCategory: QuestionCategory = .UnknownCategory
+    let questionCategory: QuestionCategory
 
     /// Set of options of this current question instance
     let correctOption: Option

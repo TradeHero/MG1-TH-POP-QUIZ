@@ -167,7 +167,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         switch indexPath.section {
         case 0:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHStaffChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as StaffChallengeCellTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHStaffChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as! StaffChallengeCellTableViewCell
             let staffUser = THStaffList[indexPath.row]
             cell.bindStaffUser(staffUser)
             cell.layoutIfNeeded()
@@ -176,7 +176,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.delegate = self
             return cell
         case 1:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as! FriendsChallengeCellTableViewCell
             let friendUser = FBInvitableFriends[indexPath.row]
             cell.bindInvitableFriend(friendUser, index: indexPath.row)
             cell.layoutIfNeeded()
@@ -185,7 +185,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.delegate = self
             return cell
         case 2:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as! FriendsChallengeCellTableViewCell
             let friendUser = THFriendList[indexPath.row]
             cell.bindFriendUser(friendUser, index: indexPath.row)
             cell.layoutIfNeeded()
@@ -232,7 +232,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 
-    func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
             return THStaffList.isEmpty ? 0 : 25;
@@ -256,7 +256,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler: { error in debugPrintln(error) }) {
             [unowned self] in
             hud.dismissAnimated(true)
-            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
             vc.bindGame($0)
             self.navigationController?.pushViewController(vc, animated: true)
 
@@ -277,7 +277,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         NetworkClient.sharedClient.createChallenge(opponentId: userId, errorHandler: { error in debugPrintln(error) }) {
             [unowned self] in
             hud.dismissAnimated(true)
-            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
             vc.bindGame($0)
             self.navigationController?.pushViewController(vc, animated: true)
 

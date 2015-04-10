@@ -371,9 +371,9 @@ class QuizViewController: UIViewController {
     }
 
     private func showImageObfuscationWithTimeFactor(factor: CGFloat = 1) {
-        for view in self.questionView.subviews as [UIView] {
+        for view in self.questionView.subviews as! [UIView] {
             if view is QuestionViewWithImage {
-                let qview = view as QuestionViewWithImage
+                let qview = view as! QuestionViewWithImage
                 qview.logoCanvasView.obfuscateWithEffect(factor)
             }
         }
@@ -434,7 +434,7 @@ class QuizViewController: UIViewController {
     private func setUpQuestionViewWithQuestion(question: Question) -> UIView {
         if question.isGraphical() {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
-                    , owner: self, options: nil)[0] as QuestionViewWithImage
+                    , owner: self, options: nil)[0] as! QuestionViewWithImage
             contentView.questionContent.text = question.questionContent
             switch question.questionType {
             case .LogoType:
@@ -452,13 +452,13 @@ class QuizViewController: UIViewController {
             return contentView
         } else {
             if let accessoryImage = question.accessoryImage {
-                var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithAccessoryImage", owner: self, options: nil)[0] as QuestionViewWithAccessoryImage
+                var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithAccessoryImage", owner: self, options: nil)[0] as! QuestionViewWithAccessoryImage
 
                 contentView.questionContent.text = question.questionContent
                 contentView.accessoryImageView.image = question.accessoryImage
                 return contentView
             } else {
-                var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
+                var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as! QuestionViewPlain
 
                 contentView.questionContent.text = question.questionContent
                 return contentView
@@ -628,10 +628,10 @@ class QuizViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "QuizWinLoseSegue" {
-            let vc = segue.destinationViewController as WinLoseViewController
+            let vc = segue.destinationViewController as! WinLoseViewController
             vc.bindResult(self.game, selfUser: self.player, opponentUser: self.opponent)
         } else if segue.identifier == "PartialQuizResultSegue" {
-            let vc = segue.destinationViewController as ResultsViewController
+            let vc = segue.destinationViewController as! ResultsViewController
             vc.bindGame(self.game)
         }
     }

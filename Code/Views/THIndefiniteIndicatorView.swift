@@ -28,7 +28,7 @@ class THIndefiniteIndicatorView: JGProgressHUDIndicatorView {
         super.init(contentView: indicatorView)
     }
 
-    convenience override init() {
+    convenience init() {
         self.init(style: .ExtraLight)
     }
 
