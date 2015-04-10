@@ -70,7 +70,7 @@ DEPENDENCIES:
   - ChatHeads (~> 1.0)
   - DZNSegmentedControl (~> 1.2.2)
   - EGOCache (~> 2.1.3)
-  - ExSwift (from `https://github.com/pNre/ExSwift`, branch `master`)
+  - ExSwift (from `https://github.com/pNre/ExSwift`, branch `Swift-1.2`)
   - Facebook-iOS-SDK (~> 3.23.2)
   - FormatterKit (~> 1.8.0)
   - GPUImage (~> 0.1.6)
@@ -86,14 +86,14 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   ExSwift:
-    :branch: master
+    :branch: Swift-1.2
     :git: https://github.com/pNre/ExSwift
   KKProgressTimer:
     :git: http://github.com/gin0606/KKProgressTimer.git
 
 CHECKOUT OPTIONS:
   ExSwift:
-    :commit: 71e7fa83755b2e16135167128357871d8627fcbb
+    :commit: a2d49455df9460759f225a71603503eeddff1af0
     :git: https://github.com/pNre/ExSwift
   KKProgressTimer:
     :commit: 575be455a23e22c2646c09726d1219e363f36aa4

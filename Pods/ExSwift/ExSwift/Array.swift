@@ -75,7 +75,7 @@ internal extension Array {
             //  to intersect in the next loop
             value.each { (item: U) -> Void in
                 if result.contains(item) {
-                    intersection.append(item as Element)
+                    intersection.append(item as! Element)
                 }
             }
 
@@ -98,7 +98,7 @@ internal extension Array {
         for array in values {
             for value in array {
                 if !result.contains(value) {
-                    result.append(value as Element)
+                    result.append(value as! Element)
                 }
             }
         }
@@ -124,30 +124,6 @@ internal extension Array {
     @availability(*, unavailable, message="use the 'last' property instead") func last () -> Element? {
         return last
     }
-    
-    /**
-    First occurrence of item, if found.
-    
-    :param: item The item to search for
-    :returns: Matched item or nil
-    */
-    func find <U: Equatable> (item: U) -> T? {
-        if let index = indexOf(item) {
-            return self[index]
-        }
-        
-        return nil
-    }
-    
-    /**
-    First item that meets the condition.
-    
-    :param: condition A function which returns a boolean if an element satisfies a given condition or not.
-    :returns: First matched item or nil
-    */
-    func find (condition: Element -> Bool) -> Element? {
-        return takeFirst(condition)
-    }
 
     /**
         Index of the first occurrence of item, if found.
@@ -157,7 +133,7 @@ internal extension Array {
     */
     func indexOf <U: Equatable> (item: U) -> Int? {
         if item is Element {
-            return Swift.find(unsafeBitCast(self, [U].self), item)
+            return find(unsafeBitCast(self, [U].self), item)
         }
 
         return nil
@@ -188,7 +164,7 @@ internal extension Array {
     func lastIndexOf <U: Equatable> (item: U) -> Int? {
         if item is Element {
             for (index, value) in enumerate(lazy(self).reverse()) {
-                if value as U == item {
+                if value as! U == item {
                     return count - 1 - index
                 }
             }
@@ -209,10 +185,10 @@ internal extension Array {
 
         //  If the index is out of bounds it's assumed relative
         func relativeIndex (index: Int) -> Int {
-            var _index = (index % count)
+            var _index = (index % self.count)
 
             if _index < 0 {
-                _index = count + _index
+                _index = self.count + _index
             }
 
             return _index
@@ -375,7 +351,7 @@ internal extension Array {
         for item in self {
             let value = cond(item)
 
-            if value == lastValue? {
+            if value == lastValue {
                 let index: Int = result.count - 1
                 result[index] += [item]
             } else {
@@ -435,7 +411,7 @@ internal extension Array {
     func max <U: Comparable> () -> U {
 
         return maxElement(map {
-            return $0 as U
+            return $0 as! U
         })
 
     }
@@ -448,7 +424,7 @@ internal extension Array {
     func min <U: Comparable> () -> U {
 
         return minElement(map {
-            return $0 as U
+            return $0 as! U
         })
 
     }
@@ -693,8 +669,8 @@ internal extension Array {
         var result = [T]()
 
         for item in self {
-            if !result.contains(item as T) {
-                result.append(item as T)
+            if !result.contains(item as! T) {
+                result.append(item as! T)
             }
         }
 
@@ -1283,7 +1259,7 @@ internal extension Array {
 
         anotherSelf.each {
             (index: Int, current: Element) in
-            if current as U != element {
+            if (current as! U) != element {
                 self.append(current)
             }
         }
@@ -1314,7 +1290,7 @@ internal extension Array {
             return []
         }
             
-        return Array(self[Range(start: start, end: end)] as Slice<T>)
+        return Array(self[Range(start: start, end: end)] as ArraySlice<T>)
     }
 
     /**
