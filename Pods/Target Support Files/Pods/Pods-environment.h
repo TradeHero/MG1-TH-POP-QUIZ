@@ -9,14 +9,14 @@
 // Alamofire
 #define COCOAPODS_POD_AVAILABLE_Alamofire
 #define COCOAPODS_VERSION_MAJOR_Alamofire 1
-#define COCOAPODS_VERSION_MINOR_Alamofire 1
-#define COCOAPODS_VERSION_PATCH_Alamofire 4
+#define COCOAPODS_VERSION_MINOR_Alamofire 2
+#define COCOAPODS_VERSION_PATCH_Alamofire 0
 
 // Argo
 #define COCOAPODS_POD_AVAILABLE_Argo
 #define COCOAPODS_VERSION_MAJOR_Argo 0
-#define COCOAPODS_VERSION_MINOR_Argo 3
-#define COCOAPODS_VERSION_PATCH_Argo 4
+#define COCOAPODS_VERSION_MINOR_Argo 4
+#define COCOAPODS_VERSION_PATCH_Argo 3
 
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts
@@ -46,7 +46,7 @@
 #define COCOAPODS_POD_AVAILABLE_EGOCache
 #define COCOAPODS_VERSION_MAJOR_EGOCache 2
 #define COCOAPODS_VERSION_MINOR_EGOCache 1
-#define COCOAPODS_VERSION_PATCH_EGOCache 0
+#define COCOAPODS_VERSION_PATCH_EGOCache 3
 
 // ExSwift
 #define COCOAPODS_POD_AVAILABLE_ExSwift
@@ -58,7 +58,7 @@
 #define COCOAPODS_POD_AVAILABLE_Facebook_iOS_SDK
 #define COCOAPODS_VERSION_MAJOR_Facebook_iOS_SDK 3
 #define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 23
-#define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 0
+#define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 2
 
 // FormatterKit
 #define COCOAPODS_POD_AVAILABLE_FormatterKit
@@ -141,20 +141,14 @@
 // KeychainAccess
 #define COCOAPODS_POD_AVAILABLE_KeychainAccess
 #define COCOAPODS_VERSION_MAJOR_KeychainAccess 1
-#define COCOAPODS_VERSION_MINOR_KeychainAccess 1
-#define COCOAPODS_VERSION_PATCH_KeychainAccess 3
+#define COCOAPODS_VERSION_MINOR_KeychainAccess 2
+#define COCOAPODS_VERSION_PATCH_KeychainAccess 0
 
 // LDProgressView
 #define COCOAPODS_POD_AVAILABLE_LDProgressView
 #define COCOAPODS_VERSION_MAJOR_LDProgressView 1
 #define COCOAPODS_VERSION_MINOR_LDProgressView 2
 #define COCOAPODS_VERSION_PATCH_LDProgressView 1
-
-// MDRadialProgress
-#define COCOAPODS_POD_AVAILABLE_MDRadialProgress
-#define COCOAPODS_VERSION_MAJOR_MDRadialProgress 1
-#define COCOAPODS_VERSION_MINOR_MDRadialProgress 3
-#define COCOAPODS_VERSION_PATCH_MDRadialProgress 1
 
 // OMGHTTPURLRQ
 #define COCOAPODS_POD_AVAILABLE_OMGHTTPURLRQ
@@ -183,8 +177,32 @@
 // PromiseKit/Swift
 #define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift
 #define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift 1
-#define COCOAPODS_VERSION_MINOR_PromiseKit_Swift 3
+#define COCOAPODS_VERSION_MINOR_PromiseKit_Swift 5
 #define COCOAPODS_VERSION_PATCH_PromiseKit_Swift 0
+
+// PromiseKit/Swift/Foundation
+#define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift_Foundation
+#define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift_Foundation 1
+#define COCOAPODS_VERSION_MINOR_PromiseKit_Swift_Foundation 5
+#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_Foundation 0
+
+// PromiseKit/Swift/NSJSONFromData
+#define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift_NSJSONFromData
+#define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift_NSJSONFromData 1
+#define COCOAPODS_VERSION_MINOR_PromiseKit_Swift_NSJSONFromData 5
+#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_NSJSONFromData 0
+
+// PromiseKit/Swift/Promise
+#define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift_Promise
+#define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift_Promise 1
+#define COCOAPODS_VERSION_MINOR_PromiseKit_Swift_Promise 5
+#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_Promise 0
+
+// PromiseKit/Swift/UIKit
+#define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift_UIKit
+#define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift_UIKit 1
+#define COCOAPODS_VERSION_MINOR_PromiseKit_Swift_UIKit 5
+#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_UIKit 0
 
 // PureLayout
 #define COCOAPODS_POD_AVAILABLE_PureLayout
@@ -192,35 +210,23 @@
 #define COCOAPODS_VERSION_MINOR_PureLayout 0
 #define COCOAPODS_VERSION_PATCH_PureLayout 5
 
-// Realm
-#define COCOAPODS_POD_AVAILABLE_Realm
-#define COCOAPODS_VERSION_MAJOR_Realm 0
-#define COCOAPODS_VERSION_MINOR_Realm 90
-#define COCOAPODS_VERSION_PATCH_Realm 6
-
-// Realm/Headers
-#define COCOAPODS_POD_AVAILABLE_Realm_Headers
-#define COCOAPODS_VERSION_MAJOR_Realm_Headers 0
-#define COCOAPODS_VERSION_MINOR_Realm_Headers 90
-#define COCOAPODS_VERSION_PATCH_Realm_Headers 6
-
 // Runes
 #define COCOAPODS_POD_AVAILABLE_Runes
 #define COCOAPODS_VERSION_MAJOR_Runes 1
-#define COCOAPODS_VERSION_MINOR_Runes 1
-#define COCOAPODS_VERSION_PATCH_Runes 1
+#define COCOAPODS_VERSION_MINOR_Runes 2
+#define COCOAPODS_VERSION_PATCH_Runes 2
 
 // SDWebImage
 #define COCOAPODS_POD_AVAILABLE_SDWebImage
 #define COCOAPODS_VERSION_MAJOR_SDWebImage 3
 #define COCOAPODS_VERSION_MINOR_SDWebImage 7
-#define COCOAPODS_VERSION_PATCH_SDWebImage 1
+#define COCOAPODS_VERSION_PATCH_SDWebImage 2
 
 // SDWebImage/Core
 #define COCOAPODS_POD_AVAILABLE_SDWebImage_Core
 #define COCOAPODS_VERSION_MAJOR_SDWebImage_Core 3
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
-#define COCOAPODS_VERSION_PATCH_SDWebImage_Core 1
+#define COCOAPODS_VERSION_PATCH_SDWebImage_Core 2
 
 // SKBounceAnimation
 #define COCOAPODS_POD_AVAILABLE_SKBounceAnimation
@@ -232,7 +238,7 @@
 #define COCOAPODS_POD_AVAILABLE_SSKeychain
 #define COCOAPODS_VERSION_MAJOR_SSKeychain 1
 #define COCOAPODS_VERSION_MINOR_SSKeychain 2
-#define COCOAPODS_VERSION_PATCH_SSKeychain 2
+#define COCOAPODS_VERSION_PATCH_SSKeychain 3
 
 // WYPopoverController
 #define COCOAPODS_POD_AVAILABLE_WYPopoverController
