@@ -1,5 +1,5 @@
 # ExSwift
-![CocoaPods](https://img.shields.io/cocoapods/v/ExSwift.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+![CocoaPods](https://img.shields.io/cocoapods/v/ExSwift.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/pNre/ExSwift.svg)](https://travis-ci.org/pNre/ExSwift)
 
 Set of Swift extensions for standard types and classes.
 
@@ -428,7 +428,7 @@ Name | Signatures
 **`once`**|`once <P, T> (function: P -> T) -> (P -> T?)`<br>`once <T> (call: Void -> T) -> (Void -> T?)`
 **`partial`**|`partial <P, T> (function: (P...) -> T, _ parameters: P...) -> ((P...) -> T?)`
 **`bind`**|`bind <P, T> (function: (P...) -> T, _ parameters: P...) -> (() -> T)`
-**`cached`**|`cached <P, R> (function: (P...) -> R) -> ((P...) -> R)`<br>`cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R)`
+**`cached`**|`cached <P, R> (function: P -> R) -> (P -> R)`<br>`cached <P, R> (function: (P...) -> R) -> ((P...) -> R)`<br>`cached <P, R> (function: (P...) -> R, hash: ((P...) -> P)) -> ((P...) -> R)`
 
 #### Operators ####
 Name | Signatures

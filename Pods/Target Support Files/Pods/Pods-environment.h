@@ -10,19 +10,37 @@
 #define COCOAPODS_POD_AVAILABLE_Alamofire
 #define COCOAPODS_VERSION_MAJOR_Alamofire 1
 #define COCOAPODS_VERSION_MINOR_Alamofire 2
-#define COCOAPODS_VERSION_PATCH_Alamofire 0
+#define COCOAPODS_VERSION_PATCH_Alamofire 1
 
 // Argo
 #define COCOAPODS_POD_AVAILABLE_Argo
-#define COCOAPODS_VERSION_MAJOR_Argo 0
-#define COCOAPODS_VERSION_MINOR_Argo 4
-#define COCOAPODS_VERSION_PATCH_Argo 3
+#define COCOAPODS_VERSION_MAJOR_Argo 1
+#define COCOAPODS_VERSION_MINOR_Argo 0
+#define COCOAPODS_VERSION_PATCH_Argo 0
 
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts
 #define COCOAPODS_VERSION_MAJOR_Bolts 1
 #define COCOAPODS_VERSION_MINOR_Bolts 1
-#define COCOAPODS_VERSION_PATCH_Bolts 4
+#define COCOAPODS_VERSION_PATCH_Bolts 5
+
+// Bolts/AppLinks
+#define COCOAPODS_POD_AVAILABLE_Bolts_AppLinks
+#define COCOAPODS_VERSION_MAJOR_Bolts_AppLinks 1
+#define COCOAPODS_VERSION_MINOR_Bolts_AppLinks 1
+#define COCOAPODS_VERSION_PATCH_Bolts_AppLinks 5
+
+// Bolts/Tasks
+#define COCOAPODS_POD_AVAILABLE_Bolts_Tasks
+#define COCOAPODS_VERSION_MAJOR_Bolts_Tasks 1
+#define COCOAPODS_VERSION_MINOR_Bolts_Tasks 1
+#define COCOAPODS_VERSION_PATCH_Bolts_Tasks 5
+
+// Box
+#define COCOAPODS_POD_AVAILABLE_Box
+#define COCOAPODS_VERSION_MAJOR_Box 1
+#define COCOAPODS_VERSION_MINOR_Box 2
+#define COCOAPODS_VERSION_PATCH_Box 0
 
 // CAAnimationBlocks
 #define COCOAPODS_POD_AVAILABLE_CAAnimationBlocks
@@ -130,7 +148,7 @@
 #define COCOAPODS_POD_AVAILABLE_JGProgressHUD
 #define COCOAPODS_VERSION_MAJOR_JGProgressHUD 1
 #define COCOAPODS_VERSION_MINOR_JGProgressHUD 2
-#define COCOAPODS_VERSION_PATCH_JGProgressHUD 3
+#define COCOAPODS_VERSION_PATCH_JGProgressHUD 4
 
 // KKProgressTimer
 #define COCOAPODS_POD_AVAILABLE_KKProgressTimer
@@ -178,37 +196,37 @@
 #define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift
 #define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift 1
 #define COCOAPODS_VERSION_MINOR_PromiseKit_Swift 5
-#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift 0
+#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift 3
 
 // PromiseKit/Swift/Foundation
 #define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift_Foundation
 #define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift_Foundation 1
 #define COCOAPODS_VERSION_MINOR_PromiseKit_Swift_Foundation 5
-#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_Foundation 0
+#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_Foundation 3
 
 // PromiseKit/Swift/NSJSONFromData
 #define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift_NSJSONFromData
 #define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift_NSJSONFromData 1
 #define COCOAPODS_VERSION_MINOR_PromiseKit_Swift_NSJSONFromData 5
-#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_NSJSONFromData 0
+#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_NSJSONFromData 3
 
 // PromiseKit/Swift/Promise
 #define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift_Promise
 #define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift_Promise 1
 #define COCOAPODS_VERSION_MINOR_PromiseKit_Swift_Promise 5
-#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_Promise 0
+#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_Promise 3
 
 // PromiseKit/Swift/UIKit
 #define COCOAPODS_POD_AVAILABLE_PromiseKit_Swift_UIKit
 #define COCOAPODS_VERSION_MAJOR_PromiseKit_Swift_UIKit 1
 #define COCOAPODS_VERSION_MINOR_PromiseKit_Swift_UIKit 5
-#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_UIKit 0
+#define COCOAPODS_VERSION_PATCH_PromiseKit_Swift_UIKit 3
 
 // PureLayout
 #define COCOAPODS_POD_AVAILABLE_PureLayout
 #define COCOAPODS_VERSION_MAJOR_PureLayout 2
 #define COCOAPODS_VERSION_MINOR_PureLayout 0
-#define COCOAPODS_VERSION_PATCH_PureLayout 5
+#define COCOAPODS_VERSION_PATCH_PureLayout 6
 
 // Runes
 #define COCOAPODS_POD_AVAILABLE_Runes

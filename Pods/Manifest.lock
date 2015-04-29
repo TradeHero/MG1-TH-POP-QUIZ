@@ -1,8 +1,15 @@
 PODS:
-  - Alamofire (1.2.0)
-  - Argo (0.4.3):
-    - Runes (~> 1.2.1)
-  - Bolts (1.1.4)
+  - Alamofire (1.2.1)
+  - Argo (1.0.0):
+    - Box (~> 1.2)
+    - Runes (~> 1.2)
+  - Bolts (1.1.5):
+    - Bolts/AppLinks (= 1.1.5)
+    - Bolts/Tasks (= 1.1.5)
+  - Bolts/AppLinks (1.1.5):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.1.5)
+  - Box (1.2.0)
   - CAAnimationBlocks (0.0.1)
   - ChatHeads (1.0):
     - CAAnimationBlocks
@@ -32,7 +39,7 @@ PODS:
   - FormatterKit/UnitOfInformationFormatter (1.8.0)
   - FormatterKit/URLRequestFormatter (1.8.0)
   - GPUImage (0.1.6)
-  - JGProgressHUD (1.2.3)
+  - JGProgressHUD (1.2.4)
   - KeychainAccess (1.2.0)
   - KKProgressTimer (0.0.1)
   - LDProgressView (1.2.1)
@@ -43,19 +50,19 @@ PODS:
     - OMGHTTPURLRQ/FormURLEncode
     - OMGHTTPURLRQ/UserAgent
   - OMGHTTPURLRQ/UserAgent (2.1)
-  - PromiseKit/Swift (1.5.0):
-    - PromiseKit/Swift/Foundation (= 1.5.0)
-    - PromiseKit/Swift/UIKit (= 1.5.0)
-  - PromiseKit/Swift/Foundation (1.5.0):
+  - PromiseKit/Swift (1.5.3):
+    - PromiseKit/Swift/Foundation (= 1.5.3)
+    - PromiseKit/Swift/UIKit (= 1.5.3)
+  - PromiseKit/Swift/Foundation (1.5.3):
     - OMGHTTPURLRQ
     - PromiseKit/Swift/NSJSONFromData
     - PromiseKit/Swift/Promise
-  - PromiseKit/Swift/NSJSONFromData (1.5.0):
+  - PromiseKit/Swift/NSJSONFromData (1.5.3):
     - PromiseKit/Swift/Promise
-  - PromiseKit/Swift/Promise (1.5.0)
-  - PromiseKit/Swift/UIKit (1.5.0):
+  - PromiseKit/Swift/Promise (1.5.3)
+  - PromiseKit/Swift/UIKit (1.5.3):
     - PromiseKit/Swift/Promise
-  - PureLayout (2.0.5)
+  - PureLayout (2.0.6)
   - Runes (1.2.2)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
@@ -65,8 +72,8 @@ PODS:
   - WYPopoverController (0.3.7)
 
 DEPENDENCIES:
-  - Alamofire (~> 1.2.0)
-  - Argo (~> 0.4.3)
+  - Alamofire (~> 1.2.1)
+  - Argo (~> 1.0.0)
   - ChatHeads (~> 1.0)
   - DZNSegmentedControl (~> 1.2.2)
   - EGOCache (~> 2.1.3)
@@ -78,8 +85,8 @@ DEPENDENCIES:
   - KeychainAccess (~> 1.2.0)
   - KKProgressTimer (from `http://github.com/gin0606/KKProgressTimer.git`)
   - LDProgressView (~> 1.2.1)
-  - PromiseKit/Swift (~> 1.5.0)
-  - PureLayout (~> 2.0.5)
+  - PromiseKit/Swift (~> 1.5.3)
+  - PureLayout (~> 2.0.6)
   - SDWebImage (~> 3.7.2)
   - SSKeychain (~> 1.2.3)
   - WYPopoverController (~> 0.3.7)
@@ -93,16 +100,17 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ExSwift:
-    :commit: a2d49455df9460759f225a71603503eeddff1af0
+    :commit: f1411fc6320a053afca00ef975648c975a30ca75
     :git: https://github.com/pNre/ExSwift
   KKProgressTimer:
     :commit: 575be455a23e22c2646c09726d1219e363f36aa4
     :git: http://github.com/gin0606/KKProgressTimer.git
 
 SPEC CHECKSUMS:
-  Alamofire: d765c5c1713aa64106b0228aaa600a1e6851f68d
-  Argo: 177144547ecd35a9cf502f880ffdfb875deb66b3
-  Bolts: f8e2f94edbf9fec7bb8de5ecaaa3aa6b7de6f64e
+  Alamofire: 1acfdf179aff68b41a48dff70c1ac7fa263e2bcb
+  Argo: db42a710ec5b4826fd7594a3c9b3437ca138b63e
+  Bolts: aac24961496d504aa56fc267cde95162a71bac39
+  Box: 3345df1dee5c8cd639a663e368427c51f931d095
   CAAnimationBlocks: 1aaca5fb6447a95d83b20cc786992956ef46e4ee
   ChatHeads: 2cc05483f296a5de871643a5962ebf373f79b0e7
   DZNSegmentedControl: 8a7fdd743672742c692106f4456aaede10d43131
@@ -111,17 +119,17 @@ SPEC CHECKSUMS:
   Facebook-iOS-SDK: cd87f0b2f0c1d9574b44e8fa2baacc275524bac3
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   GPUImage: 4675ce4a5370ca92fcea8623b2a08b8f0c51b940
-  JGProgressHUD: 02eb5fc5f1069dc3a6aaf74a0da06f05c2546f32
+  JGProgressHUD: 20b6672a651d6db94da95556650084e6b3a5d1fa
   KeychainAccess: 6ff20bd4990b4840d8bde4e977f8c58e0fe7f3c1
   KKProgressTimer: 6a132f47ed5a24fdc0fa8a4f15dfe2ed5844772a
   LDProgressView: f6afc7c30d2a9edf33001515f3189338567a32d2
   OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
-  PromiseKit: 66308afa36e1f7dba6d53721c359e4d074a895b4
-  PureLayout: a0fe75f1cf485801e7e00b723b8a3c32dca558e2
+  PromiseKit: 7ecae7c190ab92ae00aae6ba7f88942107532b8f
+  PureLayout: f25f0bb904d5ccfe6e31da3cb869185259f02e0d
   Runes: 90c9bba2be981c3777ac490aea0fc0c1acff0f97
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   SKBounceAnimation: c1be441b78e1a38c44609d6e38ae20ad79ecc180
   SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
   WYPopoverController: ebefa50c477bdbbd9dc992dfdffafa168c4484eb
 
-COCOAPODS: 0.36.3
+COCOAPODS: 0.37.0.rc.1
