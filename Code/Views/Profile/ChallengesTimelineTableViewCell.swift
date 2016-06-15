@@ -56,7 +56,7 @@ class ChallengesTimelineTableViewCell: UITableViewCell {
             }
             opponentDisplayNameLabel.text = opponent.displayName
         } else {
-            debugPrintln("game incomplete")
+            debugPrint("game incomplete")
         }
     }
 

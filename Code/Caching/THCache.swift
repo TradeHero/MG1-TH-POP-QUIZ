@@ -8,7 +8,6 @@
 
 import UIKit
 import EGOCache
-import Runes
 import Argo
 
 struct THCache {
@@ -28,7 +27,7 @@ struct THCache {
         let userCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(userId)"
         let object = EGOCache.globalCache().objectForKey(userCacheKey)
         if let uJSON = object as? [String:AnyObject] {
-            return User.decode(JSONValue.parse(uJSON))
+            return decode(uJSON)
         }
         return nil
     }
@@ -41,7 +40,7 @@ struct THCache {
         let dict: [String:AnyObject] = [kFBFriendsDictionaryKey: fbFriendDicts,
                     kTHFriendsDictionaryKey: thFriendDicts]
         EGOCache.globalCache().setObject(dict, forKey: kTHUserFriendsCacheStoreKey)
-        debugPrintln("\(fbFriendDicts.count + thFriendDicts.count) friends cached.")
+        debugPrint("\(fbFriendDicts.count + thFriendDicts.count) friends cached.")
     }
 
     typealias CacheFriendsTuple = (facebookFriends:[UserFriend], tradeheroFriends:[UserFriend])
@@ -55,20 +54,20 @@ struct THCache {
 
             if let fbF = dict[kFBFriendsDictionaryKey] {
                 for fbFDict in fbF {
-                    if let uf = UserFriend.decode(JSONValue.parse(fbFDict)) {
+                    if let uf:UserFriend = decode(fbFDict) {
                         facebookFriends.append(uf)
                     }
                 }
-                debugPrintln("Retrieved \(facebookFriends.count) Facebook friend(s) from cache.")
+                debugPrint("Retrieved \(facebookFriends.count) Facebook friend(s) from cache.")
             }
 
             if let thF = dict[kTHFriendsDictionaryKey] {
                 for thFDict in thF {
-                    if let uf = UserFriend.decode(JSONValue.parse(thFDict)) {
+                    if let uf:UserFriend = decode(thFDict) {
                         tradeheroFriends.append(uf)
                     }
                 }
-                debugPrintln("Retrieved \(tradeheroFriends.count) TradeHero friend(s) from cache.")
+                debugPrint("Retrieved \(tradeheroFriends.count) TradeHero friend(s) from cache.")
             }
 
             return (facebookFriends: facebookFriends, tradeheroFriends: tradeheroFriends)
@@ -81,7 +80,7 @@ struct THCache {
         EGOCache.globalCache().setObject(users.map {
             $0.dictionaryRepresentation
             }, forKey: kTHRandomFBFriendsCacheStoreKey)
-        debugPrintln("\(users.count) random friends users cached.")
+        debugPrint("\(users.count) random friends users cached.")
     }
 
 
@@ -90,7 +89,7 @@ struct THCache {
         var friends = [UserFriend]()
         if let arr = object as? [[String:AnyObject]] {
             for FDict in arr {
-                if let uf = UserFriend.decode(JSONValue.parse(FDict)) {
+                if let uf:UserFriend = decode(FDict) {
                     friends.append(uf)
                 }
             }
@@ -106,7 +105,7 @@ struct THCache {
         }
 
         EGOCache.globalCache().setObject(staffDicts, forKey: kTHStaffUserCacheStoreKey)
-        debugPrintln("\(staffList.count) staff cached.")
+        debugPrint("\(staffList.count) staff cached.")
     }
 
     static func getStaffListFromCache() -> [StaffUser] {
@@ -116,14 +115,14 @@ struct THCache {
 
         if let arr = object as? [[String:AnyObject]] {
             for staffDict in arr {
-                if let u = User.decode(JSONValue.parse(staffDict)) {
+                if let u:User = decode(staffDict) {
                     let staffU = StaffUser(user: u, funnyName: (staffDict["funnyName"] as? String) ?? "")
                     staffUsers.append(staffU)
 
                 }
             }
         }
-        debugPrintln("Retrieved \(staffUsers.count) staff from cache.")
+        debugPrint("Retrieved \(staffUsers.count) staff from cache.")
         return staffUsers
     }
 
@@ -139,7 +138,7 @@ struct THCache {
         let gameCacheKey = "\(kTHUserCacheStoreKeyPrefix)\(gameId)"
         let object = EGOCache.globalCache().objectForKey(gameCacheKey)
         if let gJSON = object as? [String:AnyObject] {
-            return Game.decode(JSONValue.parse(gJSON))
+            return decode(gJSON)
         }
         return nil
     }

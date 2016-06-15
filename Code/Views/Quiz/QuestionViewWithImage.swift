@@ -20,11 +20,11 @@ class QuestionViewWithImage: UIView {
     }
 
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         setup()
     }
 
     func setup() {
-        self.logoCanvasView = NSBundle.mainBundle().loadNibNamed("LogoCanvasView", owner: self, options: nil)[0] as LogoCanvasView
+        self.logoCanvasView = NSBundle.mainBundle().loadNibNamed("LogoCanvasView", owner: self, options: nil)[0] as! LogoCanvasView
     }
 }

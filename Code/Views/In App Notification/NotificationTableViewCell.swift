@@ -34,10 +34,10 @@ class NotificationTableViewCell: UITableViewCell {
             if let notification = self.notification {
                 d.notificationTableViewCell(self, didTapActionButton: notification)
             } else {
-                debugPrintln("Notification object is nil")
+                debugPrint("Notification object is nil")
             }
         } else {
-            debugPrintln("NotificationTableViewCellDelegate not assigned.")
+            debugPrint("NotificationTableViewCellDelegate not assigned.")
         }
     }
 

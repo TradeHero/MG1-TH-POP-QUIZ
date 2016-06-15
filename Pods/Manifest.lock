@@ -1,17 +1,20 @@
 PODS:
-  - Alamofire (1.1.4)
-  - Argo (0.3.4):
-    - Runes
-  - Bolts (1.1.4)
-  - CAAnimationBlocks (0.0.1)
-  - ChatHeads (1.0):
-    - CAAnimationBlocks
-    - SKBounceAnimation
+  - Alamofire (3.4.1)
+  - Argo (3.0.1)
+  - Bolts (1.7.0):
+    - Bolts/AppLinks (= 1.7.0)
+    - Bolts/Tasks (= 1.7.0)
+  - Bolts/AppLinks (1.7.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.7.0)
   - DZNSegmentedControl (1.2.2)
   - EGOCache (2.1)
-  - ExSwift (0.1.9)
-  - Facebook-iOS-SDK (3.23.0):
-    - Bolts (~> 1.0)
+  - FBSDKCoreKit (4.12.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.12.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.12.0):
+    - FBSDKCoreKit
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
     - FormatterKit/ArrayFormatter (= 1.8.0)
@@ -33,99 +36,59 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.8.0)
   - GPUImage (0.1.6)
   - JGProgressHUD (1.2.3)
-  - KeychainAccess (1.1.3)
   - KKProgressTimer (0.0.1)
   - LDProgressView (1.2.1)
-  - MDRadialProgress (1.3.1)
-  - OMGHTTPURLRQ (2.1):
-    - OMGHTTPURLRQ/RQ (= 2.1)
-  - OMGHTTPURLRQ/FormURLEncode (2.1)
-  - OMGHTTPURLRQ/RQ (2.1):
-    - OMGHTTPURLRQ/FormURLEncode
-    - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (2.1)
-  - PromiseKit/Swift (1.3.0):
-    - OMGHTTPURLRQ
   - PureLayout (2.0.5)
-  - Realm (0.90.6):
-    - Realm/Headers (= 0.90.6)
-  - Realm/Headers (0.90.6)
-  - Runes (1.1.1)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
-  - SKBounceAnimation (1.0.04)
   - SSKeychain (1.2.2)
   - WYPopoverController (0.3.7)
 
 DEPENDENCIES:
-  - Alamofire (~> 1.1.4)
-  - Argo (from `https://github.com/thoughtbot/Argo`, branch `swift-1.1`)
-  - ChatHeads (~> 1.0)
+  - Alamofire (~> 3.4)
+  - Argo
   - DZNSegmentedControl (~> 1.2.2)
   - EGOCache (~> 2.1)
-  - ExSwift (from `https://github.com/pNre/ExSwift`, branch `master`)
-  - Facebook-iOS-SDK (~> 3.23.0)
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - FormatterKit (~> 1.8.0)
   - GPUImage (~> 0.1.6)
   - JGProgressHUD (~> 1.2.3)
-  - KeychainAccess (~> 1.1.2)
   - KKProgressTimer (from `http://github.com/gin0606/KKProgressTimer.git`)
   - LDProgressView (~> 1.2.1)
-  - MDRadialProgress (~> 1.3.1)
-  - PromiseKit/Swift (~> 1.3.0)
   - PureLayout (~> 2.0.5)
-  - Realm (~> 0.90.6)
   - SDWebImage (~> 3.7.1)
   - SSKeychain (~> 1.2.2)
   - WYPopoverController (~> 0.3.7)
 
 EXTERNAL SOURCES:
-  Argo:
-    :branch: swift-1.1
-    :git: https://github.com/thoughtbot/Argo
-  ExSwift:
-    :branch: master
-    :git: https://github.com/pNre/ExSwift
   KKProgressTimer:
     :git: http://github.com/gin0606/KKProgressTimer.git
 
 CHECKOUT OPTIONS:
-  Argo:
-    :commit: f31f5f3439d1ee59206e29cfaff4f79af077587c
-    :git: https://github.com/thoughtbot/Argo
-  ExSwift:
-    :commit: 87c8a9a87df0a4953ee1c7678199d1917a7c8799
-    :git: https://github.com/pNre/ExSwift
   KKProgressTimer:
     :commit: 575be455a23e22c2646c09726d1219e363f36aa4
     :git: http://github.com/gin0606/KKProgressTimer.git
 
 SPEC CHECKSUMS:
-  Alamofire: 524225da382071ee3e6d0badd0ee4b4dc36740de
-  Argo: 8aa16e20d4796306d36d44009cc8333a647c42c5
-  Bolts: dd9fb8433d67f5acc3b6b4d1379bbc5513d716c1
-  CAAnimationBlocks: 981bfca79ac481f07957aa8357885e620637f926
-  ChatHeads: 1b66a3ca6ae25e6ce04eb64485cf96b43b74bbcc
-  DZNSegmentedControl: daa91d107904f7433e73852477f08450575be331
-  EGOCache: bf414333c425fe47f5182351d1dd47ebf72d8352
-  ExSwift: 66c4dcef758ad184556954610ecadcabad3c1b36
-  Facebook-iOS-SDK: 3d65f685348b789e46a9aacf92bfa85b60b63755
-  FormatterKit: 547a808c41172136a3f3acb424ac9361d38bb32f
-  GPUImage: cecb0830bb9428f50192042e3c7b53810f51388e
-  JGProgressHUD: 733523c80f69b6dfc41b88a0f33883a89a8b4c3b
-  KeychainAccess: 7f73608d9e7bf466b71a88acdcc7f790f6a56574
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Argo: 22c5d62b7967020a641468c91dc9488bea9523b8
+  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
+  DZNSegmentedControl: 8a7fdd743672742c692106f4456aaede10d43131
+  EGOCache: d20ba0673fd747c15a3b73a9218d844350b156ba
+  FBSDKCoreKit: 6e56d5a2a64a755ad4efb5dbeee8f82fb1b99775
+  FBSDKLoginKit: 03f68a8d48c2c8bb81d7eb8097973d483543e1f6
+  FBSDKShareKit: df1491f064cffc8ebcc3fc8b71be94cc190c728e
+  FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
+  GPUImage: 4675ce4a5370ca92fcea8623b2a08b8f0c51b940
+  JGProgressHUD: 02eb5fc5f1069dc3a6aaf74a0da06f05c2546f32
   KKProgressTimer: 6a132f47ed5a24fdc0fa8a4f15dfe2ed5844772a
-  LDProgressView: e0ee70a7cd858ac8c04b319ef87854e7250fb357
-  MDRadialProgress: 0499b76b2bd25711ac1d6687c07ac915bad1b8bd
-  OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
-  PromiseKit: 4844db4448b4e387845e702b738cd87433fc02fd
-  PureLayout: 63a3257320223e8edddcd3afb407445f85a6bf74
-  Realm: 6c3facc11964ab9f828f47de6d0e9bf9c4d9c818
-  Runes: 5268f17b84bd4522494a3ab3291f18c84e3e9924
-  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
-  SKBounceAnimation: a47c30f67d3e4b948b1823ce5957d72d4382dd73
-  SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
-  WYPopoverController: 211e8e4d5178175cc8089cf754dd8631f819d0d1
+  LDProgressView: f6afc7c30d2a9edf33001515f3189338567a32d2
+  PureLayout: a0fe75f1cf485801e7e00b723b8a3c32dca558e2
+  SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
+  SSKeychain: 88767e903ee8d274ed380e364d96b7a101235286
+  WYPopoverController: ebefa50c477bdbbd9dc992dfdffafa168c4484eb
 
-COCOAPODS: 0.36.0.rc.1
+COCOAPODS: 0.39.0

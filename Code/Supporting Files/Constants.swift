@@ -121,7 +121,7 @@ let kTHRandomFBFriendsCacheStoreKey = "\(kConstantPrefix)RandomFBFriendsCacheSto
 //MARK:- Settings
 var kTHPushNotificationOn: Bool {
     set {
-        debugPrintln("Push notifications set to \(newValue)")
+        debugPrint("Push notifications set to \(newValue)")
 //    NetworkClient.sharedClient.updatePushNotification() 
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHPushNotificationOnKey)
     }
@@ -136,9 +136,9 @@ var kTHPushNotificationOn: Bool {
 
 var kTHBackgroundMusicValue: Float {
     set {
-        debugPrintln("Background music volume set to \(newValue)")
+        debugPrint("Background music volume set to \(newValue)")
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(float: newValue), forKey: kTHBackgroundMusicValueKey)
-        musicPlayer.volume = newValue
+//        musicPlayer.volume = newValue
     }
 
     get {
@@ -151,7 +151,7 @@ var kTHBackgroundMusicValue: Float {
 
 var kTHSoundEffectValue: Float {
     set {
-        debugPrintln("Sound effect volume set to \(newValue)")
+        debugPrint("Sound effect volume set to \(newValue)")
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(float: newValue), forKey: kTHSoundEffectValueKey)
     }
 
@@ -166,7 +166,7 @@ var kTHSoundEffectValue: Float {
 var kTHVibrationEffectOn: Bool {
     set {
         let on = newValue ? "on" : "off"
-        debugPrintln("Vibration effect set to \(on)")
+        debugPrint("Vibration effect set to \(on)")
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHVibrationEffectOnKey)
     }
 
@@ -181,7 +181,7 @@ var kTHVibrationEffectOn: Bool {
 var kTHNotificationHeadOn: Bool {
     set {
         let show = newValue ? "show" : "hidden"
-        debugPrintln("Notification head set to \(show)")
+        debugPrint("Notification head set to \(show)")
         NSUserDefaults.standardUserDefaults().setObject(NSNumber(bool: newValue), forKey: kTHNotificationHeadOnKey)
         NSNotificationCenter.defaultCenter().postNotificationName(kTHGameNotificationHeadNotificationToggleKey, object: nil)
     }
@@ -196,7 +196,7 @@ var kTHNotificationHeadOn: Bool {
 
 var kTHDefaultSong: String {
     set {
-        debugPrintln("Default background music set to \(newValue)")
+        debugPrint("Default background music set to \(newValue)")
         NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: kTHDefaultSongKey)
     }
 

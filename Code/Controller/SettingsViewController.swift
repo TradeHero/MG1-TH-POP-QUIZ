@@ -17,9 +17,9 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
     lazy var appVersionStringWithBuildNumber: String = {
         let infoDictionary = NSBundle.mainBundle().infoDictionary!
         if let vNum: AnyObject = infoDictionary["CFBundleShortVersionString"] {
-            let versionNumber = vNum as String
-            if let bNum: AnyObject? = infoDictionary[kCFBundleVersionKey as NSString] {
-                let buildNumber = bNum as String
+            let versionNumber = vNum as! String
+            if let bNum: AnyObject? = infoDictionary[kCFBundleVersionKey as NSString as String] {
+                let buildNumber = bNum as! String
                 return "v\(versionNumber)(\(buildNumber))"
             }
         }
@@ -103,9 +103,9 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         case 0:
             switch indexPath.row {
             case 0:
-                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
-                (cell as SettingsControlTableViewCell).configureControlType(.PushNotification)
-                (cell as SettingsControlTableViewCell).delegate = self
+                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier)! as UITableViewCell
+                (cell as! SettingsControlTableViewCell).configureControlType(.PushNotification)
+                (cell as! SettingsControlTableViewCell).delegate = self
                 cell.selectionStyle = .None
 //                UIView.roundView(cell.contentView, onCorner: .BottomLeft | .BottomRight, radius: 5)
                 return cell
@@ -115,28 +115,28 @@ class SettingsViewController: UIViewController, SettingsControlTableViewCellDele
         case 1:
             switch indexPath.row {
             case 0:
-                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsSliderTableViewCellIdentifier) as UITableViewCell
-                (cell as SettingsSliderTableViewCell).configureControlType(.BackgroundMusic)
-                (cell as SettingsSliderTableViewCell).delegate = self
+                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsSliderTableViewCellIdentifier)! as UITableViewCell
+                (cell as! SettingsSliderTableViewCell).configureControlType(.BackgroundMusic)
+                (cell as! SettingsSliderTableViewCell).delegate = self
                 cell.selectionStyle = .None
                 return cell
             case 1:
-                let cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsSliderTableViewCellIdentifier) as UITableViewCell
-                (cell as SettingsSliderTableViewCell).configureControlType(.SoundEffect)
-                (cell as SettingsSliderTableViewCell).delegate = self
+                let cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsSliderTableViewCellIdentifier)! as UITableViewCell
+                (cell as! SettingsSliderTableViewCell).configureControlType(.SoundEffect)
+                (cell as! SettingsSliderTableViewCell).delegate = self
                 cell.selectionStyle = .None
                 return cell
             case 2:
-                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier) as UITableViewCell
-                (cell as SettingsControlTableViewCell).configureControlType(.VibrationEffect)
-                (cell as SettingsControlTableViewCell).delegate = self
+                cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsControlTableViewCellIdentifier)! as UITableViewCell
+                (cell as! SettingsControlTableViewCell).configureControlType(.VibrationEffect)
+                (cell as! SettingsControlTableViewCell).delegate = self
                 cell.selectionStyle = .None
 //                UIView.roundView(cell.contentView, onCorner: .BottomLeft | .BottomRight, radius: 5)
                 return cell
             case 3:
                 if (isInternalUser(NetworkClient.sharedClient.user)) {
-                    cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsCommonTableViewCellIdentifier) as UITableViewCell
-                    (cell as SettingsCommonTableViewCell).controlTitleLabel.text = "Debug Mode"
+                    cell = tableView.dequeueReusableCellWithIdentifier(kTHSettingsCommonTableViewCellIdentifier)! as UITableViewCell
+                    (cell as! SettingsCommonTableViewCell).controlTitleLabel.text = "Debug Mode"
 //                    (cell as SettingsCommonTableViewCell).delegate = self
                     cell.selectionStyle = .Gray
                     return cell

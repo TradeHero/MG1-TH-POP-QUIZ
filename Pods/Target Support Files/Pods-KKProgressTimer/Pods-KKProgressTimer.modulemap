@@ -1,6 +1,0 @@
-framework module KKProgressTimer {
-  umbrella header "Pods-KKProgressTimer-umbrella.h"
-
-  export *
-  module * { export * }
-}

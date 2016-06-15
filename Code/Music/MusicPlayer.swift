@@ -25,8 +25,8 @@ var pianoMusic = [
 
 var countdownMusic = NSBundle.mainBundle().URLForResource("The Countdown Clock-15s", withExtension: "mp3")!
 
-var musicPlayer: AVAudioPlayer!
-var secondaryMusicPlayer = AVAudioPlayer.createAudioPlayer(countdownMusic)
+//var musicPlayer: AVAudioPlayer!
+//var secondaryMusicPlayer = AVAudioPlayer.createAudioPlayer(countdownMusic)
 
 var correctSoundPlayer = AVAudioPlayer.createAudioPlayer(NSBundle.mainBundle().URLForResource("Correct-Bell", withExtension: "caf")!)
 
@@ -51,20 +51,20 @@ func playWrongSound() {
 }
 
 func prepareForMusicPlayer(soundURL: NSURL) {
-    musicPlayer = AVAudioPlayer.createAudioPlayer(soundURL)
-    musicPlayer.numberOfLoops = -1
-    musicPlayer.volume = kTHBackgroundMusicValue
+//    musicPlayer = AVAudioPlayer.createAudioPlayer(soundURL)
+//    musicPlayer.numberOfLoops = -1
+//    musicPlayer.volume = kTHBackgroundMusicValue
 }
 
 func switchMusic(urlForMusic: NSURL) {
-    if let m = musicPlayer {
-        if m.playing {
-            m.stop()
-        }
-    }
-    prepareForMusicPlayer(urlForMusic)
-    musicPlayer.prepareToPlay()
-    musicPlayer.play()
+//    if let m = musicPlayer {
+//        if m.playing {
+//            m.stop()
+//        }
+//    }
+//    prepareForMusicPlayer(urlForMusic)
+//    musicPlayer.prepareToPlay()
+//    musicPlayer.play()
 }
 
 func +=<KeyType, ValueType>(inout left: Dictionary<KeyType, ValueType>, right: Dictionary<KeyType, ValueType>) {
@@ -87,23 +87,23 @@ func getRandomMusicName() -> String {
 }
 
 func playCountdownMusic() {
-    if secondaryMusicPlayer.playing {
-        return
-    }
-
-    secondaryMusicPlayer = AVAudioPlayer.createAudioPlayer(countdownMusic)
-    secondaryMusicPlayer.numberOfLoops = 0
-    secondaryMusicPlayer.volume = kTHBackgroundMusicValue / 2
-    secondaryMusicPlayer.prepareToPlay()
-    secondaryMusicPlayer.play()
+//    if secondaryMusicPlayer.playing {
+//        return
+//    }
+//
+//    secondaryMusicPlayer = AVAudioPlayer.createAudioPlayer(countdownMusic)
+//    secondaryMusicPlayer.numberOfLoops = 0
+//    secondaryMusicPlayer.volume = kTHBackgroundMusicValue / 2
+//    secondaryMusicPlayer.prepareToPlay()
+//    secondaryMusicPlayer.play()
 }
 
 func stopCountdownMusic() {
-    secondaryMusicPlayer.stop()
-    secondaryMusicPlayer.currentTime = 0
-    secondaryMusicPlayer = AVAudioPlayer.createAudioPlayer(countdownMusic)
-    secondaryMusicPlayer.numberOfLoops = 0
-    secondaryMusicPlayer.volume = 0
-    secondaryMusicPlayer.prepareToPlay()
+//    secondaryMusicPlayer.stop()
+//    secondaryMusicPlayer.currentTime = 0
+//    secondaryMusicPlayer = AVAudioPlayer.createAudioPlayer(countdownMusic)
+//    secondaryMusicPlayer.numberOfLoops = 0
+//    secondaryMusicPlayer.volume = 0
+//    secondaryMusicPlayer.prepareToPlay()
 }
 

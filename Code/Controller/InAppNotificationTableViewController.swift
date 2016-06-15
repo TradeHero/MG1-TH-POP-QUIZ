@@ -15,7 +15,7 @@ class InAppNotificationTableViewController: UITableViewController, NotificationT
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.navigationItem.title = "Notifications"
-        self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0xFF4069))
+        self.navigationController?.setNavigationTintColor(UIColor(hex: 0xFF4069))
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName: UIColor.whiteColor(), NSBackgroundColorAttributeName: UIColor.whiteColor()]
 
         self.tableView.registerNib(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: kTHNotificationTableViewCellIdentifier)
@@ -50,7 +50,7 @@ class InAppNotificationTableViewController: UITableViewController, NotificationT
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kTHNotificationTableViewCellIdentifier, forIndexPath: indexPath) as NotificationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(kTHNotificationTableViewCellIdentifier, forIndexPath: indexPath) as! NotificationTableViewCell
 
         cell.bindNotification(notifications[indexPath.row])
         cell.delegate = self

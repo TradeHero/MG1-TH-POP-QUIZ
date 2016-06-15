@@ -7,9 +7,8 @@
 //
 
 import Argo
-import Runes
 
-struct FacebookInvitableFriend: JSONDecodable, DebugPrintable, DictionaryRepresentation {
+struct FacebookInvitableFriend: Decodable, CustomDebugStringConvertible, DictionaryRepresentation {
     let inviteToken: String
 
     let name: String
@@ -20,7 +19,7 @@ struct FacebookInvitableFriend: JSONDecodable, DebugPrintable, DictionaryReprese
         return FacebookInvitableFriend(inviteToken: id, name: name, pictureUrl: pictureUrl)
     }
 
-    static func decode(j: JSONValue) -> FacebookInvitableFriend? {
+    static func decode(j: JSON) -> Decoded<FacebookInvitableFriend> {
         return FacebookInvitableFriend.create
                 <^> j <| "id"
                 <*> j <| "name"

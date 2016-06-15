@@ -91,7 +91,7 @@ class OptionButton: DesignableButton {
             let wordCount = txtComponents.count
 
             let longestWordLength = getLongestWordLength(txtComponents)
-            let longestWordCount = getNumberOfWordsWithWordCountApproximately(txtComponents, longestWordLength)
+            let longestWordCount = getNumberOfWordsWithWordCountApproximately(txtComponents, count: longestWordLength)
 
             if wordCount > 0 {
                 if longestWordLength > 7 {
@@ -123,7 +123,7 @@ class OptionButton: DesignableButton {
             self.wobbling = true
             self.transform = CGAffineTransformRotate(CGAffineTransformIdentity, radians(-3))
 
-            UIView.animateWithDuration(0.1, delay: 0, options: .AllowUserInteraction | .Repeat | .Autoreverse, animations: {
+            UIView.animateWithDuration(0.1, delay: 0, options: [.AllowUserInteraction, .Repeat, .Autoreverse], animations: {
                 self.transform = CGAffineTransformRotate(CGAffineTransformIdentity, radians(3))
             }, completion: nil)
         }
@@ -132,7 +132,7 @@ class OptionButton: DesignableButton {
     func stopWobble() {
         if self.wobbling {
             self.wobbling = false
-            UIView.animateWithDuration(0.1, delay: 0, options: .AllowUserInteraction | .BeginFromCurrentState | .CurveLinear, animations: {
+            UIView.animateWithDuration(0.1, delay: 0, options: [.AllowUserInteraction, .BeginFromCurrentState, .CurveLinear], animations: {
                 self.transform = CGAffineTransformIdentity
             }, completion: nil)
         }
@@ -326,7 +326,7 @@ class OptionButton: DesignableButton {
                 self.titleLabel?.removeFromSuperview()
             }
         }
-        trendingTopLayerView = NSBundle.mainBundle().loadNibNamed("OptionButtonAccessoryImageLayer", owner: self, options: nil)[0] as OptionButtonAccessoryImageLayer
+        trendingTopLayerView = NSBundle.mainBundle().loadNibNamed("OptionButtonAccessoryImageLayer", owner: self, options: nil)[0] as! OptionButtonAccessoryImageLayer
         trendingTopLayerView.titleLabel.text = self.labelText
         trendingTopLayerView.imageView.image = self.accessoryImage
         trendingTopLayerView.userInteractionEnabled = false

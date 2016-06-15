@@ -81,7 +81,7 @@ class SettingsControlTableViewCell: UITableViewCell {
             toggleSwitch.on = kTHNotificationHeadOn
             controlLogoImageView.image = UIImage(named: "VibrationSettingsIcon")
         default:
-            println("Wrong type of control")
+            print("Wrong type of control")
             break
         }
 

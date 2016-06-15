@@ -6,10 +6,9 @@
 //  Copyright (c) 2015 TradeHero. All rights reserved.
 //
 
-import Runes
 import Argo
 
-struct GameResult: JSONDecodable, DebugPrintable, Equatable {
+struct GameResult: Decodable, CustomDebugStringConvertible, Equatable {
 
     let gameId: Int
 
@@ -56,7 +55,7 @@ struct GameResult: JSONDecodable, DebugPrintable, Equatable {
         return qCorrect
     }
 
-    static func decode(j: JSONValue) -> GameResult? {
+    static func decode(j: JSON) -> Decoded<GameResult> {
         return self.create
                 <^> j <| "gameId"
                 <*> j <| "hintsUsed"
@@ -103,18 +102,18 @@ func ==(lhs: GameResult, rhs: GameResult) -> Bool {
         //if not nil
         if let rhsFinal = rhs.finalResultDetails {
             //if not nil
-            finalResultEq &= lhsFinal == rhsFinal //true if not nil value equals
+            finalResultEq = lhsFinal == rhsFinal //true if not nil value equals
         } else {
-            finalResultEq &= false //false if rhs not nil
+            finalResultEq = false //false if rhs not nil
         }
     } else {
         //if lhs nil
         if let rhsFinal = rhs.finalResultDetails {
             //rhs not nil, false
-            finalResultEq &= false
+            finalResultEq = false
         } else {
             //rhs nil, true
-            finalResultEq &= true
+            finalResultEq = true
         }
     }
 

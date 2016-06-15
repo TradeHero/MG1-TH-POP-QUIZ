@@ -1,1 +1,0 @@
-../../../ChatHeads/ChatHeads/Classes/CHDraggingCoordinator.h

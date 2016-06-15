@@ -24,7 +24,7 @@ class DevViewController: UIViewController {
 
     @IBAction func quizDisplayAction(sender: UIButton) {
         NetworkClient.sharedClient.fetchStaticQuestions({
-            debugPrintln("\($0.localizedDescription)")
+            debugPrint("\($0.localizedDescription)")
         }) {
             questionSet in
             let controller = UIStoryboard.devStoryboard().instantiateViewControllerWithIdentifier("QuizDebugViewController") as? QuizDebugViewController
@@ -35,14 +35,14 @@ class DevViewController: UIViewController {
 
     @IBAction func imageQuizDisplayAction(sender: UIButton) {
         NetworkClient.sharedClient.fetchImageQuestions({
-            debugPrintln("\($0.localizedDescription)")
+            debugPrint("\($0.localizedDescription)")
         }) {
             questionSet in
             let controller = UIStoryboard.devStoryboard().instantiateViewControllerWithIdentifier("QuizDebugViewController") as? QuizDebugViewController
             var count = 0
             var partialCompletionHandler: () -> () = {
                 count++
-                println(count)
+                print(count)
                 if (count == questionSet.count) {
                     controller?.bindQuestionSet(questionSet)
                     self.presentViewController(controller!, animated: true, completion: nil)
@@ -64,7 +64,7 @@ class DevViewController: UIViewController {
     @IBAction func APItest(sender: AnyObject) {
         NetworkClient.sharedClient.fetchGame(180, force: false, errorHandler: { error in }, completionHandler: {
             game in
-            debugPrintln(game)
+            debugPrint(game)
         })
     }
     /*

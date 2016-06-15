@@ -7,9 +7,8 @@
 //
 
 import Argo
-import Runes
 
-struct UserFriend: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresentation {
+struct UserFriend: Decodable, CustomDebugStringConvertible, Equatable, DictionaryRepresentation {
     let name: String
     let thUserId: Int
     let fbId: String
@@ -20,7 +19,7 @@ struct UserFriend: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresent
         return thUserId != 0
     }
     
-    static func decode(j: JSONValue) -> UserFriend? {
+    static func decode(j: JSON) -> Decoded<UserFriend> {
         return self.create
                 <^> j <| "name"
                 <*> j <| "thUserId"

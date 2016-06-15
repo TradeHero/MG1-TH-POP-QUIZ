@@ -1,6 +1,0 @@
-framework module EGOCache {
-  umbrella header "Pods-EGOCache-umbrella.h"
-
-  export *
-  module * { export * }
-}

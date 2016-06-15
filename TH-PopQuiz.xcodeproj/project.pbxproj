@@ -112,7 +112,7 @@
 		6DE6DDFA19C6E92E00A44620 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE6DDF919C6E92E00A44620 /* SettingsViewController.swift */; };
 		6DF8BD5F19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5D19BD56FF00E86EBB /* GameResultDetailTableViewCell.swift */; };
 		6DF8BD6019BD56FF00E86EBB /* GameResultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DF8BD5E19BD56FF00E86EBB /* GameResultDetailTableViewCell.xib */; };
-		8B50D9C2419EE3CB953C0FD8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F251FE71A19CFD2FA611D017 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8B50D9C2419EE3CB953C0FD8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F251FE71A19CFD2FA611D017 /* Pods.framework */; };
 		F6A7D92F1A00DAAC00056EB1 /* chopineb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D92B1A00DAAC00056EB1 /* chopineb.mp3 */; };
 		F6A7D9301A00DAAC00056EB1 /* k165.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D92C1A00DAAC00056EB1 /* k165.mp3 */; };
 		F6A7D9311A00DAAC00056EB1 /* turca.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F6A7D92D1A00DAAC00056EB1 /* turca.mp3 */; };
@@ -795,12 +795,13 @@
 		6DD230F719B81FFA00B5D05E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = TradeHero;
 				TargetAttributes = {
 					6DD230FE19B81FFA00B5D05E = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = CLAS2G6QPJ;
+						DevelopmentTeam = RSLW4S7XVW;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;

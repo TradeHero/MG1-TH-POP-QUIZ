@@ -36,7 +36,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return self.unfinishedChallenges.count == 0
     }
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 
     @IBOutlet weak var tableView: UITableView!
@@ -46,7 +46,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.registerNib(UINib(nibName: "HomeTurnChallengesTableViewCell", bundle: nil), forCellReuseIdentifier: kTHHomeTurnChallengesTableViewCellIdentifier)
         self.tableView.registerNib(UINib(nibName: "FriendsChallengeCellTableViewCell", bundle: nil), forCellReuseIdentifier: kTHFriendsChallengeCellTableViewCellIdentifier)
         setupSubviews()
-        self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
+        self.navigationController?.setNavigationTintColor(UIColor(hex: 0x303030), buttonColor: UIColor(hex: 0xffffff))
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName: UIColor.whiteColor(), NSBackgroundColorAttributeName: UIColor.whiteColor()]
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 53
@@ -104,10 +104,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         var hud = JGProgressHUD.progressHUDWithDefaultStyle()
         hud.showInWindow()
         hud.textLabel.text = "Creating quick game..."
-        NetworkClient.sharedClient.createQuickGame({ error in debugPrintln(error) }) {
+        NetworkClient.sharedClient.createQuickGame({ error in debugPrint(error) }) {
             [unowned self] in
             hud.textLabel.text = "Creating game with user.."
-            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
             vc.bindGame($0)
             self.navigationController?.pushViewController(vc, animated: true)
             hud.dismissAnimated(true)
@@ -187,7 +187,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         NetworkClient.sharedClient.fetchAllChallenges({
             error in
-            debugPrintln(error)
+            debugPrint(error)
         }) {
             [unowned self] in
 
@@ -207,7 +207,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             completionHandler()
         }
 
-        NetworkClient.sharedClient.getRandomFBFriendsForUser(numberOfUsers: 3, forUser: user.userId, errorHandler: { error in debugPrintln(error) }) {
+        NetworkClient.sharedClient.getRandomFBFriendsForUser(numberOfUsers: 3, forUser: user.userId, errorHandler: { error in debugPrint(error) }) {
             [unowned self] in
             self.facebookFriendsChallenge = $0
             completionHandler()
@@ -217,7 +217,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as HomeTurnChallengesTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as! HomeTurnChallengesTableViewCell
             cell.bindChalllenge(unfinishedChallenges[indexPath.row], status: .Play)
             cell.layoutIfNeeded()
             cell.setNeedsUpdateConstraints()
@@ -225,7 +225,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.delegate = self
             return cell
         case 1:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as HomeTurnChallengesTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as! HomeTurnChallengesTableViewCell
             cell.bindChalllenge(openChallenges[indexPath.row], status: .Accept)
             cell.layoutIfNeeded()
             cell.setNeedsUpdateConstraints()
@@ -236,7 +236,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let row = indexPath.row
             let offset = opponentPendingChallenges.count
             if row < offset {
-                var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as HomeTurnChallengesTableViewCell
+                var cell = tableView.dequeueReusableCellWithIdentifier(kTHHomeTurnChallengesTableViewCellIdentifier, forIndexPath: indexPath) as! HomeTurnChallengesTableViewCell
                 cell.bindChalllenge(opponentPendingChallenges[row], status: .Nudge)
                 cell.layoutIfNeeded()
                 cell.setNeedsUpdateConstraints()
@@ -244,7 +244,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.delegate = self
                 return cell
             } else {
-                var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
+                var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as! FriendsChallengeCellTableViewCell
                 cell.bindFriendUser(facebookFriendsChallenge[row - offset], index: 0)
                 cell.delegate = self
                 cell.layoutIfNeeded()
@@ -322,7 +322,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             hud.showInWindow()
             hud.textLabel.text = "Getting ready.."
 
-            NetworkClient.sharedClient.fetchGame(game.id, force: true, errorHandler: { error in debugPrintln(error) }) {
+            NetworkClient.sharedClient.fetchGame(game.id, force: true, errorHandler: { error in debugPrint(error) }) {
                 [unowned self] in
                 var i = 0
                 for game in self.openChallenges {
@@ -334,7 +334,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     i++
                 }
 
-                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
                 vc.bindGame($0)
                 self.navigationController?.pushViewController(vc, animated: true)
                 hud.dismissAnimated(true)
@@ -354,10 +354,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         var hud = JGProgressHUD.progressHUDWithDefaultStyle()
         hud.showInWindow()
         hud.textLabel.text = "Creating challenge..."
-        NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler: { error in debugPrintln(error) }) {
+        NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler: { error in debugPrint(error) }) {
             [unowned self] in
             hud.dismissAnimated(true)
-            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
             vc.bindGame($0)
             self.navigationController?.pushViewController(vc, animated: true)
         }

@@ -90,36 +90,28 @@ class NetworkClient {
                 parameters: param,
                 encoding: JSONEncoding,
                 authentication: auth).responseJSON {
-            [unowned self] _, response, content, error in
-            if let responseError = error {
-                println(responseError)
-                errorHandler(responseError)
-                return
-            }
+            [unowned self] response in
+                    switch response.result {
+                    case .Success(let content):
+                        self.saveCredentials(accessToken)
+                        
+                        let responseJSON = content as! [String:AnyObject]
+                        let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
+                        
+                        if let profileDTODict = profileDTOPart as? [String:AnyObject] {
+                            var loginUser:User = decode(profileDTODict)!
+                            print("Signed in as \(loginUser)")
+                            self.authenticatedUser = loginUser
+                            let userInfo = ["user": loginUser.dictionaryRepresentation]
+                            NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLoginSuccessfulNotificationKey, object: self, userInfo: userInfo)
+                            loginSuccessHandler(loginUser)
+                        }
+                    case .Failure(let error):
+                        errorHandler(error)
+                    }
 
-            if response?.statusCode == 200 {
-                self.saveCredentials(accessToken)
-
-                let responseJSON = content as [String:AnyObject]
-                let profileDTOPart: AnyObject? = responseJSON["profileDTO"]
-
-                if let profileDTODict = profileDTOPart as? [String:AnyObject] {
-                    var loginUser = User.decode(JSONValue.parse(profileDTODict))!
-                    println("Signed in as \(loginUser)")
-                    self.authenticatedUser = loginUser
-                    let userInfo = ["user": loginUser.dictionaryRepresentation]
-                    NSNotificationCenter.defaultCenter().postNotificationName(kTHGameLoginSuccessfulNotificationKey, object: self, userInfo: userInfo)
-                    loginSuccessHandler(loginUser)
-                }
-            } else if response?.statusCode == 417 {
-                let err = NSError(domain: "com.mymanisku.TH-PopQuiz", code: 417, userInfo: ["message": "Expired access token"])
-                errorHandler(err)
-            } else {
-                let err = NSError(domain: "com.mymanisku.TH-PopQuiz", code: response!.statusCode, userInfo: [NSLocalizedDescriptionKey: "\(content)"])
-                errorHandler(err)
-            }
         }
-        debugPrintln(r)
+        debugPrint(r)
     }
 
     /**
@@ -128,29 +120,29 @@ class NetworkClient {
     func createChallenge(numberOfQuestions: Int = 7, opponentId: Int!, errorHandler: NSError -> (), completionHandler: Game -> ()) {
         var param: [String:AnyObject] = ["numberOfQuestions": numberOfQuestions]
         if let id = opponentId {
-            debugPrintln("Creating challenge with user \(id) with \(numberOfQuestions) questions(s)")
+            debugPrint("Creating challenge with user \(id) with \(numberOfQuestions) questions(s)")
             param.updateValue(id, forKey: "opponentId")
         } else {
-            debugPrintln("Creating quick game with \(numberOfQuestions) questions(s)")
+            debugPrint("Creating quick game with \(numberOfQuestions) questions(s)")
         }
 
 
         let r = self.request(.POST, "\(THGameAPIBaseURL)/create", parameters: param, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-            if let responseError = error {
-                println(responseError)
-                return
-            }
-
-            if response?.statusCode == 200 {
+            [unowned self] response in
+            switch response.result {
+            case .Success(let content):
                 if let responseJSON = content as? [String:AnyObject] {
-                    var game = Game.decode(JSONValue.parse(responseJSON))!
-                    debugPrintln("Game created with game ID: \(game.id)")
+                    var game:Game = decode(responseJSON)!
+                    debugPrint("Game created with game ID: \(game.id)")
                     completionHandler(game)
                 }
+
+            case .Failure(let error):
+                print(error)
             }
+
         }
-        debugPrintln(r)
+        debugPrint(r)
     }
 
     /**
@@ -160,34 +152,39 @@ class NetworkClient {
 
     func fetchFriendListForUser(userId: Int, errorHandler: NSError -> (), completionHandler: TFBHUserFriendTuple -> ()) {
         let url = "\(THServerAPIBaseURL)/users/\(userId)/getnewfriends?socialNetwork=FB"
-        debugPrintln("Fetching Facebook friends for user \(userId)...")
+        debugPrint("Fetching Facebook friends for user \(userId)...")
 
 
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-            if let e = error {
-                errorHandler(e)
-            }
-            var friends: [UserFriend] = []
-
-            if let arr = content as? [AnyObject] {
-                debugPrintln("Parsing \(arr.count) objects as THUserFriend...")
-                for friendObj in arr {
-                    friends.append(UserFriend.decode(JSONValue.parse(friendObj))!)
+            [unowned self] response in
+            
+            switch response.result {
+            case .Success(let content):
+                var friends: [UserFriend] = []
+                
+                if let arr = content as? [AnyObject] {
+                    debugPrint("Parsing \(arr.count) objects as THUserFriend...")
+                    for friendObj in arr {
+                        friends.append(decode(friendObj)!)
+                    }
+                    debugPrint("Completely parsed objects as User Friend(s).")
                 }
-                debugPrintln("Completely parsed objects as User Friend(s).")
+                var fbFrnds: [UserFriend] = []
+                var thFrnds: [UserFriend] = []
+                
+                fbFrnds = friends.filter {
+                    $0.thUserId == 0
+                }
+                thFrnds = friends.filter {
+                    $0.thUserId != 0
+                }
+                debugPrint("Successfully fetched \(friends.count) friend(s).")
+                completionHandler((fbFrnds, thFrnds))
+            case .Failure(let error):
+                errorHandler(error)
             }
-            var fbFrnds: [UserFriend] = []
-            var thFrnds: [UserFriend] = []
 
-            fbFrnds = friends.filter {
-                $0.thUserId == 0
-            }
-            thFrnds = friends.filter {
-                $0.thUserId != 0
-            }
-            debugPrintln("Successfully fetched \(friends.count) friend(s).")
-            completionHandler((fbFrnds, thFrnds))
+            
         }
 
         //debugPrintln(r)
@@ -195,7 +192,7 @@ class NetworkClient {
 
     func getRandomFBFriendsForUser(numberOfUsers count: Int, forUser userId: Int, errorHandler: NSError -> (), completionHandler: [UserFriend] -> ()) {
         let url = "\(THServerAPIBaseURL)/users/\(userId)/getnewfriends?socialNetwork=FB&count=100"
-        debugPrintln("Fetching Facebook friends for user \(userId)...")
+        debugPrint("Fetching Facebook friends for user \(userId)...")
 
         if THCache.objectExistForCacheKey(kTHRandomFBFriendsCacheStoreKey) {
             var friends = THCache.getRandomFBFriendsFromCache()
@@ -212,44 +209,45 @@ class NetworkClient {
         }
 
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            if let responseError = error {
-                println(responseError)
-                return
-            }
-
-            var friends: [UserFriend] = []
-            if var arr = content as? [AnyObject] {
-                arr.shuffle()
-                debugPrintln("Parsing \(arr.count) objects as THUserFriend...")
-
-                for friendObj in arr {
-                    let friendDictionary = friendObj as [String:AnyObject]
-                    if let uID: AnyObject = friendDictionary["thUserId"] {
-                        let uIDInt = uID as Int
-                        if uIDInt != 0 {
-                            if let uf = UserFriend.decode(JSONValue.parse(friendDictionary)){
-                                friends.append(uf)
+            response in
+            switch response.result {
+            case .Success(let content):
+                var friends: [UserFriend] = []
+                if var arr = content as? [AnyObject] {
+                    arr.shuffle()
+                    debugPrint("Parsing \(arr.count) objects as THUserFriend...")
+                    
+                    for friendObj in arr {
+                        let friendDictionary = friendObj as! [String:AnyObject]
+                        if let uID: AnyObject = friendDictionary["thUserId"] {
+                            let uIDInt = uID as! Int
+                            if uIDInt != 0 {
+                                if let uf:UserFriend? = decode(friendDictionary){
+                                    friends.append(uf!)
+                                }
                             }
                         }
                     }
-                }
-                debugPrintln("Completely parsed \(friends.count) objects as THUserFriend(s).")
-                THCache.saveRandomFBFriends(friends)
-                var filteredFriends = [UserFriend]()
-                for f in friends {
-                    if filteredFriends.count == count {
-                        break
+                    debugPrint("Completely parsed \(friends.count) objects as THUserFriend(s).")
+                    THCache.saveRandomFBFriends(friends)
+                    var filteredFriends = [UserFriend]()
+                    for f in friends {
+                        if filteredFriends.count == count {
+                            break
+                        }
+                        filteredFriends.append(f)
                     }
-                    filteredFriends.append(f)
+                    completionHandler(filteredFriends)
                 }
-                completionHandler(filteredFriends)
+            case .Failure(let error):
+                print(error)
             }
 
+
+            
+
         }
-        debugPrintln(r)
-
-
+        debugPrint(r)
     }
 
     /**
@@ -260,59 +258,63 @@ class NetworkClient {
     func fetchAllChallenges(errorHandler: NSError -> (), completionHandler: THMGChallengesTuple -> ()) {
         let url = "\(THGameAPIBaseURL)/home"
 
-        debugPrintln("Fetching all all (open, unfinished, opponent pending) challenges for authenticated user...")
+        debugPrint("Fetching all all (open, unfinished, opponent pending) challenges for authenticated user...")
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-
-            if let e = error {
-                errorHandler(e)
+            [unowned self] response in
+            
+            switch response.result {
+            case .Success(let content):
+                var openChallenges = [Game]()
+                var unfinishedChallenges = [Game]()
+                var opponentPendingChallenges = [Game]()
+                
+                var count = 0
+                let intermediateHandler: () -> () = {
+                    count++
+                    if count == 3 {
+                        completionHandler((unfinishedChallenges, openChallenges, opponentPendingChallenges))
+                    }
+                }
+                
+                if let allChallengeDtos = content as? [String:AnyObject] {
+                    //parse open challenges
+                    if let openChallengeDtos = allChallengeDtos["openChallenges"] as? [AnyObject] {
+                        print("Parsing \(openChallengeDtos.count) open challenges.")
+                        for dto in openChallengeDtos {
+                            var game:Game = decode(dto)!
+                            openChallenges.append(game)
+                        }
+                        print("Parsed \(openChallenges.count) open challenges.")
+                    }
+                    
+                    //parse unfinished challenges
+                    if let unfinishedChallengeDtos = allChallengeDtos["unfinishedChallenges"] as? [AnyObject] {
+                        print("Parsing \(unfinishedChallengeDtos.count) unfinished challenges.")
+                        for dto in unfinishedChallengeDtos {
+                            var game:Game = decode(dto)!
+                            unfinishedChallenges.append(game)
+                        }
+                        print("Parsed \(unfinishedChallenges.count) unfinished challenges.")
+                    }
+                    
+                    //parse opponent pending challenges
+                    if let opponentPendingChallengeDtos = allChallengeDtos["opponnentPendingChallenges"] as? [AnyObject] {
+                        print("Parsing \(opponentPendingChallengeDtos.count) opponent pending challenges.")
+                        for dto in opponentPendingChallengeDtos {
+                            var game:Game = decode(dto)!
+                            opponentPendingChallenges.append(game)
+                        }
+                        print("Parsed \(opponentPendingChallenges.count) opponent pending challenges.")
+                    }
+                    
+                    completionHandler((unfinishedChallenges: unfinishedChallenges, openChallenges: openChallenges, opponentPendingChallenges: opponentPendingChallenges))
+                }
+            case .Failure(let error):
+                errorHandler(error)
             }
 
-            var openChallenges = [Game]()
-            var unfinishedChallenges = [Game]()
-            var opponentPendingChallenges = [Game]()
 
-            var count = 0
-            let intermediateHandler: () -> () = {
-                count++
-                if count == 3 {
-                    completionHandler((unfinishedChallenges, openChallenges, opponentPendingChallenges))
-                }
-            }
-
-            if let allChallengeDtos = content as? [String:AnyObject] {
-                //parse open challenges
-                if let openChallengeDtos = allChallengeDtos["openChallenges"] as? [AnyObject] {
-                    println("Parsing \(openChallengeDtos.count) open challenges.")
-                    for dto in openChallengeDtos {
-                        var game = Game.decode(JSONValue.parse(dto))!
-                        openChallenges.append(game)
-                    }
-                    println("Parsed \(openChallenges.count) open challenges.")
-                }
-
-                //parse unfinished challenges
-                if let unfinishedChallengeDtos = allChallengeDtos["unfinishedChallenges"] as? [AnyObject] {
-                    println("Parsing \(unfinishedChallengeDtos.count) unfinished challenges.")
-                    for dto in unfinishedChallengeDtos {
-                        var game = Game.decode(JSONValue.parse(dto))!
-                        unfinishedChallenges.append(game)
-                    }
-                    println("Parsed \(unfinishedChallenges.count) unfinished challenges.")
-                }
-
-                //parse opponent pending challenges
-                if let opponentPendingChallengeDtos = allChallengeDtos["opponnentPendingChallenges"] as? [AnyObject] {
-                    println("Parsing \(opponentPendingChallengeDtos.count) opponent pending challenges.")
-                    for dto in opponentPendingChallengeDtos {
-                        var game = Game.decode(JSONValue.parse(dto))!
-                        opponentPendingChallenges.append(game)
-                    }
-                    println("Parsed \(opponentPendingChallenges.count) opponent pending challenges.")
-                }
-
-                completionHandler((unfinishedChallenges: unfinishedChallenges, openChallenges: openChallenges, opponentPendingChallenges: opponentPendingChallenges))
-            }
+            
         }
         //debugPrintln(r)
     }
@@ -323,24 +325,24 @@ class NetworkClient {
     func fetchClosedChallenges(errorHandler: NSError -> (), completionHandler: [Game] -> ()) {
         let url = "\(THGameAPIBaseURL)/closed"
 
-        debugPrintln("Fetching all closed challenges for authenticated user...")
+        debugPrint("Fetching all closed challenges for authenticated user...")
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
+            [unowned self] response in
 
-            if let e = error {
-                errorHandler(e)
-            }
-            var closedChallenges = [Game]()
-
-            if let closedChallengesDTOs = content as? [AnyObject] {
-                println("Parsing \(closedChallenges.count) closed challenges.")
-                for dto in closedChallengesDTOs {
-                    var game = Game.decode(JSONValue.parse(dto))!
-                    closedChallenges.append(game)
+            switch response.result {
+            case .Success(let content):
+                var closedChallenges = [Game]()
+                
+                if let closedChallengesDTOs = content as? [AnyObject] {
+                    for dto in closedChallengesDTOs {
+                        var game:Game = decode(dto)!
+                        closedChallenges.append(game)
+                    }
                 }
-                println("Parsed \(closedChallenges.count) closed challenges.")
+                completionHandler(closedChallenges)
+            case .Failure(let error):
+                errorHandler(error)
             }
-            completionHandler(closedChallenges)
         }
         //        debugPrintln(r)
     }
@@ -348,7 +350,7 @@ class NetworkClient {
 
     ///
     func createQuickGame(errorHandler: NSError -> (), completionHandler: Game -> ()) {
-        self.createChallenge(numberOfQuestions: 7, opponentId: nil, errorHandler: errorHandler) {
+        self.createChallenge(7, opponentId: nil, errorHandler: errorHandler) {
             completionHandler($0)
         }
     }
@@ -359,7 +361,7 @@ class NetworkClient {
     func postGameResults(game: Game, highestCombo: Int, noOfHintsUsed hints: UInt, currentScore: Int, questionResults: [QuestionResult], errorHandler: NSError -> (), completionHandler: Game -> ()) {
         let url = "\(THGameAPIBaseURL)/postResults"
 
-        debugPrintln("Posting results for game \(game.id)...")
+        debugPrint("Posting results for game \(game.id)...")
 
         var resultSet:[[String:AnyObject]] = questionResults.map {
              return ["questionId": $0.questionId, "time": $0.timeTaken, "rawScore": $0.rawScore]
@@ -368,22 +370,23 @@ class NetworkClient {
         var param: [String:AnyObject] = ["gameId": game.id, "results": resultSet, "correctStreak": highestCombo, "hintsUsed": hints]
 
         let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
+            [unowned self] response in
 
-            if let e = error {
-                errorHandler(e)
-            }
-
-            if let gameResults = content as? [String:AnyObject] {
-                if let challengerResultDTO = gameResults["challengerResult"] as? [String:AnyObject] {
-                    game.challengerResult = GameResult.decode(JSONValue.parse(challengerResultDTO))
+            switch response.result {
+            case .Success(let content):
+                if let gameResults = content as? [String:AnyObject] {
+                    if let challengerResultDTO = gameResults["challengerResult"] as? [String:AnyObject] {
+                        game.challengerResult = decode(challengerResultDTO)
+                    }
+                    
+                    if let opponentResultDTO = gameResults["opponentResult"] as? [String:AnyObject] {
+                        game.opponentResult = decode(opponentResultDTO)
+                    }
+                    
+                    completionHandler(game)
                 }
-
-                if let opponentResultDTO = gameResults["opponentResult"] as? [String:AnyObject] {
-                    game.opponentResult = GameResult.decode(JSONValue.parse(opponentResultDTO))
-                }
-
-                completionHandler(game)
+            case .Failure(let error):
+                errorHandler(error)
             }
         }
     }
@@ -396,28 +399,30 @@ class NetworkClient {
     func getResultForGame(gameId: Int, errorHandler: NSError -> (), completionHandler: THGameResultsTuple -> ()) {
         let url = "\(THGameAPIBaseURL)/\(gameId)/results"
 
-        debugPrintln("Fetching results for game \(gameId)...")
+        debugPrint("Fetching results for game \(gameId)...")
 
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-            if let e = error {
-                errorHandler(e)
-            }
-
-            var challengerResult: GameResult?
-            var opponentResult: GameResult?
-
-            if let resultsDTO = content as? [String:AnyObject] {
-
-                if let challengerResultDTO = resultsDTO["challengerResult"] as? [String:AnyObject] {
-                    challengerResult = GameResult.decode(JSONValue.parse(challengerResultDTO))
+            [unowned self] response in
+            
+            switch response.result {
+            case .Success(let data):
+                var challengerResult: GameResult?
+                var opponentResult: GameResult?
+                
+                if let resultsDTO = data as? [String:AnyObject] {
+                    
+                    if let challengerResultDTO = resultsDTO["challengerResult"] as? [String:AnyObject] {
+                        challengerResult = decode(challengerResultDTO)
+                    }
+                    
+                    if let opponentResultDTO = resultsDTO["opponentResult"] as? [String:AnyObject] {
+                        opponentResult = decode(opponentResultDTO)
+                    }
+                    
+                    completionHandler((challengerResult: challengerResult, opponentResult: opponentResult))
                 }
-
-                if let opponentResultDTO = resultsDTO["opponentResult"] as? [String:AnyObject] {
-                    opponentResult = GameResult.decode(JSONValue.parse(opponentResultDTO))
-                }
-
-                completionHandler((challengerResult: challengerResult, opponentResult: opponentResult))
+            case .Failure(let error):
+                errorHandler(error)
             }
         }
 
@@ -427,35 +432,33 @@ class NetworkClient {
 
     func fetchStaffList(progressHandler: Float -> (), errorHandler: NSError -> (), completionHandler: [StaffUser] -> ()) {
         let url = "\(THServerAPIBaseURL)/users/internal?mgTestSet=true"
-        debugPrintln("Fetching staff users..")
+        debugPrint("Fetching staff users..")
 
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-            if let e = error {
-                errorHandler(e)
-            }
-            var staffArr = [StaffUser]()
-            println(content)
-            if let staffList = content as? [AnyObject] {
-                debugPrintln("Parsing \(staffList.count) staff users..")
-                for staffData in staffList {
-                    let staffUserDTO = staffData as [String:AnyObject]
-                    let user = User.decode(JSONValue.parse(staffUserDTO))!
-                    for staffinfo in staffs_g {
-                        if staffinfo.id == user.userId {
-                            staffArr.append(StaffUser(user: user, funnyName: staffinfo.funnyName))
-                            break
+            [unowned self] response in
+            
+            switch response.result {
+            case .Success(let data):
+                var staffArr = [StaffUser]()
+                if let staffList = data as? [AnyObject] {
+                    for staffData in staffList {
+                        let staffUserDTO = staffData as! [String:AnyObject]
+                        let user:User = decode(staffUserDTO)!
+                        for staffinfo in staffs_g {
+                            if staffinfo.id == user.userId {
+                                staffArr.append(StaffUser(user: user, funnyName: staffinfo.funnyName))
+                                break
+                            }
                         }
                     }
-                }
-                staffArr.sort {
-                    $0.userId < $1.userId
-                }
-                debugPrintln("Successfully parsed \(staffArr.count) staffs.")
-                completionHandler(staffArr)
+                    staffArr.sort {
+                        $0.userId < $1.userId
+                    }
+                    completionHandler(staffArr)
+                }            case .Failure(let error):
+                errorHandler(error)
             }
         }
-        debugPrintln(r)
     }
 
 
@@ -463,25 +466,25 @@ class NetworkClient {
 
     func updateDeviceToken(deviceToken: String, errorHandler: NSError -> (), completionHandler: () -> ()) {
         let url = "\(THServerAPIBaseURL)/updateDevice"
-        debugPrintln("Device token changed, updating device token..")
+        debugPrint("Device token changed, updating device token..")
 
         let param = ["deviceToken": deviceToken]
         if let auth = generateAuthorisationFromKeychain() {
             let r = self.request(.POST, url, parameters: param, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(auth)").responseJSON {
-                [unowned self] _, response, content, error in
-                if let e = error {
-                    debugPrintln("Device token update failure.")
-                    errorHandler(e)
-                }
-
-                debugPrintln("Device token updated successfully")
-                if let c: AnyObject = content {
-//                println(c)
-                }
+                [unowned self] response in
+//                if let e = error {
+//                    debugPrintln("Device token update failure.")
+//                    errorHandler(e)
+//                }
+//
+//                debugPrintln("Device token updated successfully")
+//                if let c: AnyObject = content {
+////                println(c)
+//                }
 
             }
 
-            debugPrintln(r)
+            debugPrint(r)
         }
     }
     ///
@@ -517,15 +520,16 @@ class NetworkClient {
         }
 
         let r = self.request(.GET, "\(THServerAPIBaseURL)/Users/\(userId)", parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            if let e = error {
-                errorHandler(e)
-                return
-            }
-            if let profileDTODict = content as? [String:AnyObject] {
-                var user = User.decode(JSONValue.parse(profileDTODict))!
-                THCache.cacheUser(user)
-                completionHandler(user)
+            response in
+            switch response.result {
+            case .Success(let content):
+                if let profileDTODict = content as? [String:AnyObject] {
+                    var user:User = decode(profileDTODict)!
+                    THCache.cacheUser(user)
+                    completionHandler(user)
+                }
+            case .Failure(let error):
+                errorHandler(error)
             }
         }
     }
@@ -533,7 +537,7 @@ class NetworkClient {
     func refreshUser(user: User, completionHandler: User -> ()) {
         self.fetchUser(user.userId, force: true, errorHandler: {
             error in
-            debugPrintln(error)
+            debugPrint(error)
         }) {
             if let u = $0 {
                 completionHandler(user)
@@ -546,30 +550,29 @@ class NetworkClient {
     */
     func fetchGame(gameId: Int, force: Bool = false, errorHandler: NSError -> (), completionHandler: Game -> ()) {
         let url = "\(THGameAPIBaseURL)/\(gameId)/details"
-        debugPrintln("Fetching game with game ID: \(gameId)...")
+        debugPrint("Fetching game with game ID: \(gameId)...")
 
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-            if let e = error {
-                errorHandler(e)
-            }
-
-            if response?.statusCode == 200 {
+            [unowned self] response in
+            switch response.result {
+            case .Success(let content):
                 if let responseJSON = content as? [String:AnyObject] {
-                    var game = Game.decode(JSONValue.parse(responseJSON))!
-                    debugPrintln("Game created with game ID: \(game.id)")
+                    var game:Game = decode(responseJSON)!
+                    debugPrint("Game created with game ID: \(game.id)")
                     completionHandler(game)
                 }
+            case .Failure(let error):
+                errorHandler(error)
             }
 
         }
-        debugPrintln(r)
+        debugPrint(r)
     }
 
 
     func pushNotificationToDevice(deviceTokens: [String], alertMessage: String?, completionHandler: () -> ()) {
         if deviceTokens.count == 0 {
-            debugPrintln("No device token, fail sending push notification")
+            debugPrint("No device token, fail sending push notification")
             completionHandler()
             return
         }
@@ -606,16 +609,17 @@ class NetworkClient {
 
         let data: [String:AnyObject] = ["audience": ["OR": deviceTokenArray], "notification": notificationDict, "device_types": ["ios"]]
         let r = self.manager.request(ParameterEncoding.JSON.encode(mutableURLRequest, parameters: data).0).authenticate(user: appKey, password: appMasterPW).responseJSON {
-            (_, response, data, error) -> Void in
-            if let err = error {
-                debugPrintln(err)
+            (response) -> Void in
+            switch response.result {
+            case .Success(let data):
+                if let d: AnyObject = data {
+                    debugPrint(d)
+                }
+            case .Failure(let error):
+                print(error)
             }
-            if let d: AnyObject = data {
-                debugPrintln(d)
-            }
-
         }
-        debugPrintln(r)
+        debugPrint(r)
         completionHandler()
     }
 
@@ -624,22 +628,28 @@ class NetworkClient {
     */
     func fetchUserDeviceTokens(id: Int, completionHandler: [String] -> ()) {
         let url = "\(THServerAPIBaseURL)/users/\(id)/token?deviceType=1"
-        debugPrintln("Fetching device token with user ID: \(id)...")
+        debugPrint("Fetching device token with user ID: \(id)...")
 
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            if let data: AnyObject = content {
-                if let tokens = data as? [String] {
-                    completionHandler(tokens)
+            response in
+            switch response.result {
+            case .Success(let content):
+                if let data: AnyObject = content {
+                    if let tokens = data as? [String] {
+                        completionHandler(tokens)
+                    } else {
+                        completionHandler([])
+                    }
                 } else {
                     completionHandler([])
                 }
-            } else {
-                completionHandler([])
+            case .Failure(let error):
+                print(error)
             }
+            
         }
 
-        debugPrintln(r)
+        debugPrint(r)
     }
 
     func sendPushNotification(targetUserId: Int, message: String?, completionHandler: () -> ()) {
@@ -656,15 +666,16 @@ class NetworkClient {
         }
 
         let r = self.request(.GET, url, parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            [unowned self] _, response, content, error in
-            if let e = error {
-                debugPrintln(error)
+            response in
+            switch response.result {
+            case .Success:
+                completionHandler()
+            case .Failure(let error):
+                print(error)
             }
-
-            completionHandler()
         }
 
-        debugPrintln(r)
+        debugPrint(r)
     }
 
     //MARK: Debug Items
@@ -681,22 +692,26 @@ class NetworkClient {
         }
 
         let r = self.request(.GET, "\(THGameAPIBaseURL)/debugStatic", parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            if let e = error {
-                errorHandler(e)
-                return
-            }
-            var questions = [Question]()
-            if let d = content as? [AnyObject] {
-                
-                questions = d.map{
-                    return Question.decode(JSONValue.parse($0))!
+            response in
+            switch response.result {
+            case .Success(let data):
+                var questions = [Question]()
+                if let d = data as? [AnyObject] {
+                    
+                    questions = d.map{
+                        return decode($0)!
+                    }
+                    
                 }
-
+                completionHandler(questions)
+            case .Failure(let error):
+                errorHandler(error)
             }
-            completionHandler(questions)
+            
+
+            
         }
-        debugPrintln(r)
+        debugPrint(r)
     }
 
     /**
@@ -711,23 +726,27 @@ class NetworkClient {
         }
 
         let r = self.request(.GET, "\(THGameAPIBaseURL)/debugImage", parameters: nil, encoding: JSONEncoding, authentication: "\(THAuthFacebookPrefix) \(generateAuthorisationFromKeychain()!)").responseJSON {
-            _, response, content, error in
-            if let e = error {
-                errorHandler(e)
-                return
-            }
-            var questions = [Question]()
-            if let d = content as? [AnyObject] {
-                for rawQuestion in d {
-                    if let question = Question.decode(JSONValue.parse(rawQuestion)) {
-                        questions.append(question)
+            response in
+            
+            switch response.result {
+            case .Success(let data):
+                var questions = [Question]()
+                if let d = data as? [AnyObject] {
+                    for rawQuestion in d {
+                        if let question:Question? = decode(rawQuestion) {
+                            questions.append(question!)
+                        }
                     }
+                    
                 }
-
+                completionHandler(questions)
+            case .Failure(let error):
+                errorHandler(error)
             }
-            completionHandler(questions)
+
+            
         }
-        debugPrintln(r)
+        debugPrint(r)
     }
 
 
@@ -751,7 +770,7 @@ class NetworkClient {
         SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: urlString), options: .CacheMemoryOnly, progress: progressHandler) {
             (image, error, cacheType, finished, url) -> () in
             if error != nil {
-                debugPrintln(error)
+                debugPrint(error)
             }
             completionHandler(image, error)
         }
@@ -797,7 +816,7 @@ class NetworkClient {
             for userData in accs {
                 if let data = userData as? [String:AnyObject] {
                     if let acct: AnyObject? = data["acct"] {
-                        SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: acct as String)
+                        SSKeychain.deletePasswordForService(kTHGameKeychainIdentifierKey, account: acct as! String)
                     }
                 }
             }
@@ -808,7 +827,7 @@ class NetworkClient {
     private func loadCredentials() -> String? {
         if let keychainAcc = SSKeychain.accountsForService(kTHGameKeychainIdentifierKey) {
             if keychainAcc.count == 0 {
-                println("No credentials found")
+                print("No credentials found")
             }
 
             for userData in keychainAcc {
@@ -830,7 +849,7 @@ class NetworkClient {
     private func loadDeviceToken() -> String? {
         if let keychainAcc = SSKeychain.accountsForService(kTHGameKeychainIdentifierKey) {
             if keychainAcc.count == 0 {
-                println("No credentials found")
+                print("No credentials found")
             }
 
             for userData in keychainAcc {

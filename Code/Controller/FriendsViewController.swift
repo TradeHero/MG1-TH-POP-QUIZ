@@ -32,7 +32,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     //MARK:- Init
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 
     override func viewDidLoad() {
@@ -68,7 +68,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let object = EGOCache.globalCache().objectForKey(kTHStaffUserCacheStoreKey)
 
         if !THCache.objectExistForCacheKey(kTHStaffUserCacheStoreKey) {
-            debugPrintln("Nothing cached.")
+            debugPrint("Nothing cached.")
             hud.textLabel.text = "Just a sec.."
             NetworkClient.sharedClient.fetchStaffList({ progress in }, errorHandler: { error in }) {
                 [unowned self] in
@@ -118,16 +118,16 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.FBInvitableFriends = self.FBFriendList.map{
                 friend in
                 var friendDict:[String: AnyObject] = ["id": friend.fbId, "name": friend.name, "picture": ["data": ["url": friend.fbPicUrl]]]
-                return FacebookInvitableFriend.decode(JSONValue.parse(friendDict))!
+                return decode(friendDict)!
             }
             self.THFriendList = $1
             self.tableView.reloadData()
         }
 
         if !THCache.objectExistForCacheKey(kTHUserFriendsCacheStoreKey) {
-            debugPrintln("Nothing cached.")
+            debugPrint("Nothing cached.")
             hud.textLabel.text = "Retrieving friends..."
-            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: { error in debugPrintln(error) }) {
+            NetworkClient.sharedClient.fetchFriendListForUser(self.user.userId, errorHandler: { error in debugPrint(error) }) {
                 [unowned self] in
                 hud.dismissAnimated(true)
                 THCache.saveFriendsListToCache($0.facebookFriends, tradeheroFriends: $0.tradeheroFriends)
@@ -167,7 +167,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         switch indexPath.section {
         case 0:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHStaffChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as StaffChallengeCellTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHStaffChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as! StaffChallengeCellTableViewCell
             let staffUser = THStaffList[indexPath.row]
             cell.bindStaffUser(staffUser)
             cell.layoutIfNeeded()
@@ -176,7 +176,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.delegate = self
             return cell
         case 1:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as! FriendsChallengeCellTableViewCell
             let friendUser = FBInvitableFriends[indexPath.row]
             cell.bindInvitableFriend(friendUser, index: indexPath.row)
             cell.layoutIfNeeded()
@@ -185,7 +185,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.delegate = self
             return cell
         case 2:
-            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as FriendsChallengeCellTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(kTHFriendsChallengeCellTableViewCellIdentifier, forIndexPath: indexPath) as! FriendsChallengeCellTableViewCell
             let friendUser = THFriendList[indexPath.row]
             cell.bindFriendUser(friendUser, index: indexPath.row)
             cell.layoutIfNeeded()
@@ -253,10 +253,10 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         hud.textLabel.text = "Creating challenge..."
         hud.detailTextLabel.text = "Creating game with user.."
-        NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler: { error in debugPrintln(error) }) {
+        NetworkClient.sharedClient.createChallenge(opponentId: userID, errorHandler: { error in debugPrint(error) }) {
             [unowned self] in
             hud.dismissAnimated(true)
-            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
             vc.bindGame($0)
             self.navigationController?.pushViewController(vc, animated: true)
 
@@ -274,10 +274,10 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         hud.textLabel.text = "Creating challenge..."
         hud.detailTextLabel.text = "Creating game with user.."
-        NetworkClient.sharedClient.createChallenge(opponentId: userId, errorHandler: { error in debugPrintln(error) }) {
+        NetworkClient.sharedClient.createChallenge(opponentId: userId, errorHandler: { error in debugPrint(error) }) {
             [unowned self] in
             hud.dismissAnimated(true)
-            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+            let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
             vc.bindGame($0)
             self.navigationController?.pushViewController(vc, animated: true)
 

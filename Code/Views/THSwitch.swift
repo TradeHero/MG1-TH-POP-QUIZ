@@ -189,14 +189,14 @@ import QuartzCore
     /*
     *   Initialization
     */
-    override init() {
+    init() {
         super.init(frame: CGRectMake(0, 0, 50, 30))
 
         self.setup()
     }
 
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
 
         self.setup()
     }
@@ -270,71 +270,71 @@ import QuartzCore
         self.on = false
     }
 
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
-        super.beginTrackingWithTouch(touch, withEvent: event)
-
-        startTrackingValue = self.on
-        didChangeWhileTracking = false
-
-        let activeKnobWidth = self.bounds.size.height - 2 + 5
-        isAnimating = true
-
-        UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
-            if self.on {
-                self.thumbView.frame = CGRectMake(self.bounds.size.width - (activeKnobWidth + 1), self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height)
-                self.backgroundView.backgroundColor = self.onTintColor
-                self.thumbView.backgroundColor = self.onThumbTintColor
-            } else {
-                self.thumbView.frame = CGRectMake(self.thumbView.frame.origin.x, self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height)
-                self.backgroundView.backgroundColor = self.activeColor
-                self.thumbView.backgroundColor = self.thumbTintColor
-            }
-        }) {
-            finished in
-            self.isAnimating = false
-        }
-
-        return true
-    }
-
-    override func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
-        super.continueTrackingWithTouch(touch, withEvent: event)
-
-        // Get touch location
-        let lastPoint = touch.locationInView(self)
-
-        // update the switch to the correct visuals depending on if
-        // they moved their touch to the right or left side of the switch
-        if lastPoint.x > self.bounds.size.width * 0.5 {
-            self.showOn(true)
-            if !startTrackingValue {
-                didChangeWhileTracking = true
-            }
-        } else {
-            self.showOff(true)
-            if startTrackingValue {
-                didChangeWhileTracking = true
-            }
-        }
-
-        return true
-    }
-
-    override func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
-        super.endTrackingWithTouch(touch, withEvent: event)
-
-        let previousValue = self.on
-
-        if didChangeWhileTracking {
-            self.setOn(currentVisualValue, animated: true)
-        } else {
-            self.setOn(!self.on, animated: true)
-        }
-
-        if previousValue != self.on {
-            self.sendActionsForControlEvents(UIControlEvents.ValueChanged)
-        }
-    }
+//    func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
+//        super.beginTrackingWithTouch(touch, withEvent: event)
+//
+//        startTrackingValue = self.on
+//        didChangeWhileTracking = false
+//
+//        let activeKnobWidth = self.bounds.size.height - 2 + 5
+//        isAnimating = true
+//
+//        UIView.animateWithDuration(0.3, delay: 0.0, options: [.CurveEaseOut, .BeginFromCurrentState], animations: {
+//            if self.on {
+//                self.thumbView.frame = CGRectMake(self.bounds.size.width - (activeKnobWidth + 1), self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height)
+//                self.backgroundView.backgroundColor = self.onTintColor
+//                self.thumbView.backgroundColor = self.onThumbTintColor
+//            } else {
+//                self.thumbView.frame = CGRectMake(self.thumbView.frame.origin.x, self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height)
+//                self.backgroundView.backgroundColor = self.activeColor
+//                self.thumbView.backgroundColor = self.thumbTintColor
+//            }
+//        }) {
+//            finished in
+//            self.isAnimating = false
+//        }
+//
+//        return true
+//    }
+//
+//    func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
+//        super.continueTrackingWithTouch(touch, withEvent: event)
+//
+//        // Get touch location
+//        let lastPoint = touch.locationInView(self)
+//
+//        // update the switch to the correct visuals depending on if
+//        // they moved their touch to the right or left side of the switch
+//        if lastPoint.x > self.bounds.size.width * 0.5 {
+//            self.showOn(true)
+//            if !startTrackingValue {
+//                didChangeWhileTracking = true
+//            }
+//        } else {
+//            self.showOff(true)
+//            if startTrackingValue {
+//                didChangeWhileTracking = true
+//            }
+//        }
+//
+//        return true
+//    }
+//
+//    func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
+//        super.endTrackingWithTouch(touch, withEvent: event)
+//
+//        let previousValue = self.on
+//
+//        if didChangeWhileTracking {
+//            self.setOn(currentVisualValue, animated: true)
+//        } else {
+//            self.setOn(!self.on, animated: true)
+//        }
+//
+//        if previousValue != self.on {
+//            self.sendActionsForControlEvents(UIControlEvents.ValueChanged)
+//        }
+//    }
 
     override func cancelTrackingWithEvent(event: UIEvent?) {
         super.cancelTrackingWithEvent(event)
@@ -406,7 +406,7 @@ import QuartzCore
         let activeKnobWidth = normalKnobWidth + 5
         if animated {
             isAnimating = true
-            UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
+            UIView.animateWithDuration(0.3, delay: 0.0, options: [.CurveEaseOut, .BeginFromCurrentState], animations: {
                 if self.tracking {
                     self.thumbView.frame = CGRectMake(self.bounds.size.width - (activeKnobWidth + 1), self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height)
                 } else {
@@ -453,7 +453,7 @@ import QuartzCore
 
         if animated {
             isAnimating = true
-            UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
+            UIView.animateWithDuration(0.3, delay: 0.0, options: [.CurveEaseOut, .BeginFromCurrentState], animations: {
                 if self.tracking {
                     self.thumbView.frame = CGRectMake(1, self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height);
                     self.backgroundView.backgroundColor = self.activeColor

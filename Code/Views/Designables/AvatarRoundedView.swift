@@ -60,7 +60,7 @@ class AvatarRoundedView: DesignableRoundedView {
             UIBezierPath(ovalInRect: bounds).addClip()
             source.drawAtPoint(CGPointMake((magnitude - source.size.width) / 2, (magnitude - source.size.height) / 2))
             UIColor(white: 1.0, alpha: 1.0 - saturation).set()
-            UIRectFillUsingBlendMode(bounds, kCGBlendModeColor)
+            UIRectFillUsingBlendMode(bounds, .Normal)
         }
     }
 

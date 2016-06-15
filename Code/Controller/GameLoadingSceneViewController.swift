@@ -97,7 +97,7 @@ class GameLoadingSceneViewController: UIViewController {
             player = game.opponentUser
             opponent = game.challenger
         } else {
-            println("Shouldn't happen")
+            print("Shouldn't happen")
         }
     }
 
@@ -166,7 +166,7 @@ class GameLoadingSceneViewController: UIViewController {
             [unowned self] image, error in
 
             if let err = error {
-                println(err)
+                print(err)
             }
             self.selfAvatarView.image = image
         }
@@ -176,7 +176,7 @@ class GameLoadingSceneViewController: UIViewController {
             [unowned self] image, error in
 
             if let err = error {
-                println(err)
+                print(err)
             }
             self.opponentAvatarView.image = image
         }
@@ -190,7 +190,7 @@ class GameLoadingSceneViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "PresentQuizSegue" {
-            let vc = segue.destinationViewController as QuizViewController
+            let vc = segue.destinationViewController as! QuizViewController
             vc.bindGameAndUsers(self.game, player: self.player, opponent: self.opponent)
         }
     }

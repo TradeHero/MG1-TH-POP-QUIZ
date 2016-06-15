@@ -1,0 +1,6 @@
+framework module KKProgressTimer {
+  umbrella header "KKProgressTimer-umbrella.h"
+
+  export *
+  module * { export * }
+}

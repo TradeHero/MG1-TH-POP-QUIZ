@@ -66,10 +66,10 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
             hud.textLabel.text = "Re-matching..."
             hud.detailTextLabel.text = "Creating game with user.."
-            NetworkClient.sharedClient.createChallenge(numberOfQuestions: 7, opponentId: opponent.userId, { error in debugPrintln(error) }) {
+            NetworkClient.sharedClient.createChallenge(7, opponentId: opponent.userId, errorHandler: { error in debugPrint(error) }) {
                 [unowned self] in
                 hud.dismissAnimated(true)
-                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as GameLoadingSceneViewController
+                let vc = UIStoryboard.quizStoryboard().instantiateViewControllerWithIdentifier("GameLoadingSceneViewController") as! GameLoadingSceneViewController
                 vc.bindGame($0)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
@@ -95,7 +95,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             [unowned self] (image, error) in
 
             if let e = error {
-                println(e)
+                print(e)
                 return
             }
             self.selfAvatarView.image = image
@@ -106,7 +106,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) {
             [unowned self] (image, error) in
             if let e = error {
-                println(e)
+                print(e)
                 return
             }
             self.opponentAvatarView.image = image
@@ -146,7 +146,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier(kTHQuestionResultTableViewCellIdentifier, forIndexPath: indexPath) as QuestionResultTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(kTHQuestionResultTableViewCellIdentifier, forIndexPath: indexPath) as! QuestionResultTableViewCell
             let selfRaw = playerResult.resultDetails[indexPath.row]
             var selfRes = QuestionResult(questionID: selfRaw.questionId, timeTaken: selfRaw.timeTaken, correct: selfRaw.rawScore > 0, score: selfRaw.rawScore)
 
@@ -169,11 +169,11 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.delegate = self
 
             if indexPath.row == playerResult.resultDetails.count - 1 {
-                UIView.roundView(cell, onCorner: .BottomLeft | .BottomRight, radius: 5)
+                UIView.roundView(cell, onCorner: [.BottomLeft, .BottomRight], radius: 5)
             }
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as! GameResultDetailTableViewCell
             cell.attribute = "Hints Used"
             cell.selfAttributeDetail = "\(playerResult.hintsUsed)"
             cell.labelTintColor = UIColor(hex: 0xBF0221)
@@ -184,7 +184,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as! GameResultDetailTableViewCell
             cell.attribute = "Highest Combo"
             cell.selfAttributeDetail = "\(playerResult.correctStreak)"
 
@@ -193,7 +193,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
             return cell
         case 3:
-            let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as GameResultDetailTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as! GameResultDetailTableViewCell
             cell.attribute = "Total Score"
             cell.selfAttributeDetail = "\(playerResult.finalScore!.decimalFormattedString)"
             cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.finalScore!.decimalFormattedString)" : "--"
@@ -274,7 +274,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         NetworkClient.fetchImageFromURLString(player.pictureURL, progressHandler: nil) {
             (image, error) in
             if let e = error {
-                println(e)
+                print(e)
                 return
             }
             selfAvatarView.image = image
@@ -287,7 +287,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         NetworkClient.fetchImageFromURLString(opponent.pictureURL, progressHandler: nil) {
             (image, error) in
             if let e = error {
-                println(e)
+                print(e)
                 return
             }
             opponentAvatarView.image = image

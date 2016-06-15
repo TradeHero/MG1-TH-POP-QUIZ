@@ -7,9 +7,8 @@
 //
 
 import Argo
-import Runes
 
-class Option: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresentation {
+class Option: Decodable, CustomDebugStringConvertible, Equatable, DictionaryRepresentation {
     let content : String
     let accessoryImageUrl : String?
 
@@ -28,10 +27,10 @@ class Option: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresentation
         return Option(content: content, accessoryImageUrl: accessoryImageUrl)
     }
     
-    class func decode(j: JSONValue) -> Option? {
-        return Option.create
+    static func decode(j: JSON) -> Decoded<Option> {
+        return self.create
             <^> j <| "content"
-            <*> j <| "accessoryImageUrl"
+            <*> j <|? "accessoryImageUrl"
     }
 
     /**
@@ -45,7 +44,7 @@ class Option: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresentation
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
                 if error != nil {
-                    debugPrintln(error)
+                    debugPrint(error)
                     return
                 }
                 

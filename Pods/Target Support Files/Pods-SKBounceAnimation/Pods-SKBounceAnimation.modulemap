@@ -1,6 +1,0 @@
-framework module SKBounceAnimation {
-  umbrella header "Pods-SKBounceAnimation-umbrella.h"
-
-  export *
-  module * { export * }
-}

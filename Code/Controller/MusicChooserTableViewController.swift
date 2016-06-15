@@ -12,7 +12,7 @@ class MusicChooserTableViewController: UITableViewController, MusicChooserTableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationTintColor(barColor: UIColor(hex: 0xFF4069))
+        self.navigationController?.setNavigationTintColor(UIColor(hex: 0xFF4069))
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 18)!, NSForegroundColorAttributeName: UIColor.whiteColor(), NSBackgroundColorAttributeName: UIColor.whiteColor()]
 
         self.tableView.registerNib(UINib(nibName: "MusicChooserTableViewCell", bundle: nil), forCellReuseIdentifier: kTHMusicChooserTableViewCellIdentifier)
@@ -63,36 +63,37 @@ class MusicChooserTableViewController: UITableViewController, MusicChooserTableV
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kTHMusicChooserTableViewCellIdentifier, forIndexPath: indexPath) as MusicChooserTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(kTHMusicChooserTableViewCellIdentifier, forIndexPath: indexPath) as! MusicChooserTableViewCell
 
-        switch indexPath.section {
-        case 0:
-            var orchestralNames = orchestralMusic.keys.array
-            orchestralNames.sort {
-                $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending
-            }
-
-            cell.bindMusicURL(orchestralMusic[orchestralNames[indexPath.row]]!, name: orchestralNames[indexPath.row])
-            cell.delegate = self
-            return cell
-        case 1:
-            var pianoNames = pianoMusic.keys.array
-            pianoNames.sort {
-                $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending
-            }
-
-            cell.bindMusicURL(pianoMusic[pianoNames[indexPath.row]]!, name: pianoNames[indexPath.row])
-            cell.delegate = self
-            return cell
-        default:
-            return UITableViewCell()
-        }
+//        switch indexPath.section {
+//        case 0:
+//            var orchestralNames = orchestralMusic.keys.array
+//            orchestralNames.sort {
+//                $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending
+//            }
+//
+//            cell.bindMusicURL(orchestralMusic[orchestralNames[indexPath.row]]!, name: orchestralNames[indexPath.row])
+//            cell.delegate = self
+//            return cell
+//        case 1:
+//            var pianoNames = pianoMusic.keys.array
+//            pianoNames.sort {
+//                $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending
+//            }
+//
+//            cell.bindMusicURL(pianoMusic[pianoNames[indexPath.row]]!, name: pianoNames[indexPath.row])
+//            cell.delegate = self
+//            return cell
+//        default:
+//            return UITableViewCell()
+//        }
+        return UITableViewCell()
     }
 
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let v = view as? UITableViewHeaderFooterView {
-            v.textLabel.textColor = UIColor(hex: 0xFFFFFF)
-            v.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 13)
+            v.textLabel!.textColor = UIColor(hex: 0xFFFFFF)
+            v.textLabel!.font = UIFont(name: "AvenirNext-Medium", size: 13)
             v.contentView.backgroundColor = UIColor(hex: 0xFF4069)
         }
 

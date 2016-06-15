@@ -28,12 +28,12 @@ class THIndefiniteIndicatorView: JGProgressHUDIndicatorView {
         super.init(contentView: indicatorView)
     }
 
-    convenience override init() {
+    convenience init() {
         self.init(style: .ExtraLight)
     }
 
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 }
 
@@ -98,7 +98,7 @@ class THIndefiniteAnnularIndicatorView: UIView {
                 animation.repeatCount = Float.infinity
                 animation.fillMode = kCAFillModeForwards
                 animation.autoreverses = false
-                _indefiniteAnimatedLayer.mask.addAnimation(animation, forKey: "rotate")
+                _indefiniteAnimatedLayer.mask!.addAnimation(animation, forKey: "rotate")
 
                 var animationGroup = CAAnimationGroup()
                 animationGroup.duration = animationDuration
@@ -137,7 +137,7 @@ class THIndefiniteAnnularIndicatorView: UIView {
         strokeThickness = THIndefiniteIndicatorViewRingThickness
         radii = THIndefiniteIndicatorViewRingRadius
         strokeColor = THIndefiniteIndicatorViewForegroundColor
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 
     private func layoutAnimatedLayer() {

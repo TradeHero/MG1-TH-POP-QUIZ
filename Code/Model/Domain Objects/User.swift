@@ -7,16 +7,15 @@
 //
 
 import Argo
-import Runes
 
-struct User: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresentation {
+struct User: Decodable, CustomDebugStringConvertible, Equatable, DictionaryRepresentation {
     let userId: Int
     let firstName: String
     let lastName: String
     let displayName: String
     let pictureURL: String?
 
-    static func decode(j: JSONValue) -> User? {
+    static func decode(j: JSON) -> Decoded<User> {
         return self.create
                 <^> j <| "id"
                 <*> j <|? "firstName"

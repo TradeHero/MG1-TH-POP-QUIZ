@@ -47,7 +47,7 @@ class LogoCanvasView: UIView {
 
 
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         self.imageView.frame = CGRectMake(10, 10, 240, 110)
         self.addSubview(self.imageView)
         self.imageView.autoPinEdgeToSuperviewEdge(.Top, withInset: 0)

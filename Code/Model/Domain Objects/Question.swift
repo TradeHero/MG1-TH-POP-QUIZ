@@ -7,7 +7,6 @@
 //
 
 import Argo
-import Runes
 
 /// Type of questions, which might make question differs in presentation style.
 ///
@@ -80,7 +79,7 @@ enum QuestionCategory: Int {
     }
 }
 
-class Question: JSONDecodable, DebugPrintable, Equatable {
+class Question: Decodable, CustomDebugStringConvertible, Equatable {
     let questionID: Int
 
     let originalContent: String
@@ -89,9 +88,9 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
     let questionContent: String
 
     /// Type of question.
-    let questionType: QuestionType = .UnknownType
+    var questionType: QuestionType = .UnknownType
 
-    let questionCategory: QuestionCategory = .UnknownCategory
+    var questionCategory: QuestionCategory = .UnknownCategory
 
     /// Set of options of this current question instance
     let correctOption: Option
@@ -209,7 +208,7 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
         return Question(questionID: id, originalContent: content, questionContent: questionContent, questionType: questionType, questionCategory: questionCategory, correctOption: correctOption, dummyOptions: dummyOptions, questionImageURLString: questionImageURLString, accessoryImageContent: accessoryImageContent, subcategory: subcategory, difficulty: difficulty)
     }
 
-    class func decode(j: JSONValue) -> Question? {
+    static func decode(j: JSON) -> Decoded<Question> {
         return Question.create
                 <^> j <| "id"
                 <*> j <| "category"
@@ -275,7 +274,7 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
                 if let err = error {
-                    debugPrintln(err)
+                    debugPrint(err)
                     return
                 }
                 if let img = image {
@@ -294,7 +293,7 @@ class Question: JSONDecodable, DebugPrintable, Equatable {
             NetworkClient.fetchImageFromURLString(imgName, progressHandler: nil, completionHandler: {
                 image, error in
                 if let err = error {
-                    debugPrintln(err)
+                    debugPrint(err)
                     return
                 }
                 if let img = image {

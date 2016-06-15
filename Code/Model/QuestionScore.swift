@@ -7,14 +7,13 @@
 //
 
 import Argo
-import Runes
 
-struct QuestionScore: JSONDecodable, DebugPrintable, DictionaryRepresentation, Equatable {
+struct QuestionScore: Decodable, CustomDebugStringConvertible, DictionaryRepresentation, Equatable {
     let questionId: Int
     let rawScore: Int
     let timeTaken: NSTimeInterval
 
-    static func decode(j: JSONValue) -> QuestionScore? {
+    static func decode(j: JSON) -> Decoded<QuestionScore> {
         return self.create
                 <^> j <| "qId"
                 <*> j <| "rawScore"
@@ -34,11 +33,11 @@ struct QuestionScore: JSONDecodable, DebugPrintable, DictionaryRepresentation, E
     }
 }
 
-struct QuestionFinalScore: JSONDecodable, DebugPrintable, DictionaryRepresentation, Equatable {
+struct QuestionFinalScore: Decodable, CustomDebugStringConvertible, DictionaryRepresentation, Equatable {
     let questionId: Int
     let finalScore: Int
 
-    static func decode(j: JSONValue) -> QuestionFinalScore? {
+    static func decode(j: JSON) -> Decoded<QuestionFinalScore> {
         return self.create
                 <^> j <| "qId"
                 <*> j <| "finalScore"

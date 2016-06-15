@@ -152,7 +152,7 @@ class WinLoseViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "CompleteQuizResultSegue" {
-            let vc = segue.destinationViewController as ResultsViewController
+            let vc = segue.destinationViewController as! ResultsViewController
             vc.bindGame(self.game)
         }
 

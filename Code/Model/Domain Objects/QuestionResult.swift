@@ -24,7 +24,7 @@ final class QuestionResult {
     }
 }
 
-extension QuestionResult: Printable {
+extension QuestionResult: CustomStringConvertible {
     var description: String {
         var d = "{\n"
         d += "Question ID: \(self.questionId)\n"

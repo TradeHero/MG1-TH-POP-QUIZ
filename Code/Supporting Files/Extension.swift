@@ -55,14 +55,14 @@ extension Array {
         }
     }
 
-    func randomItem() -> T {
+    func randomItem() -> Element {
         let index = Int(arc4random_uniform(UInt32(self.count)))
         return self[index]
     }
 
     mutating func removeObject<U:Equatable>(object: U) {
         var index: Int?
-        for (idx, objectToCompare) in enumerate(self) {
+        for (idx, objectToCompare) in enumerate() {
             if let to = objectToCompare as? U {
                 if object == to {
                     index = idx
@@ -79,14 +79,14 @@ extension Array {
 
 extension Double {
     func format(f: String) -> String {
-        return NSString(format: "%\(f)f", self)
+        return NSString(format: "%\(f)f", self) as String
     }
 }
 
 extension CGFloat {
 
     func format(f: String) -> String {
-        return NSString(format: "%\(f)f", self)
+        return NSString(format: "%\(f)f", self) as String
     }
 
 //    func roundToNearest1DecimalPlace() -> CGFloat {
@@ -130,7 +130,7 @@ extension UIColor {
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let newColor = CGColorCreate(colorSpace, newComponents)
 
-        return UIColor(CGColor: newColor)
+        return UIColor(CGColor: newColor!)
     }
 
     convenience init(r: Int, _ g: Int, _ b: Int, _ a: Int) {
@@ -197,13 +197,13 @@ extension UIView {
 
     func listAllSubviews() {
         for view in (self.subviews as [UIView]) {
-            println("\(object_getClassName(view))")
+            print("\(object_getClassName(view))")
         }
     }
 
     class func rasterizeView(view: UIView) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(view.frame.size, true, UIScreen.mainScreen().scale)
-        view.layer.renderInContext(UIGraphicsGetCurrentContext())
+        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let viewImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return viewImage
@@ -279,7 +279,7 @@ extension UIImage {
         // Crop logic
         let imageRef = CGImageCreateWithImageInRect(self.CGImage, clippedRect)
 
-        return UIImage(CGImage: imageRef)!
+        return UIImage(CGImage: imageRef!)
     }
 
     func transparencyToWhiteMatte() -> UIImage {
@@ -305,18 +305,18 @@ extension UIImage {
 
         // Allocate memory for image data. This is the destination in memory
         // where any drawing to the bitmap context will be rendered.
-        let bitmapData = malloc(CUnsignedLong(bitmapByteCount))
+        let bitmapData = malloc(Int(bitmapByteCount))
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
 
         // Create the bitmap context. We want pre-multiplied ARGB, 8-bits
         // per component. Regardless of what the source image format is
         // (CMYK, Grayscale, and so on) it will be converted over to the format
         // specified here by CGBitmapContextCreate.
-        let context = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, CUnsignedLong(8), CUnsignedLong(bitmapBytesPerRow), colorSpace, bitmapInfo)
+        let context = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, Int(8), Int(bitmapBytesPerRow), colorSpace, bitmapInfo.rawValue)
 
         // Make sure and release colorspace before returning
 
-        return context
+        return context!
     }
 
     private func getPixelColorAtLocation(context: CGContext, point: CGPoint, inImage: CGImageRef) -> UIColor {
@@ -352,14 +352,14 @@ extension String {
 
     func encodeToBase64Encoding() -> String {
         let utf8str = self.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        let base64EncodedString = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
+        let base64EncodedString = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
         return base64EncodedString!
     }
 
     func decodeFromBase64Encoding() -> String {
-        let base64data = NSData(base64EncodedString: self, options: NSDataBase64DecodingOptions(0))
+        let base64data = NSData(base64EncodedString: self, options: NSDataBase64DecodingOptions(rawValue: 0))
         let decodedString = NSString(data: base64data!, encoding: NSUTF8StringEncoding)
-        return decodedString!
+        return decodedString! as String
     }
 
     var floatValue: Float {
@@ -376,7 +376,7 @@ extension String {
     }
 
     var length: Int {
-        return self.utf16Count
+        return self.utf16.count
     }
 }
 
@@ -402,11 +402,13 @@ extension UIFont {
 extension AVAudioPlayer {
     class func createAudioPlayer(fileName: String, extensionName: String) -> AVAudioPlayer {
         let url = NSBundle.mainBundle().URLForResource(fileName, withExtension: extensionName)
-        return AVAudioPlayer(contentsOfURL: url!, error: nil)
+//        return AVAudioPlayer(contentsOfURL: url!, fileTypeHint: nil)
+        return AVAudioPlayer()
     }
 
     class func createAudioPlayer(urlResource: NSURL) -> AVAudioPlayer {
-        return AVAudioPlayer(contentsOfURL: urlResource, error: nil)
+//        return AVAudioPlayer(contentsOfURL: urlResource, fileTypeHint: nil)
+        return AVAudioPlayer()
     }
 
     func fadeToStop() {

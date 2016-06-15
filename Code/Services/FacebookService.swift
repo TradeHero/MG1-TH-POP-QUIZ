@@ -36,45 +36,45 @@ class FacebookService {
     }
 
     func connect(completionHandler: (String!, NSError!) -> (), connectOption: FacebookConnectOption = .NativeFallBack) {
-        switch connectOption {
-        case .NativeFallBack:
+//        switch connectOption {
+//        case .NativeFallBack:
             nativeFallbackWithSDKConnect(completionHandler)
-        case .SDKOnly:
-            FBSession.activeSession().closeAndClearTokenInformation()
-            FacebookConnectWithSDK {
-                [unowned self] session, error in
-                if let e = error {
-                    completionHandler(nil, error)
-                }
-                let accessToken = session.accessTokenData.accessToken
-                completionHandler(accessToken, nil)
-            }
-        }
+//        case .SDKOnly:
+////            FBSession.activeSession().closeAndClearTokenInformation()
+//            FacebookConnectWithSDK {
+//                [unowned self] session, error in
+//                if let e = error {
+//                    completionHandler(nil, error)
+//                }
+//                let accessToken = session.accessTokenData.accessToken
+//                completionHandler(accessToken, nil)
+//            }
+//        }
     }
 
-    func FacebookConnectWithSDK(completionHandler: (FBSession!, NSError!) -> ()) {
-        dispatch_async(dispatch_get_main_queue(), {
-            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes", "user_friends"], allowLoginUI: true, completionHandler: {
-                (session, state, error) -> Void in
-                completionHandler(session, error)
-            }
-            )
-            return
-        })
+//    func FacebookConnectWithSDK(completionHandler: (FBSession!, NSError!) -> ()) {
+//        dispatch_async(dispatch_get_main_queue(), {
+//            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes", "user_friends"], allowLoginUI: true, completionHandler: {
+//                (session, state, error) -> Void in
+//                completionHandler(session, error)
+//            }
+//            )
+//            return
+//        })
 
-    }
+//    }
 
-    func renewFacebookToken(completionHandler: (FBSession!, NSError!) -> ()) {
-        dispatch_async(dispatch_get_main_queue(), {
-            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes", "user_friends"], allowLoginUI: true, completionHandler: {
-                (session, state, error) -> Void in
-                completionHandler(session, error)
-            }
-            )
-            return
-        })
+//    func renewFacebookToken(completionHandler: (FBSession!, NSError!) -> ()) {
+//        dispatch_async(dispatch_get_main_queue(), {
+//            FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes", "user_friends"], allowLoginUI: true, completionHandler: {
+//                (session, state, error) -> Void in
+//                completionHandler(session, error)
+//            }
+//            )
+//            return
+//        })
 
-    }
+//    }
 
     private func nativeFallbackWithSDKConnect(completionHandler: (String!, NSError!) -> ()) {
         let facebookTypeAccount = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierFacebook)
@@ -88,16 +88,16 @@ class FacebookService {
                 }
             } else {
                 if let e = error {
-                    if error.code == Int(ACErrorAccountNotFound.value) {
+                    if error.code == Int(ACErrorAccountNotFound.rawValue) {
                         // use SDK login
-                        self.FacebookConnectWithSDK {
-                            session, error in
-                            if let e = error {
-                                completionHandler(nil, error)
-                            }
-                            let accessToken = session.accessTokenData.accessToken
-                            completionHandler(accessToken, nil)
-                        }
+//                        self.FacebookConnectWithSDK {
+//                            session, error in
+//                            if let e = error {
+//                                completionHandler(nil, error)
+//                            }
+//                            let accessToken = session.accessTokenData.accessToken
+//                            completionHandler(accessToken, nil)
+//                        }
                     }
                 }
             }
@@ -106,57 +106,62 @@ class FacebookService {
 
     func getInvitableFriends(completionHandler: [FacebookInvitableFriend] -> ()) {
         func FBRequestFriends(completionHandler: [FacebookInvitableFriend] -> ()) {
-            FBRequestConnection.startWithGraphPath("/me/invitable_friends", parameters: nil, HTTPMethod: "GET")
-            {
-                (conn, result, error) -> Void in
-                if let res = result as? [String:AnyObject] {
-                    let data: AnyObject? = res["data"]
-                    if let d = data as? [AnyObject] {
-                        var invitableFriends = [FacebookInvitableFriend]()
-                        for rawFriend in d {
-                            if let friendConverted = FacebookInvitableFriend.decode(JSONValue.parse(rawFriend)) {
-                                invitableFriends.append(friendConverted)
-                            }
-                        }
-                        completionHandler(invitableFriends);
-                    }
-                }
-            }
+//            FBRequestConnection.startWithGraphPath("/me/invitable_friends", parameters: nil, HTTPMethod: "GET")
+//            {
+//                (conn, result, error) -> Void in
+//                if let res = result as? [String:AnyObject] {
+//                    let data: AnyObject? = res["data"]
+//                    if let d = data as? [AnyObject] {
+//                        var invitableFriends = [FacebookInvitableFriend]()
+//                        for rawFriend in d {
+//                            if let friendConverted: FacebookInvitableFriend? = decode(rawFriend) {
+//                                
+//                                guard let friendConverted = friendConverted else {
+//                                    return
+//                                }
+//                                
+//                                invitableFriends.append(friendConverted)
+//                            }
+//                        }
+//                        completionHandler(invitableFriends);
+//                    }
+//                }
+//            }
         }
 
-        if (FBSession.activeSession().state == .CreatedTokenLoaded) {
-            if (!FBSession.activeSession().isOpen) {
-                dispatch_async(dispatch_get_main_queue(), {
-                    FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes"], allowLoginUI: false, completionHandler: {
-                        (session, state, error) -> Void in
-                        FBRequestFriends(completionHandler)
-                    }
-                    )
-                    return
-                })
-            }
-        } else {
+//        if (FBSession.activeSession().state == .CreatedTokenLoaded) {
+//            if (!FBSession.activeSession().isOpen) {
+//                dispatch_async(dispatch_get_main_queue(), {
+////                    FBSession.openActiveSessionWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes"], allowLoginUI: false, completionHandler: {
+////                        (session, state, error) -> Void in
+////                        FBRequestFriends(completionHandler)
+////                    }
+////                    )
+////                    return
+//                })
+//            }
+//        } else {
             FBRequestFriends(completionHandler)
-        }
+//        }
 
     }
 
     func presentInviteFriendsDialog(message: String!, friendsToInvite: [FacebookInvitableFriend]) {
         var inviteTokens = getCommaSeparatedTokens(friendsToInvite);
         let params = ["to": inviteTokens, "method": "apprequests"];
-        FBWebDialogs.presentRequestsDialogModallyWithSession(nil, message: message, title: nil, parameters: params) {
-            (result, url, err) -> Void in
-            if let e = err {
-                println(e)
-            } else {
-                if (result == .DialogNotCompleted) {
-                    println("User canceled request")
-                } else {
-                    //Handle the send request callback
-
-                }
-            }
-        }
+//        FBWebDialogs.presentRequestsDialogModallyWithSession(nil, message: message, title: nil, parameters: params) {
+//            (result, url, err) -> Void in
+//            if let e = err {
+//                print(e)
+//            } else {
+//                if (result == .DialogNotCompleted) {
+//                    print("User canceled request")
+//                } else {
+//                    //Handle the send request callback
+//
+//                }
+//            }
+//        }
     }
 
     func getCommaSeparatedTokens(friends: [FacebookInvitableFriend]) -> String {

@@ -11,7 +11,6 @@ import LDProgressView
 import JGProgressHUD
 import KKProgressTimer
 import PureLayout
-import ExSwift
 
 class QuizDebugViewController: UIViewController {
 
@@ -110,7 +109,7 @@ class QuizDebugViewController: UIViewController {
     private func setUpQuestionViewWithQuestion(question: Question) -> UIView {
         if question.isGraphical() {
             var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithImage"
-                    , owner: self, options: nil)[0] as QuestionViewWithImage
+                    , owner: self, options: nil)[0] as! QuestionViewWithImage
 
             contentView.questionContent.text = question.questionContent
 
@@ -131,14 +130,14 @@ class QuizDebugViewController: UIViewController {
             return contentView
         } else {
             if let accessoryImage = question.accessoryImage {
-                var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithAccessoryImage", owner: self, options: nil)[0] as QuestionViewWithAccessoryImage
+                var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewWithAccessoryImage", owner: self, options: nil)[0] as! QuestionViewWithAccessoryImage
 
                 contentView.questionContent.text = question.questionContent
                 contentView.accessoryImageView.image = question.accessoryImage
 
                 return contentView
             } else {
-                var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as QuestionViewPlain
+                var contentView = NSBundle.mainBundle().loadNibNamed("QuestionViewPlain", owner: self, options: nil)[0] as! QuestionViewPlain
 
                 contentView.questionContent.text = question.questionContent
                 return contentView
@@ -162,12 +161,12 @@ class QuizDebugViewController: UIViewController {
 
     @IBAction func clickNext(sender: AnyObject) {
         setupNextQuestion()
-        println("\(currentQuestionIndex)")
+        print("\(currentQuestionIndex)")
     }
 
     @IBAction func clickPrevious(sender: AnyObject) {
         setupPreviousQuestion()
-        println("\(currentQuestionIndex)")
+        print("\(currentQuestionIndex)")
 
     }
 

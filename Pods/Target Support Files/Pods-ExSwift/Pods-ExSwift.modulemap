@@ -1,6 +1,0 @@
-framework module ExSwift {
-  umbrella header "Pods-ExSwift-umbrella.h"
-
-  export *
-  module * { export * }
-}

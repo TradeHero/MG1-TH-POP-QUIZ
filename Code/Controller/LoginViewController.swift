@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
     }
 
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 
     @IBAction func facebookTapped(sender: AnyObject) {

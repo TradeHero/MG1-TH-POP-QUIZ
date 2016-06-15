@@ -7,9 +7,8 @@
 //
 
 import Argo
-import Runes
 
-class Game: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresentation {
+class Game: Decodable, CustomDebugStringConvertible, Equatable, DictionaryRepresentation {
 
     let id: Int
     let challenger: User
@@ -50,7 +49,7 @@ class Game: JSONDecodable, DebugPrintable, Equatable, DictionaryRepresentation {
         return nil
     }
 
-    class func decode(j: JSONValue) -> Game? {
+    static func decode(j: JSON) -> Decoded<Game> {
         return self.create
                 <^> j <| "id"
                 <*> j <| "challenger"

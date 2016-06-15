@@ -1,6 +1,0 @@
-framework module LDProgressView {
-  umbrella header "Pods-LDProgressView-umbrella.h"
-
-  export *
-  module * { export * }
-}

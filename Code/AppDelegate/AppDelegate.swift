@@ -8,28 +8,27 @@
 
 import UIKit
 import AVFoundation
-import ChatHeads
 import JGProgressHUD
 import FacebookSDK
 import Argo
-import Runes
 
 let kTHGamesServerMode = Mode.Prod
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate//, CHDraggingCoordinatorDelegate
+{
 
     var window: UIWindow?
     var loginOnce = false
-    var _draggableView: CHDraggableView!
-
-    var _draggingCoordinator: CHDraggingCoordinator!
-
-    var draggableView: CHDraggableView! {
-        get {
-            return _draggableView
-        }
-    }
+//    var _draggableView: CHDraggableView!
+//
+//    var _draggingCoordinator: CHDraggingCoordinator!
+//
+//    var draggableView: CHDraggableView! {
+//        get {
+//            return _draggableView
+//        }
+//    }
 
     private var isNotificationRegistered: Bool = false
 
@@ -40,9 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
 
         switch kTHGamesServerMode {
         case .Staging:
-            println("Current build points to Staging Server.\n")
+            print("Current build points to Staging Server.\n")
         case .Prod:
-            println("Current build points to Production Server.\n")
+            print("Current build points to Production Server.\n")
         }
 
         playMusic(kTHDefaultSong)
@@ -65,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
             var hud = JGProgressHUD.progressHUDWithDefaultStyle {
                 [unowned self] HUD in
                 if retry {
-                    self.autoLogin(force: true)
+                    self.autoLogin(true)
                     HUD.dismiss()
                     retry = false
                 }
@@ -117,26 +116,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-        musicPlayer.stop()
+//        musicPlayer.stop()
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        musicPlayer.stop()
+//        musicPlayer.stop()
         self.unregisterOtherNotification()
         scheduleLocalNotification()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        musicPlayer.play()
+//        musicPlayer.play()
         self.registerOtherNotification()
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        musicPlayer.play()
+//        musicPlayer.play()
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -153,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
                 NetworkClient.sharedClient._device_token = deviceToken.deviceTokenString()
                 NetworkClient.sharedClient.updateDeviceToken(deviceToken.deviceTokenString(), errorHandler: {
                     error in
-                    debugPrintln(error.description)
+                    debugPrint(error.description)
                 }) {
                 }
             }
@@ -161,14 +160,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
             NetworkClient.sharedClient._device_token = deviceToken.deviceTokenString()
             NetworkClient.sharedClient.updateDeviceToken(deviceToken.deviceTokenString(), errorHandler: {
                 error in
-                debugPrintln(error.description)
+                debugPrint(error.description)
             }) {
             }
         }
     }
 
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        debugPrintln("Fail to register for push notification: \(error)")
+        debugPrint("Fail to register for push notification: \(error)")
     }
 
 
@@ -176,14 +175,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         //TODO: Implement
     }
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        debugPrintln(sourceApplication)
+//    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+//        debugPrint(sourceApplication)
 //        let bfurl = BFURL(inboundURL: url, sourceApplication: sourceApplication)
 //        if let component = bfurl.targetURL.pathComponents[1] as? String {
 //            debugPrintln(component)
 //        }
-        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
-    }
+//        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
+//    }
 
     //MARK: Login/Logout
 
@@ -205,7 +204,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
         let obj2: AnyObject? = obj!["user"]
         if let obj2Dto = obj2 as? [String:AnyObject] {
 
-            var user = User.decode(JSONValue.parse(obj2Dto))
+            var user:User = decode(obj2Dto)!
 
             var vc: AnyObject! = UIStoryboard.mainStoryboard().instantiateInitialViewController()
             if let v = vc as? UINavigationController {
@@ -217,10 +216,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
             self.unregisterLoginNotification()
             self.registerOtherNotification()
         }
-
-        if let d = _draggableView {
-            self.window?.addSubview(_draggableView)
-        }
+//
+//        if let d = _draggableView {
+//            self.window?.addSubview(_draggableView)
+//        }
 
 
     }
@@ -250,7 +249,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     }
 
     func userDidLogout(notification: NSNotification) {
-        self.window?.rootViewController = UIStoryboard.loginStoryboard().instantiateInitialViewController() as? UIViewController
+        self.window?.rootViewController = UIStoryboard.loginStoryboard().instantiateInitialViewController()
         self.unregisterOtherNotification()
         self.registerLoginNotification()
 
@@ -258,24 +257,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CHDraggingCoordinatorDele
     }
 
     func notificationHeadViewToggle() {
-        self._draggableView.hideWithAnimation(kTHNotificationHeadOn)
+//        self._draggableView.hideWithAnimation(kTHNotificationHeadOn)
     }
 
     private func setupNotificationHead() {
         let window = self.window!
-        _draggableView = CHDraggableView(image: UIImage(named: "NotificationHeadImage"))
-        _draggableView.tag = 1
-        _draggingCoordinator = CHDraggingCoordinator(window: window, draggableViewBounds: _draggableView.bounds)
-        _draggingCoordinator.delegate = self
-        _draggingCoordinator.snappingEdge = CHSnappingEdgeBoth
-        _draggableView.delegate = _draggingCoordinator
-        _draggableView.hidden = !kTHNotificationHeadOn
+//        _draggableView = CHDraggableView(image: UIImage(named: "NotificationHeadImage"))
+//        _draggableView.tag = 1
+//        _draggingCoordinator = CHDraggingCoordinator(window: window, draggableViewBounds: _draggableView.bounds)
+//        _draggingCoordinator.delegate = self
+//        _draggingCoordinator.snappingEdge = CHSnappingEdgeBoth
+//        _draggableView.delegate = _draggingCoordinator
+//        _draggableView.hidden = !kTHNotificationHeadOn
     }
 
-    func draggingCoordinator(coordinator: CHDraggingCoordinator!, viewControllerForDraggableView draggableView: CHDraggableView!) -> UIViewController! {
-        let controller = UIStoryboard.inAppNotificationStoryboard().instantiateViewControllerWithIdentifier("InAppNotificationTableViewController") as? UIViewController
-        return controller
-    }
+//    func draggingCoordinator(coordinator: CHDraggingCoordinator!, viewControllerForDraggableView draggableView: CHDraggableView!) -> UIViewController! {
+//        let controller = UIStoryboard.inAppNotificationStoryboard().instantiateViewControllerWithIdentifier("InAppNotificationTableViewController") as? UIViewController
+//        return controller
+//    }
 
 
     func scheduleLocalNotification() {
