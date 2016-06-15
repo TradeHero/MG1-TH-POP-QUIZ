@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 TradeHero. All rights reserved.
 //
 
-import FacebookSDK
 import Social
 import Accounts
 import Argo

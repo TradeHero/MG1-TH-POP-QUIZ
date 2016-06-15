@@ -12,7 +12,6 @@ import JGProgressHUD
 import SDWebImage
 import EGOCache
 import SSKeychain
-import FacebookSDK
 import Argo
 
 class NetworkClient {

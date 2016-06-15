@@ -201,7 +201,6 @@
 		6DD16A5C1AA56B6200D9B75B /* QuizDebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizDebugViewController.swift; sourceTree = "<group>"; };
 		6DD230FF19B81FFA00B5D05E /* TH-PopQuiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TH-PopQuiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DD2311119B81FFA00B5D05E /* TH-PopQuizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TH-PopQuizTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6DD2311619B81FFA00B5D05E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DD2311719B81FFA00B5D05E /* TH_PopQuizTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TH_PopQuizTests.swift; sourceTree = "<group>"; };
 		6DD2312219B8204900B5D05E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DD2312319B8204900B5D05E /* SleekNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleekNavigationBar.swift; sourceTree = "<group>"; };
@@ -501,7 +500,6 @@
 		6DD2311519B81FFA00B5D05E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6DD2311619B81FFA00B5D05E /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -796,7 +794,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = TradeHero;
 				TargetAttributes = {
 					6DD230FE19B81FFA00B5D05E = {
@@ -1078,6 +1076,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1151,6 +1150,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mymanisku.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Code/Supporting Files/TH-PopQuiz-Bridging-Header.h";
@@ -1173,6 +1173,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mymanisku.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Code/Supporting Files/TH-PopQuiz-Bridging-Header.h";
@@ -1193,6 +1194,7 @@
 				);
 				INFOPLIST_FILE = "TH-PopQuizTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mymanisku.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TH-PopQuiz.app/TH-PopQuiz";
 			};
@@ -1208,6 +1210,7 @@
 				);
 				INFOPLIST_FILE = "TH-PopQuizTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mymanisku.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TH-PopQuiz.app/TH-PopQuiz";
 			};

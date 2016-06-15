@@ -9,7 +9,6 @@
 import UIKit
 import AVFoundation
 import JGProgressHUD
-import FacebookSDK
 import Argo
 
 let kTHGamesServerMode = Mode.Prod

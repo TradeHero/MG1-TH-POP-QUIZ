@@ -9,7 +9,6 @@
 import UIKit
 import JGProgressHUD
 import EGOCache
-import FacebookSDK
 import Argo
 
 class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FriendsChallengeCellTableViewCellDelegate, StaffChallengeCellTableViewCellDelegate {
