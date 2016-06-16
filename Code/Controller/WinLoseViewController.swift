@@ -126,7 +126,7 @@ class WinLoseViewController: UIViewController {
         self.opponentUser = opponentUser
 
         var selfResult: GameResult!
-        var oppResult: GameResult!
+        var oppResult: GameResult?
         if game.challenger.userId == selfUser.userId {
             selfResult = game.challengerResult
             oppResult = game.opponentResult
@@ -134,12 +134,20 @@ class WinLoseViewController: UIViewController {
             selfResult = game.opponentResult
             oppResult = game.challengerResult
         }
+        
+        guard let personalFinalResultDetails = selfResult.finalResultDetails else {
+            return
+        }
 
-        for extraDetail in selfResult.finalResultDetails! {
+        for extraDetail in personalFinalResultDetails {
             selfScore += extraDetail.finalScore
         }
 
-        for extraDetail in oppResult.finalResultDetails! {
+        guard let oppResultData = oppResult else {
+            return
+        }
+        
+        for extraDetail in oppResultData.finalResultDetails! {
             opponentScore += extraDetail.finalScore
         }
 

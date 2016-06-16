@@ -28,7 +28,7 @@ class Game: Decodable, CustomDebugStringConvertible, Equatable, DictionaryRepres
     }
 
     var isGameCompletedByOpponent: Bool {
-        return challengerResult != nil
+        return opponentResult != nil
     }
 
     var isGameCompletedByBothPlayer: Bool {

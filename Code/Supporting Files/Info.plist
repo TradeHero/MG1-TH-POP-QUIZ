@@ -31,7 +31,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1811</string>
+	<string>1851</string>
 	<key>FacebookAppID</key>
 	<string>431745923529834</string>
 	<key>FacebookUrlSchemeSuffix</key>
@@ -40,6 +40,11 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>angrybirds-regular.ttf</string>

@@ -33,21 +33,21 @@ var correctSoundPlayer = AVAudioPlayer.createAudioPlayer(NSBundle.mainBundle().U
 var wrongSoundPlayer = AVAudioPlayer.createAudioPlayer(NSBundle.mainBundle().URLForResource("Wrong-Buzzer", withExtension: "caf")!)
 
 func playCorrectSound() {
-    if correctSoundPlayer.playing {
-        correctSoundPlayer.stop()
-    }
-    correctSoundPlayer.numberOfLoops = 0
-    correctSoundPlayer.volume = kTHSoundEffectValue
-    correctSoundPlayer.play()
+//    if correctSoundPlayer.playing {
+//        correctSoundPlayer.stop()
+//    }
+//    correctSoundPlayer.numberOfLoops = 0
+//    correctSoundPlayer.volume = kTHSoundEffectValue
+//    correctSoundPlayer.play()
 }
 
 func playWrongSound() {
-    if wrongSoundPlayer.playing {
-        wrongSoundPlayer.stop()
-    }
-    wrongSoundPlayer.numberOfLoops = 0
-    wrongSoundPlayer.volume = kTHSoundEffectValue
-    wrongSoundPlayer.play()
+//    if wrongSoundPlayer.playing {
+//        wrongSoundPlayer.stop()
+//    }
+//    wrongSoundPlayer.numberOfLoops = 0
+//    wrongSoundPlayer.volume = kTHSoundEffectValue
+//    wrongSoundPlayer.play()
 }
 
 func prepareForMusicPlayer(soundURL: NSURL) {
@@ -74,9 +74,9 @@ func +=<KeyType, ValueType>(inout left: Dictionary<KeyType, ValueType>, right: D
 }
 
 func playMusic(name: String) {
-    var p = orchestralMusic
-    p += pianoMusic
-    switchMusic(p[name]!)
+//    var p = orchestralMusic
+//    p += pianoMusic
+//    switchMusic(p[name]!)
 }
 
 func getRandomMusicName() -> String {

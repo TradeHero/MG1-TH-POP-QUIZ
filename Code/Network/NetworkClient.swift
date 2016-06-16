@@ -77,7 +77,7 @@ class NetworkClient {
     :param: loginSuccessHandler Takes a THUser and perform operation
     */
     func loginUserWithFacebookAuth(accessToken: String, loginSuccessHandler: (User -> ())!, errorHandler: NSError -> ()) {
-        var param: [String:AnyObject] = ["clientType": 1, "clientVersion": "3.1.0", "facebook_access_token": accessToken]
+        var param: [String:AnyObject] = ["clientType": 1, "clientVersion": "5.1.0", "facebook_access_token": accessToken]
         let auth = "\(THAuthFacebookPrefix) \(accessToken)"
 
         if _device_token != nil {
@@ -85,7 +85,7 @@ class NetworkClient {
         }
 
         let r = self.request(.POST,
-                THServerAPIBaseURL + "/signupAndLogin",
+                THServerAPIBaseURL + "/login",
                 parameters: param,
                 encoding: JSONEncoding,
                 authentication: auth).responseJSON {

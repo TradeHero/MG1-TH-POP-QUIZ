@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate//, CHDraggingCoordinatorDe
             print("Current build points to Production Server.\n")
         }
 
-        playMusic(kTHDefaultSong)
+//        playMusic(kTHDefaultSong)
 
         self.registerLoginNotification()
         self.autoLogin()

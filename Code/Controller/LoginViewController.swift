@@ -54,21 +54,32 @@ class LoginViewController: UIViewController {
 //            }
 //        }
         
-        let login = FBSDKLoginManager()
-        login.logInWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes", "user_friends"]) { (result, error) in
-            if let e = error {
-                
-            }
-            
-            let accessToken = result.token.tokenString
-            NetworkClient.sharedClient.loginUserWithFacebookAuth(accessToken, loginSuccessHandler: {
-                user in
-                //succeed
-            }) {
-                //failure
-                hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
-                hud.textLabel.text = "\($0)"
-            }
+//        let login = FBSDKLoginManager()
+//        login.logInWithReadPermissions(["public_profile", "email", "user_birthday", "user_likes", "user_friends"], fromViewController: self)
+//        { (result, error) in
+//            if let e = error {
+//                
+//            }
+//            
+//            let accessToken = result.token.tokenString
+//            NetworkClient.sharedClient.loginUserWithFacebookAuth(accessToken, loginSuccessHandler: {
+//                user in
+//                //succeed
+//            }) {
+//                //failure
+//                hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
+//                hud.textLabel.text = "\($0)"
+//            }
+//        }
+        
+//        let accessToken = result.token.tokenString
+        NetworkClient.sharedClient.loginUserWithFacebookAuth("EAAGIq65nvGoBAPkueirRHbHDDcY0pLpe6eXZBDxgBDHoab1Xl0CZC4i9sDfjYZBisYGPr9QGAcOF0cM0tp0XlaHZBJ8FNu5fPhZA9oLZAXaMdTZCZAiWLXUXWZCcGg9jbcdMNZAWOhrj0Lk5pU7kWQLCaxgNrBSWc61DUCUSPd90bh4EEvMIa8JBKakOhIebReaLE93xPIb3a1r19BiympZC1dKN7ZChju3nfQoZD", loginSuccessHandler: {
+            user in
+            //succeed
+        }) {
+            //failure
+            hud.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 15)
+            hud.textLabel.text = "\($0)"
         }
         
 //        FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];

@@ -178,8 +178,13 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.selfAttributeDetail = "\(playerResult.hintsUsed)"
             cell.labelTintColor = UIColor(hex: 0xBF0221)
 
+            var opponentHintsUsed = 0
+            
+            if let checkHintUsed = opponentResult {
+                opponentHintsUsed = checkHintUsed.hintsUsed
+            }
 
-            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.hintsUsed)" : "--"
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentHintsUsed)" : "--"
 
 
             return cell
@@ -189,14 +194,35 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.selfAttributeDetail = "\(playerResult.correctStreak)"
 
             cell.labelTintColor = UIColor(hex: 0x457B1D)
-            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.correctStreak)" : "--"
+            
+            var opponentHintsUsed = 0
+            
+            if let checkHintUsed = opponentResult {
+                opponentHintsUsed = checkHintUsed.correctStreak
+            }
+            
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentHintsUsed)" : "--"
 
             return cell
         case 3:
             let cell = tableView.dequeueReusableCellWithIdentifier(kTHGameResultDetailTableViewCellIdentifier) as! GameResultDetailTableViewCell
             cell.attribute = "Total Score"
-            cell.selfAttributeDetail = "\(playerResult.finalScore!.decimalFormattedString)"
-            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentResult.finalScore!.decimalFormattedString)" : "--"
+            
+            var finalResult = ""
+            
+            if let result = playerResult.finalScore {
+                finalResult = result.decimalFormattedString
+            }
+            
+            cell.selfAttributeDetail = "\(finalResult)"
+            
+            var opponentHintsUsed = ""
+            
+            if let checkHintUsed = opponentResult {
+                opponentHintsUsed = checkHintUsed.finalScore!.decimalFormattedString
+            }
+            
+            cell.opponentAttributeDetail = game.isGameCompletedByBothPlayer ? "\(opponentHintsUsed)" : "--"
 
 
             return cell

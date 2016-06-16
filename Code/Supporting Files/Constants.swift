@@ -194,20 +194,22 @@ var kTHNotificationHeadOn: Bool {
     }
 }
 
-var kTHDefaultSong: String {
-    set {
-        debugPrint("Default background music set to \(newValue)")
-        NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: kTHDefaultSongKey)
-    }
+var kTHDefaultSong = ""
 
-    get {
-        if let obj = NSUserDefaults.standardUserDefaults().objectForKey(kTHDefaultSongKey) as? String {
-            return obj
-        }
-
-        return getRandomMusicName()
-    }
-}
+//var kTHDefaultSong: String {
+//    set {
+//        debugPrint("Default background music set to \(newValue)")
+//        NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: kTHDefaultSongKey)
+//    }
+//
+//    get {
+//        if let obj = NSUserDefaults.standardUserDefaults().objectForKey(kTHDefaultSongKey) as? String {
+//            return obj
+//        }
+//
+//        return getRandomMusicName()
+//    }
+//}
 
 func vibrateIfAllowed() {
     if kTHVibrationEffectOn {
