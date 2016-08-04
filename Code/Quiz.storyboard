@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D105g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4ZM-Mt-Hhv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="4ZM-Mt-Hhv">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="AvenirNext.ttc">
+            <string>AvenirNext-DemiBold</string>
+            <string>AvenirNext-DemiBold</string>
+            <string>AvenirNext-DemiBold</string>
+        </mutableArray>
         <mutableArray key="ProximaNova-Bold.ttf">
             <string>ProximaNova-Bold</string>
         </mutableArray>
@@ -855,14 +861,14 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WinSceneBackground" translatesAutoresizingMaskIntoConstraints="NO" id="ULh-2C-YAn">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WinSceneLightRay" translatesAutoresizingMaskIntoConstraints="NO" id="9cE-Lt-rTi">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="WinSceneLightRay" translatesAutoresizingMaskIntoConstraints="NO" id="9cE-Lt-rTi">
                                 <rect key="frame" x="0.0" y="69" width="320" height="164"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="cKC-Sn-cCe"/>
                                     <constraint firstAttribute="height" constant="164" id="iXG-79-wrI"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoseSceneDarkRay" translatesAutoresizingMaskIntoConstraints="NO" id="JDp-Dw-SZq">
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="LoseSceneDarkRay" translatesAutoresizingMaskIntoConstraints="NO" id="JDp-Dw-SZq">
                                 <rect key="frame" x="0.0" y="69" width="320" height="193"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="193" id="lsT-7Y-Lda"/>
@@ -875,7 +881,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxZ-bl-t5U">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hxZ-bl-t5U">
                                 <rect key="frame" x="49" y="141" width="210" height="84"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WinBoxBackground" translatesAutoresizingMaskIntoConstraints="NO" id="dgX-r4-Jrb">
@@ -913,7 +919,7 @@
                                     <constraint firstAttribute="height" constant="84" id="eEb-Av-tZq"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhh-X0-Fxb">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hhh-X0-Fxb">
                                 <rect key="frame" x="78" y="261" width="165" height="64"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LoseBoxBackground" translatesAutoresizingMaskIntoConstraints="NO" id="RlX-pF-V00">
@@ -951,7 +957,7 @@
                                     <constraint firstAttribute="width" secondItem="hhh-X0-Fxb" secondAttribute="height" multiplier="33:16" constant="33" id="u7g-3w-YqY"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuW-KN-qNd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="VS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuW-KN-qNd">
                                 <rect key="frame" x="149" y="235" width="22" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="0cE-6l-iZl"/>
@@ -975,7 +981,7 @@
                                     <action selector="showResultAction:" destination="aGt-3J-cJ8" eventType="touchUpInside" id="cW3-7v-bJb"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TO4-9k-RPR">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TO4-9k-RPR">
                                 <rect key="frame" x="51" y="76" width="218" height="50"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WinStarIcon" translatesAutoresizingMaskIntoConstraints="NO" id="M4A-T9-qfI">
@@ -1029,7 +1035,7 @@
                                     <constraint firstAttribute="height" constant="97" id="lBo-IG-pV8"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WinSmileyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="wpo-Qs-ZL9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="WinSmileyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="wpo-Qs-ZL9">
                                 <rect key="frame" x="235" y="211" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="DG2-hg-rqd"/>
@@ -1117,11 +1123,6 @@
         <image name="WinSmileyIcon" width="103" height="103"/>
         <image name="WinStarIcon" width="84" height="82"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="42N-oZ-ona"/>
     </inferredMetricsTieBreakers>

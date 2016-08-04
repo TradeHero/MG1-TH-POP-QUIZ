@@ -504,17 +504,17 @@ class QuizViewController: UIViewController {
             self.roundIndicatorLabel.alpha = 1
         }) {
             [unowned self] complete in
-            UIView.animateWithDuration(1, options: .TransitionCrossDissolve) {
+            UIView.animateWithDuration(0.5, options: .TransitionCrossDissolve) {
                 self.roundIndicatorLabel.alpha = 0
             }
         }
 
-        UIView.animateWithDuration(1.5, delay: 2.0, options: .TransitionCrossDissolve, animations: {
+        UIView.animateWithDuration(1.5, delay: 1.5, options: .TransitionCrossDissolve, animations: {
             [unowned self] in
             self.questionView.alpha = 1
         }, completion: nil)
 
-        UIView.animateWithDuration(2.0, delay: 4.5, options: .TransitionCrossDissolve, animations: {
+        UIView.animateWithDuration(1.0, delay: 2.5, options: .TransitionCrossDissolve, animations: {
             [unowned self] in
             self.buttonSetContentView.alpha = 1
         }) {

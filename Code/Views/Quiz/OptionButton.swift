@@ -98,7 +98,7 @@ class OptionButton: DesignableButton {
                     //chunky
                     if longestWordCount > 3 {
                         //long
-                        self.titleLabel?.lineBreakMode = .ByClipping
+                        self.titleLabel?.lineBreakMode = .ByWordWrapping
                     } else {
                         // short
                         self.titleLabel?.lineBreakMode = .ByWordWrapping
@@ -107,7 +107,7 @@ class OptionButton: DesignableButton {
                     // simple
                     if wordCount > 5 {
                         //long
-                        self.titleLabel?.lineBreakMode = .ByClipping
+                        self.titleLabel?.lineBreakMode = .ByWordWrapping
                     } else {
                         // short
                         self.titleLabel?.lineBreakMode = .ByWordWrapping
